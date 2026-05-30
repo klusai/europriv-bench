@@ -55,6 +55,10 @@ def char_spans_to_bioes(text: str, spans: list[Span]) -> list[str]:
         member = [idx for idx, (_, ts, te) in enumerate(toks) if ts < sp.end and te > sp.start]
         if not member:
             raise ValueError(f"span {sp} aligns to no token (off-by-one?) in: {text!r}")
+        # Two char-disjoint entities can still share one whitespace token (e.g. punctuation-joined
+        # "Smith-Jones"). That would corrupt the BIOES sequence — fail loud so curation drops the row.
+        if any(tags[idx] != "O" for idx in member):
+            raise ValueError(f"token collision: span {sp} shares a whitespace token with another entity in: {text!r}")
         if len(member) == 1:
             tags[member[0]] = f"S-{sp.label}"
         else:
@@ -62,6 +66,36 @@ def char_spans_to_bioes(text: str, spans: list[Span]) -> list[str]:
             tags[member[-1]] = f"E-{sp.label}"
             for idx in member[1:-1]:
                 tags[idx] = f"I-{sp.label}"
+    return tags
+
+
+def labels_to_bioes(token_labels: list[str | None]) -> list[str]:
+    """Convert a per-token label array (label or None) to BIOES; consecutive same labels = one entity.
+
+    Robust by construction — never collides. Used for *model predictions*, which can emit
+    fragmented/overlapping spans (gold uses the strict ``char_spans_to_bioes`` instead). Note the
+    v0 approximation: two adjacent same-type entities collapse into one (whitespace-token BIOES
+    carries no entity boundary); rare, and symmetric enough for v0 detection scoring.
+    """
+    n = len(token_labels)
+    tags = ["O"] * n
+    i = 0
+    while i < n:
+        lab = token_labels[i]
+        if lab is None:
+            i += 1
+            continue
+        j = i
+        while j + 1 < n and token_labels[j + 1] == lab:
+            j += 1
+        if i == j:
+            tags[i] = f"S-{lab}"
+        else:
+            tags[i] = f"B-{lab}"
+            tags[j] = f"E-{lab}"
+            for k in range(i + 1, j):
+                tags[k] = f"I-{lab}"
+        i = j + 1
     return tags
 
 

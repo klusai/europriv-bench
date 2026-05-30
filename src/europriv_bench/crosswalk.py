@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 
-from .spans import Span, char_spans_to_bioes
+from .spans import labels_to_bioes, whitespace_tokens
 from .taxonomy import SCHEMES, TAXONOMY
 
 
@@ -50,12 +50,18 @@ def entities_to_kp_bioes(text: str, entities: Sequence[dict], scheme: str) -> li
 
     ``entities``: dicts with ``label`` (native scheme label), ``start``, ``end`` (char offsets).
     Native labels with no KP mapping are dropped (use ``mapped_labels`` to audit coverage).
-    Shared by model adapters (map model output) and dataset curation (map source labels) so the
-    two produce the identical label space.
+
+    This is the *prediction* path: models emit fragmented/overlapping spans, so it's tolerant
+    (per-token first-label-wins → BIOES) and never raises. Gold curation uses the strict
+    ``char_spans_to_bioes`` instead. Both produce tags in the same KP label space.
     """
-    spans = [
-        Span(e["start"], e["end"], kp)
-        for e in entities
-        if (kp := to_kp(scheme, e["label"])) is not None
-    ]
-    return char_spans_to_bioes(text, spans)
+    toks = whitespace_tokens(text)
+    token_labels: list[str | None] = [None] * len(toks)
+    for e in entities:
+        kp = to_kp(scheme, e["label"])
+        if kp is None:
+            continue
+        for i, (_, ts, te) in enumerate(toks):
+            if ts < e["end"] and te > e["start"] and token_labels[i] is None:
+                token_labels[i] = kp
+    return labels_to_bioes(token_labels)

@@ -1,0 +1,20 @@
+name: "PII Detection — English (general)"
+version: 1
+task: detection
+domain: general
+languages: [en]
+
+dataset:
+  hf_id: klusai/europriv-bench
+  config: en
+  split: test
+  license: CC-BY-4.0
+
+# De-identification is recall-sensitive → report F2 alongside strict F1.
+metrics:
+  - entity_f1
+  - entity_f2
+
+description: >
+  Entity-level PII detection over English general text (EuroPriv-Bench v0, seeded from
+  AI4Privacy open core, remapped to the KP taxonomy).

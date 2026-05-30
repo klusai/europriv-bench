@@ -1,0 +1,199 @@
+{
+  "schema": 2,
+  "entries": {
+    "privacy-filter::openai/privacy-filter": [
+      {
+        "spec": "PII Detection — Dutch (general)",
+        "task": "detection",
+        "languages": [
+          "nl"
+        ],
+        "domain": "general",
+        "adapter": "privacy-filter",
+        "model_id": "openai/privacy-filter",
+        "n": 100,
+        "limit": 100,
+        "scores": {
+          "entity_f1": {
+            "precision": 0.627906976744186,
+            "recall": 0.40703517587939697,
+            "f1": 0.49390243902439024
+          },
+          "entity_f2": {
+            "precision": 0.627906976744186,
+            "recall": 0.40703517587939697,
+            "f2": 0.4378378378378379
+          }
+        },
+        "europriv_bench_version": "0.1.0",
+        "taxonomy_version": "0.1.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "nl",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T08:11:39.676554+00:00"
+      },
+      {
+        "spec": "PII Detection — English (general)",
+        "task": "detection",
+        "languages": [
+          "en"
+        ],
+        "domain": "general",
+        "adapter": "privacy-filter",
+        "model_id": "openai/privacy-filter",
+        "n": 100,
+        "limit": 100,
+        "scores": {
+          "entity_f1": {
+            "precision": 0.6392405063291139,
+            "recall": 0.33554817275747506,
+            "f1": 0.4400871459694989
+          },
+          "entity_f2": {
+            "precision": 0.6392405063291139,
+            "recall": 0.33554817275747506,
+            "f2": 0.3707782672540381
+          }
+        },
+        "europriv_bench_version": "0.1.0",
+        "taxonomy_version": "0.1.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "en",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T08:11:39.676554+00:00"
+      },
+      {
+        "spec": "PII Detection — French (general)",
+        "task": "detection",
+        "languages": [
+          "fr"
+        ],
+        "domain": "general",
+        "adapter": "privacy-filter",
+        "model_id": "openai/privacy-filter",
+        "n": 100,
+        "limit": 100,
+        "scores": {
+          "entity_f1": {
+            "precision": 0.6540880503144654,
+            "recall": 0.44635193133047213,
+            "f1": 0.5306122448979592
+          },
+          "entity_f2": {
+            "precision": 0.6540880503144654,
+            "recall": 0.44635193133047213,
+            "f2": 0.4766269477543538
+          }
+        },
+        "europriv_bench_version": "0.1.0",
+        "taxonomy_version": "0.1.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "fr",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T08:11:39.676554+00:00"
+      },
+      {
+        "spec": "PII Detection — German (general)",
+        "task": "detection",
+        "languages": [
+          "de"
+        ],
+        "domain": "general",
+        "adapter": "privacy-filter",
+        "model_id": "openai/privacy-filter",
+        "n": 100,
+        "limit": 100,
+        "scores": {
+          "entity_f1": {
+            "precision": 0.8125,
+            "recall": 0.4936708860759494,
+            "f1": 0.6141732283464567
+          },
+          "entity_f2": {
+            "precision": 0.8125,
+            "recall": 0.4936708860759494,
+            "f2": 0.5357142857142858
+          }
+        },
+        "europriv_bench_version": "0.1.0",
+        "taxonomy_version": "0.1.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "de",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T08:11:39.676554+00:00"
+      },
+      {
+        "spec": "PII Detection — Italian (general)",
+        "task": "detection",
+        "languages": [
+          "it"
+        ],
+        "domain": "general",
+        "adapter": "privacy-filter",
+        "model_id": "openai/privacy-filter",
+        "n": 100,
+        "limit": 100,
+        "scores": {
+          "entity_f1": {
+            "precision": 0.6951219512195121,
+            "recall": 0.5158371040723982,
+            "f1": 0.5922077922077922
+          },
+          "entity_f2": {
+            "precision": 0.6951219512195121,
+            "recall": 0.5158371040723982,
+            "f2": 0.5438931297709925
+          }
+        },
+        "europriv_bench_version": "0.1.0",
+        "taxonomy_version": "0.1.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "it",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T08:11:39.676554+00:00"
+      },
+      {
+        "spec": "PII Detection — Spanish (general)",
+        "task": "detection",
+        "languages": [
+          "es"
+        ],
+        "domain": "general",
+        "adapter": "privacy-filter",
+        "model_id": "openai/privacy-filter",
+        "n": 100,
+        "limit": 100,
+        "scores": {
+          "entity_f1": {
+            "precision": 0.708029197080292,
+            "recall": 0.47317073170731705,
+            "f1": 0.5672514619883041
+          },
+          "entity_f2": {
+            "precision": 0.708029197080292,
+            "recall": 0.47317073170731705,
+            "f2": 0.5067920585161964
+          }
+        },
+        "europriv_bench_version": "0.1.0",
+        "taxonomy_version": "0.1.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "es",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T08:11:39.676554+00:00"
+      }
+    ]
+  }
+}

@@ -36,14 +36,15 @@ def list_specs(suite: str) -> None:
 @click.option("--suite", default="evaluations", help="Directory of eval specs.")
 @click.option("--adapter", default="dummy", type=click.Choice(sorted(BUILDERS)), help="Model adapter.")
 @click.option("--out", default="baselines/leaderboard.json", help="Leaderboard output path.")
-def run(suite: str, adapter: str, out: str) -> None:
+@click.option("--limit", type=int, default=None, help="Cap examples per spec (fast iteration).")
+def run(suite: str, adapter: str, out: str, limit: int | None) -> None:
     """Run an adapter across a suite and write the leaderboard."""
     model = build(adapter)
     ts = datetime.now(timezone.utc).isoformat()
     results = []
     for spec in load_suite(suite):
         logger.info("running %s on %s", adapter, spec.name)
-        results.append(run_spec(spec, model, timestamp=ts))
+        results.append(run_spec(spec, model, timestamp=ts, limit=limit))
     path = write_leaderboard(results, out)
     click.echo(f"wrote {path}")
 

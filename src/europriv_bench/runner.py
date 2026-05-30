@@ -57,9 +57,11 @@ def run_spec(
     adapter: BaseAdapter,
     gold: tuple[list[str], list[list[str]]] | None = None,
     timestamp: str | None = None,
+    limit: int | None = None,
 ) -> dict:
     """Score one adapter on one spec. ``gold`` may be injected (tests); else loaded from HF.
 
+    ``limit`` caps examples (fast iteration); it's recorded in the result for honesty.
     Only DETECTION is wired in v0.1; other tasks raise via the adapter's task method.
     """
     if spec.task is not Task.DETECTION:
@@ -72,6 +74,8 @@ def run_spec(
         raise KeyError(f"spec {spec.name!r} names unknown metrics {unknown}; known: {sorted(REGISTRY)}")
 
     texts, gold_tags = gold if gold is not None else _load_gold(spec)
+    if limit is not None:
+        texts, gold_tags = texts[:limit], gold_tags[:limit]
     pred_tags = adapter.predict_tags(texts)
 
     scores = {key: REGISTRY[key](gold_tags, pred_tags) for key in spec.metrics}
@@ -84,6 +88,7 @@ def run_spec(
         "adapter": adapter.name,
         "model_id": adapter.model_id,
         "n": len(texts),
+        "limit": limit,
         "scores": scores,
         # provenance
         "europriv_bench_version": __version__,

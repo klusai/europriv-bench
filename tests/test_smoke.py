@@ -33,6 +33,9 @@ def test_spans_roundtrip_and_validate():
     validate_bioes(tags)
     with pytest.raises(ValueError):
         char_spans_to_bioes("a b", [Span(10, 12, "PERSON")])  # off-by-one → no aligned token
+    # Two entities sharing one whitespace token (punctuation-joined) must fail loud, not corrupt BIOES.
+    with pytest.raises(ValueError, match="token collision"):
+        char_spans_to_bioes("Smith-Jones", [Span(0, 5, "PERSON"), Span(6, 11, "PERSON")])
 
 
 def test_suite_loads_and_validates():
