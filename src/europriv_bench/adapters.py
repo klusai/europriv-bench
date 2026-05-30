@@ -68,11 +68,25 @@ class PrivacyFilterAdapter(BaseAdapter):
 
     def _pipeline(self):  # pragma: no cover - requires the `hf` extra + model download
         if self._pipe is None:
+            import os
+
+            import torch
             from transformers import pipeline
+
+            # Use the Mac GPU (MPS) when available; override with EUROPRIV_DEVICE=cpu|mps|cuda.
+            # The privacy-filter MoE may hit ops MPS lacks → allow CPU fallback rather than erroring.
+            device = os.environ.get("EUROPRIV_DEVICE") or (
+                "mps" if torch.backends.mps.is_available()
+                else "cuda" if torch.cuda.is_available()
+                else "cpu"
+            )
+            if device == "mps":
+                os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
             self._pipe = pipeline(
                 "token-classification",
                 model=self.model_id,
                 aggregation_strategy="simple",
+                device=device,
             )
         return self._pipe
 
