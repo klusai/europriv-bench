@@ -1,0 +1,45 @@
+[project]
+name = "europriv-bench"
+version = "0.1.0"
+description = "EuroPriv-Bench: a unified pan-European de-identification & anonymization benchmark with privacy-utility metrics"
+requires-python = ">=3.13"
+dependencies = [
+    "click>=8.1,<9",
+    "rich>=13.0,<15",
+    "rich-click>=1.8,<2",
+    "pyyaml>=6.0,<7",
+    "pydantic>=2.0,<3",
+    "seqeval>=1.2,<2",
+    "huggingface-hub>=0.25,<1",
+]
+
+[project.optional-dependencies]
+# Heavy model backends are optional — the harness core stays light.
+hf = ["transformers>=4.56", "torch>=2.4", "datasets>=4.0"]
+gliner = ["gliner>=0.2"]
+presidio = ["presidio-analyzer>=2.2"]
+dev = ["pytest>=8.0", "ruff>=0.11", "coverage>=7.0"]
+
+[project.scripts]
+europriv = "europriv_bench.main:cli"
+
+[build-system]
+requires = ["setuptools>=75.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["europriv_bench"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+]
+omit = ["*/tests/*"]

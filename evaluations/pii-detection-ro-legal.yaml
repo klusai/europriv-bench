@@ -1,0 +1,20 @@
+name: "PII Detection — Romanian Legal"
+version: 1
+task: detection
+domain: legal
+languages: [ro]
+
+dataset:
+  hf_id: klusai/europriv-bench
+  config: legal-ro
+  split: test
+  license: CC-BY-4.0
+
+# De-identification is recall-sensitive → report F2 alongside strict F1.
+metrics:
+  - entity_f1
+  - entity_f2
+
+description: >
+  Entity-level PII/quasi-identifier detection over Romanian legal text (court decisions,
+  contracts). Romanian is under-served by existing open models — a primary KlusAI target.

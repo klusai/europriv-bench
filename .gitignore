@@ -1,0 +1,25 @@
+# Virtual environment
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+htmlcov/
+.coverage
+
+# Environment variables
+.env
+
+# Benchmark run outputs (leaderboard JSON is committed; raw model outputs are not)
+artifacts/
+runs/
+*.log
+
+# Held-out gold data is pulled from HF at eval time, never committed
+data/
+
+# OS
+.DS_Store
