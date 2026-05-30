@@ -15,7 +15,7 @@ from collections.abc import Iterable
 from . import __version__
 from .adapters import BaseAdapter
 from .logger import get_logger
-from .metrics import REGISTRY
+from .metrics import ALL_METRICS, REGISTRY, ROW_REGISTRY
 from .spans import Span, char_spans_to_bioes, validate_bioes
 from .spec import EvalSpec, Task
 from .taxonomy import TAXONOMY_VERSION
@@ -41,41 +41,44 @@ def _rows_to_gold(rows: Iterable[dict]) -> tuple[list[str], list[list[str]]]:
     return texts, gold
 
 
-def _load_gold(spec: EvalSpec) -> tuple[list[str], list[list[str]]]:
-    """Load (texts, gold BIOES tag-sequences) for a detection spec from HF.
-
-    Requires the benchmark dataset to be published (Phase 1) and the `hf` extra (datasets).
-    """
+def _load_gold_rows(spec: EvalSpec) -> list[dict]:
+    """Load gold rows ``{text, spans}`` for a spec from HF (requires the `hf` extra: datasets)."""
     from datasets import load_dataset
 
     ds = load_dataset(spec.dataset.hf_id, spec.dataset.config, split=spec.dataset.split)
-    return _rows_to_gold(ds)
+    return [dict(r) for r in ds]
 
 
 def run_spec(
     spec: EvalSpec,
     adapter: BaseAdapter,
     gold: tuple[list[str], list[list[str]]] | None = None,
+    rows: list[dict] | None = None,
     timestamp: str | None = None,
     limit: int | None = None,
 ) -> dict:
-    """Score one adapter on one spec. ``gold`` may be injected (tests); else loaded from HF.
-
-    ``limit`` caps examples (fast iteration); it's recorded in the result for honesty.
-    Only DETECTION is wired in v0.1; other tasks raise via the adapter's task method.
-    """
+    """Score one adapter on one spec. Gold may be injected as ``rows`` (preferred) or ``gold``
+    (texts, tag-seqs, for tag-only tests); else loaded from HF. Row-metrics (e.g. cnp_leakage)
+    require ``rows``. ``limit`` caps examples (recorded for honesty)."""
     if spec.task is not Task.DETECTION:
         # The seam exists (BaseAdapter.anonymize/classify/leakage_probe); wiring lands in Phase 4.
         raise NotImplementedError(f"task {spec.task.value} lands in Phase 4; only DETECTION is wired")
 
     # Fail fast on a metric the spec names but the harness doesn't know (no silent skips).
-    unknown = [k for k in spec.metrics if k not in REGISTRY]
+    unknown = [k for k in spec.metrics if k not in ALL_METRICS]
     if unknown:
-        raise KeyError(f"spec {spec.name!r} names unknown metrics {unknown}; known: {sorted(REGISTRY)}")
+        raise KeyError(f"spec {spec.name!r} names unknown metrics {unknown}; known: {sorted(ALL_METRICS)}")
 
-    texts, gold_tags = gold if gold is not None else _load_gold(spec)
-    if limit is not None:
-        texts, gold_tags = texts[:limit], gold_tags[:limit]
+    if rows is None and gold is None:
+        rows = _load_gold_rows(spec)
+    if rows is not None:
+        if limit is not None:
+            rows = rows[:limit]
+        texts, gold_tags = _rows_to_gold(rows)
+    else:
+        texts, gold_tags = gold
+        if limit is not None:
+            texts, gold_tags = texts[:limit], gold_tags[:limit]
     pred_tags = adapter.predict_tags(texts)
 
     # Fairness: score only the entity types the gold annotates. A model isn't penalized for
@@ -87,7 +90,14 @@ def run_spec(
         for seq in pred_tags
     ]
 
-    scores = {key: REGISTRY[key](gold_tags, pred_tags) for key in spec.metrics}
+    scores: dict[str, dict] = {}
+    for key in spec.metrics:
+        if key in ROW_REGISTRY:
+            if rows is None:
+                raise ValueError(f"metric {key!r} needs gold rows; inject rows= or load from HF")
+            scores[key] = ROW_REGISTRY[key](rows, pred_tags)
+        else:
+            scores[key] = REGISTRY[key](gold_tags, pred_tags)
 
     return {
         "spec": spec.name,

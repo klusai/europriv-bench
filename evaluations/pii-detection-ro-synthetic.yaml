@@ -1,0 +1,23 @@
+name: "PII Detection + CNP Leakage — Romanian (synthetic v1)"
+version: 1
+task: detection
+domain: general
+languages: [ro]
+
+dataset:
+  hf_id: klusai/europriv-bench
+  config: ro-synthetic-v1
+  split: test
+  license: CC-BY-4.0
+
+# Detection F1/F2 PLUS the RO headline: deterministic CNP re-identification leakage.
+metrics:
+  - entity_f1
+  - entity_f2
+  - cnp_leakage
+
+description: >
+  Romanian PII detection over localized-synthetic documents (RO-native identifiers incl. CNP,
+  RO IBAN, CUI, county plates, +40 phones), offset-deterministic generation. The headline is
+  cnp_leakage: a missed CNP deterministically discloses date-of-birth + sex + county. v0 = pure
+  localized synthetic (development track); real-skeleton gold (ro-realskeleton-v1) follows.

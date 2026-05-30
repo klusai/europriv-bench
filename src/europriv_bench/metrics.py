@@ -104,6 +104,7 @@ def utility_after_redaction(*args, **kwargs) -> dict[str, float]:
     raise NotImplementedError("utility_after_redaction: scheduled for Phase 4 (privacy-utility track)")
 
 
+# Tag-based metrics: called as fn(gold_tags, pred_tags).
 REGISTRY: dict[str, Callable] = {
     "entity_f1": entity_f1,
     "entity_f2": entity_f2,
@@ -112,3 +113,10 @@ REGISTRY: dict[str, Callable] = {
     "membership_inference": membership_inference,
     "utility_after_redaction": utility_after_redaction,
 }
+
+# Row-based metrics: called as fn(gold_rows, pred_tags) — need span values, not just tags.
+ROW_REGISTRY: dict[str, Callable] = {
+    "cnp_leakage": cnp_leakage,
+}
+
+ALL_METRICS = set(REGISTRY) | set(ROW_REGISTRY)

@@ -1,7 +1,10 @@
 """Romanian CNP validation/decode + the cnp_leakage re-identification metric."""
 
+from europriv_bench.adapters import build
 from europriv_bench.metrics import cnp_leakage
 from europriv_bench.national_id import check_digit, parse_cnp, validate_cnp
+from europriv_bench.runner import run_spec
+from europriv_bench.spec import EvalSpec
 
 
 def _make_cnp(base12: str) -> str:
@@ -50,3 +53,17 @@ def test_cnp_leakage_counts_missed_as_disclosure():
     caught = cnp_leakage(rows, [["O", "S-NATIONAL_ID", "O"]])   # model redacts it
     assert caught["cnp_detected"] == 1 and caught["leak_rate"] == 0.0
     assert caught["leaked_quasi_identifiers"] == 0
+
+
+def test_run_spec_wires_cnp_leakage_via_rows():
+    cnp = _make_cnp("185071540001")
+    rows = [{"text": f"CNP {cnp} emis", "spans": [{"start": 4, "end": 17, "label": "NATIONAL_ID"}]}]
+    spec = EvalSpec.model_validate({
+        "name": "ro-test", "task": "detection", "languages": ["ro"],
+        "dataset": {"hf_id": "x", "config": "ro", "split": "test"},
+        "metrics": ["entity_f1", "cnp_leakage"],
+    })
+    res = run_spec(spec, build("dummy"), rows=rows)   # dummy predicts all-O → leak
+    assert res["scores"]["cnp_leakage"]["cnp_total"] == 1.0
+    assert res["scores"]["cnp_leakage"]["leak_rate"] == 1.0
+    assert res["scores"]["entity_f1"]["recall"] == 0.0
