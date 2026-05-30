@@ -3,7 +3,7 @@
 import pytest
 
 from europriv_bench.adapters import build
-from europriv_bench.leaderboard import build_leaderboard
+from europriv_bench.leaderboard import build_leaderboard, format_leaderboard
 from europriv_bench.metrics import entity_f1, entity_f2
 from europriv_bench.runner import run_spec
 from europriv_bench.spans import Span, char_spans_to_bioes, validate_bioes, whitespace_tokens
@@ -68,3 +68,14 @@ def test_leaderboard_schema2_groups_by_adapter_and_model():
     ])
     assert lb["schema"] == 2
     assert len(lb["entries"]["dummy::dummy"]) == 2
+
+
+def test_format_leaderboard_renders_detection_and_leakage():
+    lb = build_leaderboard([
+        {"adapter": "m", "model_id": "m", "spec": "ro",
+         "scores": {"entity_f1": {"f1": 0.5}, "entity_f2": {"f2": 0.4},
+                    "cnp_leakage": {"leak_rate": 0.9, "cnp_missed": 9.0, "leaked_quasi_identifiers": 27.0}}},
+    ])
+    text = format_leaderboard(lb)
+    assert "Detection" in text and "0.500/0.400" in text
+    assert "leakage" in text and "0.900" in text

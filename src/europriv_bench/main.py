@@ -8,7 +8,7 @@ import click
 
 from . import __version__
 from .adapters import BUILDERS, build
-from .leaderboard import write_leaderboard
+from .leaderboard import format_leaderboard, write_leaderboard
 from .logger import get_logger
 from .runner import run_spec
 from .spec import load_suite
@@ -50,6 +50,15 @@ def run(suite: str, adapters: tuple[str, ...], out: str, limit: int | None) -> N
             results.append(run_spec(spec, model, timestamp=ts, limit=limit))
     path = write_leaderboard(results, out)
     click.echo(f"wrote {path}")
+
+
+@cli.command()
+@click.option("--in", "path", default="baselines/leaderboard.json", help="Leaderboard JSON to render.")
+def leaderboard(path: str) -> None:
+    """Pretty-print a leaderboard JSON (detection F1/F2 + CNP leakage)."""
+    import json
+    from pathlib import Path
+    click.echo(format_leaderboard(json.loads(Path(path).read_text(encoding="utf-8"))))
 
 
 @cli.command()
