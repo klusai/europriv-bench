@@ -28,7 +28,8 @@ YAML in a later phase); this document is the human-facing crosswalk + paper appe
 | PHONE | core | direct | | private_phone | TELEPHONENUM | — | — |
 | URL | core | quasi | | private_url | — | — | — |
 | DATE | core | quasi | | private_date | DATE | dates | — |
-| ACCOUNT_ID | core | direct | | account_number | ACCOUNTNUM/IDCARDNUM/… | account/ssn | — |
+| ACCOUNT_ID | core | direct | | account_number | ACCOUNTNUM/TAXNUM/CC | account_numbers | — |
+| NATIONAL_ID | core | direct | | — | IDCARDNUM/SOCIALNUM/PASSPORTNUM/DRIVERLICENSENUM | ssn | — |
 | SECRET | core | direct | | secret | PASSWORD | — | — |
 | MRN | clinical | direct | | — | — | medical_record_numbers | — |
 | HEALTH_CONDITION | clinical | quasi | ✅ | — | — | — | — |
@@ -38,6 +39,15 @@ YAML in a later phase); this document is the human-facing crosswalk + paper appe
 | COURT | legal | quasi | | — | — | — | —² |
 | STATUTE_REF | legal | quasi | | — | — | — | — |
 | ORG_PARTY | legal | quasi | | — | — | — | ORGANIZATION |
+| COMPANY_ID | legal | direct | | — | — | — | — (RO-native: CUI/CIF, J-number) |
+
+**NATIONAL_ID** (v0.2.0) covers RO Law 190/2018 art.4 national identifiers — CNP, CI
+seria/număr, passport, driving-licence, CASS/EHIC — split out of ACCOUNT_ID (national IDs carry
+distinct legal safeguards and, for CNP, deterministic DOB+sex+county leakage; see
+`national_id.py` + `metrics.cnp_leakage`). RO-native IDs (CNP, CI, CUI, J-number) have no source
+scheme and are emitted directly by the RO generator. `TAXONOMY_VERSION` is now **0.2.0** —
+pre/post-bump leaderboard numbers are different benchmark versions (the v0 6-lang configs were
+curated under 0.1.0 and need re-publishing under 0.2.0 before the next official run).
 
 ¹ HIPAA `names` → **PERSON** (general owner); PROVIDER is a KP-native refinement not
 recoverable from the flat source label. ² MAPA `ORGANIZATION` → **ORG_PARTY**; FACILITY/COURT

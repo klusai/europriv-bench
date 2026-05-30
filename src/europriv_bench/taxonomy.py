@@ -16,7 +16,7 @@ from enum import Enum
 
 # Bump whenever the entity set or BIOES label space changes. Stamped into eval specs and the
 # leaderboard so dataset gold labels, model label maps, and scores are provably the same version.
-TAXONOMY_VERSION = "0.1.0"
+TAXONOMY_VERSION = "0.2.0"  # 0.2.0: added NATIONAL_ID + COMPANY_ID; national IDs split out of ACCOUNT_ID
 
 
 class Tier(str, Enum):
@@ -95,13 +95,11 @@ TAXONOMY: list[EntityType] = [
         "ACCOUNT_ID", Tier.CORE, IdentifierClass.DIRECT,
         crosswalk={
             "openai": ["account_number"],
-            "ai4privacy": [
-                "ACCOUNTNUM", "IDCARDNUM", "TAXNUM", "SOCIALNUM", "PASSPORTNUM",
-                "CREDITCARDNUMBER", "DRIVERLICENSENUM",
-            ],
-            "hipaa": ["account_numbers", "ssn"],  # medical_record_numbers → MRN (clinical-specific)
+            # National IDs (IDCARDNUM/SOCIALNUM/PASSPORTNUM/DRIVERLICENSENUM/SSN) → NATIONAL_ID.
+            "ai4privacy": ["ACCOUNTNUM", "TAXNUM", "CREDITCARDNUMBER"],
+            "hipaa": ["account_numbers"],  # ssn → NATIONAL_ID; medical_record_numbers → MRN
             "openmed": [
-                "SSN", "IBAN", "BANKACCOUNT", "BIC", "CREDITCARD", "CREDITCARDISSUER", "CVV",
+                "IBAN", "BANKACCOUNT", "BIC", "CREDITCARD", "CREDITCARDISSUER", "CVV",
                 "PIN", "MASKEDNUMBER", "ACCOUNTNAME", "BITCOINADDRESS", "ETHEREUMADDRESS",
                 "LITECOINADDRESS", "VIN", "VRM", "IMEI", "MACADDRESS", "IPADDRESS",
                 "USERNAME", "USERAGENT",
@@ -111,6 +109,17 @@ TAXONOMY: list[EntityType] = [
     EntityType(
         "SECRET", Tier.CORE, IdentifierClass.DIRECT,
         crosswalk={"openai": ["secret"], "ai4privacy": ["PASSWORD"], "openmed": ["PASSWORD"]},
+    ),
+    # Government-issued national identifiers (RO Law 190/2018 art.4: CNP, CI seria/număr,
+    # passport, driving licence, CASS/EHIC). CNP is highest-leakage — see national_id.py /
+    # metrics.cnp_leakage. RO-native IDs are emitted directly by the RO generator as NATIONAL_ID.
+    EntityType(
+        "NATIONAL_ID", Tier.CORE, IdentifierClass.DIRECT,
+        crosswalk={
+            "ai4privacy": ["IDCARDNUM", "SOCIALNUM", "PASSPORTNUM", "DRIVERLICENSENUM"],
+            "hipaa": ["ssn"],
+            "openmed": ["SSN"],
+        },
     ),
     # --- Clinical (PHI) ---
     EntityType(
@@ -131,6 +140,8 @@ TAXONOMY: list[EntityType] = [
     EntityType("COURT", Tier.LEGAL, IdentifierClass.QUASI, crosswalk={}),
     EntityType("STATUTE_REF", Tier.LEGAL, IdentifierClass.QUASI, crosswalk={}),
     EntityType("ORG_PARTY", Tier.LEGAL, IdentifierClass.QUASI, crosswalk={"mapa": ["ORGANIZATION"]}),
+    # Company identifiers (RO: CUI/CIF fiscal code, trade-register J-number). RO-native.
+    EntityType("COMPANY_ID", Tier.LEGAL, IdentifierClass.DIRECT, crosswalk={}),
 ]
 
 ENTITY_NAMES: list[str] = [e.name for e in TAXONOMY]

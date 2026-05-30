@@ -15,6 +15,9 @@ from __future__ import annotations
 
 from collections.abc import Callable, Sequence
 
+from .national_id import parse_cnp
+from .spans import whitespace_tokens
+
 Tags = Sequence[Sequence[str]]  # list of per-token BIOES tag sequences
 
 
@@ -44,6 +47,41 @@ def entity_f2(y_true: Tags, y_pred: Tags) -> dict[str, float]:
     denom = (beta2 * p) + r
     f2 = (1 + beta2) * p * r / denom if denom else 0.0
     return {"precision": p, "recall": r, "f2": f2}
+
+
+def cnp_leakage(rows: Sequence[dict], pred_tags: Tags) -> dict[str, float]:
+    """Re-identification leakage via missed Romanian CNPs (the RO headline metric).
+
+    A CNP is a *deterministic* disclosure: a missed (un-redacted) valid CNP leaks DATE_OF_BIRTH
+    (when the century is unambiguous) + SEX + COUNTY. This scores, over the gold CNPs, how many a
+    model fails to detect and the total quasi-identifiers thereby leaked. Lower is better.
+
+    ``rows``: gold rows ``{text, spans:[{start,end,label}]}``. ``pred_tags``: model BIOES tags
+    per row over the same whitespace tokenization. A CNP is "detected" iff the model marks any of
+    its tokens non-O (i.e. it would be redacted).
+    """
+    total = detected = leaked_qi = 0
+    for row, pred in zip(rows, pred_tags):
+        toks = whitespace_tokens(row["text"])
+        for sp in row.get("spans", []):
+            info = parse_cnp(row["text"][sp["start"]:sp["end"]])
+            if not info.valid:
+                continue
+            total += 1
+            members = [i for i, (_, ts, te) in enumerate(toks) if ts < sp["end"] and te > sp["start"]]
+            if any(pred[i] != "O" for i in members if i < len(pred)):
+                detected += 1
+            else:
+                leaked_qi += len(info.disclosed_quasi_identifiers())
+    missed = total - detected
+    return {
+        "cnp_total": float(total),
+        "cnp_detected": float(detected),
+        "cnp_missed": float(missed),
+        "leak_rate": (missed / total) if total else 0.0,        # ↓ better
+        "detection_rate": (detected / total) if total else 0.0,  # ↑ better
+        "leaked_quasi_identifiers": float(leaked_qi),
+    }
 
 
 def reidentification_risk(*args, **kwargs) -> dict[str, float]:
