@@ -62,9 +62,13 @@ class PrivacyFilterAdapter(BaseAdapter):
     name = "privacy-filter"
 
     def __init__(self, model_id: str = "openai/privacy-filter", scheme: str = "openai") -> None:
+        import os
+
         self.model_id = model_id
         self.scheme = scheme
         self._pipe = None
+        # Batching is the dominant speedup (~4x at 32 on CPU) — far more than device choice.
+        self._batch_size = int(os.environ.get("EUROPRIV_BATCH_SIZE", "32"))
 
     def _pipeline(self):  # pragma: no cover - requires the `hf` extra + model download
         if self._pipe is None:
@@ -73,13 +77,10 @@ class PrivacyFilterAdapter(BaseAdapter):
             import torch
             from transformers import pipeline
 
-            # Use the Mac GPU (MPS) when available; override with EUROPRIV_DEVICE=cpu|mps|cuda.
-            # The privacy-filter MoE may hit ops MPS lacks → allow CPU fallback rather than erroring.
-            device = os.environ.get("EUROPRIV_DEVICE") or (
-                "mps" if torch.backends.mps.is_available()
-                else "cuda" if torch.cuda.is_available()
-                else "cpu"
-            )
+            # Device: CUDA when present (DO GPU droplets); else CPU. MPS is *intentionally not*
+            # auto-selected — measured ~3x SLOWER than CPU for this MoE (routing ops fall back off
+            # Metal and thrash transfers). Force it with EUROPRIV_DEVICE=mps if ever desired.
+            device = os.environ.get("EUROPRIV_DEVICE") or ("cuda" if torch.cuda.is_available() else "cpu")
             if device == "mps":
                 os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
             self._pipe = pipeline(
@@ -92,13 +93,15 @@ class PrivacyFilterAdapter(BaseAdapter):
 
     def predict_tags(self, texts: Sequence[str]) -> list[list[str]]:
         pipe = self._pipeline()  # pragma: no cover - needs model
+        texts = list(texts)  # pragma: no cover
+        results = pipe(texts, batch_size=self._batch_size)  # pragma: no cover - batched inference
         out = []  # pragma: no cover
-        for text in texts:  # pragma: no cover
-            ents = [
+        for text, ents in zip(texts, results):  # pragma: no cover
+            mapped = [
                 {"label": e["entity_group"], "start": int(e["start"]), "end": int(e["end"])}
-                for e in pipe(text)
+                for e in ents
             ]
-            out.append(entities_to_kp_bioes(text, ents, self.scheme))
+            out.append(entities_to_kp_bioes(text, mapped, self.scheme))
         return out
 
 
