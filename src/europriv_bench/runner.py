@@ -78,6 +78,15 @@ def run_spec(
         texts, gold_tags = texts[:limit], gold_tags[:limit]
     pred_tags = adapter.predict_tags(texts)
 
+    # Fairness: score only the entity types the gold annotates. A model isn't penalized for
+    # detecting categories this gold doesn't cover (it predicts them → masked to O, not FPs).
+    # Applied identically to every adapter so the leaderboard is apples-to-apples.
+    eval_labels = {t.split("-", 1)[1] for seq in gold_tags for t in seq if t != "O"}
+    pred_tags = [
+        [t if (t == "O" or t.split("-", 1)[1] in eval_labels) else "O" for t in seq]
+        for seq in pred_tags
+    ]
+
     scores = {key: REGISTRY[key](gold_tags, pred_tags) for key in spec.metrics}
 
     return {
@@ -89,6 +98,7 @@ def run_spec(
         "model_id": adapter.model_id,
         "n": len(texts),
         "limit": limit,
+        "eval_labels": sorted(eval_labels),
         "scores": scores,
         # provenance
         "europriv_bench_version": __version__,

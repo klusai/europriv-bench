@@ -66,6 +66,10 @@ TAXONOMY: list[EntityType] = [
             "ai4privacy": ["STREET", "CITY", "ZIPCODE", "BUILDINGNUM"],
             "hipaa": ["geographic_subdivisions"],
             "mapa": ["ADDRESS"],
+            "openmed": [
+                "STREET", "CITY", "ZIPCODE", "BUILDINGNUMBER", "COUNTY", "STATE",
+                "SECONDARYADDRESS", "GPSCOORDINATES", "ORDINALDIRECTION",
+            ],
         },
     ),
     EntityType(
@@ -82,7 +86,10 @@ TAXONOMY: list[EntityType] = [
     ),
     EntityType(
         "DATE", Tier.CORE, IdentifierClass.QUASI,
-        crosswalk={"openai": ["private_date"], "ai4privacy": ["DATE", "TIME"], "hipaa": ["dates"]},
+        crosswalk={
+            "openai": ["private_date"], "ai4privacy": ["DATE", "TIME"], "hipaa": ["dates"],
+            "openmed": ["DATE", "DATEOFBIRTH", "TIME"],
+        },
     ),
     EntityType(
         "ACCOUNT_ID", Tier.CORE, IdentifierClass.DIRECT,
@@ -93,6 +100,12 @@ TAXONOMY: list[EntityType] = [
                 "CREDITCARDNUMBER", "DRIVERLICENSENUM",
             ],
             "hipaa": ["account_numbers", "ssn"],  # medical_record_numbers → MRN (clinical-specific)
+            "openmed": [
+                "SSN", "IBAN", "BANKACCOUNT", "BIC", "CREDITCARD", "CREDITCARDISSUER", "CVV",
+                "PIN", "MASKEDNUMBER", "ACCOUNTNAME", "BITCOINADDRESS", "ETHEREUMADDRESS",
+                "LITECOINADDRESS", "VIN", "VRM", "IMEI", "MACADDRESS", "IPADDRESS",
+                "USERNAME", "USERAGENT",
+            ],
         },
     ),
     EntityType(

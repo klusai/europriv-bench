@@ -88,10 +88,20 @@ class PrivacyFilterAdapter(BaseAdapter):
         return out
 
 
+class OpenMedAdapter(PrivacyFilterAdapter):
+    """OpenMed/privacy-filter-multilingual — a 54-category finetune of privacy-filter (scheme=openmed)."""
+
+    name = "openmed"
+
+    def __init__(self) -> None:
+        super().__init__(model_id="OpenMed/privacy-filter-multilingual", scheme="openmed")
+
+
 # Builder registry: adapter key (CLI --adapter) -> zero-arg factory.
 BUILDERS: dict[str, type[BaseAdapter]] = {
     "dummy": DummyAdapter,
     "privacy-filter": PrivacyFilterAdapter,
+    "openmed": OpenMedAdapter,
 }
 
 

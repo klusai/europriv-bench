@@ -34,17 +34,20 @@ def list_specs(suite: str) -> None:
 
 @cli.command()
 @click.option("--suite", default="evaluations", help="Directory of eval specs.")
-@click.option("--adapter", default="dummy", type=click.Choice(sorted(BUILDERS)), help="Model adapter.")
+@click.option("--adapter", "adapters", multiple=True, type=click.Choice(sorted(BUILDERS)),
+              default=("dummy",), help="Model adapter(s); repeatable for a comparative leaderboard.")
 @click.option("--out", default="baselines/leaderboard.json", help="Leaderboard output path.")
 @click.option("--limit", type=int, default=None, help="Cap examples per spec (fast iteration).")
-def run(suite: str, adapter: str, out: str, limit: int | None) -> None:
-    """Run an adapter across a suite and write the leaderboard."""
-    model = build(adapter)
+def run(suite: str, adapters: tuple[str, ...], out: str, limit: int | None) -> None:
+    """Run one or more adapters across a suite and write a combined leaderboard."""
+    specs = load_suite(suite)
     ts = datetime.now(timezone.utc).isoformat()
     results = []
-    for spec in load_suite(suite):
-        logger.info("running %s on %s", adapter, spec.name)
-        results.append(run_spec(spec, model, timestamp=ts, limit=limit))
+    for name in adapters:
+        model = build(name)
+        for spec in specs:
+            logger.info("running %s on %s", name, spec.name)
+            results.append(run_spec(spec, model, timestamp=ts, limit=limit))
     path = write_leaderboard(results, out)
     click.echo(f"wrote {path}")
 

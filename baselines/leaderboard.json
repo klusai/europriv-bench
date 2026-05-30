@@ -1,6 +1,248 @@
 {
   "schema": 2,
   "entries": {
+    "openmed::OpenMed/privacy-filter-multilingual": [
+      {
+        "spec": "PII Detection — Dutch (general)",
+        "task": "detection",
+        "languages": [
+          "nl"
+        ],
+        "domain": "general",
+        "adapter": "openmed",
+        "model_id": "OpenMed/privacy-filter-multilingual",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.6153846153846154,
+            "recall": 0.5226130653266332,
+            "f1": 0.5652173913043479
+          },
+          "entity_f2": {
+            "precision": 0.6153846153846154,
+            "recall": 0.5226130653266332,
+            "f2": 0.538860103626943
+          }
+        },
+        "europriv_bench_version": "0.1.0",
+        "taxonomy_version": "0.1.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "nl",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T08:28:35.053555+00:00"
+      },
+      {
+        "spec": "PII Detection — English (general)",
+        "task": "detection",
+        "languages": [
+          "en"
+        ],
+        "domain": "general",
+        "adapter": "openmed",
+        "model_id": "OpenMed/privacy-filter-multilingual",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.708502024291498,
+            "recall": 0.5813953488372093,
+            "f1": 0.6386861313868614
+          },
+          "entity_f2": {
+            "precision": 0.708502024291498,
+            "recall": 0.5813953488372093,
+            "f2": 0.6030323914541696
+          }
+        },
+        "europriv_bench_version": "0.1.0",
+        "taxonomy_version": "0.1.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "en",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T08:28:35.053555+00:00"
+      },
+      {
+        "spec": "PII Detection — French (general)",
+        "task": "detection",
+        "languages": [
+          "fr"
+        ],
+        "domain": "general",
+        "adapter": "openmed",
+        "model_id": "OpenMed/privacy-filter-multilingual",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.7149532710280374,
+            "recall": 0.6566523605150214,
+            "f1": 0.6845637583892618
+          },
+          "entity_f2": {
+            "precision": 0.7149532710280374,
+            "recall": 0.6566523605150214,
+            "f2": 0.6675392670157068
+          }
+        },
+        "europriv_bench_version": "0.1.0",
+        "taxonomy_version": "0.1.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "fr",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T08:28:35.053555+00:00"
+      },
+      {
+        "spec": "PII Detection — German (general)",
+        "task": "detection",
+        "languages": [
+          "de"
+        ],
+        "domain": "general",
+        "adapter": "openmed",
+        "model_id": "OpenMed/privacy-filter-multilingual",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.7761194029850746,
+            "recall": 0.6582278481012658,
+            "f1": 0.7123287671232876
+          },
+          "entity_f2": {
+            "precision": 0.7761194029850746,
+            "recall": 0.6582278481012658,
+            "f2": 0.6788511749347258
+          }
+        },
+        "europriv_bench_version": "0.1.0",
+        "taxonomy_version": "0.1.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "de",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T08:28:35.053555+00:00"
+      },
+      {
+        "spec": "PII Detection — Italian (general)",
+        "task": "detection",
+        "languages": [
+          "it"
+        ],
+        "domain": "general",
+        "adapter": "openmed",
+        "model_id": "OpenMed/privacy-filter-multilingual",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.696969696969697,
+            "recall": 0.6244343891402715,
+            "f1": 0.6587112171837709
+          },
+          "entity_f2": {
+            "precision": 0.696969696969697,
+            "recall": 0.6244343891402715,
+            "f2": 0.6377079482439927
+          }
+        },
+        "europriv_bench_version": "0.1.0",
+        "taxonomy_version": "0.1.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "it",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T08:28:35.053555+00:00"
+      },
+      {
+        "spec": "PII Detection — Spanish (general)",
+        "task": "detection",
+        "languages": [
+          "es"
+        ],
+        "domain": "general",
+        "adapter": "openmed",
+        "model_id": "OpenMed/privacy-filter-multilingual",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.7159090909090909,
+            "recall": 0.6146341463414634,
+            "f1": 0.6614173228346457
+          },
+          "entity_f2": {
+            "precision": 0.7159090909090909,
+            "recall": 0.6146341463414634,
+            "f2": 0.6325301204819277
+          }
+        },
+        "europriv_bench_version": "0.1.0",
+        "taxonomy_version": "0.1.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "es",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T08:28:35.053555+00:00"
+      }
+    ],
     "privacy-filter::openai/privacy-filter": [
       {
         "spec": "PII Detection — Dutch (general)",
@@ -13,6 +255,14 @@
         "model_id": "openai/privacy-filter",
         "n": 100,
         "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "PERSON",
+          "PHONE"
+        ],
         "scores": {
           "entity_f1": {
             "precision": 0.627906976744186,
@@ -32,7 +282,7 @@
           "config": "nl",
           "split": "test"
         },
-        "timestamp": "2026-05-30T08:11:39.676554+00:00"
+        "timestamp": "2026-05-30T08:28:35.053555+00:00"
       },
       {
         "spec": "PII Detection — English (general)",
@@ -45,6 +295,14 @@
         "model_id": "openai/privacy-filter",
         "n": 100,
         "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "PERSON",
+          "PHONE"
+        ],
         "scores": {
           "entity_f1": {
             "precision": 0.6392405063291139,
@@ -64,7 +322,7 @@
           "config": "en",
           "split": "test"
         },
-        "timestamp": "2026-05-30T08:11:39.676554+00:00"
+        "timestamp": "2026-05-30T08:28:35.053555+00:00"
       },
       {
         "spec": "PII Detection — French (general)",
@@ -77,6 +335,14 @@
         "model_id": "openai/privacy-filter",
         "n": 100,
         "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "PERSON",
+          "PHONE"
+        ],
         "scores": {
           "entity_f1": {
             "precision": 0.6540880503144654,
@@ -96,7 +362,7 @@
           "config": "fr",
           "split": "test"
         },
-        "timestamp": "2026-05-30T08:11:39.676554+00:00"
+        "timestamp": "2026-05-30T08:28:35.053555+00:00"
       },
       {
         "spec": "PII Detection — German (general)",
@@ -109,6 +375,14 @@
         "model_id": "openai/privacy-filter",
         "n": 100,
         "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "PERSON",
+          "PHONE"
+        ],
         "scores": {
           "entity_f1": {
             "precision": 0.8125,
@@ -128,7 +402,7 @@
           "config": "de",
           "split": "test"
         },
-        "timestamp": "2026-05-30T08:11:39.676554+00:00"
+        "timestamp": "2026-05-30T08:28:35.053555+00:00"
       },
       {
         "spec": "PII Detection — Italian (general)",
@@ -141,6 +415,14 @@
         "model_id": "openai/privacy-filter",
         "n": 100,
         "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "PERSON",
+          "PHONE"
+        ],
         "scores": {
           "entity_f1": {
             "precision": 0.6951219512195121,
@@ -160,7 +442,7 @@
           "config": "it",
           "split": "test"
         },
-        "timestamp": "2026-05-30T08:11:39.676554+00:00"
+        "timestamp": "2026-05-30T08:28:35.053555+00:00"
       },
       {
         "spec": "PII Detection — Spanish (general)",
@@ -173,16 +455,24 @@
         "model_id": "openai/privacy-filter",
         "n": 100,
         "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "PERSON",
+          "PHONE"
+        ],
         "scores": {
           "entity_f1": {
-            "precision": 0.708029197080292,
+            "precision": 0.7132352941176471,
             "recall": 0.47317073170731705,
-            "f1": 0.5672514619883041
+            "f1": 0.5689149560117301
           },
           "entity_f2": {
-            "precision": 0.708029197080292,
+            "precision": 0.7132352941176471,
             "recall": 0.47317073170731705,
-            "f2": 0.5067920585161964
+            "f2": 0.5073221757322176
           }
         },
         "europriv_bench_version": "0.1.0",
@@ -192,7 +482,7 @@
           "config": "es",
           "split": "test"
         },
-        "timestamp": "2026-05-30T08:11:39.676554+00:00"
+        "timestamp": "2026-05-30T08:28:35.053555+00:00"
       }
     ]
   }
