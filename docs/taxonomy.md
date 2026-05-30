@@ -28,16 +28,28 @@ YAML in a later phase); this document is the human-facing crosswalk + paper appe
 | PHONE | core | direct | | private_phone | TELEPHONENUM | — | — |
 | URL | core | quasi | | private_url | — | — | — |
 | DATE | core | quasi | | private_date | DATE | dates | — |
-| ACCOUNT_ID | core | direct | | account_number | ACCOUNTNUM/IDCARDNUM/… | account/ssn/mrn | — |
+| ACCOUNT_ID | core | direct | | account_number | ACCOUNTNUM/IDCARDNUM/… | account/ssn | — |
 | SECRET | core | direct | | secret | PASSWORD | — | — |
 | MRN | clinical | direct | | — | — | medical_record_numbers | — |
 | HEALTH_CONDITION | clinical | quasi | ✅ | — | — | — | — |
-| PROVIDER | clinical | quasi | | — | — | names | — |
-| FACILITY | clinical | quasi | | — | — | — | ORGANIZATION |
+| PROVIDER | clinical | quasi | | — | — | —¹ | — |
+| FACILITY | clinical | quasi | | — | — | — | —² |
 | CASE_NUMBER | legal | direct | | — | — | — | AMOUNT |
-| COURT | legal | quasi | | — | — | — | ORGANIZATION |
+| COURT | legal | quasi | | — | — | — | —² |
 | STATUTE_REF | legal | quasi | | — | — | — | — |
 | ORG_PARTY | legal | quasi | | — | — | — | ORGANIZATION |
+
+¹ HIPAA `names` → **PERSON** (general owner); PROVIDER is a KP-native refinement not
+recoverable from the flat source label. ² MAPA `ORGANIZATION` → **ORG_PARTY**; FACILITY/COURT
+are KP-native refinements. Rule: each native label maps to exactly one KP type (native→KP is a
+function), enforced at import by `crosswalk.py`.
+
+## Coverage gaps surfaced by live curation (AI4Privacy, 2026-05-30)
+
+Captured now (no label-space change): `CREDITCARDNUMBER`, `DRIVERLICENSENUM` → ACCOUNT_ID;
+`TIME` → DATE. **Deferred** (need new entity types — bump `TAXONOMY_VERSION` when added):
+`AGE`, `SEX` (GDPR-sensitive: SEX is Art.9-adjacent — design as special-category?), `TITLE`
+(honorific; PERSON-adjacent). The curation script logs all dropped labels so coverage stays auditable.
 
 ## Open crosswalk decisions (resolve in Phase 1)
 

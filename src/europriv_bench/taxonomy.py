@@ -82,14 +82,17 @@ TAXONOMY: list[EntityType] = [
     ),
     EntityType(
         "DATE", Tier.CORE, IdentifierClass.QUASI,
-        crosswalk={"openai": ["private_date"], "ai4privacy": ["DATE"], "hipaa": ["dates"]},
+        crosswalk={"openai": ["private_date"], "ai4privacy": ["DATE", "TIME"], "hipaa": ["dates"]},
     ),
     EntityType(
         "ACCOUNT_ID", Tier.CORE, IdentifierClass.DIRECT,
         crosswalk={
             "openai": ["account_number"],
-            "ai4privacy": ["ACCOUNTNUM", "IDCARDNUM", "TAXNUM", "SOCIALNUM", "PASSPORTNUM"],
-            "hipaa": ["account_numbers", "ssn", "medical_record_numbers"],
+            "ai4privacy": [
+                "ACCOUNTNUM", "IDCARDNUM", "TAXNUM", "SOCIALNUM", "PASSPORTNUM",
+                "CREDITCARDNUMBER", "DRIVERLICENSENUM",
+            ],
+            "hipaa": ["account_numbers", "ssn"],  # medical_record_numbers → MRN (clinical-specific)
         },
     ),
     EntityType(
@@ -105,11 +108,14 @@ TAXONOMY: list[EntityType] = [
         "HEALTH_CONDITION", Tier.CLINICAL, IdentifierClass.QUASI, gdpr_special=True,
         crosswalk={"openmed": ["DIAGNOSES", "MEDICATION"]},
     ),
-    EntityType("PROVIDER", Tier.CLINICAL, IdentifierClass.QUASI, crosswalk={"hipaa": ["names"]}),
-    EntityType("FACILITY", Tier.CLINICAL, IdentifierClass.QUASI, crosswalk={"mapa": ["ORGANIZATION"]}),
+    # PROVIDER/FACILITY are KP-native refinements: HIPAA "names" → PERSON and MAPA
+    # "ORGANIZATION" → ORG_PARTY (the general owners); these finer types can't be recovered
+    # from the flat source label, so they don't claim it (keeps native→KP a function).
+    EntityType("PROVIDER", Tier.CLINICAL, IdentifierClass.QUASI, crosswalk={}),
+    EntityType("FACILITY", Tier.CLINICAL, IdentifierClass.QUASI, crosswalk={}),
     # --- Legal quasi-identifiers ---
     EntityType("CASE_NUMBER", Tier.LEGAL, IdentifierClass.DIRECT, crosswalk={"mapa": ["AMOUNT"]}),
-    EntityType("COURT", Tier.LEGAL, IdentifierClass.QUASI, crosswalk={"mapa": ["ORGANIZATION"]}),
+    EntityType("COURT", Tier.LEGAL, IdentifierClass.QUASI, crosswalk={}),
     EntityType("STATUTE_REF", Tier.LEGAL, IdentifierClass.QUASI, crosswalk={}),
     EntityType("ORG_PARTY", Tier.LEGAL, IdentifierClass.QUASI, crosswalk={"mapa": ["ORGANIZATION"]}),
 ]

@@ -10,24 +10,46 @@ taxonomy + dataset revision.
 
 from __future__ import annotations
 
+from collections.abc import Iterable
+
 from . import __version__
 from .adapters import BaseAdapter
 from .logger import get_logger
 from .metrics import REGISTRY
+from .spans import Span, char_spans_to_bioes, validate_bioes
 from .spec import EvalSpec, Task
 from .taxonomy import TAXONOMY_VERSION
 
 logger = get_logger(__name__)
 
 
+def _rows_to_gold(rows: Iterable[dict]) -> tuple[list[str], list[list[str]]]:
+    """Convert benchmark rows ``{text, spans:[{start,end,label}]}`` → (texts, gold BIOES tags).
+
+    Gold spans already carry KP labels (the curation step mapped them), so no crosswalk here.
+    Every example is validated, so a malformed published row fails loudly.
+    """
+    texts: list[str] = []
+    gold: list[list[str]] = []
+    for r in rows:
+        text = r["text"]
+        spans = [Span(s["start"], s["end"], s["label"]) for s in r["spans"]]
+        tags = char_spans_to_bioes(text, spans)
+        validate_bioes(tags)
+        texts.append(text)
+        gold.append(tags)
+    return texts, gold
+
+
 def _load_gold(spec: EvalSpec) -> tuple[list[str], list[list[str]]]:
     """Load (texts, gold BIOES tag-sequences) for a detection spec from HF.
 
-    Stubbed until the benchmark dataset is published (Phase 1). Tests inject gold directly.
+    Requires the benchmark dataset to be published (Phase 1) and the `hf` extra (datasets).
     """
-    raise NotImplementedError(
-        f"_load_gold: publish {spec.dataset.hf_id} (Phase 1), then load via datasets.load_dataset"
-    )
+    from datasets import load_dataset
+
+    ds = load_dataset(spec.dataset.hf_id, spec.dataset.config, split=spec.dataset.split)
+    return _rows_to_gold(ds)
 
 
 def run_spec(

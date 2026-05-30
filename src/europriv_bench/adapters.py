@@ -17,6 +17,8 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 
+from .crosswalk import entities_to_kp_bioes
+
 
 class BaseAdapter:
     """Base for all adapters. ``name`` = family/tool; ``model_id`` = the specific checkpoint."""
@@ -62,12 +64,28 @@ class PrivacyFilterAdapter(BaseAdapter):
     def __init__(self, model_id: str = "openai/privacy-filter", scheme: str = "openai") -> None:
         self.model_id = model_id
         self.scheme = scheme
+        self._pipe = None
 
-    def predict_tags(self, texts: Sequence[str]) -> list[list[str]]:  # pragma: no cover - needs GPU/model
-        raise NotImplementedError(
-            "PrivacyFilterAdapter: install the `hf` extra and wire the token-classification "
-            "pipeline in Phase 1. Use the crosswalk in taxonomy.py to map native labels → KP."
-        )
+    def _pipeline(self):  # pragma: no cover - requires the `hf` extra + model download
+        if self._pipe is None:
+            from transformers import pipeline
+            self._pipe = pipeline(
+                "token-classification",
+                model=self.model_id,
+                aggregation_strategy="simple",
+            )
+        return self._pipe
+
+    def predict_tags(self, texts: Sequence[str]) -> list[list[str]]:
+        pipe = self._pipeline()  # pragma: no cover - needs model
+        out = []  # pragma: no cover
+        for text in texts:  # pragma: no cover
+            ents = [
+                {"label": e["entity_group"], "start": int(e["start"]), "end": int(e["end"])}
+                for e in pipe(text)
+            ]
+            out.append(entities_to_kp_bioes(text, ents, self.scheme))
+        return out
 
 
 # Builder registry: adapter key (CLI --adapter) -> zero-arg factory.
