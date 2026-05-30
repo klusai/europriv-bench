@@ -38,16 +38,33 @@ def list_specs(suite: str) -> None:
               default=("dummy",), help="Model adapter(s); repeatable for a comparative leaderboard.")
 @click.option("--out", default="baselines/leaderboard.json", help="Leaderboard output path.")
 @click.option("--limit", type=int, default=None, help="Cap examples per spec (fast iteration).")
-def run(suite: str, adapters: tuple[str, ...], out: str, limit: int | None) -> None:
-    """Run one or more adapters across a suite and write a combined leaderboard."""
+@click.option("--workers", type=int, default=1, help="Parallel worker processes over (adapter × spec) jobs.")
+@click.option("--threads", type=int, default=4, help="BLAS threads per worker (4 is fastest for this MoE).")
+def run(suite: str, adapters: tuple[str, ...], out: str, limit: int | None, workers: int, threads: int) -> None:
+    """Run one or more adapters across a suite and write a combined leaderboard.
+
+    On a many-core Mac (M3 Ultra), use --workers ~7 --threads 4 to saturate cores: this model is
+    small, so parallel thread-capped CPU jobs beat both default-threaded CPU and the GPU.
+    """
     specs = load_suite(suite)
     ts = datetime.now(timezone.utc).isoformat()
-    results = []
-    for name in adapters:
-        model = build(name)
-        for spec in specs:
-            logger.info("running %s on %s", name, spec.name)
-            results.append(run_spec(spec, model, timestamp=ts, limit=limit))
+    if workers > 1:
+        from .parallel import run_jobs
+        logger.info("running %d adapter(s) × %d spec(s) on %d workers × %d threads",
+                    len(adapters), len(specs), workers, threads)
+        results = run_jobs(list(adapters), specs, limit, ts, workers, threads)
+    else:
+        try:
+            import torch
+            torch.set_num_threads(threads)  # default 28 is slower than 4 for this workload
+        except ImportError:
+            pass
+        results = []
+        for name in adapters:
+            model = build(name)
+            for spec in specs:
+                logger.info("running %s on %s", name, spec.name)
+                results.append(run_spec(spec, model, timestamp=ts, limit=limit))
     path = write_leaderboard(results, out)
     click.echo(f"wrote {path}")
 
