@@ -9,4 +9,4 @@ dependency-light (pydantic + pyyaml + seqeval); model backends (transformers, GL
 Presidio) are optional extras behind the `adapters` layer.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"

@@ -1,6 +1,6 @@
 [project]
 name = "europriv-bench"
-version = "0.1.0"
+version = "0.2.0"
 description = "EuroPriv-Bench: a unified pan-European de-identification & anonymization benchmark with privacy-utility metrics"
 requires-python = ">=3.13"
 dependencies = [
