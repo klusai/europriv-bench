@@ -42,7 +42,7 @@ class EntityType:
 
 
 # --- Crosswalk source schemes we map onto -------------------------------------------------
-SCHEMES = ("openai", "ai4privacy", "hipaa", "mapa", "openmed", "azure")
+SCHEMES = ("openai", "ai4privacy", "hipaa", "mapa", "openmed", "azure", "tabularisai")
 
 
 # --- The harmonized taxonomy (seed; extended in docs/taxonomy.md) -------------------------
@@ -57,6 +57,7 @@ TAXONOMY: list[EntityType] = [
             "hipaa": ["names"],
             "mapa": ["PERSON"],
             "openmed": ["FIRSTNAME", "LASTNAME", "MIDDLENAME", "PREFIX"],
+            "tabularisai": ["FIRSTNAME", "LASTNAME", "MIDDLENAME", "PREFIX"],
         },
     ),
     EntityType(
@@ -70,25 +71,31 @@ TAXONOMY: list[EntityType] = [
                 "STREET", "CITY", "ZIPCODE", "BUILDINGNUMBER", "COUNTY", "STATE",
                 "SECONDARYADDRESS", "GPSCOORDINATES", "ORDINALDIRECTION",
             ],
+            "tabularisai": [
+                "ADDRESS", "BUILDING_NUMBER", "CITY", "STATE", "STREET", "POSTAL_CODE",
+                "COUNTRY", "LATITUDE", "LONGITUDE",
+            ],
         },
     ),
     EntityType(
         "EMAIL", Tier.CORE, IdentifierClass.DIRECT,
-        crosswalk={"openai": ["private_email"], "ai4privacy": ["EMAIL"], "openmed": ["EMAIL"]},
+        crosswalk={"openai": ["private_email"], "ai4privacy": ["EMAIL"], "openmed": ["EMAIL"],
+                   "tabularisai": ["EMAIL"]},
     ),
     EntityType(
         "PHONE", Tier.CORE, IdentifierClass.DIRECT,
-        crosswalk={"openai": ["private_phone"], "ai4privacy": ["TELEPHONENUM"], "openmed": ["PHONE"]},
+        crosswalk={"openai": ["private_phone"], "ai4privacy": ["TELEPHONENUM"], "openmed": ["PHONE"],
+                   "tabularisai": ["PHONE_NUMBER"]},
     ),
     EntityType(
         "URL", Tier.CORE, IdentifierClass.QUASI,
-        crosswalk={"openai": ["private_url"], "openmed": ["URL"]},
+        crosswalk={"openai": ["private_url"], "openmed": ["URL"], "tabularisai": ["URL"]},
     ),
     EntityType(
         "DATE", Tier.CORE, IdentifierClass.QUASI,
         crosswalk={
             "openai": ["private_date"], "ai4privacy": ["DATE", "TIME"], "hipaa": ["dates"],
-            "openmed": ["DATE", "DATEOFBIRTH", "TIME"],
+            "openmed": ["DATE", "DATEOFBIRTH", "TIME"], "tabularisai": ["DOB"],
         },
     ),
     EntityType(
@@ -104,11 +111,16 @@ TAXONOMY: list[EntityType] = [
                 "LITECOINADDRESS", "VIN", "VRM", "IMEI", "MACADDRESS", "IPADDRESS",
                 "USERNAME", "USERAGENT",
             ],
+            "tabularisai": [
+                "ACCOUNT_NUMBER", "CREDIT_CARD_NUMBER", "IBAN", "TAX_ID", "DEVICE_ID",
+                "IP_ADDRESS", "MAC_ADDRESS", "USERNAME",
+            ],
         },
     ),
     EntityType(
         "SECRET", Tier.CORE, IdentifierClass.DIRECT,
-        crosswalk={"openai": ["secret"], "ai4privacy": ["PASSWORD"], "openmed": ["PASSWORD"]},
+        crosswalk={"openai": ["secret"], "ai4privacy": ["PASSWORD"], "openmed": ["PASSWORD"],
+                   "tabularisai": ["PASSWORD"]},
     ),
     # Government-issued national identifiers (RO Law 190/2018 art.4: CNP, CI seria/număr,
     # passport, driving licence, CASS/EHIC). CNP is highest-leakage — see national_id.py /
@@ -119,6 +131,7 @@ TAXONOMY: list[EntityType] = [
             "ai4privacy": ["IDCARDNUM", "SOCIALNUM", "PASSPORTNUM", "DRIVERLICENSENUM"],
             "hipaa": ["ssn"],
             "openmed": ["SSN"],
+            "tabularisai": ["NATIONAL_ID", "PASSPORT_NUMBER", "DRIVER_LICENSE", "HEALTH_INSURANCE_ID"],
         },
     ),
     # --- Clinical (PHI) ---
@@ -128,7 +141,7 @@ TAXONOMY: list[EntityType] = [
     ),
     EntityType(
         "HEALTH_CONDITION", Tier.CLINICAL, IdentifierClass.QUASI, gdpr_special=True,
-        crosswalk={"openmed": ["DIAGNOSES", "MEDICATION"]},
+        crosswalk={"openmed": ["DIAGNOSES", "MEDICATION"], "tabularisai": ["HEALTH_CONDITION"]},
     ),
     # PROVIDER/FACILITY are KP-native refinements: HIPAA "names" → PERSON and MAPA
     # "ORGANIZATION" → ORG_PARTY (the general owners); these finer types can't be recovered
@@ -139,7 +152,8 @@ TAXONOMY: list[EntityType] = [
     EntityType("CASE_NUMBER", Tier.LEGAL, IdentifierClass.DIRECT, crosswalk={"mapa": ["AMOUNT"]}),
     EntityType("COURT", Tier.LEGAL, IdentifierClass.QUASI, crosswalk={}),
     EntityType("STATUTE_REF", Tier.LEGAL, IdentifierClass.QUASI, crosswalk={}),
-    EntityType("ORG_PARTY", Tier.LEGAL, IdentifierClass.QUASI, crosswalk={"mapa": ["ORGANIZATION"]}),
+    EntityType("ORG_PARTY", Tier.LEGAL, IdentifierClass.QUASI,
+               crosswalk={"mapa": ["ORGANIZATION"], "tabularisai": ["COMPANY_NAME"]}),
     # Company identifiers (RO: CUI/CIF fiscal code, trade-register J-number). RO-native.
     EntityType("COMPANY_ID", Tier.LEGAL, IdentifierClass.DIRECT, crosswalk={}),
 ]

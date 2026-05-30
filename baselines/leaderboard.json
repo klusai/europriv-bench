@@ -43,14 +43,14 @@
             "leaked_quasi_identifiers": 12.0
           }
         },
-        "europriv_bench_version": "0.1.0",
+        "europriv_bench_version": "0.2.0",
         "taxonomy_version": "0.2.0",
         "dataset": {
           "hf_id": "klusai/europriv-bench",
           "config": "ro-synthetic-v1",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:30:50.854957+00:00"
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
       },
       {
         "spec": "PII Detection — Dutch (general)",
@@ -84,14 +84,14 @@
             "f2": 0.5181347150259067
           }
         },
-        "europriv_bench_version": "0.1.0",
+        "europriv_bench_version": "0.2.0",
         "taxonomy_version": "0.2.0",
         "dataset": {
           "hf_id": "klusai/europriv-bench",
           "config": "nl",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:30:50.854957+00:00"
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
       },
       {
         "spec": "PII Detection — English (general)",
@@ -125,14 +125,14 @@
             "f2": 0.5677907777013077
           }
         },
-        "europriv_bench_version": "0.1.0",
+        "europriv_bench_version": "0.2.0",
         "taxonomy_version": "0.2.0",
         "dataset": {
           "hf_id": "klusai/europriv-bench",
           "config": "en",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:30:50.854957+00:00"
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
       },
       {
         "spec": "PII Detection — French (general)",
@@ -166,14 +166,14 @@
             "f2": 0.6375545851528385
           }
         },
-        "europriv_bench_version": "0.1.0",
+        "europriv_bench_version": "0.2.0",
         "taxonomy_version": "0.2.0",
         "dataset": {
           "hf_id": "klusai/europriv-bench",
           "config": "fr",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:30:50.854957+00:00"
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
       },
       {
         "spec": "PII Detection — German (general)",
@@ -207,14 +207,14 @@
             "f2": 0.6266318537859007
           }
         },
-        "europriv_bench_version": "0.1.0",
+        "europriv_bench_version": "0.2.0",
         "taxonomy_version": "0.2.0",
         "dataset": {
           "hf_id": "klusai/europriv-bench",
           "config": "de",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:30:50.854957+00:00"
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
       },
       {
         "spec": "PII Detection — Italian (general)",
@@ -248,14 +248,14 @@
             "f2": 0.55452865064695
           }
         },
-        "europriv_bench_version": "0.1.0",
+        "europriv_bench_version": "0.2.0",
         "taxonomy_version": "0.2.0",
         "dataset": {
           "hf_id": "klusai/europriv-bench",
           "config": "it",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:30:50.854957+00:00"
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
       },
       {
         "spec": "PII Detection — Spanish (general)",
@@ -289,14 +289,14 @@
             "f2": 0.5572289156626506
           }
         },
-        "europriv_bench_version": "0.1.0",
+        "europriv_bench_version": "0.2.0",
         "taxonomy_version": "0.2.0",
         "dataset": {
           "hf_id": "klusai/europriv-bench",
           "config": "es",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:30:50.854957+00:00"
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
       }
     ],
     "privacy-filter::openai/privacy-filter": [
@@ -341,14 +341,14 @@
             "leaked_quasi_identifiers": 0.0
           }
         },
-        "europriv_bench_version": "0.1.0",
+        "europriv_bench_version": "0.2.0",
         "taxonomy_version": "0.2.0",
         "dataset": {
           "hf_id": "klusai/europriv-bench",
           "config": "ro-synthetic-v1",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:30:50.854957+00:00"
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
       },
       {
         "spec": "PII Detection — Dutch (general)",
@@ -382,14 +382,14 @@
             "f2": 0.3837837837837838
           }
         },
-        "europriv_bench_version": "0.1.0",
+        "europriv_bench_version": "0.2.0",
         "taxonomy_version": "0.2.0",
         "dataset": {
           "hf_id": "klusai/europriv-bench",
           "config": "nl",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:30:50.854957+00:00"
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
       },
       {
         "spec": "PII Detection — English (general)",
@@ -423,14 +423,14 @@
             "f2": 0.315712187958884
           }
         },
-        "europriv_bench_version": "0.1.0",
+        "europriv_bench_version": "0.2.0",
         "taxonomy_version": "0.2.0",
         "dataset": {
           "hf_id": "klusai/europriv-bench",
           "config": "en",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:30:50.854957+00:00"
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
       },
       {
         "spec": "PII Detection — French (general)",
@@ -464,14 +464,14 @@
             "f2": 0.41743119266055045
           }
         },
-        "europriv_bench_version": "0.1.0",
+        "europriv_bench_version": "0.2.0",
         "taxonomy_version": "0.2.0",
         "dataset": {
           "hf_id": "klusai/europriv-bench",
           "config": "fr",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:30:50.854957+00:00"
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
       },
       {
         "spec": "PII Detection — German (general)",
@@ -505,14 +505,14 @@
             "f2": 0.4711802378774017
           }
         },
-        "europriv_bench_version": "0.1.0",
+        "europriv_bench_version": "0.2.0",
         "taxonomy_version": "0.2.0",
         "dataset": {
           "hf_id": "klusai/europriv-bench",
           "config": "de",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:30:50.854957+00:00"
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
       },
       {
         "spec": "PII Detection — Italian (general)",
@@ -546,14 +546,14 @@
             "f2": 0.42979942693409745
           }
         },
-        "europriv_bench_version": "0.1.0",
+        "europriv_bench_version": "0.2.0",
         "taxonomy_version": "0.2.0",
         "dataset": {
           "hf_id": "klusai/europriv-bench",
           "config": "it",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:30:50.854957+00:00"
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
       },
       {
         "spec": "PII Detection — Spanish (general)",
@@ -587,14 +587,312 @@
             "f2": 0.412748171368861
           }
         },
-        "europriv_bench_version": "0.1.0",
+        "europriv_bench_version": "0.2.0",
         "taxonomy_version": "0.2.0",
         "dataset": {
           "hf_id": "klusai/europriv-bench",
           "config": "es",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:30:50.854957+00:00"
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+      }
+    ],
+    "tabularisai::tabularisai/eu-pii-safeguard": [
+      {
+        "spec": "PII Detection + CNP Leakage — Romanian (synthetic v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "general",
+        "adapter": "tabularisai",
+        "model_id": "tabularisai/eu-pii-safeguard",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.8931116389548693,
+            "recall": 0.8604118993135011,
+            "f1": 0.8764568764568764
+          },
+          "entity_f2": {
+            "precision": 0.8931116389548693,
+            "recall": 0.8604118993135011,
+            "f2": 0.8667588750576302
+          },
+          "cnp_leakage": {
+            "cnp_total": 67.0,
+            "cnp_detected": 67.0,
+            "cnp_missed": 0.0,
+            "leak_rate": 0.0,
+            "detection_rate": 1.0,
+            "leaked_quasi_identifiers": 0.0
+          }
+        },
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "ro-synthetic-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+      },
+      {
+        "spec": "PII Detection — Dutch (general)",
+        "task": "detection",
+        "languages": [
+          "nl"
+        ],
+        "domain": "general",
+        "adapter": "tabularisai",
+        "model_id": "tabularisai/eu-pii-safeguard",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.6144578313253012,
+            "recall": 0.5125628140703518,
+            "f1": 0.5589041095890411
+          },
+          "entity_f2": {
+            "precision": 0.6144578313253012,
+            "recall": 0.5125628140703518,
+            "f2": 0.5301455301455301
+          }
+        },
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "nl",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+      },
+      {
+        "spec": "PII Detection — English (general)",
+        "task": "detection",
+        "languages": [
+          "en"
+        ],
+        "domain": "general",
+        "adapter": "tabularisai",
+        "model_id": "tabularisai/eu-pii-safeguard",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.6318407960199005,
+            "recall": 0.4219269102990033,
+            "f1": 0.5059760956175299
+          },
+          "entity_f2": {
+            "precision": 0.6318407960199005,
+            "recall": 0.4219269102990033,
+            "f2": 0.45195729537366547
+          }
+        },
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "en",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+      },
+      {
+        "spec": "PII Detection — French (general)",
+        "task": "detection",
+        "languages": [
+          "fr"
+        ],
+        "domain": "general",
+        "adapter": "tabularisai",
+        "model_id": "tabularisai/eu-pii-safeguard",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.7027027027027027,
+            "recall": 0.5579399141630901,
+            "f1": 0.6220095693779903
+          },
+          "entity_f2": {
+            "precision": 0.7027027027027027,
+            "recall": 0.5579399141630901,
+            "f2": 0.5819158460161146
+          }
+        },
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "fr",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+      },
+      {
+        "spec": "PII Detection — German (general)",
+        "task": "detection",
+        "languages": [
+          "de"
+        ],
+        "domain": "general",
+        "adapter": "tabularisai",
+        "model_id": "tabularisai/eu-pii-safeguard",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.7433155080213903,
+            "recall": 0.5864978902953587,
+            "f1": 0.6556603773584906
+          },
+          "entity_f2": {
+            "precision": 0.7433155080213903,
+            "recall": 0.5864978902953587,
+            "f2": 0.6123348017621145
+          }
+        },
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "de",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+      },
+      {
+        "spec": "PII Detection — Italian (general)",
+        "task": "detection",
+        "languages": [
+          "it"
+        ],
+        "domain": "general",
+        "adapter": "tabularisai",
+        "model_id": "tabularisai/eu-pii-safeguard",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.774390243902439,
+            "recall": 0.5746606334841629,
+            "f1": 0.6597402597402597
+          },
+          "entity_f2": {
+            "precision": 0.774390243902439,
+            "recall": 0.5746606334841629,
+            "f2": 0.6059160305343512
+          }
+        },
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "it",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+      },
+      {
+        "spec": "PII Detection — Spanish (general)",
+        "task": "detection",
+        "languages": [
+          "es"
+        ],
+        "domain": "general",
+        "adapter": "tabularisai",
+        "model_id": "tabularisai/eu-pii-safeguard",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.725609756097561,
+            "recall": 0.5804878048780487,
+            "f1": 0.6449864498644986
+          },
+          "entity_f2": {
+            "precision": 0.725609756097561,
+            "recall": 0.5804878048780487,
+            "f2": 0.6046747967479674
+          }
+        },
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "es",
+          "split": "test"
+        },
+        "timestamp": "2026-05-30T09:44:37.009949+00:00"
       }
     ]
   }

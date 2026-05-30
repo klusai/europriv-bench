@@ -16,6 +16,10 @@ def test_crosswalk_maps_native_labels_to_kp():
     # Unknown / unmapped → None (dropped, not guessed).
     assert to_kp("openai", "not_a_label") is None
     assert to_kp("nonexistent_scheme", "x") is None
+    # tabularisai scheme (XLM-R baseline): national IDs + Art.9 handling.
+    assert to_kp("tabularisai", "PASSPORT_NUMBER") == "NATIONAL_ID"
+    assert to_kp("tabularisai", "PHONE_NUMBER") == "PHONE"
+    assert to_kp("tabularisai", "ETHNICITY") is None  # GDPR Art.9 — deferred, not mis-mapped
 
 
 def test_mapped_labels_reports_coverage():

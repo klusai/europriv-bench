@@ -114,11 +114,24 @@ class OpenMedAdapter(PrivacyFilterAdapter):
         super().__init__(model_id="OpenMed/privacy-filter-multilingual", scheme="openmed")
 
 
+class TabularisaiAdapter(PrivacyFilterAdapter):
+    """tabularisai/eu-pii-safeguard — XLM-R token classifier, 42 types, 26 EU langs (scheme=tabularisai).
+
+    The pipeline adapter is arch-agnostic; this just fixes the model id + label scheme.
+    """
+
+    name = "tabularisai"
+
+    def __init__(self) -> None:
+        super().__init__(model_id="tabularisai/eu-pii-safeguard", scheme="tabularisai")
+
+
 # Builder registry: adapter key (CLI --adapter) -> zero-arg factory.
 BUILDERS: dict[str, type[BaseAdapter]] = {
     "dummy": DummyAdapter,
     "privacy-filter": PrivacyFilterAdapter,
     "openmed": OpenMedAdapter,
+    "tabularisai": TabularisaiAdapter,
 }
 
 
