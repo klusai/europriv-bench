@@ -11,8 +11,8 @@
         "domain": "legal",
         "adapter": "gliner",
         "model_id": "urchade/gliner_multi_pii-v1",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -28,22 +28,22 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.9360986547085202,
-            "recall": 0.7738646895273401,
-            "f1": 0.8472856418061897
+            "precision": 0.9389102072141212,
+            "recall": 0.7817252396166134,
+            "f1": 0.8531380753138075
           },
           "entity_f2": {
-            "precision": 0.9360986547085202,
-            "recall": 0.7738646895273401,
-            "f2": 0.8016513056835637
+            "precision": 0.9389102072141212,
+            "recall": 0.7817252396166134,
+            "f2": 0.8088060293534312
           },
           "cnp_leakage": {
-            "cnp_total": 115.0,
-            "cnp_detected": 95.0,
-            "cnp_missed": 20.0,
-            "leak_rate": 0.17391304347826086,
-            "detection_rate": 0.8260869565217391,
-            "leaked_quasi_identifiers": 60.0
+            "cnp_total": 1520.0,
+            "cnp_detected": 1181.0,
+            "cnp_missed": 339.0,
+            "leak_rate": 0.22302631578947368,
+            "detection_rate": 0.7769736842105263,
+            "leaked_quasi_identifiers": 1017.0
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -53,7 +53,7 @@
           "config": "ro-realskeleton-v1",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection + CNP Leakage — Romanian (synthetic v1)",
@@ -64,8 +64,8 @@
         "domain": "general",
         "adapter": "gliner",
         "model_id": "urchade/gliner_multi_pii-v1",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -78,18 +78,18 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.814385150812065,
-            "recall": 0.8032036613272311,
-            "f1": 0.8087557603686636
+            "precision": 0.8216028971815462,
+            "recall": 0.8042540073982737,
+            "f1": 0.812835890645689
           },
           "entity_f2": {
-            "precision": 0.814385150812065,
-            "recall": 0.8032036613272311,
-            "f2": 0.8054153281321706
+            "precision": 0.8216028971815462,
+            "recall": 0.8042540073982737,
+            "f2": 0.8076649227625916
           },
           "cnp_leakage": {
-            "cnp_total": 67.0,
-            "cnp_detected": 67.0,
+            "cnp_total": 1017.0,
+            "cnp_detected": 1017.0,
             "cnp_missed": 0.0,
             "leak_rate": 0.0,
             "detection_rate": 1.0,
@@ -103,7 +103,7 @@
           "config": "ro-synthetic-v1",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — Dutch (general)",
@@ -114,8 +114,8 @@
         "domain": "general",
         "adapter": "gliner",
         "model_id": "urchade/gliner_multi_pii-v1",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -127,14 +127,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.5911949685534591,
-            "recall": 0.4723618090452261,
-            "f1": 0.5251396648044693
+            "precision": 0.6389558232931727,
+            "recall": 0.50912,
+            "f1": 0.5666963490650044
           },
           "entity_f2": {
-            "precision": 0.5911949685534591,
-            "recall": 0.4723618090452261,
-            "f2": 0.4921465968586387
+            "precision": 0.6389558232931727,
+            "recall": 0.50912,
+            "f2": 0.5306871247498332
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -144,7 +144,7 @@
           "config": "nl",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — English (general)",
@@ -155,8 +155,8 @@
         "domain": "general",
         "adapter": "gliner",
         "model_id": "urchade/gliner_multi_pii-v1",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -168,14 +168,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.6302083333333334,
-            "recall": 0.4019933554817276,
-            "f1": 0.4908722109533469
+            "precision": 0.6189894050529747,
+            "recall": 0.4197292069632495,
+            "f1": 0.5002469948954388
           },
           "entity_f2": {
-            "precision": 0.6302083333333334,
-            "recall": 0.4019933554817276,
-            "f2": 0.4333810888252149
+            "precision": 0.6189894050529747,
+            "recall": 0.4197292069632495,
+            "f2": 0.4486119314825753
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -185,7 +185,7 @@
           "config": "en",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — French (general)",
@@ -196,8 +196,8 @@
         "domain": "general",
         "adapter": "gliner",
         "model_id": "urchade/gliner_multi_pii-v1",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -209,14 +209,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.6647398843930635,
-            "recall": 0.49356223175965663,
-            "f1": 0.566502463054187
+            "precision": 0.6564165641656416,
+            "recall": 0.4873668188736682,
+            "f1": 0.5593990216631726
           },
           "entity_f2": {
-            "precision": 0.6647398843930635,
-            "recall": 0.49356223175965663,
-            "f2": 0.5203619909502263
+            "precision": 0.6564165641656416,
+            "recall": 0.4873668188736682,
+            "f2": 0.5138327235380961
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -226,7 +226,7 @@
           "config": "fr",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — German (general)",
@@ -237,8 +237,8 @@
         "domain": "general",
         "adapter": "gliner",
         "model_id": "urchade/gliner_multi_pii-v1",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -250,14 +250,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.7336956521739131,
-            "recall": 0.569620253164557,
-            "f1": 0.641330166270784
+            "precision": 0.6409251274010193,
+            "recall": 0.5172413793103449,
+            "f1": 0.5724789915966387
           },
           "entity_f2": {
-            "precision": 0.7336956521739131,
-            "recall": 0.569620253164557,
-            "f2": 0.5962897526501767
+            "precision": 0.6409251274010193,
+            "recall": 0.5172413793103449,
+            "f2": 0.5380059230009872
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -267,7 +267,7 @@
           "config": "de",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — Italian (general)",
@@ -278,8 +278,8 @@
         "domain": "general",
         "adapter": "gliner",
         "model_id": "urchade/gliner_multi_pii-v1",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -291,14 +291,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.6686046511627907,
-            "recall": 0.5203619909502263,
-            "f1": 0.5852417302798982
+            "precision": 0.6452025586353944,
+            "recall": 0.4663995067817509,
+            "f1": 0.5414206477008409
           },
           "entity_f2": {
-            "precision": 0.6686046511627907,
-            "recall": 0.5203619909502263,
-            "f2": 0.5445075757575758
+            "precision": 0.6452025586353944,
+            "recall": 0.4663995067817509,
+            "f2": 0.4937667254095685
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -308,7 +308,7 @@
           "config": "it",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — Spanish (general)",
@@ -319,8 +319,8 @@
         "domain": "general",
         "adapter": "gliner",
         "model_id": "urchade/gliner_multi_pii-v1",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -332,14 +332,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.6451612903225806,
-            "recall": 0.4878048780487805,
-            "f1": 0.5555555555555556
+            "precision": 0.6617197730248799,
+            "recall": 0.4741945573975602,
+            "f1": 0.5524781341107872
           },
           "entity_f2": {
-            "precision": 0.6451612903225806,
-            "recall": 0.4878048780487805,
-            "f2": 0.5128205128205128
+            "precision": 0.6617197730248799,
+            "recall": 0.4741945573975602,
+            "f2": 0.5026858544996352
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -349,7 +349,7 @@
           "config": "es",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       }
     ],
     "openmed::OpenMed/privacy-filter-multilingual": [
@@ -362,8 +362,8 @@
         "domain": "legal",
         "adapter": "openmed",
         "model_id": "OpenMed/privacy-filter-multilingual",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -379,22 +379,22 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.6336056009334889,
-            "recall": 0.5032437442075997,
-            "f1": 0.5609504132231405
+            "precision": 0.638078236572493,
+            "recall": 0.5253035143769968,
+            "f1": 0.5762248545594728
           },
           "entity_f2": {
-            "precision": 0.6336056009334889,
-            "recall": 0.5032437442075997,
-            "f2": 0.5248405180746182
+            "precision": 0.638078236572493,
+            "recall": 0.5253035143769968,
+            "f2": 0.5445524879444651
           },
           "cnp_leakage": {
-            "cnp_total": 115.0,
-            "cnp_detected": 87.0,
-            "cnp_missed": 28.0,
-            "leak_rate": 0.24347826086956523,
-            "detection_rate": 0.7565217391304347,
-            "leaked_quasi_identifiers": 84.0
+            "cnp_total": 1520.0,
+            "cnp_detected": 1223.0,
+            "cnp_missed": 297.0,
+            "leak_rate": 0.19539473684210526,
+            "detection_rate": 0.8046052631578947,
+            "leaked_quasi_identifiers": 891.0
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -404,7 +404,7 @@
           "config": "ro-realskeleton-v1",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection + CNP Leakage — Romanian (synthetic v1)",
@@ -415,8 +415,8 @@
         "domain": "general",
         "adapter": "openmed",
         "model_id": "OpenMed/privacy-filter-multilingual",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -429,22 +429,22 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.7308533916849015,
-            "recall": 0.7643020594965675,
-            "f1": 0.7472035794183445
+            "precision": 0.718320057929037,
+            "recall": 0.7644882860665845,
+            "f1": 0.740685432688718
           },
           "entity_f2": {
-            "precision": 0.7308533916849015,
-            "recall": 0.7643020594965675,
-            "f2": 0.7573696145124716
+            "precision": 0.718320057929037,
+            "recall": 0.7644882860665845,
+            "f2": 0.7547858903734364
           },
           "cnp_leakage": {
-            "cnp_total": 67.0,
-            "cnp_detected": 63.0,
-            "cnp_missed": 4.0,
-            "leak_rate": 0.05970149253731343,
-            "detection_rate": 0.9402985074626866,
-            "leaked_quasi_identifiers": 12.0
+            "cnp_total": 1017.0,
+            "cnp_detected": 998.0,
+            "cnp_missed": 19.0,
+            "leak_rate": 0.018682399213372666,
+            "detection_rate": 0.9813176007866273,
+            "leaked_quasi_identifiers": 57.0
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -454,7 +454,7 @@
           "config": "ro-synthetic-v1",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — Dutch (general)",
@@ -465,8 +465,8 @@
         "domain": "general",
         "adapter": "openmed",
         "model_id": "OpenMed/privacy-filter-multilingual",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -478,14 +478,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.591715976331361,
-            "recall": 0.5025125628140703,
-            "f1": 0.5434782608695653
+            "precision": 0.6980620155038759,
+            "recall": 0.57632,
+            "f1": 0.631375985977213
           },
           "entity_f2": {
-            "precision": 0.591715976331361,
-            "recall": 0.5025125628140703,
-            "f2": 0.5181347150259067
+            "precision": 0.6980620155038759,
+            "recall": 0.57632,
+            "f2": 0.5971485411140584
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -495,7 +495,7 @@
           "config": "nl",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — English (general)",
@@ -506,8 +506,8 @@
         "domain": "general",
         "adapter": "openmed",
         "model_id": "OpenMed/privacy-filter-multilingual",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -519,14 +519,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.6626506024096386,
-            "recall": 0.5481727574750831,
-            "f1": 0.6000000000000001
+            "precision": 0.6628724472715098,
+            "recall": 0.547112462006079,
+            "f1": 0.5994550408719347
           },
           "entity_f2": {
-            "precision": 0.6626506024096386,
-            "recall": 0.5481727574750831,
-            "f2": 0.5677907777013077
+            "precision": 0.6628724472715098,
+            "recall": 0.547112462006079,
+            "f2": 0.5669129015633052
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -536,7 +536,7 @@
           "config": "en",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — French (general)",
@@ -547,8 +547,8 @@
         "domain": "general",
         "adapter": "openmed",
         "model_id": "OpenMed/privacy-filter-multilingual",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -560,14 +560,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.6854460093896714,
-            "recall": 0.6266094420600858,
-            "f1": 0.6547085201793723
+            "precision": 0.667027027027027,
+            "recall": 0.5634703196347032,
+            "f1": 0.6108910891089109
           },
           "entity_f2": {
-            "precision": 0.6854460093896714,
-            "recall": 0.6266094420600858,
-            "f2": 0.6375545851528385
+            "precision": 0.667027027027027,
+            "recall": 0.5634703196347032,
+            "f2": 0.5815268614514608
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -577,7 +577,7 @@
           "config": "fr",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — German (general)",
@@ -588,8 +588,8 @@
         "domain": "general",
         "adapter": "openmed",
         "model_id": "OpenMed/privacy-filter-multilingual",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -601,14 +601,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.7164179104477612,
-            "recall": 0.6075949367088608,
-            "f1": 0.6575342465753424
+            "precision": 0.6699695121951219,
+            "recall": 0.5561531161024992,
+            "f1": 0.6077787381158167
           },
           "entity_f2": {
-            "precision": 0.7164179104477612,
-            "recall": 0.6075949367088608,
-            "f2": 0.6266318537859007
+            "precision": 0.6699695121951219,
+            "recall": 0.5561531161024992,
+            "f2": 0.5757139114487817
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -618,7 +618,7 @@
           "config": "de",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — Italian (general)",
@@ -629,8 +629,8 @@
         "domain": "general",
         "adapter": "openmed",
         "model_id": "OpenMed/privacy-filter-multilingual",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -642,14 +642,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.6060606060606061,
-            "recall": 0.5429864253393665,
-            "f1": 0.5727923627684964
+            "precision": 0.607222635889799,
+            "recall": 0.5027743526510481,
+            "f1": 0.5500843170320404
           },
           "entity_f2": {
-            "precision": 0.6060606060606061,
-            "recall": 0.5429864253393665,
-            "f2": 0.55452865064695
+            "precision": 0.607222635889799,
+            "recall": 0.5027743526510481,
+            "f2": 0.520687013152854
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -659,7 +659,7 @@
           "config": "it",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — Spanish (general)",
@@ -670,8 +670,8 @@
         "domain": "general",
         "adapter": "openmed",
         "model_id": "OpenMed/privacy-filter-multilingual",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -683,14 +683,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.6306818181818182,
-            "recall": 0.5414634146341464,
-            "f1": 0.5826771653543307
+            "precision": 0.659590891547665,
+            "recall": 0.534563653425086,
+            "f1": 0.5905321354526607
           },
           "entity_f2": {
-            "precision": 0.6306818181818182,
-            "recall": 0.5414634146341464,
-            "f2": 0.5572289156626506
+            "precision": 0.659590891547665,
+            "recall": 0.534563653425086,
+            "f2": 0.5556278041485142
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -700,7 +700,7 @@
           "config": "es",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       }
     ],
     "privacy-filter::openai/privacy-filter": [
@@ -713,8 +713,8 @@
         "domain": "legal",
         "adapter": "privacy-filter",
         "model_id": "openai/privacy-filter",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -730,22 +730,22 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.399581589958159,
-            "recall": 0.3540315106580167,
-            "f1": 0.37542997542997547
+            "precision": 0.38806620209059234,
+            "recall": 0.34159744408945686,
+            "f1": 0.36335213756541834
           },
           "entity_f2": {
-            "precision": 0.399581589958159,
-            "recall": 0.3540315106580167,
-            "f2": 0.3622913505311077
+            "precision": 0.38806620209059234,
+            "recall": 0.34159744408945686,
+            "f2": 0.3499790510107887
           },
           "cnp_leakage": {
-            "cnp_total": 115.0,
-            "cnp_detected": 115.0,
-            "cnp_missed": 0.0,
-            "leak_rate": 0.0,
-            "detection_rate": 1.0,
-            "leaked_quasi_identifiers": 0.0
+            "cnp_total": 1520.0,
+            "cnp_detected": 1503.0,
+            "cnp_missed": 17.0,
+            "leak_rate": 0.01118421052631579,
+            "detection_rate": 0.9888157894736842,
+            "leaked_quasi_identifiers": 51.0
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -755,7 +755,7 @@
           "config": "ro-realskeleton-v1",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection + CNP Leakage — Romanian (synthetic v1)",
@@ -766,8 +766,8 @@
         "domain": "general",
         "adapter": "privacy-filter",
         "model_id": "openai/privacy-filter",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -780,22 +780,22 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.5711206896551724,
-            "recall": 0.6064073226544623,
-            "f1": 0.588235294117647
+            "precision": 0.5603737771937509,
+            "recall": 0.5915536374845869,
+            "f1": 0.575541726025343
           },
           "entity_f2": {
-            "precision": 0.5711206896551724,
-            "recall": 0.6064073226544623,
-            "f2": 0.5990054249547921
+            "precision": 0.5603737771937509,
+            "recall": 0.5915536374845869,
+            "f2": 0.5850431389286911
           },
           "cnp_leakage": {
-            "cnp_total": 67.0,
-            "cnp_detected": 67.0,
-            "cnp_missed": 0.0,
-            "leak_rate": 0.0,
-            "detection_rate": 1.0,
-            "leaked_quasi_identifiers": 0.0
+            "cnp_total": 1017.0,
+            "cnp_detected": 1016.0,
+            "cnp_missed": 1.0,
+            "leak_rate": 0.0009832841691248771,
+            "detection_rate": 0.9990167158308751,
+            "leaked_quasi_identifiers": 3.0
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -805,7 +805,7 @@
           "config": "ro-synthetic-v1",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — Dutch (general)",
@@ -816,8 +816,8 @@
         "domain": "general",
         "adapter": "privacy-filter",
         "model_id": "openai/privacy-filter",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -829,14 +829,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.5503875968992248,
-            "recall": 0.35678391959798994,
-            "f1": 0.4329268292682927
+            "precision": 0.5932944606413995,
+            "recall": 0.39072,
+            "f1": 0.4711557013312754
           },
           "entity_f2": {
-            "precision": 0.5503875968992248,
-            "recall": 0.35678391959798994,
-            "f2": 0.3837837837837838
+            "precision": 0.5932944606413995,
+            "recall": 0.39072,
+            "f2": 0.4193570545404589
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -846,7 +846,7 @@
           "config": "nl",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — English (general)",
@@ -857,8 +857,8 @@
         "domain": "general",
         "adapter": "privacy-filter",
         "model_id": "openai/privacy-filter",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -870,14 +870,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.5443037974683544,
-            "recall": 0.2857142857142857,
-            "f1": 0.37472766884531594
+            "precision": 0.5798611111111112,
+            "recall": 0.3230174081237911,
+            "f1": 0.4149068322981367
           },
           "entity_f2": {
-            "precision": 0.5443037974683544,
-            "recall": 0.2857142857142857,
-            "f2": 0.315712187958884
+            "precision": 0.5798611111111112,
+            "recall": 0.3230174081237911,
+            "f2": 0.35441426146010185
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -887,7 +887,7 @@
           "config": "en",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — French (general)",
@@ -898,8 +898,8 @@
         "domain": "general",
         "adapter": "privacy-filter",
         "model_id": "openai/privacy-filter",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -911,14 +911,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.5759493670886076,
-            "recall": 0.3905579399141631,
-            "f1": 0.46547314578005117
+            "precision": 0.5922605002359603,
+            "recall": 0.3820395738203957,
+            "f1": 0.4644707623982235
           },
           "entity_f2": {
-            "precision": 0.5759493670886076,
-            "recall": 0.3905579399141631,
-            "f2": 0.41743119266055045
+            "precision": 0.5922605002359603,
+            "recall": 0.3820395738203957,
+            "f2": 0.41123271511894616
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -928,7 +928,7 @@
           "config": "fr",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — German (general)",
@@ -939,8 +939,8 @@
         "domain": "general",
         "adapter": "privacy-filter",
         "model_id": "openai/privacy-filter",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -952,14 +952,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.7103448275862069,
-            "recall": 0.4345991561181435,
-            "f1": 0.5392670157068062
+            "precision": 0.6328011611030478,
+            "recall": 0.41379310344827586,
+            "f1": 0.5003825554705432
           },
           "entity_f2": {
-            "precision": 0.7103448275862069,
-            "recall": 0.4345991561181435,
-            "f2": 0.4711802378774017
+            "precision": 0.6328011611030478,
+            "recall": 0.41379310344827586,
+            "f2": 0.4445652912786351
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -969,7 +969,7 @@
           "config": "de",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — Italian (general)",
@@ -980,8 +980,8 @@
         "domain": "general",
         "adapter": "privacy-filter",
         "model_id": "openai/privacy-filter",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -993,14 +993,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.5521472392638037,
-            "recall": 0.4072398190045249,
-            "f1": 0.46875
+            "precision": 0.566962202519832,
+            "recall": 0.374537607891492,
+            "f1": 0.45108594765175425
           },
           "entity_f2": {
-            "precision": 0.5521472392638037,
-            "recall": 0.4072398190045249,
-            "f2": 0.42979942693409745
+            "precision": 0.566962202519832,
+            "recall": 0.374537607891492,
+            "f2": 0.4018122891725644
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -1010,7 +1010,7 @@
           "config": "it",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — Spanish (general)",
@@ -1021,8 +1021,8 @@
         "domain": "general",
         "adapter": "privacy-filter",
         "model_id": "openai/privacy-filter",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -1034,14 +1034,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.5766423357664233,
-            "recall": 0.3853658536585366,
-            "f1": 0.4619883040935672
+            "precision": 0.5927360774818402,
+            "recall": 0.38285893024710665,
+            "f1": 0.46522234891676173
           },
           "entity_f2": {
-            "precision": 0.5766423357664233,
-            "recall": 0.3853658536585366,
-            "f2": 0.412748171368861
+            "precision": 0.5927360774818402,
+            "recall": 0.38285893024710665,
+            "f2": 0.412037972126843
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -1051,7 +1051,7 @@
           "config": "es",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       }
     ],
     "tabularisai::tabularisai/eu-pii-safeguard": [
@@ -1064,8 +1064,8 @@
         "domain": "legal",
         "adapter": "tabularisai",
         "model_id": "tabularisai/eu-pii-safeguard",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -1081,22 +1081,22 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.903137789904502,
-            "recall": 0.6135310472659871,
-            "f1": 0.7306843267108168
+            "precision": 0.9011654169301653,
+            "recall": 0.6373801916932907,
+            "f1": 0.7466596803772595
           },
           "entity_f2": {
-            "precision": 0.903137789904502,
-            "recall": 0.6135310472659871,
-            "f2": 0.6555753614577144
+            "precision": 0.9011654169301653,
+            "recall": 0.6373801916932907,
+            "f2": 0.6770147551887498
           },
           "cnp_leakage": {
-            "cnp_total": 115.0,
-            "cnp_detected": 77.0,
-            "cnp_missed": 38.0,
-            "leak_rate": 0.33043478260869563,
-            "detection_rate": 0.6695652173913044,
-            "leaked_quasi_identifiers": 114.0
+            "cnp_total": 1520.0,
+            "cnp_detected": 1123.0,
+            "cnp_missed": 397.0,
+            "leak_rate": 0.2611842105263158,
+            "detection_rate": 0.7388157894736842,
+            "leaked_quasi_identifiers": 1191.0
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -1106,7 +1106,7 @@
           "config": "ro-realskeleton-v1",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection + CNP Leakage — Romanian (synthetic v1)",
@@ -1117,8 +1117,8 @@
         "domain": "general",
         "adapter": "tabularisai",
         "model_id": "tabularisai/eu-pii-safeguard",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -1131,18 +1131,18 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.8931116389548693,
-            "recall": 0.8604118993135011,
-            "f1": 0.8764568764568764
+            "precision": 0.8933376040999359,
+            "recall": 0.8597410604192355,
+            "f1": 0.8762174049638705
           },
           "entity_f2": {
-            "precision": 0.8931116389548693,
-            "recall": 0.8604118993135011,
-            "f2": 0.8667588750576302
+            "precision": 0.8933376040999359,
+            "recall": 0.8597410604192355,
+            "f2": 0.86625667784818
           },
           "cnp_leakage": {
-            "cnp_total": 67.0,
-            "cnp_detected": 67.0,
+            "cnp_total": 1017.0,
+            "cnp_detected": 1017.0,
             "cnp_missed": 0.0,
             "leak_rate": 0.0,
             "detection_rate": 1.0,
@@ -1156,7 +1156,7 @@
           "config": "ro-synthetic-v1",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — Dutch (general)",
@@ -1167,8 +1167,8 @@
         "domain": "general",
         "adapter": "tabularisai",
         "model_id": "tabularisai/eu-pii-safeguard",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -1180,14 +1180,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.6144578313253012,
-            "recall": 0.5125628140703518,
-            "f1": 0.5589041095890411
+            "precision": 0.7122069523039612,
+            "recall": 0.56384,
+            "f1": 0.6293981068047866
           },
           "entity_f2": {
-            "precision": 0.6144578313253012,
-            "recall": 0.5125628140703518,
-            "f2": 0.5301455301455301
+            "precision": 0.7122069523039612,
+            "recall": 0.56384,
+            "f2": 0.588353145452117
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -1197,7 +1197,7 @@
           "config": "nl",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — English (general)",
@@ -1208,8 +1208,8 @@
         "domain": "general",
         "adapter": "tabularisai",
         "model_id": "tabularisai/eu-pii-safeguard",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -1221,14 +1221,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.6318407960199005,
-            "recall": 0.4219269102990033,
-            "f1": 0.5059760956175299
+            "precision": 0.643597181931206,
+            "recall": 0.42912406742193976,
+            "f1": 0.514920424403183
           },
           "entity_f2": {
-            "precision": 0.6318407960199005,
-            "recall": 0.4219269102990033,
-            "f2": 0.45195729537366547
+            "precision": 0.643597181931206,
+            "recall": 0.42912406742193976,
+            "f2": 0.4597667120611048
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -1238,7 +1238,7 @@
           "config": "en",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — French (general)",
@@ -1249,8 +1249,8 @@
         "domain": "general",
         "adapter": "tabularisai",
         "model_id": "tabularisai/eu-pii-safeguard",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -1262,14 +1262,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.7027027027027027,
-            "recall": 0.5579399141630901,
-            "f1": 0.6220095693779903
+            "precision": 0.6971311475409836,
+            "recall": 0.5178082191780822,
+            "f1": 0.594235807860262
           },
           "entity_f2": {
-            "precision": 0.7027027027027027,
-            "recall": 0.5579399141630901,
-            "f2": 0.5819158460161146
+            "precision": 0.6971311475409836,
+            "recall": 0.5178082191780822,
+            "f2": 0.5458921694480102
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -1279,7 +1279,7 @@
           "config": "fr",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — German (general)",
@@ -1290,8 +1290,8 @@
         "domain": "general",
         "adapter": "tabularisai",
         "model_id": "tabularisai/eu-pii-safeguard",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -1303,14 +1303,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.7433155080213903,
-            "recall": 0.5864978902953587,
-            "f1": 0.6556603773584906
+            "precision": 0.7166201673973694,
+            "recall": 0.5688073394495413,
+            "f1": 0.6342151675485008
           },
           "entity_f2": {
-            "precision": 0.7433155080213903,
-            "recall": 0.5864978902953587,
-            "f2": 0.6123348017621145
+            "precision": 0.7166201673973694,
+            "recall": 0.5688073394495413,
+            "f2": 0.593281858377879
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -1320,7 +1320,7 @@
           "config": "de",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — Italian (general)",
@@ -1331,8 +1331,8 @@
         "domain": "general",
         "adapter": "tabularisai",
         "model_id": "tabularisai/eu-pii-safeguard",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -1344,14 +1344,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.774390243902439,
-            "recall": 0.5746606334841629,
-            "f1": 0.6597402597402597
+            "precision": 0.6890399320305862,
+            "recall": 0.5,
+            "f1": 0.5794926759556984
           },
           "entity_f2": {
-            "precision": 0.774390243902439,
-            "recall": 0.5746606334841629,
-            "f2": 0.6059160305343512
+            "precision": 0.6890399320305862,
+            "recall": 0.5,
+            "f2": 0.5290280495759948
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -1361,7 +1361,7 @@
           "config": "it",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       },
       {
         "spec": "PII Detection — Spanish (general)",
@@ -1372,8 +1372,8 @@
         "domain": "general",
         "adapter": "tabularisai",
         "model_id": "tabularisai/eu-pii-safeguard",
-        "n": 100,
-        "limit": 100,
+        "n": 1500,
+        "limit": null,
         "eval_labels": [
           "ACCOUNT_ID",
           "ADDRESS",
@@ -1385,14 +1385,14 @@
         ],
         "scores": {
           "entity_f1": {
-            "precision": 0.725609756097561,
-            "recall": 0.5804878048780487,
-            "f1": 0.6449864498644986
+            "precision": 0.6771523178807947,
+            "recall": 0.5117297466374726,
+            "f1": 0.5829324781756636
           },
           "entity_f2": {
-            "precision": 0.725609756097561,
-            "recall": 0.5804878048780487,
-            "f2": 0.6046747967479674
+            "precision": 0.6771523178807947,
+            "recall": 0.5117297466374726,
+            "f2": 0.5380163114969744
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -1402,7 +1402,7 @@
           "config": "es",
           "split": "test"
         },
-        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+        "timestamp": "2026-06-01T06:19:19.295690+00:00"
       }
     ]
   }
