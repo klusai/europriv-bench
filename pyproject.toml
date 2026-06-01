@@ -15,8 +15,10 @@ dependencies = [
 
 [project.optional-dependencies]
 # Heavy model backends are optional — the harness core stays light.
-# transformers>=5.0 is required for the openai/privacy-filter (openai_privacy_filter) arch.
-hf = ["transformers>=5.0", "torch>=2.4", "datasets>=4.0"]
+# transformers>=5.9 is required for the openai/privacy-filter (openai_privacy_filter) arch —
+# 5.1 does NOT recognize it. NOTE: the `gliner` extra pins an older transformers and will
+# downgrade/break this; run GLiNER baselines in a SEPARATE environment.
+hf = ["transformers>=5.9", "torch>=2.4", "datasets>=4.0"]
 gliner = ["gliner>=0.2"]
 presidio = ["presidio-analyzer>=2.2"]
 dev = ["pytest>=8.0", "ruff>=0.11", "coverage>=7.0"]

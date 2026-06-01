@@ -1,7 +1,411 @@
 {
   "schema": 2,
   "entries": {
+    "gliner::urchade/gliner_multi_pii-v1": [
+      {
+        "spec": "PII Detection + CNP Leakage — Romanian (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "legal",
+        "adapter": "gliner",
+        "model_id": "urchade/gliner_multi_pii-v1",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.9360986547085202,
+            "recall": 0.7738646895273401,
+            "f1": 0.8472856418061897
+          },
+          "entity_f2": {
+            "precision": 0.9360986547085202,
+            "recall": 0.7738646895273401,
+            "f2": 0.8016513056835637
+          },
+          "cnp_leakage": {
+            "cnp_total": 115.0,
+            "cnp_detected": 95.0,
+            "cnp_missed": 20.0,
+            "leak_rate": 0.17391304347826086,
+            "detection_rate": 0.8260869565217391,
+            "leaked_quasi_identifiers": 60.0
+          }
+        },
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "ro-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+      },
+      {
+        "spec": "PII Detection + CNP Leakage — Romanian (synthetic v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "general",
+        "adapter": "gliner",
+        "model_id": "urchade/gliner_multi_pii-v1",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.814385150812065,
+            "recall": 0.8032036613272311,
+            "f1": 0.8087557603686636
+          },
+          "entity_f2": {
+            "precision": 0.814385150812065,
+            "recall": 0.8032036613272311,
+            "f2": 0.8054153281321706
+          },
+          "cnp_leakage": {
+            "cnp_total": 67.0,
+            "cnp_detected": 67.0,
+            "cnp_missed": 0.0,
+            "leak_rate": 0.0,
+            "detection_rate": 1.0,
+            "leaked_quasi_identifiers": 0.0
+          }
+        },
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "ro-synthetic-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+      },
+      {
+        "spec": "PII Detection — Dutch (general)",
+        "task": "detection",
+        "languages": [
+          "nl"
+        ],
+        "domain": "general",
+        "adapter": "gliner",
+        "model_id": "urchade/gliner_multi_pii-v1",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.5911949685534591,
+            "recall": 0.4723618090452261,
+            "f1": 0.5251396648044693
+          },
+          "entity_f2": {
+            "precision": 0.5911949685534591,
+            "recall": 0.4723618090452261,
+            "f2": 0.4921465968586387
+          }
+        },
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "nl",
+          "split": "test"
+        },
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+      },
+      {
+        "spec": "PII Detection — English (general)",
+        "task": "detection",
+        "languages": [
+          "en"
+        ],
+        "domain": "general",
+        "adapter": "gliner",
+        "model_id": "urchade/gliner_multi_pii-v1",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.6302083333333334,
+            "recall": 0.4019933554817276,
+            "f1": 0.4908722109533469
+          },
+          "entity_f2": {
+            "precision": 0.6302083333333334,
+            "recall": 0.4019933554817276,
+            "f2": 0.4333810888252149
+          }
+        },
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "en",
+          "split": "test"
+        },
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+      },
+      {
+        "spec": "PII Detection — French (general)",
+        "task": "detection",
+        "languages": [
+          "fr"
+        ],
+        "domain": "general",
+        "adapter": "gliner",
+        "model_id": "urchade/gliner_multi_pii-v1",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.6647398843930635,
+            "recall": 0.49356223175965663,
+            "f1": 0.566502463054187
+          },
+          "entity_f2": {
+            "precision": 0.6647398843930635,
+            "recall": 0.49356223175965663,
+            "f2": 0.5203619909502263
+          }
+        },
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "fr",
+          "split": "test"
+        },
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+      },
+      {
+        "spec": "PII Detection — German (general)",
+        "task": "detection",
+        "languages": [
+          "de"
+        ],
+        "domain": "general",
+        "adapter": "gliner",
+        "model_id": "urchade/gliner_multi_pii-v1",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.7336956521739131,
+            "recall": 0.569620253164557,
+            "f1": 0.641330166270784
+          },
+          "entity_f2": {
+            "precision": 0.7336956521739131,
+            "recall": 0.569620253164557,
+            "f2": 0.5962897526501767
+          }
+        },
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "de",
+          "split": "test"
+        },
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+      },
+      {
+        "spec": "PII Detection — Italian (general)",
+        "task": "detection",
+        "languages": [
+          "it"
+        ],
+        "domain": "general",
+        "adapter": "gliner",
+        "model_id": "urchade/gliner_multi_pii-v1",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.6686046511627907,
+            "recall": 0.5203619909502263,
+            "f1": 0.5852417302798982
+          },
+          "entity_f2": {
+            "precision": 0.6686046511627907,
+            "recall": 0.5203619909502263,
+            "f2": 0.5445075757575758
+          }
+        },
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "it",
+          "split": "test"
+        },
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+      },
+      {
+        "spec": "PII Detection — Spanish (general)",
+        "task": "detection",
+        "languages": [
+          "es"
+        ],
+        "domain": "general",
+        "adapter": "gliner",
+        "model_id": "urchade/gliner_multi_pii-v1",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.6451612903225806,
+            "recall": 0.4878048780487805,
+            "f1": 0.5555555555555556
+          },
+          "entity_f2": {
+            "precision": 0.6451612903225806,
+            "recall": 0.4878048780487805,
+            "f2": 0.5128205128205128
+          }
+        },
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "es",
+          "split": "test"
+        },
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+      }
+    ],
     "openmed::OpenMed/privacy-filter-multilingual": [
+      {
+        "spec": "PII Detection + CNP Leakage — Romanian (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "legal",
+        "adapter": "openmed",
+        "model_id": "OpenMed/privacy-filter-multilingual",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.6336056009334889,
+            "recall": 0.5032437442075997,
+            "f1": 0.5609504132231405
+          },
+          "entity_f2": {
+            "precision": 0.6336056009334889,
+            "recall": 0.5032437442075997,
+            "f2": 0.5248405180746182
+          },
+          "cnp_leakage": {
+            "cnp_total": 115.0,
+            "cnp_detected": 87.0,
+            "cnp_missed": 28.0,
+            "leak_rate": 0.24347826086956523,
+            "detection_rate": 0.7565217391304347,
+            "leaked_quasi_identifiers": 84.0
+          }
+        },
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "ro-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+      },
       {
         "spec": "PII Detection + CNP Leakage — Romanian (synthetic v1)",
         "task": "detection",
@@ -50,7 +454,7 @@
           "config": "ro-synthetic-v1",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       },
       {
         "spec": "PII Detection — Dutch (general)",
@@ -91,7 +495,7 @@
           "config": "nl",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       },
       {
         "spec": "PII Detection — English (general)",
@@ -132,7 +536,7 @@
           "config": "en",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       },
       {
         "spec": "PII Detection — French (general)",
@@ -173,7 +577,7 @@
           "config": "fr",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       },
       {
         "spec": "PII Detection — German (general)",
@@ -214,7 +618,7 @@
           "config": "de",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       },
       {
         "spec": "PII Detection — Italian (general)",
@@ -255,7 +659,7 @@
           "config": "it",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       },
       {
         "spec": "PII Detection — Spanish (general)",
@@ -296,10 +700,63 @@
           "config": "es",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       }
     ],
     "privacy-filter::openai/privacy-filter": [
+      {
+        "spec": "PII Detection + CNP Leakage — Romanian (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "legal",
+        "adapter": "privacy-filter",
+        "model_id": "openai/privacy-filter",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.399581589958159,
+            "recall": 0.3540315106580167,
+            "f1": 0.37542997542997547
+          },
+          "entity_f2": {
+            "precision": 0.399581589958159,
+            "recall": 0.3540315106580167,
+            "f2": 0.3622913505311077
+          },
+          "cnp_leakage": {
+            "cnp_total": 115.0,
+            "cnp_detected": 115.0,
+            "cnp_missed": 0.0,
+            "leak_rate": 0.0,
+            "detection_rate": 1.0,
+            "leaked_quasi_identifiers": 0.0
+          }
+        },
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "ro-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+      },
       {
         "spec": "PII Detection + CNP Leakage — Romanian (synthetic v1)",
         "task": "detection",
@@ -348,7 +805,7 @@
           "config": "ro-synthetic-v1",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       },
       {
         "spec": "PII Detection — Dutch (general)",
@@ -389,7 +846,7 @@
           "config": "nl",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       },
       {
         "spec": "PII Detection — English (general)",
@@ -430,7 +887,7 @@
           "config": "en",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       },
       {
         "spec": "PII Detection — French (general)",
@@ -471,7 +928,7 @@
           "config": "fr",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       },
       {
         "spec": "PII Detection — German (general)",
@@ -512,7 +969,7 @@
           "config": "de",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       },
       {
         "spec": "PII Detection — Italian (general)",
@@ -553,7 +1010,7 @@
           "config": "it",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       },
       {
         "spec": "PII Detection — Spanish (general)",
@@ -594,10 +1051,63 @@
           "config": "es",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       }
     ],
     "tabularisai::tabularisai/eu-pii-safeguard": [
+      {
+        "spec": "PII Detection + CNP Leakage — Romanian (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "legal",
+        "adapter": "tabularisai",
+        "model_id": "tabularisai/eu-pii-safeguard",
+        "n": 100,
+        "limit": 100,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.903137789904502,
+            "recall": 0.6135310472659871,
+            "f1": 0.7306843267108168
+          },
+          "entity_f2": {
+            "precision": 0.903137789904502,
+            "recall": 0.6135310472659871,
+            "f2": 0.6555753614577144
+          },
+          "cnp_leakage": {
+            "cnp_total": 115.0,
+            "cnp_detected": 77.0,
+            "cnp_missed": 38.0,
+            "leak_rate": 0.33043478260869563,
+            "detection_rate": 0.6695652173913044,
+            "leaked_quasi_identifiers": 114.0
+          }
+        },
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "ro-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
+      },
       {
         "spec": "PII Detection + CNP Leakage — Romanian (synthetic v1)",
         "task": "detection",
@@ -646,7 +1156,7 @@
           "config": "ro-synthetic-v1",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       },
       {
         "spec": "PII Detection — Dutch (general)",
@@ -687,7 +1197,7 @@
           "config": "nl",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       },
       {
         "spec": "PII Detection — English (general)",
@@ -728,7 +1238,7 @@
           "config": "en",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       },
       {
         "spec": "PII Detection — French (general)",
@@ -769,7 +1279,7 @@
           "config": "fr",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       },
       {
         "spec": "PII Detection — German (general)",
@@ -810,7 +1320,7 @@
           "config": "de",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       },
       {
         "spec": "PII Detection — Italian (general)",
@@ -851,7 +1361,7 @@
           "config": "it",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       },
       {
         "spec": "PII Detection — Spanish (general)",
@@ -892,7 +1402,7 @@
           "config": "es",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:44:37.009949+00:00"
+        "timestamp": "2026-06-01T06:15:53.843653+00:00"
       }
     ]
   }

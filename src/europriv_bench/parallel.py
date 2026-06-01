@@ -13,7 +13,11 @@ Each job loads its own model in a fresh process (spawn), so thread caps are set 
 from __future__ import annotations
 
 import os
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ProcessPoolExecutor, as_completed
+
+from .logger import get_logger
+
+logger = get_logger("europriv.parallel")
 
 
 def _run_job(payload: tuple) -> dict:
@@ -42,10 +46,34 @@ def run_jobs(
     threads: int,
 ) -> list[dict]:
     """Run every (adapter × spec) job across a process pool. Returns result dicts (order-agnostic)."""
+    # Pre-warm the HF dataset cache in the main process: build each unique (hf_id, config, split)
+    # once here so workers read fully-built arrow files instead of racing to build the same repo's
+    # configs concurrently (that race silently dropped just-published configs).
+    seen: set = set()
+    for spec in specs:
+        d = spec.dataset
+        key = (d.hf_id, d.config, d.split)
+        if key in seen:
+            continue
+        seen.add(key)
+        try:
+            from datasets import load_dataset
+            load_dataset(d.hf_id, d.config, split=d.split)
+        except Exception as e:  # pragma: no cover - network/dep dependent
+            logger.warning("cache pre-warm failed for %s/%s: %s", d.hf_id, d.config, e)
+
     jobs = [
         (name, spec.model_dump(mode="json"), limit, timestamp, threads)
         for name in adapters
         for spec in specs
     ]
+    results: list[dict] = []
     with ProcessPoolExecutor(max_workers=workers) as ex:
-        return list(ex.map(_run_job, jobs))
+        futures = {ex.submit(_run_job, job): job for job in jobs}
+        for fut in as_completed(futures):
+            name, spec_dict, *_ = futures[fut]
+            try:
+                results.append(fut.result())
+            except Exception as e:  # a bad job is logged + skipped, never silently aborts the run
+                logger.error("job failed (adapter=%s spec=%s): %s", name, spec_dict.get("name"), e)
+    return results
