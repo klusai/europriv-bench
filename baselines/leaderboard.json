@@ -38,13 +38,13 @@
             "f2": 0.8088060293534312
           },
           "cnp_leakage": {
-            "cnp_total": 1520.0,
-            "cnp_detected": 1181.0,
+            "cnp_total": 1123.0,
+            "cnp_detected": 784.0,
             "cnp_missed": 339.0,
-            "leak_rate": 0.22302631578947368,
-            "leak_rate_ci_low": 0.20281228863401063,
-            "leak_rate_ci_high": 0.24463678570606445,
-            "detection_rate": 0.7769736842105263,
+            "leak_rate": 0.3018699910952805,
+            "leak_rate_ci_low": 0.27573326532199466,
+            "leak_rate_ci_high": 0.32935758158929856,
+            "detection_rate": 0.6981300089047195,
             "leaked_quasi_identifiers": 1017.0
           }
         },
@@ -409,12 +409,12 @@
             "f2": 0.7783281045428719
           },
           "cnp_leakage": {
-            "cnp_total": 1520.0,
-            "cnp_detected": 1520.0,
+            "cnp_total": 1123.0,
+            "cnp_detected": 1123.0,
             "cnp_missed": 0.0,
             "leak_rate": 0.0,
-            "leak_rate_ci_low": 2.168404344971009e-19,
-            "leak_rate_ci_high": 0.002520894295622453,
+            "leak_rate_ci_low": 0.0,
+            "leak_rate_ci_high": 0.003409036137937588,
             "detection_rate": 1.0,
             "leaked_quasi_identifiers": 0.0
           }
@@ -468,14 +468,14 @@
             "f2": 0.5445524879444651
           },
           "cnp_leakage": {
-            "cnp_total": 1520.0,
-            "cnp_detected": 1223.0,
-            "cnp_missed": 297.0,
-            "leak_rate": 0.19539473684210526,
-            "leak_rate_ci_low": 0.17623992317354553,
-            "leak_rate_ci_high": 0.2160853058512876,
-            "detection_rate": 0.8046052631578947,
-            "leaked_quasi_identifiers": 891.0
+            "cnp_total": 1123.0,
+            "cnp_detected": 827.0,
+            "cnp_missed": 296.0,
+            "leak_rate": 0.26357969723953695,
+            "leak_rate_ci_low": 0.2386492673312092,
+            "leak_rate_ci_high": 0.29012205785956985,
+            "detection_rate": 0.736420302760463,
+            "leaked_quasi_identifiers": 888.0
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -839,14 +839,14 @@
             "f2": 0.3499790510107887
           },
           "cnp_leakage": {
-            "cnp_total": 1520.0,
-            "cnp_detected": 1503.0,
-            "cnp_missed": 17.0,
-            "leak_rate": 0.01118421052631579,
-            "leak_rate_ci_low": 0.006994533011580435,
-            "leak_rate_ci_high": 0.017838393911639935,
-            "detection_rate": 0.9888157894736842,
-            "leaked_quasi_identifiers": 51.0
+            "cnp_total": 1123.0,
+            "cnp_detected": 1107.0,
+            "cnp_missed": 16.0,
+            "leak_rate": 0.014247551202137132,
+            "leak_rate_ci_low": 0.00878868543080416,
+            "leak_rate_ci_high": 0.02301831227755729,
+            "detection_rate": 0.9857524487978628,
+            "leaked_quasi_identifiers": 48.0
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -1210,13 +1210,13 @@
             "f2": 0.6770147551887498
           },
           "cnp_leakage": {
-            "cnp_total": 1520.0,
-            "cnp_detected": 1123.0,
+            "cnp_total": 1123.0,
+            "cnp_detected": 726.0,
             "cnp_missed": 397.0,
-            "leak_rate": 0.2611842105263158,
-            "leak_rate_ci_low": 0.23972242571084057,
-            "leak_rate_ci_high": 0.28385005406456865,
-            "detection_rate": 0.7388157894736842,
+            "leak_rate": 0.3535173642030276,
+            "leak_rate_ci_low": 0.3260997060954522,
+            "leak_rate_ci_high": 0.3819337515086276,
+            "detection_rate": 0.6464826357969724,
             "leaked_quasi_identifiers": 1191.0
           }
         },

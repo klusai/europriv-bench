@@ -80,15 +80,16 @@ def test_cnp_leakage_emits_wilson_ci_bracketing_point_estimate():
 
 
 def test_wilson_ci_reproduces_privacy_filter_ro_real_leak_rate():
-    # privacy-filter on ro-realskeleton-v1: 17 missed CNPs out of 1520 (committed baseline counts).
-    # Point estimate ~1.1%; the paper's hand-computed 95% CI is ~0.7%-1.8%.
-    missed, total = 17, 1520
+    # privacy-filter on ro-realskeleton-v1: 16 leaked CNP *subjects* out of 1123 distinct subjects
+    # (KLU-49 committed baseline counts — per-subject, after deduping the CASS "cod asigurat"
+    # duplicate within each clinical doc). Point estimate ~1.4%; harness 95% Wilson CI ~0.9%-2.3%.
+    missed, total = 16, 1123
     point = missed / total
     low, high = wilson_interval(missed, total)
-    assert abs(point - 0.0112) < 0.001          # ~1.1%
+    assert abs(point - 0.0142) < 0.001          # ~1.4%
     assert low < point < high                    # brackets the point estimate
-    assert 0.006 < low < 0.008                   # lower ~0.7%
-    assert 0.017 < high < 0.019                  # upper ~1.8%
+    assert 0.008 < low < 0.010                   # lower ~0.9%
+    assert 0.022 < high < 0.024                  # upper ~2.3%
 
 
 def test_run_spec_wires_cnp_leakage_via_rows():
@@ -232,3 +233,83 @@ def test_cnp_leakage_alias_still_works_and_scopes_to_ro():
     assert res["leak_rate"] == 1.0
     assert res["leaked_quasi_identifiers"] == 3.0  # DOB + SEX + COUNTY
     assert "leak_rate_ci_low" in res and "leak_rate_ci_high" in res
+
+
+# --- KLU-49: per-subject dedup (re-identification risk is per distinct subject) ----------
+#
+# Real RO clinical docs repeat the SAME CNP twice (the CNP field + the CASS "cod asigurat"
+# field). Re-id risk is per distinct subject: the same value in one document is ONE subject,
+# protected iff every occurrence is redacted and leaking iff ANY occurrence is missed.
+
+
+def _ro_clinical_row(cnp: str) -> dict:
+    """A doc that emits the same CNP twice, like the real RO clinical skeleton (CNP + CASS)."""
+    text = f"CNP {cnp} asigurat {cnp} fin"  # tokens: CNP, <cnp>, asigurat, <cnp>, fin
+    a = len("CNP ")
+    b = len(f"CNP {cnp} asigurat ")
+    return {
+        "text": text,
+        "spans": [
+            {"start": a, "end": a + 13, "label": "NATIONAL_ID"},
+            {"start": b, "end": b + 13, "label": "NATIONAL_ID"},
+        ],
+    }
+
+
+def test_duplicate_cnp_in_one_doc_counts_as_one_subject():
+    cnp = _make_cnp("185071540001")
+    rows = [_ro_clinical_row(cnp)]
+    # Both occurrences redacted → one subject, detected, no leak.
+    both = national_id_leakage(rows, [["O", "S-NATIONAL_ID", "O", "S-NATIONAL_ID", "O"]])
+    assert both["decode_bearing_total"] == 1.0   # ONE subject, not two spans
+    assert both["decode_bearing_detected"] == 1.0
+    assert both["decode_bearing_missed"] == 0.0
+    assert both["leak_rate"] == 0.0
+    assert both["leaked_quasi_identifiers"] == 0.0
+    assert both["ro_total"] == 1.0 and both["ro_detected"] == 1.0
+
+
+def test_subject_leaks_if_any_occurrence_missed():
+    cnp = _make_cnp("185071540001")
+    rows = [_ro_clinical_row(cnp)]
+    # First occurrence redacted, the CASS one missed → subject leaks (ANY occurrence missed).
+    one = national_id_leakage(rows, [["O", "S-NATIONAL_ID", "O", "O", "O"]])
+    assert one["decode_bearing_total"] == 1.0
+    assert one["decode_bearing_missed"] == 1.0
+    assert one["leak_rate"] == 1.0
+    # Quasi-identifiers counted ONCE per leaked subject (not once per missed span).
+    assert one["leaked_quasi_identifiers"] == 3.0  # DOB + SEX + COUNTY
+
+
+def test_distinct_cnps_in_one_doc_count_as_distinct_subjects():
+    cnp1 = _make_cnp("185071540001")
+    cnp2 = _make_cnp("605031120007")  # a different subject
+    text = f"CNP {cnp1} si {cnp2} fin"  # tokens: CNP, <cnp1>, si, <cnp2>, fin
+    a = len("CNP ")
+    b = len(f"CNP {cnp1} si ")
+    rows = [{"text": text, "spans": [
+        {"start": a, "end": a + 13, "label": "NATIONAL_ID"},
+        {"start": b, "end": b + 13, "label": "NATIONAL_ID"},
+    ]}]
+    res = national_id_leakage(rows, [["O", "O", "O", "O", "O"]])
+    assert res["decode_bearing_total"] == 2.0  # two distinct values → two subjects
+    assert res["decode_bearing_missed"] == 2.0
+
+
+def test_same_cnp_in_different_docs_counts_as_two_subjects():
+    # Dedup is scoped per-document: the same value across two docs is two subjects at risk.
+    cnp = _make_cnp("185071540001")
+    rows = [_single_id_rows(cnp, "RO")[0], _single_id_rows(cnp, "RO")[0]]
+    res = national_id_leakage(rows, [["O", "O", "O"], ["O", "O", "O"]])
+    assert res["decode_bearing_total"] == 2.0
+    assert res["decode_bearing_missed"] == 2.0
+
+
+def test_cnp_leakage_alias_dedups_duplicate_cnp():
+    cnp = _make_cnp("185071540001")
+    rows = [_ro_clinical_row(cnp)]
+    res = cnp_leakage(rows, [["O", "O", "O", "O", "O"]])  # both occurrences missed
+    assert res["cnp_total"] == 1.0   # ONE subject despite two spans
+    assert res["cnp_missed"] == 1.0
+    assert res["leak_rate"] == 1.0
+    assert res["leaked_quasi_identifiers"] == 3.0  # counted once per subject
