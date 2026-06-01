@@ -1,0 +1,185 @@
+# The harmonized KlusAI Privacy (KP) entity taxonomy + crosswalk — SINGLE SOURCE OF TRUTH.
+#
+# This is *standardization*, not invention: every target scheme below is mature. The
+# contribution is one GDPR-aligned crosswalk that unifies them across general + legal +
+# clinical for European jurisdictions, plus explicit GDPR-Art.9 (special-category) and
+# direct-vs-quasi-identifier marking (à la TAB / MultiGraSCCo).
+#
+# Entity tags use BIOES so the label space is directly compatible with
+# `openai/privacy-filter` (enabling head-to-head scoring).
+#
+# `version` MUST equal `TAXONOMY_VERSION` in src/europriv_bench/taxonomy.py — the loader
+# fails loud on mismatch. Bump both together whenever the entity set or BIOES label space
+# changes (see GOVERNANCE.md). This is an immutable, versioned config name.
+
+version: "0.2.0"  # 0.2.0: added NATIONAL_ID + COMPANY_ID; national IDs split out of ACCOUNT_ID
+
+# Crosswalk source schemes we map onto. Order is significant (reported in coverage tables).
+schemes:
+  - openai
+  - ai4privacy
+  - hipaa
+  - mapa
+  - openmed
+  - azure
+  - tabularisai
+
+# The harmonized taxonomy. `entities` order defines the BIOES label order — DO NOT reorder
+# without bumping `version` (it changes the label space). Fields:
+#   name              canonical KP label
+#   tier              core | clinical | legal
+#   identifier_class  direct (alone) | quasi (re-identification risk in combination)
+#   gdpr_special      GDPR Art. 9 special category (default false)
+#   crosswalk         scheme -> [source labels] (default empty)
+entities:
+  - name: PERSON
+    tier: core
+    identifier_class: direct
+    crosswalk:
+      openai: [private_person]
+      ai4privacy: [GIVENNAME, SURNAME, FIRSTNAME, LASTNAME, MIDDLENAME]
+      hipaa: [names]
+      mapa: [PERSON]
+      openmed: [FIRSTNAME, LASTNAME, MIDDLENAME, PREFIX]
+      tabularisai: [FIRSTNAME, LASTNAME, MIDDLENAME, PREFIX]
+
+  - name: ADDRESS
+    tier: core
+    identifier_class: quasi
+    crosswalk:
+      openai: [private_address]
+      ai4privacy: [STREET, CITY, ZIPCODE, BUILDINGNUM]
+      hipaa: [geographic_subdivisions]
+      mapa: [ADDRESS]
+      openmed:
+        [STREET, CITY, ZIPCODE, BUILDINGNUMBER, COUNTY, STATE, SECONDARYADDRESS,
+         GPSCOORDINATES, ORDINALDIRECTION]
+      tabularisai:
+        [ADDRESS, BUILDING_NUMBER, CITY, STATE, STREET, POSTAL_CODE, COUNTRY,
+         LATITUDE, LONGITUDE]
+
+  - name: EMAIL
+    tier: core
+    identifier_class: direct
+    crosswalk:
+      openai: [private_email]
+      ai4privacy: [EMAIL]
+      openmed: [EMAIL]
+      tabularisai: [EMAIL]
+
+  - name: PHONE
+    tier: core
+    identifier_class: direct
+    crosswalk:
+      openai: [private_phone]
+      ai4privacy: [TELEPHONENUM]
+      openmed: [PHONE]
+      tabularisai: [PHONE_NUMBER]
+
+  - name: URL
+    tier: core
+    identifier_class: quasi
+    crosswalk:
+      openai: [private_url]
+      openmed: [URL]
+      tabularisai: [URL]
+
+  - name: DATE
+    tier: core
+    identifier_class: quasi
+    crosswalk:
+      openai: [private_date]
+      ai4privacy: [DATE, TIME]
+      hipaa: [dates]
+      openmed: [DATE, DATEOFBIRTH, TIME]
+      tabularisai: [DOB]
+
+  - name: ACCOUNT_ID
+    tier: core
+    identifier_class: direct
+    # National IDs (IDCARDNUM/SOCIALNUM/PASSPORTNUM/DRIVERLICENSENUM/SSN) → NATIONAL_ID.
+    crosswalk:
+      openai: [account_number]
+      ai4privacy: [ACCOUNTNUM, TAXNUM, CREDITCARDNUMBER]
+      hipaa: [account_numbers]  # ssn → NATIONAL_ID; medical_record_numbers → MRN
+      openmed:
+        [IBAN, BANKACCOUNT, BIC, CREDITCARD, CREDITCARDISSUER, CVV, PIN, MASKEDNUMBER,
+         ACCOUNTNAME, BITCOINADDRESS, ETHEREUMADDRESS, LITECOINADDRESS, VIN, VRM, IMEI,
+         MACADDRESS, IPADDRESS, USERNAME, USERAGENT]
+      tabularisai:
+        [ACCOUNT_NUMBER, CREDIT_CARD_NUMBER, IBAN, TAX_ID, DEVICE_ID, IP_ADDRESS,
+         MAC_ADDRESS, USERNAME]
+
+  - name: SECRET
+    tier: core
+    identifier_class: direct
+    crosswalk:
+      openai: [secret]
+      ai4privacy: [PASSWORD]
+      openmed: [PASSWORD]
+      tabularisai: [PASSWORD]
+
+  # Government-issued national identifiers (RO Law 190/2018 art.4: CNP, CI seria/număr,
+  # passport, driving licence, CASS/EHIC). CNP is highest-leakage — see national_id.py /
+  # metrics.cnp_leakage. RO-native IDs are emitted directly by the RO generator as NATIONAL_ID.
+  - name: NATIONAL_ID
+    tier: core
+    identifier_class: direct
+    crosswalk:
+      ai4privacy: [IDCARDNUM, SOCIALNUM, PASSPORTNUM, DRIVERLICENSENUM]
+      hipaa: [ssn]
+      openmed: [SSN]
+      tabularisai: [NATIONAL_ID, PASSPORT_NUMBER, DRIVER_LICENSE, HEALTH_INSURANCE_ID]
+
+  # --- Clinical (PHI) ---
+  - name: MRN
+    tier: clinical
+    identifier_class: direct
+    crosswalk:
+      hipaa: [medical_record_numbers]
+
+  - name: HEALTH_CONDITION
+    tier: clinical
+    identifier_class: quasi
+    gdpr_special: true
+    crosswalk:
+      openmed: [DIAGNOSES, MEDICATION]
+      tabularisai: [HEALTH_CONDITION]
+
+  # PROVIDER/FACILITY are KP-native refinements: HIPAA "names" → PERSON and MAPA
+  # "ORGANIZATION" → ORG_PARTY (the general owners); these finer types can't be recovered
+  # from the flat source label, so they don't claim it (keeps native→KP a function).
+  - name: PROVIDER
+    tier: clinical
+    identifier_class: quasi
+
+  - name: FACILITY
+    tier: clinical
+    identifier_class: quasi
+
+  # --- Legal quasi-identifiers ---
+  - name: CASE_NUMBER
+    tier: legal
+    identifier_class: direct
+    crosswalk:
+      mapa: [AMOUNT]
+
+  - name: COURT
+    tier: legal
+    identifier_class: quasi
+
+  - name: STATUTE_REF
+    tier: legal
+    identifier_class: quasi
+
+  - name: ORG_PARTY
+    tier: legal
+    identifier_class: quasi
+    crosswalk:
+      mapa: [ORGANIZATION]
+      tabularisai: [COMPANY_NAME]
+
+  # Company identifiers (RO: CUI/CIF fiscal code, trade-register J-number). RO-native.
+  - name: COMPANY_ID
+    tier: legal
+    identifier_class: direct
