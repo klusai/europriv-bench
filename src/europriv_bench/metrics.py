@@ -106,44 +106,76 @@ def national_id_leakage(rows: Sequence[dict], pred_tags: Tags) -> dict[str, floa
         detection coverage and **never** emit a re-identification number (its leaked-QI is 0 by
         construction).
 
+    **Re-identification risk is per *distinct subject*, not per textual mention (KLU-49).** Real RO
+    clinical documents legitimately repeat the same CNP value twice (the CNP field + the CASS "cod
+    asigurat" field). Counting per textual span would double-count a single subject's national ID
+    and inflate the denominator. So we dedup by ``(document, country, normalized value)``: a
+    *subject* is one distinct ID value within one document, it is **protected iff ALL its
+    occurrences are redacted**, and it **leaks iff ANY occurrence is left unredacted**. Counts,
+    leak-rate and disclosed quasi-identifiers are all per-subject.
+
     Leak-rates carry 95% Wilson CIs via the shared ``_leak_rate_stats``. The headline ``leak_rate``
     is computed over the **decode-bearing** subset (the re-id-risk signal); coverage-only IDs get
     their own detection counters. Lower leak_rate is better.
     """
-    # Overall + per-family + per-country counters.
-    db_total = db_detected = leaked_qi = 0          # decode-bearing
-    co_total = co_detected = 0                       # coverage-only
-    per_country: dict[str, list[int]] = {}           # cc -> [total, detected]
+    # Per-subject aggregation. Key: (document index, country, normalized value). For each subject
+    # we track whether every occurrence was detected (detected iff ALL spans detected → leaks iff
+    # ANY span missed) plus the disclosed quasi-identifiers (counted once per leaked subject).
+    subjects: dict[tuple[int, str, str], dict] = {}
 
-    for row, pred in zip(rows, pred_tags):
+    for doc_idx, (row, pred) in enumerate(zip(rows, pred_tags)):
         toks = whitespace_tokens(row["text"])
         for sp in row.get("spans", []):
             cc = _span_country(row, sp)
             validator = get_validator(cc)
             if validator is None:
                 continue
-            info = validator.parse(row["text"][sp["start"]:sp["end"]])
+            raw = row["text"][sp["start"]:sp["end"]]
+            info = validator.parse(raw)
             if not info.valid:
                 continue
             members = [i for i, (_, ts, te) in enumerate(toks) if ts < sp["end"] and te > sp["start"]]
             detected = any(pred[i] != "O" for i in members if i < len(pred))
 
-            counts = per_country.setdefault(cc, [0, 0])
-            counts[0] += 1
-            if detected:
-                counts[1] += 1
+            # Normalize the value so the CNP field and the CASS "cod asigurat" field — same digits,
+            # possibly different surrounding whitespace — collapse onto one subject.
+            key = (doc_idx, cc, raw.strip())
+            subj = subjects.get(key)
+            if subj is None:
+                subj = {
+                    "country": cc,
+                    "decode_bearing": validator.decode_bearing,
+                    # A subject is detected only if EVERY occurrence is detected.
+                    "detected": True,
+                    "qi": len(info.disclosed_quasi_identifiers()),
+                }
+                subjects[key] = subj
+            subj["detected"] = subj["detected"] and detected
 
-            if validator.decode_bearing:
-                db_total += 1
-                if detected:
-                    db_detected += 1
-                else:
-                    # Coverage-only IDs never reach here, so no re-id number is ever emitted.
-                    leaked_qi += len(info.disclosed_quasi_identifiers())
+    # Overall + per-family + per-country counters, now over distinct subjects.
+    db_total = db_detected = leaked_qi = 0          # decode-bearing
+    co_total = co_detected = 0                       # coverage-only
+    per_country: dict[str, list[int]] = {}           # cc -> [total, detected]
+
+    for subj in subjects.values():
+        cc = subj["country"]
+        detected = subj["detected"]
+        counts = per_country.setdefault(cc, [0, 0])
+        counts[0] += 1
+        if detected:
+            counts[1] += 1
+
+        if subj["decode_bearing"]:
+            db_total += 1
+            if detected:
+                db_detected += 1
             else:
-                co_total += 1
-                if detected:
-                    co_detected += 1
+                # Coverage-only subjects never reach here, so no re-id number is ever emitted.
+                leaked_qi += subj["qi"]
+        else:
+            co_total += 1
+            if detected:
+                co_detected += 1
 
     db_missed = db_total - db_detected
     stats = _leak_rate_stats(db_missed, db_total)
