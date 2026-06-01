@@ -78,6 +78,37 @@ def leaderboard(path: str) -> None:
     click.echo(format_leaderboard(json.loads(Path(path).read_text(encoding="utf-8"))))
 
 
+@cli.group()
+def submission() -> None:
+    """Submission-CI helpers (KLU-16): validate a model card, run the reproduction gate."""
+
+
+@submission.command(name="validate-card")
+@click.argument("path", type=click.Path(exists=True))
+def submission_validate_card(path: str) -> None:
+    """Validate a submitted model-card YAML against the required-field schema."""
+    from .submission import CardValidationError, validate_model_card_file
+
+    try:
+        card = validate_model_card_file(path)
+    except CardValidationError as e:
+        raise click.ClickException(str(e)) from e
+    click.echo(f"model card OK: {card['hf_model_id']} via adapter {card['adapter']!r}")
+
+
+@submission.command(name="reproduce")
+@click.option("--in", "path", default="baselines/leaderboard.json", help="Leaderboard JSON to gate.")
+@click.option("--tolerance", type=float, default=None, help="Override the ±band (default 0.02).")
+def submission_reproduce(path: str, tolerance: float | None) -> None:
+    """Reproduction gate: assert the committed anchor row is within the tolerance band."""
+    from .submission import REPRO_TOLERANCE, check_reproduction_file
+
+    ok, msg = check_reproduction_file(path, tolerance=tolerance if tolerance is not None else REPRO_TOLERANCE)
+    click.echo(msg)
+    if not ok:
+        raise click.ClickException("reproduction gate FAILED")
+
+
 @cli.command()
 def taxonomy() -> None:
     """Print the harmonized KP taxonomy summary and BIOES label count."""
