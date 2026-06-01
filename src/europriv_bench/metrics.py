@@ -16,7 +16,7 @@ from __future__ import annotations
 import math
 from collections.abc import Callable, Sequence
 
-from .national_id import parse_cnp
+from .national_id import get_validator
 from .spans import whitespace_tokens
 
 Tags = Sequence[Sequence[str]]  # list of per-token BIOES tag sequences
@@ -81,41 +81,116 @@ def entity_f2(y_true: Tags, y_pred: Tags) -> dict[str, float]:
     return {"precision": p, "recall": r, "f2": f2}
 
 
-def cnp_leakage(rows: Sequence[dict], pred_tags: Tags) -> dict[str, float]:
-    """Re-identification leakage via missed Romanian CNPs (the RO headline metric).
+# A span's country is read from its ``country`` key (ISO alpha-2); rows may set a row-level
+# ``country`` default. When neither is present we fall back to RO — preserving the legacy
+# CNP-only behavior of ``cnp_leakage`` for existing RO datasets that carry no country tag.
+_DEFAULT_COUNTRY = "RO"
 
-    A CNP is a *deterministic* disclosure: a missed (un-redacted) valid CNP leaks DATE_OF_BIRTH
-    (when the century is unambiguous) + SEX + COUNTY. This scores, over the gold CNPs, how many a
-    model fails to detect and the total quasi-identifiers thereby leaked. Lower is better.
 
-    ``rows``: gold rows ``{text, spans:[{start,end,label}]}``. ``pred_tags``: model BIOES tags
-    per row over the same whitespace tokenization. A CNP is "detected" iff the model marks any of
-    its tokens non-O (i.e. it would be redacted).
+def _span_country(row: dict, sp: dict) -> str:
+    return str(sp.get("country") or row.get("country") or _DEFAULT_COUNTRY).upper()
+
+
+def national_id_leakage(rows: Sequence[dict], pred_tags: Tags) -> dict[str, float]:
+    """Country-dispatched re-identification leakage via missed national IDs (one re-id family).
+
+    Each gold span is validated by its country's validator (``national_id.REGISTRY``, keyed by an
+    ISO alpha-2 ``country`` on the span or row; default RO). A span is "detected" iff the model
+    marks any of its whitespace tokens non-O (i.e. it would be redacted). This folds in
+    ``cnp_leakage`` (RO) as one re-identification-risk family and cleanly separates two families
+    on output:
+
+      * **decode-bearing** (RO/CNP, PL/PESEL, IT/codice-fiscale) — a miss deterministically
+        discloses quasi-identifiers (DOB/sex/place); we sum ``leaked_quasi_identifiers``.
+      * **coverage-only** (ES/DNI-NIF) — detectable but no decodable quasi-identifier; we score
+        detection coverage and **never** emit a re-identification number (its leaked-QI is 0 by
+        construction).
+
+    Leak-rates carry 95% Wilson CIs via the shared ``_leak_rate_stats``. The headline ``leak_rate``
+    is computed over the **decode-bearing** subset (the re-id-risk signal); coverage-only IDs get
+    their own detection counters. Lower leak_rate is better.
     """
-    total = detected = leaked_qi = 0
+    # Overall + per-family + per-country counters.
+    db_total = db_detected = leaked_qi = 0          # decode-bearing
+    co_total = co_detected = 0                       # coverage-only
+    per_country: dict[str, list[int]] = {}           # cc -> [total, detected]
+
     for row, pred in zip(rows, pred_tags):
         toks = whitespace_tokens(row["text"])
         for sp in row.get("spans", []):
-            info = parse_cnp(row["text"][sp["start"]:sp["end"]])
+            cc = _span_country(row, sp)
+            validator = get_validator(cc)
+            if validator is None:
+                continue
+            info = validator.parse(row["text"][sp["start"]:sp["end"]])
             if not info.valid:
                 continue
-            total += 1
             members = [i for i, (_, ts, te) in enumerate(toks) if ts < sp["end"] and te > sp["start"]]
-            if any(pred[i] != "O" for i in members if i < len(pred)):
-                detected += 1
+            detected = any(pred[i] != "O" for i in members if i < len(pred))
+
+            counts = per_country.setdefault(cc, [0, 0])
+            counts[0] += 1
+            if detected:
+                counts[1] += 1
+
+            if validator.decode_bearing:
+                db_total += 1
+                if detected:
+                    db_detected += 1
+                else:
+                    # Coverage-only IDs never reach here, so no re-id number is ever emitted.
+                    leaked_qi += len(info.disclosed_quasi_identifiers())
             else:
-                leaked_qi += len(info.disclosed_quasi_identifiers())
-    missed = total - detected
-    stats = _leak_rate_stats(missed, total)
-    return {
-        "cnp_total": float(total),
-        "cnp_detected": float(detected),
-        "cnp_missed": float(missed),
-        "leak_rate": stats["leak_rate"],                         # ↓ better
-        "leak_rate_ci_low": stats["leak_rate_ci_low"],           # 95% Wilson lower bound
-        "leak_rate_ci_high": stats["leak_rate_ci_high"],         # 95% Wilson upper bound
-        "detection_rate": (detected / total) if total else 0.0,  # ↑ better
+                co_total += 1
+                if detected:
+                    co_detected += 1
+
+    db_missed = db_total - db_detected
+    stats = _leak_rate_stats(db_missed, db_total)
+    out = {
+        # Decode-bearing re-identification-risk family (the headline leak-rate signal).
+        "decode_bearing_total": float(db_total),
+        "decode_bearing_detected": float(db_detected),
+        "decode_bearing_missed": float(db_missed),
+        "leak_rate": stats["leak_rate"],                            # ↓ better
+        "leak_rate_ci_low": stats["leak_rate_ci_low"],              # 95% Wilson lower bound
+        "leak_rate_ci_high": stats["leak_rate_ci_high"],            # 95% Wilson upper bound
+        "detection_rate": (db_detected / db_total) if db_total else 0.0,  # ↑ better
         "leaked_quasi_identifiers": float(leaked_qi),
+        # Coverage-only family — detection only, never a re-identification number.
+        "coverage_only_total": float(co_total),
+        "coverage_only_detected": float(co_detected),
+        "coverage_only_detection_rate": (co_detected / co_total) if co_total else 0.0,  # ↑ better
+    }
+    # Per-country detection counters (cc_total / cc_detected) for both families.
+    for cc, (tot, det) in sorted(per_country.items()):
+        out[f"{cc.lower()}_total"] = float(tot)
+        out[f"{cc.lower()}_detected"] = float(det)
+    return out
+
+
+def cnp_leakage(rows: Sequence[dict], pred_tags: Tags) -> dict[str, float]:
+    """RO/CNP re-identification leakage — back-compat alias over ``national_id_leakage``.
+
+    A CNP is a *deterministic* disclosure: a missed (un-redacted) valid CNP leaks DATE_OF_BIRTH
+    (when the century is unambiguous) + SEX + COUNTY. This is now one country in the unified
+    national-ID re-id-risk family; it scopes scoring to RO spans and preserves the historical
+    ``cnp_*`` output keys (and Wilson-CI leak_rate) verbatim so existing RO callers, baselines and
+    the leaderboard keep working unchanged. Lower is better.
+    """
+    ro_rows = [{**row, "country": "RO",
+                "spans": [{**sp, "country": "RO"} for sp in row.get("spans", [])]}
+               for row in rows]
+    res = national_id_leakage(ro_rows, pred_tags)
+    return {
+        "cnp_total": res["decode_bearing_total"],
+        "cnp_detected": res["decode_bearing_detected"],
+        "cnp_missed": res["decode_bearing_missed"],
+        "leak_rate": res["leak_rate"],                           # ↓ better
+        "leak_rate_ci_low": res["leak_rate_ci_low"],             # 95% Wilson lower bound
+        "leak_rate_ci_high": res["leak_rate_ci_high"],           # 95% Wilson upper bound
+        "detection_rate": res["detection_rate"],                 # ↑ better
+        "leaked_quasi_identifiers": res["leaked_quasi_identifiers"],
     }
 
 
@@ -151,7 +226,8 @@ REGISTRY: dict[str, Callable] = {
 
 # Row-based metrics: called as fn(gold_rows, pred_tags) — need span values, not just tags.
 ROW_REGISTRY: dict[str, Callable] = {
-    "cnp_leakage": cnp_leakage,
+    "national_id_leakage": national_id_leakage,
+    "cnp_leakage": cnp_leakage,  # back-compat alias scoped to RO (same re-id-risk family)
 }
 
 ALL_METRICS = set(REGISTRY) | set(ROW_REGISTRY)
