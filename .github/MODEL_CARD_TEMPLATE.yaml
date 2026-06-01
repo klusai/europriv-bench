@@ -1,0 +1,40 @@
+# EuroPriv-Bench leaderboard submission — model card
+#
+# Fill EVERY field below, then include this file in your submission PR (see
+# .github/PULL_REQUEST_TEMPLATE/submission.md). The submission CI validates it with
+# `europriv submission validate-card <this-file>`. Submitters do NOT report scores — CI
+# produces a provenance-stamped row. The protocol is specified in klusai-papers SUBMISSIONS.md.
+#
+# This shipped example is itself a valid card (it points at the privacy-filter baseline) so the
+# schema stays self-documenting; replace every value with your own.
+
+# Public, REVISION-PINNED Hugging Face model id — `org/model@<commit-sha>`, not a moving tag.
+# Pinning a revision is what lets a leaderboard row stamp an immutable model version.
+hf_model_id: "openai/privacy-filter@5f2e8d1c9b7a6e3f4d2c1b0a9e8d7c6b5a4f3e2d"
+
+# Adapter scheme the harness uses to call the model. MUST be one of adapters.BUILDERS:
+#   dummy | privacy-filter | openmed | tabularisai | gliner | kp-model
+# No arbitrary submitter code runs — only this declared built-in adapter is instantiated.
+adapter: "privacy-filter"
+
+# What the model is for.
+intended_use: "Entity-level PII/PHI detection over European general-domain text."
+
+# Training-data provenance AND licensing (be specific: corpora, sizes, licenses).
+training_data: "openai/privacy-filter training mix; see upstream model card for sources and license."
+
+# Languages covered (ISO 639-1 codes).
+languages: ["en", "de", "fr", "it", "es", "nl"]
+
+# Domains covered: general | legal | clinical | ...
+domains: ["general"]
+
+# Known limitations / failure modes.
+known_limitations: "Lower recall on non-Latin scripts and legal-domain documents."
+
+# Contamination statement: state whether the model's training data overlaps EuroPriv-Bench's
+# held-out gold splits. External submissions are recorded as contamination=unknown on the
+# leaderboard until classified (see GOVERNANCE.md); say what you know here.
+contamination_statement: >
+  Training overlap with the EuroPriv-Bench held-out splits is not established by the submitter.
+  CI records this entry as contamination=unknown pending classification.

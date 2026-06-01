@@ -1,0 +1,82 @@
+# EuroPriv-Bench submission CI (KLU-16).
+#
+# Builds a third-party submission's declared built-in adapter, runs `europriv run` on the PUBLIC
+# benchmark configs, validates the model card, and appends a provenance-stamped schema-3 row to
+# baselines/leaderboard.json. Protocol: klusai-papers SUBMISSIONS.md.
+#
+# NO-SECRETS SANDBOX
+# ------------------
+# This uses `pull_request` (NOT `pull_request_target`): the workflow runs against the PR's own
+# checkout with the default read-only GITHUB_TOKEN and NO access to repository/org secrets. We
+# never reference `secrets.*`, so untrusted adapter code cannot exfiltrate them. Public models
+# need no HF_TOKEN. Private/gated models requiring org secrets are a SEPARATE human-gated path
+# (KLU-10) — intentionally not wired here.
+#
+# Note: the reproduction gate and card validation here are exactly what `make submission-check`
+# runs locally, so the gate is verifiable offline without GitHub Actions.
+
+name: submission-ci
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "submissions/**"
+      - ".github/MODEL_CARD_TEMPLATE.yaml"
+
+permissions:
+  contents: read  # read-only; the no-secrets sandbox cannot push or read secrets
+
+concurrency:
+  group: submission-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  submission:
+    runs-on: ubuntu-latest
+    # Hard guarantee: no secrets are available to this job. `env:` is populated only from public
+    # context — never from `secrets.*`. HF stays in anonymous (public-model) mode.
+    env:
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      TRANSFORMERS_OFFLINE: "0"  # allow public model download; no token is set
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install (harness + hf extra)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e '.[dev,hf]'
+
+      - name: Validate the submitted model card
+        id: card
+        run: |
+          CARD=$(ls submissions/*.yaml submissions/*.yml 2>/dev/null | head -n1)
+          if [ -z "$CARD" ]; then
+            echo "::error::no model card found under submissions/ (see .github/MODEL_CARD_TEMPLATE.yaml)"
+            exit 1
+          fi
+          echo "card=$CARD" >> "$GITHUB_OUTPUT"
+          europriv submission validate-card "$CARD"
+
+      - name: Reproduction gate (anchor must hold before we trust a new row)
+        run: make submission-check
+
+      - name: Build adapter + run on PUBLIC configs (no-secrets sandbox)
+        run: |
+          # The card's declared adapter is one of adapters.BUILDERS; the harness instantiates only
+          # that built-in. `europriv run` pulls public gold from HF anonymously (no HF_TOKEN).
+          ADAPTER=$(python -c "import yaml,sys; print(yaml.safe_load(open('${{ steps.card.outputs.card }}'))['adapter'])")
+          europriv run --suite evaluations --adapter "$ADAPTER" --out submission-result.json
+          echo "Scored with adapter=$ADAPTER. External rows are recorded contamination=unknown until classified."
+
+      - name: Re-run the gate against the committed board (post-run drift check)
+        run: make submission-check
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: submission-result
+          path: submission-result.json
