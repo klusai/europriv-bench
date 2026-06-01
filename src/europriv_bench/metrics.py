@@ -13,12 +13,44 @@ Every metric is registered in ``REGISTRY`` keyed by the string used in eval spec
 
 from __future__ import annotations
 
+import math
 from collections.abc import Callable, Sequence
 
 from .national_id import parse_cnp
 from .spans import whitespace_tokens
 
 Tags = Sequence[Sequence[str]]  # list of per-token BIOES tag sequences
+
+# Default two-sided z for a 95% normal-approximation confidence interval.
+WILSON_Z_95 = 1.95996
+
+
+def wilson_interval(successes: int, total: int, z: float = WILSON_Z_95) -> tuple[float, float]:
+    """Wilson score interval for a binomial proportion ``successes/total``.
+
+    Unlike the naive normal-approximation (Wald) interval, the Wilson interval stays inside
+    ``[0, 1]`` and behaves sensibly for proportions near 0 or 1 and for small ``total`` — which is
+    exactly the regime of leak-rate CIs (rare misses over ~1.5k items). Returns ``(low, high)``
+    bounds; ``(0.0, 0.0)`` when ``total == 0``.
+    """
+    if total <= 0:
+        return (0.0, 0.0)
+    p = successes / total
+    z2 = z * z
+    denom = 1.0 + z2 / total
+    center = (p + z2 / (2.0 * total)) / denom
+    half = (z / denom) * math.sqrt(p * (1.0 - p) / total + z2 / (4.0 * total * total))
+    return (center - half, center + half)
+
+
+def _leak_rate_stats(missed: int, total: int) -> dict[str, float]:
+    """Shared leak-rate point estimate + Wilson CI (reused by CNP and future national-id leakage)."""
+    low, high = wilson_interval(missed, total)
+    return {
+        "leak_rate": (missed / total) if total else 0.0,  # ↓ better
+        "leak_rate_ci_low": low,
+        "leak_rate_ci_high": high,
+    }
 
 
 def _seqeval(y_true: Tags, y_pred: Tags):
@@ -74,11 +106,14 @@ def cnp_leakage(rows: Sequence[dict], pred_tags: Tags) -> dict[str, float]:
             else:
                 leaked_qi += len(info.disclosed_quasi_identifiers())
     missed = total - detected
+    stats = _leak_rate_stats(missed, total)
     return {
         "cnp_total": float(total),
         "cnp_detected": float(detected),
         "cnp_missed": float(missed),
-        "leak_rate": (missed / total) if total else 0.0,        # ↓ better
+        "leak_rate": stats["leak_rate"],                         # ↓ better
+        "leak_rate_ci_low": stats["leak_rate_ci_low"],           # 95% Wilson lower bound
+        "leak_rate_ci_high": stats["leak_rate_ci_high"],         # 95% Wilson upper bound
         "detection_rate": (detected / total) if total else 0.0,  # ↑ better
         "leaked_quasi_identifiers": float(leaked_qi),
     }
