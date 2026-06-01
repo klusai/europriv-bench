@@ -2,7 +2,7 @@
 
 import pytest
 
-from europriv_bench.crosswalk import entities_to_kp_bioes, mapped_labels, to_kp
+from europriv_bench.crosswalk import entities_to_kp_bioes, kp_entities_to_bioes, mapped_labels, to_kp
 from europriv_bench.runner import _rows_to_gold
 
 
@@ -25,6 +25,13 @@ def test_crosswalk_maps_native_labels_to_kp():
 def test_mapped_labels_reports_coverage():
     m = mapped_labels("ai4privacy")
     assert m["EMAIL"] == "EMAIL" and m["TELEPHONENUM"] == "PHONE"
+
+
+def test_kp_entities_to_bioes_direct():
+    # GLiNER path: entities already carry KP labels (no scheme crosswalk).
+    text = "Ion Popescu plata"
+    tags = kp_entities_to_bioes(text, [{"start": 0, "end": 11, "label": "PERSON"}])
+    assert tags == ["B-PERSON", "E-PERSON", "O"]
 
 
 def test_entities_to_kp_bioes_maps_and_drops_unmapped():

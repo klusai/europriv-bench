@@ -55,13 +55,25 @@ def entities_to_kp_bioes(text: str, entities: Sequence[dict], scheme: str) -> li
     (per-token first-label-wins → BIOES) and never raises. Gold curation uses the strict
     ``char_spans_to_bioes`` instead. Both produce tags in the same KP label space.
     """
+    kp_entities = [
+        {"start": e["start"], "end": e["end"], "label": kp}
+        for e in entities
+        if (kp := to_kp(scheme, e["label"])) is not None
+    ]
+    return kp_entities_to_bioes(text, kp_entities)
+
+
+def kp_entities_to_bioes(text: str, kp_entities: Sequence[dict]) -> list[str]:
+    """BIOES from entities ALREADY carrying KP labels (``{start, end, label}``).
+
+    Tolerant prediction-path helper (per-token first-label-wins, never raises). Used by adapters
+    that produce KP labels directly — e.g. zero-shot GLiNER, prompted with KP types — so they
+    don't need a native→KP crosswalk scheme.
+    """
     toks = whitespace_tokens(text)
     token_labels: list[str | None] = [None] * len(toks)
-    for e in entities:
-        kp = to_kp(scheme, e["label"])
-        if kp is None:
-            continue
+    for e in kp_entities:
         for i, (_, ts, te) in enumerate(toks):
             if ts < e["end"] and te > e["start"] and token_labels[i] is None:
-                token_labels[i] = kp
+                token_labels[i] = e["label"]
     return labels_to_bioes(token_labels)

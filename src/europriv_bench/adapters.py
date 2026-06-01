@@ -17,7 +17,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 
-from .crosswalk import entities_to_kp_bioes
+from .crosswalk import entities_to_kp_bioes, kp_entities_to_bioes
 
 
 class BaseAdapter:
@@ -126,12 +126,62 @@ class TabularisaiAdapter(PrivacyFilterAdapter):
         super().__init__(model_id="tabularisai/eu-pii-safeguard", scheme="tabularisai")
 
 
+class GLiNERAdapter(BaseAdapter):
+    """GLiNER zero-shot NER (urchade/gliner_multi_pii-v1). Requires the `gliner` extra.
+
+    Architecturally distinct from the token-classifiers: we *prompt* it with natural-language
+    labels and it returns spans for them. We prompt with phrasings of the KP types and map the
+    returned label straight back to KP — so no native→KP crosswalk scheme is needed.
+    """
+
+    name = "gliner"
+    model_id = "urchade/gliner_multi_pii-v1"
+
+    # prompt label -> KP type. Phrasing matters for zero-shot recall.
+    LABEL_TO_KP = {
+        "person": "PERSON", "full name": "PERSON",
+        "address": "ADDRESS", "city": "ADDRESS", "postal code": "ADDRESS",
+        "email": "EMAIL", "phone number": "PHONE", "url": "URL",
+        "date": "DATE", "date of birth": "DATE",
+        "account number": "ACCOUNT_ID", "credit card number": "ACCOUNT_ID", "iban": "ACCOUNT_ID",
+        "ip address": "ACCOUNT_ID", "username": "ACCOUNT_ID",
+        "password": "SECRET",
+        "national identification number": "NATIONAL_ID", "passport number": "NATIONAL_ID",
+        "driver license number": "NATIONAL_ID",
+        "company": "ORG_PARTY",
+    }
+
+    def __init__(self, threshold: float = 0.5) -> None:
+        self.threshold = threshold
+        self._model = None
+        self._labels = sorted(self.LABEL_TO_KP)
+
+    def _load(self):  # pragma: no cover - requires the `gliner` extra + model download
+        if self._model is None:
+            from gliner import GLiNER
+            self._model = GLiNER.from_pretrained(self.model_id)
+        return self._model
+
+    def predict_tags(self, texts: Sequence[str]) -> list[list[str]]:
+        model = self._load()  # pragma: no cover - needs model
+        out = []  # pragma: no cover
+        for text in texts:  # pragma: no cover
+            kp_ents = [
+                {"start": e["start"], "end": e["end"], "label": self.LABEL_TO_KP[e["label"]]}
+                for e in model.predict_entities(text, self._labels, threshold=self.threshold)
+                if e["label"] in self.LABEL_TO_KP
+            ]
+            out.append(kp_entities_to_bioes(text, kp_ents))
+        return out
+
+
 # Builder registry: adapter key (CLI --adapter) -> zero-arg factory.
 BUILDERS: dict[str, type[BaseAdapter]] = {
     "dummy": DummyAdapter,
     "privacy-filter": PrivacyFilterAdapter,
     "openmed": OpenMedAdapter,
     "tabularisai": TabularisaiAdapter,
+    "gliner": GLiNERAdapter,
 }
 
 
