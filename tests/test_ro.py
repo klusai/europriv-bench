@@ -1,7 +1,7 @@
 """Romanian CNP validation/decode + the cnp_leakage re-identification metric."""
 
 from europriv_bench.adapters import build
-from europriv_bench.metrics import cnp_leakage
+from europriv_bench.metrics import cnp_leakage, wilson_interval
 from europriv_bench.national_id import check_digit, parse_cnp, validate_cnp
 from europriv_bench.runner import run_spec
 from europriv_bench.spec import EvalSpec
@@ -53,6 +53,30 @@ def test_cnp_leakage_counts_missed_as_disclosure():
     caught = cnp_leakage(rows, [["O", "S-NATIONAL_ID", "O"]])   # model redacts it
     assert caught["cnp_detected"] == 1 and caught["leak_rate"] == 0.0
     assert caught["leaked_quasi_identifiers"] == 0
+
+
+def test_cnp_leakage_emits_wilson_ci_bracketing_point_estimate():
+    cnp = _make_cnp("185071540001")
+    text = f"CNP {cnp} emis"
+    rows = [{"text": text, "spans": [{"start": 4, "end": 4 + 13, "label": "NATIONAL_ID"}]}]
+
+    # One miss out of one → point leak_rate 1.0; the Wilson interval must bracket it.
+    res = cnp_leakage(rows, [["O", "O", "O"]])
+    assert "leak_rate_ci_low" in res and "leak_rate_ci_high" in res
+    assert res["leak_rate_ci_low"] <= res["leak_rate"] <= res["leak_rate_ci_high"]
+    assert 0.0 <= res["leak_rate_ci_low"] and res["leak_rate_ci_high"] <= 1.0
+
+
+def test_wilson_ci_reproduces_privacy_filter_ro_real_leak_rate():
+    # privacy-filter on ro-realskeleton-v1: 17 missed CNPs out of 1520 (committed baseline counts).
+    # Point estimate ~1.1%; the paper's hand-computed 95% CI is ~0.7%-1.8%.
+    missed, total = 17, 1520
+    point = missed / total
+    low, high = wilson_interval(missed, total)
+    assert abs(point - 0.0112) < 0.001          # ~1.1%
+    assert low < point < high                    # brackets the point estimate
+    assert 0.006 < low < 0.008                   # lower ~0.7%
+    assert 0.017 < high < 0.019                  # upper ~1.8%
 
 
 def test_run_spec_wires_cnp_leakage_via_rows():
