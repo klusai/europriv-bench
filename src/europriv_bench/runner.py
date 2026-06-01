@@ -14,6 +14,7 @@ from collections.abc import Iterable
 
 from . import __version__
 from .adapters import BaseAdapter
+from .leaderboard import DEFAULT_CONFIG_STATUS, classify_contamination
 from .logger import get_logger
 from .metrics import ALL_METRICS, REGISTRY, ROW_REGISTRY
 from .spans import Span, char_spans_to_bioes, validate_bioes
@@ -110,6 +111,11 @@ def run_spec(
         "limit": limit,
         "eval_labels": sorted(eval_labels),
         "scores": scores,
+        # schema-3 governance markers (per model, config). See leaderboard.py / GOVERNANCE.md.
+        # contamination: in_distribution | clean_held_out | unknown (derived from adapter+config).
+        # config_status: dev | citable-validated; defaults to dev until KLU-27 sign-off promotes it.
+        "contamination": classify_contamination(adapter.name, spec.dataset.config),
+        "config_status": DEFAULT_CONFIG_STATUS,
         # provenance
         "europriv_bench_version": __version__,
         "taxonomy_version": TAXONOMY_VERSION,

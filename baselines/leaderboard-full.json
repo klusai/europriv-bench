@@ -1,5 +1,5 @@
 {
-  "schema": 2,
+  "schema": 3,
   "entries": {
     "openmed::OpenMed/privacy-filter-multilingual": [
       {
@@ -39,6 +39,8 @@
             "cnp_detected": 998.0,
             "cnp_missed": 19.0,
             "leak_rate": 0.018682399213372666,
+            "leak_rate_ci_low": 0.011992474144830024,
+            "leak_rate_ci_high": 0.02899473643546866,
             "detection_rate": 0.9813176007866273,
             "leaked_quasi_identifiers": 57.0
           }
@@ -50,7 +52,9 @@
           "config": "ro-synthetic-v1",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:31:55.871465+00:00"
+        "timestamp": "2026-05-30T09:31:55.871465+00:00",
+        "contamination": "unknown",
+        "config_status": "dev"
       },
       {
         "spec": "PII Detection — Dutch (general)",
@@ -91,7 +95,9 @@
           "config": "nl",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:31:55.871465+00:00"
+        "timestamp": "2026-05-30T09:31:55.871465+00:00",
+        "contamination": "in_distribution",
+        "config_status": "dev"
       },
       {
         "spec": "PII Detection — English (general)",
@@ -132,7 +138,9 @@
           "config": "en",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:31:55.871465+00:00"
+        "timestamp": "2026-05-30T09:31:55.871465+00:00",
+        "contamination": "in_distribution",
+        "config_status": "dev"
       },
       {
         "spec": "PII Detection — French (general)",
@@ -173,7 +181,9 @@
           "config": "fr",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:31:55.871465+00:00"
+        "timestamp": "2026-05-30T09:31:55.871465+00:00",
+        "contamination": "in_distribution",
+        "config_status": "dev"
       },
       {
         "spec": "PII Detection — German (general)",
@@ -214,7 +224,9 @@
           "config": "de",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:31:55.871465+00:00"
+        "timestamp": "2026-05-30T09:31:55.871465+00:00",
+        "contamination": "in_distribution",
+        "config_status": "dev"
       },
       {
         "spec": "PII Detection — Italian (general)",
@@ -255,7 +267,9 @@
           "config": "it",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:31:55.871465+00:00"
+        "timestamp": "2026-05-30T09:31:55.871465+00:00",
+        "contamination": "in_distribution",
+        "config_status": "dev"
       },
       {
         "spec": "PII Detection — Spanish (general)",
@@ -296,7 +310,9 @@
           "config": "es",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:31:55.871465+00:00"
+        "timestamp": "2026-05-30T09:31:55.871465+00:00",
+        "contamination": "in_distribution",
+        "config_status": "dev"
       }
     ],
     "privacy-filter::openai/privacy-filter": [
@@ -337,6 +353,8 @@
             "cnp_detected": 1016.0,
             "cnp_missed": 1.0,
             "leak_rate": 0.0009832841691248771,
+            "leak_rate_ci_low": 0.00017359538675441747,
+            "leak_rate_ci_high": 0.005548589229183444,
             "detection_rate": 0.9990167158308751,
             "leaked_quasi_identifiers": 3.0
           }
@@ -348,7 +366,9 @@
           "config": "ro-synthetic-v1",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:31:55.871465+00:00"
+        "timestamp": "2026-05-30T09:31:55.871465+00:00",
+        "contamination": "unknown",
+        "config_status": "dev"
       },
       {
         "spec": "PII Detection — Dutch (general)",
@@ -389,7 +409,9 @@
           "config": "nl",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:31:55.871465+00:00"
+        "timestamp": "2026-05-30T09:31:55.871465+00:00",
+        "contamination": "unknown",
+        "config_status": "dev"
       },
       {
         "spec": "PII Detection — English (general)",
@@ -430,7 +452,9 @@
           "config": "en",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:31:55.871465+00:00"
+        "timestamp": "2026-05-30T09:31:55.871465+00:00",
+        "contamination": "unknown",
+        "config_status": "dev"
       },
       {
         "spec": "PII Detection — French (general)",
@@ -471,7 +495,9 @@
           "config": "fr",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:31:55.871465+00:00"
+        "timestamp": "2026-05-30T09:31:55.871465+00:00",
+        "contamination": "unknown",
+        "config_status": "dev"
       },
       {
         "spec": "PII Detection — German (general)",
@@ -512,7 +538,9 @@
           "config": "de",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:31:55.871465+00:00"
+        "timestamp": "2026-05-30T09:31:55.871465+00:00",
+        "contamination": "unknown",
+        "config_status": "dev"
       },
       {
         "spec": "PII Detection — Italian (general)",
@@ -553,7 +581,9 @@
           "config": "it",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:31:55.871465+00:00"
+        "timestamp": "2026-05-30T09:31:55.871465+00:00",
+        "contamination": "unknown",
+        "config_status": "dev"
       },
       {
         "spec": "PII Detection — Spanish (general)",
@@ -594,7 +624,9 @@
           "config": "es",
           "split": "test"
         },
-        "timestamp": "2026-05-30T09:31:55.871465+00:00"
+        "timestamp": "2026-05-30T09:31:55.871465+00:00",
+        "contamination": "unknown",
+        "config_status": "dev"
       }
     ]
   }
