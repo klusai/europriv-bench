@@ -7,15 +7,23 @@ direct-vs-quasi-identifier marking (à la TAB / MultiGraSCCo).
 
 Entity tags use BIOES so the label space is directly compatible with `openai/privacy-filter`
 (enabling head-to-head scoring).
+
+The crosswalk is **not** hand-coded here: it is the single, versioned source of truth in
+``conf/taxonomy.yaml``, loaded once at import. ``TAXONOMY_VERSION`` below is the in-code
+anchor; the YAML must echo the same ``version`` or import fails loud (see GOVERNANCE.md).
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass, field
 from enum import Enum
+from pathlib import Path
+
+import yaml
 
 # Bump whenever the entity set or BIOES label space changes. Stamped into eval specs and the
 # leaderboard so dataset gold labels, model label maps, and scores are provably the same version.
+# MUST equal `version` in conf/taxonomy.yaml — the loader fails loud on mismatch.
 TAXONOMY_VERSION = "0.2.0"  # 0.2.0: added NATIONAL_ID + COMPANY_ID; national IDs split out of ACCOUNT_ID
 
 
@@ -41,122 +49,54 @@ class EntityType:
     crosswalk: dict[str, list[str]] = field(default_factory=dict)  # scheme -> source labels
 
 
-# --- Crosswalk source schemes we map onto -------------------------------------------------
-SCHEMES = ("openai", "ai4privacy", "hipaa", "mapa", "openmed", "azure", "tabularisai")
+# --- Single source of truth: conf/taxonomy.yaml -------------------------------------------
+# Resolve relative to the package, walking up to the repo root (editable install) and falling
+# back to package-bundled data (wheel install). Keeps load behavior identical either way.
+_CONF_NAME = "taxonomy.yaml"
 
 
-# --- The harmonized taxonomy (seed; extended in docs/taxonomy.md) -------------------------
-# Kept deliberately small and auditable here; the full 50+ crosswalk lives in the doc and is
-# loaded from a versioned YAML in a later phase.
-TAXONOMY: list[EntityType] = [
-    EntityType(
-        "PERSON", Tier.CORE, IdentifierClass.DIRECT,
-        crosswalk={
-            "openai": ["private_person"],
-            "ai4privacy": ["GIVENNAME", "SURNAME", "FIRSTNAME", "LASTNAME", "MIDDLENAME"],
-            "hipaa": ["names"],
-            "mapa": ["PERSON"],
-            "openmed": ["FIRSTNAME", "LASTNAME", "MIDDLENAME", "PREFIX"],
-            "tabularisai": ["FIRSTNAME", "LASTNAME", "MIDDLENAME", "PREFIX"],
-        },
-    ),
-    EntityType(
-        "ADDRESS", Tier.CORE, IdentifierClass.QUASI,
-        crosswalk={
-            "openai": ["private_address"],
-            "ai4privacy": ["STREET", "CITY", "ZIPCODE", "BUILDINGNUM"],
-            "hipaa": ["geographic_subdivisions"],
-            "mapa": ["ADDRESS"],
-            "openmed": [
-                "STREET", "CITY", "ZIPCODE", "BUILDINGNUMBER", "COUNTY", "STATE",
-                "SECONDARYADDRESS", "GPSCOORDINATES", "ORDINALDIRECTION",
-            ],
-            "tabularisai": [
-                "ADDRESS", "BUILDING_NUMBER", "CITY", "STATE", "STREET", "POSTAL_CODE",
-                "COUNTRY", "LATITUDE", "LONGITUDE",
-            ],
-        },
-    ),
-    EntityType(
-        "EMAIL", Tier.CORE, IdentifierClass.DIRECT,
-        crosswalk={"openai": ["private_email"], "ai4privacy": ["EMAIL"], "openmed": ["EMAIL"],
-                   "tabularisai": ["EMAIL"]},
-    ),
-    EntityType(
-        "PHONE", Tier.CORE, IdentifierClass.DIRECT,
-        crosswalk={"openai": ["private_phone"], "ai4privacy": ["TELEPHONENUM"], "openmed": ["PHONE"],
-                   "tabularisai": ["PHONE_NUMBER"]},
-    ),
-    EntityType(
-        "URL", Tier.CORE, IdentifierClass.QUASI,
-        crosswalk={"openai": ["private_url"], "openmed": ["URL"], "tabularisai": ["URL"]},
-    ),
-    EntityType(
-        "DATE", Tier.CORE, IdentifierClass.QUASI,
-        crosswalk={
-            "openai": ["private_date"], "ai4privacy": ["DATE", "TIME"], "hipaa": ["dates"],
-            "openmed": ["DATE", "DATEOFBIRTH", "TIME"], "tabularisai": ["DOB"],
-        },
-    ),
-    EntityType(
-        "ACCOUNT_ID", Tier.CORE, IdentifierClass.DIRECT,
-        crosswalk={
-            "openai": ["account_number"],
-            # National IDs (IDCARDNUM/SOCIALNUM/PASSPORTNUM/DRIVERLICENSENUM/SSN) → NATIONAL_ID.
-            "ai4privacy": ["ACCOUNTNUM", "TAXNUM", "CREDITCARDNUMBER"],
-            "hipaa": ["account_numbers"],  # ssn → NATIONAL_ID; medical_record_numbers → MRN
-            "openmed": [
-                "IBAN", "BANKACCOUNT", "BIC", "CREDITCARD", "CREDITCARDISSUER", "CVV",
-                "PIN", "MASKEDNUMBER", "ACCOUNTNAME", "BITCOINADDRESS", "ETHEREUMADDRESS",
-                "LITECOINADDRESS", "VIN", "VRM", "IMEI", "MACADDRESS", "IPADDRESS",
-                "USERNAME", "USERAGENT",
-            ],
-            "tabularisai": [
-                "ACCOUNT_NUMBER", "CREDIT_CARD_NUMBER", "IBAN", "TAX_ID", "DEVICE_ID",
-                "IP_ADDRESS", "MAC_ADDRESS", "USERNAME",
-            ],
-        },
-    ),
-    EntityType(
-        "SECRET", Tier.CORE, IdentifierClass.DIRECT,
-        crosswalk={"openai": ["secret"], "ai4privacy": ["PASSWORD"], "openmed": ["PASSWORD"],
-                   "tabularisai": ["PASSWORD"]},
-    ),
-    # Government-issued national identifiers (RO Law 190/2018 art.4: CNP, CI seria/număr,
-    # passport, driving licence, CASS/EHIC). CNP is highest-leakage — see national_id.py /
-    # metrics.cnp_leakage. RO-native IDs are emitted directly by the RO generator as NATIONAL_ID.
-    EntityType(
-        "NATIONAL_ID", Tier.CORE, IdentifierClass.DIRECT,
-        crosswalk={
-            "ai4privacy": ["IDCARDNUM", "SOCIALNUM", "PASSPORTNUM", "DRIVERLICENSENUM"],
-            "hipaa": ["ssn"],
-            "openmed": ["SSN"],
-            "tabularisai": ["NATIONAL_ID", "PASSPORT_NUMBER", "DRIVER_LICENSE", "HEALTH_INSURANCE_ID"],
-        },
-    ),
-    # --- Clinical (PHI) ---
-    EntityType(
-        "MRN", Tier.CLINICAL, IdentifierClass.DIRECT,
-        crosswalk={"hipaa": ["medical_record_numbers"]},
-    ),
-    EntityType(
-        "HEALTH_CONDITION", Tier.CLINICAL, IdentifierClass.QUASI, gdpr_special=True,
-        crosswalk={"openmed": ["DIAGNOSES", "MEDICATION"], "tabularisai": ["HEALTH_CONDITION"]},
-    ),
-    # PROVIDER/FACILITY are KP-native refinements: HIPAA "names" → PERSON and MAPA
-    # "ORGANIZATION" → ORG_PARTY (the general owners); these finer types can't be recovered
-    # from the flat source label, so they don't claim it (keeps native→KP a function).
-    EntityType("PROVIDER", Tier.CLINICAL, IdentifierClass.QUASI, crosswalk={}),
-    EntityType("FACILITY", Tier.CLINICAL, IdentifierClass.QUASI, crosswalk={}),
-    # --- Legal quasi-identifiers ---
-    EntityType("CASE_NUMBER", Tier.LEGAL, IdentifierClass.DIRECT, crosswalk={"mapa": ["AMOUNT"]}),
-    EntityType("COURT", Tier.LEGAL, IdentifierClass.QUASI, crosswalk={}),
-    EntityType("STATUTE_REF", Tier.LEGAL, IdentifierClass.QUASI, crosswalk={}),
-    EntityType("ORG_PARTY", Tier.LEGAL, IdentifierClass.QUASI,
-               crosswalk={"mapa": ["ORGANIZATION"], "tabularisai": ["COMPANY_NAME"]}),
-    # Company identifiers (RO: CUI/CIF fiscal code, trade-register J-number). RO-native.
-    EntityType("COMPANY_ID", Tier.LEGAL, IdentifierClass.DIRECT, crosswalk={}),
-]
+def _locate_conf() -> Path:
+    here = Path(__file__).resolve()
+    for parent in here.parents:
+        candidate = parent / "conf" / _CONF_NAME
+        if candidate.is_file():
+            return candidate
+    # Fallback: bundled alongside the package (wheel/sdist via package_data).
+    bundled = here.parent / "conf" / _CONF_NAME
+    if bundled.is_file():
+        return bundled
+    raise FileNotFoundError(
+        f"taxonomy config {_CONF_NAME!r} not found (looked under conf/ up the tree from {here})"
+    )
+
+
+def _load_taxonomy() -> tuple[tuple[str, ...], list[EntityType]]:
+    with open(_locate_conf(), encoding="utf-8") as f:
+        doc = yaml.safe_load(f)
+
+    yaml_version = doc.get("version")
+    if yaml_version != TAXONOMY_VERSION:
+        raise ValueError(
+            f"taxonomy version mismatch: {_CONF_NAME} carries version={yaml_version!r} but "
+            f"TAXONOMY_VERSION={TAXONOMY_VERSION!r}. Bump both together (see GOVERNANCE.md)."
+        )
+
+    schemes = tuple(doc["schemes"])
+    entities: list[EntityType] = []
+    for raw in doc["entities"]:
+        entities.append(
+            EntityType(
+                name=raw["name"],
+                tier=Tier(raw["tier"]),
+                identifier_class=IdentifierClass(raw["identifier_class"]),
+                gdpr_special=bool(raw.get("gdpr_special", False)),
+                crosswalk={k: list(v) for k, v in (raw.get("crosswalk") or {}).items()},
+            )
+        )
+    return schemes, entities
+
+
+SCHEMES, TAXONOMY = _load_taxonomy()
 
 ENTITY_NAMES: list[str] = [e.name for e in TAXONOMY]
 BY_NAME: dict[str, EntityType] = {e.name: e for e in TAXONOMY}
