@@ -1,0 +1,22 @@
+name: "PII Detection + CNP Leakage — Romanian (real-skeleton v1)"
+version: 1
+task: detection
+domain: legal
+languages: [ro]
+
+dataset:
+  hf_id: klusai/europriv-bench
+  config: ro-realskeleton-v1
+  split: test
+  license: CC-BY-4.0
+
+metrics:
+  - entity_f1
+  - entity_f2
+  - cnp_leakage
+
+description: >
+  The CITABLE Romanian track: faithful real-structure documents (CNAS discharge letter,
+  services contract, declarație, administrative letter) with synthetic PII (CNP-consistent
+  DOB). Compare against ro-synthetic-v1 for the synthetic-context vs real-context gap (Paper 2);
+  headline is cnp_leakage (missed CNP = deterministic DOB+sex+county disclosure).
