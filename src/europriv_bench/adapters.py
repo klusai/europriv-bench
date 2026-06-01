@@ -175,6 +175,60 @@ class GLiNERAdapter(BaseAdapter):
         return out
 
 
+class KpModelAdapter(BaseAdapter):
+    """KlusAI `kp-*` token-classification finetunes (e.g. ``klusai/kp-deid-mdeberta-280m``).
+
+    Unlike the baselines wrapped by ``PrivacyFilterAdapter`` (which emit a *native* scheme that a
+    crosswalk must translate), KP models are trained directly on the harmonized KP taxonomy: their
+    ``id2label`` already carries KP entity types (``PERSON``, ``NATIONAL_ID``, ...). So we follow the
+    GLiNER pattern and map the model's spans straight back via ``kp_entities_to_bioes`` — no
+    native→KP ``scheme`` and no ``crosswalk.py`` touch. Requires the `hf` extra.
+
+    ``aggregation_strategy="simple"`` re-groups subword pieces into spans whose ``entity_group`` is
+    the KP type (BIOES head prefixes stripped by the pipeline), giving char offsets to align.
+    """
+
+    name = "kp-model"
+
+    def __init__(self, model_id: str = "klusai/kp-deid-mdeberta-280m") -> None:
+        import os
+
+        self.model_id = model_id
+        self._pipe = None
+        self._batch_size = int(os.environ.get("EUROPRIV_BATCH_SIZE", "32"))
+
+    def _pipeline(self):  # pragma: no cover - requires the `hf` extra + model download
+        if self._pipe is None:
+            import os
+
+            import torch
+            from transformers import pipeline
+
+            device = os.environ.get("EUROPRIV_DEVICE") or ("cuda" if torch.cuda.is_available() else "cpu")
+            if device == "mps":
+                os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
+            self._pipe = pipeline(
+                "token-classification",
+                model=self.model_id,
+                aggregation_strategy="simple",
+                device=device,
+            )
+        return self._pipe
+
+    def predict_tags(self, texts: Sequence[str]) -> list[list[str]]:
+        pipe = self._pipeline()  # pragma: no cover - needs model
+        texts = list(texts)  # pragma: no cover
+        results = pipe(texts, batch_size=self._batch_size)  # pragma: no cover - batched inference
+        out = []  # pragma: no cover
+        for text, ents in zip(texts, results):  # pragma: no cover
+            kp_ents = [
+                {"start": int(e["start"]), "end": int(e["end"]), "label": e["entity_group"]}
+                for e in ents
+            ]
+            out.append(kp_entities_to_bioes(text, kp_ents))
+        return out
+
+
 # Builder registry: adapter key (CLI --adapter) -> zero-arg factory.
 BUILDERS: dict[str, type[BaseAdapter]] = {
     "dummy": DummyAdapter,
@@ -182,6 +236,7 @@ BUILDERS: dict[str, type[BaseAdapter]] = {
     "openmed": OpenMedAdapter,
     "tabularisai": TabularisaiAdapter,
     "gliner": GLiNERAdapter,
+    "kp-model": KpModelAdapter,
 }
 
 
