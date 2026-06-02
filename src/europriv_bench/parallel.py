@@ -16,6 +16,7 @@ import os
 from concurrent.futures import ProcessPoolExecutor, as_completed
 
 from .logger import get_logger
+from .runner import ConfigUnavailableError
 
 logger = get_logger("europriv.parallel")
 
@@ -74,6 +75,9 @@ def run_jobs(
             name, spec_dict, *_ = futures[fut]
             try:
                 results.append(fut.result())
-            except Exception as e:  # a bad job is logged + skipped, never silently aborts the run
-                logger.error("job failed (adapter=%s spec=%s): %s", name, spec_dict.get("name"), e)
+            except ConfigUnavailableError as e:
+                # ONLY an unpublished config is logged + skipped; every other exception (a real eval
+                # crash on an available config) propagates and fails the run loudly (KLU-58).
+                logger.warning("skipping unavailable config (adapter=%s spec=%s): %s",
+                               name, spec_dict.get("name"), e)
     return results

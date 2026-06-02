@@ -24,6 +24,47 @@ from .taxonomy import TAXONOMY_VERSION
 logger = get_logger(__name__)
 
 
+class ConfigUnavailableError(Exception):
+    """The spec's dataset config isn't published on the resolved HF revision.
+
+    This is the ONE failure a run is allowed to skip-and-continue (so the no-secrets submission CI
+    stays green when a config like ``pl-realskeleton-v1`` hasn't been pushed yet). It is raised only
+    for the genuinely-unavailable case — a missing repo/revision or a missing config name — so the
+    run loop can catch *this* and let every other (real eval) exception propagate and fail loud.
+    """
+
+
+def _load_gold_rows(spec: EvalSpec) -> list[dict]:
+    """Load gold rows ``{text, spans}`` for a spec from HF (requires the `hf` extra: datasets).
+
+    Translates only the "config genuinely not published" failures into ``ConfigUnavailableError``;
+    any other loader error (corrupt rows, network, schema drift) propagates unchanged so a real
+    crash on an *available* config fails the run instead of being silently skipped.
+    """
+    from datasets import load_dataset
+    from datasets.exceptions import DatasetNotFoundError
+
+    cfg = spec.dataset.config
+    try:
+        ds = load_dataset(spec.dataset.hf_id, cfg, split=spec.dataset.split)
+    except DatasetNotFoundError as e:
+        # Repo or revision absent on the hub (DatasetNotFoundError ⊂ FileNotFoundError) → unavailable.
+        raise ConfigUnavailableError(
+            f"dataset {spec.dataset.hf_id!r} (config {cfg!r}) not found on the hub: {e}"
+        ) from e
+    except ValueError as e:
+        # datasets surfaces an unknown *config* name (repo exists, config not published) as a bare
+        # ValueError "BuilderConfig '<name>' not found. Available: [...]". Match precisely on that
+        # signature + the requested config name so a real eval ValueError is NOT swallowed.
+        msg = str(e)
+        if cfg and f"BuilderConfig '{cfg}' not found" in msg:
+            raise ConfigUnavailableError(
+                f"config {cfg!r} not published for dataset {spec.dataset.hf_id!r}: {e}"
+            ) from e
+        raise
+    return [dict(r) for r in ds]
+
+
 def _rows_to_gold(rows: Iterable[dict]) -> tuple[list[str], list[list[str]]]:
     """Convert benchmark rows ``{text, spans:[{start,end,label}]}`` → (texts, gold BIOES tags).
 
@@ -40,14 +81,6 @@ def _rows_to_gold(rows: Iterable[dict]) -> tuple[list[str], list[list[str]]]:
         texts.append(text)
         gold.append(tags)
     return texts, gold
-
-
-def _load_gold_rows(spec: EvalSpec) -> list[dict]:
-    """Load gold rows ``{text, spans}`` for a spec from HF (requires the `hf` extra: datasets)."""
-    from datasets import load_dataset
-
-    ds = load_dataset(spec.dataset.hf_id, spec.dataset.config, split=spec.dataset.split)
-    return [dict(r) for r in ds]
 
 
 def run_spec(
