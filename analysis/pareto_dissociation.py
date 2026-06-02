@@ -184,7 +184,7 @@ def make_figure(points: list[dict], out_svg: Path, out_png: Path) -> None:
         f"(n={n_total} distinct CNP subjects, per-subject (doc, country, value) re-id unit). "
         f"config_status={'/'.join(statuses)} (contamination-controlled, not yet citable-validated). "
         f"kp-deid (ringed) sits OFF the detection-optimal frontier: 0% leak at non-maximal F1. "
-        f"Source: baselines/leaderboard.json."
+        f"Source: EuroPriv-Bench leaderboard (ro-realskeleton-v1)."
     )
     fig.text(0.5, 0.005, caption, ha="center", va="bottom", fontsize=7.3, wrap=True, color="#333333")
     fig.tight_layout(rect=(0, 0.055, 1, 1))
