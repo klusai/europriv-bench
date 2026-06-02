@@ -8,12 +8,15 @@
 # This shipped example is itself a valid card (it points at the privacy-filter baseline) so the
 # schema stays self-documenting; replace every value with your own.
 
-# Public, REVISION-PINNED Hugging Face model id — `org/model@<commit-sha>`, not a moving tag.
-# Pinning a revision is what lets a leaderboard row stamp an immutable model version.
+# Public, VERSION-PINNED reference, not a moving tag. For an HF model this is the revision-pinned
+# id `org/model@<commit-sha>`; for a non-HF orchestration tool (e.g. Presidio) it is the package
+# pinned to a release `org/tool@<version>`. Pinning is what lets a leaderboard row stamp an
+# immutable version. (Field key kept as hf_model_id for schema compatibility.)
+# See submissions/microsoft-presidio.yaml for a filled non-HF (Presidio) worked example.
 hf_model_id: "openai/privacy-filter@5f2e8d1c9b7a6e3f4d2c1b0a9e8d7c6b5a4f3e2d"
 
 # Adapter scheme the harness uses to call the model. MUST be one of adapters.BUILDERS:
-#   dummy | privacy-filter | openmed | tabularisai | gliner | kp-model
+#   dummy | privacy-filter | openmed | tabularisai | gliner | kp-model | presidio
 # No arbitrary submitter code runs — only this declared built-in adapter is instantiated.
 adapter: "privacy-filter"
 

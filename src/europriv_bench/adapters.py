@@ -229,6 +229,93 @@ class KpModelAdapter(BaseAdapter):
         return out
 
 
+class PresidioAdapter(BaseAdapter):
+    """Microsoft Presidio (``presidio-analyzer``) — the rule+NER orchestration baseline.
+
+    Unlike the other baselines, Presidio is **not a single HF model**: it is an *orchestration*
+    engine that runs an ensemble of recognizers (regex/checksum patterns for structured PII like
+    email/IBAN/credit-card, plus a spaCy NER for PERSON/LOCATION/DATE) and merges their spans. So
+    this adapter wraps the ``AnalyzerEngine`` rather than a ``transformers`` pipeline, and there is
+    no revision-pinned HF checkpoint — the "model" is the recognizer set + the spaCy pipeline.
+
+    Presidio emits its own entity vocabulary (``PERSON``, ``EMAIL_ADDRESS``, ``IBAN_CODE``, ...).
+    We map those straight to KP types here (the GLiNER/kp-model pattern) and feed
+    ``kp_entities_to_bioes`` — no native→KP ``crosswalk.py`` scheme, since Presidio is not one of
+    the curation source schemes. Requires the `presidio` extra (``presidio-analyzer`` + a spaCy
+    model; the English ``en_core_web_lg`` is Presidio's default download).
+
+    Language: Presidio's default NLP engine is English. Its *structured* recognizers
+    (email/phone/URL/IBAN/credit-card/IP/crypto/MAC) are regex/checksum-based and language-agnostic,
+    so they fire on any of the EU configs; only the NER-backed types (PERSON/LOCATION/DATE) lean on
+    the English spaCy model and so have lower recall on non-English text. We run the English engine
+    across all configs — the honest out-of-the-box Presidio baseline — which keeps the submission CI
+    deterministic with a single spaCy model rather than per-language downloads.
+    """
+
+    name = "presidio"
+    # Not an HF checkpoint: stamp the orchestration stack (analyzer + spaCy model) as the "model_id"
+    # so the leaderboard row still records exactly what produced the score.
+    model_id = "presidio-analyzer+en_core_web_lg"
+
+    # Presidio entity type -> KP type. Presidio's English default recognizer set is the source
+    # vocabulary; we map onto the harmonized KP taxonomy (0.2.0).
+    PRESIDIO_TO_KP = {
+        "PERSON": "PERSON",
+        "LOCATION": "ADDRESS",
+        "EMAIL_ADDRESS": "EMAIL",
+        "PHONE_NUMBER": "PHONE",
+        "URL": "URL",
+        "DATE_TIME": "DATE",
+        # Financial / device / network identifiers → ACCOUNT_ID (direct).
+        "CREDIT_CARD": "ACCOUNT_ID",
+        "IBAN_CODE": "ACCOUNT_ID",
+        "CRYPTO": "ACCOUNT_ID",
+        "IP_ADDRESS": "ACCOUNT_ID",
+        "MAC_ADDRESS": "ACCOUNT_ID",
+        "US_BANK_NUMBER": "ACCOUNT_ID",
+        # Government-issued national identifiers → NATIONAL_ID (direct).
+        "US_SSN": "NATIONAL_ID",
+        "US_ITIN": "NATIONAL_ID",
+        "US_PASSPORT": "NATIONAL_ID",
+        "US_DRIVER_LICENSE": "NATIONAL_ID",
+        "UK_NHS": "NATIONAL_ID",
+        # NRP (nationality/religion/political) and MEDICAL_LICENSE have no clean KP type → dropped.
+    }
+
+    def __init__(self, language: str = "en", score_threshold: float = 0.0) -> None:
+        self.language = language
+        # Presidio scores each result; keep every result above this floor (0.0 = keep all). The
+        # eval-label fairness mask in the runner already handles types the gold doesn't annotate.
+        self.score_threshold = score_threshold
+        self._engine = None
+        self._entities = sorted(self.PRESIDIO_TO_KP)
+
+    def _analyzer(self):  # pragma: no cover - requires the `presidio` extra + spaCy model
+        if self._engine is None:
+            from presidio_analyzer import AnalyzerEngine
+
+            self._engine = AnalyzerEngine()
+        return self._engine
+
+    def predict_tags(self, texts: Sequence[str]) -> list[list[str]]:
+        engine = self._analyzer()  # pragma: no cover - needs the engine
+        out = []  # pragma: no cover
+        for text in texts:  # pragma: no cover
+            results = engine.analyze(
+                text=text,
+                language=self.language,
+                entities=self._entities,
+                score_threshold=self.score_threshold,
+            )
+            kp_ents = [
+                {"start": int(r.start), "end": int(r.end), "label": self.PRESIDIO_TO_KP[r.entity_type]}
+                for r in results
+                if r.entity_type in self.PRESIDIO_TO_KP
+            ]
+            out.append(kp_entities_to_bioes(text, kp_ents))
+        return out
+
+
 # Builder registry: adapter key (CLI --adapter) -> zero-arg factory.
 BUILDERS: dict[str, type[BaseAdapter]] = {
     "dummy": DummyAdapter,
@@ -237,6 +324,7 @@ BUILDERS: dict[str, type[BaseAdapter]] = {
     "tabularisai": TabularisaiAdapter,
     "gliner": GLiNERAdapter,
     "kp-model": KpModelAdapter,
+    "presidio": PresidioAdapter,
 }
 
 

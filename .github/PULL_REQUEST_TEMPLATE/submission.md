@@ -13,13 +13,16 @@ provenance-stamped schema-3 row (contamination=unknown until classified). See
 
 ## Submission
 
-- **Hugging Face model id (revision-pinned, `org/model@<sha>`):**
-- **Adapter scheme** (one of `adapters.BUILDERS`: `privacy-filter` / `openmed` / `tabularisai` / `gliner` / `kp-model`):
+- **Version-pinned model/tool id** (HF model: `org/model@<sha>`; non-HF tool: `org/tool@<version>`):
+- **Adapter scheme** (one of `adapters.BUILDERS`: `privacy-filter` / `openmed` / `tabularisai` / `gliner` / `kp-model` / `presidio`):
 - **Model card file** (path to your filled copy of `MODEL_CARD_TEMPLATE.yaml`, e.g. `submissions/<org>-<model>.yaml`):
+
+Worked example: `submissions/microsoft-presidio.yaml` is a real third-party submission (Microsoft
+Presidio, an MIT-licensed orchestration tool — not an HF model) landed via this exact path.
 
 ## Checklist
 
-- [ ] The model is **public** on Hugging Face and the id pins a **revision/commit**, not a moving tag.
+- [ ] The model/tool is **public** and the id pins an **immutable version** (HF revision `@<sha>`, or for a non-HF tool a release `@<version>`), not a moving tag.
 - [ ] The adapter scheme is one of the built-in `adapters.BUILDERS` (no custom adapter code in this PR).
 - [ ] A filled model card is included and passes `europriv submission validate-card <card>`.
 - [ ] The contamination statement describes any overlap with the held-out gold splits.

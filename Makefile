@@ -1,7 +1,12 @@
 .PHONY: help test lint check install run-baselines submission-check
 
+# Use bash for `.` (source) and conditional activation. Activate the local .venv when it exists
+# (developer machines) but fall back to whatever python/europriv is already on PATH — the
+# submission CI installs into the runner's system Python with NO .venv, so an unconditional
+# `source .venv/bin/activate` would die with "source: not found" and break the gate there.
+SHELL := /bin/bash
 VENV := .venv/bin/activate
-RUN := source $(VENV) &&
+RUN := if [ -f $(VENV) ]; then . $(VENV); fi;
 
 help:
 	@echo "Available targets:"

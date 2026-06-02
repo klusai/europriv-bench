@@ -46,10 +46,21 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Install (harness + hf extra)
+      - name: Install (harness + adapter backends)
         run: |
           python -m pip install --upgrade pip
-          pip install -e '.[dev,hf]'
+          # hf: transformers-backed adapters. presidio: the orchestration adapter (KLU-52). Both
+          # are public, no-secrets installs; pulling both keeps any built-in adapter runnable in CI.
+          pip install -e '.[dev,hf,presidio]'
+
+      - name: Provision the Presidio NLP model (only when a presidio submission is present)
+        run: |
+          # The `presidio` adapter needs a spaCy model for its NER recognizers. Presidio's English
+          # default is en_core_web_lg. Download it only if a submitted card declares adapter:
+          # presidio, so other submissions don't pay the cost.
+          if grep -rqE '^adapter:[[:space:]]*"?presidio"?' submissions/*.yaml submissions/*.yml 2>/dev/null; then
+            python -m spacy download en_core_web_lg
+          fi
 
       - name: Validate the submitted model card
         id: card
