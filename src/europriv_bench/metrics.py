@@ -91,36 +91,16 @@ def _span_country(row: dict, sp: dict) -> str:
     return str(sp.get("country") or row.get("country") or _DEFAULT_COUNTRY).upper()
 
 
-def national_id_leakage(rows: Sequence[dict], pred_tags: Tags) -> dict[str, float]:
-    """Country-dispatched re-identification leakage via missed national IDs (one re-id family).
+def _national_id_subjects(rows: Sequence[dict], pred_tags: Tags) -> dict[tuple[int, str, str], dict]:
+    """Build the per-subject detection table shared by the leak metric and the prediction dump.
 
-    Each gold span is validated by its country's validator (``national_id.REGISTRY``, keyed by an
-    ISO alpha-2 ``country`` on the span or row; default RO). A span is "detected" iff the model
-    marks any of its whitespace tokens non-O (i.e. it would be redacted). This folds in
-    ``cnp_leakage`` (RO) as one re-identification-risk family and cleanly separates two families
-    on output:
-
-      * **decode-bearing** (RO/CNP, PL/PESEL, IT/codice-fiscale) — a miss deterministically
-        discloses quasi-identifiers (DOB/sex/place); we sum ``leaked_quasi_identifiers``.
-      * **coverage-only** (ES/DNI-NIF) — detectable but no decodable quasi-identifier; we score
-        detection coverage and **never** emit a re-identification number (its leaked-QI is 0 by
-        construction).
-
-    **Re-identification risk is per *distinct subject*, not per textual mention (KLU-49).** Real RO
-    clinical documents legitimately repeat the same CNP value twice (the CNP field + the CASS "cod
-    asigurat" field). Counting per textual span would double-count a single subject's national ID
-    and inflate the denominator. So we dedup by ``(document, country, normalized value)``: a
-    *subject* is one distinct ID value within one document, it is **protected iff ALL its
-    occurrences are redacted**, and it **leaks iff ANY occurrence is left unredacted**. Counts,
-    leak-rate and disclosed quasi-identifiers are all per-subject.
-
-    Leak-rates carry 95% Wilson CIs via the shared ``_leak_rate_stats``. The headline ``leak_rate``
-    is computed over the **decode-bearing** subset (the re-id-risk signal); coverage-only IDs get
-    their own detection counters. Lower leak_rate is better.
+    Key: ``(document index, country, normalized value)`` — one distinct national-ID value within
+    one document (KLU-49 per-subject semantics). A subject is **detected iff EVERY occurrence is
+    detected** (a span is detected iff the model marks any of its whitespace tokens non-O), so it
+    leaks iff ANY occurrence is left unredacted. Only spans whose country has a validator and that
+    parse as *valid* national IDs become subjects. ``qi`` is the count of disclosed quasi-identifiers
+    for a decode-bearing miss.
     """
-    # Per-subject aggregation. Key: (document index, country, normalized value). For each subject
-    # we track whether every occurrence was detected (detected iff ALL spans detected → leaks iff
-    # ANY span missed) plus the disclosed quasi-identifiers (counted once per leaked subject).
     subjects: dict[tuple[int, str, str], dict] = {}
 
     for doc_idx, (row, pred) in enumerate(zip(rows, pred_tags)):
@@ -151,6 +131,66 @@ def national_id_leakage(rows: Sequence[dict], pred_tags: Tags) -> dict[str, floa
                 }
                 subjects[key] = subj
             subj["detected"] = subj["detected"] and detected
+
+    return subjects
+
+
+def national_id_subject_detection(rows: Sequence[dict], pred_tags: Tags) -> list[dict]:
+    """Per-subject national-ID detection outcomes for item-paired significance testing (McNemar).
+
+    Returns one record per distinct subject ``(doc, country, normalized value)`` in deterministic
+    (document, value) order:
+      ``{"doc": int, "country": str, "value": str, "decode_bearing": bool, "detected": bool}``
+
+    ``detected=False`` means the subject's national ID **leaked** (was left unredacted in at least
+    one occurrence). This is the exact unit the re-id leak-rate is computed over, so a McNemar test
+    pairing two models' ``detected`` flags subject-by-subject is consistent with the leaderboard
+    leak-rate. Keys are stable across adapters (they depend only on the gold rows), so two dumps
+    align row-for-row by ``(doc, country, value)``.
+    """
+    subjects = _national_id_subjects(rows, pred_tags)
+    return [
+        {
+            "doc": key[0],
+            "country": key[1],
+            "value": key[2],
+            "decode_bearing": subj["decode_bearing"],
+            "detected": bool(subj["detected"]),
+        }
+        for key, subj in sorted(subjects.items(), key=lambda kv: (kv[0][0], kv[0][1], kv[0][2]))
+    ]
+
+
+def national_id_leakage(rows: Sequence[dict], pred_tags: Tags) -> dict[str, float]:
+    """Country-dispatched re-identification leakage via missed national IDs (one re-id family).
+
+    Each gold span is validated by its country's validator (``national_id.REGISTRY``, keyed by an
+    ISO alpha-2 ``country`` on the span or row; default RO). A span is "detected" iff the model
+    marks any of its whitespace tokens non-O (i.e. it would be redacted). This folds in
+    ``cnp_leakage`` (RO) as one re-identification-risk family and cleanly separates two families
+    on output:
+
+      * **decode-bearing** (RO/CNP, PL/PESEL, IT/codice-fiscale) — a miss deterministically
+        discloses quasi-identifiers (DOB/sex/place); we sum ``leaked_quasi_identifiers``.
+      * **coverage-only** (ES/DNI-NIF) — detectable but no decodable quasi-identifier; we score
+        detection coverage and **never** emit a re-identification number (its leaked-QI is 0 by
+        construction).
+
+    **Re-identification risk is per *distinct subject*, not per textual mention (KLU-49).** Real RO
+    clinical documents legitimately repeat the same CNP value twice (the CNP field + the CASS "cod
+    asigurat" field). Counting per textual span would double-count a single subject's national ID
+    and inflate the denominator. So we dedup by ``(document, country, normalized value)``: a
+    *subject* is one distinct ID value within one document, it is **protected iff ALL its
+    occurrences are redacted**, and it **leaks iff ANY occurrence is left unredacted**. Counts,
+    leak-rate and disclosed quasi-identifiers are all per-subject.
+
+    Leak-rates carry 95% Wilson CIs via the shared ``_leak_rate_stats``. The headline ``leak_rate``
+    is computed over the **decode-bearing** subset (the re-id-risk signal); coverage-only IDs get
+    their own detection counters. Lower leak_rate is better.
+    """
+    # Per-subject aggregation (KLU-49). Shared with the prediction dump so the dumped per-subject
+    # detected/leaked flags are computed by the exact same (doc, country, normalized value) logic.
+    subjects = _national_id_subjects(rows, pred_tags)
 
     # Overall + per-family + per-country counters, now over distinct subjects.
     db_total = db_detected = leaked_qi = 0          # decode-bearing

@@ -313,3 +313,79 @@ def test_cnp_leakage_alias_dedups_duplicate_cnp():
     assert res["cnp_missed"] == 1.0
     assert res["leak_rate"] == 1.0
     assert res["leaked_quasi_identifiers"] == 3.0  # counted once per subject
+
+
+# --- Per-subject prediction dump (KLU-53: item-paired McNemar) ---------------------------------
+# The dump must use the EXACT same per-subject (doc, country, value) unit as the leak metric so a
+# McNemar pairing of two models' detected/leaked flags is consistent with the leaderboard leak-rate.
+
+
+def test_subject_detection_dump_dedups_and_matches_metric():
+    from europriv_bench.metrics import national_id_subject_detection
+
+    cnp = _make_cnp("185071540001")
+    rows = [_ro_clinical_row(cnp)]  # same CNP twice in one doc → ONE subject
+    # First occurrence redacted, the CASS one missed → subject leaks (ANY occurrence missed).
+    pred = [["O", "S-NATIONAL_ID", "O", "O", "O"]]
+    subs = national_id_subject_detection(rows, pred)
+    assert len(subs) == 1                       # deduped to one subject
+    s = subs[0]
+    assert s["doc"] == 0 and s["country"] == "RO" and s["value"] == cnp
+    assert s["decode_bearing"] is True
+    assert s["detected"] is False               # leaked (consistent with leak_rate==1.0)
+    # And it agrees with the metric on the same input.
+    assert national_id_leakage(rows, pred)["leak_rate"] == 1.0
+
+
+def test_subject_detection_dump_keys_align_across_models():
+    from europriv_bench.metrics import national_id_subject_detection
+
+    cnp1 = _make_cnp("185071540001")
+    cnp2 = _make_cnp("605031120007")
+    text = f"CNP {cnp1} si {cnp2} fin"
+    a = len("CNP ")
+    b = len(f"CNP {cnp1} si ")
+    rows = [{"text": text, "spans": [
+        {"start": a, "end": a + 13, "label": "NATIONAL_ID"},
+        {"start": b, "end": b + 13, "label": "NATIONAL_ID"},
+    ]}]
+    # Model A detects neither; model B detects only the first → keys identical, flags differ.
+    a_subs = national_id_subject_detection(rows, [["O", "O", "O", "O", "O"]])
+    b_subs = national_id_subject_detection(rows, [["O", "S-NATIONAL_ID", "O", "O", "O"]])
+
+    def keys(ss):
+        return [(s["doc"], s["country"], s["value"]) for s in ss]
+
+    assert keys(a_subs) == keys(b_subs)          # gold-derived keys align row-for-row
+    assert [s["detected"] for s in a_subs] == [False, False]
+    assert [s["detected"] for s in b_subs] == [True, False]
+
+
+def test_run_spec_emits_dump_when_sink_provided():
+    cnp = _make_cnp("185071540001")
+    rows = [{"text": f"CNP {cnp} emis", "spans": [{"start": 4, "end": 17, "label": "NATIONAL_ID"}]}]
+    spec = EvalSpec.model_validate({
+        "name": "ro-test", "task": "detection", "languages": ["ro"],
+        "dataset": {"hf_id": "x", "config": "ro-realskeleton-v1", "split": "test"},
+        "metrics": ["entity_f1", "cnp_leakage"],
+    })
+    dumps: list[dict] = []
+    run_spec(spec, build("dummy"), rows=rows, dumps=dumps)
+    assert len(dumps) == 1
+    d = dumps[0]
+    assert d["adapter"] == "dummy" and d["dataset"]["config"] == "ro-realskeleton-v1"
+    assert len(d["subjects"]) == 1
+    assert d["subjects"][0]["detected"] is False   # dummy predicts all-O → leak
+
+
+def test_run_spec_no_dump_without_sink():
+    # Back-compat: callers that don't pass dumps= get the unchanged single-dict return.
+    cnp = _make_cnp("185071540001")
+    rows = [{"text": f"CNP {cnp} emis", "spans": [{"start": 4, "end": 17, "label": "NATIONAL_ID"}]}]
+    spec = EvalSpec.model_validate({
+        "name": "ro-test", "task": "detection", "languages": ["ro"],
+        "dataset": {"hf_id": "x", "config": "ro", "split": "test"},
+        "metrics": ["cnp_leakage"],
+    })
+    res = run_spec(spec, build("dummy"), rows=rows)
+    assert "scores" in res  # plain dict, no crash
