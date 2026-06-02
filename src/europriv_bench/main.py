@@ -40,7 +40,11 @@ def list_specs(suite: str) -> None:
 @click.option("--limit", type=int, default=None, help="Cap examples per spec (fast iteration).")
 @click.option("--workers", type=int, default=1, help="Parallel worker processes over (adapter × spec) jobs.")
 @click.option("--threads", type=int, default=4, help="BLAS threads per worker (4 is fastest for this MoE).")
-def run(suite: str, adapters: tuple[str, ...], out: str, limit: int | None, workers: int, threads: int) -> None:
+@click.option("--dump-predictions", "dump_predictions", default=None,
+              help="Write per-subject national-ID detection records (for item-paired McNemar, KLU-53) "
+                   "to this JSON, alongside the leaderboard. Serial path only (requires --workers 1).")
+def run(suite: str, adapters: tuple[str, ...], out: str, limit: int | None, workers: int, threads: int,
+        dump_predictions: str | None) -> None:
     """Run one or more adapters across a suite and write a combined leaderboard.
 
     On a many-core Mac (M3 Ultra), use --workers ~7 --threads 4 to saturate cores: this model is
@@ -49,6 +53,8 @@ def run(suite: str, adapters: tuple[str, ...], out: str, limit: int | None, work
     specs = load_suite(suite)
     ts = datetime.now(timezone.utc).isoformat()
     if workers > 1:
+        if dump_predictions:
+            raise click.ClickException("--dump-predictions requires the serial path (use --workers 1)")
         from .parallel import run_jobs
         logger.info("running %d adapter(s) × %d spec(s) on %d workers × %d threads",
                     len(adapters), len(specs), workers, threads)
@@ -60,18 +66,27 @@ def run(suite: str, adapters: tuple[str, ...], out: str, limit: int | None, work
         except ImportError:
             pass
         results = []
+        dumps: list[dict] | None = [] if dump_predictions else None
         for name in adapters:
             model = build(name)
             for spec in specs:
                 logger.info("running %s on %s", name, spec.name)
                 try:
-                    results.append(run_spec(spec, model, timestamp=ts, limit=limit))
+                    results.append(run_spec(spec, model, timestamp=ts, limit=limit, dumps=dumps))
                 except Exception as e:
                     # A spec whose dataset config isn't published on the public HF revision (or any
                     # other per-spec failure) is logged + skipped, never aborting the whole run —
                     # mirroring the parallel path. This keeps the no-secrets submission CI green:
                     # an external adapter is still scored on every config that IS reachable.
                     logger.error("skipping spec %r for adapter %r: %s", spec.name, name, e)
+        if dump_predictions is not None:
+            import json
+            from pathlib import Path
+            dp = Path(dump_predictions)
+            dp.parent.mkdir(parents=True, exist_ok=True)
+            dp.write_text(json.dumps({"timestamp": ts, "dumps": dumps}, ensure_ascii=False, indent=2),
+                          encoding="utf-8")
+            click.echo(f"wrote predictions dump {dp}")
     path = write_leaderboard(results, out)
     click.echo(f"wrote {path}")
 

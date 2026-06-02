@@ -21,6 +21,10 @@ dependencies = [
 hf = ["transformers>=5.9", "torch>=2.4", "datasets>=4.0"]
 gliner = ["gliner>=0.2"]
 presidio = ["presidio-analyzer>=2.2"]
+# Paper-figure / significance-test analysis (KLU-53). Kept out of core: the harness scores and
+# writes JSON without it; only `analysis/pareto_dissociation.py` needs matplotlib to render the
+# figure. scipy is used for the exact-binomial McNemar p-value when present (pure-Python fallback).
+analysis = ["matplotlib>=3.8", "scipy>=1.11"]
 dev = ["pytest>=8.0", "ruff>=0.11", "coverage>=7.0"]
 
 [project.scripts]

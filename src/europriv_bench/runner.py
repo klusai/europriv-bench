@@ -57,10 +57,17 @@ def run_spec(
     rows: list[dict] | None = None,
     timestamp: str | None = None,
     limit: int | None = None,
+    dumps: list[dict] | None = None,
 ) -> dict:
     """Score one adapter on one spec. Gold may be injected as ``rows`` (preferred) or ``gold``
     (texts, tag-seqs, for tag-only tests); else loaded from HF. Row-metrics (e.g. cnp_leakage)
-    require ``rows``. ``limit`` caps examples (recorded for honesty)."""
+    require ``rows``. ``limit`` caps examples (recorded for honesty).
+
+    When ``dumps`` is provided, a per-subject national-ID detection record (KLU-53, for item-paired
+    McNemar significance) is appended to it: ``{adapter, model_id, spec, dataset, n, subjects:[...]}``
+    where each subject carries its ``detected``/``leaked`` flag under the exact same per-subject
+    ``(doc, country, normalized value)`` semantics as the re-id leak-rate. Requires ``rows`` (the
+    span values), so it is emitted only for row-metric specs run against real gold."""
     if spec.task is not Task.DETECTION:
         # The seam exists (BaseAdapter.anonymize/classify/leakage_probe); wiring lands in Phase 4.
         raise NotImplementedError(f"task {spec.task.value} lands in Phase 4; only DETECTION is wired")
@@ -99,6 +106,25 @@ def run_spec(
             scores[key] = ROW_REGISTRY[key](rows, pred_tags)
         else:
             scores[key] = REGISTRY[key](gold_tags, pred_tags)
+
+    # KLU-53: per-subject national-ID detection dump for item-paired McNemar significance. Emitted
+    # only when requested AND the spec actually scores a national-ID re-id metric on real rows —
+    # uses the SAME masked pred_tags fed to the metric, so the dumped flags match the leak-rate.
+    if dumps is not None and rows is not None and (
+        "cnp_leakage" in spec.metrics or "national_id_leakage" in spec.metrics
+    ):
+        from .metrics import national_id_subject_detection
+
+        dumps.append({
+            "adapter": adapter.name,
+            "model_id": adapter.model_id,
+            "spec": spec.name,
+            "dataset": {"hf_id": spec.dataset.hf_id, "config": spec.dataset.config,
+                        "split": spec.dataset.split},
+            "n": len(texts),
+            "limit": limit,
+            "subjects": national_id_subject_detection(rows, pred_tags),
+        })
 
     return {
         "spec": spec.name,

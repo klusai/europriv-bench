@@ -1,0 +1,132 @@
+{
+  "config": "ro-realskeleton-v1",
+  "predictions_timestamp": "2026-06-02T10:38:13.997432+00:00",
+  "alpha": 0.05,
+  "pareto_points": [
+    {
+      "adapter": "privacy-filter",
+      "model_id": "openai/privacy-filter",
+      "f1": 0.36335213756541834,
+      "leak_rate": 0.014247551202137132,
+      "leak_ci_low": 0.00878868543080416,
+      "leak_ci_high": 0.02301831227755729,
+      "cnp_total": 1123,
+      "cnp_missed": 16,
+      "config_status": "dev"
+    },
+    {
+      "adapter": "presidio",
+      "model_id": "presidio-analyzer+en_core_web_lg",
+      "f1": 0.4723127035830619,
+      "leak_rate": 0.0,
+      "leak_ci_low": 0.0,
+      "leak_ci_high": 0.003409036137937588,
+      "cnp_total": 1123,
+      "cnp_missed": 0,
+      "config_status": "dev"
+    },
+    {
+      "adapter": "openmed",
+      "model_id": "OpenMed/privacy-filter-multilingual",
+      "f1": 0.5762248545594728,
+      "leak_rate": 0.26357969723953695,
+      "leak_ci_low": 0.2386492673312092,
+      "leak_ci_high": 0.29012205785956985,
+      "cnp_total": 1123,
+      "cnp_missed": 296,
+      "config_status": "dev"
+    },
+    {
+      "adapter": "kp-model",
+      "model_id": "klusai/kp-deid-mdeberta-280m",
+      "f1": 0.7410913795131131,
+      "leak_rate": 0.0,
+      "leak_ci_low": 0.0,
+      "leak_ci_high": 0.003409036137937588,
+      "cnp_total": 1123,
+      "cnp_missed": 0,
+      "config_status": "dev"
+    },
+    {
+      "adapter": "tabularisai",
+      "model_id": "tabularisai/eu-pii-safeguard",
+      "f1": 0.7466596803772595,
+      "leak_rate": 0.3535173642030276,
+      "leak_ci_low": 0.3260997060954522,
+      "leak_ci_high": 0.3819337515086276,
+      "cnp_total": 1123,
+      "cnp_missed": 397,
+      "config_status": "dev"
+    },
+    {
+      "adapter": "gliner",
+      "model_id": "urchade/gliner_multi_pii-v1",
+      "f1": 0.8531380753138075,
+      "leak_rate": 0.3018699910952805,
+      "leak_ci_low": 0.27573326532199466,
+      "leak_ci_high": 0.32935758158929856,
+      "cnp_total": 1123,
+      "cnp_missed": 339,
+      "config_status": "dev"
+    }
+  ],
+  "contrasts": [
+    {
+      "model_a": "kp-model",
+      "model_b": "gliner",
+      "n_shared_subjects": 1123,
+      "table": {
+        "both_detected": 784,
+        "a_detected_b_missed_b": 339,
+        "a_missed_b_detected_b": 0,
+        "neither_detected": 0
+      },
+      "discordant_b_A_protects_B_leaks": 339,
+      "discordant_c_B_protects_A_leaks": 0,
+      "mcnemar_chi2_cc": 337.00294985250736,
+      "p_value_exact_binomial": 1.7859177988785547e-102,
+      "a_leaked": 0,
+      "b_leaked": 339,
+      "contrast": "f1_leader_max_leak",
+      "verdict": "SIGNIFICANT (p=1.79e-102 < 0.05): kp-model protects per-subject CNPs that gliner leaks far more often than the reverse (b=339, c=0). The dissociation is real."
+    },
+    {
+      "model_a": "kp-model",
+      "model_b": "presidio",
+      "n_shared_subjects": 1123,
+      "table": {
+        "both_detected": 1123,
+        "a_detected_b_missed_b": 0,
+        "a_missed_b_detected_b": 0,
+        "neither_detected": 0
+      },
+      "discordant_b_A_protects_B_leaks": 0,
+      "discordant_c_B_protects_A_leaks": 0,
+      "mcnemar_chi2_cc": 0.0,
+      "p_value_exact_binomial": 1.0,
+      "a_leaked": 0,
+      "b_leaked": 0,
+      "contrast": "next_best_protector",
+      "verdict": "NOT significant (p=1 >= 0.05): no detectable difference in per-subject CNP protection between kp-model and presidio (b=0, c=0)."
+    },
+    {
+      "model_a": "kp-model",
+      "model_b": "privacy-filter",
+      "n_shared_subjects": 1123,
+      "table": {
+        "both_detected": 1107,
+        "a_detected_b_missed_b": 16,
+        "a_missed_b_detected_b": 0,
+        "neither_detected": 0
+      },
+      "discordant_b_A_protects_B_leaks": 16,
+      "discordant_c_B_protects_A_leaks": 0,
+      "mcnemar_chi2_cc": 14.0625,
+      "p_value_exact_binomial": 3.0517578125e-05,
+      "a_leaked": 0,
+      "b_leaked": 16,
+      "contrast": "next_leaking_protector",
+      "verdict": "SIGNIFICANT (p=3.05e-05 < 0.05): kp-model protects per-subject CNPs that privacy-filter leaks far more often than the reverse (b=16, c=0). The dissociation is real."
+    }
+  ]
+}
