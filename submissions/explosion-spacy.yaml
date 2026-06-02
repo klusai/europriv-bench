@@ -1,0 +1,49 @@
+# EuroPriv-Bench leaderboard submission — model card (THIRD-PARTY: spaCy).
+#
+# A real, third-party submission (KLU-108): the 3rd independent outside system on the board after
+# Microsoft Presidio (KLU-52) and GLiNER2, landed through the no-secrets submission CI. spaCy
+# (Explosion) is a statistical NER pipeline — like Presidio it is NOT a single HF model, so this
+# pins the spaCy model PACKAGE release. Validated by `europriv submission validate-card`.
+
+# Version-pinned reference. The spaCy en_core_web_lg model is distributed as a versioned package
+# (not an HF revision), so this pins the package release `org/model@<version>` — the `@` still
+# stamps an immutable version (field key kept as hf_model_id for schema compatibility).
+hf_model_id: "spacy/en_core_web_lg@3.8.0"
+
+# Adapter scheme the harness uses to call the system. MUST be one of adapters.BUILDERS.
+# `spacy` loads en_core_web_lg via spacy.load and maps its OntoNotes NER types onto the KP
+# taxonomy. No submitter code runs in CI — only this declared built-in adapter is instantiated.
+adapter: "spacy"
+
+# What the system is for.
+intended_use: >
+  General-purpose statistical named-entity recognition over English text. Here it is used for
+  entity-level PII detection: its OntoNotes entity types (PERSON, GPE/LOC/FAC → ADDRESS, ORG →
+  ORG_PARTY, DATE) are mapped onto the harmonized KP taxonomy.
+
+# Training-data provenance AND licensing. en_core_web_lg is spaCy's pretrained English pipeline
+# (OntoNotes 5.0). MIT-licensed (both spaCy and the model package).
+training_data: >
+  spaCy en_core_web_lg is trained on OntoNotes 5.0 (news/web/broadcast English). None of this
+  overlaps the EuroPriv-Bench gold splits. spaCy and the en_core_web_lg model package are
+  MIT-licensed.
+
+# Languages. The model is English-only; its NER is applied across all configs as the honest
+# out-of-the-box baseline (low recall on non-English text — a deliberate, reported limitation).
+languages: ["en"]
+
+# Domains covered.
+domains: ["general"]
+
+# Known limitations / failure modes.
+known_limitations: >
+  A named-entity tagger, NOT a structured-PII detector: it has no recognizers for email, phone,
+  URL, IBAN/account, or national-ID formats, so those types are never predicted — a recall floor
+  on the structured-PII and real-skeleton tracks, and HIGH re-identification leakage on RO CNP /
+  PL PESEL (the decode-bearing IDs go undetected). English-only → low recall on non-English configs.
+
+# Contamination statement.
+contamination_statement: >
+  spaCy en_core_web_lg is an off-the-shelf OntoNotes-trained NER; it was trained on NONE of the
+  EuroPriv-Bench gold data. There is no train/eval overlap on any config, so every row is
+  clean_held_out (see GOVERNANCE.md / leaderboard.classify_contamination).

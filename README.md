@@ -63,6 +63,15 @@ via the crosswalk in `taxonomy.py`, register it in `adapters.BUILDERS`. Planned 
 GLiNER-PII, MAPA, Presidio, mDeBERTa/XLM-R. (Piiranha-v1 is **CC-BY-NC-ND** → baseline-only,
 never a base model or redistributed artifact.)
 
+## Submit your model to the leaderboard
+
+EuroPriv-Bench is an open, neutral scorekeeper: anyone can land a system on the public board
+through a **no-secrets** submission CI — fill a model card, open a PR, and the CI scores it on the
+held-out gold and appends a provenance-stamped row (you never submit scores). Third-party systems
+already on the board via this path: **Microsoft Presidio**, **GLiNER2**, **spaCy**. Full how-to and
+worked examples: [`submissions/README.md`](submissions/README.md). Cloud APIs (Azure AI Language,
+AWS Comprehend) need credentials → a separate human-gated path, not the self-serve CI.
+
 ## License
 
 Code: Apache-2.0. Benchmark data: built only from cleanly-licensed sources so the whole

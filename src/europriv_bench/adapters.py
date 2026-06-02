@@ -242,6 +242,114 @@ class GLiNERAdapter(BaseAdapter):
         return out
 
 
+class GLiNER2Adapter(BaseAdapter):
+    """GLiNER2 schema-based extraction (``fastino/gliner2-base-v1``). Requires the `gliner2` extra.
+
+    GLiNER2 (Fastino, Apache-2.0) is a *distinct* system from the original GLiNER wrapped above: a
+    unified schema-based information-extraction model with its own package (``gliner2``) and a
+    different inference API (``GLiNER2.from_pretrained(...).extract_entities(text, labels,
+    include_spans=True)`` → ``{"entities": {label: [{"text", "start", "end"}, ...]}}``). Like
+    GLiNER it is *prompted* with natural-language labels, so we prompt with phrasings of the KP
+    types and map the returned label straight back to KP — no native→KP crosswalk scheme.
+    """
+
+    name = "gliner2"
+    model_id = "fastino/gliner2-base-v1"
+
+    # prompt label -> KP type. Mirrors GLiNERAdapter.LABEL_TO_KP; phrasing drives zero-shot recall.
+    LABEL_TO_KP = {
+        "person": "PERSON", "full name": "PERSON",
+        "address": "ADDRESS", "city": "ADDRESS", "postal code": "ADDRESS",
+        "email": "EMAIL", "phone number": "PHONE", "url": "URL",
+        "date": "DATE", "date of birth": "DATE",
+        "account number": "ACCOUNT_ID", "credit card number": "ACCOUNT_ID", "iban": "ACCOUNT_ID",
+        "ip address": "ACCOUNT_ID", "username": "ACCOUNT_ID",
+        "password": "SECRET",
+        "national identification number": "NATIONAL_ID", "passport number": "NATIONAL_ID",
+        "driver license number": "NATIONAL_ID",
+        "company": "ORG_PARTY",
+    }
+
+    def __init__(self) -> None:
+        self._model = None
+        self._labels = sorted(self.LABEL_TO_KP)
+
+    def _load(self):  # pragma: no cover - requires the `gliner2` extra + model download
+        if self._model is None:
+            from gliner2 import GLiNER2
+            self._model = GLiNER2.from_pretrained(self.model_id)
+        return self._model
+
+    def predict_tags(self, texts: Sequence[str]) -> list[list[str]]:
+        model = self._load()  # pragma: no cover - needs model
+        out = []  # pragma: no cover
+        for text in texts:  # pragma: no cover
+            result = model.extract_entities(text, self._labels, include_spans=True)
+            kp_ents = [
+                {"start": int(span["start"]), "end": int(span["end"]), "label": self.LABEL_TO_KP[label]}
+                for label, spans in result.get("entities", {}).items()
+                if label in self.LABEL_TO_KP
+                for span in spans
+            ]
+            out.append(kp_entities_to_bioes(text, kp_ents))
+        return out
+
+
+class SpacyAdapter(BaseAdapter):
+    """spaCy statistical NER (``en_core_web_lg``). Requires the `spacy` extra.
+
+    spaCy's English pipeline emits OntoNotes NER types (``PERSON``, ``GPE``, ``ORG``, ``DATE``,
+    ...). We map those onto the harmonized KP taxonomy here (the GLiNER/Presidio pattern) and feed
+    ``kp_entities_to_bioes`` — no native→KP ``crosswalk.py`` scheme, since spaCy is not one of the
+    curation source schemes. The model is loaded by name via ``spacy.load`` (the same
+    ``en_core_web_lg`` Presidio's NER uses), so the submission CI provisions it once for both.
+
+    Coverage: spaCy NER is a *named-entity* tagger, not a structured-PII detector — it has no
+    recognizers for email/phone/IBAN/national-ID, so those types are simply never predicted (an
+    honest recall floor on the structured-PII tracks, reflected in the leaderboard row).
+    """
+
+    name = "spacy"
+    model_id = "spacy/en_core_web_lg@3.8.0"
+
+    # spaCy (OntoNotes) NER type -> KP type.
+    SPACY_TO_KP = {
+        "PERSON": "PERSON",
+        # Geo-political / location / facility entities → ADDRESS (the KP place type).
+        "GPE": "ADDRESS",
+        "LOC": "ADDRESS",
+        "FAC": "ADDRESS",
+        "ORG": "ORG_PARTY",
+        "DATE": "DATE",
+        # CARDINAL/ORDINAL/MONEY/PERCENT/NORP/EVENT/LAW/LANGUAGE/PRODUCT/WORK_OF_ART/TIME/QUANTITY
+        # have no clean KP type → dropped.
+    }
+
+    def __init__(self, model_name: str = "en_core_web_lg") -> None:
+        self.model_name = model_name
+        self._nlp = None
+        self._entities = frozenset(self.SPACY_TO_KP)
+
+    def _pipeline(self):  # pragma: no cover - requires the `spacy` extra + model download
+        if self._nlp is None:
+            import spacy
+
+            self._nlp = spacy.load(self.model_name)
+        return self._nlp
+
+    def predict_tags(self, texts: Sequence[str]) -> list[list[str]]:
+        nlp = self._pipeline()  # pragma: no cover - needs the model
+        out = []  # pragma: no cover
+        for doc in nlp.pipe(texts):  # pragma: no cover - batched spaCy inference
+            kp_ents = [
+                {"start": int(ent.start_char), "end": int(ent.end_char), "label": self.SPACY_TO_KP[ent.label_]}
+                for ent in doc.ents
+                if ent.label_ in self._entities
+            ]
+            out.append(kp_entities_to_bioes(doc.text, kp_ents))
+        return out
+
+
 class KpModelAdapter(BaseAdapter):
     """KlusAI `kp-*` token-classification finetunes (e.g. ``klusai/kp-deid-mdeberta-280m``).
 
@@ -435,6 +543,8 @@ BUILDERS: dict[str, type[BaseAdapter]] = {
     "openmed": OpenMedAdapter,
     "tabularisai": TabularisaiAdapter,
     "gliner": GLiNERAdapter,
+    "gliner2": GLiNER2Adapter,
+    "spacy": SpacyAdapter,
     "kp-model": KpModelAdapter,
     "presidio": PresidioAdapter,
 }

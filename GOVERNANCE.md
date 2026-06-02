@@ -93,13 +93,33 @@ overlapping rows from genuinely held-out ones:
 
 Rule-based / orchestration baselines (e.g. **Presidio**) learn from none of our data — regex +
 checksum recognizers plus an off-the-shelf NER — so every config is `clean_held_out` for them,
-including the AI4Privacy general configs the trained baselines overlap with.
+including the AI4Privacy general configs the trained baselines overlap with. The same applies to
+the third-party NER/IE systems `spacy` (OntoNotes-trained) and `gliner2` (Fastino's own
+pretraining), neither of which was trained on any EuroPriv-Bench gold.
 
 The marker is derived from `(adapter, dataset.config)` by `leaderboard.classify_contamination`.
 
 ## CHANGELOG
 
 ### Unreleased
+- **Grew the network: 2nd + 3rd third-party leaderboard submissions (KLU-108):** added the
+  `gliner2` and `spacy` adapters and landed both as external systems via the no-secrets submission
+  CI, after Presidio (KLU-52). **GLiNER2** (`fastino/gliner2-base-v1`, Fastino, Apache-2.0) is a
+  schema-based IE model distinct from the original GLiNER — prompted zero-shot with KP-type
+  phrasings (`submissions/fastino-gliner2.yaml`, HF SHA-pinned). **spaCy** (`en_core_web_lg`, MIT,
+  OntoNotes) is a statistical NER whose types map onto the KP taxonomy (`submissions/explosion-spacy.yaml`,
+  model-package release-pinned). Both are external systems trained on NONE of our gold, so
+  `leaderboard.classify_contamination` marks them `clean_held_out` on every config (added to the
+  external/rule-based set alongside `presidio`). Honest scores: GLiNER2 EN F1≈0.51 with RO-CNP
+  leak≈0.29 / PL-PESEL leak≈0.34; spaCy EN F1≈0.32 with RO-CNP leak≈0.89 / PL-PESEL leak≈0.45 (it
+  has no structured-PII or national-ID recognizers — the re-id screenshot the board exists to show).
+  Both adapter backends are cleanly licensed and added as **optional extras** (`gliner2`, `spacy`),
+  not core deps; the submission CI installs the `spacy` extra (and the `en_core_web_lg` model for
+  both `spacy` and `presidio` cards) and `--no-deps`-installs `gliner2` so its `gliner` dependency
+  can't downgrade the `hf` extra's `transformers>=5.9` (which the reproduction anchor needs).
+  Refreshed the public call-for-submissions doc (`submissions/README.md`) so an outside contributor
+  can self-serve. Cloud APIs (Azure AI Language, AWS Comprehend) remain a credential/billing-gated,
+  human-gated path — explicitly NOT blocked on here.
 - **Taxonomy YAML now bundled in the package (KLU-43):** moved the single source of truth from
   the top-level `conf/taxonomy.yaml` (which sat *outside* `src/` and was NOT packaged, so a wheel
   / non-editable `pip install` shipped without it and taxonomy loading would fail) to
