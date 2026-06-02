@@ -1,7 +1,12 @@
 """National-ID validators (RO/PL/IT decode-bearing, ES coverage-only) + leakage metrics."""
 
 from europriv_bench.adapters import build
-from europriv_bench.metrics import cnp_leakage, national_id_leakage, wilson_interval
+from europriv_bench.metrics import (
+    cnp_leakage,
+    national_id_leakage,
+    newcombe_diff_ci,
+    wilson_interval,
+)
 from europriv_bench.national_id import (
     check_digit,
     get_validator,
@@ -90,6 +95,28 @@ def test_wilson_ci_reproduces_privacy_filter_ro_real_leak_rate():
     assert low < point < high                    # brackets the point estimate
     assert 0.008 < low < 0.010                   # lower ~0.9%
     assert 0.022 < high < 0.024                  # upper ~2.3%
+
+
+def test_newcombe_diff_ci_excludes_zero_for_dissociation_gap():
+    """KLU-101 dissociation gap: a typed-detector that leaks vs a protector at 0 leak.
+
+    gap = leak_rate(typed-detector) − leak_rate(protector). With a clear separation the Newcombe
+    difference-of-proportions CI must exclude 0 (low > 0)."""
+    # typed-detector leaks 30/200; protector leaks 0/200.
+    diff, low, high = newcombe_diff_ci(30, 200, 0, 200)
+    assert abs(diff - 0.15) < 1e-9
+    assert low > 0.0                              # CI excludes 0 → dissociation holds
+    assert high < 1.0
+    # symmetry: swapping the two arms negates the difference and reflects the interval.
+    d2, l2, h2 = newcombe_diff_ci(0, 200, 30, 200)
+    assert abs(d2 + diff) < 1e-9
+    assert abs(l2 + high) < 1e-9 and abs(h2 + low) < 1e-9
+
+
+def test_newcombe_diff_ci_includes_zero_when_indistinguishable():
+    """When both arms leak at the same low rate the gap CI must include 0 (no dissociation)."""
+    _diff, low, high = newcombe_diff_ci(2, 200, 2, 200)
+    assert low < 0.0 < high
 
 
 def test_run_spec_wires_cnp_leakage_via_rows():

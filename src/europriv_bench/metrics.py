@@ -43,6 +43,32 @@ def wilson_interval(successes: int, total: int, z: float = WILSON_Z_95) -> tuple
     return (center - half, center + half)
 
 
+def newcombe_diff_ci(
+    s1: int, n1: int, s2: int, n2: int, z: float = WILSON_Z_95
+) -> tuple[float, float, float]:
+    """Newcombe (1998) "method 10" hybrid-score CI for the difference of two INDEPENDENT proportions.
+
+    Returns ``(diff, low, high)`` where ``diff = s1/n1 − s2/n2``. The interval combines each
+    proportion's own Wilson score limits (which stay in ``[0, 1]`` and behave well near 0/1 and for
+    small n) into a CI for the difference — exactly the regime of the KLU-101 per-family dissociation
+    gap ``leak_rate(typed-detector) − leak_rate(protector)``, where the protector's leak is ≈0 and a
+    naive Wald interval would understate the uncertainty. The dissociation "holds" for a family iff
+    this CI excludes 0 (i.e. ``low > 0`` for a positive gap).
+
+    Newcombe's construction: with Wilson limits ``(l1,u1)`` for p1 and ``(l2,u2)`` for p2,
+        low  = (p1 − p2) − sqrt((p1 − l1)^2 + (u2 − p2)^2)
+        high = (p1 − p2) + sqrt((u1 − p1)^2 + (p2 − l2)^2)
+    """
+    p1 = (s1 / n1) if n1 else 0.0
+    p2 = (s2 / n2) if n2 else 0.0
+    l1, u1 = wilson_interval(s1, n1, z)
+    l2, u2 = wilson_interval(s2, n2, z)
+    diff = p1 - p2
+    low = diff - math.sqrt((p1 - l1) ** 2 + (u2 - p2) ** 2)
+    high = diff + math.sqrt((u1 - p1) ** 2 + (p2 - l2) ** 2)
+    return (diff, low, high)
+
+
 def _leak_rate_stats(missed: int, total: int) -> dict[str, float]:
     """Shared leak-rate point estimate + Wilson CI (reused by CNP and future national-id leakage)."""
     low, high = wilson_interval(missed, total)
