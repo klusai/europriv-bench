@@ -96,6 +96,18 @@ def test_classify_contamination_known_cases():
     assert classify_contamination("gliner", "en") == "unknown"
     assert classify_contamination("privacy-filter", "de") == "unknown"
     assert classify_contamination("openmed", "ro-synthetic-v1") == "unknown"
+    # kp-model (kp-deid-mdeberta-280m, KLU-44) trained on ds-kp-general-{ro,en,pl} LocalePacks.
+    # ro-synthetic shares the RO LocalePack generator → in_distribution.
+    assert classify_contamination("kp-model", "ro-synthetic-v1") == "in_distribution"
+    # fr/es/de/it/nl absent from training → genuine zero-shot cross-lingual transfer, clean held-out.
+    for cfg in ("fr", "es", "de", "it", "nl"):
+        assert classify_contamination("kp-model", cfg) == "clean_held_out"
+    # en is a trained language but the board's en config is a different (AI4Privacy) generator, and
+    # the KLU-44 held-out eval-loss is implausibly low (KLU-54) → unknown, NEVER clean_held_out.
+    assert classify_contamination("kp-model", "en") == "unknown"
+    # The real-skeleton tracks stay clean_held_out for kp-model too.
+    assert classify_contamination("kp-model", "ro-realskeleton-v1") == "clean_held_out"
+    assert classify_contamination("kp-model", "pl-realskeleton-v1") == "clean_held_out"
 
 
 def test_build_leaderboard_annotates_both_markers_defaulting_to_dev():
