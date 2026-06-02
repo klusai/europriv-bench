@@ -1,14 +1,15 @@
-"""Contract tests for the externalized taxonomy (conf/taxonomy.yaml is the source of truth).
+"""Contract tests for the externalized taxonomy (the bundled taxonomy.yaml is the source of truth).
 
 These guard the governance invariants in GOVERNANCE.md:
   * the YAML version stays in sync with TAXONOMY_VERSION (loader fails loud otherwise);
   * the loaded label space is exactly bioes_labels();
-  * the native→KP crosswalk round-trips as before (every declared source label maps back).
+  * the native→KP crosswalk round-trips as before (every declared source label maps back);
+  * the YAML is bundled *inside the package* so it travels with the wheel (KLU-43).
 """
 
 from __future__ import annotations
 
-from pathlib import Path
+from importlib import resources
 
 import pytest
 import yaml
@@ -17,19 +18,32 @@ from europriv_bench import taxonomy as tax
 from europriv_bench.crosswalk import mapped_labels, to_kp
 
 
-def _conf_path() -> Path:
-    return tax._locate_conf()
-
-
 def _conf_doc() -> dict:
-    with open(_conf_path(), encoding="utf-8") as f:
+    # Read via the same importlib.resources handle the loader uses — works for editable
+    # and zip/wheel installs alike.
+    with tax._locate_conf().open(encoding="utf-8") as f:
         return yaml.safe_load(f)
 
 
 def test_yaml_is_the_source_loaded():
-    # The module loaded from conf/taxonomy.yaml, not a hardcoded list.
-    assert _conf_path().name == "taxonomy.yaml"
-    assert _conf_path().parent.name == "conf"
+    # The module loaded from the bundled taxonomy.yaml, not a hardcoded list.
+    assert tax._locate_conf().name == "taxonomy.yaml"
+
+
+def test_taxonomy_yaml_is_bundled_in_the_package():
+    # KLU-43: the YAML must be a *package resource* (src/europriv_bench/conf/taxonomy.yaml),
+    # not merely a file somewhere up the source tree. This is what guarantees it ships in the
+    # wheel and resolves for `pip install`ed users. Under the old, unbundled setup (YAML in a
+    # top-level conf/ outside src/, resolved by walking the source tree), this would fail:
+    # importlib.resources would not find it inside the installed package.
+    resource = resources.files("europriv_bench.conf") / "taxonomy.yaml"
+    assert resource.is_file(), (
+        "taxonomy.yaml is not bundled inside the europriv_bench package — a wheel install "
+        "would be unable to load the taxonomy"
+    )
+    # It loads and carries the version, purely through the package-resource API (no source tree).
+    doc = yaml.safe_load(resource.read_text(encoding="utf-8"))
+    assert doc["version"] == tax.TAXONOMY_VERSION
 
 
 def test_version_in_sync():

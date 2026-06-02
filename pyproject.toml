@@ -37,6 +37,12 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.packages.find]
 where = ["src"]
 
+# Bundle the canonical taxonomy YAML so it travels with the wheel/sdist (KLU-43). It lives
+# inside the package (src/europriv_bench/conf/) and is loaded via importlib.resources, so this
+# is what makes taxonomy loading work for non-editable `pip install europriv-bench`.
+[tool.setuptools.package-data]
+europriv_bench = ["conf/*.yaml"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 

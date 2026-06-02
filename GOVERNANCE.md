@@ -11,15 +11,17 @@ The following names are part of the public contract. Once published they MUST NO
 repurposed, or have their meaning changed under the same version — doing so silently breaks
 every downstream dataset, model label map, and leaderboard that references them.
 
-- **`conf/taxonomy.yaml`** — the single source of truth for the harmonized KP taxonomy, the
-  crosswalk to external schemes, and the BIOES label space. Loaded once at import by
+- **`src/europriv_bench/conf/taxonomy.yaml`** — the single source of truth for the harmonized
+  KP taxonomy, the crosswalk to external schemes, and the BIOES label space. It lives *inside*
+  the package so it ships in the wheel/sdist and is loaded via `importlib.resources` (works for
+  both editable and `pip install`ed users). Loaded once at import by
   `src/europriv_bench/taxonomy.py`. It carries a `version` field that MUST equal
   `TAXONOMY_VERSION`; on mismatch import fails loud (`ValueError`). Never edit the entity set,
   entity order, or label space without bumping `version` (see below).
 - **`TAXONOMY_VERSION`** (in `src/europriv_bench/taxonomy.py`) — the in-code anchor for the
   taxonomy version. Stamped into every eval spec result and the leaderboard.
 - **KP entity-type names** (e.g. `PERSON`, `NATIONAL_ID`, `HEALTH_CONDITION`) and the derived
-  **BIOES labels** (`O`, `B-/I-/E-/S-<TYPE>`). The entity *order* in `conf/taxonomy.yaml`
+  **BIOES labels** (`O`, `B-/I-/E-/S-<TYPE>`). The entity *order* in `europriv_bench/conf/taxonomy.yaml`
   defines the label order; reordering changes the label space and requires a version bump.
 - **Crosswalk source scheme keys** (`openai`, `ai4privacy`, `hipaa`, `mapa`, `openmed`,
   `azure`, `tabularisai`). Datasets and adapters key off these.
@@ -38,7 +40,7 @@ A benchmark number is only meaningful relative to the versions that produced it.
   numbers for reasons unrelated to model quality.
 - Every result row carries its provenance (`taxonomy_version`, `europriv_bench_version`,
   dataset config/split, dataset revision). Reproductions MUST match on all of these.
-- **Version bump policy:** bump `TAXONOMY_VERSION` (and the `version` in `conf/taxonomy.yaml`,
+- **Version bump policy:** bump `TAXONOMY_VERSION` (and the `version` in `europriv_bench/conf/taxonomy.yaml`,
   together) on any change to the entity set, entity order, GDPR-Art.9 marking, or the BIOES
   label space. Crosswalk-only additions that do not change the KP label space still warrant a
   patch bump so coverage numbers remain attributable.
@@ -51,7 +53,7 @@ A benchmark number is only meaningful relative to the versions that produced it.
 - Metrics are **deterministic**: identical inputs (gold + predictions, same label space)
   produce identical outputs.
 - The BIOES label space scored against is exactly `bioes_labels()`, derived from
-  `conf/taxonomy.yaml`. Gold curation and model adapters share this one space via the
+  `europriv_bench/conf/taxonomy.yaml`. Gold curation and model adapters share this one space via the
   crosswalk, so detection scores are apples-to-apples.
 - Confidence intervals and any statistical reporting are part of the metric contract: their
   method is fixed within a harness version.
@@ -98,6 +100,13 @@ The marker is derived from `(adapter, dataset.config)` by `leaderboard.classify_
 ## CHANGELOG
 
 ### Unreleased
+- **Taxonomy YAML now bundled in the package (KLU-43):** moved the single source of truth from
+  the top-level `conf/taxonomy.yaml` (which sat *outside* `src/` and was NOT packaged, so a wheel
+  / non-editable `pip install` shipped without it and taxonomy loading would fail) to
+  `src/europriv_bench/conf/taxonomy.yaml`. It is loaded via `importlib.resources` and declared as
+  `package-data` in `pyproject.toml`, so it travels with the wheel/sdist and resolves identically
+  for editable and installed users. No taxonomy content or `TAXONOMY_VERSION` change — consumers
+  (klusai-datasets/-models) keep using the public API (`bioes_labels()`, `to_kp()`, …) unchanged.
 - **First third-party leaderboard submission via the no-secrets CI (KLU-52):** added the
   `presidio` adapter wrapping Microsoft Presidio (`presidio-analyzer`, MIT) — the first external
   baseline on the board, landed through the submission CI. Presidio is an orchestration *tool*
@@ -125,7 +134,7 @@ The marker is derived from `(adapter, dataset.config)` by `leaderboard.classify_
   CI fields are preserved. No config is citable-validated until the KLU-27 native-speaker/IAA
   sign-off.
 - **Governance:** externalized the taxonomy crosswalk from a hardcoded Python list into
-  `conf/taxonomy.yaml` (single source of truth), loaded at import with a `version` ↔
+  `europriv_bench/conf/taxonomy.yaml` (single source of truth), loaded at import with a `version` ↔
   `TAXONOMY_VERSION` sync check that fails loud on mismatch. Behavior-preserving: the loaded
   entity set, crosswalk, and BIOES label space are unchanged. Added `GOVERNANCE.md` and a
   contract test (`tests/test_taxonomy_contract.py`). (KLU-9)

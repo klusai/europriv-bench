@@ -9,21 +9,23 @@ Entity tags use BIOES so the label space is directly compatible with `openai/pri
 (enabling head-to-head scoring).
 
 The crosswalk is **not** hand-coded here: it is the single, versioned source of truth in
-``conf/taxonomy.yaml``, loaded once at import. ``TAXONOMY_VERSION`` below is the in-code
-anchor; the YAML must echo the same ``version`` or import fails loud (see GOVERNANCE.md).
+the package-bundled ``europriv_bench/conf/taxonomy.yaml``, loaded once at import.
+``TAXONOMY_VERSION`` below is the in-code anchor; the YAML must echo the same ``version``
+or import fails loud (see GOVERNANCE.md).
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass, field
 from enum import Enum
-from pathlib import Path
+from importlib import resources
+from importlib.resources.abc import Traversable
 
 import yaml
 
 # Bump whenever the entity set or BIOES label space changes. Stamped into eval specs and the
 # leaderboard so dataset gold labels, model label maps, and scores are provably the same version.
-# MUST equal `version` in conf/taxonomy.yaml — the loader fails loud on mismatch.
+# MUST equal `version` in europriv_bench/conf/taxonomy.yaml — the loader fails loud on mismatch.
 TAXONOMY_VERSION = "0.2.0"  # 0.2.0: added NATIONAL_ID + COMPANY_ID; national IDs split out of ACCOUNT_ID
 
 
@@ -49,29 +51,33 @@ class EntityType:
     crosswalk: dict[str, list[str]] = field(default_factory=dict)  # scheme -> source labels
 
 
-# --- Single source of truth: conf/taxonomy.yaml -------------------------------------------
-# Resolve relative to the package, walking up to the repo root (editable install) and falling
-# back to package-bundled data (wheel install). Keeps load behavior identical either way.
+# --- Single source of truth: europriv_bench/conf/taxonomy.yaml ----------------------------
+# The YAML lives *inside* the package (src/europriv_bench/conf/), so it travels with the wheel
+# and is resolvable via importlib.resources in both editable and installed/zipped contexts.
+# This is the single source of truth consumed by klusai-datasets/-models through the public API
+# (bioes_labels(), to_kp(), …); do NOT fork it.
+_CONF_PKG = "europriv_bench.conf"
 _CONF_NAME = "taxonomy.yaml"
 
 
-def _locate_conf() -> Path:
-    here = Path(__file__).resolve()
-    for parent in here.parents:
-        candidate = parent / "conf" / _CONF_NAME
-        if candidate.is_file():
-            return candidate
-    # Fallback: bundled alongside the package (wheel/sdist via package_data).
-    bundled = here.parent / "conf" / _CONF_NAME
-    if bundled.is_file():
-        return bundled
-    raise FileNotFoundError(
-        f"taxonomy config {_CONF_NAME!r} not found (looked under conf/ up the tree from {here})"
-    )
+def _locate_conf() -> Traversable:
+    """Resolve the package-bundled taxonomy YAML.
+
+    Returns an ``importlib.resources`` Traversable (a ``Path`` for unpacked installs, a
+    zip-backed resource otherwise). It exposes ``.name``/``open()`` like a path, so callers
+    that only read the file work unchanged across editable and wheel installs.
+    """
+    resource = resources.files(_CONF_PKG) / _CONF_NAME
+    if not resource.is_file():
+        raise FileNotFoundError(
+            f"taxonomy config {_CONF_NAME!r} not found in package {_CONF_PKG!r} "
+            f"(is it bundled? see [tool.setuptools.package-data] in pyproject.toml)"
+        )
+    return resource
 
 
 def _load_taxonomy() -> tuple[tuple[str, ...], list[EntityType]]:
-    with open(_locate_conf(), encoding="utf-8") as f:
+    with _locate_conf().open(encoding="utf-8") as f:
         doc = yaml.safe_load(f)
 
     yaml_version = doc.get("version")
