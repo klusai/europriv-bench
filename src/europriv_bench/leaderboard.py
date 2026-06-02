@@ -10,7 +10,8 @@ governance markers:
     established). OpenMed and tabularisai were trained on AI4Privacy, which is the source of the
     six general-text configs (en/de/fr/it/es/nl), so those rows are ``in_distribution``. The
     real-skeleton tracks (``ro-realskeleton-v1``, ``pl-realskeleton-v1``) are ``clean_held_out``
-    for every model. The ``kp-model`` family (kp-deid-mdeberta-280m, KLU-44) was trained on the KP
+    for every model. Rule-based orchestration baselines (``presidio``) learn from none of our data,
+    so every config is ``clean_held_out`` for them. The ``kp-model`` family (kp-deid-mdeberta-280m, KLU-44) was trained on the KP
     synthetic LocalePacks ``ds-kp-general-{ro,en,pl}-50k`` (ro/en/pl only), so on a kp-model row the
     marker is *config-dependent*: ``ro-synthetic-v1`` (same RO LocalePack generator) is
     ``in_distribution``; the cross-lingual AI4Privacy configs fr/es/de/it/nl (languages never in
@@ -53,6 +54,11 @@ _AI4PRIVACY_CONFIGS = frozenset({"en", "de", "fr", "it", "es", "nl"})
 # the board was trained on them. Marked clean_held_out for every model.
 _CLEAN_HELD_OUT_CONFIGS = frozenset({"ro-realskeleton-v1", "pl-realskeleton-v1"})
 
+# Rule-based / orchestration adapters that learn from NO training data of ours (regex + checksum
+# recognizers + an off-the-shelf NER). Every config is a genuine clean held-out test for them —
+# there is no train/eval overlap to flag. Presidio (KLU-52) is the first such external baseline.
+_RULE_BASED_ADAPTERS = frozenset({"presidio"})
+
 # --- kp-deid (KlusAI `kp-model` family) contamination ----------------------------------------
 # kp-deid-mdeberta-280m (KLU-44) was trained on the KP synthetic LocalePacks
 # ``klusai/ds-kp-general-{ro,en,pl}-50k`` (150k general-text docs; ro/en/pl ONLY). The marker on a
@@ -87,6 +93,10 @@ def classify_contamination(adapter: str | None, config: str | None) -> str:
     data we don't know).
     """
     if config in _CLEAN_HELD_OUT_CONFIGS:
+        return CLEAN_HELD_OUT
+    # Rule-based orchestration baselines (Presidio): no training data of ours → clean held-out
+    # on EVERY config, including the AI4Privacy general configs others overlap with.
+    if adapter in _RULE_BASED_ADAPTERS:
         return CLEAN_HELD_OUT
     if adapter in _AI4PRIVACY_TRAINED_ADAPTERS and config in _AI4PRIVACY_CONFIGS:
         return IN_DISTRIBUTION

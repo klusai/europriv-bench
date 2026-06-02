@@ -39,7 +39,11 @@ REPRO_TOLERANCE = 0.02
 
 # Model-card required fields. A submission PR must fill every one of these.
 REQUIRED_CARD_FIELDS = (
-    "hf_model_id",      # public, revision-pinned HF reference (org/model@<sha>)
+    # Public, version-pinned model/tool reference. For an HF model this is the revision-pinned id
+    # ``org/model@<sha>``; for a non-HF orchestration tool (e.g. Presidio) it is the package pinned
+    # to a release, ``org/tool@<version>``. Either way the ``@`` pins an immutable version so a row
+    # stamps exactly what produced the score. (Field key kept as ``hf_model_id`` for compatibility.)
+    "hf_model_id",
     "adapter",          # one of adapters.BUILDERS — the built-in scheme the harness calls
     "intended_use",
     "training_data",    # provenance + licensing of the training data
@@ -77,7 +81,8 @@ def validate_model_card(card: dict) -> dict:
     hf_id = str(card["hf_model_id"])
     if "@" not in hf_id:
         raise CardValidationError(
-            f"hf_model_id {hf_id!r} must pin a revision (org/model@<sha>), not a moving tag"
+            f"hf_model_id {hf_id!r} must pin a version (HF model: org/model@<sha>; "
+            f"non-HF tool: org/tool@<version>), not a moving tag"
         )
 
     return card

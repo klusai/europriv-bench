@@ -62,8 +62,8 @@ def test_unknown_adapter_rejected():
 
 def test_unpinned_revision_rejected():
     card = _good_card()
-    card["hf_model_id"] = "org/model"  # no @<sha>
-    with pytest.raises(CardValidationError, match="pin a revision"):
+    card["hf_model_id"] = "org/model"  # no @<sha> / @<version>
+    with pytest.raises(CardValidationError, match="pin a version"):
         validate_model_card(card)
 
 
@@ -73,8 +73,18 @@ def test_shipped_template_card_validates():
 
     path = ROOT / ".github" / "MODEL_CARD_TEMPLATE.yaml"
     assert validate_model_card_file(path)["adapter"] in {
-        "privacy-filter", "openmed", "tabularisai", "gliner", "kp-model", "dummy",
+        "privacy-filter", "openmed", "tabularisai", "gliner", "kp-model", "dummy", "presidio",
     }
+
+
+def test_presidio_worked_example_card_validates():
+    """The committed third-party Presidio submission (KLU-52) — a non-HF tool pinned by release —
+    must pass validation, so it stays a working reference example for outside contributors."""
+    from europriv_bench.submission import validate_model_card_file
+
+    card = validate_model_card_file(ROOT / "submissions" / "microsoft-presidio.yaml")
+    assert card["adapter"] == "presidio"
+    assert "@" in card["hf_model_id"]  # version-pinned (PyPI release), not a moving tag
 
 
 # --- reproduction gate -------------------------------------------------------------------------

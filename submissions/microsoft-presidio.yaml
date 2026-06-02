@@ -1,0 +1,52 @@
+# EuroPriv-Bench leaderboard submission — model card (WORKED EXAMPLE: Microsoft Presidio).
+#
+# This is a real, third-party submission (KLU-52): the first model on the board that is NOT ours,
+# landed through the no-secrets submission CI. It doubles as the reference example an outside
+# contributor can copy — Presidio is an orchestration TOOL (not an HF model), so it shows how a
+# non-HF, rule-based system fills this card. Validated by `europriv submission validate-card`.
+
+# Version-pinned reference. Presidio is not an HF model, so this pins the PyPI package release
+# instead of an HF revision — the `@<version>` still stamps an immutable version (field key kept
+# as hf_model_id for schema compatibility; see submission.py).
+hf_model_id: "microsoft/presidio-analyzer@2.2.362"
+
+# Adapter scheme the harness uses to call the system. MUST be one of adapters.BUILDERS.
+# `presidio` wraps presidio-analyzer's AnalyzerEngine (regex/checksum recognizers + a spaCy NER)
+# and maps Presidio's entity types onto the KP taxonomy. No submitter code runs in CI — only this
+# declared built-in adapter is instantiated.
+adapter: "presidio"
+
+# What the system is for.
+intended_use: >
+  Entity-level PII detection / de-identification orchestration over text. Presidio runs an
+  ensemble of recognizers (regex + checksum patterns for structured PII such as email, phone,
+  IBAN, credit card, IP; plus a spaCy NER for PERSON/LOCATION/DATE) and merges their spans.
+
+# Training-data provenance AND licensing. Presidio's structured recognizers are rule-based (no
+# learned weights); its NER is the off-the-shelf spaCy `en_core_web_lg` model. MIT-licensed.
+training_data: >
+  Rule-based: the structured recognizers are regex/checksum patterns and learn from no training
+  data. The NER component is spaCy's pretrained `en_core_web_lg` (English; OntoNotes 5.0 +
+  ClearNLP, MIT-licensed). presidio-analyzer itself is MIT-licensed. None of this overlaps the
+  EuroPriv-Bench gold splits.
+
+# Languages. The default NLP engine is English; structured recognizers are language-agnostic
+# (regex/checksum), so they fire on every config, while NER-backed types (PERSON/LOCATION/DATE)
+# rely on the English spaCy model and have lower recall on non-English text.
+languages: ["en", "de", "fr", "it", "es", "nl", "ro", "pl"]
+
+# Domains covered.
+domains: ["general", "legal"]
+
+# Known limitations / failure modes.
+known_limitations: >
+  English-only NLP engine by default → reduced PERSON/LOCATION/DATE recall on non-English text.
+  No native recognizers for the European national-ID formats scored here (RO CNP, PL PESEL): those
+  IDs are caught, if at all, only by generic numeric recognizers, so re-identification leakage is
+  high on the real-skeleton tracks. Entity vocabulary is US/UK-centric (US_SSN, UK_NHS, etc.).
+
+# Contamination statement.
+contamination_statement: >
+  Presidio is rule-based + an off-the-shelf English NER; it was trained on NONE of the
+  EuroPriv-Bench gold data. There is no train/eval overlap on any config, so every row is
+  clean_held_out (see GOVERNANCE.md / leaderboard.classify_contamination).

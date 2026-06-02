@@ -1300,6 +1300,377 @@
         "config_status": "dev"
       }
     ],
+    "presidio::presidio-analyzer+en_core_web_lg": [
+      {
+        "spec": "PII Detection + CNP Leakage — Romanian (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "legal",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.47210163432073543,
+            "recall": 0.47252396166134186,
+            "f1": 0.4723127035830619
+          },
+          "entity_f2": {
+            "precision": 0.47210163432073543,
+            "recall": 0.47252396166134186,
+            "f2": 0.47243943575590314
+          },
+          "cnp_leakage": {
+            "cnp_total": 1123.0,
+            "cnp_detected": 1123.0,
+            "cnp_missed": 0.0,
+            "leak_rate": 0.0,
+            "leak_rate_ci_low": 0.0,
+            "leak_rate_ci_high": 0.003409036137937588,
+            "detection_rate": 1.0,
+            "leaked_quasi_identifiers": 0.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "ro-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T04:53:42.999082+00:00"
+      },
+      {
+        "spec": "PII Detection + CNP Leakage — Romanian (synthetic v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "general",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.5470304492010853,
+            "recall": 0.5593403205918619,
+            "f1": 0.5531169029111416
+          },
+          "entity_f2": {
+            "precision": 0.5470304492010853,
+            "recall": 0.5593403205918619,
+            "f2": 0.5568342232860738
+          },
+          "cnp_leakage": {
+            "cnp_total": 1017.0,
+            "cnp_detected": 1017.0,
+            "cnp_missed": 0.0,
+            "leak_rate": 0.0,
+            "leak_rate_ci_low": 0.0,
+            "leak_rate_ci_high": 0.0037630165068067048,
+            "detection_rate": 1.0,
+            "leaked_quasi_identifiers": 0.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "ro-synthetic-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T04:53:42.999082+00:00"
+      },
+      {
+        "spec": "PII Detection — Dutch (general)",
+        "task": "detection",
+        "languages": [
+          "nl"
+        ],
+        "domain": "general",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.22373721722962503,
+            "recall": 0.23104,
+            "f1": 0.2273299748110831
+          },
+          "entity_f2": {
+            "precision": 0.22373721722962503,
+            "recall": 0.23104,
+            "f2": 0.2295415527436892
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "nl",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T04:53:42.999082+00:00"
+      },
+      {
+        "spec": "PII Detection — English (general)",
+        "task": "detection",
+        "languages": [
+          "en"
+        ],
+        "domain": "general",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.557799742157284,
+            "recall": 0.3586626139817629,
+            "f1": 0.4365960309451732
+          },
+          "entity_f2": {
+            "precision": 0.557799742157284,
+            "recall": 0.3586626139817629,
+            "f2": 0.38624055228233056
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "en",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T04:53:42.999082+00:00"
+      },
+      {
+        "spec": "PII Detection — French (general)",
+        "task": "detection",
+        "languages": [
+          "fr"
+        ],
+        "domain": "general",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.3538050734312417,
+            "recall": 0.2420091324200913,
+            "f1": 0.2874186550976139
+          },
+          "entity_f2": {
+            "precision": 0.3538050734312417,
+            "recall": 0.2420091324200913,
+            "f2": 0.25833495808149737
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "fr",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T04:53:42.999082+00:00"
+      },
+      {
+        "spec": "PII Detection — German (general)",
+        "task": "detection",
+        "languages": [
+          "de"
+        ],
+        "domain": "general",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.19842782277274892,
+            "recall": 0.2635242012021512,
+            "f1": 0.22638945508900668
+          },
+          "entity_f2": {
+            "precision": 0.19842782277274892,
+            "recall": 0.2635242012021512,
+            "f2": 0.24729842061512886
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "de",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T04:53:42.999082+00:00"
+      },
+      {
+        "spec": "PII Detection — Italian (general)",
+        "task": "detection",
+        "languages": [
+          "it"
+        ],
+        "domain": "general",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.2534562211981567,
+            "recall": 0.22040690505548705,
+            "f1": 0.23577906018136852
+          },
+          "entity_f2": {
+            "precision": 0.2534562211981567,
+            "recall": 0.22040690505548705,
+            "f2": 0.22630879280876112
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "it",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T04:53:42.999082+00:00"
+      },
+      {
+        "spec": "PII Detection — Spanish (general)",
+        "task": "detection",
+        "languages": [
+          "es"
+        ],
+        "domain": "general",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.28131680205215903,
+            "recall": 0.20581795433218641,
+            "f1": 0.23771676300578035
+          },
+          "entity_f2": {
+            "precision": 0.28131680205215903,
+            "recall": 0.20581795433218641,
+            "f2": 0.21749190189726977
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "es",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T04:53:42.999082+00:00"
+      }
+    ],
     "privacy-filter::openai/privacy-filter": [
       {
         "spec": "PII Detection + CNP Leakage — Romanian (real-skeleton v1)",

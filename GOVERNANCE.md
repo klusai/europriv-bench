@@ -89,11 +89,28 @@ overlapping rows from genuinely held-out ones:
 - **`unknown`** — overlap not established (e.g. a baseline whose training set we don't know, or
   the synthetic RO track).
 
+Rule-based / orchestration baselines (e.g. **Presidio**) learn from none of our data — regex +
+checksum recognizers plus an off-the-shelf NER — so every config is `clean_held_out` for them,
+including the AI4Privacy general configs the trained baselines overlap with.
+
 The marker is derived from `(adapter, dataset.config)` by `leaderboard.classify_contamination`.
 
 ## CHANGELOG
 
 ### Unreleased
+- **First third-party leaderboard submission via the no-secrets CI (KLU-52):** added the
+  `presidio` adapter wrapping Microsoft Presidio (`presidio-analyzer`, MIT) — the first external
+  baseline on the board, landed through the submission CI. Presidio is an orchestration *tool*
+  (regex/checksum recognizers + a spaCy NER), not an HF model, so the adapter wraps the
+  `AnalyzerEngine` and maps Presidio's entity types onto the KP taxonomy (no native crosswalk
+  scheme). Marked `clean_held_out` on every config (rule-based; no training data of ours). Worked
+  example: `submissions/microsoft-presidio.yaml`. Minimal submission-path fixes so an external,
+  non-HF adapter can actually land: model-card id accepts a version-pinned non-HF tool reference
+  (`org/tool@<version>`); the serial `europriv run` path now skips a spec whose dataset config is
+  not on the public HF revision (with a warning) instead of crashing the whole run — keeping the
+  no-secrets CI green; CI installs the `presidio` extra + the spaCy model when a presidio card is
+  present. Scored on the 8 public configs (the `pl-realskeleton-v1` track is not yet published to
+  the public HF dataset, so it is skipped).
 - **Leaderboard schema 3 (KLU-8):** added two per-`(model, config)` governance markers —
   `contamination` (`in_distribution` | `clean_held_out` | `unknown`) and `config_status`
   (`dev` | `citable-validated`, defaulting to `dev`). `runner.run_spec` now emits both on every
