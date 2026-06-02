@@ -10,7 +10,7 @@ from . import __version__
 from .adapters import BUILDERS, build
 from .leaderboard import format_leaderboard, write_leaderboard
 from .logger import get_logger
-from .runner import run_spec
+from .runner import ConfigUnavailableError, run_spec
 from .spec import load_suite
 from .taxonomy import TAXONOMY, bioes_labels, special_category_types
 
@@ -73,12 +73,14 @@ def run(suite: str, adapters: tuple[str, ...], out: str, limit: int | None, work
                 logger.info("running %s on %s", name, spec.name)
                 try:
                     results.append(run_spec(spec, model, timestamp=ts, limit=limit, dumps=dumps))
-                except Exception as e:
-                    # A spec whose dataset config isn't published on the public HF revision (or any
-                    # other per-spec failure) is logged + skipped, never aborting the whole run —
-                    # mirroring the parallel path. This keeps the no-secrets submission CI green:
-                    # an external adapter is still scored on every config that IS reachable.
-                    logger.error("skipping spec %r for adapter %r: %s", spec.name, name, e)
+                except ConfigUnavailableError as e:
+                    # ONLY a config that isn't published on the resolved HF revision is logged +
+                    # skipped, never aborting the whole run — mirroring the parallel path. This keeps
+                    # the no-secrets submission CI green: an external adapter is still scored on every
+                    # config that IS reachable. Every OTHER exception (a genuine eval crash on an
+                    # available config) propagates and fails the run loudly (KLU-58).
+                    logger.warning("skipping unavailable config for spec %r / adapter %r: %s",
+                                   spec.name, name, e)
         if dump_predictions is not None:
             import json
             from pathlib import Path
