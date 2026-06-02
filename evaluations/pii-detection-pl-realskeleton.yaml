@@ -1,0 +1,38 @@
+name: "PII Detection + PESEL Leakage — Polish (real-skeleton v1)"
+version: 1
+task: detection
+domain: legal
+languages: [pl]
+
+dataset:
+  hf_id: klusai/europriv-bench
+  config: pl-realskeleton-v1
+  split: test
+  license: CC-BY-4.0
+
+metrics:
+  - entity_f1
+  - entity_f2
+  - national_id_leakage
+
+description: >
+  A citable-track candidate (currently config_status=dev; not yet validated — pending
+  native-speaker review + IAA, KLU-27) and the SECOND decode-bearing measurement (after
+  ro-realskeleton-v1): faithful real-structure documents (hospital discharge card
+  KARTA INFORMACYJNA, services contract UMOWA, declaration OŚWIADCZENIE, administrative
+  letter) with synthetic PII (PESEL-consistent DOB). Headline is national_id_leakage —
+  rows carry country=PL so it dispatches to the PESEL validator; a missed PESEL is a
+  deterministic DOB+sex disclosure. The protection result here is ZERO-SHOT:
+  kp-deid-mdeberta-280m leaks 0% PESEL on PL despite being RO-trained and having never
+  seen Polish (this is zero-shot transfer, not PL-trained performance). The
+  protection-vs-leak contrast on PL is carried by GLiNER (~58%) and tabularisai (~31%);
+  note that openai/privacy-filter also leaks ~0% PESEL on PL, so the "type-accurate
+  detectors leak" story holds for 2 of 4 baselines here, not universally (unlike RO/CNP
+  where privacy-filter leaked ~1.4%). n=1500 counts documents, while the leak-rate
+  denominator is 1096 distinct PESEL subjects: re-identification is counted per distinct
+  subject (the discharge card repeats the PESEL → one subject, KLU-49 dedup). All four
+  templates are one authored skeleton family sharing a single fill path; a leak headline
+  from a single template family is not validated generalization — a second independent
+  template family is required before this is cited. Together with ro-realskeleton-v1 this
+  tests whether the train-for-protection result replicates on a second identifier (PESEL)
+  in a second language (PL).
