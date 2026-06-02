@@ -109,8 +109,11 @@ The marker is derived from `(adapter, dataset.config)` by `leaderboard.classify_
   (`org/tool@<version>`); the serial `europriv run` path now skips a spec whose dataset config is
   not on the public HF revision (with a warning) instead of crashing the whole run — keeping the
   no-secrets CI green; CI installs the `presidio` extra + the spaCy model when a presidio card is
-  present. Scored on the 8 public configs (the `pl-realskeleton-v1` track is not yet published to
-  the public HF dataset, so it is skipped).
+  present; and the `Makefile` reproduction-gate recipe no longer hard-`source`s a `.venv` (the CI
+  runner installs into system Python with no venv, so the old `source .venv/bin/activate` died with
+  `source: not found` and made the submission gate un-passable — now it activates `.venv` only when
+  present and otherwise uses the python on PATH). Scored on the 8 public configs (the
+  `pl-realskeleton-v1` track is not yet published to the public HF dataset, so it is skipped).
 - **Leaderboard schema 3 (KLU-8):** added two per-`(model, config)` governance markers —
   `contamination` (`in_distribution` | `clean_held_out` | `unknown`) and `config_status`
   (`dev` | `citable-validated`, defaulting to `dev`). `runner.run_spec` now emits both on every
