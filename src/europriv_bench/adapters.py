@@ -16,8 +16,75 @@ method(s), register it in ``BUILDERS``.
 from __future__ import annotations
 
 from collections.abc import Sequence
+from dataclasses import dataclass
 
 from .crosswalk import entities_to_kp_bioes, kp_entities_to_bioes
+from .spans import whitespace_tokens
+
+
+@dataclass(frozen=True)
+class PredictedSpan:
+    """A model-predicted PII span in the harmonized KP taxonomy, with char offsets + confidence.
+
+    ``start``/``end`` are character offsets into the input text (``end`` exclusive), aligned to the
+    same whitespace-token grid the BIOES scoring path uses, so ``text[start:end] == span.text`` and
+    the span re-derives back to exactly the tag the leaderboard scores. ``label`` is a KP entity
+    type (e.g. ``PERSON``, ``NATIONAL_ID``; see ``europriv_bench.taxonomy``). ``score`` is the
+    model's mean confidence over the subword pieces backing the span (0.0 if unscored).
+    """
+
+    label: str   # harmonized KP type, e.g. "PERSON"
+    start: int   # char offset, inclusive
+    end: int     # char offset, exclusive
+    text: str    # surface text == input[start:end]
+    score: float  # mean model confidence over the span's pieces
+
+
+def _bioes_to_kp_spans(text: str, tags: list[str]) -> list[tuple[int, int, str]]:
+    """Reconstruct ``(start, end, label)`` char spans from BIOES tags over whitespace tokens.
+
+    Walks the *exact* token grid (``whitespace_tokens``) the BIOES sequence is defined on, so a
+    span's char extent is the span the harness scores — start at the first token's char-start, end
+    at the last token's char-end.
+    """
+    toks = whitespace_tokens(text)
+    spans: list[tuple[int, int, str]] = []
+    i = 0
+    n = len(tags)
+    while i < n:
+        tag = tags[i]
+        if tag == "O":
+            i += 1
+            continue
+        kind, _, etype = tag.partition("-")
+        if kind == "S":
+            _, ts, te = toks[i]
+            spans.append((ts, te, etype))
+            i += 1
+            continue
+        if kind == "B":
+            start_tok = i
+            j = i
+            # Consume I-* then the closing E-* of the same type (labels_to_bioes guarantees this
+            # shape; be tolerant of a missing E by stopping at the run of same-type tokens).
+            while j + 1 < n:
+                nk, _, ne = tags[j + 1].partition("-")
+                if nk in {"I", "E"} and ne == etype:
+                    j += 1
+                    if nk == "E":
+                        break
+                else:
+                    break
+            _, ts, _ = toks[start_tok]
+            _, _, te = toks[j]
+            spans.append((ts, te, etype))
+            i = j + 1
+            continue
+        # Stray I-/E- without a B- (malformed): treat as a lone token to stay total.
+        _, ts, te = toks[i]
+        spans.append((ts, te, etype))
+        i += 1
+    return spans
 
 
 class BaseAdapter:
@@ -227,6 +294,51 @@ class KpModelAdapter(BaseAdapter):
             ]
             out.append(kp_entities_to_bioes(text, kp_ents))
         return out
+
+    def predict_spans(self, text: str) -> list[PredictedSpan]:
+        """DETECTION (rich): char-offset KP spans + confidence for a single ``text``.
+
+        The public accessor for callers (e.g. the ``klusai-privacy`` SDK) that need char offsets
+        and confidence scores — which ``predict_tags`` discards. It runs the *same* model-load +
+        token-classification decoding path ``predict_tags`` uses, then maps the raw pipeline
+        entities (``entity_group`` = KP type, char ``start``/``end``, ``score``) onto the
+        harmonized KP taxonomy and re-derives spans off the **same** whitespace-token BIOES grid
+        the leaderboard scores. So the returned spans reproduce ``predict_tags([text])[0]`` exactly
+        (``char_spans_to_bioes`` over the spans == the BIOES sequence), with offsets that index back
+        to the surface text (``text[s.start:s.end] == s.text``).
+
+        Returns a list of :class:`PredictedSpan` (``label``, ``start``, ``end``, ``text``,
+        ``score``); ``score`` is the mean pipeline confidence over the pieces backing each span.
+        """
+        pipe = self._pipeline()
+        raw = pipe(text)
+        # Raw pipeline entities (entity_group=KP type, char start/end, score). Aggregation is
+        # "simple", so these are subword-grouped pieces.
+        kp_ents = [
+            {
+                "start": int(e["start"]),
+                "end": int(e["end"]),
+                "label": e["entity_group"],
+                "score": float(e["score"]),
+            }
+            for e in raw
+        ]
+        # Re-derive the BIOES sequence exactly as predict_tags does, then read spans back off the
+        # same whitespace-token grid the harness scores on.
+        tags = kp_entities_to_bioes(text, kp_ents)
+        spans: list[PredictedSpan] = []
+        for start, end, label in _bioes_to_kp_spans(text, tags):
+            # Mean confidence over the pipeline pieces overlapping this span (same label).
+            pieces = [
+                e["score"]
+                for e in kp_ents
+                if e["start"] < end and e["end"] > start and e["label"] == label
+            ]
+            score = sum(pieces) / len(pieces) if pieces else 0.0
+            spans.append(
+                PredictedSpan(label=label, start=start, end=end, text=text[start:end], score=score)
+            )
+        return spans
 
 
 class PresidioAdapter(BaseAdapter):
