@@ -73,7 +73,8 @@ def test_shipped_template_card_validates():
 
     path = ROOT / ".github" / "MODEL_CARD_TEMPLATE.yaml"
     assert validate_model_card_file(path)["adapter"] in {
-        "privacy-filter", "openmed", "tabularisai", "gliner", "kp-model", "dummy", "presidio",
+        "privacy-filter", "openmed", "tabularisai", "gliner", "gliner2", "spacy",
+        "kp-model", "dummy", "presidio",
     }
 
 
@@ -85,6 +86,21 @@ def test_presidio_worked_example_card_validates():
     card = validate_model_card_file(ROOT / "submissions" / "microsoft-presidio.yaml")
     assert card["adapter"] == "presidio"
     assert "@" in card["hf_model_id"]  # version-pinned (PyPI release), not a moving tag
+
+
+def test_klu108_third_party_cards_validate():
+    """The 2nd + 3rd third-party submissions (KLU-108): GLiNER2 (HF model, SHA-pinned) and spaCy
+    (non-HF model package, release-pinned). Both must pass validation so the no-secrets CI accepts
+    them and they stay followable reference examples for outside contributors."""
+    from europriv_bench.submission import validate_model_card_file
+
+    gliner2 = validate_model_card_file(ROOT / "submissions" / "fastino-gliner2.yaml")
+    assert gliner2["adapter"] == "gliner2"
+    assert "@" in gliner2["hf_model_id"]  # HF revision SHA
+
+    spacy = validate_model_card_file(ROOT / "submissions" / "explosion-spacy.yaml")
+    assert spacy["adapter"] == "spacy"
+    assert "@" in spacy["hf_model_id"]  # spaCy model package release
 
 
 # --- reproduction gate -------------------------------------------------------------------------

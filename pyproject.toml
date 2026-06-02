@@ -20,6 +20,14 @@ dependencies = [
 # downgrade/break this; run GLiNER baselines in a SEPARATE environment.
 hf = ["transformers>=5.9", "torch>=2.4", "datasets>=4.0"]
 gliner = ["gliner>=0.2"]
+# GLiNER2 (Fastino, Apache-2.0): a distinct schema-based IE system from the original GLiNER, with
+# its own `gliner2` package. It runs against the `hf` extra's transformers>=5.9, but its `gliner`
+# dependency would otherwise drag in an OLDER transformers — so install it WITHOUT full dependency
+# resolution (`pip install --no-deps gliner2 peft accelerate`), same caveat as the `gliner` extra.
+gliner2 = ["gliner2>=1.3", "peft>=0.11", "accelerate>=0.21"]
+# spaCy statistical NER (MIT). The en_core_web_lg model is downloaded separately (`python -m spacy
+# download`) — it is the same model Presidio's NER uses, so the CI provisions it once for both.
+spacy = ["spacy>=3.7,<4"]
 presidio = ["presidio-analyzer>=2.2"]
 # Paper-figure / significance-test analysis (KLU-53). Kept out of core: the harness scores and
 # writes JSON without it; only `analysis/pareto_dissociation.py` needs matplotlib to render the

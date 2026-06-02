@@ -1,0 +1,51 @@
+# EuroPriv-Bench leaderboard submission — model card (THIRD-PARTY: GLiNER2).
+#
+# A real, third-party submission (KLU-108): the 2nd independent outside system on the board after
+# Microsoft Presidio (KLU-52), landed through the no-secrets submission CI. GLiNER2 (Fastino) is a
+# schema-based information-extraction model, DISTINCT from the original GLiNER already on the board
+# (different package `gliner2`, different inference API). Validated by
+# `europriv submission validate-card`.
+
+# Version-pinned reference: the HF model revision-pinned to an immutable commit SHA.
+hf_model_id: "fastino/gliner2-base-v1@f5b2ecedebe4381b088c1cf276f5bf72a52cac54"
+
+# Adapter scheme the harness uses to call the system. MUST be one of adapters.BUILDERS.
+# `gliner2` prompts the model with natural-language phrasings of the KP entity types and maps the
+# returned labels straight back to the KP taxonomy. No submitter code runs in CI — only this
+# declared built-in adapter is instantiated.
+adapter: "gliner2"
+
+# What the system is for.
+intended_use: >
+  Schema-based information extraction over text — named-entity recognition, classification, and
+  structured extraction in one 205M-parameter model. Here it is used zero-shot for entity-level
+  PII detection: prompted with KP entity-type phrasings (person, email, national identification
+  number, ...) and asked for the spans matching each.
+
+# Training-data provenance AND licensing. GLiNER2 is Fastino's own pretrained model
+# (microsoft/deberta-v3-base encoder + a GLiNER-style span head). Apache-2.0 licensed; the
+# `gliner2` package and its `gliner`/`peft` deps are Apache-2.0 / MIT.
+training_data: >
+  GLiNER2 (fastino/gliner2-base-v1) is pretrained by Fastino on its own information-extraction
+  corpora; the encoder is microsoft/deberta-v3-base. None of this overlaps the EuroPriv-Bench gold
+  splits. Model + package are Apache-2.0.
+
+# Languages. GLiNER2's zero-shot span extraction generalizes across the Latin-script EU languages
+# scored here; recall is strongest on English.
+languages: ["en", "de", "fr", "it", "es", "nl", "ro", "pl"]
+
+# Domains covered.
+domains: ["general", "legal"]
+
+# Known limitations / failure modes.
+known_limitations: >
+  Zero-shot extraction prompted with generic PII phrasings, never tuned to the European national-ID
+  formats scored here (RO CNP, PL PESEL) — so it does NOT reliably detect those decode-bearing IDs,
+  leaving re-identification leakage non-trivial on the real-skeleton tracks. Recall drops on
+  non-English text and on structured identifiers it was not prompted for.
+
+# Contamination statement.
+contamination_statement: >
+  GLiNER2 is an external pretrained system trained on NONE of the EuroPriv-Bench gold data. There
+  is no train/eval overlap on any config, so every row is clean_held_out (see GOVERNANCE.md /
+  leaderboard.classify_contamination).

@@ -10,8 +10,9 @@ governance markers:
     established). OpenMed and tabularisai were trained on AI4Privacy, which is the source of the
     six general-text configs (en/de/fr/it/es/nl), so those rows are ``in_distribution``. The
     real-skeleton tracks (``ro-realskeleton-v1``, ``pl-realskeleton-v1``) are ``clean_held_out``
-    for every model. Rule-based orchestration baselines (``presidio``) learn from none of our data,
-    so every config is ``clean_held_out`` for them. The ``kp-model`` family (kp-deid-mdeberta-280m, KLU-44) was trained on the KP
+    for every model. External systems that learn from none of our data — the rule-based Presidio
+    orchestration baseline, and the third-party NER/IE systems ``spacy`` (OntoNotes-trained) and
+    ``gliner2`` (Fastino's own pretraining) — are ``clean_held_out`` on every config. The ``kp-model`` family (kp-deid-mdeberta-280m, KLU-44) was trained on the KP
     synthetic LocalePacks ``ds-kp-general-{ro,en,pl}-50k`` (ro/en/pl only), so on a kp-model row the
     marker is *config-dependent*: ``ro-synthetic-v1`` (same RO LocalePack generator) is
     ``in_distribution``; the cross-lingual AI4Privacy configs fr/es/de/it/nl (languages never in
@@ -54,10 +55,13 @@ _AI4PRIVACY_CONFIGS = frozenset({"en", "de", "fr", "it", "es", "nl"})
 # the board was trained on them. Marked clean_held_out for every model.
 _CLEAN_HELD_OUT_CONFIGS = frozenset({"ro-realskeleton-v1", "pl-realskeleton-v1"})
 
-# Rule-based / orchestration adapters that learn from NO training data of ours (regex + checksum
-# recognizers + an off-the-shelf NER). Every config is a genuine clean held-out test for them —
-# there is no train/eval overlap to flag. Presidio (KLU-52) is the first such external baseline.
-_RULE_BASED_ADAPTERS = frozenset({"presidio"})
+# External systems trained on NONE of our data — so every config is a genuine clean held-out test
+# for them (no train/eval overlap to flag). This covers rule-based / orchestration baselines
+# (Presidio: regex/checksum recognizers + an off-the-shelf NER), and third-party NER/IE systems
+# whose training corpora are unrelated to the EuroPriv-Bench gold: spaCy (en_core_web_lg, trained
+# on OntoNotes 5.0) and GLiNER2 (fastino/gliner2-*, pretrained on its own data). Presidio (KLU-52)
+# was the first; spaCy + GLiNER2 land via the same no-secrets CI under KLU-108.
+_RULE_BASED_ADAPTERS = frozenset({"presidio", "spacy", "gliner2"})
 
 # --- kp-deid (KlusAI `kp-model` family) contamination ----------------------------------------
 # kp-deid-mdeberta-280m (KLU-44) was trained on the KP synthetic LocalePacks

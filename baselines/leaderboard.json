@@ -1,6 +1,439 @@
 {
   "schema": 3,
   "entries": {
+    "gliner2::fastino/gliner2-base-v1": [
+      {
+        "spec": "PII Detection + CNP Leakage — Romanian (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "legal",
+        "adapter": "gliner2",
+        "model_id": "fastino/gliner2-base-v1",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.7463204195567585,
+            "recall": 0.5637699680511182,
+            "f1": 0.6423267326732673
+          },
+          "entity_f2": {
+            "precision": 0.7463204195567585,
+            "recall": 0.5637699680511182,
+            "f2": 0.5927682674477978
+          },
+          "cnp_leakage": {
+            "cnp_total": 1123.0,
+            "cnp_detected": 802.0,
+            "cnp_missed": 321.0,
+            "leak_rate": 0.2858414959928762,
+            "leak_rate_ci_low": 0.26018141149023505,
+            "leak_rate_ci_high": 0.3129617286543314,
+            "detection_rate": 0.7141585040071238,
+            "leaked_quasi_identifiers": 963.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "ro-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T21:03:36.676867+00:00"
+      },
+      {
+        "spec": "PII Detection + CNP Leakage — Romanian (synthetic v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "general",
+        "adapter": "gliner2",
+        "model_id": "fastino/gliner2-base-v1",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.8017255152580285,
+            "recall": 0.7734278668310728,
+            "f1": 0.7873225072566095
+          },
+          "entity_f2": {
+            "precision": 0.8017255152580285,
+            "recall": 0.7734278668310728,
+            "f2": 0.7789264536959424
+          },
+          "cnp_leakage": {
+            "cnp_total": 1017.0,
+            "cnp_detected": 935.0,
+            "cnp_missed": 82.0,
+            "leak_rate": 0.08062930186823992,
+            "leak_rate_ci_low": 0.06543134331653028,
+            "leak_rate_ci_high": 0.09898345813903131,
+            "detection_rate": 0.9193706981317601,
+            "leaked_quasi_identifiers": 246.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "ro-synthetic-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T21:03:36.676867+00:00"
+      },
+      {
+        "spec": "PII Detection + PESEL Leakage — Polish (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "pl"
+        ],
+        "domain": "legal",
+        "adapter": "gliner2",
+        "model_id": "fastino/gliner2-base-v1",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.5741733006736068,
+            "recall": 0.47393694319833196,
+            "f1": 0.5192620539268284
+          },
+          "entity_f2": {
+            "precision": 0.5741733006736068,
+            "recall": 0.47393694319833196,
+            "f2": 0.4910831194678678
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1096.0,
+            "decode_bearing_detected": 726.0,
+            "decode_bearing_missed": 370.0,
+            "leak_rate": 0.3375912408759124,
+            "leak_rate_ci_low": 0.31020537398396797,
+            "leak_rate_ci_high": 0.36611160588569736,
+            "detection_rate": 0.6624087591240876,
+            "leaked_quasi_identifiers": 740.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "pl_total": 1096.0,
+            "pl_detected": 726.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "pl-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T21:03:36.676867+00:00"
+      },
+      {
+        "spec": "PII Detection — Dutch (general)",
+        "task": "detection",
+        "languages": [
+          "nl"
+        ],
+        "domain": "general",
+        "adapter": "gliner2",
+        "model_id": "fastino/gliner2-base-v1",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.5070155479711794,
+            "recall": 0.42784,
+            "f1": 0.46407497396737246
+          },
+          "entity_f2": {
+            "precision": 0.5070155479711794,
+            "recall": 0.42784,
+            "f2": 0.44163308449494615
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "nl",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T21:03:36.676867+00:00"
+      },
+      {
+        "spec": "PII Detection — English (general)",
+        "task": "detection",
+        "languages": [
+          "en"
+        ],
+        "domain": "general",
+        "adapter": "gliner2",
+        "model_id": "fastino/gliner2-base-v1",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.5843137254901961,
+            "recall": 0.45288753799392095,
+            "f1": 0.5102739726027398
+          },
+          "entity_f2": {
+            "precision": 0.5843137254901961,
+            "recall": 0.45288753799392095,
+            "f2": 0.47422024188415024
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "en",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T21:03:36.676867+00:00"
+      },
+      {
+        "spec": "PII Detection — French (general)",
+        "task": "detection",
+        "languages": [
+          "fr"
+        ],
+        "domain": "general",
+        "adapter": "gliner2",
+        "model_id": "fastino/gliner2-base-v1",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.5660992394060124,
+            "recall": 0.4757990867579909,
+            "f1": 0.5170360568971222
+          },
+          "entity_f2": {
+            "precision": 0.5660992394060124,
+            "recall": 0.4757990867579909,
+            "f2": 0.4914785233633105
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "fr",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T21:03:36.676867+00:00"
+      },
+      {
+        "spec": "PII Detection — German (general)",
+        "task": "detection",
+        "languages": [
+          "de"
+        ],
+        "domain": "general",
+        "adapter": "gliner2",
+        "model_id": "fastino/gliner2-base-v1",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.560663149962321,
+            "recall": 0.4707371085099652,
+            "f1": 0.511779879621668
+          },
+          "entity_f2": {
+            "precision": 0.560663149962321,
+            "recall": 0.4707371085099652,
+            "f2": 0.486338083409596
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "de",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T21:03:36.676867+00:00"
+      },
+      {
+        "spec": "PII Detection — Italian (general)",
+        "task": "detection",
+        "languages": [
+          "it"
+        ],
+        "domain": "general",
+        "adapter": "gliner2",
+        "model_id": "fastino/gliner2-base-v1",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.5460267505900865,
+            "recall": 0.4278668310727497,
+            "f1": 0.4797787763567231
+          },
+          "entity_f2": {
+            "precision": 0.5460267505900865,
+            "recall": 0.4278668310727497,
+            "f2": 0.447222580229411
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "it",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T21:03:36.676867+00:00"
+      },
+      {
+        "spec": "PII Detection — Spanish (general)",
+        "task": "detection",
+        "languages": [
+          "es"
+        ],
+        "domain": "general",
+        "adapter": "gliner2",
+        "model_id": "fastino/gliner2-base-v1",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.5678598061148397,
+            "recall": 0.4763841101032218,
+            "f1": 0.5181153257356694
+          },
+          "entity_f2": {
+            "precision": 0.5678598061148397,
+            "recall": 0.4763841101032218,
+            "f2": 0.4922430510665805
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "es",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T21:03:36.676867+00:00"
+      }
+    ],
     "gliner::urchade/gliner_multi_pii-v1": [
       {
         "spec": "PII Detection + CNP Leakage — Romanian (real-skeleton v1)",
@@ -2164,6 +2597,439 @@
         "timestamp": "2026-06-01T06:19:19.295690+00:00",
         "contamination": "unknown",
         "config_status": "dev"
+      }
+    ],
+    "spacy::spacy/en_core_web_lg@3.8.0": [
+      {
+        "spec": "PII Detection + CNP Leakage — Romanian (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "legal",
+        "adapter": "spacy",
+        "model_id": "spacy/en_core_web_lg@3.8.0",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.14214258579207295,
+            "recall": 0.14345047923322685,
+            "f1": 0.1427935377178476
+          },
+          "entity_f2": {
+            "precision": 0.14214258579207295,
+            "recall": 0.14345047923322685,
+            "f2": 0.14318697859530066
+          },
+          "cnp_leakage": {
+            "cnp_total": 1123.0,
+            "cnp_detected": 123.0,
+            "cnp_missed": 1000.0,
+            "leak_rate": 0.8904719501335708,
+            "leak_rate_ci_low": 0.8708580149669146,
+            "leak_rate_ci_high": 0.9074236193225146,
+            "detection_rate": 0.10952804986642921,
+            "leaked_quasi_identifiers": 3000.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "ro-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T21:01:59.342983+00:00"
+      },
+      {
+        "spec": "PII Detection + CNP Leakage — Romanian (synthetic v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "general",
+        "adapter": "spacy",
+        "model_id": "spacy/en_core_web_lg@3.8.0",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.30041293874741914,
+            "recall": 0.1345561035758323,
+            "f1": 0.185863317010858
+          },
+          "entity_f2": {
+            "precision": 0.30041293874741914,
+            "recall": 0.1345561035758323,
+            "f2": 0.15125788342920507
+          },
+          "cnp_leakage": {
+            "cnp_total": 1017.0,
+            "cnp_detected": 92.0,
+            "cnp_missed": 925.0,
+            "leak_rate": 0.9095378564405113,
+            "leak_rate_ci_low": 0.8903334845530128,
+            "leak_rate_ci_high": 0.9256600329001142,
+            "detection_rate": 0.09046214355948869,
+            "leaked_quasi_identifiers": 2775.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "ro-synthetic-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T21:01:59.342983+00:00"
+      },
+      {
+        "spec": "PII Detection + PESEL Leakage — Polish (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "pl"
+        ],
+        "domain": "legal",
+        "adapter": "spacy",
+        "model_id": "spacy/en_core_web_lg@3.8.0",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.16719310839913856,
+            "recall": 0.14715359828141783,
+            "f1": 0.15653459690156937
+          },
+          "entity_f2": {
+            "precision": 0.16719310839913856,
+            "recall": 0.14715359828141783,
+            "f2": 0.15076775680364587
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1096.0,
+            "decode_bearing_detected": 606.0,
+            "decode_bearing_missed": 490.0,
+            "leak_rate": 0.4470802919708029,
+            "leak_rate_ci_low": 0.4178808794762689,
+            "leak_rate_ci_high": 0.4766493723913749,
+            "detection_rate": 0.5529197080291971,
+            "leaked_quasi_identifiers": 980.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "pl_total": 1096.0,
+            "pl_detected": 606.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "pl-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T21:01:59.342983+00:00"
+      },
+      {
+        "spec": "PII Detection — Dutch (general)",
+        "task": "detection",
+        "languages": [
+          "nl"
+        ],
+        "domain": "general",
+        "adapter": "spacy",
+        "model_id": "spacy/en_core_web_lg@3.8.0",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.1150278293135436,
+            "recall": 0.0992,
+            "f1": 0.10652920962199312
+          },
+          "entity_f2": {
+            "precision": 0.1150278293135436,
+            "recall": 0.0992,
+            "f2": 0.10200723922342878
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "nl",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T21:01:59.342983+00:00"
+      },
+      {
+        "spec": "PII Detection — English (general)",
+        "task": "detection",
+        "languages": [
+          "en"
+        ],
+        "domain": "general",
+        "adapter": "spacy",
+        "model_id": "spacy/en_core_web_lg@3.8.0",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.48763657274295574,
+            "recall": 0.23431887261674494,
+            "f1": 0.3165360209033221
+          },
+          "entity_f2": {
+            "precision": 0.48763657274295574,
+            "recall": 0.23431887261674494,
+            "f2": 0.26148627813752695
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "en",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T21:01:59.342983+00:00"
+      },
+      {
+        "spec": "PII Detection — French (general)",
+        "task": "detection",
+        "languages": [
+          "fr"
+        ],
+        "domain": "general",
+        "adapter": "spacy",
+        "model_id": "spacy/en_core_web_lg@3.8.0",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.17807389460932768,
+            "recall": 0.08949771689497717,
+            "f1": 0.11912479740680713
+          },
+          "entity_f2": {
+            "precision": 0.17807389460932768,
+            "recall": 0.08949771689497717,
+            "f2": 0.09938476100331282
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "fr",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T21:01:59.342983+00:00"
+      },
+      {
+        "spec": "PII Detection — German (general)",
+        "task": "detection",
+        "languages": [
+          "de"
+        ],
+        "domain": "general",
+        "adapter": "spacy",
+        "model_id": "spacy/en_core_web_lg@3.8.0",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.09355106559645723,
+            "recall": 0.10692818728250554,
+            "f1": 0.09979332742840272
+          },
+          "entity_f2": {
+            "precision": 0.09355106559645723,
+            "recall": 0.10692818728250554,
+            "f2": 0.10395521929015193
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "de",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T21:01:59.342983+00:00"
+      },
+      {
+        "spec": "PII Detection — Italian (general)",
+        "task": "detection",
+        "languages": [
+          "it"
+        ],
+        "domain": "general",
+        "adapter": "spacy",
+        "model_id": "spacy/en_core_web_lg@3.8.0",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.11815812337098175,
+            "recall": 0.08384710234278668,
+            "f1": 0.09808871258564729
+          },
+          "entity_f2": {
+            "precision": 0.11815812337098175,
+            "recall": 0.08384710234278668,
+            "f2": 0.08901688702709779
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "it",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T21:01:59.342983+00:00"
+      },
+      {
+        "spec": "PII Detection — Spanish (general)",
+        "task": "detection",
+        "languages": [
+          "es"
+        ],
+        "domain": "general",
+        "adapter": "spacy",
+        "model_id": "spacy/en_core_web_lg@3.8.0",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.12057522123893805,
+            "recall": 0.06818892711917422,
+            "f1": 0.0871128871128871
+          },
+          "entity_f2": {
+            "precision": 0.12057522123893805,
+            "recall": 0.06818892711917422,
+            "f2": 0.07467799397095094
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "es",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T21:01:59.342983+00:00"
       }
     ],
     "tabularisai::tabularisai/eu-pii-safeguard": [
