@@ -1413,6 +1413,68 @@
         "timestamp": "2026-06-02T04:53:42.999082+00:00"
       },
       {
+        "spec": "PII Detection + PESEL Leakage — Polish (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "pl"
+        ],
+        "domain": "legal",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.4548580754211109,
+            "recall": 0.4930814431035572,
+            "f1": 0.4731991268493815
+          },
+          "entity_f2": {
+            "precision": 0.4548580754211109,
+            "recall": 0.4930814431035572,
+            "f2": 0.4849313366059778
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1096.0,
+            "decode_bearing_detected": 1096.0,
+            "decode_bearing_missed": 0.0,
+            "leak_rate": 0.0,
+            "leak_rate_ci_low": 0.0,
+            "leak_rate_ci_high": 0.003492724542564693,
+            "detection_rate": 1.0,
+            "leaked_quasi_identifiers": 0.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "pl_total": 1096.0,
+            "pl_detected": 1096.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "pl-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-06-02T11:04:28.490593+00:00"
+      },
+      {
         "spec": "PII Detection — Dutch (general)",
         "task": "detection",
         "languages": [
