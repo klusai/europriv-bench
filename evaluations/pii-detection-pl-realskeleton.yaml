@@ -1,0 +1,27 @@
+name: "PII Detection + PESEL Leakage — Polish (real-skeleton v1)"
+version: 1
+task: detection
+domain: legal
+languages: [pl]
+
+dataset:
+  hf_id: klusai/europriv-bench
+  config: pl-realskeleton-v1
+  split: test
+  license: CC-BY-4.0
+
+metrics:
+  - entity_f1
+  - entity_f2
+  - national_id_leakage
+
+description: >
+  The CITABLE Polish track and the SECOND decode-bearing measurement (after
+  ro-realskeleton-v1): faithful real-structure documents (hospital discharge card
+  KARTA INFORMACYJNA, services contract UMOWA, declaration OŚWIADCZENIE, administrative
+  letter) with synthetic PII (PESEL-consistent DOB). Headline is national_id_leakage —
+  rows carry country=PL so it dispatches to the PESEL validator; a missed PESEL is a
+  deterministic DOB+sex disclosure. Re-identification is counted per distinct subject
+  (the discharge card repeats the PESEL → one subject, KLU-49 dedup). Together with
+  ro-realskeleton-v1 this tests whether the train-for-protection result replicates on a
+  second identifier (PESEL) in a second language (PL).

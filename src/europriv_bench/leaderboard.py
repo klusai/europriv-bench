@@ -8,8 +8,9 @@ governance markers:
     ``in_distribution`` (the model was trained on the same source data), ``clean_held_out``
     (no baseline was trained on this data — a fair held-out test), or ``unknown`` (overlap not
     established). OpenMed and tabularisai were trained on AI4Privacy, which is the source of the
-    six general-text configs (en/de/fr/it/es/nl), so those rows are ``in_distribution``. The RO
-    real-skeleton track (``ro-realskeleton-v1``) is ``clean_held_out`` for every model.
+    six general-text configs (en/de/fr/it/es/nl), so those rows are ``in_distribution``. The
+    real-skeleton tracks (``ro-realskeleton-v1``, ``pl-realskeleton-v1``) are ``clean_held_out``
+    for every model.
   * **config_status** — ``dev`` (default; usable for iteration, MUST NOT be cited as a validated
     result) or ``citable-validated`` (promotable ONLY after native-speaker review + IAA sign-off
     on the gold data — that gate lands in KLU-27). Everything defaults to ``dev`` here: no config
@@ -42,9 +43,9 @@ DEFAULT_CONFIG_STATUS = DEV
 _AI4PRIVACY_TRAINED_ADAPTERS = frozenset({"openmed", "tabularisai"})
 _AI4PRIVACY_CONFIGS = frozenset({"en", "de", "fr", "it", "es", "nl"})
 
-# The RO real-skeleton track is a genuinely clean held-out set: no baseline on the board was
-# trained on it. Marked clean_held_out for every model.
-_CLEAN_HELD_OUT_CONFIGS = frozenset({"ro-realskeleton-v1"})
+# The real-skeleton tracks (RO/CNP, PL/PESEL) are genuinely clean held-out sets: no baseline on
+# the board was trained on them. Marked clean_held_out for every model.
+_CLEAN_HELD_OUT_CONFIGS = frozenset({"ro-realskeleton-v1", "pl-realskeleton-v1"})
 
 
 def classify_contamination(adapter: str | None, config: str | None) -> str:
