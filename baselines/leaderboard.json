@@ -3,6 +3,66 @@
   "entries": {
     "gliner2::fastino/gliner2-base-v1": [
       {
+        "spec": "PII Detection + CNP Leakage — Legal domain (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "legal",
+        "adapter": "gliner2",
+        "model_id": "fastino/gliner2-base-v1",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.825316895294322,
+            "recall": 0.5591106928596635,
+            "f1": 0.6666199158485273
+          },
+          "entity_f2": {
+            "precision": 0.825316895294322,
+            "recall": 0.5591106928596635,
+            "f2": 0.5976661720695119
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1500.0,
+            "decode_bearing_detected": 519.0,
+            "decode_bearing_missed": 981.0,
+            "leak_rate": 0.654,
+            "leak_rate_ci_low": 0.6295612620145388,
+            "leak_rate_ci_high": 0.6776519765144022,
+            "detection_rate": 0.346,
+            "leaked_quasi_identifiers": 2943.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1500.0,
+            "ro_detected": 519.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "legal-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      },
+      {
         "spec": "PII Detection + CNP Leakage — Romanian (real-skeleton v1)",
         "task": "detection",
         "languages": [
@@ -497,6 +557,66 @@
       }
     ],
     "gliner::urchade/gliner_multi_pii-v1": [
+      {
+        "spec": "PII Detection + CNP Leakage — Legal domain (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "legal",
+        "adapter": "gliner",
+        "model_id": "urchade/gliner_multi_pii-v1",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.8925768593851249,
+            "recall": 0.7291495118221386,
+            "f1": 0.8026285973260822
+          },
+          "entity_f2": {
+            "precision": 0.8925768593851249,
+            "recall": 0.7291495118221386,
+            "f2": 0.7568653308423996
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1500.0,
+            "decode_bearing_detected": 424.0,
+            "decode_bearing_missed": 1076.0,
+            "leak_rate": 0.7173333333333334,
+            "leak_rate_ci_low": 0.6940128839354436,
+            "leak_rate_ci_high": 0.7395434613478238,
+            "detection_rate": 0.2826666666666667,
+            "leaked_quasi_identifiers": 3228.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1500.0,
+            "ro_detected": 424.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "legal-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      },
       {
         "spec": "PII Detection + CNP Leakage — Romanian (real-skeleton v1)",
         "task": "detection",
@@ -993,6 +1113,66 @@
     ],
     "kp-model::klusai/kp-deid-mdeberta-280m": [
       {
+        "spec": "PII Detection + CNP Leakage — Legal domain (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "legal",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-mdeberta-280m",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.5151668565160529,
+            "recall": 0.718209622397365,
+            "f1": 0.5999754329934898
+          },
+          "entity_f2": {
+            "precision": 0.5151668565160529,
+            "recall": 0.718209622397365,
+            "f2": 0.6657325729737982
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1500.0,
+            "decode_bearing_detected": 1439.0,
+            "decode_bearing_missed": 61.0,
+            "leak_rate": 0.04066666666666666,
+            "leak_rate_ci_low": 0.03178852843796518,
+            "leak_rate_ci_high": 0.051891465733288754,
+            "detection_rate": 0.9593333333333334,
+            "leaked_quasi_identifiers": 183.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1500.0,
+            "ro_detected": 1439.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "legal-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      },
+      {
         "spec": "PII Detection + CNP Leakage — Romanian (real-skeleton v1)",
         "task": "detection",
         "languages": [
@@ -1487,6 +1667,66 @@
       }
     ],
     "openmed::OpenMed/privacy-filter-multilingual": [
+      {
+        "spec": "PII Detection + CNP Leakage — Legal domain (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "legal",
+        "adapter": "openmed",
+        "model_id": "OpenMed/privacy-filter-multilingual",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.5568627450980392,
+            "recall": 0.44265380543465477,
+            "f1": 0.49323327981125276
+          },
+          "entity_f2": {
+            "precision": 0.5568627450980392,
+            "recall": 0.44265380543465477,
+            "f2": 0.46158752744624215
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1500.0,
+            "decode_bearing_detected": 242.0,
+            "decode_bearing_missed": 1258.0,
+            "leak_rate": 0.8386666666666667,
+            "leak_rate_ci_low": 0.8191904451169637,
+            "leak_rate_ci_high": 0.8564126941588025,
+            "detection_rate": 0.16133333333333333,
+            "leaked_quasi_identifiers": 3774.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1500.0,
+            "ro_detected": 242.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "legal-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      },
       {
         "spec": "PII Detection + CNP Leakage — Romanian (real-skeleton v1)",
         "task": "detection",
@@ -1983,6 +2223,66 @@
     ],
     "presidio::presidio-analyzer+en_core_web_lg": [
       {
+        "spec": "PII Detection + CNP Leakage — Legal domain (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "legal",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.4294591484464902,
+            "recall": 0.4390071756263969,
+            "f1": 0.4341806759350823
+          },
+          "entity_f2": {
+            "precision": 0.4294591484464902,
+            "recall": 0.4390071756263969,
+            "f2": 0.43706375603129244
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1500.0,
+            "decode_bearing_detected": 503.0,
+            "decode_bearing_missed": 997.0,
+            "leak_rate": 0.6646666666666666,
+            "leak_rate_ci_low": 0.6403814494051044,
+            "leak_rate_ci_high": 0.6881106281561441,
+            "detection_rate": 0.3353333333333333,
+            "leaked_quasi_identifiers": 2991.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1500.0,
+            "ro_detected": 503.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "legal-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      },
+      {
         "spec": "PII Detection + CNP Leakage — Romanian (real-skeleton v1)",
         "task": "detection",
         "languages": [
@@ -2477,6 +2777,66 @@
       }
     ],
     "privacy-filter::openai/privacy-filter": [
+      {
+        "spec": "PII Detection + CNP Leakage — Legal domain (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "legal",
+        "adapter": "privacy-filter",
+        "model_id": "openai/privacy-filter",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.3754640706212359,
+            "recall": 0.26767439124808845,
+            "f1": 0.31253648319197885
+          },
+          "entity_f2": {
+            "precision": 0.3754640706212359,
+            "recall": 0.26767439124808845,
+            "f2": 0.28397958292253744
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1500.0,
+            "decode_bearing_detected": 50.0,
+            "decode_bearing_missed": 1450.0,
+            "leak_rate": 0.9666666666666667,
+            "leak_rate_ci_low": 0.9563241877586719,
+            "leak_rate_ci_high": 0.9746250199047857,
+            "detection_rate": 0.03333333333333333,
+            "leaked_quasi_identifiers": 4350.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1500.0,
+            "ro_detected": 50.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "legal-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      },
       {
         "spec": "PII Detection + CNP Leakage — Romanian (real-skeleton v1)",
         "task": "detection",
@@ -2973,6 +3333,66 @@
     ],
     "spacy::spacy/en_core_web_lg@3.8.0": [
       {
+        "spec": "PII Detection + CNP Leakage — Legal domain (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "legal",
+        "adapter": "spacy",
+        "model_id": "spacy/en_core_web_lg@3.8.0",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.10930475128583246,
+            "recall": 0.17874367721444537,
+            "f1": 0.13565450284566455
+          },
+          "entity_f2": {
+            "precision": 0.10930475128583246,
+            "recall": 0.17874367721444537,
+            "f2": 0.1585934809155525
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1500.0,
+            "decode_bearing_detected": 510.0,
+            "decode_bearing_missed": 990.0,
+            "leak_rate": 0.66,
+            "leak_rate_ci_low": 0.635645959782899,
+            "leak_rate_ci_high": 0.683536625701715,
+            "detection_rate": 0.34,
+            "leaked_quasi_identifiers": 2970.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1500.0,
+            "ro_detected": 510.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "legal-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      },
+      {
         "spec": "PII Detection + CNP Leakage — Romanian (real-skeleton v1)",
         "task": "detection",
         "languages": [
@@ -3467,6 +3887,66 @@
       }
     ],
     "tabularisai::tabularisai/eu-pii-safeguard": [
+      {
+        "spec": "PII Detection + CNP Leakage — Legal domain (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "legal",
+        "adapter": "tabularisai",
+        "model_id": "tabularisai/eu-pii-safeguard",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.7782228696285506,
+            "recall": 0.5027643806610987,
+            "f1": 0.610876867004931
+          },
+          "entity_f2": {
+            "precision": 0.7782228696285506,
+            "recall": 0.5027643806610987,
+            "f2": 0.5410674498683411
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1500.0,
+            "decode_bearing_detected": 1091.0,
+            "decode_bearing_missed": 409.0,
+            "leak_rate": 0.27266666666666667,
+            "leak_rate_ci_low": 0.2507322937520253,
+            "leak_rate_ci_high": 0.295762449371919,
+            "detection_rate": 0.7273333333333334,
+            "leaked_quasi_identifiers": 1227.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1500.0,
+            "ro_detected": 1091.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "legal-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      },
       {
         "spec": "PII Detection + CNP Leakage — Romanian (real-skeleton v1)",
         "task": "detection",

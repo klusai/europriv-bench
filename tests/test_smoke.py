@@ -105,9 +105,13 @@ def test_classify_contamination_known_cases():
     # en is a trained language but the board's en config is a different (AI4Privacy) generator, and
     # the KLU-44 held-out eval-loss is implausibly low (KLU-54) → unknown, NEVER clean_held_out.
     assert classify_contamination("kp-model", "en") == "unknown"
-    # The real-skeleton tracks stay clean_held_out for kp-model too.
+    # The real-skeleton tracks stay clean_held_out for kp-model too — including the legal-domain
+    # track (KLU-111): an authored legal-genre skeleton, distinct from any training config, even
+    # though it reuses the RO PII generators (the same basis as ro-realskeleton-v1).
     assert classify_contamination("kp-model", "ro-realskeleton-v1") == "clean_held_out"
     assert classify_contamination("kp-model", "pl-realskeleton-v1") == "clean_held_out"
+    assert classify_contamination("kp-model", "legal-realskeleton-v1") == "clean_held_out"
+    assert classify_contamination("presidio", "legal-realskeleton-v1") == "clean_held_out"
 
 
 def test_build_leaderboard_annotates_both_markers_defaulting_to_dev():
