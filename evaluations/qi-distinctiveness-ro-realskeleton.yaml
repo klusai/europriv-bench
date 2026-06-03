@@ -1,0 +1,49 @@
+name: "QI Distinctiveness (name-in-context leak) — Romanian (real-skeleton v1)"
+version: 1
+task: detection
+domain: legal
+languages: [ro]
+
+dataset:
+  hf_id: klusai/europriv-bench
+  config: ro-realskeleton-v1
+  split: test
+  license: CC-BY-4.0
+
+metrics:
+  - entity_f1
+  - entity_f2
+  - national_id_leakage
+  - name_in_context_leakage
+  - k_anonymity_violation
+
+description: >
+  KLU-118 v1 — the SECOND, non-token re-identification mechanism, wired on the EXISTING
+  ro-realskeleton-v1 config (no new data). config_status=dev: NOT a citable/validated/headline
+  result, gated on KLU-27 (native-speaker review + IAA) before any public number.
+
+  CLAIM LANGUAGE (hard rule, KLU-118 design panel): "re-identification" is reserved for the
+  deterministic national-ID anchor (national_id_leakage, the CNP channel). The new channels are
+  "residual quasi-identifier distinctiveness" / "name-in-context leak" / "k-anonymity violation" —
+  NEVER "re-identification rate" on synthetic data.
+
+  Metrics:
+    * national_id_leakage — the structured-ID anchor (the original dissociation evidence): a missed
+      CNP deterministically discloses DOB+SEX+COUNTY. Per-distinct-subject (doc, country, value),
+      95% Wilson CI. This is the PRIMARY evidence; the name channel CORROBORATES, never replaces it.
+    * name_in_context_leakage — the v1 second (non-token) channel: per distinct PERSON subject
+      (doc, country, normalized name), a leak iff the full name is left un-redacted on the
+      POST-DETECTION RESIDUAL (NOT raw text — a name detection would have removed cannot leak).
+      Reports the name-leak rate (95% Wilson CI) and a 2x2 cross-tab vs the national-ID anchor
+      (per document carrying both channels: id-leaked x name-leaked -> both/id-only/name-only/
+      neither) to show the two channels are INDEPENDENT. A null/weak result — the name channel does
+      NOT reproduce the structured-ID dissociation — is an EXPECTED, valid, thesis-sharpening
+      finding and is reported honestly (it would mean the dissociation is specific to structured,
+      decode-bearing identifiers). Nothing is tuned to manufacture a leak.
+    * k_anonymity_violation — an EXPLORATORY diagnostic over the residual QI tuple, labelled
+      "sample distinctiveness, not population re-identification" and NEVER a headline scalar (it
+      emits the within-corpus equivalence-class-size distribution + k=1/k<5 rates). The current gold
+      carries only entity-type spans, not binned QI tuples typed to the frozen v1 QI schema, so this
+      SKIPS-AND-REPORTS cleanly (available=false + reason) rather than fabricating QIs; enabling it
+      is follow-up work (the reference-population / QI-tagging track, KLU-122). v2 PURR is NOT built
+      here.

@@ -1,0 +1,91 @@
+{
+  "config": "ro-realskeleton-v1",
+  "config_status": "dev",
+  "claim_language": "name-in-context leak / residual quasi-identifier distinctiveness on synthetic data; NOT a re-identification rate (reserved for the national-ID anchor)",
+  "models": {
+    "kp-model": {
+      "model_id": "klusai/kp-deid-mdeberta-280m",
+      "detection_f1": 0.5711766434799648,
+      "id_leak_rate": 0.0,
+      "id_leak_ci": [
+        8.673617379884035e-19,
+        0.008654989885329735
+      ],
+      "id_subjects": 440,
+      "name_leak_rate": 0.0,
+      "name_leak_ci": [
+        0.0,
+        0.005609244650325836
+      ],
+      "name_subjects": 681,
+      "xtab": {
+        "docs": 440,
+        "both_leaked": 0,
+        "id_only_leaked": 0,
+        "name_only_leaked": 0,
+        "neither_leaked": 440
+      },
+      "k_anonymity_violation": {
+        "available": false,
+        "reason": "QI diagnostic unavailable: gold lacks QI tagging. The k-anonymity-violation diagnostic needs a residual quasi-identifier TUPLE per subject (binned QI values typed to the frozen v1 QI schema: DOB/age band, sex, locality/NUTS, nationality, profession/ISCO, rare-condition flag). The current gold carries only entity-type spans {start,end,label}, not binned QI values, so no equivalence-class key can be formed without fabricating QIs. Follow-up: tag QI values in gold (KLU-122 / the reference-population work) before enabling this diagnostic.",
+        "label": "sample distinctiveness, not population re-identification"
+      }
+    },
+    "presidio": {
+      "model_id": "presidio-analyzer+en_core_web_lg",
+      "detection_f1": 0.43949367088607594,
+      "id_leak_rate": 0.0,
+      "id_leak_ci": [
+        8.673617379884035e-19,
+        0.008654989885329735
+      ],
+      "id_subjects": 440,
+      "name_leak_rate": 0.13656387665198239,
+      "name_leak_ci": [
+        0.11280392444665518,
+        0.1644010331185596
+      ],
+      "name_subjects": 681,
+      "xtab": {
+        "docs": 440,
+        "both_leaked": 0,
+        "id_only_leaked": 0,
+        "name_only_leaked": 71,
+        "neither_leaked": 369
+      },
+      "k_anonymity_violation": {
+        "available": false,
+        "reason": "QI diagnostic unavailable: gold lacks QI tagging. The k-anonymity-violation diagnostic needs a residual quasi-identifier TUPLE per subject (binned QI values typed to the frozen v1 QI schema: DOB/age band, sex, locality/NUTS, nationality, profession/ISCO, rare-condition flag). The current gold carries only entity-type spans {start,end,label}, not binned QI values, so no equivalence-class key can be formed without fabricating QIs. Follow-up: tag QI values in gold (KLU-122 / the reference-population work) before enabling this diagnostic.",
+        "label": "sample distinctiveness, not population re-identification"
+      }
+    },
+    "spacy": {
+      "model_id": "spacy/en_core_web_lg@3.8.0",
+      "detection_f1": 0.1410131514856308,
+      "id_leak_rate": 0.9045454545454545,
+      "id_leak_ci": [
+        0.873484057195068,
+        0.9286041782613469
+      ],
+      "id_subjects": 440,
+      "name_leak_rate": 0.06754772393538913,
+      "name_leak_ci": [
+        0.05102134106563279,
+        0.08892556803721878
+      ],
+      "name_subjects": 681,
+      "xtab": {
+        "docs": 440,
+        "both_leaked": 24,
+        "id_only_leaked": 374,
+        "name_only_leaked": 1,
+        "neither_leaked": 41
+      },
+      "k_anonymity_violation": {
+        "available": false,
+        "reason": "QI diagnostic unavailable: gold lacks QI tagging. The k-anonymity-violation diagnostic needs a residual quasi-identifier TUPLE per subject (binned QI values typed to the frozen v1 QI schema: DOB/age band, sex, locality/NUTS, nationality, profession/ISCO, rare-condition flag). The current gold carries only entity-type spans {start,end,label}, not binned QI values, so no equivalence-class key can be formed without fabricating QIs. Follow-up: tag QI values in gold (KLU-122 / the reference-population work) before enabling this diagnostic.",
+        "label": "sample distinctiveness, not population re-identification"
+      }
+    }
+  }
+}

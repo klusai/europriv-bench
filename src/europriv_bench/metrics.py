@@ -293,6 +293,207 @@ def cnp_leakage(rows: Sequence[dict], pred_tags: Tags) -> dict[str, float]:
 
 
 # =============================================================================================
+# KLU-118 v1 — the SECOND, non-token re-identification mechanism: name-in-context residual leak.
+#
+# CLAIM LANGUAGE (hard rule, from the design panel's red-team — docs/klu-118-qi-distinctiveness-
+# design.md): this channel is a **"name-in-context leak" / "residual quasi-identifier
+# distinctiveness"**, NEVER a "re-identification rate" on synthetic data. "Re-identification" is
+# reserved for the deterministic national-ID anchor (``national_id_leakage``). A leaked PERSON full
+# name left un-redacted on the POST-DETECTION RESIDUAL is a re-identifying signal that needs no
+# reference-population model — but on synthetic documents it is a distinctiveness signal, not a
+# population re-id. All outputs are config_status=dev and gated on KLU-27 before any headline use.
+#
+# Computed on the residual (the model's own redaction decision), NOT raw text: a name a detector
+# would have removed cannot "leak". The unit is the SAME per-distinct-subject shape as the
+# national-ID anchor — ``(doc, country, subject)`` — so the two channels are directly comparable,
+# and we emit a 2×2 cross-tab per document (ID-leaked × name-leaked → both/either/neither) to show
+# the channels are INDEPENDENT. A null/weak name-leak dissociation is an expected, valid finding
+# (it would mean the dissociation is specific to structured, decode-bearing IDs) — reported as-is.
+# =============================================================================================
+
+
+def _person_name_subjects(rows: Sequence[dict], pred_tags: Tags) -> dict[tuple[int, str, str], dict]:
+    """Per-distinct-subject PERSON-name residual-detection table, mirroring ``_national_id_subjects``.
+
+    Key ``(document index, country, normalized name)`` — one distinct PERSON full-name value within
+    one document. A subject is **detected iff EVERY occurrence is detected** (a span is detected iff
+    the model marks any of its whitespace tokens non-O on the residual), so it **leaks iff ANY
+    occurrence is left un-redacted** — exactly the per-subject (KLU-49) semantics the national-ID
+    leak metric uses, so the two channels line up subject-for-subject and document-for-document.
+
+    Only gold ``PERSON`` spans become subjects (the v1 name channel; direct identifiers other than
+    the name and the IDs are out of scope here). The country tag is carried for unit-shape parity
+    with the anchor; it does not gate which spans count (every country's names are in scope).
+    """
+    subjects: dict[tuple[int, str, str], dict] = {}
+    for doc_idx, (row, pred) in enumerate(zip(rows, pred_tags)):
+        toks = whitespace_tokens(row["text"])
+        for sp in row.get("spans", []):
+            if sp.get("label") != "PERSON":
+                continue
+            cc = _span_country(row, sp)
+            raw = row["text"][sp["start"]:sp["end"]]
+            name = " ".join(raw.split())  # normalize internal whitespace so repeats collapse to one subject
+            if not name:
+                continue
+            members = [i for i, (_, ts, te) in enumerate(toks) if ts < sp["end"] and te > sp["start"]]
+            detected = any(pred[i] != "O" for i in members if i < len(pred))
+            key = (doc_idx, cc, name)
+            subj = subjects.get(key)
+            if subj is None:
+                subj = {"doc": doc_idx, "country": cc, "name": name, "detected": True}
+                subjects[key] = subj
+            subj["detected"] = subj["detected"] and detected
+    return subjects
+
+
+def name_in_context_leakage(rows: Sequence[dict], pred_tags: Tags) -> dict[str, float]:
+    """Name-in-context residual leak — the KLU-118 v1 second (non-token) re-identification channel.
+
+    NOT a "re-identification rate": this is a **name-in-context leak / residual quasi-identifier
+    distinctiveness** signal (claim-language rule, KLU-118 design doc). For each distinct PERSON
+    subject ``(doc, country, normalized name)`` (same unit shape as the national-ID anchor), the
+    subject **leaks** iff its full name is left un-redacted on the POST-DETECTION RESIDUAL (the model
+    marked none of an occurrence's whitespace tokens; a leak iff ANY occurrence survives). Computed
+    on the residual, never raw text — a name detection would have removed cannot leak.
+
+    Returns the per-subject **name-leak rate** (↓ better) with a 95% Wilson CI (shared
+    ``_leak_rate_stats``), and a per-document **2×2 cross-tab vs the national-ID anchor** to show the
+    two channels are independent. A document is *id_leaked* iff any decode-bearing national-ID subject
+    in it leaked, *name_leaked* iff any PERSON subject in it leaked; the cross-tab counts documents
+    that carry BOTH channels (so the comparison is apples-to-apples) into
+    ``both`` / ``id_only`` / ``name_only`` / ``neither``. A null/weak result (the name channel does
+    NOT reproduce the structured-ID dissociation) is an expected, reportable finding.
+    """
+    name_subjects = _person_name_subjects(rows, pred_tags)
+    total = len(name_subjects)
+    leaked = sum(1 for s in name_subjects.values() if not s["detected"])
+    stats = _leak_rate_stats(leaked, total)
+
+    # Per-document 2×2 cross-tab vs the deterministic national-ID anchor. Only documents that carry
+    # BOTH a (decode-bearing) national-ID subject AND a PERSON subject enter the cross-tab, so the
+    # channels are compared on the same individuals' documents.
+    id_subjects = _national_id_subjects(rows, pred_tags)
+    id_leaked_doc: dict[int, bool] = {}
+    for (doc_idx, _cc, _v), subj in id_subjects.items():
+        if subj["decode_bearing"]:
+            id_leaked_doc[doc_idx] = id_leaked_doc.get(doc_idx, False) or (not subj["detected"])
+    name_leaked_doc: dict[int, bool] = {}
+    for (doc_idx, _cc, _n), subj in name_subjects.items():
+        name_leaked_doc[doc_idx] = name_leaked_doc.get(doc_idx, False) or (not subj["detected"])
+
+    both = id_only = name_only = neither = 0
+    for doc_idx in id_leaked_doc.keys() & name_leaked_doc.keys():
+        idl = id_leaked_doc[doc_idx]
+        nml = name_leaked_doc[doc_idx]
+        if idl and nml:
+            both += 1
+        elif idl and not nml:
+            id_only += 1
+        elif nml and not idl:
+            name_only += 1
+        else:
+            neither += 1
+
+    return {
+        "name_subjects_total": float(total),
+        "name_subjects_leaked": float(leaked),
+        # NB: a name-in-context leak rate, NOT a re-identification rate (synthetic distinctiveness).
+        "name_leak_rate": stats["leak_rate"],                  # ↓ better
+        "name_leak_rate_ci_low": stats["leak_rate_ci_low"],    # 95% Wilson lower bound
+        "name_leak_rate_ci_high": stats["leak_rate_ci_high"],  # 95% Wilson upper bound
+        # 2×2 cross-tab vs the national-ID anchor (per document carrying BOTH channels): the channels
+        # are INDEPENDENT iff name leaks are not concentrated in the same docs as ID leaks.
+        "xtab_docs": float(both + id_only + name_only + neither),
+        "xtab_both_leaked": float(both),
+        "xtab_id_only_leaked": float(id_only),
+        "xtab_name_only_leaked": float(name_only),
+        "xtab_neither_leaked": float(neither),
+    }
+
+
+# --- KLU-118 v1 scope item 2: k-anonymity-violation diagnostic over the residual QI tuple ----
+#
+# This is an EXPLORATORY diagnostic, NEVER a headline number, and labelled "sample distinctiveness,
+# not population re-identification" (design-doc hard rule). It needs a residual QI TUPLE per subject
+# — binned quasi-identifier VALUES per the frozen v1 QI schema (DOB/age band, sex, locality/NUTS,
+# nationality, profession/ISCO, rare-condition flag; see the design doc's schema.py). The current
+# gold carries only entity-type SPANS ``{start, end, label}`` (e.g. DATE/ADDRESS/HEALTH_CONDITION),
+# NOT binned QI values typed to that schema, so an equivalence-class key cannot be formed without
+# fabricating QIs. Per the design doc we SKIP-AND-REPORT cleanly rather than invent QIs.
+
+
+_KANON_UNAVAILABLE_REASON = (
+    "QI diagnostic unavailable: gold lacks QI tagging. The k-anonymity-violation diagnostic needs a "
+    "residual quasi-identifier TUPLE per subject (binned QI values typed to the frozen v1 QI schema: "
+    "DOB/age band, sex, locality/NUTS, nationality, profession/ISCO, rare-condition flag). The "
+    "current gold carries only entity-type spans {start,end,label}, not binned QI values, so no "
+    "equivalence-class key can be formed without fabricating QIs. Follow-up: tag QI values in gold "
+    "(KLU-122 / the reference-population work) before enabling this diagnostic."
+)
+
+
+def _gold_has_qi_tuples(rows: Sequence[dict]) -> bool:
+    """True iff gold rows carry a per-subject quasi-identifier TUPLE (binned QI values, not spans).
+
+    We look for an explicit ``qi`` mapping on a span or a row-level ``qi_tuple``/``quasi_identifiers``
+    field — the shape the k-anon equivalence-class key would be built from. Entity-type spans alone
+    (``{start, end, label}``) do NOT qualify: a ``DATE`` or ``ADDRESS`` label is not a binned QI value
+    typed to the frozen schema. Returns False for today's gold (→ skip-and-report).
+    """
+    for row in rows:
+        if isinstance(row.get("qi_tuple"), dict) or isinstance(row.get("quasi_identifiers"), dict):
+            return True
+        for sp in row.get("spans", []):
+            if isinstance(sp.get("qi"), dict):
+                return True
+    return False
+
+
+def k_anonymity_violation(rows: Sequence[dict], pred_tags: Tags | None = None) -> dict[str, object]:
+    """k-anonymity-violation diagnostic over the residual QI tuple — EXPLORATORY, NEVER a headline.
+
+    LABEL (hard rule): this measures **"sample distinctiveness, not population re-identification."**
+    When gold carries binned QI tuples it would report the **within-corpus equivalence-class-size
+    distribution** (a histogram, never a single scalar) plus the k=1 and k<5 violation rates over the
+    POST-DETECTION RESIDUAL QI tuple. The current gold lacks QI tagging (see ``_gold_has_qi_tuples``),
+    so this **skip-and-reports** cleanly with ``available=False`` and a reason, rather than fabricating
+    QIs. ``pred_tags`` is accepted for signature parity with the residual computation (unused on skip).
+    """
+    if not _gold_has_qi_tuples(rows):
+        return {
+            "available": False,
+            "reason": _KANON_UNAVAILABLE_REASON,
+            "label": "sample distinctiveness, not population re-identification",
+        }
+    # Gold DOES carry QI tuples → build the within-corpus equivalence-class-size distribution over the
+    # residual QI tuple. (Reached only once QI tagging lands; kept minimal + dependency-free.)
+    from collections import Counter
+
+    classes: Counter[tuple] = Counter()
+    for row in rows:
+        qi = row.get("qi_tuple") or row.get("quasi_identifiers") or {}
+        classes[tuple(sorted(qi.items()))] += 1
+    sizes = sorted(classes.values())
+    n = sum(sizes)
+    size_hist: dict[int, int] = {}
+    for s in sizes:
+        size_hist[s] = size_hist.get(s, 0) + 1
+    k1 = sum(c for c in sizes if c == 1)
+    klt5 = sum(c for c in sizes if c < 5)
+    return {
+        "available": True,
+        "label": "sample distinctiveness, not population re-identification",
+        # The required distribution — emitted instead of a single headline scalar.
+        "equivalence_class_size_histogram": {int(k): int(v) for k, v in sorted(size_hist.items())},
+        "n_subjects": int(n),
+        "n_equivalence_classes": int(len(classes)),
+        "k1_violation_rate": (k1 / n) if n else 0.0,      # fraction of subjects in a unique (k=1) class
+        "klt5_violation_rate": (klt5 / n) if n else 0.0,  # fraction of subjects in a k<5 class
+    }
+
+
+# =============================================================================================
 # Track C — anonymization + downstream-utility (KLU-104).
 #
 # These score an adapter's *redacted text output* (one string per doc), NOT BIOES tags. The unit
@@ -566,6 +767,11 @@ REGISTRY: dict[str, Callable] = {
 ROW_REGISTRY: dict[str, Callable] = {
     "national_id_leakage": national_id_leakage,
     "cnp_leakage": cnp_leakage,  # back-compat alias scoped to RO (same re-id-risk family)
+    # KLU-118 v1 — name-in-context residual leak (the second, non-token re-id channel) + the
+    # exploratory k-anonymity-violation diagnostic. Both take (rows, pred_tags); k_anonymity_violation
+    # skip-and-reports when gold lacks QI tuples. Computed on the POST-DETECTION RESIDUAL.
+    "name_in_context_leakage": name_in_context_leakage,
+    "k_anonymity_violation": k_anonymity_violation,
 }
 
 # Track-C anonymization metrics: called as fn(gold_rows, redacted_texts) — score the adapter's
