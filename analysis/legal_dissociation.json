@@ -1,0 +1,190 @@
+{
+  "config": "legal-realskeleton-v1",
+  "country": "RO",
+  "domain": "legal",
+  "dissociation": {
+    "protector": "kp-model",
+    "protector_leak_rate": 0.04066666666666666,
+    "protector_missed": 61,
+    "protector_total": 1500,
+    "protector_leak_wilson_low": 0.03178852843796518,
+    "protector_leak_wilson_high": 0.051891465733288754,
+    "protector_leaked_quasi_identifiers": 183,
+    "gaps": [
+      {
+        "detector": "gliner",
+        "detector_leak_rate": 0.7173333333333334,
+        "detector_missed": 1076,
+        "detector_total": 1500,
+        "protector": "kp-model",
+        "protector_leak_rate": 0.04066666666666666,
+        "protector_missed": 61,
+        "protector_total": 1500,
+        "gap": 0.6766666666666667,
+        "gap_ci_low": 0.6507854094675742,
+        "gap_ci_high": 0.7005855112212848,
+        "dissociation_holds": true
+      },
+      {
+        "detector": "gliner2",
+        "detector_leak_rate": 0.654,
+        "detector_missed": 981,
+        "detector_total": 1500,
+        "protector": "kp-model",
+        "protector_leak_rate": 0.04066666666666666,
+        "protector_missed": 61,
+        "protector_total": 1500,
+        "gap": 0.6133333333333334,
+        "gap_ci_low": 0.5864400622714475,
+        "gap_ci_high": 0.6385966927980951,
+        "dissociation_holds": true
+      },
+      {
+        "detector": "openmed",
+        "detector_leak_rate": 0.8386666666666667,
+        "detector_missed": 1258,
+        "detector_total": 1500,
+        "protector": "kp-model",
+        "protector_leak_rate": 0.04066666666666666,
+        "protector_missed": 61,
+        "protector_total": 1500,
+        "gap": 0.798,
+        "gap_ci_low": 0.7755206912931213,
+        "gap_ci_high": 0.8178429541691647,
+        "dissociation_holds": true
+      },
+      {
+        "detector": "presidio",
+        "detector_leak_rate": 0.6646666666666666,
+        "detector_missed": 997,
+        "detector_total": 1500,
+        "protector": "kp-model",
+        "protector_leak_rate": 0.04066666666666666,
+        "protector_missed": 61,
+        "protector_total": 1500,
+        "gap": 0.624,
+        "gap_ci_low": 0.5972461611814806,
+        "gap_ci_high": 0.6490687189287373,
+        "dissociation_holds": true
+      },
+      {
+        "detector": "privacy-filter",
+        "detector_leak_rate": 0.9666666666666667,
+        "detector_missed": 1450,
+        "detector_total": 1500,
+        "protector": "kp-model",
+        "protector_leak_rate": 0.04066666666666666,
+        "protector_missed": 61,
+        "protector_total": 1500,
+        "gap": 0.926,
+        "gap_ci_low": 0.9107368750234968,
+        "gap_ci_high": 0.9379229494954315,
+        "dissociation_holds": true
+      },
+      {
+        "detector": "spacy",
+        "detector_leak_rate": 0.66,
+        "detector_missed": 990,
+        "detector_total": 1500,
+        "protector": "kp-model",
+        "protector_leak_rate": 0.04066666666666666,
+        "protector_missed": 61,
+        "protector_total": 1500,
+        "gap": 0.6193333333333334,
+        "gap_ci_low": 0.5925170064226206,
+        "gap_ci_high": 0.644488732114322,
+        "dissociation_holds": true
+      },
+      {
+        "detector": "tabularisai",
+        "detector_leak_rate": 0.27266666666666667,
+        "detector_missed": 409,
+        "detector_total": 1500,
+        "protector": "kp-model",
+        "protector_leak_rate": 0.04066666666666666,
+        "protector_missed": 61,
+        "protector_total": 1500,
+        "gap": 0.232,
+        "gap_ci_low": 0.20736034031800377,
+        "gap_ci_high": 0.25674341361203346,
+        "dissociation_holds": true
+      }
+    ],
+    "holds": true,
+    "n_docs": 1500,
+    "models": {
+      "gliner2": {
+        "adapter": "gliner2",
+        "model_id": "fastino/gliner2-base-v1",
+        "f1": 0.6666199158485273,
+        "leak_rate": 0.654,
+        "missed": 981,
+        "total": 1500,
+        "leaked_qi": 2943
+      },
+      "gliner": {
+        "adapter": "gliner",
+        "model_id": "urchade/gliner_multi_pii-v1",
+        "f1": 0.8026285973260822,
+        "leak_rate": 0.7173333333333334,
+        "missed": 1076,
+        "total": 1500,
+        "leaked_qi": 3228
+      },
+      "kp-model": {
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-mdeberta-280m",
+        "f1": 0.5999754329934898,
+        "leak_rate": 0.04066666666666666,
+        "missed": 61,
+        "total": 1500,
+        "leaked_qi": 183
+      },
+      "openmed": {
+        "adapter": "openmed",
+        "model_id": "OpenMed/privacy-filter-multilingual",
+        "f1": 0.49323327981125276,
+        "leak_rate": 0.8386666666666667,
+        "missed": 1258,
+        "total": 1500,
+        "leaked_qi": 3774
+      },
+      "presidio": {
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "f1": 0.4341806759350823,
+        "leak_rate": 0.6646666666666666,
+        "missed": 997,
+        "total": 1500,
+        "leaked_qi": 2991
+      },
+      "privacy-filter": {
+        "adapter": "privacy-filter",
+        "model_id": "openai/privacy-filter",
+        "f1": 0.31253648319197885,
+        "leak_rate": 0.9666666666666667,
+        "missed": 1450,
+        "total": 1500,
+        "leaked_qi": 4350
+      },
+      "spacy": {
+        "adapter": "spacy",
+        "model_id": "spacy/en_core_web_lg@3.8.0",
+        "f1": 0.13565450284566455,
+        "leak_rate": 0.66,
+        "missed": 990,
+        "total": 1500,
+        "leaked_qi": 2970
+      },
+      "tabularisai": {
+        "adapter": "tabularisai",
+        "model_id": "tabularisai/eu-pii-safeguard",
+        "f1": 0.610876867004931,
+        "leak_rate": 0.27266666666666667,
+        "missed": 409,
+        "total": 1500,
+        "leaked_qi": 1227
+      }
+    }
+  }
+}

@@ -51,11 +51,16 @@ DEFAULT_CONFIG_STATUS = DEV
 _AI4PRIVACY_TRAINED_ADAPTERS = frozenset({"openmed", "tabularisai"})
 _AI4PRIVACY_CONFIGS = frozenset({"en", "de", "fr", "it", "es", "nl"})
 
-# The real-skeleton tracks (RO/CNP, PL/PESEL, IT/codice-fiscale) are genuinely clean held-out sets:
-# no baseline on the board was trained on them (it-realskeleton-v1 is the IT LocalePack the kp-model
-# was NOT trained on — trained ro/en/pl only — and an authored real-skeleton, not the AI4Privacy
-# `it` generator). Marked clean_held_out for every model.
-_CLEAN_HELD_OUT_CONFIGS = frozenset({"ro-realskeleton-v1", "pl-realskeleton-v1", "it-realskeleton-v1"})
+# The real-skeleton tracks (RO/CNP, PL/PESEL, IT/codice-fiscale, and the legal-domain track) are
+# genuinely clean held-out sets: no baseline on the board was trained on them. it-realskeleton-v1 is
+# the IT LocalePack the kp-model was NOT trained on (trained ro/en/pl only) and an authored
+# real-skeleton, not the AI4Privacy `it` generator. legal-realskeleton-v1 (KLU-111) reuses the RO PII
+# generators but is an authored LEGAL-genre skeleton family distinct from any TRAINING config — the
+# same basis on which ro-realskeleton-v1 is clean_held_out while only the general-text ro-synthetic-v1
+# (the RO LocalePack at a different seed) is in_distribution. Marked clean_held_out for every model.
+_CLEAN_HELD_OUT_CONFIGS = frozenset({
+    "ro-realskeleton-v1", "pl-realskeleton-v1", "it-realskeleton-v1", "legal-realskeleton-v1",
+})
 
 # External systems trained on NONE of our data — so every config is a genuine clean held-out test
 # for them (no train/eval overlap to flag). This covers rule-based / orchestration baselines

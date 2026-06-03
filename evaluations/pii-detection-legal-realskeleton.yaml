@@ -1,0 +1,41 @@
+name: "PII Detection + CNP Leakage — Legal domain (real-skeleton v1)"
+version: 1
+task: detection
+domain: legal
+languages: [ro]
+
+dataset:
+  hf_id: klusai/europriv-bench
+  config: legal-realskeleton-v1
+  split: test
+  license: CC-BY-4.0
+
+metrics:
+  - entity_f1
+  - entity_f2
+  - national_id_leakage
+
+description: >
+  A citable-track candidate (currently config_status=dev; not yet validated — pending
+  native-speaker review + IAA) and the program's first LEGAL-DOMAIN real-skeleton track
+  (KLU-111, the under-served differentiating domain bet): documents that mirror the public
+  STRUCTURE of the legal-document types the EU privacy world runs on — an EUR-Lex-style legal
+  instrument (titled act -> numbered recitals -> numbered articles -> "adoptata la"), an
+  ECHR-style court judgment (case caption CAUZA ... IMPOTRIVA ROMANIEI, application number,
+  then IN FAPT / IN DREPT / PENTRU ACESTE MOTIVE INSTANTA), and a GDPR Article 15 DSAR
+  response (identification -> categories of data -> recipients -> retention -> rights) —
+  populated with synthetic Romanian PII (valid-checksum CNP, CNP-consistent DOB, CUI, +40
+  phones, addresses). CLEANLY-LICENSED, STRUCTURE ONLY: authored skeletons reproduce the
+  uncopyrightable public section layout of these document types; NO copyrighted EUR-Lex or
+  ECHR/HUDOC source text is included or redistributed (EUR-Lex reuse under Commission Decision
+  2011/833/EU is not even relied on; ECHR/HUDOC reuse is restricted, so no HUDOC text is used).
+  Rows carry country=RO so the headline national_id_leakage dispatches to the CNP validator: a
+  missed (un-redacted) CNP deterministically discloses DATE_OF_BIRTH + SEX + COUNTY.
+  Re-identification is counted per distinct subject (document, country, normalized value) — the
+  DSAR response repeats the applicant CNP (identity block + identity-confirmation line), so the
+  repeat collapses to one subject (KLU-49 dedup) and never double-counts. All three templates
+  are one authored skeleton family (the legal genre); a leak headline from a single template
+  family is not validated generalization — a second independent legal template family is
+  required before this is cited (the KLU-101 RO hardening, replicated for the legal track).
+  This proves the EuroPriv-Bench harness generalizes to the legal domain (a bounded PoC: 1
+  language, 3 legal document types), the domain axis alongside the general/clinical tracks.
