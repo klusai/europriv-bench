@@ -20,6 +20,9 @@ runs/
 
 # Held-out gold data is pulled from HF at eval time, never committed
 data/
+# Locally-generated two-family gold rows (KLU-101) — reproducible from klusai-datasets'
+# generate_combined_dataset; treated as held-out gold, never committed.
+analysis/ro_realskeleton_two_family_rows.json
 
 # OS
 .DS_Store
