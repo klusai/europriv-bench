@@ -1,0 +1,567 @@
+{
+  "issue": "KLU-103",
+  "config_status": "dev",
+  "synthetic_config": "ro-synthetic-v1",
+  "real_config": "ro-realskeleton-v1",
+  "hf_id": "klusai/europriv-bench",
+  "seed": 20260603,
+  "resamples": 10000,
+  "ci_alpha": 0.05,
+  "label_intersection": [
+    "ACCOUNT_ID",
+    "ADDRESS",
+    "COMPANY_ID",
+    "DATE",
+    "EMAIL",
+    "NATIONAL_ID",
+    "PERSON",
+    "PHONE"
+  ],
+  "hashes": {
+    "synthetic": "66c2041b8af86b4cf637c6e082df912a6b0bb72cb409df3e59d21beff385589b",
+    "real": "cc9e66dafe19565df06c343f2756dbec6ec6c7bc3a33f0dcec200c7e4a3fe5c6"
+  },
+  "headline": "On the re-id (NATIONAL_ID) detection rate, synthetic overstates real-context performance by 13.7 pp on average across 8 models (range -1.9 to +35.4 pp).",
+  "primary": [
+    {
+      "model": "gliner2::fastino/gliner2-base-v1",
+      "reid_leak": {
+        "label": "NATIONAL_ID",
+        "synthetic_subjects": 1017,
+        "real_subjects": 1123,
+        "leak_rate_gap": {
+          "metric": "leak_rate",
+          "synthetic": 0.08062930186823992,
+          "real": 0.2858414959928762,
+          "gap": -0.20521219412463632,
+          "ci_low": -0.23614024626759164,
+          "ci_high": -0.17421072401411095,
+          "excludes_zero": true,
+          "resamples": 10000,
+          "seed": 20260603
+        },
+        "detection_rate_gap": {
+          "metric": "detection_rate",
+          "synthetic": 0.9193706981317601,
+          "real": 0.7141585040071238,
+          "gap": 0.20521219412463632,
+          "ci_low": 0.17421072401411097,
+          "ci_high": 0.23614024626759156,
+          "excludes_zero": true,
+          "resamples": 10000,
+          "seed": 20260603
+        }
+      },
+      "entity_f1": {
+        "synthetic_f1": 0.7873225072566095,
+        "real_f1": 0.6423267326732673,
+        "gap": 0.14499577458334212,
+        "level": "aggregate"
+      },
+      "label_intersection": [
+        "ACCOUNT_ID",
+        "ADDRESS",
+        "COMPANY_ID",
+        "DATE",
+        "EMAIL",
+        "NATIONAL_ID",
+        "PERSON",
+        "PHONE"
+      ]
+    },
+    {
+      "model": "gliner::urchade/gliner_multi_pii-v1",
+      "reid_leak": {
+        "label": "NATIONAL_ID",
+        "synthetic_subjects": 1017,
+        "real_subjects": 1123,
+        "leak_rate_gap": {
+          "metric": "leak_rate",
+          "synthetic": 0.0,
+          "real": 0.3018699910952805,
+          "gap": -0.3018699910952805,
+          "ci_low": -0.3294746215494212,
+          "ci_high": -0.27515583259127335,
+          "excludes_zero": true,
+          "resamples": 10000,
+          "seed": 20260603
+        },
+        "detection_rate_gap": {
+          "metric": "detection_rate",
+          "synthetic": 1.0,
+          "real": 0.6981300089047195,
+          "gap": 0.30186999109528045,
+          "ci_low": 0.2751558325912734,
+          "ci_high": 0.3294746215494212,
+          "excludes_zero": true,
+          "resamples": 10000,
+          "seed": 20260603
+        }
+      },
+      "entity_f1": {
+        "synthetic_f1": 0.812835890645689,
+        "real_f1": 0.8531380753138075,
+        "gap": -0.040302184668118524,
+        "level": "aggregate"
+      },
+      "label_intersection": [
+        "ACCOUNT_ID",
+        "ADDRESS",
+        "COMPANY_ID",
+        "DATE",
+        "EMAIL",
+        "NATIONAL_ID",
+        "PERSON",
+        "PHONE"
+      ]
+    },
+    {
+      "model": "kp-model::klusai/kp-deid-mdeberta-280m",
+      "reid_leak": {
+        "label": "NATIONAL_ID",
+        "synthetic_subjects": 1017,
+        "real_subjects": 1123,
+        "leak_rate_gap": {
+          "metric": "leak_rate",
+          "synthetic": 0.0,
+          "real": 0.0,
+          "gap": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "excludes_zero": false,
+          "resamples": 10000,
+          "seed": 20260603
+        },
+        "detection_rate_gap": {
+          "metric": "detection_rate",
+          "synthetic": 1.0,
+          "real": 1.0,
+          "gap": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "excludes_zero": false,
+          "resamples": 10000,
+          "seed": 20260603
+        }
+      },
+      "entity_f1": {
+        "synthetic_f1": 1.0,
+        "real_f1": 0.7410913795131131,
+        "gap": 0.2589086204868869,
+        "level": "aggregate"
+      },
+      "label_intersection": [
+        "ACCOUNT_ID",
+        "ADDRESS",
+        "COMPANY_ID",
+        "DATE",
+        "EMAIL",
+        "NATIONAL_ID",
+        "PERSON",
+        "PHONE"
+      ]
+    },
+    {
+      "model": "openmed::OpenMed/privacy-filter-multilingual",
+      "reid_leak": {
+        "label": "NATIONAL_ID",
+        "synthetic_subjects": 1017,
+        "real_subjects": 1123,
+        "leak_rate_gap": {
+          "metric": "leak_rate",
+          "synthetic": 0.018682399213372666,
+          "real": 0.26357969723953695,
+          "gap": -0.24489729802616428,
+          "ci_low": -0.27170426874916276,
+          "ci_high": -0.21771907842720065,
+          "excludes_zero": true,
+          "resamples": 10000,
+          "seed": 20260603
+        },
+        "detection_rate_gap": {
+          "metric": "detection_rate",
+          "synthetic": 0.9813176007866273,
+          "real": 0.736420302760463,
+          "gap": 0.24489729802616433,
+          "ci_low": 0.21771907842720062,
+          "ci_high": 0.27170426874916265,
+          "excludes_zero": true,
+          "resamples": 10000,
+          "seed": 20260603
+        }
+      },
+      "entity_f1": {
+        "synthetic_f1": 0.740685432688718,
+        "real_f1": 0.5762248545594728,
+        "gap": 0.1644605781292452,
+        "level": "aggregate"
+      },
+      "label_intersection": [
+        "ACCOUNT_ID",
+        "ADDRESS",
+        "COMPANY_ID",
+        "DATE",
+        "EMAIL",
+        "NATIONAL_ID",
+        "PERSON",
+        "PHONE"
+      ]
+    },
+    {
+      "model": "presidio::presidio-analyzer+en_core_web_lg",
+      "reid_leak": {
+        "label": "NATIONAL_ID",
+        "synthetic_subjects": 1017,
+        "real_subjects": 1123,
+        "leak_rate_gap": {
+          "metric": "leak_rate",
+          "synthetic": 0.0,
+          "real": 0.0,
+          "gap": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "excludes_zero": false,
+          "resamples": 10000,
+          "seed": 20260603
+        },
+        "detection_rate_gap": {
+          "metric": "detection_rate",
+          "synthetic": 1.0,
+          "real": 1.0,
+          "gap": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "excludes_zero": false,
+          "resamples": 10000,
+          "seed": 20260603
+        }
+      },
+      "entity_f1": {
+        "synthetic_f1": 0.5531169029111416,
+        "real_f1": 0.4723127035830619,
+        "gap": 0.0808041993280797,
+        "level": "aggregate"
+      },
+      "label_intersection": [
+        "ACCOUNT_ID",
+        "ADDRESS",
+        "COMPANY_ID",
+        "DATE",
+        "EMAIL",
+        "NATIONAL_ID",
+        "PERSON",
+        "PHONE"
+      ]
+    },
+    {
+      "model": "privacy-filter::openai/privacy-filter",
+      "reid_leak": {
+        "label": "NATIONAL_ID",
+        "synthetic_subjects": 1017,
+        "real_subjects": 1123,
+        "leak_rate_gap": {
+          "metric": "leak_rate",
+          "synthetic": 0.0009832841691248771,
+          "real": 0.014247551202137132,
+          "gap": -0.013264267033012256,
+          "ci_low": -0.020480854853072127,
+          "ci_high": -0.006233303650934996,
+          "excludes_zero": true,
+          "resamples": 10000,
+          "seed": 20260603
+        },
+        "detection_rate_gap": {
+          "metric": "detection_rate",
+          "synthetic": 0.9990167158308751,
+          "real": 0.9857524487978628,
+          "gap": 0.013264267033012311,
+          "ci_low": 0.006233303650934996,
+          "ci_high": 0.02048085485307216,
+          "excludes_zero": true,
+          "resamples": 10000,
+          "seed": 20260603
+        }
+      },
+      "entity_f1": {
+        "synthetic_f1": 0.575541726025343,
+        "real_f1": 0.36335213756541834,
+        "gap": 0.2121895884599247,
+        "level": "aggregate"
+      },
+      "label_intersection": [
+        "ACCOUNT_ID",
+        "ADDRESS",
+        "COMPANY_ID",
+        "DATE",
+        "EMAIL",
+        "NATIONAL_ID",
+        "PERSON",
+        "PHONE"
+      ]
+    },
+    {
+      "model": "spacy::spacy/en_core_web_lg@3.8.0",
+      "reid_leak": {
+        "label": "NATIONAL_ID",
+        "synthetic_subjects": 1017,
+        "real_subjects": 1123,
+        "leak_rate_gap": {
+          "metric": "leak_rate",
+          "synthetic": 0.9095378564405113,
+          "real": 0.8904719501335708,
+          "gap": 0.019065906306940494,
+          "ci_low": -0.006424181610747204,
+          "ci_high": 0.04427755756765439,
+          "excludes_zero": false,
+          "resamples": 10000,
+          "seed": 20260603
+        },
+        "detection_rate_gap": {
+          "metric": "detection_rate",
+          "synthetic": 0.09046214355948869,
+          "real": 0.10952804986642921,
+          "gap": -0.019065906306940522,
+          "ci_low": -0.04427755756765442,
+          "ci_high": 0.006424181610747301,
+          "excludes_zero": false,
+          "resamples": 10000,
+          "seed": 20260603
+        }
+      },
+      "entity_f1": {
+        "synthetic_f1": 0.185863317010858,
+        "real_f1": 0.1427935377178476,
+        "gap": 0.043069779293010396,
+        "level": "aggregate"
+      },
+      "label_intersection": [
+        "ACCOUNT_ID",
+        "ADDRESS",
+        "COMPANY_ID",
+        "DATE",
+        "EMAIL",
+        "NATIONAL_ID",
+        "PERSON",
+        "PHONE"
+      ]
+    },
+    {
+      "model": "tabularisai::tabularisai/eu-pii-safeguard",
+      "reid_leak": {
+        "label": "NATIONAL_ID",
+        "synthetic_subjects": 1017,
+        "real_subjects": 1123,
+        "leak_rate_gap": {
+          "metric": "leak_rate",
+          "synthetic": 0.0,
+          "real": 0.3535173642030276,
+          "gap": -0.3535173642030276,
+          "ci_low": -0.3811442564559216,
+          "ci_high": -0.3250222617987533,
+          "excludes_zero": true,
+          "resamples": 10000,
+          "seed": 20260603
+        },
+        "detection_rate_gap": {
+          "metric": "detection_rate",
+          "synthetic": 1.0,
+          "real": 0.6464826357969724,
+          "gap": 0.3535173642030276,
+          "ci_low": 0.3250222617987534,
+          "ci_high": 0.3811442564559213,
+          "excludes_zero": true,
+          "resamples": 10000,
+          "seed": 20260603
+        }
+      },
+      "entity_f1": {
+        "synthetic_f1": 0.8762174049638705,
+        "real_f1": 0.7466596803772595,
+        "gap": 0.12955772458661097,
+        "level": "aggregate"
+      },
+      "label_intersection": [
+        "ACCOUNT_ID",
+        "ADDRESS",
+        "COMPANY_ID",
+        "DATE",
+        "EMAIL",
+        "NATIONAL_ID",
+        "PERSON",
+        "PHONE"
+      ]
+    }
+  ],
+  "label_matched_control": {
+    "description": "NATIONAL_ID re-id leak gap after down-sampling both configs to matched per-config subject counts (min of the two). Preserves each config's detection probability; isolates realness from the raw subject-count imbalance.",
+    "rows": [
+      {
+        "model": "gliner2::fastino/gliner2-base-v1",
+        "matched_subjects_per_config": 1017,
+        "leak_rate_gap": {
+          "metric": "leak_rate",
+          "synthetic": 0.08062930186823992,
+          "real": 0.2861356932153392,
+          "gap": -0.2055063913470993,
+          "ci_low": -0.23797935103244836,
+          "ci_high": -0.17305801376597835,
+          "excludes_zero": true,
+          "resamples": 10000,
+          "seed": 20260603
+        }
+      },
+      {
+        "model": "gliner::urchade/gliner_multi_pii-v1",
+        "matched_subjects_per_config": 1017,
+        "leak_rate_gap": {
+          "metric": "leak_rate",
+          "synthetic": 0.0,
+          "real": 0.30186823992133727,
+          "gap": -0.30186823992133727,
+          "ci_low": -0.3303834808259587,
+          "ci_high": -0.27335299901671584,
+          "excludes_zero": true,
+          "resamples": 10000,
+          "seed": 20260603
+        }
+      },
+      {
+        "model": "kp-model::klusai/kp-deid-mdeberta-280m",
+        "matched_subjects_per_config": 1017,
+        "leak_rate_gap": {
+          "metric": "leak_rate",
+          "synthetic": 0.0,
+          "real": 0.0,
+          "gap": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "excludes_zero": false,
+          "resamples": 10000,
+          "seed": 20260603
+        }
+      },
+      {
+        "model": "openmed::OpenMed/privacy-filter-multilingual",
+        "matched_subjects_per_config": 1017,
+        "leak_rate_gap": {
+          "metric": "leak_rate",
+          "synthetic": 0.018682399213372666,
+          "real": 0.2635201573254671,
+          "gap": -0.2448377581120944,
+          "ci_low": -0.27335299901671584,
+          "ci_high": -0.21632251720747298,
+          "excludes_zero": true,
+          "resamples": 10000,
+          "seed": 20260603
+        }
+      },
+      {
+        "model": "presidio::presidio-analyzer+en_core_web_lg",
+        "matched_subjects_per_config": 1017,
+        "leak_rate_gap": {
+          "metric": "leak_rate",
+          "synthetic": 0.0,
+          "real": 0.0,
+          "gap": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "excludes_zero": false,
+          "resamples": 10000,
+          "seed": 20260603
+        }
+      },
+      {
+        "model": "privacy-filter::openai/privacy-filter",
+        "matched_subjects_per_config": 1017,
+        "leak_rate_gap": {
+          "metric": "leak_rate",
+          "synthetic": 0.0009832841691248771,
+          "real": 0.01376597836774828,
+          "gap": -0.012782694198623403,
+          "ci_low": -0.02064896755162242,
+          "ci_high": -0.0058997050147492625,
+          "excludes_zero": true,
+          "resamples": 10000,
+          "seed": 20260603
+        }
+      },
+      {
+        "model": "spacy::spacy/en_core_web_lg@3.8.0",
+        "matched_subjects_per_config": 1017,
+        "leak_rate_gap": {
+          "metric": "leak_rate",
+          "synthetic": 0.9095378564405113,
+          "real": 0.8908554572271387,
+          "gap": 0.01868239921337267,
+          "ci_low": -0.0068829891838742,
+          "ci_high": 0.04424778761061954,
+          "excludes_zero": false,
+          "resamples": 10000,
+          "seed": 20260603
+        }
+      },
+      {
+        "model": "tabularisai::tabularisai/eu-pii-safeguard",
+        "matched_subjects_per_config": 1017,
+        "leak_rate_gap": {
+          "metric": "leak_rate",
+          "synthetic": 0.0,
+          "real": 0.35398230088495575,
+          "gap": -0.35398230088495575,
+          "ci_low": -0.38446411012782694,
+          "ci_high": -0.32448377581120946,
+          "excludes_zero": true,
+          "resamples": 10000,
+          "seed": 20260603
+        }
+      }
+    ]
+  },
+  "descriptive": {
+    "tag": "corpus-composition, not model drift",
+    "label_distribution_shift": {
+      "tv_distance": 0.14390901068770856,
+      "js_distance": 0.29395837135954733,
+      "synthetic_label_counts": {
+        "ACCOUNT_ID": 490,
+        "ADDRESS": 764,
+        "COMPANY_ID": 250,
+        "DATE": 1237,
+        "EMAIL": 483,
+        "NATIONAL_ID": 1017,
+        "PERSON": 1500,
+        "PHONE": 747
+      },
+      "real_label_counts": {
+        "ACCOUNT_ID": 339,
+        "ADDRESS": 1839,
+        "CASE_NUMBER": 716,
+        "COMPANY_ID": 339,
+        "DATE": 3010,
+        "EMAIL": 1103,
+        "HEALTH_CONDITION": 397,
+        "NATIONAL_ID": 2304,
+        "ORG_PARTY": 1113,
+        "PERSON": 2990,
+        "PHONE": 1500
+      },
+      "note": "TV + Jensen-Shannon distance (bounded, symmetric); raw KL deliberately avoided."
+    },
+    "length_shift": {
+      "wasserstein1_tokens": 46.435333333333325,
+      "synthetic_mean_tokens": 18.786666666666665,
+      "real_mean_tokens": 65.222,
+      "unit": "whitespace tokens",
+      "note": "Earth-Mover's Distance (Wasserstein-1) over document token counts."
+    }
+  },
+  "limitations": [
+    "entity_f1 gap is reported at the aggregate level only: the committed leaderboard stores a single corpus-level precision/recall/f1 per (model, config), with no per-document or per-label breakdown, so neither a per-label restriction nor a per-document bootstrap CI is recoverable for entity_f1 from committed artifacts.",
+    "re-id-leak gap CI is a per-distinct-subject Bernoulli bootstrap reconstructed from the committed aggregate subject counts (cnp_detected / cnp_total) for BOTH configs; the leaderboard does not commit per-subject flags for ro-synthetic-v1, so the resample is over the binomial implied by those counts rather than over joined per-document records.",
+    "re-id leak is a single-label (NATIONAL_ID/CNP) signal, so the 'per-label' restriction for the primary leak metric is the NATIONAL_ID label itself; the label intersection drives the entity-F1 reading and the descriptive label-distribution metric.",
+    "MMD / embedding-distribution distance is deferred (needs a GPU encoder; KLU-106 owns the GPU). This artifact is CPU-only."
+  ],
+  "deferred": [
+    "MMD / embedding-distribution distance (GPU; KLU-106) — CPU-only here"
+  ]
+}
