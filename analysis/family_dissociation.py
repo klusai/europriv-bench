@@ -28,7 +28,7 @@ Reproduce (scoring is heavy — run serial/foreground, see KLU-53 perf note)::
 
     # 1. dump the two-family gold rows from klusai-datasets (its venv has both packs)
     python -c "import json; from klusai.privacy.datasets.data.ro_skeletons import \\
-        generate_combined_dataset; json.dump(list(generate_combined_dataset(200, seed=20260531)), \\
+        generate_combined_dataset; json.dump(list(generate_combined_dataset(250, seed=20260531)), \\
         open('analysis/ro_realskeleton_two_family_rows.json','w'), ensure_ascii=False)"
 
     # 2. score every board model per family + emit the per-family gap table (europriv-bench venv)
