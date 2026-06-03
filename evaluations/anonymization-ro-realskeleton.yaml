@@ -1,0 +1,38 @@
+name: "Anonymization (Track C) — Romanian (real-skeleton v1)"
+version: 1
+task: anonymization
+domain: legal
+languages: [ro]
+
+dataset:
+  hf_id: klusai/europriv-bench
+  config: ro-realskeleton-v1
+  split: test
+  license: CC-BY-4.0
+
+metrics:
+  - redaction_leakage
+  - pseudonymization_consistency
+  - information_retention
+  - structural_disruption
+
+description: >
+  Track C scaffolding (KLU-104) — the anonymization + downstream-utility track, opened on the
+  EXISTING ro-realskeleton-v1 config (no new data). config_status=dev at launch: the four metrics
+  are measurable, code-computed numbers (formulas in metrics.py), NOT a citable validated result.
+  An anonymization adapter is the default redaction baseline (Presidio-as-redactor and friends):
+  it masks the spans its own detector finds, so a missed span survives in the output. The four
+  metrics:
+    * redaction_leakage — per-distinct-subject (doc, country, normalized value) re-identification
+      leak AFTER redaction, computed FROM GOLD OFFSETS against the redacted text (NOT a detector
+      re-run on the output). A subject leaks if ANY re-identifying fragment of its gold CNP value
+      survives verbatim (partial survival, e.g. an un-masked last-4, = leak). 95% Wilson CI.
+    * pseudonymization_consistency — measurable surrogate bijection rate (each distinct source
+      entity ↔ exactly one surrogate, no surrogate reused), reported in-doc and cross-doc.
+    * information_retention — utility-after-redaction PROXY: fraction of NON-PII tokens preserved
+      unchanged (labelled a proxy; not a downstream-task score).
+    * structural_disruption — LANGUAGE-NEUTRAL readability proxy (mask-token ratio + token-count
+      delta); Flesch-Kincaid is English-tuned and invalid for non-EN so it is deliberately avoided.
+  The redactor's detection recall is reported SEPARATELY (scores.detection_recall) from the
+  post-redaction leak, so a high leak is attributable to recall failure vs masking policy. Presidio
+  is a BASELINE, not a ranked winner. Prereq for the kp-anon frontier issue (KLU-109).

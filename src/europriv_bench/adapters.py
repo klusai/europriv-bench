@@ -21,6 +21,10 @@ from dataclasses import dataclass
 from .crosswalk import entities_to_kp_bioes, kp_entities_to_bioes
 from .spans import whitespace_tokens
 
+# Track-C redaction mask token. A single language-neutral placeholder glyph run, recognized by the
+# structural-disruption metric as a mask token.
+MASK_TOKEN = "█"
+
 
 @dataclass(frozen=True)
 class PredictedSpan:
@@ -87,6 +91,32 @@ def _bioes_to_kp_spans(text: str, tags: list[str]) -> list[tuple[int, int, str]]
     return spans
 
 
+def _mask_spans(text: str, spans: list[tuple[int, int]]) -> str:
+    """Replace each ``(start, end)`` char span in ``text`` with a single :data:`MASK_TOKEN`.
+
+    Spans are merged when overlapping/adjacent and applied left-to-right so offsets stay valid; the
+    surrounding non-PII text is preserved verbatim (so ``information_retention`` only drops on the
+    spans the redactor touched). One placeholder per masked span keeps the structural-disruption
+    measure interpretable (mask-token count == redacted-span count).
+    """
+    if not spans:
+        return text
+    spans = sorted(spans)
+    merged: list[list[int]] = [list(spans[0])]
+    for s, e in spans[1:]:
+        if s <= merged[-1][1]:
+            merged[-1][1] = max(merged[-1][1], e)
+        else:
+            merged.append([s, e])
+    out, cursor = [], 0
+    for s, e in merged:
+        out.append(text[cursor:s])
+        out.append(MASK_TOKEN)
+        cursor = e
+    out.append(text[cursor:])
+    return "".join(out)
+
+
 class BaseAdapter:
     """Base for all adapters. ``name`` = family/tool; ``model_id`` = the specific checkpoint."""
 
@@ -98,8 +128,46 @@ class BaseAdapter:
         raise NotImplementedError(f"{self.name}: detection not implemented")
 
     def anonymize(self, texts: Sequence[str]) -> list[str]:
-        """ANONYMIZATION: return redacted/pseudonymized text per input. Phase 4."""
-        raise NotImplementedError(f"{self.name}: anonymization lands in Phase 4")
+        """ANONYMIZATION (Track C): return redacted text per input by masking detected spans.
+
+        The default Track-C redaction baseline (KLU-104): run this adapter's OWN ``predict_tags``
+        detector, reconstruct char spans off the same whitespace-token grid the harness scores on,
+        and replace each detected span with a single :data:`MASK_TOKEN` placeholder. So a span the
+        detector MISSES survives verbatim in the output and is counted as a re-identification leak by
+        ``metrics.redaction_leakage`` (which reads the gold offsets against this output) — making a
+        high post-redaction leak attributable to detection recall, reported separately from the
+        masking policy. Presidio inherits this unchanged → "Presidio-as-redactor" baseline.
+        """
+        out: list[str] = []
+        for text, tags in zip(texts, self.predict_tags(list(texts))):
+            spans = _bioes_to_kp_spans(text, tags)
+            out.append(_mask_spans(text, [(s, e) for s, e, _ in spans]))
+        return out
+
+    def pseudonymize(self, texts: Sequence[str]) -> list[dict[str, str]]:
+        """ANONYMIZATION (Track C): per-doc surrogate map ``{source value -> surrogate}``.
+
+        The default baseline assigns a stable, per-type surrogate to each distinct detected source
+        value (e.g. ``PERSON_1``), reused for every occurrence within the corpus so the bijection
+        rate (``metrics.pseudonymization_consistency``) is measurable. Detectors that fragment the
+        same entity into different spans, or collide two entities onto one surrogate, lower that
+        rate. Keyed by the surface value (whitespace-normalized) so cross-doc consistency is scored.
+        """
+        per_value_surrogate: dict[tuple[str, str], str] = {}
+        per_type_counter: dict[str, int] = {}
+        maps: list[dict[str, str]] = []
+        for text, tags in zip(texts, self.predict_tags(list(texts))):
+            m: dict[str, str] = {}
+            for start, end, label in _bioes_to_kp_spans(text, tags):
+                value = text[start:end]
+                norm = "".join(value.split())
+                k = (label, norm)
+                if k not in per_value_surrogate:
+                    per_type_counter[label] = per_type_counter.get(label, 0) + 1
+                    per_value_surrogate[k] = f"{label}_{per_type_counter[label]}"
+                m[value] = per_value_surrogate[k]
+            maps.append(m)
+        return maps
 
     def classify(self, texts: Sequence[str]) -> list[str]:
         """CLASSIFICATION: return a document-level privacy/sensitivity label per input. Phase 4."""

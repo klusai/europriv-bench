@@ -16,7 +16,7 @@ from . import __version__
 from .adapters import BaseAdapter
 from .leaderboard import DEFAULT_CONFIG_STATUS, classify_contamination
 from .logger import get_logger
-from .metrics import ALL_METRICS, REGISTRY, ROW_REGISTRY
+from .metrics import ALL_METRICS, ANON_MAP_REGISTRY, ANON_REGISTRY, REGISTRY, ROW_REGISTRY
 from .spans import Span, char_spans_to_bioes, validate_bioes
 from .spec import EvalSpec, Task
 from .taxonomy import TAXONOMY_VERSION
@@ -83,6 +83,76 @@ def _rows_to_gold(rows: Iterable[dict]) -> tuple[list[str], list[list[str]]]:
     return texts, gold
 
 
+def _run_anonymization(
+    spec: EvalSpec,
+    adapter: BaseAdapter,
+    rows: list[dict] | None,
+    texts: list[str],
+    gold_tags: list[list[str]],
+    timestamp: str | None,
+    limit: int | None,
+) -> dict:
+    """Track C (KLU-104): score a redaction/pseudonymization adapter on its anonymized output.
+
+    Two metric families:
+      * ``ANON_REGISTRY`` (redaction_leakage / information_retention / structural_disruption) score
+        the adapter's redacted text (``adapter.anonymize``) against the GOLD rows. The re-id leak is
+        computed from gold offsets vs the output — never a detector re-run on the output.
+      * ``ANON_MAP_REGISTRY`` (pseudonymization_consistency) scores the per-doc surrogate maps from
+        ``adapter.pseudonymize``.
+
+    Track C requires gold span values (offsets), so ``rows`` is mandatory. We ALSO compute the
+    redactor's detection recall separately (entity_f1/entity_f2 over the SAME predict_tags the
+    redaction masks), so a high post-redaction leak is attributable to recall failure vs masking
+    policy (KLU-104). DETECTION scoring is untouched by this path.
+    """
+    if rows is None:
+        raise ValueError("Track C (anonymization) metrics need gold rows; inject rows= or load from HF")
+
+    scores: dict[str, dict] = {}
+    needs_text = [k for k in spec.metrics if k in ANON_REGISTRY]
+    needs_maps = [k for k in spec.metrics if k in ANON_MAP_REGISTRY]
+
+    if needs_text:
+        redacted = adapter.anonymize(texts)
+        for key in needs_text:
+            scores[key] = ANON_REGISTRY[key](rows, redacted)
+    if needs_maps:
+        mappings = adapter.pseudonymize(texts)
+        for key in needs_maps:
+            scores[key] = ANON_MAP_REGISTRY[key](rows, mappings)
+
+    # Detection recall of the underlying redactor, reported SEPARATELY from the post-redaction leak
+    # (KLU-104): same predict_tags + eval-label fairness mask as the DETECTION path, so recall here
+    # is the recall that drives what anonymize() masks.
+    pred_tags = adapter.predict_tags(texts)
+    eval_labels = {t.split("-", 1)[1] for seq in gold_tags for t in seq if t != "O"}
+    pred_tags = [
+        [t if (t == "O" or t.split("-", 1)[1] in eval_labels) else "O" for t in seq]
+        for seq in pred_tags
+    ]
+    scores["detection_recall"] = REGISTRY["entity_f2"](gold_tags, pred_tags)
+
+    return {
+        "spec": spec.name,
+        "task": spec.task.value,
+        "languages": spec.languages,
+        "domain": spec.domain,
+        "adapter": adapter.name,
+        "model_id": adapter.model_id,
+        "n": len(texts),
+        "limit": limit,
+        "eval_labels": sorted(eval_labels),
+        "scores": scores,
+        "contamination": classify_contamination(adapter.name, spec.dataset.config),
+        "config_status": DEFAULT_CONFIG_STATUS,
+        "europriv_bench_version": __version__,
+        "taxonomy_version": TAXONOMY_VERSION,
+        "dataset": {"hf_id": spec.dataset.hf_id, "config": spec.dataset.config, "split": spec.dataset.split},
+        "timestamp": timestamp,
+    }
+
+
 def run_spec(
     spec: EvalSpec,
     adapter: BaseAdapter,
@@ -101,9 +171,13 @@ def run_spec(
     where each subject carries its ``detected``/``leaked`` flag under the exact same per-subject
     ``(doc, country, normalized value)`` semantics as the re-id leak-rate. Requires ``rows`` (the
     span values), so it is emitted only for row-metric specs run against real gold."""
-    if spec.task is not Task.DETECTION:
-        # The seam exists (BaseAdapter.anonymize/classify/leakage_probe); wiring lands in Phase 4.
-        raise NotImplementedError(f"task {spec.task.value} lands in Phase 4; only DETECTION is wired")
+    # Track gating: DETECTION (the original v0 path, unchanged) and ANONYMIZATION (Track C, KLU-104)
+    # are wired. CLASSIFICATION/LEAKAGE still raise — the seam exists but is not implemented, so the
+    # harness never silently reports a fake number. Lifting ANONYMIZATION does NOT touch DETECTION.
+    if spec.task not in (Task.DETECTION, Task.ANONYMIZATION):
+        raise NotImplementedError(
+            f"task {spec.task.value} not wired; only DETECTION and ANONYMIZATION (Track C) are"
+        )
 
     # Fail fast on a metric the spec names but the harness doesn't know (no silent skips).
     unknown = [k for k in spec.metrics if k not in ALL_METRICS]
@@ -120,6 +194,10 @@ def run_spec(
         texts, gold_tags = gold
         if limit is not None:
             texts, gold_tags = texts[:limit], gold_tags[:limit]
+
+    if spec.task is Task.ANONYMIZATION:
+        return _run_anonymization(spec, adapter, rows, texts, gold_tags, timestamp, limit)
+
     pred_tags = adapter.predict_tags(texts)
 
     # Fairness: score only the entity types the gold annotates. A model isn't penalized for

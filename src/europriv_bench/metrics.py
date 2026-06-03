@@ -292,14 +292,262 @@ def cnp_leakage(rows: Sequence[dict], pred_tags: Tags) -> dict[str, float]:
     }
 
 
-def reidentification_risk(*args, **kwargs) -> dict[str, float]:
-    """Residual re-identification risk after redaction (TAB-style). Lands in Phase 4."""
-    raise NotImplementedError("reidentification_risk: scheduled for Phase 4 (privacy-utility track)")
+# =============================================================================================
+# Track C — anonymization + downstream-utility (KLU-104).
+#
+# These score an adapter's *redacted text output* (one string per doc), NOT BIOES tags. The unit
+# of measurement is the same per-distinct-subject (doc, country, normalized value) the detection
+# leak metric uses, but the leak is read **from the gold offsets against the redacted text** — we
+# never re-run a detector on the output (that would conflate redactor recall with auditor recall;
+# KLU-104). Every number here is computed by code in this module with the formula in its docstring;
+# the two utility/readability numbers are explicitly labelled reproducible *proxies*, not ratings.
+# At launch the track ships config_status=dev (leaderboard default) and Presidio-as-redactor is a
+# *baseline*, never a ranked winner.
+# =============================================================================================
+
+# Minimum surviving-fragment length (chars) that counts as a leak. A redactor that leaves the
+# last-4 of a CNP/PESEL/CF un-masked still re-identifies (those digits narrow the subject), so a
+# partial survival is a leak. We require ≥4 surviving consecutive characters of the gold value so a
+# coincidental single shared digit elsewhere in the doc is not miscounted; 4 is the canonical
+# "last-4" disclosure unit. Whitespace inside the value is ignored when matching.
+_MIN_LEAK_FRAGMENT = 4
 
 
-def pii_replay(*args, **kwargs) -> dict[str, float]:
-    """Count of real PII entities reappearing in generated/anonymized output. Phase 4."""
-    raise NotImplementedError("pii_replay: scheduled for Phase 4 (anonymization track)")
+def _value_survives(redacted: str, value: str, min_fragment: int = _MIN_LEAK_FRAGMENT) -> bool:
+    """True iff a re-identifying fragment of gold ``value`` survives verbatim in ``redacted`` text.
+
+    Whitespace is stripped from both sides so a reformatted-but-unmasked value still counts. A
+    *partial* survival is a leak: any contiguous run of ``min_fragment`` non-space characters of the
+    value that appears in the (whitespace-stripped) output is a leak (e.g. an un-masked last-4 of a
+    national ID). For short values (< ``min_fragment`` chars) the whole value must survive.
+    """
+    v = "".join(value.split())
+    if not v:
+        return False
+    hay = "".join(redacted.split())
+    k = min(min_fragment, len(v))
+    # Slide a length-k window over the gold value; a leak if any window survives in the output.
+    return any(v[i : i + k] in hay for i in range(0, len(v) - k + 1))
+
+
+def _quasi_identifier_subjects(rows: Sequence[dict]) -> dict[tuple[int, str, str], dict]:
+    """Per-distinct-subject quasi-identifier table built from GOLD offsets only (no model output).
+
+    Key ``(doc index, country, normalized value)`` — one distinct national-ID value within one
+    document, matching the detection leak metric's per-subject semantics (KLU-49). Only spans whose
+    country has a validator and that parse as *valid*, decode-bearing national IDs become subjects
+    (a leaked coverage-only ID discloses no quasi-identifier by construction, so it carries no re-id
+    weight). ``qi`` is the count of quasi-identifiers a leak of this subject would disclose.
+    """
+    subjects: dict[tuple[int, str, str], dict] = {}
+    for doc_idx, row in enumerate(rows):
+        for sp in row.get("spans", []):
+            cc = _span_country(row, sp)
+            validator = get_validator(cc)
+            if validator is None or not validator.decode_bearing:
+                continue
+            raw = row["text"][sp["start"]:sp["end"]]
+            info = validator.parse(raw)
+            if not info.valid:
+                continue
+            key = (doc_idx, cc, raw.strip())
+            if key not in subjects:
+                subjects[key] = {"country": cc, "value": raw.strip(),
+                                 "qi": len(info.disclosed_quasi_identifiers())}
+    return subjects
+
+
+def redaction_leakage(rows: Sequence[dict], redacted: Sequence[str]) -> dict[str, float]:
+    """Re-identification leak AFTER redaction, computed from gold offsets vs the redacted output.
+
+    For each distinct decode-bearing subject ``(doc, country, normalized value)`` (KLU-49 dedup),
+    the subject **leaks** iff a re-identifying fragment of its gold quasi-identifier value survives
+    verbatim in that document's redacted text (``_value_survives`` — a partial survival such as an
+    un-masked last-4 of a CNP counts as a leak). This is computed **purely from the gold span values
+    against the output string**, never by re-running a detector on the output, so a high leak is
+    attributable to the redactor's masking, not to an auditor's recall.
+
+    Returns the per-subject leak-rate (↓ better) with a 95% Wilson CI, leaked-subject and
+    leaked-quasi-identifier counts. ``redacted[i]`` is the anonymized text for ``rows[i]``.
+    """
+    subjects = _quasi_identifier_subjects(rows)
+    total = len(subjects)
+    leaked = leaked_qi = 0
+    for (doc_idx, _cc, value), subj in subjects.items():
+        out = redacted[doc_idx] if doc_idx < len(redacted) else ""
+        if _value_survives(out, value):
+            leaked += 1
+            leaked_qi += subj["qi"]
+    stats = _leak_rate_stats(leaked, total)
+    return {
+        "subjects_total": float(total),
+        "subjects_leaked": float(leaked),
+        "leak_rate": stats["leak_rate"],                  # ↓ better
+        "leak_rate_ci_low": stats["leak_rate_ci_low"],    # 95% Wilson lower bound
+        "leak_rate_ci_high": stats["leak_rate_ci_high"],  # 95% Wilson upper bound
+        "leaked_quasi_identifiers": float(leaked_qi),
+    }
+
+
+def pseudonymization_consistency(
+    rows: Sequence[dict], mappings: Sequence[dict[str, str]]
+) -> dict[str, float]:
+    """Measurable surrogate **bijection rate** for a pseudonymizer (each entity ↔ one surrogate).
+
+    ``mappings[i]`` is the per-doc map ``{normalized source entity value -> surrogate}`` the
+    pseudonymizer used for ``rows[i]``. Entity resolution is by normalized value (whitespace
+    stripped), matching the leak metric's subject keying. The bijection rate is the fraction of
+    distinct source entities that satisfy BOTH directions of a bijection:
+
+      * **injective on the source** — every occurrence of the entity maps to exactly ONE surrogate
+        (no inconsistent rewrites), AND
+      * **injective on the target** — that surrogate is NOT reused for any OTHER distinct entity
+        (no surrogate collision).
+
+    Reported at two scopes (KLU-104 "state in-doc vs cross-doc"):
+      * ``in_doc`` — bijection checked within each document independently, averaged over entities.
+      * ``cross_doc`` — the same entity value must map to one stable surrogate across ALL documents
+        (a stricter consistency a real pipeline needs for joinability), no surrogate shared across
+        entities corpus-wide.
+
+    Both are pure proportions (↑ better). An empty corpus yields rate 1.0 vacuously.
+    """
+    def _bijection_rate(scope_maps: Sequence[dict[str, str]]) -> tuple[int, int]:
+        # entity -> set of surrogates seen; surrogate -> set of entities seen.
+        ent_to_surr: dict[str, set[str]] = {}
+        surr_to_ent: dict[str, set[str]] = {}
+        for m in scope_maps:
+            for ent, surr in m.items():
+                e = "".join(ent.split())
+                ent_to_surr.setdefault(e, set()).add(surr)
+                surr_to_ent.setdefault(surr, set()).add(e)
+        good = 0
+        for e, surrs in ent_to_surr.items():
+            injective_source = len(surrs) == 1
+            # The single surrogate (if injective) must map back to only this entity.
+            injective_target = injective_source and len(surr_to_ent[next(iter(surrs))]) == 1
+            if injective_source and injective_target:
+                good += 1
+        return good, len(ent_to_surr)
+
+    # in-doc: average the per-doc bijection rate over docs that contain ≥1 entity.
+    in_good = in_total = 0
+    for m in mappings:
+        g, t = _bijection_rate([m])
+        in_good += g
+        in_total += t
+    cross_good, cross_total = _bijection_rate(list(mappings))
+    return {
+        "in_doc_bijection_rate": (in_good / in_total) if in_total else 1.0,    # ↑ better
+        "in_doc_entities": float(in_total),
+        "cross_doc_bijection_rate": (cross_good / cross_total) if cross_total else 1.0,  # ↑ better
+        "cross_doc_entities": float(cross_total),
+    }
+
+
+def _non_pii_token_mask(text: str, spans: Sequence[dict]) -> list[bool]:
+    """Per-whitespace-token mask: True for tokens that overlap NO gold PII span (the non-PII tokens)."""
+    toks = whitespace_tokens(text)
+    is_pii = [False] * len(toks)
+    for sp in spans:
+        for idx, (_, ts, te) in enumerate(toks):
+            if ts < sp["end"] and te > sp["start"]:
+                is_pii[idx] = True
+    return [not p for p in is_pii]
+
+
+def information_retention(rows: Sequence[dict], redacted: Sequence[str]) -> dict[str, float]:
+    """Utility-after-redaction PROXY: fraction of NON-PII tokens preserved unchanged (↑ better).
+
+    A reproducible, code-computed utility proxy (NOT a downstream-task score and NOT a subjective
+    rating): of every whitespace token in the gold text that overlaps no gold PII span, what
+    fraction appears unchanged (as a whitespace token) in the redacted output? A redactor that only
+    touches PII keeps this near 1.0; one that rewrites or drops surrounding context lowers it. This
+    is a *proxy* for downstream utility — labelled as such — because token preservation correlates
+    with, but does not measure, task performance on the redacted text.
+
+    Formula: ``retained = |{non-PII gold tokens whose surface string is still present in the output
+    token multiset}| / |non-PII gold tokens|``, matched by multiset so duplicates are consumed once.
+    """
+    retained = total = 0
+    for i, row in enumerate(rows):
+        text = row["text"]
+        toks = whitespace_tokens(text)
+        keep = _non_pii_token_mask(text, row.get("spans", []))
+        out = redacted[i] if i < len(redacted) else ""
+        # Multiset of output token surface strings, consumed once per match.
+        out_counts: dict[str, int] = {}
+        for tok, _, _ in whitespace_tokens(out):
+            out_counts[tok] = out_counts.get(tok, 0) + 1
+        for (tok, _, _), is_keep in zip(toks, keep):
+            if not is_keep:
+                continue
+            total += 1
+            if out_counts.get(tok, 0) > 0:
+                retained += 1
+                out_counts[tok] -= 1
+    return {
+        "information_retention": (retained / total) if total else 1.0,  # ↑ better (proxy)
+        "non_pii_tokens": float(total),
+        "non_pii_tokens_retained": float(retained),
+        "is_proxy": 1.0,  # explicit: a reproducible proxy for downstream utility, not a task score
+    }
+
+
+def structural_disruption(rows: Sequence[dict], redacted: Sequence[str]) -> dict[str, float]:
+    """Readability PROXY — a LANGUAGE-NEUTRAL structural-disruption measure (↓ less disruptive).
+
+    Flesch-Kincaid is English-tuned and INVALID for de/fr/es/it/nl/ro (syllable/word-length
+    heuristics don't transfer), so we deliberately do NOT use a readability formula. Instead we
+    report a cross-lingual structural measure of how much redaction fragments the text:
+
+      * ``mask_token_ratio`` — fraction of output whitespace tokens that are mask placeholders
+        (a token consisting only of redaction characters: ``*``, ``█``, ``<...>``, ``[...]``, ``X``
+        runs, or ``REDACTED``-style ALL-CAPS placeholders). More masks = more disruption.
+      * ``length_delta_ratio`` — ``|len(out_tokens) − len(in_tokens)| / max(len(in_tokens), 1)``,
+        averaged over docs: how much the token count changed (fragmentation/expansion of spans).
+
+    Both are pure structural counts over whitespace tokens — no per-language linguistic model — so
+    they are valid across every EuroPriv-Bench language. Lower means the redaction disturbed the
+    document's structure less. NOTE (cross-lingual caveat): this measures *structural* disruption,
+    not human-perceived readability, which no single index captures validly across languages.
+    """
+    import re
+
+    # A token is a mask placeholder iff, after stripping bracketing, it is non-empty and made up
+    # only of redaction glyphs / is an ALL-CAPS placeholder word like REDACTED / MASK / PII.
+    _mask_word = {"REDACTED", "MASK", "MASKED", "PII", "ANONYMIZED", "HIDDEN", "REMOVED"}
+
+    def _is_mask(tok: str) -> bool:
+        core = tok.strip("[](){}<>").strip()
+        if not core:
+            return False
+        if core.upper() in _mask_word:
+            return True
+        # A run of the full-block placeholder (the harness MASK_TOKEN █) is a mask at any length.
+        if re.fullmatch(r"█+", core):
+            return True
+        # Other redaction glyph runs (asterisk, hash, X/x, underscore, hyphen) need ≥2 chars so a
+        # stray single '-' or 'x' in ordinary text is not miscounted as a mask.
+        return bool(re.fullmatch(r"[*#_\-xX]+", core)) and len(core) >= 2
+
+    mask_tokens = out_tokens_total = 0
+    length_delta_sum = 0.0
+    for i, row in enumerate(rows):
+        in_n = len(whitespace_tokens(row["text"]))
+        out = redacted[i] if i < len(redacted) else ""
+        out_toks = whitespace_tokens(out)
+        out_tokens_total += len(out_toks)
+        mask_tokens += sum(1 for tok, _, _ in out_toks if _is_mask(tok))
+        length_delta_sum += abs(len(out_toks) - in_n) / max(in_n, 1)
+    n_docs = len(rows)
+    return {
+        "mask_token_ratio": (mask_tokens / out_tokens_total) if out_tokens_total else 0.0,  # ↓
+        "length_delta_ratio": (length_delta_sum / n_docs) if n_docs else 0.0,               # ↓
+        "mask_tokens": float(mask_tokens),
+        "output_tokens": float(out_tokens_total),
+        "is_proxy": 1.0,  # language-neutral structural proxy; NOT a readability index (see docstring)
+    }
 
 
 def membership_inference(*args, **kwargs) -> dict[str, float]:
@@ -307,19 +555,11 @@ def membership_inference(*args, **kwargs) -> dict[str, float]:
     raise NotImplementedError("membership_inference: scheduled for Phase 4 (leakage track)")
 
 
-def utility_after_redaction(*args, **kwargs) -> dict[str, float]:
-    """Downstream-task utility + readability preserved after redaction. Phase 4."""
-    raise NotImplementedError("utility_after_redaction: scheduled for Phase 4 (privacy-utility track)")
-
-
 # Tag-based metrics: called as fn(gold_tags, pred_tags).
 REGISTRY: dict[str, Callable] = {
     "entity_f1": entity_f1,
     "entity_f2": entity_f2,
-    "reidentification_risk": reidentification_risk,
-    "pii_replay": pii_replay,
     "membership_inference": membership_inference,
-    "utility_after_redaction": utility_after_redaction,
 }
 
 # Row-based metrics: called as fn(gold_rows, pred_tags) — need span values, not just tags.
@@ -328,4 +568,19 @@ ROW_REGISTRY: dict[str, Callable] = {
     "cnp_leakage": cnp_leakage,  # back-compat alias scoped to RO (same re-id-risk family)
 }
 
-ALL_METRICS = set(REGISTRY) | set(ROW_REGISTRY)
+# Track-C anonymization metrics: called as fn(gold_rows, redacted_texts) — score the adapter's
+# redacted output string per doc (KLU-104). Re-id leak is computed from gold offsets, NOT a detector
+# re-run on the output. Pseudonymization consistency takes per-doc surrogate maps instead of text;
+# the runner passes them through when the adapter emits them (see ANON_MAP_REGISTRY).
+ANON_REGISTRY: dict[str, Callable] = {
+    "redaction_leakage": redaction_leakage,
+    "information_retention": information_retention,
+    "structural_disruption": structural_disruption,
+}
+
+# Track-C metrics scored over per-doc surrogate maps (not the redacted text).
+ANON_MAP_REGISTRY: dict[str, Callable] = {
+    "pseudonymization_consistency": pseudonymization_consistency,
+}
+
+ALL_METRICS = set(REGISTRY) | set(ROW_REGISTRY) | set(ANON_REGISTRY) | set(ANON_MAP_REGISTRY)

@@ -1,0 +1,43 @@
+{
+  "config": "ro-realskeleton-v1",
+  "country": "RO",
+  "n_docs": 500,
+  "track": "C-anonymization",
+  "config_status": "dev",
+  "models": {
+    "presidio": {
+      "adapter": "presidio",
+      "model_id": "presidio-analyzer+en_core_web_lg",
+      "detection_recall": 0.44184270806821074,
+      "detection_f2": 0.44090008635139943,
+      "redaction_leak_rate": 0.00909090909090909,
+      "redaction_leak_ci_low": 0.003540801368886003,
+      "redaction_leak_ci_high": 0.023138643245801373,
+      "subjects_leaked": 4,
+      "subjects_total": 440,
+      "leaked_quasi_identifiers": 12,
+      "in_doc_bijection_rate": 1.0,
+      "cross_doc_bijection_rate": 0.998598785614199,
+      "information_retention": 0.9254584634328686,
+      "mask_token_ratio": 0.14613491603937465,
+      "length_delta_ratio": 0.1000000974572244
+    },
+    "dummy": {
+      "adapter": "dummy",
+      "model_id": "dummy",
+      "detection_recall": 0.0,
+      "detection_f2": 0.0,
+      "redaction_leak_rate": 1.0,
+      "redaction_leak_ci_low": 0.9913450101146701,
+      "redaction_leak_ci_high": 0.9999999999999998,
+      "subjects_leaked": 440,
+      "subjects_total": 440,
+      "leaked_quasi_identifiers": 1320,
+      "in_doc_bijection_rate": 1.0,
+      "cross_doc_bijection_rate": 1.0,
+      "information_retention": 1.0,
+      "mask_token_ratio": 0.002175960507940632,
+      "length_delta_ratio": 0.0
+    }
+  }
+}
