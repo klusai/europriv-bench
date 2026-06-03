@@ -86,8 +86,9 @@ overlapping rows from genuinely held-out ones:
   is inflated by train/eval overlap. OpenMed and tabularisai were trained on **AI4Privacy**, the
   source of the six general-text configs (`en`/`de`/`fr`/`it`/`es`/`nl`), so those rows are
   `in_distribution`.
-- **`clean_held_out`** — no baseline on the board was trained on this data. The RO real-skeleton
-  track (`ro-realskeleton-v1`) is `clean_held_out` for every model.
+- **`clean_held_out`** — no baseline on the board was trained on this data. The real-skeleton
+  tracks (`ro-realskeleton-v1`, `pl-realskeleton-v1`, `it-realskeleton-v1`) are `clean_held_out`
+  for every model.
 - **`unknown`** — overlap not established (e.g. a baseline whose training set we don't know, or
   the synthetic RO track).
 

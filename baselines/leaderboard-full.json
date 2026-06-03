@@ -1,6 +1,198 @@
 {
   "schema": 3,
   "entries": {
+    "gliner2::fastino/gliner2-base-v1": [
+      {
+        "spec": "PII Detection + Codice Fiscale Leakage — Italian (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "it"
+        ],
+        "domain": "legal",
+        "adapter": "gliner2",
+        "model_id": "fastino/gliner2-base-v1",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.873045232890533,
+            "recall": 0.6917132960298428,
+            "f1": 0.7718724448078496
+          },
+          "entity_f2": {
+            "precision": 0.873045232890533,
+            "recall": 0.6917132960298428,
+            "f2": 0.721692474493342
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1111.0,
+            "decode_bearing_detected": 676.0,
+            "decode_bearing_missed": 435.0,
+            "leak_rate": 0.3915391539153915,
+            "leak_rate_ci_low": 0.3632591275192328,
+            "leak_rate_ci_high": 0.42056663400978184,
+            "detection_rate": 0.6084608460846085,
+            "leaked_quasi_identifiers": 1305.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "it_total": 1111.0,
+            "it_detected": 676.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "it-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      }
+    ],
+    "gliner::urchade/gliner_multi_pii-v1": [
+      {
+        "spec": "PII Detection + Codice Fiscale Leakage — Italian (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "it"
+        ],
+        "domain": "legal",
+        "adapter": "gliner",
+        "model_id": "urchade/gliner_multi_pii-v1",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.9210183268154283,
+            "recall": 0.8000932587263523,
+            "f1": 0.8563077032759421
+          },
+          "entity_f2": {
+            "precision": 0.9210183268154283,
+            "recall": 0.8000932587263523,
+            "f2": 0.8216694714662945
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1111.0,
+            "decode_bearing_detected": 709.0,
+            "decode_bearing_missed": 402.0,
+            "leak_rate": 0.36183618361836184,
+            "leak_rate_ci_low": 0.3341008622033043,
+            "leak_rate_ci_high": 0.39052365559506713,
+            "detection_rate": 0.6381638163816382,
+            "leaked_quasi_identifiers": 1206.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "it_total": 1111.0,
+            "it_detected": 709.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "it-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      }
+    ],
+    "kp-model::klusai/kp-deid-mdeberta-280m": [
+      {
+        "spec": "PII Detection + Codice Fiscale Leakage — Italian (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "it"
+        ],
+        "domain": "legal",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-mdeberta-280m",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.6209689982863374,
+            "recall": 0.7965627498001598,
+            "f1": 0.697890221482973
+          },
+          "entity_f2": {
+            "precision": 0.6209689982863374,
+            "recall": 0.7965627498001598,
+            "f2": 0.7539247210138075
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1111.0,
+            "decode_bearing_detected": 1111.0,
+            "decode_bearing_missed": 0.0,
+            "leak_rate": 0.0,
+            "leak_rate_ci_low": 2.168404344971009e-19,
+            "leak_rate_ci_high": 0.0034457305341718805,
+            "detection_rate": 1.0,
+            "leaked_quasi_identifiers": 0.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "it_total": 1111.0,
+            "it_detected": 1111.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "it-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      }
+    ],
     "openmed::OpenMed/privacy-filter-multilingual": [
       {
         "spec": "PII Detection + CNP Leakage — Romanian (synthetic v1)",
@@ -55,6 +247,68 @@
         "timestamp": "2026-05-30T09:31:55.871465+00:00",
         "contamination": "unknown",
         "config_status": "dev"
+      },
+      {
+        "spec": "PII Detection + Codice Fiscale Leakage — Italian (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "it"
+        ],
+        "domain": "legal",
+        "adapter": "openmed",
+        "model_id": "OpenMed/privacy-filter-multilingual",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.665320095857583,
+            "recall": 0.6472821742605915,
+            "f1": 0.6561771955295945
+          },
+          "entity_f2": {
+            "precision": 0.665320095857583,
+            "recall": 0.6472821742605915,
+            "f2": 0.6508110859576977
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1111.0,
+            "decode_bearing_detected": 718.0,
+            "decode_bearing_missed": 393.0,
+            "leak_rate": 0.35373537353735374,
+            "leak_rate_ci_low": 0.326168541771862,
+            "leak_rate_ci_high": 0.38231018228178854,
+            "detection_rate": 0.6462646264626463,
+            "leaked_quasi_identifiers": 1179.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "it_total": 1111.0,
+            "it_detected": 718.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "it-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": null
       },
       {
         "spec": "PII Detection — Dutch (general)",
@@ -315,6 +569,70 @@
         "config_status": "dev"
       }
     ],
+    "presidio::presidio-analyzer+en_core_web_lg": [
+      {
+        "spec": "PII Detection + Codice Fiscale Leakage — Italian (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "it"
+        ],
+        "domain": "legal",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.5145062169501214,
+            "recall": 0.47961630695443647,
+            "f1": 0.49644901054954144
+          },
+          "entity_f2": {
+            "precision": 0.5145062169501214,
+            "recall": 0.47961630695443647,
+            "f2": 0.4862105291591259
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1111.0,
+            "decode_bearing_detected": 39.0,
+            "decode_bearing_missed": 1072.0,
+            "leak_rate": 0.9648964896489649,
+            "leak_rate_ci_low": 0.9523731658150323,
+            "leak_rate_ci_high": 0.9742159974236719,
+            "detection_rate": 0.0351035103510351,
+            "leaked_quasi_identifiers": 3216.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "it_total": 1111.0,
+            "it_detected": 39.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "it-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      }
+    ],
     "privacy-filter::openai/privacy-filter": [
       {
         "spec": "PII Detection + CNP Leakage — Romanian (synthetic v1)",
@@ -369,6 +687,68 @@
         "timestamp": "2026-05-30T09:31:55.871465+00:00",
         "contamination": "unknown",
         "config_status": "dev"
+      },
+      {
+        "spec": "PII Detection + Codice Fiscale Leakage — Italian (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "it"
+        ],
+        "domain": "legal",
+        "adapter": "privacy-filter",
+        "model_id": "openai/privacy-filter",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.7112109573157476,
+            "recall": 0.6537436717292833,
+            "f1": 0.6812675714136963
+          },
+          "entity_f2": {
+            "precision": 0.7112109573157476,
+            "recall": 0.6537436717292833,
+            "f2": 0.6644819694774331
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1111.0,
+            "decode_bearing_detected": 1107.0,
+            "decode_bearing_missed": 4.0,
+            "leak_rate": 0.0036003600360036,
+            "leak_rate_ci_low": 0.001400975924584786,
+            "leak_rate_ci_high": 0.009220662940574154,
+            "detection_rate": 0.9963996399639964,
+            "leaked_quasi_identifiers": 12.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "it_total": 1111.0,
+            "it_detected": 1107.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "it-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": null
       },
       {
         "spec": "PII Detection — Dutch (general)",
@@ -627,6 +1007,134 @@
         "timestamp": "2026-05-30T09:31:55.871465+00:00",
         "contamination": "unknown",
         "config_status": "dev"
+      }
+    ],
+    "spacy::spacy/en_core_web_lg@3.8.0": [
+      {
+        "spec": "PII Detection + Codice Fiscale Leakage — Italian (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "it"
+        ],
+        "domain": "legal",
+        "adapter": "spacy",
+        "model_id": "spacy/en_core_web_lg@3.8.0",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.15926118240486611,
+            "recall": 0.14301891819877433,
+            "f1": 0.1507036816060085
+          },
+          "entity_f2": {
+            "precision": 0.15926118240486611,
+            "recall": 0.14301891819877433,
+            "f2": 0.14599681758217847
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1111.0,
+            "decode_bearing_detected": 676.0,
+            "decode_bearing_missed": 435.0,
+            "leak_rate": 0.3915391539153915,
+            "leak_rate_ci_low": 0.3632591275192328,
+            "leak_rate_ci_high": 0.42056663400978184,
+            "detection_rate": 0.6084608460846085,
+            "leaked_quasi_identifiers": 1305.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "it_total": 1111.0,
+            "it_detected": 676.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "it-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      }
+    ],
+    "tabularisai::tabularisai/eu-pii-safeguard": [
+      {
+        "spec": "PII Detection + Codice Fiscale Leakage — Italian (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "it"
+        ],
+        "domain": "legal",
+        "adapter": "tabularisai",
+        "model_id": "tabularisai/eu-pii-safeguard",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.8964708182618046,
+            "recall": 0.6108446576072475,
+            "f1": 0.7265956182401647
+          },
+          "entity_f2": {
+            "precision": 0.8964708182618046,
+            "recall": 0.6108446576072475,
+            "f2": 0.6524182876332227
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1111.0,
+            "decode_bearing_detected": 729.0,
+            "decode_bearing_missed": 382.0,
+            "leak_rate": 0.3438343834383438,
+            "leak_rate_ci_low": 0.3164854167250554,
+            "leak_rate_ci_high": 0.3722595594183807,
+            "detection_rate": 0.6561656165616562,
+            "leaked_quasi_identifiers": 1146.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "it_total": 1111.0,
+            "it_detected": 729.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "it-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": null
       }
     ]
   }

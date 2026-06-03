@@ -31,6 +31,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Callable
 
+from europriv_bench.belfiore import resolve_belfiore
+
 
 @dataclass(frozen=True)
 class IDInfo:
@@ -229,10 +231,13 @@ def _parse_pl(value: str) -> IDInfo:
 #   YY      birth year (last two digits)
 #   M       birth-month letter (A..T per a fixed table)
 #   DD      day; +40 for females (so day 41–71 → female, day−40)
-#   ZZZZ    Belfiore code: place/comune of birth (national for Italy, ``Z…`` for abroad)
+#   ZZZZ    Belfiore code: place/comune of birth (national for Italy, ``Z…`` for abroad), resolved
+#           to a named comune/country against the pinned ``belfiore`` snapshot (KLU-105)
 #   C       mod-26 control letter over the 15 preceding chars (even/odd position tables)
 # A missed codice fiscale deterministically discloses DATE_OF_BIRTH + SEX + PLACE_OF_BIRTH.
-# (Omocodia substitutes letters for digits in the numeric fields on collision; we decode it.)
+# Omocodia substitutes letters for digits in ALL the variable numeric fields on collision — year,
+# day AND the three Belfiore numeric positions — so we reverse it across every numeric field
+# (incl. the place code) before decoding, making the disclosed place-of-birth omocodia-invariant.
 
 _CF_MONTHS = {  # month-letter → 1..12
     "A": 1, "B": 2, "C": 3, "D": 4, "E": 5, "H": 6,
@@ -262,6 +267,24 @@ def _cf_digit(ch: str) -> int | None:
         return int(ch)
     sub = _CF_OMOCODIA.get(ch)
     return int(sub) if sub is not None else None
+
+
+def _cf_place_code(field_chars: str) -> str | None:
+    """Recover the canonical Belfiore code from the CF place field, reversing omocodia.
+
+    The Belfiore field is one letter (``L`` for comuni, ``Z`` for foreign-born) followed by three
+    numeric positions. Those three positions are *variable numeric positions*, so omocodia can
+    substitute letters for their digits exactly as it does for the year/day. We therefore reverse
+    omocodia on the three trailing positions so a base CF and its omocode resolve to the **same**
+    comune/country (the place-of-birth quasi-identifier must be omocodia-invariant — KLU-105).
+    Returns the canonical ``X###`` code, or ``None`` if the field is structurally invalid.
+    """
+    if len(field_chars) != 4 or not field_chars[0].isalpha():
+        return None
+    digits = _two_digit_field(field_chars[1:4])
+    if digits is None:
+        return None
+    return f"{field_chars[0]}{digits:03d}"
 
 
 def _cf_control_letter(first15: str) -> str:
@@ -305,15 +328,25 @@ def _parse_it(value: str) -> IDInfo:
     if not (1 <= day <= 31) or day > [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month - 1]:
         return IDInfo(valid=False, country="IT", decode_bearing=True)
 
-    place_code = s[11:15]  # Belfiore code: comune (national) or Z-prefixed foreign country
-    if not (place_code[0].isalpha() and _two_digit_field(place_code[1:4]) is not None):
+    # Belfiore code: comune (national) or Z-prefixed foreign country. Reverse omocodia on its three
+    # numeric positions so a base CF and its omocode disclose the SAME place-of-birth, then resolve
+    # against the pinned Belfiore snapshot (KLU-105). The canonical (omocodia-reversed) code is the
+    # one carried in ``extra`` and used for resolution, so place-of-birth is omocodia-invariant.
+    belfiore_code = _cf_place_code(s[11:15])
+    if belfiore_code is None:
         return IDInfo(valid=False, country="IT", decode_bearing=True)
+    place = resolve_belfiore(belfiore_code)
 
     return IDInfo(
         valid=True, country="IT", decode_bearing=True,
         quasi_identifiers=frozenset({"DATE_OF_BIRTH", "SEX", "PLACE_OF_BIRTH"}),
         extra={"sex": sex, "birth_year_2digit": f"{yy:02d}",
-               "birth_month": month, "birth_day": day, "belfiore_code": place_code},
+               "birth_month": month, "birth_day": day,
+               # Canonical (omocodia-reversed) Belfiore code + resolved place-of-birth. Foreign-born
+               # CFs (Z-prefixed) resolve to a country (coarser disclosure); see belfiore module.
+               "belfiore_code": belfiore_code,
+               "place_of_birth": place.name,
+               "place_kind": place.kind},
     )
 
 

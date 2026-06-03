@@ -9,8 +9,8 @@ governance markers:
     (no baseline was trained on this data — a fair held-out test), or ``unknown`` (overlap not
     established). OpenMed and tabularisai were trained on AI4Privacy, which is the source of the
     six general-text configs (en/de/fr/it/es/nl), so those rows are ``in_distribution``. The
-    real-skeleton tracks (``ro-realskeleton-v1``, ``pl-realskeleton-v1``) are ``clean_held_out``
-    for every model. External systems that learn from none of our data — the rule-based Presidio
+    real-skeleton tracks (``ro-realskeleton-v1``, ``pl-realskeleton-v1``, ``it-realskeleton-v1``)
+    are ``clean_held_out`` for every model. External systems that learn from none of our data — the rule-based Presidio
     orchestration baseline, and the third-party NER/IE systems ``spacy`` (OntoNotes-trained) and
     ``gliner2`` (Fastino's own pretraining) — are ``clean_held_out`` on every config. The ``kp-model`` family (kp-deid-mdeberta-280m, KLU-44) was trained on the KP
     synthetic LocalePacks ``ds-kp-general-{ro,en,pl}-50k`` (ro/en/pl only), so on a kp-model row the
@@ -51,9 +51,11 @@ DEFAULT_CONFIG_STATUS = DEV
 _AI4PRIVACY_TRAINED_ADAPTERS = frozenset({"openmed", "tabularisai"})
 _AI4PRIVACY_CONFIGS = frozenset({"en", "de", "fr", "it", "es", "nl"})
 
-# The real-skeleton tracks (RO/CNP, PL/PESEL) are genuinely clean held-out sets: no baseline on
-# the board was trained on them. Marked clean_held_out for every model.
-_CLEAN_HELD_OUT_CONFIGS = frozenset({"ro-realskeleton-v1", "pl-realskeleton-v1"})
+# The real-skeleton tracks (RO/CNP, PL/PESEL, IT/codice-fiscale) are genuinely clean held-out sets:
+# no baseline on the board was trained on them (it-realskeleton-v1 is the IT LocalePack the kp-model
+# was NOT trained on — trained ro/en/pl only — and an authored real-skeleton, not the AI4Privacy
+# `it` generator). Marked clean_held_out for every model.
+_CLEAN_HELD_OUT_CONFIGS = frozenset({"ro-realskeleton-v1", "pl-realskeleton-v1", "it-realskeleton-v1"})
 
 # External systems trained on NONE of our data — so every config is a genuine clean held-out test
 # for them (no train/eval overlap to flag). This covers rule-based / orchestration baselines
