@@ -129,7 +129,12 @@ def make_figure(points: list[dict], out_svg: Path, out_png: Path) -> None:
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    fig, ax = plt.subplots(figsize=(8.0, 6.0))
+    # Wide landscape (2:1) so the figure fills a full-width hero frame at a sensible height and the
+    # edge labels have room to breathe.
+    fig, ax = plt.subplots(figsize=(12.0, 6.0))
+
+    xs = [p["f1"] for p in points]
+    xmin, xmax = (min(xs), max(xs)) if xs else (0.0, 1.0)
 
     # Trend line through the *leaking* content-NER detectors (sorted by F1): for systems that treat
     # a CNP as just another token, higher detection-F1 does NOT lower the re-id leak — it is the
@@ -143,6 +148,19 @@ def make_figure(points: list[dict], out_svg: Path, out_png: Path) -> None:
             label="content-NER detectors (high F1 ⇏ low leak)",
         )
 
+    # Per-adapter label placement (offset in points; ha/va; leader = draw a thin connector for the
+    # points in the tight mid-cluster so labels sit in open space). Cosmetic only — every plotted
+    # value still comes from the leaderboard above; unlisted adapters fall back to a sane default.
+    PLACE = {
+        "spacy":          (10, -14, "left",  "top",    False),
+        "privacy-filter": (-8,  11, "right", "bottom", False),
+        "presidio":       (8,   15, "left",  "bottom", False),
+        "openmed":        (-48,  4, "right", "center", True),
+        "gliner2":        (4,  -34, "left",  "top",    True),
+        "tabularisai":    (-6,  13, "right", "bottom", False),
+        "gliner":         (-12, 11, "right", "bottom", False),
+        "kp-model":       (12,  13, "left",  "bottom", False),
+    }
     for p in points:
         x = p["f1"]
         y = p["leak_rate"] * 100
@@ -156,26 +174,27 @@ def make_figure(points: list[dict], out_svg: Path, out_png: Path) -> None:
             markeredgewidth=1.6 if is_kp else 0,
             zorder=4 if is_kp else 3,
         )
-        # Offset labels so they don't sit on the markers/error bars.
-        dy = 1.6 if not is_kp else 2.4
-        ax.annotate(
-            f"{p['label']}\nF1={x:.3f}, leak={y:.1f}%",
-            (x, y), textcoords="offset points", xytext=(8, dy * 4),
-            fontsize=8.5, fontweight="bold" if is_kp else "normal",
-            ha="left", va="bottom",
+        dx, dy, ha, va, leader = PLACE.get(p["adapter"], (10, 8, "left", "bottom", False))
+        ann_kw = dict(
+            textcoords="offset points", xytext=(dx, dy),
+            fontsize=9, fontweight="bold" if is_kp else "normal", ha=ha, va=va,
         )
+        if leader:
+            ann_kw["arrowprops"] = dict(arrowstyle="-", color="#999999", lw=0.7, shrinkA=0, shrinkB=5)
+        ax.annotate(f"{p['label']}\nF1={x:.3f}, leak={y:.1f}%", (x, y), **ann_kw)
 
-    ax.set_xlabel("Detection entity-F1  (higher = better detection)", fontsize=11)
-    ax.set_ylabel("Re-identification CNP leak-rate  (lower = better protection)", fontsize=11)
+    ax.set_xlim(xmin - 0.05, xmax + 0.06)
+    ax.set_xlabel("Detection entity-F1  (higher = better detection)", fontsize=12)
+    ax.set_ylabel("Re-identification CNP leak-rate  (lower = better protection)", fontsize=12)
     ax.set_title(
         "Detection accuracy does NOT buy privacy protection\n"
         "RO real-skeleton track (ro-realskeleton-v1): per-subject CNP leak vs entity-F1",
-        fontsize=12.5,
+        fontsize=13.5,
     )
     ax.set_ylim(bottom=-1.5)
     ax.axhline(0, color="#cccccc", linewidth=0.8, zorder=0)
     ax.grid(True, alpha=0.25)
-    ax.legend(loc="upper left", fontsize=8.5, framealpha=0.9)
+    ax.legend(loc="upper right", fontsize=9, framealpha=0.9)
 
     n_total = points[0]["cnp_total"] if points else 0
     statuses = sorted({p["config_status"] for p in points})
