@@ -1,6 +1,10 @@
 """National-ID validators (RO/PL/IT decode-bearing, ES coverage-only) + leakage metrics."""
 
 from europriv_bench.adapters import build
+from europriv_bench.belfiore import (
+    BELFIORE_SNAPSHOT_VERSION,
+    resolve_belfiore,
+)
 from europriv_bench.metrics import (
     cnp_leakage,
     national_id_leakage,
@@ -8,6 +12,8 @@ from europriv_bench.metrics import (
     wilson_interval,
 )
 from europriv_bench.national_id import (
+    _CF_OMOCODIA,
+    _cf_control_letter,
     check_digit,
     get_validator,
     parse_cnp,
@@ -185,6 +191,88 @@ def test_codice_fiscale_female_day_offset_and_control_letter_rejection():
     # Corrupt the control letter → invalid.
     bad = CF_IT_M[:-1] + ("A" if CF_IT_M[-1] != "A" else "B")
     assert not parse_national_id(bad, "IT").valid
+
+
+# --- IT: omocodia (the KLU-105 crux — letter↔digit substitution on collision) ------------
+
+_DIGIT_TO_OMOCODE_LETTER = {v: k for k, v in _CF_OMOCODIA.items()}  # "0"→"L", "1"→"M", …
+
+
+def _make_omocode(cf: str, positions: list[int]) -> str:
+    """Build a valid omocode of ``cf`` by substituting digits→letters at the given 0-based positions
+    within the first 15 chars, then recomputing the control letter (omocodes carry their OWN valid
+    check char). ``positions`` must index *numeric* CF positions (year 6-7, day 9-10, place 12-14)."""
+    chars = list(cf[:15])
+    for i in positions:
+        assert chars[i].isdigit(), f"position {i} is not a digit in {cf}"
+        chars[i] = _DIGIT_TO_OMOCODE_LETTER[chars[i]]
+    first15 = "".join(chars)
+    return first15 + _cf_control_letter(first15)
+
+
+def test_omocodia_base_and_omocode_decode_to_same_quasi_identifiers():
+    """A base CF and ≥1 omocode of the SAME identity must decode to identical quasi-identifiers,
+    and the omocode's own control character must validate (KLU-105 mandatory unit-test)."""
+    base = parse_national_id(CF_IT_M, "IT")
+    assert base.valid
+
+    # Single omocode (substitute the rightmost numeric position — the place field's last digit).
+    omo1 = _make_omocode(CF_IT_M, [14])
+    # Multi-omocode (substitute several numeric positions across year/day/place).
+    omoN = _make_omocode(CF_IT_M, [14, 13, 12, 10, 9, 7, 6])
+
+    for omo in (omo1, omoN):
+        assert omo != CF_IT_M, "omocode must differ from the base CF"
+        info = parse_national_id(omo, "IT")
+        assert info.valid and info.decode_bearing, f"omocode {omo} must validate"
+        # Same DOB, sex AND place-of-birth (place must be omocodia-invariant — the crux).
+        assert info.extra == base.extra, f"omocode {omo} decoded differently: {info.extra}"
+        assert info.disclosed_quasi_identifiers() == base.disclosed_quasi_identifiers()
+        assert info.extra["belfiore_code"] == "A562"  # omocodia reversed on the place field too
+
+
+def test_omocode_with_tampered_control_letter_is_rejected():
+    omo = _make_omocode(CF_IT_M, [14])
+    bad = omo[:-1] + ("A" if omo[-1] != "A" else "B")
+    assert not parse_national_id(bad, "IT").valid
+
+
+# --- IT: Belfiore place-of-birth resolution (pinned snapshot, foreign-born scope) --------
+
+
+def test_belfiore_resolves_comune_and_is_pinned():
+    assert BELFIORE_SNAPSHOT_VERSION  # snapshot carries an explicit version
+    roma = resolve_belfiore("H501")
+    assert roma.kind == "comune" and roma.name == "Roma"
+
+
+def test_belfiore_foreign_born_resolves_to_country_not_comune():
+    """Z-prefixed codes encode only the COUNTRY of birth — a coarser place disclosure (documented)."""
+    foreign = resolve_belfiore("Z404")
+    assert foreign.kind == "foreign_country" and foreign.name == "Cina"
+
+
+def test_belfiore_unknown_code_still_a_place_but_unnamed():
+    unk = resolve_belfiore("A562")  # real comune code, intentionally not in the pinned subset
+    assert unk.kind == "unknown" and unk.name is None
+
+
+def test_codice_fiscale_foreign_born_discloses_country_place_of_birth():
+    first15 = "RSSMRA85T10Z404"
+    cf = first15 + _cf_control_letter(first15)
+    info = parse_national_id(cf, "IT")
+    assert info.valid
+    assert info.extra["place_of_birth"] == "Cina"
+    assert info.extra["place_kind"] == "foreign_country"
+    assert "PLACE_OF_BIRTH" in info.disclosed_quasi_identifiers()
+
+
+def test_codice_fiscale_comune_place_of_birth_named_from_snapshot():
+    # Milano (F205) is in the snapshot → place-of-birth resolves to a named comune.
+    first15 = "RSSMRA85T10F205"
+    cf = first15 + _cf_control_letter(first15)
+    info = parse_national_id(cf, "IT")
+    assert info.extra["place_of_birth"] == "Milano" and info.extra["place_kind"] == "comune"
 
 
 # --- ES: DNI/NIF (coverage-only — NEVER a re-id number) ----------------------------------

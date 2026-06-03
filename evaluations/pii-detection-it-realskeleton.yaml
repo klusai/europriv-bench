@@ -1,0 +1,41 @@
+name: "PII Detection + Codice Fiscale Leakage — Italian (real-skeleton v1)"
+version: 1
+task: detection
+domain: legal
+languages: [it]
+
+dataset:
+  hf_id: klusai/europriv-bench
+  config: it-realskeleton-v1
+  split: test
+  license: CC-BY-4.0
+
+metrics:
+  - entity_f1
+  - entity_f2
+  - national_id_leakage
+
+description: >
+  A citable-track candidate (currently config_status=dev; not yet validated — pending
+  native-speaker review + IAA) and the THIRD decode-bearing measurement (after
+  ro-realskeleton-v1 and pl-realskeleton-v1): faithful real-structure Italian documents
+  (discharge letter LETTERA DI DIMISSIONE OSPEDALIERA, services contract CONTRATTO DI
+  PRESTAZIONE DI SERVIZI, self-declaration DICHIARAZIONE SOSTITUTIVA DI CERTIFICAZIONE,
+  administrative letter) with synthetic PII (valid-checksum codice fiscale, CF-consistent
+  DOB, partita IVA / IBAN / +39 phones / addresses). Headline is national_id_leakage —
+  rows carry country=IT so it dispatches to the codice-fiscale validator. The codice
+  fiscale is the RICHEST of the three decode-bearing identifiers: a missed (un-redacted)
+  CF deterministically discloses DATE_OF_BIRTH + SEX + PLACE_OF_BIRTH (the Belfiore
+  comune/country of birth), so the re-identification leak counts place-of-birth, not just
+  DOB+sex. Omocodia (the tax authority's letter-for-digit substitution on collision) is
+  reversed before decoding, so a leaked omocode discloses the same QIs as a leaked base
+  CF; place-of-birth is decoded against a pinned, versioned Belfiore snapshot (foreign-born
+  Z-codes resolve to a country, a coarser disclosure than a comune). Re-identification is
+  counted per distinct subject — the discharge letter repeats the patient CF (identity
+  header + Identificativo paziente), so the repeat collapses to one subject (KLU-49 dedup)
+  and never double-counts. All four templates are one authored skeleton family sharing a
+  single fill path; a leak headline from a single template family is not validated
+  generalization — a second independent IT template family is required before this is
+  cited (the KLU-101 RO hardening, replicated for IT). Together with ro-realskeleton-v1
+  (CNP) and pl-realskeleton-v1 (PESEL), this measures the detection≠re-identification
+  dissociation across 3 identifiers in 3 languages (RO/PL/IT).
