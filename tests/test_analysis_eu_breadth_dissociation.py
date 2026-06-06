@@ -1,8 +1,8 @@
-"""RES-80 — SE/CZ difference-of-proportions dissociation logic in the analysis script.
+"""RES-80/RES-83 — SE/CZ/DK/FI difference-of-proportions dissociation logic in the analysis script.
 
 Covers the *statistics* only (no model backends): the per-detector gap = leak(detector) −
 leak(protector), the Newcombe CI on the difference, and the "holds iff CI excludes 0" verdict on
-the single SE/CZ template family. A null (no detector separates) is asserted to report as NO.
+the single SE/CZ/DK/FI template family. A null (no detector separates) is asserted to report as NO.
 """
 
 from __future__ import annotations
@@ -24,10 +24,12 @@ def _leak(adapter, missed, total, leaked_qi=None):
             "leaked_qi": leaked_qi if leaked_qi is not None else missed * 2}
 
 
-def test_countries_cover_se_and_cz():
-    assert set(ebd.COUNTRIES) == {"SE", "CZ"}
+def test_countries_cover_se_cz_dk_fi():
+    assert set(ebd.COUNTRIES) == {"SE", "CZ", "DK", "FI"}
     assert ebd.COUNTRIES["SE"]["config"] == "se-realskeleton-v1"
     assert ebd.COUNTRIES["CZ"]["config"] == "cz-realskeleton-v1"
+    assert ebd.COUNTRIES["DK"]["config"] == "dk-realskeleton-v1"
+    assert ebd.COUNTRIES["FI"]["config"] == "fi-realskeleton-v1"
 
 
 def test_detector_gap_excludes_zero_when_detector_leaks_and_protector_does_not():
