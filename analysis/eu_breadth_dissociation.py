@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
-"""RES-80 — the detection≠re-id dissociation on SE (personnummer) and CZ (rodné číslo).
+"""RES-80/RES-83 — the detection≠re-id dissociation on SE/CZ (RES-80) and DK/FI (RES-83).
 
-The 4th and 5th decode-bearing measurements, after RO/CNP, PL/PESEL and IT/codice-fiscale. Both
-extend the headline to a NEW identifier in a NEW language:
+The 4th–7th decode-bearing measurements, after RO/CNP, PL/PESEL and IT/codice-fiscale. Each
+extends the headline to a NEW identifier in a NEW language:
 
   * SE personnummer — a missed (un-redacted) number discloses SEX + DATE_OF_BIRTH (birth month +
     day; the bare 10-digit form's century is carried only by the printed separator).
   * CZ rodné číslo  — a missed number discloses SEX + DATE_OF_BIRTH (the modern 10-digit form is
     fully date-recoverable, female month +50, YY-century convention).
+  * DK CPR-nummer   — a missed number discloses SEX + DATE_OF_BIRTH (full date; century from the
+    7th-digit/YY table — the mod-11 check was abolished in 2007, so we validate format + table).
+  * FI henkilötunnus — a missed number discloses SEX + DATE_OF_BIRTH (full date; century from the
+    marker; mod-31 control char over the 31-char map).
 
 Each config ships **one authored template family for now** (a 2nd independent family is required
 before citing — the KLU-101 hardening), so this reports the dissociation as a **per-typed-detector
@@ -60,6 +64,11 @@ COUNTRIES = {
            "qi": "SEX + DATE_OF_BIRTH (birth month + day)"},
     "CZ": {"config": "cz-realskeleton-v1", "id_name": "rodné číslo", "lang": "cs",
            "qi": "SEX + DATE_OF_BIRTH (full date, modern 10-digit form)"},
+    # RES-83 EU-breadth batch 2: DK CPR + FI henkilötunnus (both decode-bearing → DOB + sex).
+    "DK": {"config": "dk-realskeleton-v1", "id_name": "CPR-nummer", "lang": "da",
+           "qi": "SEX + DATE_OF_BIRTH (full date; century from the 7th-digit table)"},
+    "FI": {"config": "fi-realskeleton-v1", "id_name": "henkilötunnus", "lang": "fi",
+           "qi": "SEX + DATE_OF_BIRTH (full date; century from the marker)"},
 }
 
 

@@ -1,4 +1,4 @@
-"""National-ID validators (RO/PL/IT/FR/SE/CZ decode-bearing, ES/DE/NL coverage-only) + leakage metrics."""
+"""National-ID validators (RO/PL/IT/FR/SE/CZ/DK/FI decode-bearing, ES/DE/NL coverage-only) + leakage metrics."""
 
 from europriv_bench.adapters import build
 from europriv_bench.belfiore import (
@@ -15,6 +15,8 @@ from europriv_bench.national_id import (
     _CF_OMOCODIA,
     _bsn_weighted_sum,
     _cf_control_letter,
+    _dk_century,
+    _fi_control_char,
     _iso7064_mod11_10,
     _nir_key,
     _se_luhn_check_digit,
@@ -35,6 +37,8 @@ DNI_ES = "12345678Z"           # canonical Spanish DNI (12345678 mod 23 → Z)
 STEUER_ID_DE = "86095742719"   # textbook DE Steuer-IdNr (ISO 7064 MOD 11,10; § 139b AO)
 PNR_SE_F = "8506152449"        # SE personnummer 1985-06-15, female (Luhn-valid)
 RC_CZ_F = "8556151010"         # CZ rodné číslo 1985-06-15, female (month +50; mod-11)
+HETU_FI_F = "131052-308T"      # FI henkilötunnus 1952-10-13, female (DVV canonical example; ctrl T)
+CPR_DK_M = "211062-0629"       # DK CPR-nummer 1962-10-21, male (c7=0 → 1900s; last digit odd)
 
 
 def _make_cnp(base12: str) -> str:
@@ -165,7 +169,7 @@ def test_run_spec_wires_cnp_leakage_via_rows():
 
 
 def test_registry_exposes_all_countries_with_correct_families():
-    assert supported_countries() == ["CZ", "DE", "ES", "FR", "IT", "NL", "PL", "RO", "SE"]
+    assert supported_countries() == ["CZ", "DE", "DK", "ES", "FI", "FR", "IT", "NL", "PL", "RO", "SE"]
     assert get_validator("ro").decode_bearing is True
     assert get_validator("PL").decode_bearing is True
     assert get_validator("it").decode_bearing is True
@@ -177,6 +181,9 @@ def test_registry_exposes_all_countries_with_correct_families():
     # SE/CZ (RES-80): both decode-bearing (personnummer / rodné číslo → DOB + sex).
     assert get_validator("SE").decode_bearing is True
     assert get_validator("cz").decode_bearing is True
+    # DK/FI (RES-83): both decode-bearing (CPR-nummer / henkilötunnus → DOB + sex).
+    assert get_validator("DK").decode_bearing is True
+    assert get_validator("fi").decode_bearing is True
     assert get_validator("XX") is None
     # Unsupported country → invalid, no decode.
     assert parse_national_id("123", "XX").valid is False
@@ -512,6 +519,83 @@ def test_rodne_cislo_length_and_implausible_date_rejected():
     assert not parse_national_id(RC_CZ_F[:8], "CZ").valid       # 8 digits (neither 9 nor 10)
     # month field 99 strips to no valid month → rejected.
     assert not parse_national_id("8599151010", "CZ").valid
+
+
+# --- DK: CPR-nummer (decode-bearing; format + century-table, NOT mod-11) -----------------
+
+
+def test_cpr_decodes_dob_and_sex():
+    info = parse_national_id(CPR_DK_M, "DK")
+    assert info.valid and info.decode_bearing
+    assert info.extra["sex"] == "M"                  # last digit 9 odd → male
+    assert info.extra["birth_date"] == "1962-10-21"  # c7=0 → 1900s; century unambiguous
+    assert info.disclosed_quasi_identifiers() == {"DATE_OF_BIRTH", "SEX"}
+
+
+def test_cpr_hyphen_form_and_no_mod11_checksum():
+    # Bare 10-digit form validates identically to the printed DDMMYY-SSSS form.
+    assert parse_national_id("2110620629", "DK").valid
+    # The mod-11 check was abolished in 2007: a number whose checksum FAILS the old mod-11 is still
+    # accepted as long as format + century-table + date are valid. ``300411-7656`` (30 Apr 2011)
+    # is mod-11-invalid but a structurally valid post-2007 CPR.
+    info = parse_national_id("3004117656", "DK")
+    assert info.valid and info.extra["birth_date"] == "2011-04-30"  # c7=7, yy=11<58 → 2000s
+    _CPR_WEIGHTS = (4, 3, 2, 7, 6, 5, 4, 3, 2, 1)
+    assert sum(int(d) * w for d, w in zip("3004117656", _CPR_WEIGHTS)) % 11 != 0  # old mod-11 fails
+
+
+def test_cpr_century_table_boundaries():
+    # 7th digit + YY → century base (CPR-kontoret table).
+    assert _dk_century(0, 99) == 1900 and _dk_century(3, 00) == 1900
+    assert _dk_century(4, 36) == 2000 and _dk_century(4, 37) == 1900
+    assert _dk_century(5, 57) == 2000 and _dk_century(8, 58) == 1800
+    assert _dk_century(9, 36) == 2000 and _dk_century(9, 37) == 1900
+
+
+def test_cpr_length_implausible_date_and_nondigit_rejected():
+    assert not parse_national_id(CPR_DK_M.replace("-", "")[:-1], "DK").valid  # 9 digits
+    assert not parse_national_id("3302620629", "DK").valid                    # day 33 → invalid
+    assert not parse_national_id("21106206X9", "DK").valid                    # non-digit
+
+
+# --- FI: henkilötunnus (decode-bearing; mod-31 control char) -----------------------------
+
+
+def test_henkilotunnus_decodes_dob_and_sex():
+    info = parse_national_id(HETU_FI_F, "FI")
+    assert info.valid and info.decode_bearing
+    assert info.extra["sex"] == "F"                  # individual number 308 even → female
+    assert info.extra["birth_date"] == "1952-10-13"  # '-' marker → 1900s; century unambiguous
+    assert info.disclosed_quasi_identifiers() == {"DATE_OF_BIRTH", "SEX"}
+
+
+def test_henkilotunnus_control_char_and_rejection():
+    # mod-31 control char over DDMMYYZZZ indexed into the 31-char map (G/I/O/Q/Z omitted).
+    assert _fi_control_char("131052308") == "T"      # DVV canonical example
+    # A wrong control character is rejected.
+    bad = HETU_FI_F[:-1] + ("U" if HETU_FI_F[-1] != "U" else "V")
+    assert not parse_national_id(bad, "FI").valid
+
+
+def test_henkilotunnus_century_markers_2023_reform():
+    # 2000s marker 'A'; recompute the control char for the same date/serial under the A century.
+    a_ctrl = _fi_control_char("010100123")
+    info = parse_national_id("010100A123" + a_ctrl, "FI")
+    assert info.valid and info.extra["birth_date"] == "2000-01-01"
+    # 2023 reform: new 1900s separators (Y/X/W/V/U) and 2000s (B–F) decode like '-'/'A'.
+    y_ctrl = _fi_control_char("010190308")
+    info2 = parse_national_id("010190Y308" + y_ctrl, "FI")
+    assert info2.valid and info2.extra["birth_date"] == "1990-01-01"  # 'Y' → 1900s
+    # '+' marker → 1800s (DDMMYY = 01 Jan 1885).
+    plus_ctrl = _fi_control_char("010185308")
+    info3 = parse_national_id("010185+308" + plus_ctrl, "FI")
+    assert info3.valid and info3.extra["birth_date"] == "1885-01-01"
+
+
+def test_henkilotunnus_length_bad_marker_and_implausible_date_rejected():
+    assert not parse_national_id(HETU_FI_F[:-1], "FI").valid          # 10 chars
+    assert not parse_national_id("131052G308T", "FI").valid          # 'G' is not a century marker
+    assert not parse_national_id("320152-308" + _fi_control_char("320152308"), "FI").valid  # day 32
 
 
 # --- national_id_leakage: country-dispatched ---------------------------------------------

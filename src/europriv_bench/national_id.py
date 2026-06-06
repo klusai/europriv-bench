@@ -29,6 +29,9 @@ Sources:
   NL  BSN / burgerservicenummer (Rijksoverheid); 11-proef (elfproef) weighted-sum test.
   SE  personnummer (Skatteverket SKV 704); Luhn / ISO 7812 mod-10; sex digit, +60 day = samordningsnummer.
   CZ  rodné číslo (Zákon č. 133/2000 Sb. § 13); whole-number mod-11; female month +50, +20 overflow.
+  DK  CPR-nummer (CPR-kontoret / Det Centrale Personregister); DDMMYY-SSSS, format + 7th-digit/YY
+      century table — the mod-11 check was abolished in 2007 (NOT a hard checksum); sex = last-digit parity.
+  FI  henkilötunnus (DVV / VRK); DDMMYY + century marker + ZZZ + mod-31 control char; sex = ZZZ parity.
 """
 
 from __future__ import annotations
@@ -656,6 +659,115 @@ def _parse_cz(value: str) -> IDInfo:
     )
 
 
+# --- DK: CPR-nummer (personnummer) — decode-bearing --------------------------------------
+#
+# 10-digit identifier ``DDMMYY-SSSS`` (the hyphen is cosmetic):
+#   DDMMYY  birth date (2-digit year; the century is recovered from the 7th digit + the YY table)
+#   SSSS    sequence number; its 7th digit (first of SSSS) encodes the century together with YY,
+#           and its LAST digit (the 10th) encodes sex — odd → male, even → female.
+# Century table (7th digit ``c7`` + 2-digit year ``yy``; this is the CPR-kontoret / Det Centrale
+# Personregister convention, matching the public reference validators):
+#   c7 in 0–3                        → 1900 + yy
+#   c7 == 4 : yy < 37 → 2000+yy      else 1900+yy
+#   c7 in 5–8 : yy < 58 → 2000+yy    else 1800+yy
+#   c7 == 9 : yy < 37 → 2000+yy      else 1900+yy
+# IMPORTANT: the historical **mod-11 checksum was officially abolished in 2007** (the day's
+# sequence numbers ran out, so numbers issued since are NOT mod-11-valid). We therefore validate
+# **format + a plausible date under the century table only — NOT a hard checksum** (validating a
+# mod-11 here would reject the majority of post-2007 CPR numbers). A missed CPR deterministically
+# discloses DATE_OF_BIRTH (century unambiguous via the table) + SEX.
+# Spec: CPR-kontoret "Personnummeret"; mod-11 abolition 2007 (CPR Office notice); cross-checked vs
+# the public reference validators (python-stdnum dk.cpr, R cprr). Cross-checked vs the pack.
+
+
+def _dk_century(c7: int, yy: int) -> int:
+    """Full birth century-base for a CPR 7th digit ``c7`` and 2-digit year ``yy`` (CPR-kontoret table)."""
+    if c7 <= 3:
+        return 1900
+    if c7 == 4:
+        return 2000 if yy < 37 else 1900
+    if c7 <= 8:                      # 5–8
+        return 2000 if yy < 58 else 1800
+    return 2000 if yy < 37 else 1900  # c7 == 9
+
+
+def _parse_dk(value: str) -> IDInfo:
+    """Decode a Danish CPR-nummer. Format + century-table + plausible date (no mod-11 — abolished 2007)."""
+    if not isinstance(value, str):
+        return IDInfo(valid=False, country="DK", decode_bearing=True)
+    s = value.strip().replace("-", "").replace(" ", "")
+    if len(s) != 10 or not s.isdigit():
+        return IDInfo(valid=False, country="DK", decode_bearing=True)
+
+    dd, mm, yy = int(s[0:2]), int(s[2:4]), int(s[4:6])
+    year = _dk_century(int(s[6]), yy) + yy
+    if not _plausible_date(year, mm, dd):
+        return IDInfo(valid=False, country="DK", decode_bearing=True)
+
+    sex = "M" if int(s[9]) % 2 == 1 else "F"  # last digit parity → sex
+    return IDInfo(
+        valid=True, country="DK", decode_bearing=True,
+        quasi_identifiers=frozenset({"DATE_OF_BIRTH", "SEX"}),
+        extra={"sex": sex, "birth_date": f"{year:04d}-{mm:02d}-{dd:02d}"},
+    )
+
+
+# --- FI: henkilötunnus — decode-bearing --------------------------------------------------
+#
+# 11-char identifier ``DDMMYY C ZZZ Q``:
+#   DDMMYY  birth date (2-digit year; the century is carried by the marker C, so DOB is unambiguous)
+#   C       century marker:  '+' → 1800s;  '-','Y','X','W','V','U' → 1900s;  'A','B','C','D','E','F'
+#           → 2000s. (The 2023 DVV reform added Y/X/W/V/U and B–F as additional separators so each
+#           date/sex has more codes — the separator is now a *distinguishing* character.)
+#   ZZZ     individual number (002–899 for residents); odd → male, even → female.
+#   Q       control character = (int(DDMMYYZZZ) mod 31) indexed into the 31-char map
+#           "0123456789ABCDEFHJKLMNPRSTUVWXY" (G/I/O/Q/Z omitted to avoid ambiguity).
+# A missed henkilötunnus deterministically discloses DATE_OF_BIRTH (century known) + SEX.
+# Spec: DVV/VRK "Personal identity code"; 2023 separator reform (Decree 128/2010 § 2, in force
+# 2023-01-01). Cross-checked vs the public reference validators (python-stdnum fi.hetu). Cross-checked vs the pack.
+
+_FI_CONTROL_MAP = "0123456789ABCDEFHJKLMNPRSTUVWXY"  # 31 chars; index = int(DDMMYYZZZ) % 31
+_FI_CENTURY = {
+    "+": 1800,
+    "-": 1900, "Y": 1900, "X": 1900, "W": 1900, "V": 1900, "U": 1900,
+    "A": 2000, "B": 2000, "C": 2000, "D": 2000, "E": 2000, "F": 2000,
+}
+
+
+def _fi_control_char(ddmmyyzzz: str) -> str:
+    """FI control character for the 9-digit ``DDMMYYZZZ`` string (mod-31 indexed into the map)."""
+    return _FI_CONTROL_MAP[int(ddmmyyzzz) % 31]
+
+
+def _parse_fi(value: str) -> IDInfo:
+    """Decode a Finnish henkilötunnus. Returns ``IDInfo(valid=False)`` for anything malformed."""
+    if not isinstance(value, str):
+        return IDInfo(valid=False, country="FI", decode_bearing=True)
+    s = value.strip().upper()
+    if len(s) != 11:
+        return IDInfo(valid=False, country="FI", decode_bearing=True)
+    date_digits, marker, individual, control = s[0:6], s[6], s[7:10], s[10]
+    if not date_digits.isdigit() or not individual.isdigit():
+        return IDInfo(valid=False, country="FI", decode_bearing=True)
+    century = _FI_CENTURY.get(marker)
+    if century is None:
+        return IDInfo(valid=False, country="FI", decode_bearing=True)
+    if _fi_control_char(date_digits + individual) != control:
+        return IDInfo(valid=False, country="FI", decode_bearing=True)
+
+    dd, mm, yy = int(s[0:2]), int(s[2:4]), int(s[4:6])
+    year = century + yy
+    if not _plausible_date(year, mm, dd):
+        return IDInfo(valid=False, country="FI", decode_bearing=True)
+
+    sex = "M" if int(individual) % 2 == 1 else "F"  # individual-number parity → sex
+    return IDInfo(
+        valid=True, country="FI", decode_bearing=True,
+        quasi_identifiers=frozenset({"DATE_OF_BIRTH", "SEX"}),
+        extra={"sex": sex, "birth_date": f"{year:04d}-{mm:02d}-{dd:02d}"},
+    )
+
+
 # --- NL: BSN / burgerservicenummer — coverage-only ---------------------------------------
 #
 # 9-digit citizen-service number validated by the "11-proef" (elfproef): the weighted sum
@@ -700,6 +812,8 @@ REGISTRY: dict[str, Validator] = {
     "NL": Validator("NL", "BSN", decode_bearing=False, parse=_parse_nl),
     "SE": Validator("SE", "personnummer", decode_bearing=True, parse=_parse_se),
     "CZ": Validator("CZ", "rodné číslo", decode_bearing=True, parse=_parse_cz),
+    "DK": Validator("DK", "CPR-nummer", decode_bearing=True, parse=_parse_dk),
+    "FI": Validator("FI", "henkilötunnus", decode_bearing=True, parse=_parse_fi),
 }
 
 
