@@ -36,3 +36,28 @@ sources:
         attribution: >-
           Eurostat, NUTS 2021 classification. (C) European Union. Re-use authorised
           under Commission Decision 2011/833/EU, with attribution.
+
+  # RES-17 (v2 PURR machinery): a COMMITTED SYNTHETIC PLACEHOLDER census cross-tabulation,
+  # used ONLY to exercise the IPF / population-uniqueness code in tests + a runnable example.
+  # It is our OWN hand-authored invention (NOT real census data, NOT for any reported number)
+  # -> fully clean, CC-BY-4.0, nothing upstream to attribute. The license-gate covers it like
+  # any vendored file (checksum + allowlisted license); the placeholder flag lives in the file's
+  # own `meta` block and is asserted by the build_joint loader + the license-gate test. The real
+  # Eurostat 2021 Census Hub hypercubes are a DEFERRED follow-up (gated on the census-calibrated
+  # generator — see docs/klu-118-qi-distinctiveness-design.md) and will get their own entries here.
+  - id: synthetic_census_xx
+    path: fixtures/synthetic_census_xx.yaml
+    sha256: efc6cc10a6db14cbec882ed42a35191664822d44c60ac6b3a6c68c36204a7f52
+    role: >-
+      ILLUSTRATIVE PLACEHOLDER — synthetic per-country census cross-tabulations for the IPF
+      build_joint + Rocher-2019 population-uniqueness unit tests and runnable example. NOT real
+      census data; NOT for any reported PURR number on any real benchmark config.
+    retrieved: "2026-06-06"
+    placeholder: true
+    components:
+      - what: synthetic census cross-tabulations (age-band x sex x NUTS-2) for fictional country XX
+        source: hand-authored by KlusAI for RES-17 (no upstream source; not real population data)
+        license: CC-BY-4.0
+        attribution: >-
+          Synthetic illustrative placeholder authored by KlusAI for EuroPriv-Bench RES-17.
+          NOT real census data. CC-BY-4.0.

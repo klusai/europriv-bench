@@ -1,9 +1,19 @@
 """KLU-118 reference-population / crosswalk module — vendored, checksummed, license-gated.
 
-v1 scope is intentionally narrow: the only vendored artifact is the **RO county -> NUTS-2**
-crosswalk used by the within-corpus k-anonymity diagnostic's locality QI field. NO census
-population, microdata, or population-uniqueness estimator is vendored here — that is the v2 PURR
-work, which is blocked on a census-calibrated generator (see
+v1 vendored the **RO county -> NUTS-2** crosswalk used by the within-corpus k-anonymity diagnostic's
+locality QI field. RES-17 adds the **v2 PURR machinery** (built + tested against a COMMITTED
+SYNTHETIC PLACEHOLDER census fixture only — NOT real census data, NOT for any reported number):
+
+  * ``build_joint`` — deterministic offline Iterative Proportional Fitting from census cross-tabs ->
+    a sparse per-country joint over the frozen ``qi-v1`` schema (pinned tolerance, reproducible).
+  * ``uniqueness`` — the Rocher–Hendrickx–de Montjoye (2019) population-uniqueness estimator, with
+    **PURR@τ** (default τ=0.95), **ΔPURR = baseline − model**, and mean **κ** (re-id correctness).
+  * ``fallbacks`` — marginal-independence + in-sample estimators, BOTH labelled weaker / upper-bound.
+  * ``report`` — auto-emits the required source attributions + the status / red-team labels.
+
+Until a census-calibrated generator lands, the PURR machinery is **internal sensitivity-analysis
+machinery, NOT a reported metric**; vendoring the real Eurostat 2021 Census Hub hypercubes and
+running PURR on a real benchmark config are DEFERRED follow-ups (see
 ``docs/klu-118-qi-distinctiveness-design.md``).
 
 Every vendored file is declared in ``manifest.yaml`` with a license on the allowlist
