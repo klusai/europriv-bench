@@ -1,0 +1,55 @@
+{
+  "config": "ro-realskeleton-v1",
+  "config_status": "dev",
+  "diagnostic": "k_anonymity_violation",
+  "label": "sample distinctiveness, not population re-identification",
+  "claim_language": "within-corpus k-anonymity-violation over the residual quasi-identifier tuple; sample distinctiveness, NOT population re-identification (the latter reserved for the deterministic national-ID anchor). Reported as the equivalence-class-size distribution, never a single scalar headline.",
+  "qi_schema_version": "qi-v1",
+  "qi_fields": [
+    "dob_band",
+    "sex",
+    "nuts2",
+    "nationality",
+    "isco_major",
+    "rare_condition"
+  ],
+  "qi_derivation": {
+    "dob_band": "CNP-decoded DOB → 5-year year-of-birth band",
+    "sex": "CNP-decoded sex",
+    "nuts2": "CNP-decoded county → NUTS-2 (vendored Eurostat/ROU-OGL crosswalk)",
+    "rare_condition": "True iff a HEALTH_CONDITION span survives the residual",
+    "nationality": "OMITTED — absent from ro-realskeleton-v1 gold",
+    "isco_major": "OMITTED — no profession label in the taxonomy / gold"
+  },
+  "residual_bounds": {
+    "null_detector": {
+      "available": true,
+      "label": "sample distinctiveness, not population re-identification",
+      "equivalence_class_size_histogram": {
+        "1": 98,
+        "2": 27,
+        "3": 14,
+        "4": 8,
+        "5": 8,
+        "6": 5,
+        "7": 1,
+        "8": 3,
+        "9": 3,
+        "10": 3,
+        "11": 1,
+        "12": 1,
+        "13": 1,
+        "20": 1
+      },
+      "n_subjects": 440,
+      "n_equivalence_classes": 174,
+      "k1_violation_rate": 0.22272727272727272,
+      "klt5_violation_rate": 0.5136363636363637
+    },
+    "perfect_detector": {
+      "available": false,
+      "reason": "QI diagnostic unavailable: no residual QI tuple could be derived. The k-anonymity-violation diagnostic needs a residual quasi-identifier TUPLE per subject (binned QI values typed to the frozen v1 QI schema: DOB/age band, sex, locality/NUTS, nationality, profession/ISCO, rare-condition flag). Gold rows carry neither a precomputed ``qi_tuple`` nor (for a supported corpus + prediction tags) any decode-bearing QI that survives the post-detection residual, so no equivalence-class key can be formed without fabricating QIs. This is an honest skip, not a failure (design-doc: a partial/skipped result is acceptable; forcing it is not).",
+      "label": "sample distinctiveness, not population re-identification"
+    }
+  }
+}

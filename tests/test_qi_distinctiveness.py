@@ -248,5 +248,12 @@ def test_runner_wires_name_channel_on_detection_track():
     assert scores["name_in_context_leakage"]["name_leak_rate"] == 1.0
     assert scores["name_in_context_leakage"]["xtab_both_leaked"] == 1.0
     assert scores["national_id_leakage"]["leak_rate"] == 1.0
-    # k-anon skip-and-reports on this (QI-less) gold.
-    assert scores["k_anonymity_violation"]["available"] is False
+    # k-anon is now ACTIVE: the null detector redacts nothing, so the CNP survives the residual and
+    # the additive enrichment derives a residual QI tuple (SEX + DOB-band + county→NUTS-2). One
+    # subject → one unique equivalence class. Still labelled distinctiveness, never a headline.
+    kanon = scores["k_anonymity_violation"]
+    assert kanon["available"] is True
+    assert kanon["label"] == "sample distinctiveness, not population re-identification"
+    assert kanon["n_subjects"] == 1
+    assert kanon["equivalence_class_size_histogram"] == {1: 1}
+    assert kanon["k1_violation_rate"] == 1.0

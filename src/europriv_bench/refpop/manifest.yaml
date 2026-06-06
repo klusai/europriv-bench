@@ -1,0 +1,38 @@
+# KLU-118 refpop / crosswalk manifest — vendored, checksummed, license-gated sources.
+#
+# Every vendored data file MUST appear here with a license on the CI allowlist
+# (CC-BY-4.0, CC-BY-3.0, EU-2011/833, ROU-OGL). The license-gate test
+# (tests/test_refpop_license_gate.py) fails the build on any source whose license is
+# not on the allowlist, or whose on-disk SHA-256 does not match the recorded checksum.
+#
+# v1 vendors only the RO county -> NUTS-2 crosswalk needed for the within-corpus
+# k-anonymity diagnostic. NO census population / microdata is vendored (that is v2 PURR,
+# blocked on a census-calibrated generator — see docs/klu-118-qi-distinctiveness-design.md).
+
+allowlist:
+  - CC-BY-4.0
+  - CC-BY-3.0
+  - EU-2011/833
+  - ROU-OGL
+
+sources:
+  - id: ro_county_nuts2
+    path: crosswalks/ro_county_nuts2.csv
+    sha256: 89cffd6a41ebfd26ca8b2adad92e3a7995520144381347be2b7e85ed0925f49e
+    role: >-
+      RO CNP county-code (JJ) -> county name -> NUTS-2 region crosswalk for the v1
+      locality QI field (county -> NUTS-2 binning).
+    retrieved: "2026-06-06"
+    components:
+      - what: CNP county-code (JJ) ordering -> county name
+        source: Romanian CNP spec (Law 190/2018 art. 4; vimishor/cnp-spec)
+        license: ROU-OGL
+        attribution: >-
+          Romanian Government open administrative data (CNP county-code ordering),
+          ROU-OGL.
+      - what: county -> NUTS-2 region assignment
+        source: Eurostat NUTS 2021 classification (Romania)
+        license: EU-2011/833
+        attribution: >-
+          Eurostat, NUTS 2021 classification. (C) European Union. Re-use authorised
+          under Commission Decision 2011/833/EU, with attribution.

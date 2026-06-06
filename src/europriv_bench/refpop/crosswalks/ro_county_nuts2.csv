@@ -1,0 +1,60 @@
+# RO CNP county-code (JJ) -> county name -> NUTS-2 region crosswalk (KLU-118 v1 QI schema).
+#
+# Two cleanly-licensed public facts, joined:
+#   1. JJ -> county name: the Romanian CNP county-code ordering (alphabetical judete + Bucuresti
+#      sectors 41-46 + Calarasi/Giurgiu 51/52). Public administrative fact, Romanian Law 190/2018
+#      / the standard CNP spec (vimishor/cnp-spec). ROU-OGL.
+#   2. county -> NUTS-2: Eurostat NUTS 2021 classification, RO judete grouped into the 8 RO NUTS-2
+#      regions. Eurostat, Commission Decision 2011/833/EU (re-use with attribution).
+#
+# Bucuresti city + its sectors (40-46) and Ilfov (23) are NUTS-2 RO32 (Bucuresti-Ilfov).
+# Columns: jj_code,county_name,nuts2_code,nuts2_name
+jj_code,county_name,nuts2_code,nuts2_name
+01,Alba,RO12,Centru
+02,Arad,RO42,Vest
+03,Arges,RO31,Sud-Muntenia
+04,Bacau,RO21,Nord-Est
+05,Bihor,RO11,Nord-Vest
+06,Bistrita-Nasaud,RO11,Nord-Vest
+07,Botosani,RO21,Nord-Est
+08,Brasov,RO12,Centru
+09,Braila,RO22,Sud-Est
+10,Buzau,RO22,Sud-Est
+11,Caras-Severin,RO42,Vest
+12,Cluj,RO11,Nord-Vest
+13,Constanta,RO22,Sud-Est
+14,Covasna,RO12,Centru
+15,Dambovita,RO31,Sud-Muntenia
+16,Dolj,RO41,Sud-Vest Oltenia
+17,Galati,RO22,Sud-Est
+18,Gorj,RO41,Sud-Vest Oltenia
+19,Harghita,RO12,Centru
+20,Hunedoara,RO42,Vest
+21,Ialomita,RO31,Sud-Muntenia
+22,Iasi,RO21,Nord-Est
+23,Ilfov,RO32,Bucuresti-Ilfov
+24,Maramures,RO11,Nord-Vest
+25,Mehedinti,RO41,Sud-Vest Oltenia
+26,Mures,RO12,Centru
+27,Neamt,RO21,Nord-Est
+28,Olt,RO41,Sud-Vest Oltenia
+29,Prahova,RO31,Sud-Muntenia
+30,Satu Mare,RO11,Nord-Vest
+31,Salaj,RO11,Nord-Vest
+32,Sibiu,RO12,Centru
+33,Suceava,RO21,Nord-Est
+34,Teleorman,RO31,Sud-Muntenia
+35,Timis,RO42,Vest
+36,Tulcea,RO22,Sud-Est
+37,Vaslui,RO21,Nord-Est
+38,Valcea,RO41,Sud-Vest Oltenia
+39,Vrancea,RO22,Sud-Est
+40,Bucuresti,RO32,Bucuresti-Ilfov
+41,Bucuresti Sector 1,RO32,Bucuresti-Ilfov
+42,Bucuresti Sector 2,RO32,Bucuresti-Ilfov
+43,Bucuresti Sector 3,RO32,Bucuresti-Ilfov
+44,Bucuresti Sector 4,RO32,Bucuresti-Ilfov
+45,Bucuresti Sector 5,RO32,Bucuresti-Ilfov
+46,Bucuresti Sector 6,RO32,Bucuresti-Ilfov
+51,Calarasi,RO31,Sud-Muntenia
+52,Giurgiu,RO31,Sud-Muntenia
