@@ -1,0 +1,120 @@
+{
+  "config": "lt-realskeleton-v1",
+  "country": "LT",
+  "dissociation": {
+    "protector": "kp-model",
+    "protector_leak_rate": 0.0,
+    "protector_missed": 0,
+    "protector_total": 227,
+    "protector_leak_wilson_low": 0.0,
+    "protector_leak_wilson_high": 0.016641046548323494,
+    "protector_leaked_quasi_identifiers": 0,
+    "gaps": [
+      {
+        "detector": "gliner",
+        "detector_leak_rate": 0.973568281938326,
+        "detector_missed": 221,
+        "detector_total": 227,
+        "protector": "kp-model",
+        "protector_leak_rate": 0.0,
+        "protector_missed": 0,
+        "protector_total": 227,
+        "gap": 0.973568281938326,
+        "gap_ci_low": 0.9392408926912038,
+        "gap_ci_high": 0.9878310156675674,
+        "dissociation_holds": true
+      },
+      {
+        "detector": "gliner2",
+        "detector_leak_rate": 0.06167400881057269,
+        "detector_missed": 14,
+        "detector_total": 227,
+        "protector": "kp-model",
+        "protector_leak_rate": 0.0,
+        "protector_missed": 0,
+        "protector_total": 227,
+        "gap": 0.06167400881057269,
+        "gap_ci_low": 0.031987245472040154,
+        "gap_ci_high": 0.10084654605811535,
+        "dissociation_holds": true
+      },
+      {
+        "detector": "presidio",
+        "detector_leak_rate": 0.0,
+        "detector_missed": 0,
+        "detector_total": 227,
+        "protector": "kp-model",
+        "protector_leak_rate": 0.0,
+        "protector_missed": 0,
+        "protector_total": 227,
+        "gap": 0.0,
+        "gap_ci_low": -0.016641046548323494,
+        "gap_ci_high": 0.016641046548323494,
+        "dissociation_holds": false
+      },
+      {
+        "detector": "spacy",
+        "detector_leak_rate": 0.6784140969162996,
+        "detector_missed": 154,
+        "detector_total": 227,
+        "protector": "kp-model",
+        "protector_leak_rate": 0.0,
+        "protector_missed": 0,
+        "protector_total": 227,
+        "gap": 0.6784140969162996,
+        "gap_ci_low": 0.6129669632488358,
+        "gap_ci_high": 0.7357722544677112,
+        "dissociation_holds": true
+      }
+    ],
+    "holds": true,
+    "n_docs": 300,
+    "models": {
+      "kp-model": {
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-mdeberta-280m",
+        "f1": 0.7258837627321749,
+        "leak_rate": 0.0,
+        "missed": 0,
+        "total": 227,
+        "leaked_qi": 0
+      },
+      "presidio": {
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "f1": 0.3971528181289947,
+        "leak_rate": 0.0,
+        "missed": 0,
+        "total": 227,
+        "leaked_qi": 0
+      },
+      "spacy": {
+        "adapter": "spacy",
+        "model_id": "spacy/en_core_web_lg@3.8.0",
+        "f1": 0.23435037960177627,
+        "leak_rate": 0.6784140969162996,
+        "missed": 154,
+        "total": 227,
+        "leaked_qi": 308
+      },
+      "gliner": {
+        "adapter": "gliner",
+        "model_id": "urchade/gliner_multi_pii-v1",
+        "f1": 0.8097227497151539,
+        "leak_rate": 0.973568281938326,
+        "missed": 221,
+        "total": 227,
+        "leaked_qi": 442
+      },
+      "gliner2": {
+        "adapter": "gliner2",
+        "model_id": "fastino/gliner2-base-v1",
+        "f1": 0.5243727598566309,
+        "leak_rate": 0.06167400881057269,
+        "missed": 14,
+        "total": 227,
+        "leaked_qi": 28
+      }
+    }
+  }
+}

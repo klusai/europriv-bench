@@ -73,6 +73,14 @@ COUNTRIES = {
     "FI": {"config": "fi-realskeleton-v1", "id_name": "henkilötunnus", "lang": "fi",
            "qi": "SEX + DATE_OF_BIRTH (full date; century from the marker)",
            "issue": "RES-83", "beyond": "RO/PL/IT/SE/CZ"},
+    # RES-84 EU-breadth batch 3: EE isikukood + LT asmens kodas (Baltic two-pass mod-11 family;
+    # both decode-bearing → DOB + sex; the century is carried by the 1st digit so DOB is full).
+    "EE": {"config": "ee-realskeleton-v1", "id_name": "isikukood", "lang": "et",
+           "qi": "SEX + DATE_OF_BIRTH (full date; century from the 1st digit)",
+           "issue": "RES-84", "beyond": "RO/PL/IT/SE/CZ/DK/FI"},
+    "LT": {"config": "lt-realskeleton-v1", "id_name": "asmens kodas", "lang": "lt",
+           "qi": "SEX + DATE_OF_BIRTH (full date; century from the 1st digit)",
+           "issue": "RES-84", "beyond": "RO/PL/IT/SE/CZ/DK/FI"},
 }
 
 

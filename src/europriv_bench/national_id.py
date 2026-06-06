@@ -32,6 +32,10 @@ Sources:
   DK  CPR-nummer (CPR-kontoret / Det Centrale Personregister); DDMMYY-SSSS, format + 7th-digit/YY
       century table — the mod-11 check was abolished in 2007 (NOT a hard checksum); sex = last-digit parity.
   FI  henkilötunnus (DVV / VRK); DDMMYY + century marker + ZZZ + mod-31 control char; sex = ZZZ parity.
+  EE  isikukood (Estonian PPA / standard EVS); GYYMMDDSSSC; G = century+sex; ISO-7064-style two-pass
+      mod-11 (weights 1..9,1 then 3..9,1,2,3; remainder 10 in BOTH passes → check digit 0).
+  LT  asmens kodas (Gyventojų registras; standard RST 1185-91); GYYMMDDNNNC; SAME two-pass mod-11 and
+      G century+sex encoding as EE (python-stdnum's lt.asmens reuses ee.ik.calc_check_digit verbatim).
 """
 
 from __future__ import annotations
@@ -768,6 +772,79 @@ def _parse_fi(value: str) -> IDInfo:
     )
 
 
+# --- EE / LT: isikukood / asmens kodas (Baltic family) — decode-bearing ------------------
+#
+# 11-digit identifier ``G YY MM DD NNN C``:
+#   G     century + sex: odd → male, even → female; 1/2 → 1800s, 3/4 → 1900s, 5/6 → 2000s,
+#         7/8 → 2100s. (LT uses 1–6 in practice; EE defines 7/8 too — we accept the full 1–8 range,
+#         which is harmless for LT since such IDs do not yet exist.)
+#   YYMMDD  birth date (century supplied by G → DOB is unambiguous, unlike the IT/SE 2-digit year)
+#   NNN     serial (separates births on the same day; for EE the parity does NOT encode sex — sex is
+#           in G — so we never read it; some LT sources tie serial parity to G but G is authoritative)
+#   C       ISO-7064-style **two-pass mod-11** check digit (see ``_baltic_check_digit``)
+# A missed isikukood / asmens kodas deterministically discloses DATE_OF_BIRTH (century known) + SEX.
+#
+# Two-pass mod-11 (verified vs python-stdnum ``ee.ik`` — LT's ``lt.asmens`` imports the SAME routine):
+#   pass 1 weights = 1,2,3,4,5,6,7,8,9,1   (i.e. (i % 9) + 1 for i = 0..9)
+#   pass 2 weights = 3,4,5,6,7,8,9,1,2,3   (i.e. ((i + 2) % 9) + 1 for i = 0..9)
+#   check = (Σ d_i·w1_i) mod 11; if check == 10 → check = (Σ d_i·w2_i) mod 11; if STILL 10 → 0.
+# (Equivalently: ``check % 10`` after the second pass, since only the 10-case differs.)
+# COLLISION FOOTGUN (EE/LT/LV share this exact structure): the validators are keyed by ``country`` so
+# an LV personal code is never decoded as an EE/LT subject — the registry never auto-detects country.
+
+_BALTIC_W1 = tuple((i % 9) + 1 for i in range(10))        # 1,2,3,4,5,6,7,8,9,1
+_BALTIC_W2 = tuple(((i + 2) % 9) + 1 for i in range(10))  # 3,4,5,6,7,8,9,1,2,3
+# G (1st digit) → century base + sex. 0 is invalid (no century/sex). 9 is unassigned.
+_BALTIC_CENTURY = {1: 1800, 2: 1800, 3: 1900, 4: 1900, 5: 2000, 6: 2000, 7: 2100, 8: 2100}
+
+
+def _baltic_check_digit(first10: str) -> int:
+    """Two-pass ISO-7064-style mod-11 check digit for the 10-digit Baltic (EE/LT) body."""
+    check = sum(int(d) * w for d, w in zip(first10, _BALTIC_W1)) % 11
+    if check == 10:
+        check = sum(int(d) * w for d, w in zip(first10, _BALTIC_W2)) % 11
+        if check == 10:
+            check = 0
+    return check
+
+
+def _parse_baltic(value: str, country: str) -> IDInfo:
+    """Decode an EE isikukood / LT asmens kodas (identical algorithm). ``country`` ∈ {"EE","LT"}."""
+    if not isinstance(value, str):
+        return IDInfo(valid=False, country=country, decode_bearing=True)
+    s = value.strip()
+    if len(s) != 11 or not s.isdigit():
+        return IDInfo(valid=False, country=country, decode_bearing=True)
+    if _baltic_check_digit(s[:10]) != int(s[10]):
+        return IDInfo(valid=False, country=country, decode_bearing=True)
+
+    g = int(s[0])
+    century = _BALTIC_CENTURY.get(g)
+    if century is None:                                   # G = 0 or 9 → no century/sex
+        return IDInfo(valid=False, country=country, decode_bearing=True)
+    sex = "M" if g % 2 == 1 else "F"                      # G parity → sex (NOT the serial)
+    yy, mm, dd = int(s[1:3]), int(s[3:5]), int(s[5:7])
+    year = century + yy
+    if not _plausible_date(year, mm, dd):
+        return IDInfo(valid=False, country=country, decode_bearing=True)
+
+    return IDInfo(
+        valid=True, country=country, decode_bearing=True,
+        quasi_identifiers=frozenset({"DATE_OF_BIRTH", "SEX"}),
+        extra={"sex": sex, "birth_date": f"{year:04d}-{mm:02d}-{dd:02d}"},
+    )
+
+
+def _parse_ee(value: str) -> IDInfo:
+    """Decode an Estonian isikukood. Returns ``IDInfo(valid=False)`` for anything malformed."""
+    return _parse_baltic(value, "EE")
+
+
+def _parse_lt(value: str) -> IDInfo:
+    """Decode a Lithuanian asmens kodas. Returns ``IDInfo(valid=False)`` for anything malformed."""
+    return _parse_baltic(value, "LT")
+
+
 # --- NL: BSN / burgerservicenummer — coverage-only ---------------------------------------
 #
 # 9-digit citizen-service number validated by the "11-proef" (elfproef): the weighted sum
@@ -814,6 +891,8 @@ REGISTRY: dict[str, Validator] = {
     "CZ": Validator("CZ", "rodné číslo", decode_bearing=True, parse=_parse_cz),
     "DK": Validator("DK", "CPR-nummer", decode_bearing=True, parse=_parse_dk),
     "FI": Validator("FI", "henkilötunnus", decode_bearing=True, parse=_parse_fi),
+    "EE": Validator("EE", "isikukood", decode_bearing=True, parse=_parse_ee),
+    "LT": Validator("LT", "asmens kodas", decode_bearing=True, parse=_parse_lt),
 }
 
 
