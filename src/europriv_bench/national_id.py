@@ -36,6 +36,20 @@ Sources:
       mod-11 (weights 1..9,1 then 3..9,1,2,3; remainder 10 in BOTH passes → check digit 0).
   LT  asmens kodas (Gyventojų registras; standard RST 1185-91); GYYMMDDNNNC; SAME two-pass mod-11 and
       G century+sex encoding as EE (python-stdnum's lt.asmens reuses ee.ik.calc_check_digit verbatim).
+  SI  EMŠO (Enotna matična številka občana; ex-YU JMBG, Zakon o matičnem registru / ZMatR-A); 13-digit
+      DDMMYYY-RR-BBB-K — a RICHER surface than the Baltic family: it also discloses REGION OF BIRTH (RR)
+      like the IT codice-fiscale's place. YYY = last 3 year digits (YYY>800 → 19YY/1900s, else 2000s —
+      the ex-YU convention); RR = political region of birth (50–59 = Slovenia, only 50 used pre-2024);
+      BBB = serial 000–499 male / 500–999 female; K = weighted mod-11 over the 12-digit body
+      (7,6,5,4,3,2 repeated twice), control = 11−(Σ mod 11) with 10/11 → 0. Decodes SEX + DATE_OF_BIRTH
+      + REGION_OF_BIRTH. COLLISION FOOTGUN: every ex-YU country shares the EMŠO/JMBG structure, so the
+      validator is country-keyed and the RR region encodes the country — an SI EMŠO is validated as SI.
+  SK  rodné číslo — the SAME identifier and SAME algorithm as CZ (Zákon č. 301/2000 Z. z. in Slovakia;
+      historically the shared Czechoslovak Zákon č. 133/2000 Sb. scheme). SK REUSES the CZ decoder
+      verbatim (``_parse_cz`` with country="SK") — no duplicate logic. Decodes SEX + DATE_OF_BIRTH.
+      COLLISION FOOTGUN: a CZ and an SK rodné číslo are structurally indistinguishable; the registry is
+      country-keyed and never auto-detects, so an SK number is decoded as SK and a CZ number as CZ — the
+      dispatch is by the row/span ``country`` tag, never by the digits.
 """
 
 from __future__ import annotations
@@ -628,18 +642,24 @@ def _cz_strip_month(mm_raw: int) -> tuple[int, str] | None:
     return mm, sex
 
 
-def _parse_cz(value: str) -> IDInfo:
-    """Decode a Czech/Slovak rodne cislo. Returns ``IDInfo(valid=False)`` for anything malformed."""
+def _parse_cz(value: str, country: str = "CZ") -> IDInfo:
+    """Decode a Czech/Slovak rodne cislo. Returns ``IDInfo(valid=False)`` for anything malformed.
+
+    CZ and SK share the SAME rodné-číslo algorithm (the historical Czechoslovak scheme; CZ Zákon
+    č. 133/2000 Sb. / SK Zákon č. 301/2000 Z. z.). ``country`` selects which the result is tagged
+    as — the registry is country-keyed and never auto-detects, so the digits never decide whether a
+    number is CZ or SK; the row/span ``country`` tag does. ``country`` ∈ {"CZ","SK"}.
+    """
     if not isinstance(value, str):
-        return IDInfo(valid=False, country="CZ", decode_bearing=True)
+        return IDInfo(valid=False, country=country, decode_bearing=True)
     s = value.strip().replace("/", "").replace(" ", "")
     if not s.isdigit() or len(s) not in (9, 10):
-        return IDInfo(valid=False, country="CZ", decode_bearing=True)
+        return IDInfo(valid=False, country=country, decode_bearing=True)
 
     yy = int(s[0:2])
     stripped = _cz_strip_month(int(s[2:4]))
     if stripped is None:
-        return IDInfo(valid=False, country="CZ", decode_bearing=True)
+        return IDInfo(valid=False, country=country, decode_bearing=True)
     month, sex = stripped
     day = int(s[4:6])
 
@@ -648,19 +668,24 @@ def _parse_cz(value: str) -> IDInfo:
         # check digit 0" historical exception.
         n10 = int(s)
         if n10 % 11 != 0 and not (int(s[:9]) % 11 == 10 and s[9] == "0"):
-            return IDInfo(valid=False, country="CZ", decode_bearing=True)
+            return IDInfo(valid=False, country=country, decode_bearing=True)
         year = 1900 + yy if yy >= 54 else 2000 + yy
     else:
         year = 1900 + yy                          # 9-digit form is pre-1954 -> unambiguously 19YY
 
     if not _plausible_date(year, month, day):
-        return IDInfo(valid=False, country="CZ", decode_bearing=True)
+        return IDInfo(valid=False, country=country, decode_bearing=True)
 
     return IDInfo(
-        valid=True, country="CZ", decode_bearing=True,
+        valid=True, country=country, decode_bearing=True,
         quasi_identifiers=frozenset({"DATE_OF_BIRTH", "SEX"}),
         extra={"sex": sex, "birth_date": f"{year:04d}-{month:02d}-{day:02d}"},
     )
+
+
+def _parse_sk(value: str) -> IDInfo:
+    """Decode a Slovak rodné číslo — the SAME algorithm as CZ, tagged ``country="SK"`` (reuse, no dup)."""
+    return _parse_cz(value, country="SK")
 
 
 # --- DK: CPR-nummer (personnummer) — decode-bearing --------------------------------------
@@ -877,6 +902,58 @@ def _parse_nl(value: str) -> IDInfo:
     return IDInfo(valid=True, country="NL", decode_bearing=False)
 
 
+# --- SI: EMŠO (Enotna matična številka občana) — decode-bearing --------------------------
+#
+# 13-digit ex-YU JMBG ``DD MM YYY RR BBB K`` (Slovenia's EMŠO; Zakon o matičnem registru):
+#   DDMMYYY  birth date — YYY is the LAST THREE year digits; the ex-YU century convention is
+#            YYY > 800 → 1000+YYY (1900s), else 2000+YYY (2000s), so the full date is unambiguous.
+#   RR       political REGION of birth (2 digits). 50–59 = Slovenia (only 50 used until 2024); other
+#            ranges belong to the other ex-YU republics, so RR also encodes the country.
+#   BBB      serial WITHIN region/date: 000–499 → male, 500–999 → female (sex lives in the serial).
+#   K        weighted mod-11 check digit over the 12-digit body, weights 7,6,5,4,3,2 repeated twice:
+#            m = 11 − (Σ w·d mod 11); K = m for m∈1..9, and K = 0 for m∈{10,11}.
+# A missed EMŠO deterministically discloses DATE_OF_BIRTH + SEX + REGION_OF_BIRTH — a RICHER surface
+# than the Baltic family (region of birth, like the IT codice-fiscale's place-of-birth).
+# Spec: ex-YU JMBG / SI EMŠO definition (Wikipedia "Unique Master Citizen Number"; ZMatR); cross-checked
+# vs the avramovic/JMBG and docs.rs ``jmbg`` reference implementations and the worked example
+# 0101006500006 (1st male registered in Slovenia on 2006-01-01 → K=6). Cross-checked vs the pack.
+# COLLISION FOOTGUN: every ex-YU country shares this exact structure; the validator is country-keyed
+# (RR carries the country) and never auto-detects — an SI EMŠO is only ever decoded as SI.
+
+_EMSO_WEIGHTS = (7, 6, 5, 4, 3, 2, 7, 6, 5, 4, 3, 2)
+
+
+def _emso_check_digit(first12: str) -> int:
+    """EMŠO/JMBG mod-11 check digit for the 12-digit body (m = 11 − Σw·d mod 11; 10/11 → 0)."""
+    m = 11 - (sum(int(d) * w for d, w in zip(first12, _EMSO_WEIGHTS)) % 11)
+    return 0 if m >= 10 else m
+
+
+def _parse_si(value: str) -> IDInfo:
+    """Decode a Slovenian EMŠO. Returns ``IDInfo(valid=False)`` for anything malformed."""
+    if not isinstance(value, str):
+        return IDInfo(valid=False, country="SI", decode_bearing=True)
+    s = value.strip().replace(" ", "")
+    if len(s) != 13 or not s.isdigit():
+        return IDInfo(valid=False, country="SI", decode_bearing=True)
+    if _emso_check_digit(s[:12]) != int(s[12]):
+        return IDInfo(valid=False, country="SI", decode_bearing=True)
+
+    dd, mm, yyy = int(s[0:2]), int(s[2:4]), int(s[4:7])
+    region = s[7:9]
+    serial = int(s[9:12])
+    year = (1000 + yyy) if yyy > 800 else (2000 + yyy)   # ex-YU century convention
+    if not _plausible_date(year, mm, dd):
+        return IDInfo(valid=False, country="SI", decode_bearing=True)
+
+    sex = "M" if serial < 500 else "F"                    # serial 000–499 male / 500–999 female
+    return IDInfo(
+        valid=True, country="SI", decode_bearing=True,
+        quasi_identifiers=frozenset({"DATE_OF_BIRTH", "SEX", "REGION_OF_BIRTH"}),
+        extra={"sex": sex, "birth_date": f"{year:04d}-{mm:02d}-{dd:02d}", "region_code": region},
+    )
+
+
 # --- Country-keyed registry --------------------------------------------------------------
 
 REGISTRY: dict[str, Validator] = {
@@ -893,6 +970,8 @@ REGISTRY: dict[str, Validator] = {
     "FI": Validator("FI", "henkilötunnus", decode_bearing=True, parse=_parse_fi),
     "EE": Validator("EE", "isikukood", decode_bearing=True, parse=_parse_ee),
     "LT": Validator("LT", "asmens kodas", decode_bearing=True, parse=_parse_lt),
+    "SI": Validator("SI", "EMŠO", decode_bearing=True, parse=_parse_si),
+    "SK": Validator("SK", "rodné číslo", decode_bearing=True, parse=_parse_sk),
 }
 
 
