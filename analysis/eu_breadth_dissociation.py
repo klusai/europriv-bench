@@ -60,6 +60,13 @@ PREREGISTERED_N_DOCS = 300
 
 # Per-country wiring: config slug + the human label for the identifier.
 COUNTRIES = {
+    # RES-87: PL PESEL — the original early decode-bearing measurement (after RO/CNP), backfilled
+    # here onto the shared codepath so it ships a committed pl_dissociation.json like the others. A
+    # missed PESEL discloses SEX + DATE_OF_BIRTH (the date digits are carried in full; the century is
+    # encoded in the month field +20/+40/+60/+80 per the post-1999 convention).
+    "PL": {"config": "pl-realskeleton-v1", "id_name": "PESEL", "lang": "pl",
+           "qi": "SEX + DATE_OF_BIRTH (full date; century encoded in the month field)",
+           "issue": "RES-87", "beyond": "RO"},
     "SE": {"config": "se-realskeleton-v1", "id_name": "personnummer", "lang": "sv",
            "qi": "SEX + DATE_OF_BIRTH (birth month + day)",
            "issue": "RES-80", "beyond": "RO/PL/IT"},

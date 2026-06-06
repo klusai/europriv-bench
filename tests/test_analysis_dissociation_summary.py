@@ -67,16 +67,21 @@ def test_ro_family_aggregation_sums_arms_and_takes_worst_case_ub():
     assert (holds, scored) == (3, 3)
 
 
-def test_build_summary_covers_eleven_langs_with_pl_as_a_gap():
+def test_build_summary_covers_eleven_langs_all_with_committed_artifacts():
     summary = bds.build_summary()
     assert summary["n_languages"] == 11
     assert summary["language_order"][0] == "RO"  # the original anchor leads
-    # PL has no committed artifact → reported as a gap, never fabricated.
+    # RES-87: PL/PESEL now ships a committed pl_dissociation.json scored on pl-realskeleton-v1 —
+    # the earlier coverage gap is closed, so all 11 decode-bearing languages have a real artifact.
     pl = summary["languages"]["PL"]
-    assert pl["artifact"] is None
-    assert pl["holds"] is None and pl["protector_leak_rate"] is None
-    assert "MISSING ARTIFACT" in pl["note"]
-    assert summary["n_languages_artifact_present"] == 10
+    assert pl["artifact"] == "pl_dissociation.json"
+    assert pl["config"] == "pl-realskeleton-v1"
+    assert pl["id_name"] == "PESEL"
+    assert pl["holds"] is not None
+    assert pl["protector_leak_rate"] is not None
+    assert pl["protector_leak_wilson_high"] is not None
+    assert "MISSING ARTIFACT" not in (pl.get("note") or "")
+    assert summary["n_languages_artifact_present"] == 11
     # Legal + name-in-context are separate sections, both present.
     assert summary["legal_domain"]["domain"] == "legal"
     assert summary["name_in_context"]["models_scored"]

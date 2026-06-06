@@ -12,15 +12,16 @@ What it reads (committed artifacts only — never a model backend):
 * ``family_dissociation_ro_realskeleton.json`` — RO/CNP, the original two-family clinical anchor
   (families A + B); the cross-language row aggregates over both families.
 * ``it_dissociation.json``                     — IT/codice fiscale (the richest QI surface).
-* ``{cc}_dissociation.json`` for cc in SE/CZ/DK/FI/EE/LT/SI/SK — the EU-breadth single-family configs.
+* ``{cc}_dissociation.json`` for cc in PL/SE/CZ/DK/FI/EE/LT/SI/SK — the EU-breadth single-family
+  configs (PL/PESEL backfilled onto the shared codepath in RES-87, closing the earlier gap).
 * ``legal_dissociation.json``                  — the RO legal-domain track (separate section).
 * ``name_in_context_leak_ro_realskeleton.json``— the RO name-in-context channel (separate section).
 
 Identifier + decoded-QI *labels* (descriptive, not statistics) come from the committed
-``eu_breadth_dissociation.COUNTRIES`` map for the 8 EU-breadth configs, extended here with RO/PL/IT
-(sourced from ``it_dissociation.py`` and the legal/RO markdown prose). PL/PESEL is referenced by the
-upstream scripts but has **no committed dissociation JSON**, so it is reported as a known coverage
-gap rather than fabricated.
+``eu_breadth_dissociation.COUNTRIES`` map for the EU-breadth configs (PL/SE/CZ/DK/FI/EE/LT/SI/SK),
+extended here with RO/IT (sourced from ``it_dissociation.py`` and the legal/RO markdown prose). All
+11 decode-bearing languages now have a committed dissociation JSON — every leak-rate, Wilson bound
+and gap CI below is read from a per-language artifact, never fabricated.
 
 Reproduce::
 
@@ -58,12 +59,12 @@ def _load_breadth_countries() -> dict:
     return mod.COUNTRIES
 
 
-# RO/PL/IT are not in the EU-breadth COUNTRIES map; their identifier + QI labels are taken from
+# RO/IT are not in the EU-breadth COUNTRIES map; their identifier + QI labels are taken from
 # it_dissociation.py and the legal/RO markdown prose. These are labels only — every leak-rate, Wilson
-# bound and gap CI below is read from the per-language JSON, never from here.
+# bound and gap CI below is read from the per-language JSON, never from here. (PL now lives in the
+# EU-breadth COUNTRIES map as of RES-87, so its label is sourced there like the other breadth configs.)
 _RO_PL_IT_META = {
     "RO": {"id_name": "CNP", "qi": "DATE_OF_BIRTH + SEX + COUNTY"},
-    "PL": {"id_name": "PESEL", "qi": "DATE_OF_BIRTH + SEX"},
     "IT": {"id_name": "codice fiscale", "qi": "DATE_OF_BIRTH + SEX + PLACE_OF_BIRTH"},
 }
 
@@ -165,26 +166,12 @@ def build_summary() -> dict:
         } for fam, s in ro["families"].items()},
     }
 
-    # PL — referenced upstream (PESEL) but no committed dissociation JSON: a known coverage gap.
-    languages["PL"] = {
-        "config": "pl-realskeleton-v1",
-        "id_name": meta["PL"]["id_name"],
-        "decoded_qi": meta["PL"]["qi"],
-        "artifact": None,
-        "config_status": CONFIG_STATUS,
-        "protector_leak_rate": None,
-        "protector_leak_wilson_high": None,
-        "n_detectors_scored": None,
-        "n_detectors_gap_ci_excludes_0": None,
-        "models_scored": None,
-        "holds": None,
-        "n_docs": None,
-        "note": "MISSING ARTIFACT: PESEL referenced by it_dissociation.py / eu_breadth "
-                "but no pl_dissociation.json committed — not fabricated (RES-86 guard)",
-    }
-
-    # IT + the 8 EU-breadth configs — flat single-family schema {config, country, dissociation}.
+    # PL/IT + the 9 EU-breadth configs — flat single-family schema {config, country, dissociation}.
+    # PL/PESEL was backfilled onto the shared eu_breadth codepath (RES-87): it now ships a committed
+    # pl_dissociation.json scored on the same pl-realskeleton-v1 track as the board, closing the
+    # earlier coverage gap so all 11 decode-bearing languages have a committed artifact.
     flat_configs = {
+        "PL": "pl_dissociation.json",
         "IT": "it_dissociation.json",
         "SE": "se_dissociation.json", "CZ": "cz_dissociation.json",
         "DK": "dk_dissociation.json", "FI": "fi_dissociation.json",
@@ -282,11 +269,12 @@ def build_summary() -> dict:
             "Single authored template family per language (RO has two; a 2nd independent family is "
             "required per language before citation — KLU-101 hardening).",
             "Model coverage VARIES across languages (CPU-subset under the Mac hardware bound): "
-            "RO/IT/legal score all 8 board models; SE/CZ/DK/FI score 5; EE/LT/SI/SK score 5 (a "
+            "RO/PL/IT/legal score all 8 board models; SE/CZ/DK/FI score 5; EE/LT/SI/SK score 5 (a "
             "different 5). A consistent full-model re-score is pending RES-53 before any "
             "public/citable use.",
-            "PL/PESEL is referenced by the upstream scripts but has NO committed dissociation JSON "
-            "in analysis/; reported as a coverage gap, not fabricated.",
+            "PL/PESEL was scored on the same pl-realskeleton-v1 track as the public board (RES-87, "
+            "all 8 models, n=1500 docs → 1096 distinct subjects); its per-model leak rates reconcile "
+            "exactly with the committed baselines/leaderboard.json rows.",
             "\"First *unified*\" discipline: this consolidates prior per-language measurements; it "
             "does not claim to be the first observation of the phenomenon.",
             "Re-identification is reserved for the deterministic national-ID channel. The "
@@ -349,8 +337,9 @@ def render_markdown(summary: dict) -> str:
     lines += [
         "",
         "RO aggregates its two authored families (A + B); the Wilson UB shown is the worst-case "
-        "across families and the gap-CI tally sums both families' detector arms. PL/PESEL has no "
-        "committed `pl_dissociation.json` — shown as a coverage gap, not fabricated.",
+        "across families and the gap-CI tally sums both families' detector arms. PL/PESEL is scored "
+        "on the same `pl-realskeleton-v1` track as the public board (all 8 models, n=1500 docs → "
+        "1096 distinct subjects); its leak rates reconcile exactly with `baselines/leaderboard.json`.",
         "",
         "## Legal domain (RO)",
         "",

@@ -24,8 +24,12 @@ def _leak(adapter, missed, total, leaked_qi=None):
             "leaked_qi": leaked_qi if leaked_qi is not None else missed * 2}
 
 
-def test_countries_cover_se_cz_dk_fi_ee_lt_si_sk():
-    assert set(ebd.COUNTRIES) == {"SE", "CZ", "DK", "FI", "EE", "LT", "SI", "SK"}
+def test_countries_cover_pl_se_cz_dk_fi_ee_lt_si_sk():
+    assert set(ebd.COUNTRIES) == {"PL", "SE", "CZ", "DK", "FI", "EE", "LT", "SI", "SK"}
+    # RES-87: PL PESEL backfilled onto the shared eu_breadth codepath (DOB + sex; pl-realskeleton-v1).
+    assert ebd.COUNTRIES["PL"]["config"] == "pl-realskeleton-v1"
+    assert ebd.COUNTRIES["PL"]["id_name"] == "PESEL"
+    assert ebd.COUNTRIES["PL"]["lang"] == "pl"
     assert ebd.COUNTRIES["SE"]["config"] == "se-realskeleton-v1"
     assert ebd.COUNTRIES["CZ"]["config"] == "cz-realskeleton-v1"
     assert ebd.COUNTRIES["DK"]["config"] == "dk-realskeleton-v1"
