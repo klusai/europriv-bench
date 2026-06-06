@@ -1,0 +1,78 @@
+# =====================================================================================
+# ILLUSTRATIVE PLACEHOLDER — *** NOT REAL CENSUS DATA ***
+# =====================================================================================
+# This is a hand-authored, made-up census cross-tabulation for a fictional country
+# "XX". It exists ONLY to exercise the IPF / population-uniqueness machinery in unit
+# tests and to give a runnable end-to-end example. The counts below were typed by hand
+# and correspond to NO real population. They MUST NOT be used to produce, calibrate, or
+# report ANY number on a real benchmark config (see RES-17 scope / the design doc's
+# red-team "Must-NOT-do" rules).
+#
+# When the real Eurostat 2021 Census Hub hypercubes are vendored (DEFERRED follow-up,
+# gated on the census-calibrated generator — see docs/klu-118-qi-distinctiveness-design.md),
+# they replace this file and carry their own manifest entry + license + checksum.
+#
+# License of THIS file: it is our own synthetic invention -> CC-BY-4.0 (fully clean,
+# nothing to attribute upstream).
+# =====================================================================================
+
+meta:
+  country: "XX"                      # fictional; NOT an ISO country code in use
+  placeholder: true                  # the license-gate / loader assert this is true
+  is_real_census: false
+  label: "ILLUSTRATIVE PLACEHOLDER — NOT REAL CENSUS DATA — NOT FOR ANY REPORTED NUMBER"
+  population_total: 100000           # nominal synthetic head-count the marginals sum to
+  # The QI fields this synthetic joint spans (a subset of the frozen qi-v1 schema). The
+  # IPF target joint is over exactly these axes, in this order.
+  schema_version: "qi-v1"
+  axes: ["dob_band", "sex", "nuts2"]
+
+# Category vocabularies per axis (the support of the joint). Kept tiny on purpose.
+axes:
+  dob_band: ["1960-1964", "1965-1969", "1970-1974", "1975-1979"]
+  sex: ["M", "F"]
+  nuts2: ["XX01", "XX02", "XX03"]
+
+# Published-style cross-tabulations (the IPF *targets*). Each marginal is a partial
+# cross-tab over a subset of the axes whose counts sum to population_total. IPF fits a
+# full joint consistent with all of these simultaneously. (A real census ships exactly
+# this shape: several lower-dimensional hypercubes, never the full joint.)
+marginals:
+  # 1-D: age-band marginal
+  - axes: ["dob_band"]
+    counts:
+      "1960-1964": 22000
+      "1965-1969": 26000
+      "1970-1974": 28000
+      "1975-1979": 24000
+  # 1-D: sex marginal (slight female majority, as in most real populations)
+  - axes: ["sex"]
+    counts:
+      "M": 48500
+      "F": 51500
+  # 1-D: region marginal
+  - axes: ["nuts2"]
+    counts:
+      "XX01": 45000
+      "XX02": 35000
+      "XX03": 20000
+  # 2-D: age x sex cross-tab (sex ratio drifts with age — correlation IPF must capture)
+  - axes: ["dob_band", "sex"]
+    counts:
+      "1960-1964|M": 10200
+      "1960-1964|F": 11800
+      "1965-1969|M": 12400
+      "1965-1969|F": 13600
+      "1970-1974|M": 13900
+      "1970-1974|F": 14100
+      "1975-1979|M": 12000
+      "1975-1979|F": 12000
+  # 2-D: sex x region cross-tab
+  - axes: ["sex", "nuts2"]
+    counts:
+      "M|XX01": 21500
+      "M|XX02": 17200
+      "M|XX03": 9800
+      "F|XX01": 23500
+      "F|XX02": 17800
+      "F|XX03": 10200

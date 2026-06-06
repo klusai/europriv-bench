@@ -50,3 +50,37 @@ def test_ro_county_nuts2_crosswalk_loads_and_maps():
     assert ro_county_to_nuts2("32") == "RO12"   # Sibiu → Centru
     assert ro_county_to_nuts2(None) is None
     assert ro_county_to_nuts2("99") is None     # unmapped code → None (never fabricated)
+
+
+# --- RES-17: the new synthetic census fixture is gated like any vendored file ----------------
+
+
+def _source(src_id: str) -> dict:
+    for src in load_manifest()["sources"]:
+        if src["id"] == src_id:
+            return src
+    raise AssertionError(f"source {src_id!r} not on the manifest")
+
+
+def test_synthetic_census_fixture_is_on_the_manifest_and_checksummed():
+    src = _source("synthetic_census_xx")
+    # The allowlist mechanism is intact: the synthetic fixture's license is on the allowlist...
+    for comp in src["components"]:
+        assert comp["license"] in ALLOWLIST
+    # ...and its committed checksum matches on disk (re-vendor + bump on drift).
+    assert file_sha256(src["path"]) == src["sha256"]
+
+
+def test_synthetic_census_fixture_is_flagged_placeholder_everywhere():
+    """A placeholder must be loudly labelled in the manifest AND inside the file's own meta block."""
+    src = _source("synthetic_census_xx")
+    assert src.get("placeholder") is True
+    assert "PLACEHOLDER" in src["role"].upper()
+
+    from europriv_bench.refpop.build_joint import load_census_spec
+
+    spec = load_census_spec("synthetic_census_xx.yaml")
+    meta = spec["meta"]
+    assert meta["placeholder"] is True
+    assert meta["is_real_census"] is False
+    assert "NOT REAL CENSUS DATA" in meta["label"].upper()

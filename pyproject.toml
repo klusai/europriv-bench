@@ -49,7 +49,7 @@ where = ["src"]
 # inside the package (src/europriv_bench/conf/) and is loaded via importlib.resources, so this
 # is what makes taxonomy loading work for non-editable `pip install europriv-bench`.
 [tool.setuptools.package-data]
-europriv_bench = ["conf/*.yaml", "refpop/*.yaml", "refpop/crosswalks/*.csv"]
+europriv_bench = ["conf/*.yaml", "refpop/*.yaml", "refpop/crosswalks/*.csv", "refpop/fixtures/*.yaml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
