@@ -24,6 +24,9 @@ Sources:
   PL  PESEL spec (GUS); weighted mod-10 checksum, month-offset century encoding.
   IT  Agenzia delle Entrate codice-fiscale spec (DM 23/12/1976); omocodia, Belfiore codes.
   ES  DNI/NIF control-letter table (Orden del Ministerio del Interior).
+  DE  Steuer-IdNr (§ 139b Abgabenordnung); ISO 7064 MOD 11,10 check digit.
+  FR  NIR / numéro de sécurité sociale (INSEE); 13-digit body, clé = 97 − (body mod 97).
+  NL  BSN / burgerservicenummer (Rijksoverheid); 11-proef (elfproef) weighted-sum test.
 """
 
 from __future__ import annotations
@@ -391,6 +394,159 @@ def _parse_es(value: str) -> IDInfo:
     return IDInfo(valid=True, country="ES", decode_bearing=False)
 
 
+# --- DE: Steuer-IdNr (steuerliche Identifikationsnummer) — coverage-only -----------------
+#
+# 11-digit lifelong tax id (§ 139b Abgabenordnung). The 11th digit is an ISO 7064 MOD 11,10
+# check digit over the leading 10 digits; the first digit is never zero. The German tax id
+# carries **no** embedded DOB/sex/place — it is a pure serial. So this validator is
+# COVERAGE-ONLY: we validate + detect but NEVER decode or emit any quasi-identifier.
+#
+# ISO 7064 MOD 11,10 check-digit algorithm (also used for the German USt-IdNr):
+#   p = 10
+#   for each digit d (left→right over the 10-digit body):
+#       s = (d + p) mod 10;  if s == 0: s = 10;  p = (2*s) mod 11
+#   check = (11 − p) mod 10
+# Spec: ISO/IEC 7064:2003 MOD 11,10; § 139b AO. Cross-checked against the KLU-102 generator.
+
+
+def _iso7064_mod11_10(body: str) -> int:
+    """ISO 7064 MOD 11,10 check digit for a numeric ``body`` (German Steuer-IdNr scheme)."""
+    p = 10
+    for ch in body:
+        s = (int(ch) + p) % 10
+        s = s if s != 0 else 10
+        p = (2 * s) % 11
+    return (11 - p) % 10
+
+
+def _parse_de(value: str) -> IDInfo:
+    """Validate a German Steuer-IdNr. Coverage-only: never discloses quasi-identifiers."""
+    if not isinstance(value, str):
+        return IDInfo(valid=False, country="DE", decode_bearing=False)
+    s = value.strip()
+    if len(s) != 11 or not s.isdigit() or s[0] == "0":
+        return IDInfo(valid=False, country="DE", decode_bearing=False)
+    if _iso7064_mod11_10(s[:10]) != int(s[10]):
+        return IDInfo(valid=False, country="DE", decode_bearing=False)
+    # Valid + detectable, but carries no quasi-identifier → quasi_identifiers stays empty.
+    return IDInfo(valid=True, country="DE", decode_bearing=False)
+
+
+# --- FR: NIR / numéro de sécurité sociale (INSEE) — decode-bearing -----------------------
+#
+# 15-char identifier ``S YY MM DD/PP CC OOO KK`` (13-digit body + 2-digit control key):
+#   S      sex: 1 = male, 2 = female (3/4/7/8 = registration-in-progress, no decodable sex)
+#   YY     birth year (last two digits; century ambiguous — no century marker)
+#   MM     birth month 01..12 (also 20–42 / 50–99 / 13 used for unknown-month registrations)
+#   CC     département of birth: numeric 01–95 / 99 (born abroad) / 970+ (overseas), plus
+#          Corsica as letters ``2A`` (Corse-du-Sud) and ``2B`` (Haute-Corse)
+#   OOO    commune + order number
+#   KK     control key = 97 − (13-digit body mod 97), 2 digits
+# For the key, Corsica letters are substituted BEFORE the mod-97: 2A → 19, 2B → 18 (the only
+# non-numeric positions). A missed NIR deterministically discloses SEX (when S∈{1,2}) and
+# DATE_OF_BIRTH (when MM is a real month 01–12 — year+month, century-ambiguous like the IT CF).
+# Spec: INSEE NIR definition; fr.wikipedia "Numéro de sécurité sociale en France".
+# Cross-checked against the KLU-102 generator (which emits numeric départements only).
+
+# Corsica département letters → numeric value used for the mod-97 control-key computation.
+_NIR_CORSICA = {"A": "19", "B": "18"}
+
+
+def _nir_key(body13: str) -> int:
+    """Control key for a NIR: 97 − (13-digit numeric body mod 97). Body must be all digits."""
+    return 97 - (int(body13) % 97)
+
+
+def _nir_numeric_body(body13: str) -> str | None:
+    """Map the 13-char NIR body to its numeric form for the key (Corsica 2A→19, 2B→18).
+
+    Only the département field (positions 6–7, 0-based 5–6) may legitimately carry letters
+    (``2A``/``2B``); every other position must already be a digit. Returns ``None`` if any
+    other position is non-numeric.
+    """
+    chars = list(body13)
+    # Département occupies 0-based indices 5–6; Corsica is "2A"/"2B". Replace the whole two-char
+    # field with its numeric equivalent ("2A"→"19", "2B"→"18") before the mod-97 computation.
+    if chars[5] == "2" and chars[6] in _NIR_CORSICA:
+        repl = _NIR_CORSICA[chars[6]]
+        chars[5], chars[6] = repl[0], repl[1]
+    numeric = "".join(chars)
+    return numeric if numeric.isdigit() else None
+
+
+def _parse_fr(value: str) -> IDInfo:
+    """Decode a French NIR. Returns ``IDInfo(valid=False)`` for anything malformed."""
+    if not isinstance(value, str):
+        return IDInfo(valid=False, country="FR", decode_bearing=True)
+    s = value.strip().upper().replace(" ", "")
+    if len(s) != 15:
+        return IDInfo(valid=False, country="FR", decode_bearing=True)
+    body, key = s[:13], s[13:15]
+    if not key.isdigit():
+        return IDInfo(valid=False, country="FR", decode_bearing=True)
+    numeric_body = _nir_numeric_body(body)
+    if numeric_body is None:
+        return IDInfo(valid=False, country="FR", decode_bearing=True)
+    if _nir_key(numeric_body) != int(key):
+        return IDInfo(valid=False, country="FR", decode_bearing=True)
+
+    # Decode quasi-identifiers from the (original) body. Sex only for the standard 1/2 codes.
+    sex = {"1": "M", "2": "F"}.get(body[0])
+    yy = int(body[1:3])
+    mm = int(body[3:5])
+
+    qi: set[str] = set()
+    if sex is not None:
+        qi.add("SEX")
+    # DATE_OF_BIRTH only when the month field is a real calendar month (01–12); the unknown-month
+    # registration codes (13, 20–42, 50–99) do not disclose a usable birth month.
+    birth_year_month = None
+    if 1 <= mm <= 12:
+        qi.add("DATE_OF_BIRTH")
+        birth_year_month = f"{yy:02d}-{mm:02d}"
+
+    return IDInfo(
+        valid=True, country="FR", decode_bearing=True,
+        quasi_identifiers=frozenset(qi),
+        extra={"sex": sex, "birth_year_2digit": f"{yy:02d}",
+               "birth_month": mm if 1 <= mm <= 12 else None,
+               "birth_year_month": birth_year_month,
+               "department": body[5:7]},
+    )
+
+
+# --- NL: BSN / burgerservicenummer — coverage-only ---------------------------------------
+#
+# 9-digit citizen-service number validated by the "11-proef" (elfproef): the weighted sum
+#   9·d1 + 8·d2 + 7·d3 + 6·d4 + 5·d5 + 4·d6 + 3·d7 + 2·d8 + (−1)·d9
+# must be a NON-ZERO multiple of 11. (8-digit historical BSNs are left-padded with a zero to
+# 9 digits before the test.) The BSN carries **no** embedded DOB/sex/place — it is a pure
+# serial. So this validator is COVERAGE-ONLY: validate + detect, never decode/emit a QI.
+# Spec: Rijksoverheid BSN 11-proef. Cross-checked against the KLU-102 generator.
+
+_BSN_WEIGHTS = (9, 8, 7, 6, 5, 4, 3, 2, -1)
+
+
+def _bsn_weighted_sum(digits: str) -> int:
+    return sum(int(d) * w for d, w in zip(digits, _BSN_WEIGHTS))
+
+
+def _parse_nl(value: str) -> IDInfo:
+    """Validate a Dutch BSN (11-proef). Coverage-only: never discloses quasi-identifiers."""
+    if not isinstance(value, str):
+        return IDInfo(valid=False, country="NL", decode_bearing=False)
+    s = value.strip()
+    if len(s) == 8 and s.isdigit():
+        s = "0" + s  # historical 8-digit BSN: left-pad to 9 before the 11-proef
+    if len(s) != 9 or not s.isdigit():
+        return IDInfo(valid=False, country="NL", decode_bearing=False)
+    total = _bsn_weighted_sum(s)
+    if total == 0 or total % 11 != 0:
+        return IDInfo(valid=False, country="NL", decode_bearing=False)
+    # Valid + detectable, but carries no quasi-identifier → quasi_identifiers stays empty.
+    return IDInfo(valid=True, country="NL", decode_bearing=False)
+
+
 # --- Country-keyed registry --------------------------------------------------------------
 
 REGISTRY: dict[str, Validator] = {
@@ -398,6 +554,9 @@ REGISTRY: dict[str, Validator] = {
     "PL": Validator("PL", "PESEL", decode_bearing=True, parse=_parse_pl),
     "IT": Validator("IT", "codice fiscale", decode_bearing=True, parse=_parse_it),
     "ES": Validator("ES", "DNI/NIF", decode_bearing=False, parse=_parse_es),
+    "DE": Validator("DE", "Steuer-IdNr", decode_bearing=False, parse=_parse_de),
+    "FR": Validator("FR", "NIR", decode_bearing=True, parse=_parse_fr),
+    "NL": Validator("NL", "BSN", decode_bearing=False, parse=_parse_nl),
 }
 
 

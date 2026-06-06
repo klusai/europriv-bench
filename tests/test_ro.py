@@ -13,7 +13,10 @@ from europriv_bench.metrics import (
 )
 from europriv_bench.national_id import (
     _CF_OMOCODIA,
+    _bsn_weighted_sum,
     _cf_control_letter,
+    _iso7064_mod11_10,
+    _nir_key,
     check_digit,
     get_validator,
     parse_cnp,
@@ -28,10 +31,26 @@ from europriv_bench.spec import EvalSpec
 PESEL_M_1944 = "44051401359"   # 1944-05-14, male
 CF_IT_M = "RSSMRA85T10A562S"   # 1985-12-10, male, Belfiore A562
 DNI_ES = "12345678Z"           # canonical Spanish DNI (12345678 mod 23 → Z)
+STEUER_ID_DE = "86095742719"   # textbook DE Steuer-IdNr (ISO 7064 MOD 11,10; § 139b AO)
 
 
 def _make_cnp(base12: str) -> str:
     return base12 + str(check_digit(base12))
+
+
+def _make_nir(body13: str) -> str:
+    """Append the 2-digit NIR control key to a 13-char (numeric metropolitan) body."""
+    return body13 + f"{_nir_key(body13):02d}"
+
+
+def _make_bsn(serial8: str) -> str:
+    """Append a 9th digit making ``serial8`` (8 digits) pass the 11-proef, if one exists."""
+    for last in range(10):
+        cand = serial8 + str(last)
+        total = _bsn_weighted_sum(cand)
+        if total != 0 and total % 11 == 0:
+            return cand
+    raise AssertionError(f"no valid BSN check digit for {serial8}")
 
 
 def test_valid_cnp_decodes_dob_sex_county():
@@ -143,14 +162,18 @@ def test_run_spec_wires_cnp_leakage_via_rows():
 
 
 def test_registry_exposes_all_countries_with_correct_families():
-    assert supported_countries() == ["ES", "IT", "PL", "RO"]
+    assert supported_countries() == ["DE", "ES", "FR", "IT", "NL", "PL", "RO"]
     assert get_validator("ro").decode_bearing is True
     assert get_validator("PL").decode_bearing is True
     assert get_validator("it").decode_bearing is True
     assert get_validator("ES").decode_bearing is False
-    assert get_validator("FR") is None
+    # DE/FR/NL (RES-25): FR is decode-bearing (sex + birth year/month); DE/NL coverage-only.
+    assert get_validator("de").decode_bearing is False
+    assert get_validator("FR").decode_bearing is True
+    assert get_validator("nl").decode_bearing is False
+    assert get_validator("XX") is None
     # Unsupported country → invalid, no decode.
-    assert parse_national_id("123", "FR").valid is False
+    assert parse_national_id("123", "XX").valid is False
 
 
 # --- PL: PESEL (decode-bearing) ----------------------------------------------------------
@@ -289,6 +312,127 @@ def test_dni_is_coverage_only_and_never_discloses_quasi_identifiers():
     assert not parse_national_id("12345678A", "ES").valid
 
 
+# --- DE: Steuer-IdNr (coverage-only — ISO 7064 MOD 11,10) --------------------------------
+
+
+def test_steuer_id_is_coverage_only_and_never_discloses_quasi_identifiers():
+    info = parse_national_id(STEUER_ID_DE, "DE")
+    assert info.valid
+    assert info.decode_bearing is False
+    # Coverage-only: a valid DE tax id emits NO re-identification number.
+    assert info.disclosed_quasi_identifiers() == set()
+    assert info.quasi_identifiers == frozenset()
+
+
+def test_steuer_id_check_digit_and_rejections():
+    # Recompute the textbook check digit, then flip it → invalid.
+    assert _iso7064_mod11_10(STEUER_ID_DE[:10]) == int(STEUER_ID_DE[10])
+    bad = STEUER_ID_DE[:10] + str((int(STEUER_ID_DE[10]) + 1) % 10)
+    assert not parse_national_id(bad, "DE").valid
+    # Leading zero is not allowed for the Steuer-IdNr.
+    assert not parse_national_id("0" + STEUER_ID_DE[1:], "DE").valid
+    # Wrong length / non-digit.
+    assert not parse_national_id(STEUER_ID_DE[:-1], "DE").valid
+    assert not parse_national_id("8609574271X", "DE").valid
+
+
+# --- FR: NIR / numéro de sécurité sociale (decode-bearing — sex + birth year/month) ------
+
+
+def test_nir_decodes_sex_and_birth_year_month():
+    nir = _make_nir("1" "85" "03" "75" "001" "001")  # male, 1985-03, dept 75
+    info = parse_national_id(nir, "FR")
+    assert info.valid and info.decode_bearing
+    assert info.extra["sex"] == "M"
+    assert info.extra["birth_year_month"] == "85-03"
+    assert info.disclosed_quasi_identifiers() == {"DATE_OF_BIRTH", "SEX"}
+
+
+def test_nir_female_and_control_key_rejection():
+    nir = _make_nir("2" "90" "12" "59" "350" "042")  # female, 1990-12
+    info = parse_national_id(nir, "FR")
+    assert info.valid and info.extra["sex"] == "F" and info.extra["birth_month"] == 12
+    # Corrupt the 2-digit control key → invalid.
+    bad = nir[:13] + f"{(int(nir[13:15]) + 1) % 97:02d}"
+    assert not parse_national_id(bad, "FR").valid
+
+
+def test_nir_corsica_letter_department_substituted_before_mod97():
+    # Corsica 2A (Corse-du-Sud) → 19 for the key; the stored body keeps the letters "2A".
+    body = "2" "90" "07" "2A" "012" "034"
+    key = _nir_key(body[:5] + "19" + body[7:])  # substitute 2A→19 over the full body
+    nir = body + f"{key:02d}"
+    info = parse_national_id(nir, "FR")
+    assert info.valid and info.extra["department"] == "2A"
+    assert info.disclosed_quasi_identifiers() == {"DATE_OF_BIRTH", "SEX"}
+    # Tamper the key → invalid (proves the 2A→19 substitution actually drives the checksum).
+    assert not parse_national_id(nir[:13] + f"{(key + 1) % 97:02d}", "FR").valid
+
+
+def test_nir_unknown_month_discloses_sex_only_not_birth_date():
+    # Month codes 20–42 / 50–99 / 13 mark unknown-month registrations → no usable birth month.
+    nir = _make_nir("1" "85" "20" "75" "001" "001")
+    info = parse_national_id(nir, "FR")
+    assert info.valid
+    assert info.extra["birth_month"] is None and info.extra["birth_year_month"] is None
+    assert info.disclosed_quasi_identifiers() == {"SEX"}
+
+
+def test_nir_registration_in_progress_sex_code_discloses_no_sex():
+    # Sex codes 3/4/7/8 are registration-in-progress → sex is not decodable.
+    nir = _make_nir("3" "85" "03" "75" "001" "001")
+    info = parse_national_id(nir, "FR")
+    assert info.valid and info.extra["sex"] is None
+    # Still discloses DATE_OF_BIRTH (real month) but not SEX.
+    assert info.disclosed_quasi_identifiers() == {"DATE_OF_BIRTH"}
+
+
+def test_nir_length_and_non_digit_key_rejected():
+    nir = _make_nir("1" "85" "03" "75" "001" "001")
+    assert not parse_national_id(nir[:-1], "FR").valid           # 14 chars
+    assert not parse_national_id(nir[:13] + "AB", "FR").valid    # non-digit key
+    # A non-Corsica letter anywhere in the numeric body is invalid.
+    assert not parse_national_id("1850375001Z0182", "FR").valid
+
+
+# --- NL: BSN / burgerservicenummer (coverage-only — 11-proef) ----------------------------
+
+
+def test_bsn_is_coverage_only_and_never_discloses_quasi_identifiers():
+    bsn = _make_bsn("11122333")
+    info = parse_national_id(bsn, "NL")
+    assert info.valid
+    assert info.decode_bearing is False
+    assert info.disclosed_quasi_identifiers() == set()
+    assert info.quasi_identifiers == frozenset()
+
+
+def test_bsn_eleven_proef_and_rejections():
+    bsn = _make_bsn("11122333")
+    # The 11-proef weighted sum is a non-zero multiple of 11.
+    total = _bsn_weighted_sum(bsn)
+    assert total != 0 and total % 11 == 0
+    # Flip the last digit → fails the 11-proef.
+    bad = bsn[:-1] + str((int(bsn[-1]) + 1) % 10)
+    assert not parse_national_id(bad, "NL").valid
+    # All zeros: weighted sum is 0 → explicitly rejected (0 is a multiple of 11).
+    assert not parse_national_id("000000000", "NL").valid
+    # Wrong length / non-digit.
+    assert not parse_national_id(bsn[:-1], "NL").valid
+    assert not parse_national_id("12345678X", "NL").valid
+
+
+def test_bsn_eight_digit_historical_is_left_padded():
+    # An 8-digit BSN is left-padded with a leading zero before the 11-proef. "010000021" is a
+    # valid 9-digit BSN beginning with 0, so its 8-digit form "10000021" must validate identically.
+    padded = "010000021"
+    assert parse_national_id(padded, "NL").valid
+    eight = padded[1:]  # "10000021"
+    assert len(eight) == 8
+    assert parse_national_id(eight, "NL").valid
+    assert parse_national_id(eight, "NL").valid == parse_national_id(padded, "NL").valid
+
+
 # --- national_id_leakage: country-dispatched ---------------------------------------------
 
 
@@ -320,6 +464,27 @@ def test_national_id_leakage_coverage_only_never_emits_reid_number():
     assert missed["decode_bearing_total"] == 0.0
     assert missed["leaked_quasi_identifiers"] == 0.0
     assert missed["es_total"] == 1.0
+
+
+def test_national_id_leakage_dispatches_fr_decode_bearing():
+    # A missed FR NIR is a decode-bearing re-id event disclosing SEX + DATE_OF_BIRTH (2 QIs).
+    nir = _make_nir("1" "85" "03" "75" "001" "001")
+    rows = _single_id_rows(nir, "FR")
+    missed = national_id_leakage(rows, [["O", "O", "O"]])
+    assert missed["decode_bearing_total"] == 1.0 and missed["decode_bearing_missed"] == 1.0
+    assert missed["leak_rate"] == 1.0
+    assert missed["leaked_quasi_identifiers"] == 2.0  # SEX + DATE_OF_BIRTH
+    assert missed["fr_total"] == 1.0 and missed["fr_detected"] == 0.0
+
+
+def test_national_id_leakage_de_and_nl_coverage_only_emit_no_reid_number():
+    for value, cc in ((STEUER_ID_DE, "DE"), (_make_bsn("11122333"), "NL")):
+        rows = _single_id_rows(value, cc)
+        missed = national_id_leakage(rows, [["O", "O", "O"]])
+        assert missed["coverage_only_total"] == 1.0 and missed["coverage_only_detected"] == 0.0
+        assert missed["decode_bearing_total"] == 0.0
+        assert missed["leaked_quasi_identifiers"] == 0.0
+        assert missed[f"{cc.lower()}_total"] == 1.0
 
 
 def test_national_id_leakage_emits_wilson_ci_over_decode_bearing():
