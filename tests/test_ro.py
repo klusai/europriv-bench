@@ -17,6 +17,7 @@ from europriv_bench.national_id import (
     _bsn_weighted_sum,
     _cf_control_letter,
     _dk_century,
+    _emso_check_digit,
     _fi_control_char,
     _iso7064_mod11_10,
     _nir_key,
@@ -41,11 +42,17 @@ RC_CZ_F = "8556151010"         # CZ rodné číslo 1985-06-15, female (month +50
 HETU_FI_F = "131052-308T"      # FI henkilötunnus 1952-10-13, female (DVV canonical example; ctrl T)
 CPR_DK_M = "211062-0629"       # DK CPR-nummer 1962-10-21, male (c7=0 → 1900s; last digit odd)
 IK_EE_M = "37605030299"        # EE isikukood 1976-05-03, male (python-stdnum canonical example)
+EMSO_SI_M = "0101006500006"    # SI EMŠO: 1st male registered in Slovenia on 2006-01-01 (worked example)
 
 
 def _make_baltic(body10: str) -> str:
     """Append the two-pass mod-11 check digit to a 10-digit EE/LT body."""
     return body10 + str(_baltic_check_digit(body10))
+
+
+def _make_emso(body12: str) -> str:
+    """Append the EMŠO/JMBG mod-11 check digit to a 12-digit body (DDMMYYY RR BBB)."""
+    return body12 + str(_emso_check_digit(body12))
 
 
 def _make_cnp(base12: str) -> str:
@@ -177,7 +184,7 @@ def test_run_spec_wires_cnp_leakage_via_rows():
 
 def test_registry_exposes_all_countries_with_correct_families():
     assert supported_countries() == [
-        "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "IT", "LT", "NL", "PL", "RO", "SE"
+        "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "IT", "LT", "NL", "PL", "RO", "SE", "SI", "SK"
     ]
     assert get_validator("ro").decode_bearing is True
     assert get_validator("PL").decode_bearing is True
@@ -196,6 +203,9 @@ def test_registry_exposes_all_countries_with_correct_families():
     # EE/LT (RES-84): both decode-bearing (isikukood / asmens kodas → DOB + sex).
     assert get_validator("EE").decode_bearing is True
     assert get_validator("lt").decode_bearing is True
+    # SI/SK (RES-85): both decode-bearing (EMŠO → DOB + sex + region; SK rodné číslo → DOB + sex).
+    assert get_validator("SI").decode_bearing is True
+    assert get_validator("sk").decode_bearing is True
     assert get_validator("XX") is None
     # Unsupported country → invalid, no decode.
     assert parse_national_id("123", "XX").valid is False
@@ -655,6 +665,59 @@ def test_baltic_invalid_g_implausible_date_and_length_rejected():
     assert not parse_national_id("3760503029X", "LT").valid
 
 
+# --- SI: EMŠO (decode-bearing; DOB + sex + region of birth; mod-11) -----------------------
+
+
+def test_emso_decodes_dob_sex_and_region():
+    # Worked example: 1st male registered in Slovenia on 2006-01-01 (RR=50, serial 000 → male).
+    info = parse_national_id(EMSO_SI_M, "SI")
+    assert info.valid and info.country == "SI"
+    assert info.extra["birth_date"] == "2006-01-01"
+    assert info.extra["sex"] == "M"
+    assert info.extra["region_code"] == "50"
+    # The richer surface: a missed EMŠO discloses DATE_OF_BIRTH + SEX + REGION_OF_BIRTH (3 QIs).
+    assert info.disclosed_quasi_identifiers() == {"DATE_OF_BIRTH", "SEX", "REGION_OF_BIRTH"}
+
+
+def test_emso_century_and_serial_sex_encoding():
+    # YYY>800 → 1900s; serial 500–999 → female.
+    f_1970 = _make_emso("0203970" "50" "501")  # 1970-03-02, region 50, serial 501 → female
+    info = parse_national_id(f_1970, "SI")
+    assert info.valid and info.extra["birth_date"] == "1970-03-02" and info.extra["sex"] == "F"
+    # YYY<=800 → 2000s; serial 000–499 → male.
+    m_2015 = _make_emso("1507015" "50" "123")  # 2015-07-15, region 50, serial 123 → male
+    info2 = parse_national_id(m_2015, "SI")
+    assert info2.valid and info2.extra["birth_date"] == "2015-07-15" and info2.extra["sex"] == "M"
+
+
+def test_emso_check_digit_and_structure_rejection():
+    bad = EMSO_SI_M[:-1] + str((int(EMSO_SI_M[-1]) + 1) % 10)
+    assert not parse_national_id(bad, "SI").valid          # wrong check digit
+    assert not parse_national_id(EMSO_SI_M[:-1], "SI").valid  # 12 digits (too short)
+    assert not parse_national_id("32" + EMSO_SI_M[2:], "SI").valid  # day 32 → implausible date
+
+
+# --- SK: rodné číslo (decode-bearing; SAME algorithm as CZ; reuse) ------------------------
+
+
+def test_sk_rodne_cislo_same_algorithm_as_cz_decodes_dob_and_sex():
+    # SK reuses the CZ decoder verbatim; the same digits validate identically under both.
+    info = parse_national_id(RC_CZ_F, "SK")
+    assert info.valid and info.country == "SK"
+    assert info.extra["birth_date"] == "1985-06-15" and info.extra["sex"] == "F"
+    assert info.disclosed_quasi_identifiers() == {"DATE_OF_BIRTH", "SEX"}
+    # COLLISION FOOTGUN: CZ and SK rodné číslo are structurally identical; only the country tag
+    # differs — the same number is valid under both, and the registry never auto-detects which.
+    cz = parse_national_id(RC_CZ_F, "CZ")
+    assert cz.valid and cz.country == "CZ"
+    assert cz.extra["birth_date"] == info.extra["birth_date"]
+
+
+def test_sk_rejects_malformed():
+    assert not parse_national_id(RC_CZ_F[:-1] + "1", "SK").valid  # break the mod-11
+    assert not parse_national_id("85" "13" "15" "1010", "SK").valid  # month 13 → implausible
+
+
 # --- national_id_leakage: country-dispatched ---------------------------------------------
 
 
@@ -697,6 +760,26 @@ def test_national_id_leakage_dispatches_fr_decode_bearing():
     assert missed["leak_rate"] == 1.0
     assert missed["leaked_quasi_identifiers"] == 2.0  # SEX + DATE_OF_BIRTH
     assert missed["fr_total"] == 1.0 and missed["fr_detected"] == 0.0
+
+
+def test_national_id_leakage_si_decode_bearing_three_qi():
+    # A missed SI EMŠO is a decode-bearing re-id event disclosing DOB + SEX + REGION (3 QIs).
+    rows = _single_id_rows(EMSO_SI_M, "SI")
+    missed = national_id_leakage(rows, [["O", "O", "O"]])
+    assert missed["decode_bearing_total"] == 1.0 and missed["decode_bearing_missed"] == 1.0
+    assert missed["leak_rate"] == 1.0
+    assert missed["leaked_quasi_identifiers"] == 3.0  # DOB + SEX + REGION_OF_BIRTH
+    assert missed["si_total"] == 1.0 and missed["si_detected"] == 0.0
+
+
+def test_national_id_leakage_sk_decode_bearing_two_qi():
+    # A missed SK rodné číslo discloses SEX + DATE_OF_BIRTH (2 QIs); dispatches under country='SK'.
+    rows = _single_id_rows(RC_CZ_F, "SK")
+    missed = national_id_leakage(rows, [["O", "O", "O"]])
+    assert missed["decode_bearing_total"] == 1.0 and missed["decode_bearing_missed"] == 1.0
+    assert missed["leak_rate"] == 1.0
+    assert missed["leaked_quasi_identifiers"] == 2.0  # SEX + DATE_OF_BIRTH
+    assert missed["sk_total"] == 1.0 and missed["sk_detected"] == 0.0
 
 
 def test_national_id_leakage_de_and_nl_coverage_only_emit_no_reid_number():

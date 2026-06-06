@@ -81,6 +81,14 @@ COUNTRIES = {
     "LT": {"config": "lt-realskeleton-v1", "id_name": "asmens kodas", "lang": "lt",
            "qi": "SEX + DATE_OF_BIRTH (full date; century from the 1st digit)",
            "issue": "RES-84", "beyond": "RO/PL/IT/SE/CZ/DK/FI"},
+    # RES-85 EU-breadth batch 3 remainder: SI EMŠO (richer surface — also REGION OF BIRTH, like the
+    # IT codice-fiscale's place) + SK rodné číslo (the SAME algorithm as CZ; reuses the CZ decoder).
+    "SI": {"config": "si-realskeleton-v1", "id_name": "EMŠO", "lang": "sl",
+           "qi": "SEX + DATE_OF_BIRTH + REGION_OF_BIRTH (full date; ex-YU century convention)",
+           "issue": "RES-85", "beyond": "RO/PL/IT/SE/CZ/DK/FI/EE/LT"},
+    "SK": {"config": "sk-realskeleton-v1", "id_name": "rodné číslo", "lang": "sk",
+           "qi": "SEX + DATE_OF_BIRTH (full date, modern 10-digit form; same algorithm as CZ)",
+           "issue": "RES-85", "beyond": "RO/PL/IT/SE/CZ/DK/FI/EE/LT"},
 }
 
 
