@@ -4,7 +4,7 @@
 
 **Headline.** The detection≠re-identification dissociation holds across 11 languages / 11 decode-bearing national IDs + the legal domain (RO) + a second (name-in-context) channel. This is the first *unified* multi-language demonstration — not a claim of being first to observe the phenomenon.
 
-Coverage: **10/11** decode-bearing languages have a committed artifact; the dissociation holds on **10** of them (+ legal + name-in-context).
+Coverage: **11/11** decode-bearing languages have a committed artifact; the dissociation holds on **11** of them (+ legal + name-in-context).
 
 ## Cross-language dissociation (decode-bearing national IDs)
 
@@ -13,7 +13,7 @@ Per language: national ID, the quasi-identifiers a missed ID decodes to, the kp-
 | Lang | National ID | Decoded QIs | kp-deid leak | Wilson UB | gap-CI excl. 0 | Models scored | Holds |
 |---|---|---|---:|---:|:--:|---|:--:|
 | RO | CNP | DATE_OF_BIRTH + SEX + COUNTY | 0.0000 | 0.0198 | 11/14 | kp-deid + 7 (gliner, gliner2, openmed, presidio, privacy-filter, spacy, tabularisai) | YES |
-| PL | PESEL | DATE_OF_BIRTH + SEX | — | — | — | MISSING ARTIFACT | — |
+| PL | PESEL | SEX + DATE_OF_BIRTH (full date; century encoded in the month field) | 0.0000 | 0.0035 | 5/7 | kp-deid + 7 (gliner, gliner2, openmed, presidio, privacy-filter, spacy, tabularisai) | YES |
 | IT | codice fiscale | DATE_OF_BIRTH + SEX + PLACE_OF_BIRTH | 0.0000 | 0.0169 | 6/7 | kp-deid + 7 (gliner, gliner2, openmed, presidio, privacy-filter, spacy, tabularisai) | YES |
 | SE | personnummer | SEX + DATE_OF_BIRTH (birth month + day) | 0.0000 | 0.0163 | 3/4 | kp-deid + 4 (gliner, gliner2, privacy-filter, tabularisai) | YES |
 | CZ | rodné číslo | SEX + DATE_OF_BIRTH (full date, modern 10-digit form) | 0.0000 | 0.0171 | 3/4 | kp-deid + 4 (gliner, gliner2, privacy-filter, tabularisai) | YES |
@@ -24,7 +24,7 @@ Per language: national ID, the quasi-identifiers a missed ID decodes to, the kp-
 | SI | EMŠO | SEX + DATE_OF_BIRTH + REGION_OF_BIRTH (full date; ex-YU century convention) | 0.0000 | 0.0172 | 3/4 | kp-deid + 4 (gliner, gliner2, presidio, spacy) | YES |
 | SK | rodné číslo | SEX + DATE_OF_BIRTH (full date, modern 10-digit form; same algorithm as CZ) | 0.0000 | 0.0160 | 3/4 | kp-deid + 4 (gliner, gliner2, presidio, spacy) | YES |
 
-RO aggregates its two authored families (A + B); the Wilson UB shown is the worst-case across families and the gap-CI tally sums both families' detector arms. PL/PESEL has no committed `pl_dissociation.json` — shown as a coverage gap, not fabricated.
+RO aggregates its two authored families (A + B); the Wilson UB shown is the worst-case across families and the gap-CI tally sums both families' detector arms. PL/PESEL is scored on the same `pl-realskeleton-v1` track as the public board (all 8 models, n=1500 docs → 1096 distinct subjects); its leak rates reconcile exactly with `baselines/leaderboard.json`.
 
 ## Legal domain (RO)
 
@@ -51,8 +51,8 @@ k-anonymity / population re-id diagnostic available: **no** (residual distinctiv
 
 - All configs are config_status=dev — not yet citable/public.
 - Single authored template family per language (RO has two; a 2nd independent family is required per language before citation — KLU-101 hardening).
-- Model coverage VARIES across languages (CPU-subset under the Mac hardware bound): RO/IT/legal score all 8 board models; SE/CZ/DK/FI score 5; EE/LT/SI/SK score 5 (a different 5). A consistent full-model re-score is pending RES-53 before any public/citable use.
-- PL/PESEL is referenced by the upstream scripts but has NO committed dissociation JSON in analysis/; reported as a coverage gap, not fabricated.
+- Model coverage VARIES across languages (CPU-subset under the Mac hardware bound): RO/PL/IT/legal score all 8 board models; SE/CZ/DK/FI score 5; EE/LT/SI/SK score 5 (a different 5). A consistent full-model re-score is pending RES-53 before any public/citable use.
+- PL/PESEL was scored on the same pl-realskeleton-v1 track as the public board (RES-87, all 8 models, n=1500 docs → 1096 distinct subjects); its per-model leak rates reconcile exactly with the committed baselines/leaderboard.json rows.
 - "First *unified*" discipline: this consolidates prior per-language measurements; it does not claim to be the first observation of the phenomenon.
 - Re-identification is reserved for the deterministic national-ID channel. The name/QI (name-in-context) channel measures RESIDUAL DISTINCTIVENESS / sample distinctiveness, NOT population re-identification (k-anonymity diagnostic unavailable: gold lacks QI tagging — KLU-122).
 - Validation gates: native-speaker + IAA sign-off (RES-77) and the full-model re-score (RES-53) must clear before this feeds the Paper-3 breadth section or the public board.

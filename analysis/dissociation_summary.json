@@ -16,8 +16,8 @@
     "SK"
   ],
   "n_languages": 11,
-  "n_languages_artifact_present": 10,
-  "n_languages_holds": 10,
+  "n_languages_artifact_present": 11,
+  "n_languages_holds": 11,
   "languages": {
     "RO": {
       "config": "ro-realskeleton-v1",
@@ -60,17 +60,26 @@
     "PL": {
       "config": "pl-realskeleton-v1",
       "id_name": "PESEL",
-      "decoded_qi": "DATE_OF_BIRTH + SEX",
-      "artifact": null,
+      "decoded_qi": "SEX + DATE_OF_BIRTH (full date; century encoded in the month field)",
+      "artifact": "pl_dissociation.json",
       "config_status": "dev",
-      "protector_leak_rate": null,
-      "protector_leak_wilson_high": null,
-      "n_detectors_scored": null,
-      "n_detectors_gap_ci_excludes_0": null,
-      "models_scored": null,
-      "holds": null,
-      "n_docs": null,
-      "note": "MISSING ARTIFACT: PESEL referenced by it_dissociation.py / eu_breadth but no pl_dissociation.json committed — not fabricated (RES-86 guard)"
+      "protector_leak_rate": 0.0,
+      "protector_leak_wilson_high": 0.003492724542564693,
+      "n_detectors_scored": 7,
+      "n_detectors_gap_ci_excludes_0": 5,
+      "models_scored": [
+        "gliner",
+        "gliner2",
+        "kp-model",
+        "openmed",
+        "presidio",
+        "privacy-filter",
+        "spacy",
+        "tabularisai"
+      ],
+      "holds": true,
+      "n_docs": 1500,
+      "note": "single authored family (2nd needed before citation)"
     },
     "IT": {
       "config": "it-realskeleton-v1",
@@ -352,8 +361,8 @@
   "caveats": [
     "All configs are config_status=dev — not yet citable/public.",
     "Single authored template family per language (RO has two; a 2nd independent family is required per language before citation — KLU-101 hardening).",
-    "Model coverage VARIES across languages (CPU-subset under the Mac hardware bound): RO/IT/legal score all 8 board models; SE/CZ/DK/FI score 5; EE/LT/SI/SK score 5 (a different 5). A consistent full-model re-score is pending RES-53 before any public/citable use.",
-    "PL/PESEL is referenced by the upstream scripts but has NO committed dissociation JSON in analysis/; reported as a coverage gap, not fabricated.",
+    "Model coverage VARIES across languages (CPU-subset under the Mac hardware bound): RO/PL/IT/legal score all 8 board models; SE/CZ/DK/FI score 5; EE/LT/SI/SK score 5 (a different 5). A consistent full-model re-score is pending RES-53 before any public/citable use.",
+    "PL/PESEL was scored on the same pl-realskeleton-v1 track as the public board (RES-87, all 8 models, n=1500 docs → 1096 distinct subjects); its per-model leak rates reconcile exactly with the committed baselines/leaderboard.json rows.",
     "\"First *unified*\" discipline: this consolidates prior per-language measurements; it does not claim to be the first observation of the phenomenon.",
     "Re-identification is reserved for the deterministic national-ID channel. The name/QI (name-in-context) channel measures RESIDUAL DISTINCTIVENESS / sample distinctiveness, NOT population re-identification (k-anonymity diagnostic unavailable: gold lacks QI tagging — KLU-122).",
     "Validation gates: native-speaker + IAA sign-off (RES-77) and the full-model re-score (RES-53) must clear before this feeds the Paper-3 breadth section or the public board."
