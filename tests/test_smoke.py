@@ -114,6 +114,25 @@ def test_classify_contamination_known_cases():
     assert classify_contamination("presidio", "legal-realskeleton-v1") == "clean_held_out"
 
 
+def test_classify_contamination_ai4privacy_openpii_track():
+    # RES-93 external Ai4Privacy open-core track. openmed/tabularisai trained on Ai4Privacy →
+    # in_distribution on EVERY language of this track (a training substrate, not a fair held-out).
+    for adapter in ("openmed", "tabularisai"):
+        for lang in ("ro", "pl", "cs", "sv", "el", "fi", "hu", "de", "fr", "nl"):
+            assert classify_contamination(adapter, f"ai4privacy-openpii-{lang}-v1") == "in_distribution"
+    # kp-deid: distinct generator. Trained languages ro/en → unknown (overlap plausible, not
+    # established); everything else → genuine zero-shot clean_held_out.
+    assert classify_contamination("kp-model", "ai4privacy-openpii-ro-v1") == "unknown"
+    for lang in ("pl", "cs", "sv", "el", "fi", "hu", "de", "fr", "nl"):
+        assert classify_contamination("kp-model", f"ai4privacy-openpii-{lang}-v1") == "clean_held_out"
+    # Rule-based / third-party systems: clean_held_out on every language of the track.
+    for adapter in ("presidio", "spacy", "gliner2"):
+        assert classify_contamination(adapter, "ai4privacy-openpii-de-v1") == "clean_held_out"
+    # An adapter with unknown training data → unknown (not silently clean).
+    assert classify_contamination("privacy-filter", "ai4privacy-openpii-de-v1") == "unknown"
+    assert classify_contamination("gliner", "ai4privacy-openpii-fr-v1") == "unknown"
+
+
 def test_build_leaderboard_annotates_both_markers_defaulting_to_dev():
     lb = build_leaderboard([
         {"adapter": "openmed", "model_id": "OpenMed/x", "spec": "en",

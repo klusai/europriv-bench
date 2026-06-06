@@ -1,0 +1,209 @@
+{
+  "track": "ai4privacy-openpii-{lang}-v1",
+  "source": "ai4privacy/pii-masking-openpii-1m (CC-BY-4.0 open core)",
+  "label": "external synthetic (Ai4Privacy LLM generator, not KP, not real); config_status=dev",
+  "limit_per_lang": 80,
+  "languages": [
+    "ro",
+    "pl",
+    "cs",
+    "sv",
+    "el",
+    "fi",
+    "hu",
+    "de",
+    "fr",
+    "nl"
+  ],
+  "scored_adapters": [
+    "kp-model",
+    "tabularisai",
+    "gliner",
+    "gliner2",
+    "spacy",
+    "presidio",
+    "dummy"
+  ],
+  "pending_adapters": [
+    "privacy-filter",
+    "openmed"
+  ],
+  "per_adapter": {
+    "kp-model": {
+      "f1_by_lang": {
+        "ro": 0.3535,
+        "pl": 0.3515,
+        "cs": 0.4167,
+        "sv": 0.3625,
+        "el": 0.365,
+        "fi": 0.3624,
+        "hu": 0.3039,
+        "de": 0.2983,
+        "fr": 0.3911,
+        "nl": 0.3663
+      },
+      "min": 0.2983,
+      "max": 0.4167,
+      "mean": 0.3571
+    },
+    "tabularisai": {
+      "f1_by_lang": {
+        "ro": 0.6294,
+        "pl": 0.6422,
+        "cs": 0.6432,
+        "sv": 0.5944,
+        "el": 0.6558,
+        "fi": 0.5447,
+        "hu": 0.5996,
+        "de": 0.5646,
+        "fr": 0.6688,
+        "nl": 0.576
+      },
+      "min": 0.5447,
+      "max": 0.6688,
+      "mean": 0.6119
+    },
+    "gliner": {
+      "f1_by_lang": {
+        "ro": 0.553,
+        "pl": 0.6077,
+        "cs": 0.5591,
+        "sv": 0.5171,
+        "el": 0.5358,
+        "fi": 0.5085,
+        "hu": 0.497,
+        "de": 0.5157,
+        "fr": 0.6037,
+        "nl": 0.509
+      },
+      "min": 0.497,
+      "max": 0.6077,
+      "mean": 0.5407
+    },
+    "gliner2": {
+      "f1_by_lang": {
+        "ro": 0.5365,
+        "pl": 0.5561,
+        "cs": 0.484,
+        "sv": 0.4804,
+        "el": 0.4674,
+        "fi": 0.456,
+        "hu": 0.4752,
+        "de": 0.4898,
+        "fr": 0.5769,
+        "nl": 0.4978
+      },
+      "min": 0.456,
+      "max": 0.5769,
+      "mean": 0.502
+    },
+    "spacy": {
+      "f1_by_lang": {
+        "ro": 0.0767,
+        "pl": 0.1015,
+        "cs": 0.0942,
+        "sv": 0.1089,
+        "el": 0.1071,
+        "fi": 0.1378,
+        "hu": 0.1241,
+        "de": 0.1122,
+        "fr": 0.1297,
+        "nl": 0.0992
+      },
+      "min": 0.0767,
+      "max": 0.1378,
+      "mean": 0.1091
+    },
+    "presidio": {
+      "f1_by_lang": {
+        "ro": 0.3318,
+        "pl": 0.2765,
+        "cs": 0.2669,
+        "sv": 0.2784,
+        "el": 0.3416,
+        "fi": 0.2875,
+        "hu": 0.3081,
+        "de": 0.246,
+        "fr": 0.3767,
+        "nl": 0.2799
+      },
+      "min": 0.246,
+      "max": 0.3767,
+      "mean": 0.2993
+    },
+    "dummy": {
+      "f1_by_lang": {
+        "ro": 0.0,
+        "pl": 0.0,
+        "cs": 0.0,
+        "sv": 0.0,
+        "el": 0.0,
+        "fi": 0.0,
+        "hu": 0.0,
+        "de": 0.0,
+        "fr": 0.0,
+        "nl": 0.0
+      },
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0
+    }
+  },
+  "board_f1_range_per_lang": {
+    "ro": {
+      "min": 0.0767,
+      "max": 0.6294,
+      "spread": 0.5528
+    },
+    "pl": {
+      "min": 0.1015,
+      "max": 0.6422,
+      "spread": 0.5406
+    },
+    "cs": {
+      "min": 0.0942,
+      "max": 0.6432,
+      "spread": 0.549
+    },
+    "sv": {
+      "min": 0.1089,
+      "max": 0.5944,
+      "spread": 0.4856
+    },
+    "el": {
+      "min": 0.1071,
+      "max": 0.6558,
+      "spread": 0.5487
+    },
+    "fi": {
+      "min": 0.1378,
+      "max": 0.5447,
+      "spread": 0.4069
+    },
+    "hu": {
+      "min": 0.1241,
+      "max": 0.5996,
+      "spread": 0.4755
+    },
+    "de": {
+      "min": 0.1122,
+      "max": 0.5646,
+      "spread": 0.4524
+    },
+    "fr": {
+      "min": 0.1297,
+      "max": 0.6688,
+      "spread": 0.5391
+    },
+    "nl": {
+      "min": 0.0992,
+      "max": 0.576,
+      "spread": 0.4769
+    }
+  },
+  "headline": {
+    "max_f1_any_model_any_lang": 0.6688,
+    "saturates": false,
+    "verdict": "NON-SATURATING: best F1 well below 1.0 — spread restored"
+  }
+}

@@ -94,6 +94,23 @@ _KP_TRAINED_LANGUAGE_CONFIGS = frozenset({"en"})
 # cross-lingual transfer, clean held-out for the kp-model family.
 _KP_CROSS_LINGUAL_CONFIGS = _AI4PRIVACY_CONFIGS - _KP_TRAINED_LANGUAGE_CONFIGS  # fr, es, de, it, nl
 
+# --- RES-93: Ai4Privacy open-core EXTERNAL detection track (ai4privacy-openpii-{lang}-v1) ------
+# A second family of Ai4Privacy-sourced configs (the openpii-1m open core, an LLM-generated diverse
+# corpus). Same contamination semantics as the bare-language AI4Privacy configs above, but the
+# config name is prefixed and language-suffixed, so we parse the language out of it. openmed +
+# tabularisai were trained on Ai4Privacy data → in_distribution on EVERY language of this track.
+_AI4PRIVACY_OPENPII_PREFIX = "ai4privacy-openpii-"
+_AI4PRIVACY_OPENPII_SUFFIX = "-v1"
+
+
+def _ai4privacy_openpii_lang(config: str | None) -> str | None:
+    """Return the ISO lang of an ``ai4privacy-openpii-{lang}-v1`` config, else None."""
+    if not config:
+        return None
+    if config.startswith(_AI4PRIVACY_OPENPII_PREFIX) and config.endswith(_AI4PRIVACY_OPENPII_SUFFIX):
+        return config[len(_AI4PRIVACY_OPENPII_PREFIX):-len(_AI4PRIVACY_OPENPII_SUFFIX)]
+    return None
+
 
 def classify_contamination(adapter: str | None, config: str | None) -> str:
     """Contamination marker for one ``(adapter, config)`` pair.
@@ -109,6 +126,20 @@ def classify_contamination(adapter: str | None, config: str | None) -> str:
     # on EVERY config, including the AI4Privacy general configs others overlap with.
     if adapter in _RULE_BASED_ADAPTERS:
         return CLEAN_HELD_OUT
+
+    # RES-93 external Ai4Privacy open-core track (ai4privacy-openpii-{lang}-v1). Ai4Privacy is the
+    # training substrate for openmed/tabularisai → in_distribution for them on ANY language of this
+    # track. kp-deid trained on KP LocalePacks (ro/en/pl, a DIFFERENT generator): zero-shot
+    # clean_held_out on languages absent from its training; ro/en (trained languages, but a distinct
+    # Ai4Privacy generator) are honestly `unknown`, never clean_held_out.
+    openpii_lang = _ai4privacy_openpii_lang(config)
+    if openpii_lang is not None:
+        if adapter in _AI4PRIVACY_TRAINED_ADAPTERS:
+            return IN_DISTRIBUTION
+        if adapter in _KP_TRAINED_ADAPTERS:
+            return UNKNOWN if openpii_lang in {"ro", "en"} else CLEAN_HELD_OUT
+        return UNKNOWN
+
     if adapter in _AI4PRIVACY_TRAINED_ADAPTERS and config in _AI4PRIVACY_CONFIGS:
         return IN_DISTRIBUTION
     if adapter in _KP_TRAINED_ADAPTERS:
