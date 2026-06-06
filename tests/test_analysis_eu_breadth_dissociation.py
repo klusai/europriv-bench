@@ -24,12 +24,15 @@ def _leak(adapter, missed, total, leaked_qi=None):
             "leaked_qi": leaked_qi if leaked_qi is not None else missed * 2}
 
 
-def test_countries_cover_se_cz_dk_fi():
-    assert set(ebd.COUNTRIES) == {"SE", "CZ", "DK", "FI"}
+def test_countries_cover_se_cz_dk_fi_ee_lt():
+    assert set(ebd.COUNTRIES) == {"SE", "CZ", "DK", "FI", "EE", "LT"}
     assert ebd.COUNTRIES["SE"]["config"] == "se-realskeleton-v1"
     assert ebd.COUNTRIES["CZ"]["config"] == "cz-realskeleton-v1"
     assert ebd.COUNTRIES["DK"]["config"] == "dk-realskeleton-v1"
     assert ebd.COUNTRIES["FI"]["config"] == "fi-realskeleton-v1"
+    # RES-84: EE isikukood + LT asmens kodas (Baltic two-pass mod-11 family).
+    assert ebd.COUNTRIES["EE"]["config"] == "ee-realskeleton-v1"
+    assert ebd.COUNTRIES["LT"]["config"] == "lt-realskeleton-v1"
 
 
 def test_detector_gap_excludes_zero_when_detector_leaks_and_protector_does_not():

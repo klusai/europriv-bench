@@ -13,6 +13,7 @@ from europriv_bench.metrics import (
 )
 from europriv_bench.national_id import (
     _CF_OMOCODIA,
+    _baltic_check_digit,
     _bsn_weighted_sum,
     _cf_control_letter,
     _dk_century,
@@ -39,6 +40,12 @@ PNR_SE_F = "8506152449"        # SE personnummer 1985-06-15, female (Luhn-valid)
 RC_CZ_F = "8556151010"         # CZ rodné číslo 1985-06-15, female (month +50; mod-11)
 HETU_FI_F = "131052-308T"      # FI henkilötunnus 1952-10-13, female (DVV canonical example; ctrl T)
 CPR_DK_M = "211062-0629"       # DK CPR-nummer 1962-10-21, male (c7=0 → 1900s; last digit odd)
+IK_EE_M = "37605030299"        # EE isikukood 1976-05-03, male (python-stdnum canonical example)
+
+
+def _make_baltic(body10: str) -> str:
+    """Append the two-pass mod-11 check digit to a 10-digit EE/LT body."""
+    return body10 + str(_baltic_check_digit(body10))
 
 
 def _make_cnp(base12: str) -> str:
@@ -169,7 +176,9 @@ def test_run_spec_wires_cnp_leakage_via_rows():
 
 
 def test_registry_exposes_all_countries_with_correct_families():
-    assert supported_countries() == ["CZ", "DE", "DK", "ES", "FI", "FR", "IT", "NL", "PL", "RO", "SE"]
+    assert supported_countries() == [
+        "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "IT", "LT", "NL", "PL", "RO", "SE"
+    ]
     assert get_validator("ro").decode_bearing is True
     assert get_validator("PL").decode_bearing is True
     assert get_validator("it").decode_bearing is True
@@ -184,6 +193,9 @@ def test_registry_exposes_all_countries_with_correct_families():
     # DK/FI (RES-83): both decode-bearing (CPR-nummer / henkilötunnus → DOB + sex).
     assert get_validator("DK").decode_bearing is True
     assert get_validator("fi").decode_bearing is True
+    # EE/LT (RES-84): both decode-bearing (isikukood / asmens kodas → DOB + sex).
+    assert get_validator("EE").decode_bearing is True
+    assert get_validator("lt").decode_bearing is True
     assert get_validator("XX") is None
     # Unsupported country → invalid, no decode.
     assert parse_national_id("123", "XX").valid is False
@@ -596,6 +608,51 @@ def test_henkilotunnus_length_bad_marker_and_implausible_date_rejected():
     assert not parse_national_id(HETU_FI_F[:-1], "FI").valid          # 10 chars
     assert not parse_national_id("131052G308T", "FI").valid          # 'G' is not a century marker
     assert not parse_national_id("320152-308" + _fi_control_char("320152308"), "FI").valid  # day 32
+
+
+# --- EE / LT: isikukood / asmens kodas (decode-bearing; two-pass mod-11) ------------------
+
+
+def test_isikukood_decodes_dob_and_sex():
+    info = parse_national_id(IK_EE_M, "EE")
+    assert info.valid and info.decode_bearing
+    assert info.extra["sex"] == "M"                  # G=3 odd → male
+    assert info.extra["birth_date"] == "1976-05-03"  # G=3 → 1900s; century unambiguous
+    assert info.disclosed_quasi_identifiers() == {"DATE_OF_BIRTH", "SEX"}
+
+
+def test_isikukood_two_pass_mod11_and_century_sex_encoding():
+    # G century+sex bands: 5/6 → 2000s, even → female.
+    ee_f = _make_baltic("6" + "05" + "01" + "10" + "007")  # 2005-01-10, female
+    info = parse_national_id(ee_f, "EE")
+    assert info.valid and info.extra["sex"] == "F" and info.extra["birth_date"] == "2005-01-10"
+    # The two-pass check digit is exercised: weights 1..9,1 then 3..9,1,2,3; remainder-10 → 0.
+    assert _baltic_check_digit("3760503029") == int(IK_EE_M[-1])
+    # A wrong check digit is rejected.
+    bad = IK_EE_M[:-1] + str((int(IK_EE_M[-1]) + 1) % 10)
+    assert not parse_national_id(bad, "EE").valid
+
+
+def test_asmens_kodas_same_family_as_ee_decodes_dob_and_sex():
+    # LT asmens kodas: IDENTICAL algorithm to EE (python-stdnum lt.asmens reuses ee.ik).
+    lt_m = _make_baltic("3" + "85" + "06" + "15" + "123")  # 1985-06-15, male (G=3)
+    info = parse_national_id(lt_m, "LT")
+    assert info.valid and info.decode_bearing
+    assert info.extra["sex"] == "M" and info.extra["birth_date"] == "1985-06-15"
+    assert info.disclosed_quasi_identifiers() == {"DATE_OF_BIRTH", "SEX"}
+    # Same digits validate identically under EE (the algorithm is country-agnostic; only the
+    # registry key differs) — the country is supplied by the caller, never auto-detected.
+    assert parse_national_id(lt_m, "EE").valid
+
+
+def test_baltic_invalid_g_implausible_date_and_length_rejected():
+    # G = 0 → no century/sex band → rejected even with a valid check digit.
+    assert not parse_national_id(_make_baltic("0" + "85" + "06" + "15" + "123"), "EE").valid
+    # Implausible date (month 13) rejected.
+    assert not parse_national_id(_make_baltic("3" + "85" + "13" + "15" + "123"), "LT").valid
+    # Wrong length / non-digit rejected.
+    assert not parse_national_id(IK_EE_M[:-1], "EE").valid
+    assert not parse_national_id("3760503029X", "LT").valid
 
 
 # --- national_id_leakage: country-dispatched ---------------------------------------------
