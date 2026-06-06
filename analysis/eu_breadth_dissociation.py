@@ -61,14 +61,18 @@ PREREGISTERED_N_DOCS = 300
 # Per-country wiring: config slug + the human label for the identifier.
 COUNTRIES = {
     "SE": {"config": "se-realskeleton-v1", "id_name": "personnummer", "lang": "sv",
-           "qi": "SEX + DATE_OF_BIRTH (birth month + day)"},
+           "qi": "SEX + DATE_OF_BIRTH (birth month + day)",
+           "issue": "RES-80", "beyond": "RO/PL/IT"},
     "CZ": {"config": "cz-realskeleton-v1", "id_name": "rodné číslo", "lang": "cs",
-           "qi": "SEX + DATE_OF_BIRTH (full date, modern 10-digit form)"},
+           "qi": "SEX + DATE_OF_BIRTH (full date, modern 10-digit form)",
+           "issue": "RES-80", "beyond": "RO/PL/IT"},
     # RES-83 EU-breadth batch 2: DK CPR + FI henkilötunnus (both decode-bearing → DOB + sex).
     "DK": {"config": "dk-realskeleton-v1", "id_name": "CPR-nummer", "lang": "da",
-           "qi": "SEX + DATE_OF_BIRTH (full date; century from the 7th-digit table)"},
+           "qi": "SEX + DATE_OF_BIRTH (full date; century from the 7th-digit/YY table)",
+           "issue": "RES-83", "beyond": "RO/PL/IT/SE/CZ"},
     "FI": {"config": "fi-realskeleton-v1", "id_name": "henkilötunnus", "lang": "fi",
-           "qi": "SEX + DATE_OF_BIRTH (full date; century from the marker)"},
+           "qi": "SEX + DATE_OF_BIRTH (full date; century from the marker)",
+           "issue": "RES-83", "beyond": "RO/PL/IT/SE/CZ"},
 }
 
 
@@ -196,9 +200,9 @@ def main() -> None:
     out_json.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
 
     lines = [
-        f"# detection≠re-id dissociation — `{meta['config']}` (RES-80, {meta['id_name']})",
+        f"# detection≠re-id dissociation — `{meta['config']}` ({meta['issue']}, {meta['id_name']})",
         "",
-        f"A decode-bearing identifier + language extending the headline beyond RO/PL/IT. A missed "
+        f"A decode-bearing identifier + language extending the headline beyond {meta['beyond']}. A missed "
         f"{meta['id_name']} discloses **{meta['qi']}**. Difference-of-proportions: **gap = "
         f"leak_rate(typed-detector) − leak_rate(protector=kp-deid)**, Newcombe (1998) hybrid-score "
         f"CI; the dissociation **holds** iff a typed-detector's gap CI **excludes 0** (`low > 0`). "
