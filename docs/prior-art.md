@@ -54,7 +54,14 @@ The unmet intersection is real and narrow. **EuroPriv-Bench's defensible claim i
 
 - **Piiranha-v1 = CC-BY-NC-ND-4.0** (verified live): evaluation baseline only — never a
   finetuning base or a redistributed artifact.
-- **AI4Privacy**: open core (`openpii-1m`, mini-10k, nano-1k) is CC-BY-4.0; enterprise tiers
-  are Llama-license-bound — **exclude** those from the redistributable benchmark.
+- **AI4Privacy**: license verified live (RES-93, 2026-06-07). `ai4privacy/pii-masking-openpii-1m`
+  is the verified-clean **open core** — card body states "License: CC-BY-4.0. Copyright © 2026 Ai
+  Suisse SA … research, commercial use, redistribution, and modification," no Llama clause. This is
+  the source the benchmark uses. The larger `open-pii-masking-500k-ai4privacy` tier is **Llama-
+  Community-License-bound** (card: "created using Llama models (versions 3.1 and 3.3) … subject to
+  the Llama Community License Agreement"; "Built with Llama") — **excluded**, despite a cosmetic
+  `license_name: cc-by-4.0` in its YAML. The `pii-masking-300k`/`-200k` tiers carry a custom
+  company-size-tiered `license.md` — also **excluded**. See `docs/crosswalk-ai4privacy.md` and the
+  `klusai-datasets` manifest `conf/ai4privacy_openpii_manifest.yaml`.
 - Build EuroPriv-Bench only from cleanly-licensed sources (TAB/ECHR, CC-BY AI4Privacy splits,
   MEDDOCAN, EUR-Lex, KlusAI synthetic) to keep the whole suite openly redistributable.
