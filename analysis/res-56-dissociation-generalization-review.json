@@ -1,0 +1,43 @@
+{
+  "issue": "RES-56",
+  "review_type": "review_gate",
+  "date": "2026-06-06",
+  "method": "read-only review of committed artifacts; no re-scoring, no fabrication",
+  "config_status": "dev",
+  "thesis": "detection-F1 ranking does not predict re-identification-protection ranking on the deterministic national-ID channel",
+  "sanity": {
+    "RO": {"id": "CNP", "kp_leak": 0.0, "wilson_ub": 0.0198, "gap_ci_excl_0": "11/14", "verdict": "holds", "note": "two families A(5/7)+B(6/7); kp F1 0.733/0.495"},
+    "PL": {"id": "PESEL", "kp_leak": 0.0, "wilson_ub": 0.0035, "gap_ci_excl_0": "5/7", "kp_f1": 0.763, "gliner_f1": 0.825, "gliner_leak": 0.578, "verdict": "holds", "no_dissoc_detectors_are_protectors": ["presidio(0.000)", "privacy-filter(0.001)"]},
+    "IT": {"id": "codice fiscale", "kp_leak": 0.0, "wilson_ub": 0.0169, "gap_ci_excl_0": "6/7", "kp_f1": 0.707, "gliner_f1": 0.858, "gliner_leak": 0.397, "verdict": "holds", "no_dissoc_detectors_are_protectors": ["privacy-filter(0.004)"]}
+  },
+  "generalization": {
+    "n_languages_artifact_present": 11,
+    "n_languages_holds": 11,
+    "counterexamples_found": 0,
+    "uniform_signal": "GLiNER highest detection F1 (0.81-0.86) in every language yet leaks 36.4-100% of national IDs; kp-deid leaks 0% (4.07% only in RO legal domain)",
+    "models_present_in_all_11": ["gliner", "gliner2", "kp-model"],
+    "coverage": {"full_8_models": ["RO", "PL", "IT", "legal"], "nordic_5": ["SE", "CZ", "DK", "FI"], "baltic_5": ["EE", "LT", "SI", "SK"]},
+    "no_dissoc_detectors_are_all_low_leakers": true
+  },
+  "weaknesses_flagged": [
+    "cross-language claim rests on only 3 models present in all 11 (gliner, gliner2, kp-deid)",
+    "single authored template family in every language except RO; small n (~224-232) outside RO/PL",
+    "headline 'comparable detection F1' is false: kp-deid is F1 leader in zero languages; reframe as ranking dissociation",
+    "kp-deid not literally 0% in legal domain (4.07%, Wilson UB 0.0519)"
+  ],
+  "paper_worthiness": {
+    "verdict": "YES, conditionally — strengthens Papers 1/3 generalization claim with tightened scope",
+    "scoped_claim": "Across 11 EU decode-bearing national IDs, detection-F1 ranking does not predict re-id-protection ranking: highest-F1 model GLiNER leaks 36-100% of national IDs while kp-deid leaks ~0% (4.1% in RO legal). First *unified* multi-language demonstration.",
+    "bulletproof_core_full_coverage": ["RO", "PL", "IT"],
+    "mandatory_caveats": [
+      "first *unified*, not first",
+      "config_status=dev; NOT SOTA/citable; gated on RES-77 (native-speaker/IAA) and RES-53 (full-model re-score) before any public/citable use",
+      "11-language claim scoped to models scored per language; only RO/PL/IT/legal have all 8",
+      "single authored family except RO (KLU-101)",
+      "re-identification reserved for national-ID channel; name/QI = residual distinctiveness, no k-anonymity (KLU-122)",
+      "kp-deid is ~0% not literally 0% in legal (4.07%)"
+    ]
+  },
+  "weakens_thesis": false,
+  "provenance": ["analysis/dissociation_summary.json", "analysis/family_dissociation_ro_realskeleton.json", "analysis/pl_dissociation.json", "analysis/it_dissociation.json", "analysis/se_dissociation.json", "analysis/cz_dissociation.json", "analysis/dk_dissociation.json", "analysis/fi_dissociation.json", "analysis/ee_dissociation.json", "analysis/lt_dissociation.json", "analysis/si_dissociation.json", "analysis/sk_dissociation.json", "analysis/legal_dissociation.json", "analysis/name_in_context_leak_ro_realskeleton.json"]
+}
