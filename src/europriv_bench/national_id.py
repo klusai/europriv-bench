@@ -27,6 +27,8 @@ Sources:
   DE  Steuer-IdNr (§ 139b Abgabenordnung); ISO 7064 MOD 11,10 check digit.
   FR  NIR / numéro de sécurité sociale (INSEE); 13-digit body, clé = 97 − (body mod 97).
   NL  BSN / burgerservicenummer (Rijksoverheid); 11-proef (elfproef) weighted-sum test.
+  SE  personnummer (Skatteverket SKV 704); Luhn / ISO 7812 mod-10; sex digit, +60 day = samordningsnummer.
+  CZ  rodné číslo (Zákon č. 133/2000 Sb. § 13); whole-number mod-11; female month +50, +20 overflow.
 """
 
 from __future__ import annotations
@@ -515,6 +517,145 @@ def _parse_fr(value: str) -> IDInfo:
     )
 
 
+# --- SE: personnummer — decode-bearing ---------------------------------------------------
+#
+# 10-digit identifier ``YY MM DD - NNN C`` (the printed form is ``YYMMDD-NNNC``; a person who
+# has turned 100 uses ``+`` instead of ``-``). A 12-digit form ``YYYYMMDD-NNNC`` also exists.
+#   YYMMDD  birth date (2-digit year; the century is carried only by the separator, see below)
+#   NNN     birth-number; its LAST digit (the 9th of the 10) encodes sex: odd -> male, even -> female
+#   C       Luhn (mod-10) check digit over the first 9 digits, weights 2,1,2,1,2,1,2,1,2
+# Separator: ``-`` while the holder is < 100, ``+`` once they have turned 100. So with a known
+# "today" the separator disambiguates the century -- but a bare 10-digit string does NOT, exactly
+# like the IT codice fiscale 2-digit year. We therefore disclose SEX + birth month/day (2-digit
+# year), and only surface a full DATE_OF_BIRTH century when a 12-digit (4-digit-year) form is given.
+# Samordningsnummer (coordination numbers) add 60 to the DAY field (61-91); they validate by the
+# same Luhn and decode the same sex, but the day is offset -- we recover the real day (day-60).
+# Spec: Skatteverket "Personnummer" (SKV 704); Luhn / ISO 7812 mod-10. Cross-checked vs the pack.
+
+_SE_LUHN_WEIGHTS = (2, 1, 2, 1, 2, 1, 2, 1, 2)
+
+
+def _se_luhn_check_digit(first9: str) -> int:
+    """Luhn (mod-10) check digit over the 9-digit personnummer body (weights 2,1,2,...)."""
+    total = 0
+    for d, w in zip(first9, _SE_LUHN_WEIGHTS):
+        prod = int(d) * w
+        total += prod - 9 if prod > 9 else prod  # cast a two-digit product to its digit sum
+    return (10 - (total % 10)) % 10
+
+
+def _parse_se(value: str) -> IDInfo:
+    """Decode a Swedish personnummer. Returns ``IDInfo(valid=False)`` for anything malformed.
+
+    Accepts the 10-digit ``YYMMDD-NNNC`` / ``YYMMDDNNNC`` form and the 12-digit
+    ``YYYYMMDD-NNNC`` form. Separators ``-``/``+`` are stripped before the Luhn check; the ``+``
+    (holder >= 100) is recorded so callers can shift the century back if they wish.
+    """
+    if not isinstance(value, str):
+        return IDInfo(valid=False, country="SE", decode_bearing=True)
+    s = value.strip()
+    plus_separator = "+" in s
+    s = s.replace("-", "").replace("+", "").replace(" ", "")
+    century_digits: str | None = None
+    if len(s) == 12 and s.isdigit():
+        century_digits, s = s[:2], s[2:]        # split off the explicit century (YYYY -> CC + YY)
+    if len(s) != 10 or not s.isdigit():
+        return IDInfo(valid=False, country="SE", decode_bearing=True)
+    if _se_luhn_check_digit(s[:9]) != int(s[9]):
+        return IDInfo(valid=False, country="SE", decode_bearing=True)
+
+    yy, mm, dd = int(s[0:2]), int(s[2:4]), int(s[4:6])
+    # Samordningsnummer (coordination number): the day field is offset by +60 (61-91 -> day-60).
+    coordination = dd > 60
+    real_day = dd - 60 if coordination else dd
+    if not (1 <= mm <= 12 and 1 <= real_day <= 31):
+        return IDInfo(valid=False, country="SE", decode_bearing=True)
+
+    sex = "M" if int(s[8]) % 2 == 1 else "F"     # 9th digit (last of NNN) parity -> sex
+    qi = {"SEX", "DATE_OF_BIRTH"}                 # month + day always disclosed; year 2-digit
+    birth_date = None
+    if century_digits is not None:                # 12-digit form: full, unambiguous DOB
+        year = int(century_digits) * 100 + yy
+        if not _plausible_date(year, mm, real_day):
+            return IDInfo(valid=False, country="SE", decode_bearing=True)
+        birth_date = f"{year:04d}-{mm:02d}-{real_day:02d}"
+
+    return IDInfo(
+        valid=True, country="SE", decode_bearing=True,
+        quasi_identifiers=frozenset(qi),
+        extra={"sex": sex, "birth_year_2digit": f"{yy:02d}",
+               "birth_month": mm, "birth_day": real_day,
+               "birth_date": birth_date,            # set only for the 12-digit (4-digit-year) form
+               "coordination_number": coordination, "plus_separator": plus_separator},
+    )
+
+
+# --- CZ: rodne cislo (birth number) — decode-bearing -------------------------------------
+#
+# 9- or 10-digit identifier ``YY XX DD / SSS [C]``:
+#   YY    birth year (last two digits)
+#   XX    month with sex/overflow offsets:
+#           01-12 male; +50 -> female (51-62); post-2004 serial-overflow adds +20 -> male 21-32,
+#           female 71-82 (50 already applied). We strip the offsets to recover the real month.
+#   DD    day of birth
+#   SSS   serial; C the check digit (10-digit form only)
+# Check digit (>= 1954, 10-digit): the whole 10-digit number is divisible by 11. Historical
+# exception (numbers issued 1954-1985): if ``first9 % 11 == 10`` the check digit was written as 0,
+# so ``...SSS0`` with ``first9 % 11 == 10`` is also accepted. Pre-1954 numbers are 9 digits with NO
+# check digit (no mod-11 condition). Century: a 10-digit number with ``YY >= 54`` is 19YY, ``YY <= 53``
+# is 20YY (the same convention the reference validators use); a 9-digit number is necessarily 19YY
+# (pre-1954) so the year is unambiguous. A missed rodne cislo discloses DATE_OF_BIRTH + SEX.
+# Spec: Zakon c. 133/2000 Sb. (o evidenci obyvatel) par. 13; cross-checked vs kub1x/rodnecislo.
+
+
+def _cz_strip_month(mm_raw: int) -> tuple[int, str] | None:
+    """Recover (real_month, sex) from a rodne-cislo month field, undoing the +50/+20/+70 offsets."""
+    sex = "M"
+    mm = mm_raw
+    if 51 <= mm <= 62 or 71 <= mm <= 82:          # female (base +50, or +50+20 overflow)
+        sex, mm = "F", mm - 50
+    if 21 <= mm <= 32:                            # male serial-overflow (+20), applied post-2004
+        mm -= 20
+    if not (1 <= mm <= 12):
+        return None
+    return mm, sex
+
+
+def _parse_cz(value: str) -> IDInfo:
+    """Decode a Czech/Slovak rodne cislo. Returns ``IDInfo(valid=False)`` for anything malformed."""
+    if not isinstance(value, str):
+        return IDInfo(valid=False, country="CZ", decode_bearing=True)
+    s = value.strip().replace("/", "").replace(" ", "")
+    if not s.isdigit() or len(s) not in (9, 10):
+        return IDInfo(valid=False, country="CZ", decode_bearing=True)
+
+    yy = int(s[0:2])
+    stripped = _cz_strip_month(int(s[2:4]))
+    if stripped is None:
+        return IDInfo(valid=False, country="CZ", decode_bearing=True)
+    month, sex = stripped
+    day = int(s[4:6])
+
+    if len(s) == 10:
+        # >=1954: the whole 10-digit number is divisible by 11, with the 1954-1985 "remainder 10 ->
+        # check digit 0" historical exception.
+        n10 = int(s)
+        if n10 % 11 != 0 and not (int(s[:9]) % 11 == 10 and s[9] == "0"):
+            return IDInfo(valid=False, country="CZ", decode_bearing=True)
+        year = 1900 + yy if yy >= 54 else 2000 + yy
+    else:
+        year = 1900 + yy                          # 9-digit form is pre-1954 -> unambiguously 19YY
+
+    if not _plausible_date(year, month, day):
+        return IDInfo(valid=False, country="CZ", decode_bearing=True)
+
+    return IDInfo(
+        valid=True, country="CZ", decode_bearing=True,
+        quasi_identifiers=frozenset({"DATE_OF_BIRTH", "SEX"}),
+        extra={"sex": sex, "birth_date": f"{year:04d}-{month:02d}-{day:02d}"},
+    )
+
+
 # --- NL: BSN / burgerservicenummer — coverage-only ---------------------------------------
 #
 # 9-digit citizen-service number validated by the "11-proef" (elfproef): the weighted sum
@@ -557,6 +698,8 @@ REGISTRY: dict[str, Validator] = {
     "DE": Validator("DE", "Steuer-IdNr", decode_bearing=False, parse=_parse_de),
     "FR": Validator("FR", "NIR", decode_bearing=True, parse=_parse_fr),
     "NL": Validator("NL", "BSN", decode_bearing=False, parse=_parse_nl),
+    "SE": Validator("SE", "personnummer", decode_bearing=True, parse=_parse_se),
+    "CZ": Validator("CZ", "rodné číslo", decode_bearing=True, parse=_parse_cz),
 }
 
 

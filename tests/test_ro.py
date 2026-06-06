@@ -1,4 +1,4 @@
-"""National-ID validators (RO/PL/IT decode-bearing, ES coverage-only) + leakage metrics."""
+"""National-ID validators (RO/PL/IT/FR/SE/CZ decode-bearing, ES/DE/NL coverage-only) + leakage metrics."""
 
 from europriv_bench.adapters import build
 from europriv_bench.belfiore import (
@@ -17,6 +17,7 @@ from europriv_bench.national_id import (
     _cf_control_letter,
     _iso7064_mod11_10,
     _nir_key,
+    _se_luhn_check_digit,
     check_digit,
     get_validator,
     parse_cnp,
@@ -32,6 +33,8 @@ PESEL_M_1944 = "44051401359"   # 1944-05-14, male
 CF_IT_M = "RSSMRA85T10A562S"   # 1985-12-10, male, Belfiore A562
 DNI_ES = "12345678Z"           # canonical Spanish DNI (12345678 mod 23 → Z)
 STEUER_ID_DE = "86095742719"   # textbook DE Steuer-IdNr (ISO 7064 MOD 11,10; § 139b AO)
+PNR_SE_F = "8506152449"        # SE personnummer 1985-06-15, female (Luhn-valid)
+RC_CZ_F = "8556151010"         # CZ rodné číslo 1985-06-15, female (month +50; mod-11)
 
 
 def _make_cnp(base12: str) -> str:
@@ -162,7 +165,7 @@ def test_run_spec_wires_cnp_leakage_via_rows():
 
 
 def test_registry_exposes_all_countries_with_correct_families():
-    assert supported_countries() == ["DE", "ES", "FR", "IT", "NL", "PL", "RO"]
+    assert supported_countries() == ["CZ", "DE", "ES", "FR", "IT", "NL", "PL", "RO", "SE"]
     assert get_validator("ro").decode_bearing is True
     assert get_validator("PL").decode_bearing is True
     assert get_validator("it").decode_bearing is True
@@ -171,6 +174,9 @@ def test_registry_exposes_all_countries_with_correct_families():
     assert get_validator("de").decode_bearing is False
     assert get_validator("FR").decode_bearing is True
     assert get_validator("nl").decode_bearing is False
+    # SE/CZ (RES-80): both decode-bearing (personnummer / rodné číslo → DOB + sex).
+    assert get_validator("SE").decode_bearing is True
+    assert get_validator("cz").decode_bearing is True
     assert get_validator("XX") is None
     # Unsupported country → invalid, no decode.
     assert parse_national_id("123", "XX").valid is False
@@ -431,6 +437,81 @@ def test_bsn_eight_digit_historical_is_left_padded():
     assert len(eight) == 8
     assert parse_national_id(eight, "NL").valid
     assert parse_national_id(eight, "NL").valid == parse_national_id(padded, "NL").valid
+
+
+# --- SE: personnummer (decode-bearing) ---------------------------------------------------
+
+
+def test_personnummer_decodes_sex_and_birth_month_day():
+    info = parse_national_id(PNR_SE_F, "SE")
+    assert info.valid and info.decode_bearing
+    assert info.extra["sex"] == "F"          # 9th digit even → female
+    assert info.extra["birth_month"] == 6 and info.extra["birth_day"] == 15
+    # Bare 10-digit form: century is carried only by the separator, so birth_date stays None
+    # (DOB month+day + sex still disclosed, like the IT codice-fiscale 2-digit year).
+    assert info.extra["birth_date"] is None
+    assert info.disclosed_quasi_identifiers() == {"DATE_OF_BIRTH", "SEX"}
+
+
+def test_personnummer_luhn_rejection_and_hyphen_form():
+    # Printed YYMMDD-NNNC form validates identically to the bare digits.
+    assert parse_national_id(PNR_SE_F[:6] + "-" + PNR_SE_F[6:], "SE").valid
+    bad = PNR_SE_F[:-1] + str((int(PNR_SE_F[-1]) + 1) % 10)
+    assert not parse_national_id(bad, "SE").valid
+    assert _se_luhn_check_digit("800101812") == 9   # documented Skatteverket-style vector
+
+
+def test_personnummer_twelve_digit_form_discloses_full_dob():
+    info = parse_national_id("19" + PNR_SE_F, "SE")  # explicit 4-digit year
+    assert info.valid and info.extra["birth_date"] == "1985-06-15"
+    assert info.disclosed_quasi_identifiers() == {"DATE_OF_BIRTH", "SEX"}
+
+
+def test_personnummer_samordningsnummer_day_plus_60():
+    # Coordination number: the day field is offset +60 (75 → real day 15); still decodes.
+    info = parse_national_id("8506752446", "SE")
+    assert info.valid and info.extra["coordination_number"] is True
+    assert info.extra["birth_day"] == 15
+    assert info.disclosed_quasi_identifiers() == {"DATE_OF_BIRTH", "SEX"}
+
+
+def test_personnummer_length_and_nondigit_rejected():
+    assert not parse_national_id(PNR_SE_F[:-1], "SE").valid    # 9 digits
+    assert not parse_national_id("85061524X9", "SE").valid     # non-digit
+
+
+# --- CZ: rodné číslo (decode-bearing) ----------------------------------------------------
+
+
+def test_rodne_cislo_decodes_dob_and_sex():
+    info = parse_national_id(RC_CZ_F, "CZ")
+    assert info.valid and info.decode_bearing
+    assert info.extra["sex"] == "F"                  # month +50 → female
+    assert info.extra["birth_date"] == "1985-06-15"  # modern 10-digit form → full DOB
+    assert info.disclosed_quasi_identifiers() == {"DATE_OF_BIRTH", "SEX"}
+
+
+def test_rodne_cislo_mod11_rejection_and_slash_form():
+    # Printed YYMMDD/SSSC form validates identically to the bare digits.
+    assert parse_national_id(RC_CZ_F[:6] + "/" + RC_CZ_F[6:], "CZ").valid
+    bad = RC_CZ_F[:-1] + str((int(RC_CZ_F[-1]) + 1) % 10)
+    assert not parse_national_id(bad, "CZ").valid    # breaks divisibility-by-11
+
+
+def test_rodne_cislo_male_and_century_convention():
+    # Male June 1985 (month 06, no +50); yy=85 ≥ 54 → 19YY.
+    info = parse_national_id("8506151005", "CZ")
+    assert info.valid and info.extra["sex"] == "M"
+    assert info.extra["birth_date"] == "1985-06-15"
+    # yy ≤ 53 → 20YY (2005-01-10, male).
+    info2 = parse_national_id("0501101007", "CZ")
+    assert info2.valid and info2.extra["birth_date"] == "2005-01-10"
+
+
+def test_rodne_cislo_length_and_implausible_date_rejected():
+    assert not parse_national_id(RC_CZ_F[:8], "CZ").valid       # 8 digits (neither 9 nor 10)
+    # month field 99 strips to no valid month → rejected.
+    assert not parse_national_id("8599151010", "CZ").valid
 
 
 # --- national_id_leakage: country-dispatched ---------------------------------------------
