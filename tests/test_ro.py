@@ -820,6 +820,33 @@ def test_cnp_leakage_alias_still_works_and_scopes_to_ro():
     assert "leak_rate_ci_low" in res and "leak_rate_ci_high" in res
 
 
+def test_res82_key_rename_preserves_leak_values():
+    """RES-82 hard invariant: unifying the board key cnp_leakage → national_id_leakage is a pure
+    rename — the leak VALUES (leak_rate, CIs, counts, leaked-QI) are byte-identical on RO rows. The
+    generalized metric just re-expresses the same RO/CNP subjects under generalized field names
+    (decode_bearing_* == cnp_*) plus zero coverage-only and a per-country RO mirror. No number moves.
+    """
+    cnp = _make_cnp("185071540001")
+    rows = _ro_clinical_row(cnp)  # built below; duplicate-CNP doc exercises the per-subject dedup
+    rows = [rows, _single_id_rows(_make_cnp("605031120007"), "RO")[0]]
+    pred = [["O", "S-NATIONAL_ID", "O", "O", "O"], ["O", "O", "O"]]  # one leak, one leak
+
+    alias = cnp_leakage(rows, pred)
+    nid = national_id_leakage(rows, pred)  # rows default to RO → CNP validator
+
+    # Shared leak numbers identical.
+    for f in ("leak_rate", "leak_rate_ci_low", "leak_rate_ci_high",
+              "detection_rate", "leaked_quasi_identifiers"):
+        assert alias[f] == nid[f], f
+    # Count fields rename 1:1, same values.
+    assert nid["decode_bearing_total"] == alias["cnp_total"]
+    assert nid["decode_bearing_detected"] == alias["cnp_detected"]
+    assert nid["decode_bearing_missed"] == alias["cnp_missed"]
+    # The migration's derived fields: no coverage-only IDs in RO, per-country RO mirrors the counts.
+    assert nid["coverage_only_total"] == 0.0
+    assert nid["ro_total"] == alias["cnp_total"] and nid["ro_detected"] == alias["cnp_detected"]
+
+
 # --- KLU-49: per-subject dedup (re-identification risk is per distinct subject) ----------
 #
 # Real RO clinical docs repeat the SAME CNP twice (the CNP field + the CASS "cod asigurat"

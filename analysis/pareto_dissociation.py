@@ -84,11 +84,13 @@ def load_track_points(leaderboard_path: Path) -> list[dict]:
         for e in entries:
             if e.get("dataset", {}).get("config") != CONFIG:
                 continue
-            cnp = e["scores"]["cnp_leakage"]
+            # RES-82: unified national_id_leakage key, falling back to the legacy cnp_leakage key
+            # (and cnp_* inner fields) so committed/older boards still resolve.
+            cnp = e["scores"].get("national_id_leakage") or e["scores"]["cnp_leakage"]
             adapter = e["adapter"]
             disp = MODEL_DISPLAY.get(adapter, {"label": adapter, "color": "#555555"})
-            total = int(cnp["cnp_total"])
-            missed = int(cnp["cnp_missed"])
+            total = int(cnp.get("decode_bearing_total", cnp.get("cnp_total")))
+            missed = int(cnp.get("decode_bearing_missed", cnp.get("cnp_missed")))
             points.append({
                 "adapter": adapter,
                 "model_id": e["model_id"],

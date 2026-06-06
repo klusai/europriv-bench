@@ -163,7 +163,7 @@ def run_spec(
     dumps: list[dict] | None = None,
 ) -> dict:
     """Score one adapter on one spec. Gold may be injected as ``rows`` (preferred) or ``gold``
-    (texts, tag-seqs, for tag-only tests); else loaded from HF. Row-metrics (e.g. cnp_leakage)
+    (texts, tag-seqs, for tag-only tests); else loaded from HF. Row-metrics (e.g. national_id_leakage)
     require ``rows``. ``limit`` caps examples (recorded for honesty).
 
     When ``dumps`` is provided, a per-subject national-ID detection record (KLU-53, for item-paired

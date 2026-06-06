@@ -145,7 +145,9 @@ _BASELINE_FILES = ["baselines/leaderboard.json", "baselines/leaderboard-full.jso
 @pytest.mark.parametrize("rel", _BASELINE_FILES)
 def test_committed_baseline_is_schema3_with_markers(rel):
     """Every committed baseline row is schema 3, carries both markers, defaults to dev, and —
-    where it has cnp_leakage — keeps the merged Wilson CI fields (no regression on KLU-6)."""
+    where it has the national-ID leak metric — keeps the merged Wilson CI fields (no regression on
+    KLU-6). RES-82: the board emits the unified ``national_id_leakage`` key; the committed baselines
+    must NOT carry the legacy ``cnp_leakage`` key anymore."""
     root = Path(__file__).resolve().parents[1]
     d = json.loads((root / rel).read_text())
     assert d["schema"] == 3
@@ -157,7 +159,9 @@ def test_committed_baseline_is_schema3_with_markers(rel):
             assert r["config_status"] == "dev"
             # Derived markers match the policy in leaderboard.classify_contamination.
             assert r["contamination"] == classify_contamination(r["adapter"], r["dataset"]["config"])
-            leak = r["scores"].get("cnp_leakage")
+            # RES-82: leak metric is unified under national_id_leakage; cnp_leakage is fully migrated.
+            assert "cnp_leakage" not in r["scores"]
+            leak = r["scores"].get("national_id_leakage")
             if leak is not None:
                 assert "leak_rate_ci_low" in leak and "leak_rate_ci_high" in leak
 

@@ -26,7 +26,7 @@ every downstream dataset, model label map, and leaderboard that references them.
 - **Crosswalk source scheme keys** (`openai`, `ai4privacy`, `hipaa`, `mapa`, `openmed`,
   `azure`, `tabularisai`). Datasets and adapters key off these.
 - **Metric keys** in `src/europriv_bench/metrics.py` (e.g. `entity_f1`, `entity_f2`,
-  `cnp_leakage`) and **eval-spec names** under `evaluations/`.
+  `national_id_leakage`) and **eval-spec names** under `evaluations/`.
 
 ## Version-comparability rules
 

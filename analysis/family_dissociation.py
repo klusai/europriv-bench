@@ -136,20 +136,24 @@ def _score_family(rows: list[dict], adapters: list[str]) -> dict[str, dict]:
         languages=["ro"],
         domain="legal",
         dataset=DatasetRef(hf_id="klusai/europriv-bench", config=CONFIG, split="test"),
-        metrics=["entity_f1", "cnp_leakage"],
+        metrics=["entity_f1", "national_id_leakage"],
     )
     out: dict[str, dict] = {}
     for name in adapters:
         model = build(name)
         res = run_spec(spec, model, rows=rows)
-        cnp = res["scores"]["cnp_leakage"]
+        # RES-82: unified national_id_leakage key (rows default country=RO → CNP). Tolerate the
+        # legacy cnp_leakage key / cnp_* inner fields so this resolves on older boards too.
+        leak = res["scores"].get("national_id_leakage") or res["scores"]["cnp_leakage"]
+        missed = leak.get("decode_bearing_missed", leak.get("cnp_missed"))
+        total = leak.get("decode_bearing_total", leak.get("cnp_total"))
         out[name] = {
             "adapter": name,
             "model_id": res["model_id"],
             "f1": res["scores"]["entity_f1"]["f1"],
-            "leak_rate": cnp["leak_rate"],
-            "missed": int(cnp["cnp_missed"]),
-            "total": int(cnp["cnp_total"]),
+            "leak_rate": leak["leak_rate"],
+            "missed": int(missed),
+            "total": int(total),
         }
     return out
 

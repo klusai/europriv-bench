@@ -287,15 +287,24 @@ def load_rows(config: str, hf_id: str = HF_ID) -> list[dict]:
 
 
 def _leak_entry(rows: list[dict], config: str) -> dict | None:
-    """Pull the committed cnp_leakage subject counts for a config from a model's leaderboard rows."""
+    """Pull the committed national-ID leak subject counts for a config from a model's leaderboard rows.
+
+    RES-82: the RO headline is now the unified ``national_id_leakage`` key; tolerate the legacy
+    ``cnp_leakage`` key (and its ``cnp_*`` inner fields) so older boards still resolve.
+    """
     for r in rows:
-        if r["dataset"]["config"] == config and "cnp_leakage" in r["scores"]:
-            sc = r["scores"]["cnp_leakage"]
-            return {
-                "detected": int(round(sc["cnp_detected"])),
-                "total": int(round(sc["cnp_total"])),
-                "leak_rate": sc["leak_rate"],
-            }
+        if r["dataset"]["config"] != config:
+            continue
+        sc = r["scores"].get("national_id_leakage") or r["scores"].get("cnp_leakage")
+        if sc is None:
+            continue
+        detected = sc.get("decode_bearing_detected", sc.get("cnp_detected"))
+        total = sc.get("decode_bearing_total", sc.get("cnp_total"))
+        return {
+            "detected": int(round(detected)),
+            "total": int(round(total)),
+            "leak_rate": sc["leak_rate"],
+        }
     return None
 
 

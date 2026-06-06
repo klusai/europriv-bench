@@ -97,15 +97,20 @@
             "recall": 0.5637699680511182,
             "f2": 0.5927682674477978
           },
-          "cnp_leakage": {
-            "cnp_total": 1123.0,
-            "cnp_detected": 802.0,
-            "cnp_missed": 321.0,
+          "national_id_leakage": {
+            "decode_bearing_total": 1123.0,
+            "decode_bearing_detected": 802.0,
+            "decode_bearing_missed": 321.0,
             "leak_rate": 0.2858414959928762,
             "leak_rate_ci_low": 0.26018141149023505,
             "leak_rate_ci_high": 0.3129617286543314,
             "detection_rate": 0.7141585040071238,
-            "leaked_quasi_identifiers": 963.0
+            "leaked_quasi_identifiers": 963.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1123.0,
+            "ro_detected": 802.0
           }
         },
         "contamination": "clean_held_out",
@@ -151,15 +156,20 @@
             "recall": 0.7734278668310728,
             "f2": 0.7789264536959424
           },
-          "cnp_leakage": {
-            "cnp_total": 1017.0,
-            "cnp_detected": 935.0,
-            "cnp_missed": 82.0,
+          "national_id_leakage": {
+            "decode_bearing_total": 1017.0,
+            "decode_bearing_detected": 935.0,
+            "decode_bearing_missed": 82.0,
             "leak_rate": 0.08062930186823992,
             "leak_rate_ci_low": 0.06543134331653028,
             "leak_rate_ci_high": 0.09898345813903131,
             "detection_rate": 0.9193706981317601,
-            "leaked_quasi_identifiers": 246.0
+            "leaked_quasi_identifiers": 246.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1017.0,
+            "ro_detected": 935.0
           }
         },
         "contamination": "clean_held_out",
@@ -652,15 +662,20 @@
             "recall": 0.7817252396166134,
             "f2": 0.8088060293534312
           },
-          "cnp_leakage": {
-            "cnp_total": 1123.0,
-            "cnp_detected": 784.0,
-            "cnp_missed": 339.0,
+          "national_id_leakage": {
+            "decode_bearing_total": 1123.0,
+            "decode_bearing_detected": 784.0,
+            "decode_bearing_missed": 339.0,
             "leak_rate": 0.3018699910952805,
             "leak_rate_ci_low": 0.27573326532199466,
             "leak_rate_ci_high": 0.32935758158929856,
             "detection_rate": 0.6981300089047195,
-            "leaked_quasi_identifiers": 1017.0
+            "leaked_quasi_identifiers": 1017.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1123.0,
+            "ro_detected": 784.0
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -706,15 +721,20 @@
             "recall": 0.8042540073982737,
             "f2": 0.8076649227625916
           },
-          "cnp_leakage": {
-            "cnp_total": 1017.0,
-            "cnp_detected": 1017.0,
-            "cnp_missed": 0.0,
+          "national_id_leakage": {
+            "decode_bearing_total": 1017.0,
+            "decode_bearing_detected": 1017.0,
+            "decode_bearing_missed": 0.0,
             "leak_rate": 0.0,
             "leak_rate_ci_low": 0.0,
             "leak_rate_ci_high": 0.0037630165068067048,
             "detection_rate": 1.0,
-            "leaked_quasi_identifiers": 0.0
+            "leaked_quasi_identifiers": 0.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1017.0,
+            "ro_detected": 1017.0
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -1207,15 +1227,20 @@
             "recall": 0.8053035143769968,
             "f2": 0.7783281045428719
           },
-          "cnp_leakage": {
-            "cnp_total": 1123.0,
-            "cnp_detected": 1123.0,
-            "cnp_missed": 0.0,
+          "national_id_leakage": {
+            "decode_bearing_total": 1123.0,
+            "decode_bearing_detected": 1123.0,
+            "decode_bearing_missed": 0.0,
             "leak_rate": 0.0,
             "leak_rate_ci_low": 0.0,
             "leak_rate_ci_high": 0.003409036137937588,
             "detection_rate": 1.0,
-            "leaked_quasi_identifiers": 0.0
+            "leaked_quasi_identifiers": 0.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1123.0,
+            "ro_detected": 1123.0
           }
         },
         "contamination": "clean_held_out",
@@ -1261,15 +1286,20 @@
             "recall": 1.0,
             "f2": 1.0
           },
-          "cnp_leakage": {
-            "cnp_total": 1017.0,
-            "cnp_detected": 1017.0,
-            "cnp_missed": 0.0,
+          "national_id_leakage": {
+            "decode_bearing_total": 1017.0,
+            "decode_bearing_detected": 1017.0,
+            "decode_bearing_missed": 0.0,
             "leak_rate": 0.0,
             "leak_rate_ci_low": 0.0,
             "leak_rate_ci_high": 0.0037630165068067048,
             "detection_rate": 1.0,
-            "leaked_quasi_identifiers": 0.0
+            "leaked_quasi_identifiers": 0.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1017.0,
+            "ro_detected": 1017.0
           }
         },
         "contamination": "in_distribution",
@@ -1762,15 +1792,20 @@
             "recall": 0.5253035143769968,
             "f2": 0.5445524879444651
           },
-          "cnp_leakage": {
-            "cnp_total": 1123.0,
-            "cnp_detected": 827.0,
-            "cnp_missed": 296.0,
+          "national_id_leakage": {
+            "decode_bearing_total": 1123.0,
+            "decode_bearing_detected": 827.0,
+            "decode_bearing_missed": 296.0,
             "leak_rate": 0.26357969723953695,
             "leak_rate_ci_low": 0.2386492673312092,
             "leak_rate_ci_high": 0.29012205785956985,
             "detection_rate": 0.736420302760463,
-            "leaked_quasi_identifiers": 888.0
+            "leaked_quasi_identifiers": 888.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1123.0,
+            "ro_detected": 827.0
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -1816,15 +1851,20 @@
             "recall": 0.7644882860665845,
             "f2": 0.7547858903734364
           },
-          "cnp_leakage": {
-            "cnp_total": 1017.0,
-            "cnp_detected": 998.0,
-            "cnp_missed": 19.0,
+          "national_id_leakage": {
+            "decode_bearing_total": 1017.0,
+            "decode_bearing_detected": 998.0,
+            "decode_bearing_missed": 19.0,
             "leak_rate": 0.018682399213372666,
             "leak_rate_ci_low": 0.011992474144830024,
             "leak_rate_ci_high": 0.02899473643546866,
             "detection_rate": 0.9813176007866273,
-            "leaked_quasi_identifiers": 57.0
+            "leaked_quasi_identifiers": 57.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1017.0,
+            "ro_detected": 998.0
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -2317,15 +2357,20 @@
             "recall": 0.47252396166134186,
             "f2": 0.47243943575590314
           },
-          "cnp_leakage": {
-            "cnp_total": 1123.0,
-            "cnp_detected": 1123.0,
-            "cnp_missed": 0.0,
+          "national_id_leakage": {
+            "decode_bearing_total": 1123.0,
+            "decode_bearing_detected": 1123.0,
+            "decode_bearing_missed": 0.0,
             "leak_rate": 0.0,
             "leak_rate_ci_low": 0.0,
             "leak_rate_ci_high": 0.003409036137937588,
             "detection_rate": 1.0,
-            "leaked_quasi_identifiers": 0.0
+            "leaked_quasi_identifiers": 0.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1123.0,
+            "ro_detected": 1123.0
           }
         },
         "contamination": "clean_held_out",
@@ -2371,15 +2416,20 @@
             "recall": 0.5593403205918619,
             "f2": 0.5568342232860738
           },
-          "cnp_leakage": {
-            "cnp_total": 1017.0,
-            "cnp_detected": 1017.0,
-            "cnp_missed": 0.0,
+          "national_id_leakage": {
+            "decode_bearing_total": 1017.0,
+            "decode_bearing_detected": 1017.0,
+            "decode_bearing_missed": 0.0,
             "leak_rate": 0.0,
             "leak_rate_ci_low": 0.0,
             "leak_rate_ci_high": 0.0037630165068067048,
             "detection_rate": 1.0,
-            "leaked_quasi_identifiers": 0.0
+            "leaked_quasi_identifiers": 0.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1017.0,
+            "ro_detected": 1017.0
           }
         },
         "contamination": "clean_held_out",
@@ -2872,15 +2922,20 @@
             "recall": 0.34159744408945686,
             "f2": 0.3499790510107887
           },
-          "cnp_leakage": {
-            "cnp_total": 1123.0,
-            "cnp_detected": 1107.0,
-            "cnp_missed": 16.0,
+          "national_id_leakage": {
+            "decode_bearing_total": 1123.0,
+            "decode_bearing_detected": 1107.0,
+            "decode_bearing_missed": 16.0,
             "leak_rate": 0.014247551202137132,
             "leak_rate_ci_low": 0.00878868543080416,
             "leak_rate_ci_high": 0.02301831227755729,
             "detection_rate": 0.9857524487978628,
-            "leaked_quasi_identifiers": 48.0
+            "leaked_quasi_identifiers": 48.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1123.0,
+            "ro_detected": 1107.0
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -2926,15 +2981,20 @@
             "recall": 0.5915536374845869,
             "f2": 0.5850431389286911
           },
-          "cnp_leakage": {
-            "cnp_total": 1017.0,
-            "cnp_detected": 1016.0,
-            "cnp_missed": 1.0,
+          "national_id_leakage": {
+            "decode_bearing_total": 1017.0,
+            "decode_bearing_detected": 1016.0,
+            "decode_bearing_missed": 1.0,
             "leak_rate": 0.0009832841691248771,
             "leak_rate_ci_low": 0.00017359538675441747,
             "leak_rate_ci_high": 0.005548589229183444,
             "detection_rate": 0.9990167158308751,
-            "leaked_quasi_identifiers": 3.0
+            "leaked_quasi_identifiers": 3.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1017.0,
+            "ro_detected": 1016.0
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -3427,15 +3487,20 @@
             "recall": 0.14345047923322685,
             "f2": 0.14318697859530066
           },
-          "cnp_leakage": {
-            "cnp_total": 1123.0,
-            "cnp_detected": 123.0,
-            "cnp_missed": 1000.0,
+          "national_id_leakage": {
+            "decode_bearing_total": 1123.0,
+            "decode_bearing_detected": 123.0,
+            "decode_bearing_missed": 1000.0,
             "leak_rate": 0.8904719501335708,
             "leak_rate_ci_low": 0.8708580149669146,
             "leak_rate_ci_high": 0.9074236193225146,
             "detection_rate": 0.10952804986642921,
-            "leaked_quasi_identifiers": 3000.0
+            "leaked_quasi_identifiers": 3000.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1123.0,
+            "ro_detected": 123.0
           }
         },
         "contamination": "clean_held_out",
@@ -3481,15 +3546,20 @@
             "recall": 0.1345561035758323,
             "f2": 0.15125788342920507
           },
-          "cnp_leakage": {
-            "cnp_total": 1017.0,
-            "cnp_detected": 92.0,
-            "cnp_missed": 925.0,
+          "national_id_leakage": {
+            "decode_bearing_total": 1017.0,
+            "decode_bearing_detected": 92.0,
+            "decode_bearing_missed": 925.0,
             "leak_rate": 0.9095378564405113,
             "leak_rate_ci_low": 0.8903334845530128,
             "leak_rate_ci_high": 0.9256600329001142,
             "detection_rate": 0.09046214355948869,
-            "leaked_quasi_identifiers": 2775.0
+            "leaked_quasi_identifiers": 2775.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1017.0,
+            "ro_detected": 92.0
           }
         },
         "contamination": "clean_held_out",
@@ -3982,15 +4052,20 @@
             "recall": 0.6373801916932907,
             "f2": 0.6770147551887498
           },
-          "cnp_leakage": {
-            "cnp_total": 1123.0,
-            "cnp_detected": 726.0,
-            "cnp_missed": 397.0,
+          "national_id_leakage": {
+            "decode_bearing_total": 1123.0,
+            "decode_bearing_detected": 726.0,
+            "decode_bearing_missed": 397.0,
             "leak_rate": 0.3535173642030276,
             "leak_rate_ci_low": 0.3260997060954522,
             "leak_rate_ci_high": 0.3819337515086276,
             "detection_rate": 0.6464826357969724,
-            "leaked_quasi_identifiers": 1191.0
+            "leaked_quasi_identifiers": 1191.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1123.0,
+            "ro_detected": 726.0
           }
         },
         "europriv_bench_version": "0.2.0",
@@ -4036,15 +4111,20 @@
             "recall": 0.8597410604192355,
             "f2": 0.86625667784818
           },
-          "cnp_leakage": {
-            "cnp_total": 1017.0,
-            "cnp_detected": 1017.0,
-            "cnp_missed": 0.0,
+          "national_id_leakage": {
+            "decode_bearing_total": 1017.0,
+            "decode_bearing_detected": 1017.0,
+            "decode_bearing_missed": 0.0,
             "leak_rate": 0.0,
             "leak_rate_ci_low": 0.0,
             "leak_rate_ci_high": 0.0037630165068067048,
             "detection_rate": 1.0,
-            "leaked_quasi_identifiers": 0.0
+            "leaked_quasi_identifiers": 0.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1017.0,
+            "ro_detected": 1017.0
           }
         },
         "europriv_bench_version": "0.2.0",
