@@ -417,20 +417,56 @@ def name_in_context_leakage(rows: Sequence[dict], pred_tags: Tags) -> dict[str, 
 # This is an EXPLORATORY diagnostic, NEVER a headline number, and labelled "sample distinctiveness,
 # not population re-identification" (design-doc hard rule). It needs a residual QI TUPLE per subject
 # — binned quasi-identifier VALUES per the frozen v1 QI schema (DOB/age band, sex, locality/NUTS,
-# nationality, profession/ISCO, rare-condition flag; see the design doc's schema.py). The current
-# gold carries only entity-type SPANS ``{start, end, label}`` (e.g. DATE/ADDRESS/HEALTH_CONDITION),
-# NOT binned QI values typed to that schema, so an equivalence-class key cannot be formed without
-# fabricating QIs. Per the design doc we SKIP-AND-REPORT cleanly rather than invent QIs.
+# nationality, profession/ISCO, rare-condition flag; see ``qi_schema.py``). Gold rows carry only
+# entity-type SPANS ``{start, end, label}``, so the tuple is produced ADDITIVELY at analysis time by
+# ``qi_enrich.residual_qi_rows``: the CNP deterministically decodes SEX + DOB-band + county→NUTS-2,
+# and a surviving HEALTH_CONDITION span sets the rare-condition flag — all on the POST-DETECTION
+# RESIDUAL. Absent fields (nationality, profession/ISCO in this gold) are OMITTED, never fabricated.
+# When no QI survives (unsupported corpus, or everything redacted) the diagnostic SKIP-AND-REPORTS
+# cleanly rather than invent QIs.
 
 
 _KANON_UNAVAILABLE_REASON = (
-    "QI diagnostic unavailable: gold lacks QI tagging. The k-anonymity-violation diagnostic needs a "
-    "residual quasi-identifier TUPLE per subject (binned QI values typed to the frozen v1 QI schema: "
-    "DOB/age band, sex, locality/NUTS, nationality, profession/ISCO, rare-condition flag). The "
-    "current gold carries only entity-type spans {start,end,label}, not binned QI values, so no "
-    "equivalence-class key can be formed without fabricating QIs. Follow-up: tag QI values in gold "
-    "(KLU-122 / the reference-population work) before enabling this diagnostic."
+    "QI diagnostic unavailable: no residual QI tuple could be derived. The k-anonymity-violation "
+    "diagnostic needs a residual quasi-identifier TUPLE per subject (binned QI values typed to the "
+    "frozen v1 QI schema: DOB/age band, sex, locality/NUTS, nationality, profession/ISCO, "
+    "rare-condition flag). Gold rows carry neither a precomputed ``qi_tuple`` nor (for a supported "
+    "corpus + prediction tags) any decode-bearing QI that survives the post-detection residual, so "
+    "no equivalence-class key can be formed without fabricating QIs. This is an honest skip, not a "
+    "failure (design-doc: a partial/skipped result is acceptable; forcing it is not)."
 )
+
+
+def _kanon_distribution(qi_rows: Sequence[dict]) -> dict[str, object]:
+    """Within-corpus equivalence-class-size distribution over a set of residual QI-tuple rows.
+
+    Each row supplies a ``qi_tuple`` (or ``quasi_identifiers``) binned-value mapping; subjects are
+    grouped into equivalence classes by their full tuple. Emits the **size histogram** (never a
+    single scalar headline) plus the k=1 / k<5 violation RATES — labelled as sample distinctiveness.
+    """
+    from collections import Counter
+
+    classes: Counter[tuple] = Counter()
+    for row in qi_rows:
+        qi = row.get("qi_tuple") or row.get("quasi_identifiers") or {}
+        classes[tuple(sorted(qi.items()))] += 1
+    sizes = sorted(classes.values())
+    n = sum(sizes)
+    size_hist: dict[int, int] = {}
+    for s in sizes:
+        size_hist[s] = size_hist.get(s, 0) + 1
+    k1 = sum(c for c in sizes if c == 1)
+    klt5 = sum(c for c in sizes if c < 5)
+    return {
+        "available": True,
+        "label": "sample distinctiveness, not population re-identification",
+        # The required distribution — emitted instead of a single headline scalar.
+        "equivalence_class_size_histogram": {int(k): int(v) for k, v in sorted(size_hist.items())},
+        "n_subjects": int(n),
+        "n_equivalence_classes": int(len(classes)),
+        "k1_violation_rate": (k1 / n) if n else 0.0,      # fraction of subjects in a unique (k=1) class
+        "klt5_violation_rate": (klt5 / n) if n else 0.0,  # fraction of subjects in a k<5 class
+    }
 
 
 def _gold_has_qi_tuples(rows: Sequence[dict]) -> bool:
@@ -454,42 +490,38 @@ def k_anonymity_violation(rows: Sequence[dict], pred_tags: Tags | None = None) -
     """k-anonymity-violation diagnostic over the residual QI tuple — EXPLORATORY, NEVER a headline.
 
     LABEL (hard rule): this measures **"sample distinctiveness, not population re-identification."**
-    When gold carries binned QI tuples it would report the **within-corpus equivalence-class-size
-    distribution** (a histogram, never a single scalar) plus the k=1 and k<5 violation rates over the
-    POST-DETECTION RESIDUAL QI tuple. The current gold lacks QI tagging (see ``_gold_has_qi_tuples``),
-    so this **skip-and-reports** cleanly with ``available=False`` and a reason, rather than fabricating
-    QIs. ``pred_tags`` is accepted for signature parity with the residual computation (unused on skip).
-    """
-    if not _gold_has_qi_tuples(rows):
-        return {
-            "available": False,
-            "reason": _KANON_UNAVAILABLE_REASON,
-            "label": "sample distinctiveness, not population re-identification",
-        }
-    # Gold DOES carry QI tuples → build the within-corpus equivalence-class-size distribution over the
-    # residual QI tuple. (Reached only once QI tagging lands; kept minimal + dependency-free.)
-    from collections import Counter
+    Reports the **within-corpus equivalence-class-size distribution** (a histogram, never a single
+    scalar) plus the k=1 and k<5 violation rates over the POST-DETECTION RESIDUAL QI tuple.
 
-    classes: Counter[tuple] = Counter()
-    for row in rows:
-        qi = row.get("qi_tuple") or row.get("quasi_identifiers") or {}
-        classes[tuple(sorted(qi.items()))] += 1
-    sizes = sorted(classes.values())
-    n = sum(sizes)
-    size_hist: dict[int, int] = {}
-    for s in sizes:
-        size_hist[s] = size_hist.get(s, 0) + 1
-    k1 = sum(c for c in sizes if c == 1)
-    klt5 = sum(c for c in sizes if c < 5)
+    Two ways the residual QI tuples are obtained, in order:
+      1. **Pre-tagged gold** — rows already carrying a per-subject ``qi_tuple`` / ``quasi_identifiers``
+         mapping are used as-is.
+      2. **Additive residual enrichment** — when ``pred_tags`` are supplied, a deterministic,
+         read-only pass (``qi_enrich.residual_qi_rows``) DERIVES per-subject residual QI tuples from
+         data already in gold (the CNP decodes SEX + DOB-band + county->NUTS-2; a surviving
+         HEALTH_CONDITION span sets the rare-condition flag). No documents/spans/RNG are touched, so
+         this is pure additive metadata and cannot move any headline number.
+
+    If neither yields a tuple (unsupported corpus, or nothing survives the residual), this
+    **skip-and-reports** cleanly with ``available=False`` — an honest skip, never fabricated QIs.
+    """
+    if _gold_has_qi_tuples(rows):
+        # Pre-tagged gold: rows already carry binned QI tuples → use them directly.
+        return _kanon_distribution(list(rows))
+
+    if pred_tags is not None:
+        # Additive residual enrichment from gold spans + the model's redaction decision.
+        from .qi_enrich import residual_qi_rows
+
+        country = str(rows[0].get("country") or _DEFAULT_COUNTRY).upper() if rows else _DEFAULT_COUNTRY
+        qi_rows = residual_qi_rows(rows, pred_tags, country=country)
+        if qi_rows:
+            return _kanon_distribution(qi_rows)
+
     return {
-        "available": True,
+        "available": False,
+        "reason": _KANON_UNAVAILABLE_REASON,
         "label": "sample distinctiveness, not population re-identification",
-        # The required distribution — emitted instead of a single headline scalar.
-        "equivalence_class_size_histogram": {int(k): int(v) for k, v in sorted(size_hist.items())},
-        "n_subjects": int(n),
-        "n_equivalence_classes": int(len(classes)),
-        "k1_violation_rate": (k1 / n) if n else 0.0,      # fraction of subjects in a unique (k=1) class
-        "klt5_violation_rate": (klt5 / n) if n else 0.0,  # fraction of subjects in a k<5 class
     }
 
 
