@@ -164,8 +164,17 @@ def write_leaderboard(results: list[dict], out: str | Path) -> Path:
     return out
 
 
+def _leak_scores(scores: dict) -> dict | None:
+    """Read the unified national-ID leak metric, tolerating the legacy ``cnp_leakage`` key.
+
+    The board now emits a single ``national_id_leakage`` key (RES-82). Old rows / external dumps may
+    still carry ``cnp_leakage`` (the RO-only alias) — read either so back-compat consumers resolve.
+    """
+    return scores.get("national_id_leakage") or scores.get("cnp_leakage")
+
+
 def format_leaderboard(lb: dict) -> str:
-    """Render a leaderboard dict as plain-text tables: detection F1/F2, then CNP leakage."""
+    """Render a leaderboard dict as plain-text tables: detection F1/F2, then national-ID leakage."""
     by_spec: dict[str, dict[str, dict]] = {}
     models: set[str] = set()
     for key, rows in lb.get("entries", {}).items():
@@ -188,14 +197,16 @@ def format_leaderboard(lb: dict) -> str:
         out.append(line)
 
     leak = [
-        (spec, m, by_spec[spec][m]["scores"]["cnp_leakage"])
+        (spec, m, s)
         for spec in sorted(by_spec) for m in cols
-        if m in by_spec[spec] and "cnp_leakage" in by_spec[spec][m]["scores"]
+        if m in by_spec[spec] and (s := _leak_scores(by_spec[spec][m]["scores"])) is not None
     ]
     if leak:
-        out += ["", "CNP re-identification leakage (leak_rate ↓ better):",
+        out += ["", "National-ID re-identification leakage (leak_rate ↓ better):",
                 "  " + f"{'spec':44}{'model':>14}{'leak_rate':>11}{'missed':>9}{'leaked_QI':>11}"]
         for spec, m, s in leak:
+            # The decode-bearing miss count: generalized key, falling back to the legacy cnp_* key.
+            missed = s.get("decode_bearing_missed", s.get("cnp_missed", 0.0))
             out.append("  " + f"{spec[:44]:44}{m[:14]:>14}{s['leak_rate']:>11.3f}"
-                       f"{int(s['cnp_missed']):>9}{int(s['leaked_quasi_identifiers']):>11}")
+                       f"{int(missed):>9}{int(s['leaked_quasi_identifiers']):>11}")
     return "\n".join(out)

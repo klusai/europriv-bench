@@ -10,13 +10,15 @@ dataset:
   split: test
   license: CC-BY-4.0
 
+# Headline uses the unified national_id_leakage metric (RES-82); rows default to country=RO, so it
+# dispatches to the CNP validator — same per-subject leak_rate/CIs/counts the cnp_leakage alias emit.
 metrics:
   - entity_f1
   - entity_f2
-  - cnp_leakage
+  - national_id_leakage
 
 description: >
   The CITABLE Romanian track: faithful real-structure documents (CNAS discharge letter,
   services contract, declarație, administrative letter) with synthetic PII (CNP-consistent
   DOB). Compare against ro-synthetic-v1 for the synthetic-context vs real-context gap (Paper 2);
-  headline is cnp_leakage (missed CNP = deterministic DOB+sex+county disclosure).
+  headline is national_id_leakage (CNP channel: missed CNP = deterministic DOB+sex+county disclosure).

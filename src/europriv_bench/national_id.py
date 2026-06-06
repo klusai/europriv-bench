@@ -666,6 +666,11 @@ def _parse_cz(value: str, country: str = "CZ") -> IDInfo:
     if len(s) == 10:
         # >=1954: the whole 10-digit number is divisible by 11, with the 1954-1985 "remainder 10 ->
         # check digit 0" historical exception.
+        # RES-80 nuance: the remainder-10->0 exception is applied YEAR-AGNOSTICALLY (not gated to the
+        # 1954-1985 issuance window) — intentionally, matching the python-stdnum reference (cz.rc),
+        # which also accepts it unconditionally. Year-scoping isn't cleanly determinable here anyway
+        # (the decoded year depends on the checksum passing first), and a real 1954-1985 number that
+        # relies on this branch must still validate. Affects no committed number.
         n10 = int(s)
         if n10 % 11 != 0 and not (int(s[:9]) % 11 == 10 and s[9] == "0"):
             return IDInfo(valid=False, country=country, decode_bearing=True)
