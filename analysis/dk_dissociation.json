@@ -39,6 +39,34 @@
         "dissociation_holds": true
       },
       {
+        "detector": "openmed",
+        "detector_leak_rate": 0.3053097345132743,
+        "detector_missed": 69,
+        "detector_total": 226,
+        "protector": "kp-model",
+        "protector_leak_rate": 0.0,
+        "protector_missed": 0,
+        "protector_total": 226,
+        "gap": 0.3053097345132743,
+        "gap_ci_low": 0.24651078018682335,
+        "gap_ci_high": 0.36819118069244494,
+        "dissociation_holds": true
+      },
+      {
+        "detector": "presidio",
+        "detector_leak_rate": 0.0,
+        "detector_missed": 0,
+        "detector_total": 226,
+        "protector": "kp-model",
+        "protector_leak_rate": 0.0,
+        "protector_missed": 0,
+        "protector_total": 226,
+        "gap": 0.0,
+        "gap_ci_low": -0.016713448837121024,
+        "gap_ci_high": 0.016713448837121024,
+        "dissociation_holds": false
+      },
+      {
         "detector": "privacy-filter",
         "detector_leak_rate": 0.04424778761061947,
         "detector_missed": 10,
@@ -50,6 +78,20 @@
         "gap": 0.04424778761061947,
         "gap_ci_low": 0.018154166432002905,
         "gap_ci_high": 0.07952057565899845,
+        "dissociation_holds": true
+      },
+      {
+        "detector": "spacy",
+        "detector_leak_rate": 0.36283185840707965,
+        "detector_missed": 82,
+        "detector_total": 226,
+        "protector": "kp-model",
+        "protector_leak_rate": 0.0,
+        "protector_missed": 0,
+        "protector_total": 226,
+        "gap": 0.36283185840707965,
+        "gap_ci_low": 0.3006342467620804,
+        "gap_ci_high": 0.42732692563554525,
         "dissociation_holds": true
       },
       {
@@ -79,24 +121,6 @@
         "total": 226,
         "leaked_qi": 0
       },
-      "privacy-filter": {
-        "adapter": "privacy-filter",
-        "model_id": "openai/privacy-filter",
-        "f1": 0.5650000000000002,
-        "leak_rate": 0.04424778761061947,
-        "missed": 10,
-        "total": 226,
-        "leaked_qi": 20
-      },
-      "tabularisai": {
-        "adapter": "tabularisai",
-        "model_id": "tabularisai/eu-pii-safeguard",
-        "f1": 0.7240556660039761,
-        "leak_rate": 0.3495575221238938,
-        "missed": 79,
-        "total": 226,
-        "leaked_qi": 158
-      },
       "gliner": {
         "adapter": "gliner",
         "model_id": "urchade/gliner_multi_pii-v1",
@@ -114,6 +138,51 @@
         "missed": 188,
         "total": 226,
         "leaked_qi": 376
+      },
+      "presidio": {
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "f1": 0.4626576139670223,
+        "leak_rate": 0.0,
+        "missed": 0,
+        "total": 226,
+        "leaked_qi": 0
+      },
+      "spacy": {
+        "adapter": "spacy",
+        "model_id": "spacy/en_core_web_lg@3.8.0",
+        "f1": 0.3028503562945368,
+        "leak_rate": 0.36283185840707965,
+        "missed": 82,
+        "total": 226,
+        "leaked_qi": 164
+      },
+      "tabularisai": {
+        "adapter": "tabularisai",
+        "model_id": "tabularisai/eu-pii-safeguard",
+        "f1": 0.7240556660039761,
+        "leak_rate": 0.3495575221238938,
+        "missed": 79,
+        "total": 226,
+        "leaked_qi": 158
+      },
+      "privacy-filter": {
+        "adapter": "privacy-filter",
+        "model_id": "openai/privacy-filter",
+        "f1": 0.5650000000000002,
+        "leak_rate": 0.04424778761061947,
+        "missed": 10,
+        "total": 226,
+        "leaked_qi": 20
+      },
+      "openmed": {
+        "adapter": "openmed",
+        "model_id": "OpenMed/privacy-filter-multilingual",
+        "f1": 0.6216447255941185,
+        "leak_rate": 0.3053097345132743,
+        "missed": 69,
+        "total": 226,
+        "leaked_qi": 138
       }
     }
   }

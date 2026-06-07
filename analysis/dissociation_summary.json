@@ -18,6 +18,17 @@
   "n_languages": 11,
   "n_languages_artifact_present": 11,
   "n_languages_holds": 11,
+  "uniform_model_basis": [
+    "gliner",
+    "gliner2",
+    "kp-model",
+    "openmed",
+    "presidio",
+    "privacy-filter",
+    "spacy",
+    "tabularisai"
+  ],
+  "coverage_is_uniform": true,
   "languages": {
     "RO": {
       "config": "ro-realskeleton-v1",
@@ -113,13 +124,16 @@
       "config_status": "dev",
       "protector_leak_rate": 0.0,
       "protector_leak_wilson_high": 0.01628824497277304,
-      "n_detectors_scored": 4,
-      "n_detectors_gap_ci_excludes_0": 3,
+      "n_detectors_scored": 7,
+      "n_detectors_gap_ci_excludes_0": 5,
       "models_scored": [
         "gliner",
         "gliner2",
         "kp-model",
+        "openmed",
+        "presidio",
         "privacy-filter",
+        "spacy",
         "tabularisai"
       ],
       "holds": true,
@@ -134,13 +148,16 @@
       "config_status": "dev",
       "protector_leak_rate": 0.0,
       "protector_leak_wilson_high": 0.017085120727301326,
-      "n_detectors_scored": 4,
-      "n_detectors_gap_ci_excludes_0": 3,
+      "n_detectors_scored": 7,
+      "n_detectors_gap_ci_excludes_0": 5,
       "models_scored": [
         "gliner",
         "gliner2",
         "kp-model",
+        "openmed",
+        "presidio",
         "privacy-filter",
+        "spacy",
         "tabularisai"
       ],
       "holds": true,
@@ -155,13 +172,16 @@
       "config_status": "dev",
       "protector_leak_rate": 0.0,
       "protector_leak_wilson_high": 0.016713448837121024,
-      "n_detectors_scored": 4,
-      "n_detectors_gap_ci_excludes_0": 4,
+      "n_detectors_scored": 7,
+      "n_detectors_gap_ci_excludes_0": 6,
       "models_scored": [
         "gliner",
         "gliner2",
         "kp-model",
+        "openmed",
+        "presidio",
         "privacy-filter",
+        "spacy",
         "tabularisai"
       ],
       "holds": true,
@@ -176,13 +196,16 @@
       "config_status": "dev",
       "protector_leak_rate": 0.0,
       "protector_leak_wilson_high": 0.01656926884405061,
-      "n_detectors_scored": 4,
-      "n_detectors_gap_ci_excludes_0": 4,
+      "n_detectors_scored": 7,
+      "n_detectors_gap_ci_excludes_0": 7,
       "models_scored": [
         "gliner",
         "gliner2",
         "kp-model",
+        "openmed",
+        "presidio",
         "privacy-filter",
+        "spacy",
         "tabularisai"
       ],
       "holds": true,
@@ -197,14 +220,17 @@
       "config_status": "dev",
       "protector_leak_rate": 0.0,
       "protector_leak_wilson_high": 0.01649810767696531,
-      "n_detectors_scored": 4,
-      "n_detectors_gap_ci_excludes_0": 3,
+      "n_detectors_scored": 7,
+      "n_detectors_gap_ci_excludes_0": 6,
       "models_scored": [
         "gliner",
         "gliner2",
         "kp-model",
+        "openmed",
         "presidio",
-        "spacy"
+        "privacy-filter",
+        "spacy",
+        "tabularisai"
       ],
       "holds": true,
       "n_docs": 300,
@@ -218,14 +244,17 @@
       "config_status": "dev",
       "protector_leak_rate": 0.0,
       "protector_leak_wilson_high": 0.016641046548323494,
-      "n_detectors_scored": 4,
-      "n_detectors_gap_ci_excludes_0": 3,
+      "n_detectors_scored": 7,
+      "n_detectors_gap_ci_excludes_0": 5,
       "models_scored": [
         "gliner",
         "gliner2",
         "kp-model",
+        "openmed",
         "presidio",
-        "spacy"
+        "privacy-filter",
+        "spacy",
+        "tabularisai"
       ],
       "holds": true,
       "n_docs": 300,
@@ -239,14 +268,17 @@
       "config_status": "dev",
       "protector_leak_rate": 0.0,
       "protector_leak_wilson_high": 0.01716144761513288,
-      "n_detectors_scored": 4,
-      "n_detectors_gap_ci_excludes_0": 3,
+      "n_detectors_scored": 7,
+      "n_detectors_gap_ci_excludes_0": 6,
       "models_scored": [
         "gliner",
         "gliner2",
         "kp-model",
+        "openmed",
         "presidio",
-        "spacy"
+        "privacy-filter",
+        "spacy",
+        "tabularisai"
       ],
       "holds": true,
       "n_docs": 300,
@@ -260,14 +292,17 @@
       "config_status": "dev",
       "protector_leak_rate": 0.0,
       "protector_leak_wilson_high": 0.016016594756607827,
-      "n_detectors_scored": 4,
-      "n_detectors_gap_ci_excludes_0": 3,
+      "n_detectors_scored": 7,
+      "n_detectors_gap_ci_excludes_0": 5,
       "models_scored": [
         "gliner",
         "gliner2",
         "kp-model",
+        "openmed",
         "presidio",
-        "spacy"
+        "privacy-filter",
+        "spacy",
+        "tabularisai"
       ],
       "holds": true,
       "n_docs": 300,
@@ -361,10 +396,10 @@
   "caveats": [
     "All configs are config_status=dev — not yet citable/public.",
     "Single authored template family per language (RO has two; a 2nd independent family is required per language before citation — KLU-101 hardening).",
-    "Model coverage VARIES across languages (CPU-subset under the Mac hardware bound): RO/PL/IT/legal score all 8 board models; SE/CZ/DK/FI score 5; EE/LT/SI/SK score 5 (a different 5). A consistent full-model re-score is pending RES-53 before any public/citable use.",
+    "Model coverage is now UNIFORM across every language + legal: all score the same 8-model board basis (gliner, gliner2, kp-model, openmed, presidio, privacy-filter, spacy, tabularisai). The earlier state — where coverage VARIES (RO/PL/IT/legal scored all 8 board models but SE/CZ/DK/FI/EE/LT/SI/SK scored only a 5-of-8 CPU subset) — was the weak arm of the breadth claim (RES-56); the consistent full-model re-score that was thought to need GPU burst (RES-53) was instead run on the M3 Ultra (CPU+parallel) under RES-96, closing the gap.",
     "PL/PESEL was scored on the same pl-realskeleton-v1 track as the public board (RES-87, all 8 models, n=1500 docs → 1096 distinct subjects); its per-model leak rates reconcile exactly with the committed baselines/leaderboard.json rows.",
     "\"First *unified*\" discipline: this consolidates prior per-language measurements; it does not claim to be the first observation of the phenomenon.",
     "Re-identification is reserved for the deterministic national-ID channel. The name/QI (name-in-context) channel measures RESIDUAL DISTINCTIVENESS / sample distinctiveness, NOT population re-identification (k-anonymity diagnostic unavailable: gold lacks QI tagging — KLU-122).",
-    "Validation gates: native-speaker + IAA sign-off (RES-77) and the full-model re-score (RES-53) must clear before this feeds the Paper-3 breadth section or the public board."
+    "Validation gates: the full-model re-score (RES-53 GPU-burst gate) is now CLEARED — it ran on the M3 Ultra under RES-96, giving the uniform basis above. Native-speaker + IAA sign-off (RES-77) must still clear before this feeds the Paper-3 breadth section or is surfaced on the public board (the in-repo uniform numbers do NOT auto-publish)."
   ]
 }

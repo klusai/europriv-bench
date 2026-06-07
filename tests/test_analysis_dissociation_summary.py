@@ -96,6 +96,24 @@ def test_caveats_carry_the_required_disciplines():
         assert needle.lower() in blob, needle
 
 
+def test_coverage_is_uniform_full_model_basis_res96():
+    # RES-96: every decode-bearing language + legal scores the SAME board-model basis. The summary
+    # derives that basis from the committed artifacts (intersection of per-language models_scored).
+    summary = bds.build_summary()
+    assert summary["coverage_is_uniform"] is True
+    # kp-deid (the protector) plus the seven typed detectors — the full 8-model board.
+    assert "kp-model" in summary["uniform_model_basis"]
+    assert len(summary["uniform_model_basis"]) == 8
+    # Every language row (and legal) scores exactly that basis — no language is a subset.
+    basis = set(summary["uniform_model_basis"])
+    for cc in summary["language_order"]:
+        assert set(summary["languages"][cc]["models_scored"]) == basis, cc
+    assert set(summary["legal_domain"]["models_scored"]) == basis
+    # The caveat narrates the closed gap (RES-96 ran the re-score the RES-53 GPU gate had blocked).
+    blob = " ".join(summary["caveats"]).lower()
+    assert "uniform" in blob and "res-96" in blob
+
+
 def test_committed_summary_files_are_regenerable():
     summary = bds.build_summary()
     fresh_json = json.dumps(summary, indent=2, ensure_ascii=False) + "\n"
