@@ -10,9 +10,11 @@ from europriv_bench.leaderboard import (
     CONFIG_STATUS_VALUES,
     CONTAMINATION_VALUES,
     DEFAULT_CONFIG_STATUS,
+    REAL_EXTERNAL_GOLD,
     annotate_row,
     build_leaderboard,
     classify_contamination,
+    config_status_for,
     format_leaderboard,
 )
 from europriv_bench.metrics import entity_f1, entity_f2
@@ -148,6 +150,24 @@ def test_build_leaderboard_annotates_both_markers_defaulting_to_dev():
         assert r["config_status"] == "dev" == DEFAULT_CONFIG_STATUS
         assert r["contamination"] in CONTAMINATION_VALUES
         assert r["config_status"] in CONFIG_STATUS_VALUES
+
+
+def test_tab_echr_is_real_external_gold_and_clean_held_out():
+    """RES-89: the TAB ECHR config is REAL peer-reviewed external gold (distinct from synthetic
+    `dev`) and clean_held_out for every model (none trained on it)."""
+    assert config_status_for("tab-echr-legal-en-v1") == REAL_EXTERNAL_GOLD == "real-external-gold"
+    assert REAL_EXTERNAL_GOLD in CONFIG_STATUS_VALUES
+    # synthetic configs still default to dev
+    assert config_status_for("ro-realskeleton-v1") == DEFAULT_CONFIG_STATUS == "dev"
+    assert config_status_for("en") == "dev"
+    # clean_held_out for the whole board (no model trained on real ECHR)
+    for adapter in ("kp-model", "openmed", "tabularisai", "gliner", "gliner2",
+                    "presidio", "spacy", "privacy-filter"):
+        assert classify_contamination(adapter, "tab-echr-legal-en-v1") == "clean_held_out"
+    # annotate_row derives the real-gold status from the config
+    row = annotate_row({"adapter": "gliner", "dataset": {"config": "tab-echr-legal-en-v1"}})
+    assert row["config_status"] == "real-external-gold"
+    assert row["contamination"] == "clean_held_out"
 
 
 def test_annotate_row_preserves_existing_markers():

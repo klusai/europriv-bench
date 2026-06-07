@@ -68,11 +68,23 @@ per-`(model, config)` `config_status`:
 - **`citable-validated`** — promotable ONLY after native-speaker review and inter-annotator
   agreement (IAA) sign-off on the underlying gold data. A config cannot be marked
   `citable-validated` without recorded native-speaker/IAA validation.
+- **`real-external-gold`** (RES-89) — REAL, peer-reviewed, externally-annotated human gold: a
+  third value, a clear step ABOVE synthetic `dev`, on a separate basis from `citable-validated`.
+  Assigned to configs built from real-data corpora whose annotations are already external
+  peer-reviewed human gold — so they do NOT depend on the program's own KLU-27/RES-77
+  native-speaker/IAA gate (that gate validates *our* synthetic skeletons; it is not needed for an
+  externally peer-reviewed corpus). The first is **`tab-echr-legal-en-v1`** (the Text Anonymization
+  Benchmark, Pilán et al. 2022, *Computational Linguistics* 48(4)). Claim discipline still applies:
+  the KP gold uses one canonical annotator per document, keeps DIRECT+QUASI mentions remapped to
+  the KP taxonomy, and is a single-annotator detection gold (TAB's own metric micro-averages over
+  annotators). The point of the distinct value is that REAL data must never be conflated with the
+  synthetic `dev` skeletons on the board.
 
-This field is implemented in the schema-3 leaderboard (KLU-8). **Everything currently defaults to
-`dev`**: no config is `citable-validated` until the native-speaker / IAA sign-off lands — that
-gate is tracked in **KLU-27**. Until a row is explicitly promoted there, treat all configs as
-`dev` for citation purposes. The promotion is a curated, recorded change to the row's
+This field is implemented in the schema-3 leaderboard (KLU-8). **Synthetic configs default to
+`dev`**: no synthetic config is `citable-validated` until the native-speaker / IAA sign-off lands —
+that gate is tracked in **KLU-27**. The real-data `real-external-gold` configs are derived from the
+config (see `leaderboard.config_status_for`). Until a synthetic row is explicitly promoted, treat it
+as `dev` for citation purposes. The promotion is a curated, recorded change to the row's
 `config_status`; re-aggregating the leaderboard never silently flips it back (`annotate_row`
 preserves any value already present).
 
