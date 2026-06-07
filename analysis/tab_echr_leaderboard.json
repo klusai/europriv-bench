@@ -130,6 +130,49 @@
         "timestamp": null
       }
     ],
+    "kp-model::klusai/kp-deid-xlmr-560m": [
+      {
+        "spec": "PII Detection — TAB ECHR legal English (REAL gold)",
+        "task": "detection",
+        "languages": [
+          "en"
+        ],
+        "domain": "legal",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m",
+        "n": 127,
+        "limit": null,
+        "eval_labels": [
+          "ADDRESS",
+          "CASE_NUMBER",
+          "DATE",
+          "ORG_PARTY",
+          "PERSON"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.2764783180026281,
+            "recall": 0.21821198921385604,
+            "f1": 0.2439137491305356
+          },
+          "entity_f2": {
+            "precision": 0.2764783180026281,
+            "recall": 0.21821198921385604,
+            "f2": 0.2278141106154446
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "real-external-gold",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "tab-echr-legal-en-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      }
+    ],
     "presidio::presidio-analyzer+en_core_web_lg": [
       {
         "spec": "PII Detection — TAB ECHR legal English (REAL gold)",
