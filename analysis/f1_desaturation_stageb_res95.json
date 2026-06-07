@@ -1,0 +1,150 @@
+{
+  "issue": "RES-95 (F1 de-saturation confirmation — second half of acceptance)",
+  "config_status": "dev",
+  "question": "Does the diverse stage-B narrative data de-saturate detection entity-F1 vs the templated ro-synthetic baseline (which pins near 1.0)?",
+  "scoring_only": true,
+  "device": "cpu",
+  "n_per_set": 400,
+  "datasets": {
+    "templated_ro": {
+      "spec": "evaluations/pii-detection-ro-synthetic.yaml",
+      "config": "ro-synthetic-v1",
+      "held_out_n": 400,
+      "regime": "template-splice (saturating, RES-19/KLU-106)"
+    },
+    "stageb_ro": {
+      "path": "/Users/mihai/codespace/klusai-datasets/artifacts/europriv/ro_stageb_v1.jsonl",
+      "held_out_n": 400,
+      "slice": "tail",
+      "regime": "stage-B LLM-authored narrative (RES-95 v1; skeleton ratio 0.909)"
+    }
+  },
+  "bootstrap": {
+    "iters": 2000,
+    "seed": 12345,
+    "ci": "95% percentile, micro entity-F1, resampling documents"
+  },
+  "scoring_path": "europriv_bench harness: _rows_to_gold + entity_f1 + eval-label fairness mask",
+  "per_model": [
+    {
+      "model": "kp-deid",
+      "model_id": "/Users/mihai/codespace/klusai-models/runs/kp-deid-mdeberta-280m-v2-seed0",
+      "templated_ro": {
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_ci95_low": 1.0,
+        "f1_ci95_high": 1.0,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "seconds": 8.0
+      },
+      "stageb_ro": {
+        "f1": 0.9374,
+        "precision": 0.9645,
+        "recall": 0.9118,
+        "f1_ci95_low": 0.9226,
+        "f1_ci95_high": 0.9517,
+        "eval_labels": [
+          "ADDRESS",
+          "DATE",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "seconds": 21.2
+      },
+      "f1_drop_templated_minus_stageb": 0.0626,
+      "stageb_desaturates": true
+    },
+    {
+      "model": "gliner",
+      "model_id": "urchade/gliner_multi_pii-v1",
+      "templated_ro": {
+        "f1": 0.7953,
+        "precision": 0.8035,
+        "recall": 0.7873,
+        "f1_ci95_low": 0.7801,
+        "f1_ci95_high": 0.8101,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "seconds": 39.4
+      },
+      "stageb_ro": {
+        "f1": 0.8891,
+        "precision": 0.9578,
+        "recall": 0.8296,
+        "f1_ci95_low": 0.8813,
+        "f1_ci95_high": 0.897,
+        "eval_labels": [
+          "ADDRESS",
+          "DATE",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "seconds": 47.8
+      },
+      "f1_drop_templated_minus_stageb": -0.0938,
+      "stageb_desaturates": false
+    },
+    {
+      "model": "gliner2",
+      "model_id": "fastino/gliner2-base-v1",
+      "templated_ro": {
+        "f1": 0.7697,
+        "precision": 0.7818,
+        "recall": 0.7579,
+        "f1_ci95_low": 0.7521,
+        "f1_ci95_high": 0.7872,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "seconds": 35.9
+      },
+      "stageb_ro": {
+        "f1": 0.7133,
+        "precision": 0.8724,
+        "recall": 0.6033,
+        "f1_ci95_low": 0.6984,
+        "f1_ci95_high": 0.7286,
+        "eval_labels": [
+          "ADDRESS",
+          "DATE",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "seconds": 47.4
+      },
+      "f1_drop_templated_minus_stageb": 0.0564,
+      "stageb_desaturates": true
+    }
+  ],
+  "skipped_models": {},
+  "verdict": "CONFIRMED: stage-B de-saturates detection F1 (templated near 1.0; stage-B spreads below 1.0).",
+  "timestamp": "2026-06-07T18:54:19.892494+00:00"
+}
