@@ -4,7 +4,9 @@
   "config_status": "dev",
   "comparison": "relative-realism-and-diversity gap (ours vs Ai4Privacy) — NOT synthetic->real drift",
   "our_dataset": "klusai/ds-kp-general-{lang}-50k",
-  "ai4privacy_dataset": "ai4privacy/open-pii-masking-500k-ai4privacy",
+  "ai4privacy_dataset": "ai4privacy/pii-masking-openpii-1m",
+  "ai4privacy_license": "CC-BY-4.0",
+  "ai4privacy_source_note": "pii-masking-openpii-1m (CC-BY-4.0) — verified-clean open core (RES-93). The Llama-Community-licensed 500k tier is excluded by the license gate; not used.",
   "embed_model": "microsoft/mdeberta-v3-base",
   "embed_model_note": "offline multilingual substitute for multilingual-E5 (E5 not in offline cache); mean-pooled, L2-normalized, CPU-only.",
   "seed": 20260603,
@@ -13,120 +15,204 @@
   "ci_alpha": 0.05,
   "per_lang_sample": 1500,
   "scored_languages": [
+    "ro",
     "en",
+    "pl",
     "it",
     "de",
     "fr",
     "es",
     "nl"
   ],
-  "uncovered_languages": [
-    "ro",
-    "pl"
-  ],
+  "uncovered_languages": [],
   "honest_labels": {
     "comparison_kind": "relative-realism-and-diversity gap between TWO SYNTHETIC corpora",
     "NOT": "this is NOT a synthetic->real drift number; Ai4Privacy is more-realistic SYNTHETIC, not real. A real-data drift number still requires TAB / real corpora.",
     "ours": "ds-kp-general-{lang} — KlusAI template-splice synthetic (the saturating eval corpus)",
-    "reference": "Ai4Privacy open core — LLM-generated synthetic (CC-BY-4.0), de-saturating baseline"
+    "reference": "ai4privacy/pii-masking-openpii-1m — LLM-generated synthetic, verified-clean CC-BY-4.0 open core (RES-93); de-saturating baseline"
   },
   "ranked_most_templated": [
     {
-      "language": "de",
-      "templated_score": 1.3345222583960332,
+      "language": "pl",
+      "templated_score": 1.307507681109311,
       "components": {
-        "unique_ratio_deficit": 0.9933333333333333,
-        "top_skeleton_share_excess": 0.18533333333333335,
-        "ttr_deficit": 0.15585559172936658
+        "unique_ratio_deficit": 0.996,
+        "top_skeleton_share_excess": 0.1753333333333333,
+        "ttr_deficit": 0.13617434777597753
       },
       "our_unique_ratio": 0.004,
-      "ai4p_unique_ratio": 0.9973333333333333,
-      "centroid_distance": 0.033203125,
-      "mauve_style": 0.006407592052599154
+      "ai4p_unique_ratio": 1.0,
+      "centroid_distance": 0.0234375,
+      "mauve_style": 0.004850146720789447
+    },
+    {
+      "language": "de",
+      "templated_score": 1.2823574176449306,
+      "components": {
+        "unique_ratio_deficit": 0.996,
+        "top_skeleton_share_excess": 0.186,
+        "ttr_deficit": 0.10035741764493064
+      },
+      "our_unique_ratio": 0.004,
+      "ai4p_unique_ratio": 1.0,
+      "centroid_distance": 0.03662109375,
+      "mauve_style": 0.00444730399059235
+    },
+    {
+      "language": "ro",
+      "templated_score": 1.2602552259290458,
+      "components": {
+        "unique_ratio_deficit": 0.996,
+        "top_skeleton_share_excess": 0.17266666666666666,
+        "ttr_deficit": 0.09158855926237913
+      },
+      "our_unique_ratio": 0.004,
+      "ai4p_unique_ratio": 1.0,
+      "centroid_distance": 0.046875,
+      "mauve_style": 0.004562637951644053
     },
     {
       "language": "fr",
-      "templated_score": 1.3234370724204112,
+      "templated_score": 1.2597722827029965,
       "components": {
-        "unique_ratio_deficit": 0.9953333333333333,
-        "top_skeleton_share_excess": 0.17266666666666666,
-        "ttr_deficit": 0.15543707242041138
+        "unique_ratio_deficit": 0.996,
+        "top_skeleton_share_excess": 0.1733333333333333,
+        "ttr_deficit": 0.09043894936966311
       },
       "our_unique_ratio": 0.004,
-      "ai4p_unique_ratio": 0.9993333333333333,
-      "centroid_distance": 0.03759765625,
-      "mauve_style": 0.005129604772782778
-    },
-    {
-      "language": "es",
-      "templated_score": 1.3218460807393297,
-      "components": {
-        "unique_ratio_deficit": 0.992,
-        "top_skeleton_share_excess": 0.16999999999999998,
-        "ttr_deficit": 0.1598460807393297
-      },
-      "our_unique_ratio": 0.004,
-      "ai4p_unique_ratio": 0.996,
-      "centroid_distance": 0.0263671875,
-      "mauve_style": 0.0056590345987697225
-    },
-    {
-      "language": "en",
-      "templated_score": 1.3076986720094428,
-      "components": {
-        "unique_ratio_deficit": 0.988,
-        "top_skeleton_share_excess": 0.17533333333333334,
-        "ttr_deficit": 0.14436533867610948
-      },
-      "our_unique_ratio": 0.004,
-      "ai4p_unique_ratio": 0.992,
-      "centroid_distance": 0.0166015625,
-      "mauve_style": 0.005470548255023267
+      "ai4p_unique_ratio": 1.0,
+      "centroid_distance": 0.03955078125,
+      "mauve_style": 0.004296037408651814
     },
     {
       "language": "nl",
-      "templated_score": 1.3065886863334053,
+      "templated_score": 1.2478864429675671,
       "components": {
-        "unique_ratio_deficit": 0.9913333333333333,
-        "top_skeleton_share_excess": 0.16999999999999998,
-        "ttr_deficit": 0.14525535300007186
+        "unique_ratio_deficit": 0.996,
+        "top_skeleton_share_excess": 0.1713333333333333,
+        "ttr_deficit": 0.08055310963423377
       },
       "our_unique_ratio": 0.004,
-      "ai4p_unique_ratio": 0.9953333333333333,
-      "centroid_distance": 0.021484375,
-      "mauve_style": 0.005516642195803329
+      "ai4p_unique_ratio": 1.0,
+      "centroid_distance": 0.02587890625,
+      "mauve_style": 0.004144617463398624
+    },
+    {
+      "language": "es",
+      "templated_score": 1.2454887677588897,
+      "components": {
+        "unique_ratio_deficit": 0.996,
+        "top_skeleton_share_excess": 0.1713333333333333,
+        "ttr_deficit": 0.07815543442555646
+      },
+      "our_unique_ratio": 0.004,
+      "ai4p_unique_ratio": 1.0,
+      "centroid_distance": 0.03466796875,
+      "mauve_style": 0.004146604112008562
     },
     {
       "language": "it",
-      "templated_score": 1.2920367449085055,
+      "templated_score": 1.2393074146572685,
       "components": {
-        "unique_ratio_deficit": 0.9853333333333333,
-        "top_skeleton_share_excess": 0.16933333333333334,
-        "ttr_deficit": 0.1373700782418391
+        "unique_ratio_deficit": 0.996,
+        "top_skeleton_share_excess": 0.1753333333333333,
+        "ttr_deficit": 0.06797408132393504
       },
       "our_unique_ratio": 0.004,
-      "ai4p_unique_ratio": 0.9893333333333333,
-      "centroid_distance": 0.029296875,
-      "mauve_style": 0.007238858736994346
+      "ai4p_unique_ratio": 1.0,
+      "centroid_distance": 0.0341796875,
+      "mauve_style": 0.004413027071071181
+    },
+    {
+      "language": "en",
+      "templated_score": 1.2291847763883055,
+      "components": {
+        "unique_ratio_deficit": 0.996,
+        "top_skeleton_share_excess": 0.18066666666666667,
+        "ttr_deficit": 0.052518109721638645
+      },
+      "our_unique_ratio": 0.004,
+      "ai4p_unique_ratio": 1.0,
+      "centroid_distance": 0.02783203125,
+      "mauve_style": 0.004556209162871433
     }
   ],
   "per_language": [
     {
-      "language": "en",
+      "language": "ro",
       "n_ours": 1500,
       "n_ai4privacy": 1500,
       "embedding_centroid_distance": {
         "metric": "centroid_cosine_distance",
-        "point": 0.0166015625,
-        "ci_low": 0.015625,
-        "ci_high": 0.01806640625,
+        "point": 0.046875,
+        "ci_low": 0.0439453125,
+        "ci_high": 0.04931640625,
         "resamples": 2000,
         "seed": 20260603,
         "note": "1 - cosine(mean(ours), mean(ai4privacy)); larger = corpora further apart."
       },
       "mauve_style": {
         "metric": "mauve_style",
-        "score": 0.005470548255023267,
+        "score": 0.004562637951644053,
+        "bins": 25,
+        "grid": 50,
+        "c": 5.0,
+        "note": "MAUVE-style (quantize+divergence-frontier), self-contained offline; 1=identical, lower=further apart. NOT the pip `mauve` package."
+      },
+      "diversity": {
+        "ours": {
+          "type_token_ratio": 0.08625565610859728,
+          "sentence_length": {
+            "mean": 5.118867621039087,
+            "variance": 25.610609108581652,
+            "n_sentences": 6217
+          },
+          "template_repetition": {
+            "n_docs": 1500,
+            "unique_skeletons": 6,
+            "unique_ratio": 0.004,
+            "top_skeleton_share": 0.17333333333333334
+          }
+        },
+        "ai4privacy": {
+          "type_token_ratio": 0.17784421537097642,
+          "sentence_length": {
+            "mean": 11.86161763060745,
+            "variance": 109.01418738215254,
+            "n_sentences": 8939
+          },
+          "template_repetition": {
+            "n_docs": 1500,
+            "unique_skeletons": 1500,
+            "unique_ratio": 1.0,
+            "top_skeleton_share": 0.0006666666666666666
+          }
+        },
+        "gaps": {
+          "type_token_ratio_delta": -0.09158855926237913,
+          "sentence_length_variance_delta": -83.40357827357089,
+          "unique_skeleton_ratio_delta": -0.996,
+          "top_skeleton_share_delta": 0.17266666666666666,
+          "note": "delta = ours - ai4privacy. Negative TTR/variance/unique-ratio + positive top-share => OURS is more templated/narrow."
+        }
+      }
+    },
+    {
+      "language": "en",
+      "n_ours": 1500,
+      "n_ai4privacy": 1500,
+      "embedding_centroid_distance": {
+        "metric": "centroid_cosine_distance",
+        "point": 0.02783203125,
+        "ci_low": 0.0263671875,
+        "ci_high": 0.029296875,
+        "resamples": 2000,
+        "seed": 20260603,
+        "note": "1 - cosine(mean(ours), mean(ai4privacy)); larger = corpora further apart."
+      },
+      "mauve_style": {
+        "metric": "mauve_style",
+        "score": 0.004556209162871433,
         "bins": 25,
         "grid": 50,
         "c": 5.0,
@@ -148,24 +234,83 @@
           }
         },
         "ai4privacy": {
-          "type_token_ratio": 0.2563535122786979,
+          "type_token_ratio": 0.16450628332422707,
           "sentence_length": {
-            "mean": 10.89230171073095,
-            "variance": 40.12098272701107,
-            "n_sentences": 2572
+            "mean": 10.829830646806775,
+            "variance": 102.68701872259473,
+            "n_sentences": 9802
           },
           "template_repetition": {
             "n_docs": 1500,
-            "unique_skeletons": 1488,
-            "unique_ratio": 0.992,
-            "top_skeleton_share": 0.006
+            "unique_skeletons": 1500,
+            "unique_ratio": 1.0,
+            "top_skeleton_share": 0.0006666666666666666
           }
         },
         "gaps": {
-          "type_token_ratio_delta": -0.14436533867610948,
-          "sentence_length_variance_delta": 67.55354982715932,
-          "unique_skeleton_ratio_delta": -0.988,
-          "top_skeleton_share_delta": 0.17533333333333334,
+          "type_token_ratio_delta": -0.052518109721638645,
+          "sentence_length_variance_delta": 4.987513831575654,
+          "unique_skeleton_ratio_delta": -0.996,
+          "top_skeleton_share_delta": 0.18066666666666667,
+          "note": "delta = ours - ai4privacy. Negative TTR/variance/unique-ratio + positive top-share => OURS is more templated/narrow."
+        }
+      }
+    },
+    {
+      "language": "pl",
+      "n_ours": 1500,
+      "n_ai4privacy": 1500,
+      "embedding_centroid_distance": {
+        "metric": "centroid_cosine_distance",
+        "point": 0.0234375,
+        "ci_low": 0.02197265625,
+        "ci_high": 0.0244140625,
+        "resamples": 2000,
+        "seed": 20260603,
+        "note": "1 - cosine(mean(ours), mean(ai4privacy)); larger = corpora further apart."
+      },
+      "mauve_style": {
+        "metric": "mauve_style",
+        "score": 0.004850146720789447,
+        "bins": 25,
+        "grid": 50,
+        "c": 5.0,
+        "note": "MAUVE-style (quantize+divergence-frontier), self-contained offline; 1=identical, lower=further apart. NOT the pip `mauve` package."
+      },
+      "diversity": {
+        "ours": {
+          "type_token_ratio": 0.08488553139957326,
+          "sentence_length": {
+            "mean": 4.965922107674685,
+            "variance": 19.879422889694524,
+            "n_sentences": 6984
+          },
+          "template_repetition": {
+            "n_docs": 1500,
+            "unique_skeletons": 6,
+            "unique_ratio": 0.004,
+            "top_skeleton_share": 0.176
+          }
+        },
+        "ai4privacy": {
+          "type_token_ratio": 0.2210598791755508,
+          "sentence_length": {
+            "mean": 10.695807102981352,
+            "variance": 90.24824349575191,
+            "n_sentences": 8419
+          },
+          "template_repetition": {
+            "n_docs": 1500,
+            "unique_skeletons": 1500,
+            "unique_ratio": 1.0,
+            "top_skeleton_share": 0.0006666666666666666
+          }
+        },
+        "gaps": {
+          "type_token_ratio_delta": -0.13617434777597753,
+          "sentence_length_variance_delta": -70.36882060605738,
+          "unique_skeleton_ratio_delta": -0.996,
+          "top_skeleton_share_delta": 0.1753333333333333,
           "note": "delta = ours - ai4privacy. Negative TTR/variance/unique-ratio + positive top-share => OURS is more templated/narrow."
         }
       }
@@ -176,16 +321,16 @@
       "n_ai4privacy": 1500,
       "embedding_centroid_distance": {
         "metric": "centroid_cosine_distance",
-        "point": 0.029296875,
-        "ci_low": 0.02734375,
-        "ci_high": 0.03125,
+        "point": 0.0341796875,
+        "ci_low": 0.033203125,
+        "ci_high": 0.0361328125,
         "resamples": 2000,
         "seed": 20260603,
         "note": "1 - cosine(mean(ours), mean(ai4privacy)); larger = corpora further apart."
       },
       "mauve_style": {
         "metric": "mauve_style",
-        "score": 0.007238858736994346,
+        "score": 0.004413027071071181,
         "bins": 25,
         "grid": 50,
         "c": 5.0,
@@ -207,24 +352,24 @@
           }
         },
         "ai4privacy": {
-          "type_token_ratio": 0.24246836540128272,
+          "type_token_ratio": 0.17307236848337865,
           "sentence_length": {
-            "mean": 10.763059701492537,
-            "variance": 42.961396608376035,
-            "n_sentences": 2680
+            "mean": 11.270232756779842,
+            "variance": 117.12460398169873,
+            "n_sentences": 9366
           },
           "template_repetition": {
             "n_docs": 1500,
-            "unique_skeletons": 1484,
-            "unique_ratio": 0.9893333333333333,
-            "top_skeleton_share": 0.006666666666666667
+            "unique_skeletons": 1500,
+            "unique_ratio": 1.0,
+            "top_skeleton_share": 0.0006666666666666666
           }
         },
         "gaps": {
-          "type_token_ratio_delta": -0.1373700782418391,
-          "sentence_length_variance_delta": 17.840348266925766,
-          "unique_skeleton_ratio_delta": -0.9853333333333333,
-          "top_skeleton_share_delta": 0.16933333333333334,
+          "type_token_ratio_delta": -0.06797408132393504,
+          "sentence_length_variance_delta": -56.322859106396926,
+          "unique_skeleton_ratio_delta": -0.996,
+          "top_skeleton_share_delta": 0.1753333333333333,
           "note": "delta = ours - ai4privacy. Negative TTR/variance/unique-ratio + positive top-share => OURS is more templated/narrow."
         }
       }
@@ -235,16 +380,16 @@
       "n_ai4privacy": 1500,
       "embedding_centroid_distance": {
         "metric": "centroid_cosine_distance",
-        "point": 0.033203125,
-        "ci_low": 0.03076171875,
-        "ci_high": 0.0361328125,
+        "point": 0.03662109375,
+        "ci_low": 0.0341796875,
+        "ci_high": 0.03857421875,
         "resamples": 2000,
         "seed": 20260603,
         "note": "1 - cosine(mean(ours), mean(ai4privacy)); larger = corpora further apart."
       },
       "mauve_style": {
         "metric": "mauve_style",
-        "score": 0.006407592052599154,
+        "score": 0.00444730399059235,
         "bins": 25,
         "grid": 50,
         "c": 5.0,
@@ -266,24 +411,24 @@
           }
         },
         "ai4privacy": {
-          "type_token_ratio": 0.26277263775870396,
+          "type_token_ratio": 0.20727446367426802,
           "sentence_length": {
-            "mean": 9.277145811789039,
-            "variance": 27.024189854299074,
-            "n_sentences": 2901
+            "mean": 9.69863323167288,
+            "variance": 78.3910486233032,
+            "n_sentences": 8853
           },
           "template_repetition": {
             "n_docs": 1500,
-            "unique_skeletons": 1496,
-            "unique_ratio": 0.9973333333333333,
-            "top_skeleton_share": 0.0013333333333333333
+            "unique_skeletons": 1500,
+            "unique_ratio": 1.0,
+            "top_skeleton_share": 0.0006666666666666666
           }
         },
         "gaps": {
-          "type_token_ratio_delta": -0.15585559172936658,
-          "sentence_length_variance_delta": 14.643484102335925,
-          "unique_skeleton_ratio_delta": -0.9933333333333333,
-          "top_skeleton_share_delta": 0.18533333333333335,
+          "type_token_ratio_delta": -0.10035741764493064,
+          "sentence_length_variance_delta": -36.72337466666821,
+          "unique_skeleton_ratio_delta": -0.996,
+          "top_skeleton_share_delta": 0.186,
           "note": "delta = ours - ai4privacy. Negative TTR/variance/unique-ratio + positive top-share => OURS is more templated/narrow."
         }
       }
@@ -294,16 +439,16 @@
       "n_ai4privacy": 1500,
       "embedding_centroid_distance": {
         "metric": "centroid_cosine_distance",
-        "point": 0.03759765625,
-        "ci_low": 0.03515625,
-        "ci_high": 0.04150390625,
+        "point": 0.03955078125,
+        "ci_low": 0.03662109375,
+        "ci_high": 0.0419921875,
         "resamples": 2000,
         "seed": 20260603,
         "note": "1 - cosine(mean(ours), mean(ai4privacy)); larger = corpora further apart."
       },
       "mauve_style": {
         "metric": "mauve_style",
-        "score": 0.005129604772782778,
+        "score": 0.004296037408651814,
         "bins": 25,
         "grid": 50,
         "c": 5.0,
@@ -325,24 +470,24 @@
           }
         },
         "ai4privacy": {
-          "type_token_ratio": 0.22524472891566266,
+          "type_token_ratio": 0.16024660586491438,
           "sentence_length": {
-            "mean": 11.5394641564084,
-            "variance": 48.47146937253855,
-            "n_sentences": 2762
+            "mean": 12.34331662976343,
+            "variance": 115.523667312518,
+            "n_sentences": 8581
           },
           "template_repetition": {
             "n_docs": 1500,
-            "unique_skeletons": 1499,
-            "unique_ratio": 0.9993333333333333,
-            "top_skeleton_share": 0.0013333333333333333
+            "unique_skeletons": 1500,
+            "unique_ratio": 1.0,
+            "top_skeleton_share": 0.0006666666666666666
           }
         },
         "gaps": {
-          "type_token_ratio_delta": -0.15543707242041138,
-          "sentence_length_variance_delta": 52.95806734998261,
-          "unique_skeleton_ratio_delta": -0.9953333333333333,
-          "top_skeleton_share_delta": 0.17266666666666666,
+          "type_token_ratio_delta": -0.09043894936966311,
+          "sentence_length_variance_delta": -14.094130589996837,
+          "unique_skeleton_ratio_delta": -0.996,
+          "top_skeleton_share_delta": 0.1733333333333333,
           "note": "delta = ours - ai4privacy. Negative TTR/variance/unique-ratio + positive top-share => OURS is more templated/narrow."
         }
       }
@@ -353,16 +498,16 @@
       "n_ai4privacy": 1500,
       "embedding_centroid_distance": {
         "metric": "centroid_cosine_distance",
-        "point": 0.0263671875,
-        "ci_low": 0.02490234375,
-        "ci_high": 0.02783203125,
+        "point": 0.03466796875,
+        "ci_low": 0.033203125,
+        "ci_high": 0.03662109375,
         "resamples": 2000,
         "seed": 20260603,
         "note": "1 - cosine(mean(ours), mean(ai4privacy)); larger = corpora further apart."
       },
       "mauve_style": {
         "metric": "mauve_style",
-        "score": 0.0056590345987697225,
+        "score": 0.004146604112008562,
         "bins": 25,
         "grid": 50,
         "c": 5.0,
@@ -384,24 +529,24 @@
           }
         },
         "ai4privacy": {
-          "type_token_ratio": 0.24578558160726177,
+          "type_token_ratio": 0.1640949352934885,
           "sentence_length": {
-            "mean": 10.622859270290395,
-            "variance": 41.34287283723164,
-            "n_sentences": 2686
+            "mean": 12.875438157235854,
+            "variance": 128.9866125396156,
+            "n_sentences": 7988
           },
           "template_repetition": {
             "n_docs": 1500,
-            "unique_skeletons": 1494,
-            "unique_ratio": 0.996,
-            "top_skeleton_share": 0.002
+            "unique_skeletons": 1500,
+            "unique_ratio": 1.0,
+            "top_skeleton_share": 0.0006666666666666666
           }
         },
         "gaps": {
-          "type_token_ratio_delta": -0.1598460807393297,
-          "sentence_length_variance_delta": 34.567186218832276,
-          "unique_skeleton_ratio_delta": -0.992,
-          "top_skeleton_share_delta": 0.16999999999999998,
+          "type_token_ratio_delta": -0.07815543442555646,
+          "sentence_length_variance_delta": -53.07655348355169,
+          "unique_skeleton_ratio_delta": -0.996,
+          "top_skeleton_share_delta": 0.1713333333333333,
           "note": "delta = ours - ai4privacy. Negative TTR/variance/unique-ratio + positive top-share => OURS is more templated/narrow."
         }
       }
@@ -412,16 +557,16 @@
       "n_ai4privacy": 1500,
       "embedding_centroid_distance": {
         "metric": "centroid_cosine_distance",
-        "point": 0.021484375,
-        "ci_low": 0.0205078125,
-        "ci_high": 0.02294921875,
+        "point": 0.02587890625,
+        "ci_low": 0.02490234375,
+        "ci_high": 0.02734375,
         "resamples": 2000,
         "seed": 20260603,
         "note": "1 - cosine(mean(ours), mean(ai4privacy)); larger = corpora further apart."
       },
       "mauve_style": {
         "metric": "mauve_style",
-        "score": 0.005516642195803329,
+        "score": 0.004144617463398624,
         "bins": 25,
         "grid": 50,
         "c": 5.0,
@@ -443,24 +588,24 @@
           }
         },
         "ai4privacy": {
-          "type_token_ratio": 0.2642411721948047,
+          "type_token_ratio": 0.19953892882896662,
           "sentence_length": {
-            "mean": 9.804576144036009,
-            "variance": 30.727375908118063,
-            "n_sentences": 2666
+            "mean": 10.401863848164565,
+            "variance": 97.78349919682805,
+            "n_sentences": 8799
           },
           "template_repetition": {
             "n_docs": 1500,
-            "unique_skeletons": 1493,
-            "unique_ratio": 0.9953333333333333,
-            "top_skeleton_share": 0.002
+            "unique_skeletons": 1500,
+            "unique_ratio": 1.0,
+            "top_skeleton_share": 0.0006666666666666666
           }
         },
         "gaps": {
-          "type_token_ratio_delta": -0.14525535300007186,
-          "sentence_length_variance_delta": 20.85465412533803,
-          "unique_skeleton_ratio_delta": -0.9913333333333333,
-          "top_skeleton_share_delta": 0.16999999999999998,
+          "type_token_ratio_delta": -0.08055310963423377,
+          "sentence_length_variance_delta": -46.201469163371954,
+          "unique_skeleton_ratio_delta": -0.996,
+          "top_skeleton_share_delta": 0.1713333333333333,
           "note": "delta = ours - ai4privacy. Negative TTR/variance/unique-ratio + positive top-share => OURS is more templated/narrow."
         }
       }
@@ -468,10 +613,10 @@
   ],
   "contract_reuse": "Reuses synthetic_real_drift.py's pinned percentile-bootstrap + bounded distance contract (imported, not re-implemented); extends it from leaderboard-score dataset comparison to text-embedding + diversity dataset comparison (the embedding piece the drift module deferred). CPU-only.",
   "limitations": [
-    "Ai4Privacy source is the cached open-pii-masking-500k release (same CC-BY-4.0 LLM open core); pii-masking-openpii-1m has only its README cached offline. Labelled, not silent.",
+    "Ai4Privacy source is ai4privacy/pii-masking-openpii-1m (CC-BY-4.0) — the verified-clean open core (RES-93). The Llama-Community-licensed 500k tier is excluded by the license gate and is never used. The 1m dataset is streamed over network row-by-row (only its README is cached); the stream stops once each target language has sample docs.",
     "Embedding model is microsoft/mdeberta-v3-base, the offline multilingual substitute for multilingual-E5 (not cached). Absolute embedding distances are encoder-dependent; the language RANKING and the diversity proxies are the robust, encoder-independent signals.",
-    "ro and pl have no Ai4Privacy counterpart in the cached release and are flagged uncovered (honest coverage), not blocked.",
+    "All eight of our languages (incl. ro and pl) have an openpii-1m counterpart and are scored — the prior ro/pl coverage gap is closed.",
     "MAUVE-style is a self-contained quantize+divergence-frontier implementation (the pip `mauve` package is unavailable offline); same construction, frozen offline encoder.",
-    "All numbers are computed here from the offline cache; nothing is hardcoded. CPU-only."
+    "All numbers are computed here at run time; nothing is hardcoded. CPU-only."
   ]
 }

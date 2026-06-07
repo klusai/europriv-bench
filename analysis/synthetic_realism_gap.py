@@ -45,16 +45,19 @@ Offline-coverage honesty
 * Embedding model: the brief suggests multilingual-E5; **E5 is not in the offline cache**, so we use
   the cached multilingual ``microsoft/mdeberta-v3-base`` mean-pooled encoder as the offline
   substitute. The model id is pinned in the artifact. Swap to E5 by ``--embed-model`` when available.
-* Ai4Privacy source: the brief names ``ai4privacy/pii-masking-openpii-1m``; offline, only its README
-  is cached (no data), while the prior open release ``ai4privacy/open-pii-masking-500k-ai4privacy``
-  (same CC-BY-4.0 LLM-generated open core) **is** fully cached and loadable. We use the 500k release
-  and label it; this is honest coverage, not a silent substitution.
-* Languages: OUR synthetic covers ro/en/pl/it/de/fr/es/nl; Ai4Privacy-500k covers en/fr/de/es/it/nl
-  (+hi/te). The **intersection scored is en/fr/de/es/it/nl**; **ro and pl have no Ai4Privacy
-  counterpart in the cached release and are flagged uncovered** (scored where possible, flagged
+* Ai4Privacy source: ``ai4privacy/pii-masking-openpii-1m`` — the verified-clean **CC-BY-4.0** open
+  core (RES-93 verified + adopted exactly this tier; the harness already ingests it). The
+  Llama-Community-licensed ``open-pii-masking-500k`` tier is **excluded by the program's license
+  gate** and is **never** used here. The 1m parquet is not in the offline cache (only its README is),
+  so this fetch needs network; we stream it row-by-row (``load_dataset(streaming=True)``) and stop as
+  soon as each of the eight target languages has ``sample`` docs, never materializing the full 1.43M
+  rows. If the fetch fails we STOP and report the traceback — no 500k fallback.
+* Languages: OUR synthetic covers ro/en/pl/it/de/fr/es/nl; openpii-1m covers 23 EU languages
+  **including ro and pl**, so all **eight** are scored — closing the ro/pl coverage gap the prior
+  500k-tier run flagged. Coverage is still verified at load time (scored where present, flagged
   otherwise — never blocked).
 
-Reproduce (europriv-bench venv; all data + model from the offline HF cache; CPU)::
+Reproduce (europriv-bench venv; CPU; openpii-1m streamed over network, model from offline cache)::
 
     python analysis/synthetic_realism_gap.py --per-lang-sample 1500 --outdir analysis
 """
@@ -92,17 +95,21 @@ MAUVE_BINS = 25  # k-means quantization bins for the MAUVE-style frontier
 MAUVE_GRID = 50  # mixing-weight grid resolution for the divergence frontier
 
 OUR_DATASET = "klusai/ds-kp-general-{lang}-50k"
-AI4P_DATASET = "ai4privacy/open-pii-masking-500k-ai4privacy"
+# The verified-clean CC-BY-4.0 open core (RES-93). NEVER the Llama-Community-License 500k tier.
+AI4P_DATASET = "ai4privacy/pii-masking-openpii-1m"
+AI4P_LICENSE = "CC-BY-4.0"
 
 OUR_LANGS = ["ro", "en", "pl", "it", "de", "fr", "es", "nl"]
-# Languages present in the cached Ai4Privacy 500k open core (verified at load time, not assumed).
+# All eight are present in pii-masking-openpii-1m's 23 EU languages (verified at load time, not
+# assumed) — so ro and pl, uncovered by the prior 500k tier, are now scored.
 
 HONEST_LABELS = {
     "comparison_kind": "relative-realism-and-diversity gap between TWO SYNTHETIC corpora",
     "NOT": "this is NOT a synthetic->real drift number; Ai4Privacy is more-realistic SYNTHETIC, "
     "not real. A real-data drift number still requires TAB / real corpora.",
     "ours": "ds-kp-general-{lang} — KlusAI template-splice synthetic (the saturating eval corpus)",
-    "reference": "Ai4Privacy open core — LLM-generated synthetic (CC-BY-4.0), de-saturating baseline",
+    "reference": "ai4privacy/pii-masking-openpii-1m — LLM-generated synthetic, verified-clean "
+    "CC-BY-4.0 open core (RES-93); de-saturating baseline",
 }
 
 
@@ -125,25 +132,58 @@ def load_our_rows(lang: str, sample: int, seed: int = SAMPLE_SEED) -> list[dict]
     return _subsample(rows, sample, seed)
 
 
-def load_ai4p_by_lang(sample: int, seed: int = SAMPLE_SEED) -> dict[str, list[dict]]:
-    """Load Ai4Privacy 500k once, bucket by language → {lang: [{text, spans}]}, subsampled per lang.
+def load_ai4p_by_lang(
+    sample: int, langs: Sequence[str] = OUR_LANGS, seed: int = SAMPLE_SEED
+) -> dict[str, list[dict]]:
+    """Bucket pii-masking-openpii-1m by language → {lang: [{text, spans}]}, ``sample`` docs/lang.
+
+    The 1m open core has ~1.43M rows across 23 EU languages, grouped by language. We stream it with
+    ``load_dataset(..., streaming=True)`` and fill a per-language buffer of ``sample`` documents,
+    stopping as soon as every target language is full — so we never materialize the whole dataset.
+    Because the stream is grouped by language this reads sequentially through the target-language
+    blocks; ``source_text`` is the unmasked document text we compare against ``ds-kp-general-{lang}``.
+
+    Requires network (the 1m parquet is not in the offline cache — only its README is). If the fetch
+    fails we raise — we never silently fall back to the Llama-Community-licensed 500k tier.
 
     ``privacy_mask`` carries ``label/start/end``; we normalize to our ``{label,start,end}`` span
     shape so the same skeleton/diversity code runs on both corpora.
     """
-    _offline_env()
+    # The dataset fetch needs network; do NOT force HF offline here (models stay offline-cached).
+    os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
     from datasets import load_dataset
 
-    ds = load_dataset(AI4P_DATASET, split="train")
-    by_lang: dict[str, list[dict]] = {}
-    for r in ds:
-        lang = r["language"]
-        spans = [
-            {"label": m["label"], "start": int(m["start"]), "end": int(m["end"])}
-            for m in r["privacy_mask"]
-        ]
-        by_lang.setdefault(lang, []).append({"text": r["source_text"], "spans": spans})
-    return {lang: _subsample(rows, sample, seed) for lang, rows in by_lang.items()}
+    targets = set(langs)
+    per = max(sample, 1)
+    buckets: dict[str, list[dict]] = {lng: [] for lng in targets}
+
+    try:
+        ds = load_dataset(AI4P_DATASET, split="train", streaming=True)
+    except Exception as exc:  # noqa: BLE001 — re-raise with the no-fallback contract spelled out.
+        raise RuntimeError(
+            f"Streaming fetch of {AI4P_DATASET} failed ({exc!r}). Refusing to fall back to the "
+            "excluded Llama-Community-licensed 500k tier — STOP and report the traceback."
+        ) from exc
+
+    for row in ds:
+        lng = row["language"]
+        if lng in targets and len(buckets[lng]) < per:
+            spans = [
+                {"label": m["label"], "start": int(m["start"]), "end": int(m["end"])}
+                for m in row["privacy_mask"]
+            ]
+            buckets[lng].append({"text": row["source_text"], "spans": spans})
+        if all(len(buckets[lng]) >= per for lng in targets):
+            break
+
+    by_lang = {lng: rows for lng, rows in buckets.items() if rows}
+    if not by_lang:
+        raise RuntimeError(
+            f"Fetched zero rows for target languages {sorted(targets)} from {AI4P_DATASET} — STOP "
+            "and report. Refusing to fall back to the excluded 500k tier."
+        )
+    # Already capped at ``sample`` per language by the streaming loop; subsample is a no-op guard.
+    return {lng: _subsample(rows, sample, seed) for lng, rows in by_lang.items()}
 
 
 def _subsample(rows: list[dict], sample: int, seed: int) -> list[dict]:
@@ -453,7 +493,11 @@ def render_markdown(artifact: dict) -> str:
         "number here as 'closed the real gap'. dev-tier diagnostic; feeds RES-95.\n"
     )
     L.append(f"- ours: `{a['our_dataset']}` (template-splice synthetic, the saturating eval corpus)")
-    L.append(f"- reference: `{a['ai4privacy_dataset']}` (Ai4Privacy LLM synthetic, CC-BY-4.0 open core)")
+    L.append(
+        f"- reference: `{a['ai4privacy_dataset']}` "
+        f"({a.get('ai4privacy_license', 'CC-BY-4.0')}) — Ai4Privacy LLM synthetic, verified-clean "
+        "open core (RES-93); the Llama-Community-licensed 500k tier is excluded and NOT used"
+    )
     L.append(f"- embedding model: `{a['embed_model']}`  ({a['embed_model_note']})")
     L.append(
         f"- bootstrap seed `{a['seed']}`, resamples `{a['resamples']}`, 95% percentile CI; "
@@ -564,6 +608,9 @@ def main() -> None:
         "comparison": "relative-realism-and-diversity gap (ours vs Ai4Privacy) — NOT synthetic->real drift",
         "our_dataset": OUR_DATASET,
         "ai4privacy_dataset": AI4P_DATASET,
+        "ai4privacy_license": AI4P_LICENSE,
+        "ai4privacy_source_note": "pii-masking-openpii-1m (CC-BY-4.0) — verified-clean open core "
+        "(RES-93). The Llama-Community-licensed 500k tier is excluded by the license gate; not used.",
         "embed_model": args.embed_model,
         "embed_model_note": "offline multilingual substitute for multilingual-E5 "
         "(E5 not in offline cache); mean-pooled, L2-normalized, CPU-only.",
@@ -582,16 +629,18 @@ def main() -> None:
         "dataset comparison to text-embedding + diversity dataset comparison (the embedding piece "
         "the drift module deferred). CPU-only.",
         "limitations": [
-            "Ai4Privacy source is the cached open-pii-masking-500k release (same CC-BY-4.0 LLM open "
-            "core); pii-masking-openpii-1m has only its README cached offline. Labelled, not silent.",
+            "Ai4Privacy source is ai4privacy/pii-masking-openpii-1m (CC-BY-4.0) — the verified-clean "
+            "open core (RES-93). The Llama-Community-licensed 500k tier is excluded by the license "
+            "gate and is never used. The 1m dataset is streamed over network row-by-row (only its "
+            "README is cached); the stream stops once each target language has sample docs.",
             "Embedding model is microsoft/mdeberta-v3-base, the offline multilingual substitute for "
             "multilingual-E5 (not cached). Absolute embedding distances are encoder-dependent; the "
             "language RANKING and the diversity proxies are the robust, encoder-independent signals.",
-            "ro and pl have no Ai4Privacy counterpart in the cached release and are flagged uncovered "
-            "(honest coverage), not blocked.",
+            "All eight of our languages (incl. ro and pl) have an openpii-1m counterpart and are "
+            "scored — the prior ro/pl coverage gap is closed.",
             "MAUVE-style is a self-contained quantize+divergence-frontier implementation (the pip "
             "`mauve` package is unavailable offline); same construction, frozen offline encoder.",
-            "All numbers are computed here from the offline cache; nothing is hardcoded. CPU-only.",
+            "All numbers are computed here at run time; nothing is hardcoded. CPU-only.",
         ],
     }
 
