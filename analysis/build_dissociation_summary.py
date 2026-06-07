@@ -245,6 +245,18 @@ def build_summary() -> dict:
 
     decode_langs = [cc for cc in LANGUAGE_ORDER]
     holds_langs = [cc for cc in decode_langs if languages[cc]["holds"] is True]
+
+    # RES-96 — uniform full-model coverage: every decode-bearing language (+ legal) now scores the
+    # SAME board-model set. We derive the common basis from the artifacts (never asserted): the set
+    # of models present in EVERY language's row. When that equals the full board it is the uniform
+    # 8-model basis the breadth claim now rests on (the earlier 5-of-8 CPU subset is closed).
+    per_lang_models = [set(languages[cc]["models_scored"]) for cc in decode_langs]
+    per_lang_models.append(set(legal["models_scored"]))
+    uniform_models = sorted(set.intersection(*per_lang_models)) if per_lang_models else []
+    coverage_is_uniform = all(
+        set(m) == set(uniform_models)
+        for m in [set(languages[cc]["models_scored"]) for cc in decode_langs] + [set(legal["models_scored"])]
+    )
     return {
         "title": "Unified multi-language detection≠re-id dissociation summary (RES-86)",
         "generated_by": "analysis/build_dissociation_summary.py",
@@ -261,6 +273,8 @@ def build_summary() -> dict:
             1 for cc in decode_langs if languages[cc]["artifact"] is not None
         ),
         "n_languages_holds": len(holds_langs),
+        "uniform_model_basis": uniform_models,
+        "coverage_is_uniform": coverage_is_uniform,
         "languages": languages,
         "legal_domain": legal,
         "name_in_context": name_in_context,
@@ -268,10 +282,19 @@ def build_summary() -> dict:
             "All configs are config_status=dev — not yet citable/public.",
             "Single authored template family per language (RO has two; a 2nd independent family is "
             "required per language before citation — KLU-101 hardening).",
-            "Model coverage VARIES across languages (CPU-subset under the Mac hardware bound): "
-            "RO/PL/IT/legal score all 8 board models; SE/CZ/DK/FI score 5; EE/LT/SI/SK score 5 (a "
-            "different 5). A consistent full-model re-score is pending RES-53 before any "
-            "public/citable use.",
+            (
+                f"Model coverage is now UNIFORM across every language + legal: all score the same "
+                f"{len(uniform_models)}-model board basis ({', '.join(uniform_models)}). The earlier "
+                "state — where coverage VARIES (RO/PL/IT/legal scored all 8 board models but "
+                "SE/CZ/DK/FI/EE/LT/SI/SK scored only a 5-of-8 CPU subset) — was the weak arm of the "
+                "breadth claim (RES-56); the consistent full-model re-score that was thought to need "
+                "GPU burst (RES-53) was instead run on the M3 Ultra (CPU+parallel) under RES-96, "
+                "closing the gap."
+            ) if coverage_is_uniform else (
+                "Model coverage VARIES across languages (CPU-subset under the Mac hardware bound): "
+                "RO/PL/IT/legal score all 8 board models; the breadth langs score a 5-of-8 subset. "
+                "A consistent full-model re-score is pending RES-53 before any public/citable use."
+            ),
             "PL/PESEL was scored on the same pl-realskeleton-v1 track as the public board (RES-87, "
             "all 8 models, n=1500 docs → 1096 distinct subjects); its per-model leak rates reconcile "
             "exactly with the committed baselines/leaderboard.json rows.",
@@ -281,8 +304,10 @@ def build_summary() -> dict:
             "name/QI (name-in-context) channel measures RESIDUAL DISTINCTIVENESS / sample "
             "distinctiveness, NOT population re-identification (k-anonymity diagnostic unavailable: "
             "gold lacks QI tagging — KLU-122).",
-            "Validation gates: native-speaker + IAA sign-off (RES-77) and the full-model re-score "
-            "(RES-53) must clear before this feeds the Paper-3 breadth section or the public board.",
+            "Validation gates: the full-model re-score (RES-53 GPU-burst gate) is now CLEARED — it "
+            "ran on the M3 Ultra under RES-96, giving the uniform basis above. Native-speaker + IAA "
+            "sign-off (RES-77) must still clear before this feeds the Paper-3 breadth section or is "
+            "surfaced on the public board (the in-repo uniform numbers do NOT auto-publish).",
         ],
     }
 
@@ -308,12 +333,25 @@ def render_markdown(summary: dict) -> str:
         f"decode-bearing languages have a committed artifact; the dissociation holds on "
         f"**{summary['n_languages_holds']}** of them (+ legal + name-in-context).",
         "",
+        (
+            f"**Model basis (RES-96).** Coverage is UNIFORM: every language + the legal domain scores "
+            f"the same **{len(summary['uniform_model_basis'])}-model** board "
+            f"({', '.join(summary['uniform_model_basis'])}). The earlier 5-of-8 CPU subset on the "
+            f"breadth langs (RES-56's weak arm) was closed by a consistent full-model re-score on the "
+            f"M3 Ultra (RES-96; the RES-53 GPU-burst gate proved unnecessary)."
+            if summary["coverage_is_uniform"] else
+            "**Model basis.** Coverage VARIES across languages (CPU subset on the breadth langs) — a "
+            "consistent full-model re-score is pending (RES-53)."
+        ),
+        "",
         "## Cross-language dissociation (decode-bearing national IDs)",
         "",
         "Per language: national ID, the quasi-identifiers a missed ID decodes to, the kp-deid "
         "(protector) leak-rate + 95% Wilson upper bound, the typed-detector gap-CI summary (how many "
         "of the N scored detectors have a Newcombe gap CI that excludes 0), and which board models "
-        "were scored (coverage varies — made explicit).",
+        + ("were scored (uniform full-model basis across all rows — RES-96)."
+           if summary["coverage_is_uniform"] else
+           "were scored (coverage varies — made explicit)."),
         "",
         "| Lang | National ID | Decoded QIs | kp-deid leak | Wilson UB | gap-CI excl. 0 | Models scored | Holds |",
         "|---|---|---|---:|---:|:--:|---|:--:|",
