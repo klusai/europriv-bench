@@ -1,0 +1,477 @@
+{
+  "issue": "RES-94",
+  "date": "2026-06-07",
+  "config_status": "dev",
+  "comparison": "relative-realism-and-diversity gap (ours vs Ai4Privacy) — NOT synthetic->real drift",
+  "our_dataset": "klusai/ds-kp-general-{lang}-50k",
+  "ai4privacy_dataset": "ai4privacy/open-pii-masking-500k-ai4privacy",
+  "embed_model": "microsoft/mdeberta-v3-base",
+  "embed_model_note": "offline multilingual substitute for multilingual-E5 (E5 not in offline cache); mean-pooled, L2-normalized, CPU-only.",
+  "seed": 20260603,
+  "sample_seed": 20260607,
+  "resamples": 2000,
+  "ci_alpha": 0.05,
+  "per_lang_sample": 1500,
+  "scored_languages": [
+    "en",
+    "it",
+    "de",
+    "fr",
+    "es",
+    "nl"
+  ],
+  "uncovered_languages": [
+    "ro",
+    "pl"
+  ],
+  "honest_labels": {
+    "comparison_kind": "relative-realism-and-diversity gap between TWO SYNTHETIC corpora",
+    "NOT": "this is NOT a synthetic->real drift number; Ai4Privacy is more-realistic SYNTHETIC, not real. A real-data drift number still requires TAB / real corpora.",
+    "ours": "ds-kp-general-{lang} — KlusAI template-splice synthetic (the saturating eval corpus)",
+    "reference": "Ai4Privacy open core — LLM-generated synthetic (CC-BY-4.0), de-saturating baseline"
+  },
+  "ranked_most_templated": [
+    {
+      "language": "de",
+      "templated_score": 1.3345222583960332,
+      "components": {
+        "unique_ratio_deficit": 0.9933333333333333,
+        "top_skeleton_share_excess": 0.18533333333333335,
+        "ttr_deficit": 0.15585559172936658
+      },
+      "our_unique_ratio": 0.004,
+      "ai4p_unique_ratio": 0.9973333333333333,
+      "centroid_distance": 0.033203125,
+      "mauve_style": 0.006407592052599154
+    },
+    {
+      "language": "fr",
+      "templated_score": 1.3234370724204112,
+      "components": {
+        "unique_ratio_deficit": 0.9953333333333333,
+        "top_skeleton_share_excess": 0.17266666666666666,
+        "ttr_deficit": 0.15543707242041138
+      },
+      "our_unique_ratio": 0.004,
+      "ai4p_unique_ratio": 0.9993333333333333,
+      "centroid_distance": 0.03759765625,
+      "mauve_style": 0.005129604772782778
+    },
+    {
+      "language": "es",
+      "templated_score": 1.3218460807393297,
+      "components": {
+        "unique_ratio_deficit": 0.992,
+        "top_skeleton_share_excess": 0.16999999999999998,
+        "ttr_deficit": 0.1598460807393297
+      },
+      "our_unique_ratio": 0.004,
+      "ai4p_unique_ratio": 0.996,
+      "centroid_distance": 0.0263671875,
+      "mauve_style": 0.0056590345987697225
+    },
+    {
+      "language": "en",
+      "templated_score": 1.3076986720094428,
+      "components": {
+        "unique_ratio_deficit": 0.988,
+        "top_skeleton_share_excess": 0.17533333333333334,
+        "ttr_deficit": 0.14436533867610948
+      },
+      "our_unique_ratio": 0.004,
+      "ai4p_unique_ratio": 0.992,
+      "centroid_distance": 0.0166015625,
+      "mauve_style": 0.005470548255023267
+    },
+    {
+      "language": "nl",
+      "templated_score": 1.3065886863334053,
+      "components": {
+        "unique_ratio_deficit": 0.9913333333333333,
+        "top_skeleton_share_excess": 0.16999999999999998,
+        "ttr_deficit": 0.14525535300007186
+      },
+      "our_unique_ratio": 0.004,
+      "ai4p_unique_ratio": 0.9953333333333333,
+      "centroid_distance": 0.021484375,
+      "mauve_style": 0.005516642195803329
+    },
+    {
+      "language": "it",
+      "templated_score": 1.2920367449085055,
+      "components": {
+        "unique_ratio_deficit": 0.9853333333333333,
+        "top_skeleton_share_excess": 0.16933333333333334,
+        "ttr_deficit": 0.1373700782418391
+      },
+      "our_unique_ratio": 0.004,
+      "ai4p_unique_ratio": 0.9893333333333333,
+      "centroid_distance": 0.029296875,
+      "mauve_style": 0.007238858736994346
+    }
+  ],
+  "per_language": [
+    {
+      "language": "en",
+      "n_ours": 1500,
+      "n_ai4privacy": 1500,
+      "embedding_centroid_distance": {
+        "metric": "centroid_cosine_distance",
+        "point": 0.0166015625,
+        "ci_low": 0.015625,
+        "ci_high": 0.01806640625,
+        "resamples": 2000,
+        "seed": 20260603,
+        "note": "1 - cosine(mean(ours), mean(ai4privacy)); larger = corpora further apart."
+      },
+      "mauve_style": {
+        "metric": "mauve_style",
+        "score": 0.005470548255023267,
+        "bins": 25,
+        "grid": 50,
+        "c": 5.0,
+        "note": "MAUVE-style (quantize+divergence-frontier), self-contained offline; 1=identical, lower=further apart. NOT the pip `mauve` package."
+      },
+      "diversity": {
+        "ours": {
+          "type_token_ratio": 0.11198817360258842,
+          "sentence_length": {
+            "mean": 10.504541459126868,
+            "variance": 107.67453255417038,
+            "n_sentences": 3413
+          },
+          "template_repetition": {
+            "n_docs": 1500,
+            "unique_skeletons": 6,
+            "unique_ratio": 0.004,
+            "top_skeleton_share": 0.18133333333333335
+          }
+        },
+        "ai4privacy": {
+          "type_token_ratio": 0.2563535122786979,
+          "sentence_length": {
+            "mean": 10.89230171073095,
+            "variance": 40.12098272701107,
+            "n_sentences": 2572
+          },
+          "template_repetition": {
+            "n_docs": 1500,
+            "unique_skeletons": 1488,
+            "unique_ratio": 0.992,
+            "top_skeleton_share": 0.006
+          }
+        },
+        "gaps": {
+          "type_token_ratio_delta": -0.14436533867610948,
+          "sentence_length_variance_delta": 67.55354982715932,
+          "unique_skeleton_ratio_delta": -0.988,
+          "top_skeleton_share_delta": 0.17533333333333334,
+          "note": "delta = ours - ai4privacy. Negative TTR/variance/unique-ratio + positive top-share => OURS is more templated/narrow."
+        }
+      }
+    },
+    {
+      "language": "it",
+      "n_ours": 1500,
+      "n_ai4privacy": 1500,
+      "embedding_centroid_distance": {
+        "metric": "centroid_cosine_distance",
+        "point": 0.029296875,
+        "ci_low": 0.02734375,
+        "ci_high": 0.03125,
+        "resamples": 2000,
+        "seed": 20260603,
+        "note": "1 - cosine(mean(ours), mean(ai4privacy)); larger = corpora further apart."
+      },
+      "mauve_style": {
+        "metric": "mauve_style",
+        "score": 0.007238858736994346,
+        "bins": 25,
+        "grid": 50,
+        "c": 5.0,
+        "note": "MAUVE-style (quantize+divergence-frontier), self-contained offline; 1=identical, lower=further apart. NOT the pip `mauve` package."
+      },
+      "diversity": {
+        "ours": {
+          "type_token_ratio": 0.10509828715944361,
+          "sentence_length": {
+            "mean": 9.241965471447543,
+            "variance": 60.8017448753018,
+            "n_sentences": 3765
+          },
+          "template_repetition": {
+            "n_docs": 1500,
+            "unique_skeletons": 6,
+            "unique_ratio": 0.004,
+            "top_skeleton_share": 0.176
+          }
+        },
+        "ai4privacy": {
+          "type_token_ratio": 0.24246836540128272,
+          "sentence_length": {
+            "mean": 10.763059701492537,
+            "variance": 42.961396608376035,
+            "n_sentences": 2680
+          },
+          "template_repetition": {
+            "n_docs": 1500,
+            "unique_skeletons": 1484,
+            "unique_ratio": 0.9893333333333333,
+            "top_skeleton_share": 0.006666666666666667
+          }
+        },
+        "gaps": {
+          "type_token_ratio_delta": -0.1373700782418391,
+          "sentence_length_variance_delta": 17.840348266925766,
+          "unique_skeleton_ratio_delta": -0.9853333333333333,
+          "top_skeleton_share_delta": 0.16933333333333334,
+          "note": "delta = ours - ai4privacy. Negative TTR/variance/unique-ratio + positive top-share => OURS is more templated/narrow."
+        }
+      }
+    },
+    {
+      "language": "de",
+      "n_ours": 1500,
+      "n_ai4privacy": 1500,
+      "embedding_centroid_distance": {
+        "metric": "centroid_cosine_distance",
+        "point": 0.033203125,
+        "ci_low": 0.03076171875,
+        "ci_high": 0.0361328125,
+        "resamples": 2000,
+        "seed": 20260603,
+        "note": "1 - cosine(mean(ours), mean(ai4privacy)); larger = corpora further apart."
+      },
+      "mauve_style": {
+        "metric": "mauve_style",
+        "score": 0.006407592052599154,
+        "bins": 25,
+        "grid": 50,
+        "c": 5.0,
+        "note": "MAUVE-style (quantize+divergence-frontier), self-contained offline; 1=identical, lower=further apart. NOT the pip `mauve` package."
+      },
+      "diversity": {
+        "ours": {
+          "type_token_ratio": 0.10691704602933738,
+          "sentence_length": {
+            "mean": 5.705627705627705,
+            "variance": 41.667673956635,
+            "n_sentences": 5544
+          },
+          "template_repetition": {
+            "n_docs": 1500,
+            "unique_skeletons": 6,
+            "unique_ratio": 0.004,
+            "top_skeleton_share": 0.18666666666666668
+          }
+        },
+        "ai4privacy": {
+          "type_token_ratio": 0.26277263775870396,
+          "sentence_length": {
+            "mean": 9.277145811789039,
+            "variance": 27.024189854299074,
+            "n_sentences": 2901
+          },
+          "template_repetition": {
+            "n_docs": 1500,
+            "unique_skeletons": 1496,
+            "unique_ratio": 0.9973333333333333,
+            "top_skeleton_share": 0.0013333333333333333
+          }
+        },
+        "gaps": {
+          "type_token_ratio_delta": -0.15585559172936658,
+          "sentence_length_variance_delta": 14.643484102335925,
+          "unique_skeleton_ratio_delta": -0.9933333333333333,
+          "top_skeleton_share_delta": 0.18533333333333335,
+          "note": "delta = ours - ai4privacy. Negative TTR/variance/unique-ratio + positive top-share => OURS is more templated/narrow."
+        }
+      }
+    },
+    {
+      "language": "fr",
+      "n_ours": 1500,
+      "n_ai4privacy": 1500,
+      "embedding_centroid_distance": {
+        "metric": "centroid_cosine_distance",
+        "point": 0.03759765625,
+        "ci_low": 0.03515625,
+        "ci_high": 0.04150390625,
+        "resamples": 2000,
+        "seed": 20260603,
+        "note": "1 - cosine(mean(ours), mean(ai4privacy)); larger = corpora further apart."
+      },
+      "mauve_style": {
+        "metric": "mauve_style",
+        "score": 0.005129604772782778,
+        "bins": 25,
+        "grid": 50,
+        "c": 5.0,
+        "note": "MAUVE-style (quantize+divergence-frontier), self-contained offline; 1=identical, lower=further apart. NOT the pip `mauve` package."
+      },
+      "diversity": {
+        "ours": {
+          "type_token_ratio": 0.06980765649525127,
+          "sentence_length": {
+            "mean": 12.479747675962816,
+            "variance": 101.42953672252116,
+            "n_sentences": 3012
+          },
+          "template_repetition": {
+            "n_docs": 1500,
+            "unique_skeletons": 6,
+            "unique_ratio": 0.004,
+            "top_skeleton_share": 0.174
+          }
+        },
+        "ai4privacy": {
+          "type_token_ratio": 0.22524472891566266,
+          "sentence_length": {
+            "mean": 11.5394641564084,
+            "variance": 48.47146937253855,
+            "n_sentences": 2762
+          },
+          "template_repetition": {
+            "n_docs": 1500,
+            "unique_skeletons": 1499,
+            "unique_ratio": 0.9993333333333333,
+            "top_skeleton_share": 0.0013333333333333333
+          }
+        },
+        "gaps": {
+          "type_token_ratio_delta": -0.15543707242041138,
+          "sentence_length_variance_delta": 52.95806734998261,
+          "unique_skeleton_ratio_delta": -0.9953333333333333,
+          "top_skeleton_share_delta": 0.17266666666666666,
+          "note": "delta = ours - ai4privacy. Negative TTR/variance/unique-ratio + positive top-share => OURS is more templated/narrow."
+        }
+      }
+    },
+    {
+      "language": "es",
+      "n_ours": 1500,
+      "n_ai4privacy": 1500,
+      "embedding_centroid_distance": {
+        "metric": "centroid_cosine_distance",
+        "point": 0.0263671875,
+        "ci_low": 0.02490234375,
+        "ci_high": 0.02783203125,
+        "resamples": 2000,
+        "seed": 20260603,
+        "note": "1 - cosine(mean(ours), mean(ai4privacy)); larger = corpora further apart."
+      },
+      "mauve_style": {
+        "metric": "mauve_style",
+        "score": 0.0056590345987697225,
+        "bins": 25,
+        "grid": 50,
+        "c": 5.0,
+        "note": "MAUVE-style (quantize+divergence-frontier), self-contained offline; 1=identical, lower=further apart. NOT the pip `mauve` package."
+      },
+      "diversity": {
+        "ours": {
+          "type_token_ratio": 0.08593950086793205,
+          "sentence_length": {
+            "mean": 9.977569562748439,
+            "variance": 75.91005905606391,
+            "n_sentences": 3522
+          },
+          "template_repetition": {
+            "n_docs": 1500,
+            "unique_skeletons": 6,
+            "unique_ratio": 0.004,
+            "top_skeleton_share": 0.172
+          }
+        },
+        "ai4privacy": {
+          "type_token_ratio": 0.24578558160726177,
+          "sentence_length": {
+            "mean": 10.622859270290395,
+            "variance": 41.34287283723164,
+            "n_sentences": 2686
+          },
+          "template_repetition": {
+            "n_docs": 1500,
+            "unique_skeletons": 1494,
+            "unique_ratio": 0.996,
+            "top_skeleton_share": 0.002
+          }
+        },
+        "gaps": {
+          "type_token_ratio_delta": -0.1598460807393297,
+          "sentence_length_variance_delta": 34.567186218832276,
+          "unique_skeleton_ratio_delta": -0.992,
+          "top_skeleton_share_delta": 0.16999999999999998,
+          "note": "delta = ours - ai4privacy. Negative TTR/variance/unique-ratio + positive top-share => OURS is more templated/narrow."
+        }
+      }
+    },
+    {
+      "language": "nl",
+      "n_ours": 1500,
+      "n_ai4privacy": 1500,
+      "embedding_centroid_distance": {
+        "metric": "centroid_cosine_distance",
+        "point": 0.021484375,
+        "ci_low": 0.0205078125,
+        "ci_high": 0.02294921875,
+        "resamples": 2000,
+        "seed": 20260603,
+        "note": "1 - cosine(mean(ours), mean(ai4privacy)); larger = corpora further apart."
+      },
+      "mauve_style": {
+        "metric": "mauve_style",
+        "score": 0.005516642195803329,
+        "bins": 25,
+        "grid": 50,
+        "c": 5.0,
+        "note": "MAUVE-style (quantize+divergence-frontier), self-contained offline; 1=identical, lower=further apart. NOT the pip `mauve` package."
+      },
+      "diversity": {
+        "ours": {
+          "type_token_ratio": 0.11898581919473285,
+          "sentence_length": {
+            "mean": 8.972451008236296,
+            "variance": 51.58203003345609,
+            "n_sentences": 3521
+          },
+          "template_repetition": {
+            "n_docs": 1500,
+            "unique_skeletons": 6,
+            "unique_ratio": 0.004,
+            "top_skeleton_share": 0.172
+          }
+        },
+        "ai4privacy": {
+          "type_token_ratio": 0.2642411721948047,
+          "sentence_length": {
+            "mean": 9.804576144036009,
+            "variance": 30.727375908118063,
+            "n_sentences": 2666
+          },
+          "template_repetition": {
+            "n_docs": 1500,
+            "unique_skeletons": 1493,
+            "unique_ratio": 0.9953333333333333,
+            "top_skeleton_share": 0.002
+          }
+        },
+        "gaps": {
+          "type_token_ratio_delta": -0.14525535300007186,
+          "sentence_length_variance_delta": 20.85465412533803,
+          "unique_skeleton_ratio_delta": -0.9913333333333333,
+          "top_skeleton_share_delta": 0.16999999999999998,
+          "note": "delta = ours - ai4privacy. Negative TTR/variance/unique-ratio + positive top-share => OURS is more templated/narrow."
+        }
+      }
+    }
+  ],
+  "contract_reuse": "Reuses synthetic_real_drift.py's pinned percentile-bootstrap + bounded distance contract (imported, not re-implemented); extends it from leaderboard-score dataset comparison to text-embedding + diversity dataset comparison (the embedding piece the drift module deferred). CPU-only.",
+  "limitations": [
+    "Ai4Privacy source is the cached open-pii-masking-500k release (same CC-BY-4.0 LLM open core); pii-masking-openpii-1m has only its README cached offline. Labelled, not silent.",
+    "Embedding model is microsoft/mdeberta-v3-base, the offline multilingual substitute for multilingual-E5 (not cached). Absolute embedding distances are encoder-dependent; the language RANKING and the diversity proxies are the robust, encoder-independent signals.",
+    "ro and pl have no Ai4Privacy counterpart in the cached release and are flagged uncovered (honest coverage), not blocked.",
+    "MAUVE-style is a self-contained quantize+divergence-frontier implementation (the pip `mauve` package is unavailable offline); same construction, frozen offline encoder.",
+    "All numbers are computed here from the offline cache; nothing is hardcoded. CPU-only."
+  ]
+}
