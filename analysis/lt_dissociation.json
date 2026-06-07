@@ -65,6 +65,20 @@
         "gap_ci_low": 0.6129669632488358,
         "gap_ci_high": 0.7357722544677112,
         "dissociation_holds": true
+      },
+      {
+        "detector": "tabularisai",
+        "detector_leak_rate": 0.3656387665198238,
+        "detector_missed": 83,
+        "detector_total": 227,
+        "protector": "kp-model",
+        "protector_leak_rate": 0.0,
+        "protector_missed": 0,
+        "protector_total": 227,
+        "gap": 0.3656387665198238,
+        "gap_ci_low": 0.3034393997553558,
+        "gap_ci_high": 0.43004252429101547,
+        "dissociation_holds": true
       }
     ],
     "holds": true,
@@ -78,6 +92,24 @@
         "missed": 0,
         "total": 227,
         "leaked_qi": 0
+      },
+      "gliner": {
+        "adapter": "gliner",
+        "model_id": "urchade/gliner_multi_pii-v1",
+        "f1": 0.8097227497151539,
+        "leak_rate": 0.973568281938326,
+        "missed": 221,
+        "total": 227,
+        "leaked_qi": 442
+      },
+      "gliner2": {
+        "adapter": "gliner2",
+        "model_id": "fastino/gliner2-base-v1",
+        "f1": 0.5243727598566309,
+        "leak_rate": 0.06167400881057269,
+        "missed": 14,
+        "total": 227,
+        "leaked_qi": 28
       },
       "presidio": {
         "adapter": "presidio",
@@ -97,23 +129,14 @@
         "total": 227,
         "leaked_qi": 308
       },
-      "gliner": {
-        "adapter": "gliner",
-        "model_id": "urchade/gliner_multi_pii-v1",
-        "f1": 0.8097227497151539,
-        "leak_rate": 0.973568281938326,
-        "missed": 221,
+      "tabularisai": {
+        "adapter": "tabularisai",
+        "model_id": "tabularisai/eu-pii-safeguard",
+        "f1": 0.7467240367690201,
+        "leak_rate": 0.3656387665198238,
+        "missed": 83,
         "total": 227,
-        "leaked_qi": 442
-      },
-      "gliner2": {
-        "adapter": "gliner2",
-        "model_id": "fastino/gliner2-base-v1",
-        "f1": 0.5243727598566309,
-        "leak_rate": 0.06167400881057269,
-        "missed": 14,
-        "total": 227,
-        "leaked_qi": 28
+        "leaked_qi": 166
       }
     }
   }

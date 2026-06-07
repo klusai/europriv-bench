@@ -199,6 +199,12 @@ def main() -> None:
     ap.add_argument("--outdir", type=Path, default=Path("analysis"))
     ap.add_argument("--require-hold", action="store_true",
                     help="Exit non-zero unless the dissociation holds (a gap CI excludes 0).")
+    ap.add_argument("--merge", action="store_true",
+                    help="Merge the freshly-scored --adapter(s) into the EXISTING committed "
+                         "{cc}_dissociation.json (keeping its already-scored models) instead of "
+                         "overwriting. Lets a fast-model pass be committed first, then the slow MoE "
+                         "pair (privacy-filter, openmed) merged in (RES-96 bounded execution). The "
+                         "protector may come from the existing file when not re-scored here.")
     args = ap.parse_args()
 
     cc = args.country
@@ -207,19 +213,29 @@ def main() -> None:
         "kp-model", "privacy-filter", "openmed", "tabularisai",
         "gliner", "gliner2", "spacy", "presidio",
     ]
-    if PROTECTOR not in adapters:
-        raise SystemExit(f"protector {PROTECTOR!r} must be among the scored adapters")
 
     rows = _load_rows(args.rows, cc, meta["config"])
-    leaks = _score(rows, adapters, cc, meta["config"], meta["lang"])
+
+    # In --merge mode, start from the committed models and overlay the freshly-scored adapters; the
+    # protector is allowed to live in the existing file. Otherwise this run alone must carry it.
+    existing: dict[str, dict] = {}
+    stem = f"{cc.lower()}_dissociation"
+    out_json = args.outdir / f"{stem}.json"
+    if args.merge:
+        if not out_json.exists():
+            raise SystemExit(f"--merge: {out_json} does not exist; run a full pass first")
+        existing = json.loads(out_json.read_text(encoding="utf-8"))["dissociation"]["models"]
+    if PROTECTOR not in adapters and PROTECTOR not in existing:
+        raise SystemExit(f"protector {PROTECTOR!r} must be scored here or present in {out_json}")
+
+    fresh = _score(rows, adapters, cc, meta["config"], meta["lang"])
+    leaks = {**existing, **fresh}  # freshly-scored adapters win on any overlap (re-score is authoritative)
     diss = dissociation(leaks)
     diss["n_docs"] = len(rows)
     diss["models"] = leaks
 
     payload = {"config": meta["config"], "country": cc, "dissociation": diss}
     args.outdir.mkdir(parents=True, exist_ok=True)
-    stem = f"{cc.lower()}_dissociation"
-    out_json = args.outdir / f"{stem}.json"
     out_json.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
 
     lines = [
