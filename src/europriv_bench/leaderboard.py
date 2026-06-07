@@ -38,12 +38,24 @@ CLEAN_HELD_OUT = "clean_held_out"
 UNKNOWN = "unknown"
 CONTAMINATION_VALUES = frozenset({IN_DISTRIBUTION, CLEAN_HELD_OUT, UNKNOWN})
 
-# config_status enum (per model, config). Default everything to ``dev`` until KLU-27's
-# native-speaker / IAA sign-off promotes a config to ``citable-validated``.
+# config_status enum (per model, config). Synthetic configs default to ``dev`` until KLU-27's
+# native-speaker / IAA sign-off promotes them to ``citable-validated``. RES-89 adds a THIRD,
+# distinct value, ``real-external-gold``: REAL, peer-reviewed, externally-annotated human gold
+# (the TAB ECHR config) — a clear step ABOVE synthetic ``dev``, but on a separate basis from
+# ``citable-validated``. It does NOT depend on the RES-77 native-speaker IAA gate (TAB's
+# annotations are already external peer-reviewed human gold); the program's own claim discipline
+# still applies (single-annotator gold, KP-remapped). Distinguishing it from synthetic ``dev`` is
+# the point: real data should never be conflated with the synthetic skeletons on the board.
 DEV = "dev"
 CITABLE_VALIDATED = "citable-validated"
-CONFIG_STATUS_VALUES = frozenset({DEV, CITABLE_VALIDATED})
+REAL_EXTERNAL_GOLD = "real-external-gold"
+CONFIG_STATUS_VALUES = frozenset({DEV, CITABLE_VALIDATED, REAL_EXTERNAL_GOLD})
 DEFAULT_CONFIG_STATUS = DEV
+
+# Configs that are REAL, peer-reviewed, externally-annotated human gold (config_status =
+# real-external-gold). RES-89: TAB ECHR is the first. These are clean_held_out for every board
+# model (no model was trained on them).
+_REAL_EXTERNAL_GOLD_CONFIGS = frozenset({"tab-echr-legal-en-v1"})
 
 # Adapters whose models were trained on AI4Privacy, the source of the six general-text configs
 # below. Their rows on those configs are in-distribution (train/eval overlap) and so are NOT a
@@ -58,9 +70,11 @@ _AI4PRIVACY_CONFIGS = frozenset({"en", "de", "fr", "it", "es", "nl"})
 # generators but is an authored LEGAL-genre skeleton family distinct from any TRAINING config — the
 # same basis on which ro-realskeleton-v1 is clean_held_out while only the general-text ro-synthetic-v1
 # (the RO LocalePack at a different seed) is in_distribution. Marked clean_held_out for every model.
+# RES-89: the TAB ECHR real-data gold (tab-echr-legal-en-v1) is also clean held-out for every model
+# (no board model was trained on the real ECHR judgments) — folded in via _REAL_EXTERNAL_GOLD_CONFIGS.
 _CLEAN_HELD_OUT_CONFIGS = frozenset({
     "ro-realskeleton-v1", "pl-realskeleton-v1", "it-realskeleton-v1", "legal-realskeleton-v1",
-})
+}) | _REAL_EXTERNAL_GOLD_CONFIGS
 
 # External systems trained on NONE of our data — so every config is a genuine clean held-out test
 # for them (no train/eval overlap to flag). This covers rule-based / orchestration baselines
@@ -155,17 +169,28 @@ def classify_contamination(adapter: str | None, config: str | None) -> str:
     return UNKNOWN
 
 
+def config_status_for(config: str | None) -> str:
+    """Default config_status for a config: ``real-external-gold`` for REAL peer-reviewed external
+    gold (RES-89 TAB ECHR), else ``dev`` (synthetic configs; promoted to ``citable-validated`` only
+    after the KLU-27 native-speaker / IAA sign-off)."""
+    if config in _REAL_EXTERNAL_GOLD_CONFIGS:
+        return REAL_EXTERNAL_GOLD
+    return DEFAULT_CONFIG_STATUS
+
+
 def annotate_row(row: dict) -> dict:
     """Return ``row`` with schema-3 markers filled in (idempotent; preserves existing values).
 
     ``contamination`` is derived from ``(adapter, dataset.config)`` when absent; ``config_status``
-    defaults to ``dev``. Never overwrites a value already present, so a future curated promotion to
-    ``citable-validated`` (KLU-27) survives re-aggregation.
+    is derived from the config (``real-external-gold`` for TAB ECHR, else ``dev``). Never overwrites
+    a value already present, so a future curated promotion to ``citable-validated`` (KLU-27) — or an
+    explicit real-gold tag set at run time — survives re-aggregation.
     """
+    config = (row.get("dataset") or {}).get("config")
     if "contamination" not in row:
-        row["contamination"] = classify_contamination(row.get("adapter"), (row.get("dataset") or {}).get("config"))
+        row["contamination"] = classify_contamination(row.get("adapter"), config)
     if "config_status" not in row:
-        row["config_status"] = DEFAULT_CONFIG_STATUS
+        row["config_status"] = config_status_for(config)
     return row
 
 

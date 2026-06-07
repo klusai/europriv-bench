@@ -23,6 +23,7 @@ schemes:
   - openmed
   - azure
   - tabularisai
+  - tab           # Text Anonymization Benchmark (Pilán et al. 2022) — ECHR legal `entity_type`
 
 # The harmonized taxonomy. `entities` order defines the BIOES label order — DO NOT reorder
 # without bumping `version` (it changes the label space). Fields:
@@ -42,6 +43,7 @@ entities:
       mapa: [PERSON]
       openmed: [FIRSTNAME, LASTNAME, MIDDLENAME, PREFIX]
       tabularisai: [FIRSTNAME, LASTNAME, MIDDLENAME, PREFIX]
+      tab: [PERSON]
 
   - name: ADDRESS
     tier: core
@@ -57,6 +59,7 @@ entities:
       tabularisai:
         [ADDRESS, BUILDING_NUMBER, CITY, STATE, STREET, POSTAL_CODE, COUNTRY,
          LATITUDE, LONGITUDE]
+      tab: [LOC]   # TAB LOC = geographic places (cities/countries/regions) in ECHR judgments
 
   - name: EMAIL
     tier: core
@@ -93,6 +96,7 @@ entities:
       hipaa: [dates]
       openmed: [DATE, DATEOFBIRTH, TIME]
       tabularisai: [DOB]
+      tab: [DATETIME]   # TAB DATETIME = dates/times/date-ranges in ECHR judgments
 
   - name: ACCOUNT_ID
     tier: core
@@ -163,6 +167,7 @@ entities:
     identifier_class: direct
     crosswalk:
       mapa: [AMOUNT]
+      tab: [CODE]   # TAB CODE = ECHR application/case numbers (e.g. "36110/97"), file refs
 
   - name: COURT
     tier: legal
@@ -178,6 +183,7 @@ entities:
     crosswalk:
       mapa: [ORGANIZATION]
       tabularisai: [COMPANY_NAME]
+      tab: [ORG]   # TAB ORG = courts, prosecutors, institutions, companies in ECHR judgments
 
   # Company identifiers (RO: CUI/CIF fiscal code, trade-register J-number). RO-native.
   - name: COMPANY_ID

@@ -14,7 +14,7 @@ from collections.abc import Iterable
 
 from . import __version__
 from .adapters import BaseAdapter
-from .leaderboard import DEFAULT_CONFIG_STATUS, classify_contamination
+from .leaderboard import classify_contamination, config_status_for
 from .logger import get_logger
 from .metrics import ALL_METRICS, ANON_MAP_REGISTRY, ANON_REGISTRY, REGISTRY, ROW_REGISTRY
 from .spans import Span, char_spans_to_bioes, validate_bioes
@@ -145,7 +145,7 @@ def _run_anonymization(
         "eval_labels": sorted(eval_labels),
         "scores": scores,
         "contamination": classify_contamination(adapter.name, spec.dataset.config),
-        "config_status": DEFAULT_CONFIG_STATUS,
+        "config_status": config_status_for(spec.dataset.config),
         "europriv_bench_version": __version__,
         "taxonomy_version": TAXONOMY_VERSION,
         "dataset": {"hf_id": spec.dataset.hf_id, "config": spec.dataset.config, "split": spec.dataset.split},
@@ -250,9 +250,10 @@ def run_spec(
         "scores": scores,
         # schema-3 governance markers (per model, config). See leaderboard.py / GOVERNANCE.md.
         # contamination: in_distribution | clean_held_out | unknown (derived from adapter+config).
-        # config_status: dev | citable-validated; defaults to dev until KLU-27 sign-off promotes it.
+        # config_status: dev | citable-validated | real-external-gold (REAL peer-reviewed external
+        # gold, e.g. TAB ECHR — RES-89); derived from the config, defaults to dev for synthetic.
         "contamination": classify_contamination(adapter.name, spec.dataset.config),
-        "config_status": DEFAULT_CONFIG_STATUS,
+        "config_status": config_status_for(spec.dataset.config),
         # provenance
         "europriv_bench_version": __version__,
         "taxonomy_version": TAXONOMY_VERSION,

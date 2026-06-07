@@ -1,0 +1,39 @@
+name: "PII Detection — TAB ECHR legal English (REAL gold)"
+version: 1
+task: detection
+domain: legal
+languages: [en]
+
+dataset:
+  hf_id: klusai/europriv-bench
+  config: tab-echr-legal-en-v1
+  split: test
+  license: MIT   # TAB data is MIT (NOT CC-BY — that covers only the journal article). RES-89.
+
+# De-identification is recall-sensitive → report F2 alongside strict F1.
+metrics:
+  - entity_f1
+  - entity_f2
+
+# config_status = REAL gold (not synthetic `dev`). This is the program's FIRST real-data config:
+# real ECHR English court judgments, manually annotated + peer-reviewed (Pilán et al. 2022,
+# Computational Linguistics 48(4)). It does NOT depend on the native-speaker IAA gate the synthetic
+# real-skeletons need — the annotations are already external human gold. Clean held-out for every
+# board model (none was trained on TAB ECHR). Claim discipline still applies (single-annotator gold;
+# detection scored on DIRECT+QUASI mentions remapped to KP).
+description: >
+  Entity-level PII detection over REAL English ECHR court judgments from the Text Anonymization
+  Benchmark (TAB; Pilán, Lison, Øvrelid, Papadopoulou, Sánchez & Batet, Computational Linguistics
+  48(4):1053-1101, 2022 — peer-reviewed). The held-out TAB *test* split (127 judgments, 4,821 gold
+  spans), manually annotated and remapped to the harmonized KP taxonomy via the shared `tab`
+  crosswalk (PERSON->PERSON, CODE->CASE_NUMBER, LOC->ADDRESS, ORG->ORG_PARTY, DATETIME->DATE;
+  DEM/QUANTITY/MISC have no clean KP type and are dropped + counted). Only DIRECT+QUASI mentions are
+  kept (NO_MASK is not a detection target); each gold span preserves TAB's `identifier_type`
+  (DIRECT/QUASI — the re-identification / residual-distinctiveness signal, external-validation
+  substrate for the QI channel, RES-88) and `entity_id` (co-reference). One canonical annotator per
+  document (first quality_checked, else first). Every row validated byte-equal + strict BIOES via
+  `europriv_bench.spans` (TAB offsets are exact: 0 byte mismatches; 0 misaligned docs in the test
+  split). LICENSE: TAB data is MIT (LICENSE.txt = verbatim MIT), NOT CC-BY — CC-BY covers only the
+  journal article. Underlying judgments are public Council-of-Europe / ECHR (HUDOC) documents. This
+  is the first real-data test of the detection-vs-re-identification dissociation on a peer-reviewed
+  legal anchor (the RES-52 "subsume TAB in-harness" goal).

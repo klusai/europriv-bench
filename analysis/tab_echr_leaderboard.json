@@ -1,0 +1,263 @@
+{
+  "schema": 3,
+  "entries": {
+    "gliner2::fastino/gliner2-base-v1": [
+      {
+        "spec": "PII Detection — TAB ECHR legal English (REAL gold)",
+        "task": "detection",
+        "languages": [
+          "en"
+        ],
+        "domain": "legal",
+        "adapter": "gliner2",
+        "model_id": "fastino/gliner2-base-v1",
+        "n": 127,
+        "limit": null,
+        "eval_labels": [
+          "ADDRESS",
+          "CASE_NUMBER",
+          "DATE",
+          "ORG_PARTY",
+          "PERSON"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.6448598130841121,
+            "recall": 0.4723086496577474,
+            "f1": 0.5452586206896551
+          },
+          "entity_f2": {
+            "precision": 0.6448598130841121,
+            "recall": 0.4723086496577474,
+            "f2": 0.4990138067061144
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "real-external-gold",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "tab-echr-legal-en-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      }
+    ],
+    "gliner::urchade/gliner_multi_pii-v1": [
+      {
+        "spec": "PII Detection — TAB ECHR legal English (REAL gold)",
+        "task": "detection",
+        "languages": [
+          "en"
+        ],
+        "domain": "legal",
+        "adapter": "gliner",
+        "model_id": "urchade/gliner_multi_pii-v1",
+        "n": 127,
+        "limit": null,
+        "eval_labels": [
+          "ADDRESS",
+          "CASE_NUMBER",
+          "DATE",
+          "ORG_PARTY",
+          "PERSON"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.5885441527446301,
+            "recall": 0.2557560672059739,
+            "f1": 0.35656448814343555
+          },
+          "entity_f2": {
+            "precision": 0.5885441527446301,
+            "recall": 0.2557560672059739,
+            "f2": 0.2883670891996819
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "real-external-gold",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "tab-echr-legal-en-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      }
+    ],
+    "kp-model::klusai/kp-deid-mdeberta-280m": [
+      {
+        "spec": "PII Detection — TAB ECHR legal English (REAL gold)",
+        "task": "detection",
+        "languages": [
+          "en"
+        ],
+        "domain": "legal",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-mdeberta-280m",
+        "n": 127,
+        "limit": null,
+        "eval_labels": [
+          "ADDRESS",
+          "CASE_NUMBER",
+          "DATE",
+          "ORG_PARTY",
+          "PERSON"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.2210126582278481,
+            "recall": 0.18108276291225886,
+            "f1": 0.19906510090069546
+          },
+          "entity_f2": {
+            "precision": 0.2210126582278481,
+            "recall": 0.18108276291225886,
+            "f2": 0.18787122320736852
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "real-external-gold",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "tab-echr-legal-en-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      }
+    ],
+    "presidio::presidio-analyzer+en_core_web_lg": [
+      {
+        "spec": "PII Detection — TAB ECHR legal English (REAL gold)",
+        "task": "detection",
+        "languages": [
+          "en"
+        ],
+        "domain": "legal",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 127,
+        "limit": null,
+        "eval_labels": [
+          "ADDRESS",
+          "CASE_NUMBER",
+          "DATE",
+          "ORG_PARTY",
+          "PERSON"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.5928496319663512,
+            "recall": 0.5847334577888404,
+            "f1": 0.5887635756056809
+          },
+          "entity_f2": {
+            "precision": 0.5928496319663512,
+            "recall": 0.5847334577888404,
+            "f2": 0.5863388660094013
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "real-external-gold",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "tab-echr-legal-en-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      }
+    ],
+    "spacy::spacy/en_core_web_lg@3.8.0": [
+      {
+        "spec": "PII Detection — TAB ECHR legal English (REAL gold)",
+        "task": "detection",
+        "languages": [
+          "en"
+        ],
+        "domain": "legal",
+        "adapter": "spacy",
+        "model_id": "spacy/en_core_web_lg@3.8.0",
+        "n": 127,
+        "limit": null,
+        "eval_labels": [
+          "ADDRESS",
+          "CASE_NUMBER",
+          "DATE",
+          "ORG_PARTY",
+          "PERSON"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.39446598048389253,
+            "recall": 0.6121136693632027,
+            "f1": 0.4797593887172818
+          },
+          "entity_f2": {
+            "precision": 0.39446598048389253,
+            "recall": 0.6121136693632027,
+            "f2": 0.5512796562675135
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "real-external-gold",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "tab-echr-legal-en-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      }
+    ],
+    "tabularisai::tabularisai/eu-pii-safeguard": [
+      {
+        "spec": "PII Detection — TAB ECHR legal English (REAL gold)",
+        "task": "detection",
+        "languages": [
+          "en"
+        ],
+        "domain": "legal",
+        "adapter": "tabularisai",
+        "model_id": "tabularisai/eu-pii-safeguard",
+        "n": 127,
+        "limit": null,
+        "eval_labels": [
+          "ADDRESS",
+          "CASE_NUMBER",
+          "DATE",
+          "ORG_PARTY",
+          "PERSON"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.3378839590443686,
+            "recall": 0.04107031736154325,
+            "f1": 0.0732383946735713
+          },
+          "entity_f2": {
+            "precision": 0.3378839590443686,
+            "recall": 0.04107031736154325,
+            "f2": 0.0498238550578762
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "real-external-gold",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "tab-echr-legal-en-v1",
+          "split": "test"
+        },
+        "timestamp": null
+      }
+    ]
+  }
+}

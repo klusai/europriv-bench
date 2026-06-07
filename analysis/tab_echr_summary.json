@@ -1,0 +1,70 @@
+{
+  "config": "tab-echr-legal-en-v1",
+  "source": "Text Anonymization Benchmark (TAB), Pilán et al. 2022, Computational Linguistics 48(4)",
+  "license": "MIT (TAB data; NOT CC-BY — CC-BY covers only the journal article)",
+  "label": "REAL, peer-reviewed, externally-annotated legal gold (ECHR); config_status=real-external-gold",
+  "n_docs": 127,
+  "scored_adapters": [
+    "kp-model",
+    "gliner",
+    "gliner2",
+    "spacy",
+    "presidio",
+    "tabularisai"
+  ],
+  "pending_adapters": [
+    "openmed",
+    "privacy-filter"
+  ],
+  "pending_note": "MoE backends (privacy-filter, openmed) are slow on this Mac's CPU; scored separately via the --workers parallel path or flagged pending — honest coverage, never blocking the fast subset.",
+  "per_adapter": {
+    "kp-model": {
+      "entity_f1": 0.1991,
+      "entity_f2": 0.1879,
+      "precision": 0.221,
+      "recall": 0.1811,
+      "contamination": "clean_held_out",
+      "config_status": "real-external-gold"
+    },
+    "gliner": {
+      "entity_f1": 0.3566,
+      "entity_f2": 0.2884,
+      "precision": 0.5885,
+      "recall": 0.2558,
+      "contamination": "clean_held_out",
+      "config_status": "real-external-gold"
+    },
+    "gliner2": {
+      "entity_f1": 0.5453,
+      "entity_f2": 0.499,
+      "precision": 0.6449,
+      "recall": 0.4723,
+      "contamination": "clean_held_out",
+      "config_status": "real-external-gold"
+    },
+    "spacy": {
+      "entity_f1": 0.4798,
+      "entity_f2": 0.5513,
+      "precision": 0.3945,
+      "recall": 0.6121,
+      "contamination": "clean_held_out",
+      "config_status": "real-external-gold"
+    },
+    "presidio": {
+      "entity_f1": 0.5888,
+      "entity_f2": 0.5863,
+      "precision": 0.5928,
+      "recall": 0.5847,
+      "contamination": "clean_held_out",
+      "config_status": "real-external-gold"
+    },
+    "tabularisai": {
+      "entity_f1": 0.0732,
+      "entity_f2": 0.0498,
+      "precision": 0.3379,
+      "recall": 0.0411,
+      "contamination": "clean_held_out",
+      "config_status": "real-external-gold"
+    }
+  }
+}
