@@ -19,10 +19,20 @@
   "pending_note": "MoE backends (privacy-filter, openmed) are slow on this Mac's CPU; scored separately via the --workers parallel path or flagged pending — honest coverage, never blocking the fast subset.",
   "per_adapter": {
     "kp-model": {
+      "model_id": "klusai/kp-deid-mdeberta-280m",
       "entity_f1": 0.1991,
       "entity_f2": 0.1879,
       "precision": 0.221,
       "recall": 0.1811,
+      "contamination": "clean_held_out",
+      "config_status": "real-external-gold"
+    },
+    "kp-model (xlmr-560m, seed0)": {
+      "model_id": "klusai/kp-deid-xlmr-560m",
+      "entity_f1": 0.2439,
+      "entity_f2": 0.2278,
+      "precision": 0.2765,
+      "recall": 0.2182,
       "contamination": "clean_held_out",
       "config_status": "real-external-gold"
     },
