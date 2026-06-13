@@ -830,6 +830,33 @@ def tab_reid_leakage(rows: Sequence[dict], pred_tags: Tags) -> dict[str, float]:
     return out
 
 
+def tab_reid_subject_detection(rows: Sequence[dict], pred_tags: Tags) -> list[dict]:
+    """Per-subject DIRECT/QUASI detection outcomes for paired significance testing (bootstrap/McNemar).
+
+    One record per distinct TAB subject ``(doc, entity_id, identifier_type)`` in deterministic order:
+    ``{"doc", "entity_id", "identifier_type", "detected"}``. ``detected=False`` means the subject
+    LEAKED (left un-redacted in ≥1 occurrence) — the exact unit ``tab_reid_leakage`` aggregates, so
+    pairing two models' ``detected`` flags subject-by-subject is consistent with the leaderboard leak
+    rate. Keys depend only on gold, so two models' dumps align row-for-row.
+    """
+    subjects: dict[tuple[int, str, str], dict] = {}
+    for doc_idx, (row, pred) in enumerate(zip(rows, pred_tags)):
+        toks = whitespace_tokens(row["text"])
+        for sp in row.get("spans", []):
+            eid, idt = sp.get("entity_id"), str(sp.get("identifier_type") or "").upper()
+            if eid is None or idt not in ("DIRECT", "QUASI"):
+                continue
+            members = [i for i, (_, ts, te) in enumerate(toks) if ts < sp["end"] and te > sp["start"]]
+            detected = any(pred[i] != "O" for i in members if i < len(pred))
+            key = (doc_idx, str(eid), idt)
+            subj = subjects.setdefault(key, {"idt": idt, "detected": True})
+            subj["detected"] = subj["detected"] and detected
+    return [
+        {"doc": k[0], "entity_id": k[1], "identifier_type": k[2], "detected": bool(v["detected"])}
+        for k, v in sorted(subjects.items())
+    ]
+
+
 REGISTRY: dict[str, Callable] = {
     "entity_f1": entity_f1,
     "entity_f2": entity_f2,
