@@ -12,8 +12,7 @@
     "tabularisai"
   ],
   "pending_adapters": [
-    "openmed",
-    "privacy-filter"
+    "openmed"
   ],
   "n_docs": null,
   "entries": [
@@ -70,6 +69,20 @@
       ],
       "quasi_leak_rate": 0.9122,
       "all_leak_rate": 0.8931,
+      "direct_subjects": 264,
+      "quasi_subjects": 3701
+    },
+    {
+      "adapter": "privacy-filter",
+      "model_id": "openai/privacy-filter",
+      "entity_f1": 0.3987,
+      "direct_leak_rate": 0.6477,
+      "direct_leak_ci": [
+        0.5884,
+        0.7029
+      ],
+      "quasi_leak_rate": 0.6836,
+      "all_leak_rate": 0.6812,
       "direct_subjects": 264,
       "quasi_subjects": 3701
     },
