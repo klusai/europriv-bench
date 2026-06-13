@@ -102,8 +102,8 @@
       "quasi_subjects": 3701
     }
   ],
-  "kp_local_models_not_yet_published": {
-    "note": "kp models scored from LOCAL checkpoints (HF publish gated on RES-62); not in the adapter-scored entries above. See klusai-models/docs/res104-reid-win-scorecard.md.",
+  "kp_models": {
+    "note": "kp-cjeu-structure (local checkpoint runs/res72-cjeu-tab-seed0) is PUBLISHED as klusai/kp-deid-xlmr-560m-legal (HF). Scored from the local checkpoint; identical weights. See klusai-models/docs/res104-reid-win-scorecard.md.",
     "kp-cjeu-structure": {
       "direct_leak_rate": 0.095,
       "ci": [
@@ -113,7 +113,8 @@
       "detection_f1": 0.34,
       "rank_on_reid": 1,
       "over_redaction_tok": 0.043,
-      "note": "#1 on re-id by ~5x; not over-tagging (pred non-O 9.1% < gold 11.3%)"
+      "note": "#1 on re-id by ~5x; not over-tagging (pred non-O 9.1% < gold 11.3%)",
+      "published_as": "klusai/kp-deid-xlmr-560m-legal"
     },
     "kp-xlmr-560m": {
       "direct_leak_rate": 0.58,
