@@ -1,0 +1,14 @@
+{
+  "comparison": "kp-cjeu-structure vs spacy (runner-up) \u2014 DIRECT-identifier leak rate on TAB",
+  "n_paired_direct_subjects": 264,
+  "kp_direct_leak": 0.0947,
+  "spacy_direct_leak": 0.4962,
+  "delta_kp_minus_spacy": -0.4015,
+  "delta_ci95": [
+    -0.4773,
+    -0.322
+  ],
+  "n_bootstrap": 2000,
+  "significant": true,
+  "reading": "kp leaks SIGNIFICANTLY fewer DIRECT identifiers (\u0394 CI fully below 0)"
+}
