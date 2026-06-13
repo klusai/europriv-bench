@@ -14,6 +14,7 @@ dataset:
 metrics:
   - entity_f1
   - entity_f2
+  - tab_reid_leakage   # re-id-risk leak rate (DIRECT/QUASI), the flagship privacy axis — RES-72/104
 
 # config_status = REAL gold (not synthetic `dev`). This is the program's FIRST real-data config:
 # real ECHR English court judgments, manually annotated + peer-reviewed (Pilán et al. 2022,

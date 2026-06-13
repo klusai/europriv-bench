@@ -789,6 +789,47 @@ def membership_inference(*args, **kwargs) -> dict[str, float]:
 
 
 # Tag-based metrics: called as fn(gold_tags, pred_tags).
+def tab_reid_leakage(rows: Sequence[dict], pred_tags: Tags) -> dict[str, float]:
+    """Re-identification-risk leak rate on TAB (real legal gold), split by identifier sensitivity.
+
+    The flagship privacy axis on a REAL corpus: of the manually-annotated identifiers a de-id model
+    should remove, what fraction does it LEAVE in the residual? Each TAB gold span carries an
+    ``identifier_type`` (DIRECT — directly re-identifying, e.g. names / case numbers; QUASI — needs
+    combination) and an ``entity_id`` (coreference). A **subject** is one ``(doc, entity_id,
+    identifier_type)``; it is detected iff EVERY occurrence's whitespace tokens are marked (non-O), so
+    it LEAKS iff any occurrence survives un-redacted. Reports the per-subject leak rate (↓ better)
+    overall and split DIRECT/QUASI, each with a 95% Wilson CI (shared ``_leak_rate_stats``). Computed
+    on the post-detection residual, never raw text — the re-id-risk axis competitors don't report.
+    """
+    subjects: dict[tuple[int, str, str], dict] = {}
+    for doc_idx, (row, pred) in enumerate(zip(rows, pred_tags)):
+        toks = whitespace_tokens(row["text"])
+        for sp in row.get("spans", []):
+            eid, idt = sp.get("entity_id"), str(sp.get("identifier_type") or "").upper()
+            if eid is None or idt not in ("DIRECT", "QUASI"):
+                continue
+            members = [i for i, (_, ts, te) in enumerate(toks) if ts < sp["end"] and te > sp["start"]]
+            detected = any(pred[i] != "O" for i in members if i < len(pred))
+            key = (doc_idx, str(eid), idt)
+            subj = subjects.setdefault(key, {"idt": idt, "detected": True})
+            subj["detected"] = subj["detected"] and detected
+
+    out: dict[str, float] = {}
+    groups = (("all", list(subjects.values())),
+              ("direct", [s for s in subjects.values() if s["idt"] == "DIRECT"]),
+              ("quasi", [s for s in subjects.values() if s["idt"] == "QUASI"]))
+    for name, items in groups:
+        total = len(items)
+        leaked = sum(1 for s in items if not s["detected"])
+        stats = _leak_rate_stats(leaked, total)
+        out[f"{name}_subjects_total"] = float(total)
+        out[f"{name}_subjects_leaked"] = float(leaked)
+        out[f"{name}_leak_rate"] = stats["leak_rate"]
+        out[f"{name}_leak_rate_ci_low"] = stats["leak_rate_ci_low"]
+        out[f"{name}_leak_rate_ci_high"] = stats["leak_rate_ci_high"]
+    return out
+
+
 REGISTRY: dict[str, Callable] = {
     "entity_f1": entity_f1,
     "entity_f2": entity_f2,
@@ -804,6 +845,9 @@ ROW_REGISTRY: dict[str, Callable] = {
     # skip-and-reports when gold lacks QI tuples. Computed on the POST-DETECTION RESIDUAL.
     "name_in_context_leakage": name_in_context_leakage,
     "k_anonymity_violation": k_anonymity_violation,
+    # RES-72/104 pivot: re-id-risk leak rate on TAB real legal gold, split DIRECT/QUASI. The flagship
+    # privacy axis (competitors report only detection-F1). Computed on the post-detection residual.
+    "tab_reid_leakage": tab_reid_leakage,
 }
 
 # Track-C anonymization metrics: called as fn(gold_rows, redacted_texts) — score the adapter's
