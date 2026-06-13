@@ -1,0 +1,105 @@
+{
+  "config": "tab-echr-legal-en-v1",
+  "metric": "tab_reid_leakage \u2014 per-subject DIRECT/QUASI identifier leak rate on the post-detection residual (lower = less re-identification risk)",
+  "label": "REAL legal gold (TAB ECHR, Pil\u00e1n et al. 2022); flagship re-id-risk axis (RES-72/104)",
+  "ranked_by": "direct_leak_rate (ascending)",
+  "scored_adapters": [
+    "kp-model",
+    "gliner",
+    "gliner2",
+    "spacy",
+    "presidio",
+    "tabularisai"
+  ],
+  "pending_adapters": [
+    "openmed",
+    "privacy-filter"
+  ],
+  "n_docs": null,
+  "entries": [
+    {
+      "adapter": "spacy",
+      "model_id": "spacy/en_core_web_lg@3.8.0",
+      "entity_f1": 0.4798,
+      "direct_leak_rate": 0.4962,
+      "direct_leak_ci": [
+        0.4364,
+        0.5561
+      ],
+      "quasi_leak_rate": 0.0792,
+      "all_leak_rate": 0.1069,
+      "direct_subjects": 264,
+      "quasi_subjects": 3701
+    },
+    {
+      "adapter": "presidio",
+      "model_id": "presidio-analyzer+en_core_web_lg",
+      "entity_f1": 0.5888,
+      "direct_leak_rate": 0.5,
+      "direct_leak_ci": [
+        0.4401,
+        0.5599
+      ],
+      "quasi_leak_rate": 0.1448,
+      "all_leak_rate": 0.1685,
+      "direct_subjects": 264,
+      "quasi_subjects": 3701
+    },
+    {
+      "adapter": "gliner",
+      "model_id": "urchade/gliner_multi_pii-v1",
+      "entity_f1": 0.3566,
+      "direct_leak_rate": 0.5985,
+      "direct_leak_ci": [
+        0.5383,
+        0.6558
+      ],
+      "quasi_leak_rate": 0.6787,
+      "all_leak_rate": 0.6734,
+      "direct_subjects": 264,
+      "quasi_subjects": 3701
+    },
+    {
+      "adapter": "tabularisai",
+      "model_id": "tabularisai/eu-pii-safeguard",
+      "entity_f1": 0.0732,
+      "direct_leak_rate": 0.625,
+      "direct_leak_ci": [
+        0.5652,
+        0.6812
+      ],
+      "quasi_leak_rate": 0.9122,
+      "all_leak_rate": 0.8931,
+      "direct_subjects": 264,
+      "quasi_subjects": 3701
+    },
+    {
+      "adapter": "gliner2",
+      "model_id": "fastino/gliner2-base-v1",
+      "entity_f1": 0.5453,
+      "direct_leak_rate": 0.6515,
+      "direct_leak_ci": [
+        0.5922,
+        0.7064
+      ],
+      "quasi_leak_rate": 0.301,
+      "all_leak_rate": 0.3243,
+      "direct_subjects": 264,
+      "quasi_subjects": 3701
+    },
+    {
+      "adapter": "kp-model",
+      "model_id": "klusai/kp-deid-mdeberta-280m",
+      "entity_f1": 0.1991,
+      "direct_leak_rate": 0.6742,
+      "direct_leak_ci": [
+        0.6156,
+        0.7279
+      ],
+      "quasi_leak_rate": 0.3912,
+      "all_leak_rate": 0.4101,
+      "direct_subjects": 264,
+      "quasi_subjects": 3701
+    }
+  ]
+}
