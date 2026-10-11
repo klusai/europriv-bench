@@ -1,0 +1,60 @@
+{
+  "issue": "RES-100",
+  "protocol_version": 1,
+  "benchmark_revision": "58faa4fa572cd8064818a6e1f8ca6e361b959c00",
+  "base_revision": "7ffa9a043d54d1be65afb281eddf0ffbe629385b",
+  "scope": "All public EuroPriv detection configs plus ten pinned OpenPII slices; unavailable specs reported. Existing test sets, not a new independent gateway challenge.",
+  "primary_endpoint": "residual_leakage_v2.all_leak_rate",
+  "secondary_endpoint": "TAB residual_leakage_v2.direct_leak_rate",
+  "slices": [
+    "all",
+    "DIRECT",
+    "QUASI",
+    "UNSPECIFIED"
+  ],
+  "candidate_seeds": [
+    0,
+    1,
+    2
+  ],
+  "seed_policy": "Score every available seed; single-seed rows; no pooling or best-seed selection.",
+  "inference": {
+    "device": "cpu",
+    "dtype": "float32",
+    "threads": 4,
+    "batch_size": 16,
+    "max_tokens": 256,
+    "stride": 64,
+    "aggregation": "transformers simple; remove remaining E/S label prefixes before KP mapping",
+    "packages": {
+      "transformers": "5.10.2",
+      "torch": "2.12.0",
+      "peft": "0.19.1"
+    }
+  },
+  "operator": "Replace union of exact native character spans with literal block placeholders. All non-O labels, no confidence threshold, no evaluation-label filtering, no whitespace-token expansion. Retain native spans and actual output. Local operator, not deployed gateway.",
+  "utility": "Removed gold non-PII non-whitespace characters / all gold non-PII non-whitespace characters; empty denominator unavailable.",
+  "uncertainty": {
+    "confidence": 0.95,
+    "wilson": "descriptive subject-count intervals",
+    "bootstrap_unit": "document",
+    "resamples": 2000,
+    "rng_seed": 100
+  },
+  "comparators": [
+    "openai/privacy-filter",
+    "kp-280m",
+    "TAB-trained 560m",
+    "stock Presidio",
+    "Shield"
+  ],
+  "historical_comparisons": "Main leaderboard aggregate scores remain historical. Paired inference requires identical ordered gold and actual operator receipts; missing evidence is unverified. RES-125 local receipts, if used, are explicitly separate reruns and keep their own runtime, truncation and operator provenance.",
+  "acceptance": "gateway-contract v1: >=3 independent candidate seeds, each passes disjoint v2 Wilson CIs and negative paired cluster delta upper bound; utility delta upper <=0; preserve RO/PL legacy zero floors; all required language/review/disjointness gates. One seed cannot establish a win. Zero/zero is a scoped tie, not equivalence.",
+  "not_verified": [
+    "gateway load/SLO",
+    "new reviewed harder held-out gold",
+    "training/eval subject and source disjointness",
+    "empirical attacker re-identification"
+  ],
+  "runtime_amendment": "Initial 5.9.0 run retained only as diagnostics; final rows require full inference rerun on exact moe-extra pins."
+}

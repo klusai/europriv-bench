@@ -50,6 +50,16 @@ def _load_gold_rows(spec: EvalSpec) -> list[dict]:
     any other loader error (corrupt rows, network, schema drift) propagates unchanged so a real
     crash on an *available* config fails the run instead of being silently skipped.
     """
+    if spec.dataset.loader == "gateway":
+        from .gateway import load_gateway
+
+        return load_gateway(spec)
+
+    if spec.dataset.loader == "ai4privacy-openpii":
+        from .openpii import load_openpii
+
+        return load_openpii(spec)
+
     from datasets import load_dataset
     from datasets.exceptions import DatasetNotFoundError
 
@@ -100,6 +110,7 @@ def _run_anonymization(
     gold_tags: list[list[str]],
     timestamp: str | None,
     limit: int | None,
+    dataset: dict,
 ) -> dict:
     """Track C (KLU-104): score a redaction/pseudonymization adapter on its anonymized output.
 
@@ -153,11 +164,11 @@ def _run_anonymization(
         "limit": limit,
         "eval_labels": sorted(eval_labels),
         "scores": scores,
-        "contamination": classify_contamination(adapter.name, spec.dataset.config),
-        "config_status": config_status_for(spec.dataset.config),
+        "contamination": classify_contamination(adapter.name, spec.dataset.identity),
+        "config_status": config_status_for(spec.dataset.identity),
         "europriv_bench_version": __version__,
         "taxonomy_version": TAXONOMY_VERSION,
-        "dataset": {"hf_id": spec.dataset.hf_id, "config": spec.dataset.config, "split": spec.dataset.split},
+        "dataset": dataset,
         "timestamp": timestamp,
         **adapter.provenance(),
     }
@@ -203,6 +214,7 @@ def run_spec(
     span_only = bool(spec.metrics) and all(key in SPAN_REGISTRY for key in spec.metrics)
     if rows is None and gold is None:
         rows = _load_gold_rows(spec)
+    dataset = {**spec.dataset.provenance(), **getattr(rows, "source_metadata", {})}
     if rows is not None:
         if limit is not None:
             rows = rows[:limit]
@@ -219,7 +231,7 @@ def run_spec(
     if spec.task is Task.ANONYMIZATION:
         if any(key in SPAN_REGISTRY for key in spec.metrics):
             raise ValueError("residual v2 currently uses the detection runner with exact operator coverage")
-        return _run_anonymization(spec, adapter, rows, texts, gold_tags, timestamp, limit)
+        return _run_anonymization(spec, adapter, rows, texts, gold_tags, timestamp, limit, dataset)
 
     needs_spans = any(key in SPAN_REGISTRY for key in spec.metrics)
     if needs_spans:
@@ -247,7 +259,7 @@ def run_spec(
     for key in spec.metrics:
         if key in SPAN_REGISTRY:
             scores[key] = SPAN_REGISTRY[key](rows, redaction_spans)
-            if dumps is not None:
+            if dumps is not None and key in {"residual_leakage_v2", "tab_reid_leakage_v2"}:
                 dumps.append({
                     "adapter": adapter.name, "model_id": adapter.model_id, "spec": spec.name,
                     "metric": key, "metric_version": 2, "coverage_basis": "operator_character_spans",
@@ -275,8 +287,7 @@ def run_spec(
             "adapter": adapter.name,
             "model_id": adapter.model_id,
             "spec": spec.name,
-            "dataset": {"hf_id": spec.dataset.hf_id, "config": spec.dataset.config,
-                        "split": spec.dataset.split},
+            "dataset": dataset,
             "n": len(texts),
             "limit": limit,
             "subjects": national_id_subject_detection(rows, pred_tags),
@@ -297,12 +308,12 @@ def run_spec(
         # contamination: in_distribution | clean_held_out | unknown (derived from adapter+config).
         # config_status: dev | panel-validated | citable-validated | real-external-gold (REAL peer-reviewed external
         # gold, e.g. TAB ECHR — RES-89); derived from the config, defaults to dev for synthetic.
-        "contamination": classify_contamination(adapter.name, spec.dataset.config),
-        "config_status": config_status_for(spec.dataset.config),
+        "contamination": classify_contamination(adapter.name, spec.dataset.identity),
+        "config_status": config_status_for(spec.dataset.identity),
         # provenance
         "europriv_bench_version": __version__,
         "taxonomy_version": TAXONOMY_VERSION,
-        "dataset": {"hf_id": spec.dataset.hf_id, "config": spec.dataset.config, "split": spec.dataset.split},
+        "dataset": dataset,
         "timestamp": timestamp,
         **adapter.provenance(),
     }

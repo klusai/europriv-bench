@@ -18,7 +18,7 @@ dependencies = [
 # transformers>=5.9 is required for the openai/privacy-filter (openai_privacy_filter) arch —
 # 5.1 does NOT recognize it. NOTE: the `gliner` extra pins an older transformers and will
 # downgrade/break this; run GLiNER baselines in a SEPARATE environment.
-hf = ["transformers>=5.9", "torch>=2.4", "datasets>=4.0"]
+hf = ["transformers>=5.9", "torch>=2.4", "datasets>=4.0", "pyarrow>=18"]
 gliner = ["gliner>=0.2"]
 # GLiNER2 (Fastino, Apache-2.0): a distinct schema-based IE system from the original GLiNER, with
 # its own `gliner2` package. It runs against the `hf` extra's transformers>=5.9, but its `gliner`
@@ -35,8 +35,8 @@ presidio = ["presidio-analyzer>=2.2"]
 analysis = ["matplotlib>=3.8", "scipy>=1.11"]
 # Autonomous LLM-panel audit: local parquet sampling + document bootstrap (RES-77).
 panel = ["pyarrow>=18", "numpy>=2"]
-# Loader tests mock datasets.load_dataset; they need the package, but no model backends.
-dev = ["pytest>=8.0", "ruff>=0.11", "coverage>=7.0", "datasets>=4.0"]
+# Loader tests mock Hub calls and read local parquet fixtures; no model backends.
+dev = ["pytest>=8.0", "ruff>=0.11", "coverage>=7.0", "datasets>=4.0", "pyarrow>=18"]
 
 [project.scripts]
 europriv = "europriv_bench.main:cli"

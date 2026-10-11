@@ -140,6 +140,14 @@ def classify_contamination(adapter: str | None, config: str | None) -> str:
     established — e.g. a same-language but different-generator config, or a baseline whose training
     data we don't know).
     """
+    # Gateway dev gold has pending family/subject/translation overlap review. Do not
+    # inherit a generic clean-held-out claim, including for stock orchestration baselines.
+    if config == "gateway-traffic-v1" or (config and config.startswith("gateway-traffic-v1/")):
+        return UNKNOWN
+    # RES-100 uses eight-language KP + TAB train, unlike the older three-language KP family.
+    # Do not inherit source/subject-disjointness assertions that this run has not audited.
+    if adapter == "kp-deid-moe-res100":
+        return IN_DISTRIBUTION if config == "ro-synthetic-v1" else UNKNOWN
     if config in _CLEAN_HELD_OUT_CONFIGS:
         return CLEAN_HELD_OUT
     # Rule-based orchestration baselines (Presidio): no training data of ours → clean held-out
@@ -189,12 +197,13 @@ def config_status_for(config: str | None) -> str:
 def annotate_row(row: dict) -> dict:
     """Return ``row`` with schema-3 markers filled in (idempotent; preserves existing values).
 
-    ``contamination`` is derived from ``(adapter, dataset.config)`` when absent; ``config_status``
+    ``contamination`` uses the adapter and dataset.eval_config (or config) when absent; ``config_status``
     is derived from the config (``real-external-gold`` for TAB ECHR, else ``dev``). Never overwrites
     a value already present, so a future curated promotion to ``citable-validated`` (KLU-27) — or an
     explicit real-gold tag set at run time — survives re-aggregation.
     """
-    config = (row.get("dataset") or {}).get("config")
+    dataset = row.get("dataset") or {}
+    config = dataset.get("eval_config") or dataset.get("config")
     if "contamination" not in row:
         row["contamination"] = classify_contamination(row.get("adapter"), config)
     if "config_status" not in row:

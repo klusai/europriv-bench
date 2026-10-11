@@ -194,10 +194,11 @@ def test_committed_baseline_is_schema3_with_markers(rel):
         for r in rows:
             assert r["contamination"] in CONTAMINATION_VALUES
             assert r["config_status"] in CONFIG_STATUS_VALUES
+            config = r["dataset"].get("eval_config") or r["dataset"]["config"]
             # Synthetic configs remain dev; TAB uses the existing real-external-gold policy.
-            assert r["config_status"] == config_status_for(r["dataset"]["config"])
+            assert r["config_status"] == config_status_for(config)
             # Derived markers match the policy in leaderboard.classify_contamination.
-            assert r["contamination"] == classify_contamination(r["adapter"], r["dataset"]["config"])
+            assert r["contamination"] == classify_contamination(r["adapter"], config)
             # RES-82: leak metric is unified under national_id_leakage; cnp_leakage is fully migrated.
             assert "cnp_leakage" not in r["scores"]
             leak = r["scores"].get("national_id_leakage")
