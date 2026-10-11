@@ -146,7 +146,7 @@ def classify_contamination(adapter: str | None, config: str | None) -> str:
         return UNKNOWN
     # RES-100 uses eight-language KP + TAB train, unlike the older three-language KP family.
     # Do not inherit source/subject-disjointness assertions that this run has not audited.
-    if adapter in {"kp-deid-moe-res100", "kp-deid-moe-res100-calibrated"}:
+    if adapter in {"kp-deid-moe-res100", "kp-deid-moe-res100-calibrated", "kp-deid-moe-gateway"}:
         return IN_DISTRIBUTION if config == "ro-synthetic-v1" else UNKNOWN
     if config in _CLEAN_HELD_OUT_CONFIGS:
         return CLEAN_HELD_OUT

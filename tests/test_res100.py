@@ -96,7 +96,7 @@ def test_paired_ci_keeps_documents_and_rejects_mismatched_gold():
         paired(candidate, comparator)
 
 
-@pytest.mark.parametrize("adapter", ["kp-deid-moe-res100", "kp-deid-moe-res100-calibrated"])
+@pytest.mark.parametrize("adapter", ["kp-deid-moe-res100", "kp-deid-moe-res100-calibrated", "kp-deid-moe-gateway"])
 def test_moe_contamination_does_not_inherit_old_family_assumptions(adapter):
     from europriv_bench.leaderboard import classify_contamination
 
