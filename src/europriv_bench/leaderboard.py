@@ -140,6 +140,10 @@ def classify_contamination(adapter: str | None, config: str | None) -> str:
     established — e.g. a same-language but different-generator config, or a baseline whose training
     data we don't know).
     """
+    # RES-100 uses eight-language KP + TAB train, unlike the older three-language KP family.
+    # Do not inherit source/subject-disjointness assertions that this run has not audited.
+    if adapter == "kp-deid-moe-res100":
+        return IN_DISTRIBUTION if config == "ro-synthetic-v1" else UNKNOWN
     if config in _CLEAN_HELD_OUT_CONFIGS:
         return CLEAN_HELD_OUT
     # Rule-based orchestration baselines (Presidio): no training data of ours → clean held-out

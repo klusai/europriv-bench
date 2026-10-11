@@ -256,6 +256,69 @@ class PrivacyFilterAdapter(BaseAdapter):
         return out
 
 
+class Res100MoEAdapter(PrivacyFilterAdapter):
+    """CPU MoE evaluation with full-document chunks and an exact literal-mask operator.
+
+    Keep this explicit policy separate from historical, truncating detection baselines.
+    Transformers' simple aggregator only strips B/I; the KP head also emits E/S.
+    Normalize those remaining prefixes before projecting labels, never coverage offsets.
+    """
+
+    name = "kp-deid-moe-res100"
+
+    def __init__(self, model_id: str, *, scheme: str = "kp", batch_size: int = 16) -> None:
+        super().__init__(model_id, scheme)
+        self._batch_size = batch_size
+
+    def _pipeline(self):  # pragma: no cover - real checkpoint integration
+        if self._pipe is None:
+            from transformers import pipeline
+
+            self._pipe = pipeline(
+                "token-classification", model=self.model_id, aggregation_strategy="simple", device="cpu",
+            )
+            self._pipe.tokenizer.model_max_length = 256
+        return self._pipe
+
+    def predict_receipts(self, texts: Sequence[str]) -> list[dict]:
+        from .crosswalk import to_kp
+        from .taxonomy import TAXONOMY
+
+        labels = {entity.name for entity in TAXONOMY}
+        results = self._pipeline()(list(texts), batch_size=self._batch_size, stride=64)
+        receipts = []
+        for text, entities in zip(texts, results, strict=True):
+            native, mapped = [], []
+            for entity in entities:
+                label = entity["entity_group"]
+                if len(label) > 2 and label[:2] in {"B-", "I-", "E-", "S-"}:
+                    label = label[2:]
+                span = {"start": int(entity["start"]), "end": int(entity["end"]), "label": label}
+                if not 0 <= span["start"] < span["end"] <= len(text):
+                    raise ValueError("Invalid native MoE offsets")
+                native.append(span)
+                kp = label if self.scheme == "kp" else to_kp(self.scheme, label)
+                if kp is not None:
+                    if kp not in labels:
+                        raise ValueError(f"Unknown KP label: {kp}")
+                    mapped.append({**span, "label": kp})
+            intervals = [[s["start"], s["end"]] for s in native]
+            receipts.append({
+                "tags": kp_entities_to_bioes(text, mapped), "intervals": intervals, "native": native,
+                "output": _mask_spans(text, intervals),
+            })
+        return receipts
+
+    def predict_tags(self, texts: Sequence[str]) -> list[list[str]]:
+        return [r["tags"] for r in self.predict_receipts(texts)]
+
+    def redaction_spans(self, texts: Sequence[str]) -> list[list[tuple[int, int]]]:
+        return [r["intervals"] for r in self.predict_receipts(texts)]
+
+    def anonymize(self, texts: Sequence[str]) -> list[str]:
+        return [r["output"] for r in self.predict_receipts(texts)]
+
+
 class OpenMedAdapter(PrivacyFilterAdapter):
     """OpenMed/privacy-filter-multilingual — a 54-category finetune of privacy-filter (scheme=openmed)."""
 
