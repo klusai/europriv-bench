@@ -68,6 +68,13 @@ the runner still applies its common gold-label fairness mask. `anonymize` return
 the service's text, preserving its actual operators; pseudonymization is not
 implemented for this fixed replace-policy baseline.
 
+`redaction_spans` supplies the RES-121 v2 interface with exact service offsets,
+including replaced native types without a KP label. It requires the pinned
+DEFAULT replace policy and never expands coverage onto whitespace tokens.
+The nine existing board specs still use their historical metrics; their saved
+BIOES predictions cannot be reused to claim v2 character coverage. A v2 run must
+request and retain the exact operator spans separately.
+
 ## Resumable requested suite
 
 Install `pyarrow` for this analysis script (not needed by the HTTP adapter):

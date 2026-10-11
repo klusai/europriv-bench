@@ -324,3 +324,28 @@ def test_batch_must_come_from_the_attested_process(wire, process):
     wire["response_process"] = process
     with pytest.raises(shield.ShieldError, match="unattested process"):
         adapter(wire).predict_tags(["Ștefan"])
+
+
+def test_exact_operator_coverage_keeps_unmapped_types_and_partial_tokens(wire):
+    def mutate(data, path):
+        if path == "/anonymize-batch":
+            data["results"][0]["items"][0]["entity_type"] = "ABBREVIATION"
+
+    wire["mutate"] = mutate
+    a = adapter(wire)
+    text = "🙂Ștefan/123456789"
+    assert a.redaction_spans([text]) == [[(1, 7), (8, 17)]]
+    # The slash survives even though both detections share one whitespace token.
+    spec = EvalSpec.from_yaml("evaluations/pii-detection-en.yaml")
+    spec.metrics = ["residual_leakage_v2"]
+    row = run_spec(spec, a, rows=[{"text": text, "spans": [{"start": 1, "end": 17, "label": "PERSON"}]}])
+    assert row["scores"]["residual_leakage_v2"]["all_subjects_leaked"] == 1
+    assert row["service_provenance"]["resolved_language"] == "en"
+
+
+def test_exact_coverage_refuses_other_operator_policies(wire):
+    a = adapter(wire)
+    a.client.pin["languages"]["nl"]["operators"] = [["DEFAULT", "keep", "{}"]]
+    with pytest.raises(NotImplementedError, match="DEFAULT replace"):
+        a.redaction_spans(["Ștefan"])
+    assert wire["calls"] == []

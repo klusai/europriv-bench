@@ -658,6 +658,17 @@ class ShieldAdapter(BaseAdapter):
     def anonymize(self, texts: Sequence[str]) -> list[str]:
         return [result["text"] for result in self.client.analyze(list(texts))]
 
+    def redaction_spans(self, texts: Sequence[str]) -> list[list[tuple[int, int]]]:
+        """Exact original-input coverage, including native types without a KP mapping."""
+        from .shield import OPERATORS
+
+        if self.client.provenance()["operators"] != OPERATORS:
+            raise NotImplementedError("Shield exact coverage requires the pinned DEFAULT replace policy")
+        return [
+            [(item["start"], item["end"]) for item in result["items"]]
+            for result in self.client.analyze(list(texts))
+        ]
+
     def pseudonymize(self, texts: Sequence[str]) -> list[dict[str, str]]:
         raise NotImplementedError("Shield baseline pins replace operators, not pseudonymization")
 
