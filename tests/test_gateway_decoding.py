@@ -125,3 +125,14 @@ def test_infeasible_selection_cannot_open_test_gold(tmp_path, monkeypatch):
     monkeypatch.setattr(scoring, "freeze", forbidden)
     with pytest.raises(ValueError, match="No feasible dev decoder"):
         scoring.test(tmp_path, [0], True)
+
+
+def test_diagnostic_report_rejects_missing_dev_failure_provenance(tmp_path):
+    from analysis.report_gateway_moe import report
+    from analysis.score_res100 import write
+
+    write(tmp_path / "availability.json", {"configs": ["example"], "unavailable": []})
+    write(tmp_path / "diagnostic-registration.json", {"status": "diagnostic; dev-rejected"})
+    write(tmp_path / "results/seed0--example.json", {"row": {}})
+    with pytest.raises(ValueError, match="infeasible-selection provenance"):
+        report(tmp_path, decoded=True)

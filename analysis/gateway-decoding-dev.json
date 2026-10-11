@@ -7928,5 +7928,13 @@
       "macro_leak": 0.22774963218831956,
       "macro_utility": 0.02403178692649262
     }
-  ]
+  ],
+  "metadata_corrections": {
+    "scope": "TAB dev only; frozen generic v2 replay metadata is retained, not used for selection",
+    "bootstrap_unit": "document",
+    "contamination": "unknown",
+    "config_status": "real-external-gold",
+    "split": "dev",
+    "reason": "Generic BaseAdapter replay markers are not decoder training-lineage or gold-quality claims"
+  }
 }
