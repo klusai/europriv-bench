@@ -96,10 +96,11 @@ def test_paired_ci_keeps_documents_and_rejects_mismatched_gold():
         paired(candidate, comparator)
 
 
-def test_moe_contamination_does_not_inherit_old_family_assumptions():
+@pytest.mark.parametrize("adapter", ["kp-deid-moe-res100", "kp-deid-moe-res100-calibrated"])
+def test_moe_contamination_does_not_inherit_old_family_assumptions(adapter):
     from europriv_bench.leaderboard import classify_contamination
 
-    assert classify_contamination("kp-deid-moe-res100", "ro-synthetic-v1") == "in_distribution"
+    assert classify_contamination(adapter, "ro-synthetic-v1") == "in_distribution"
     for config in ("de", "ai4privacy-openpii-fr-v1", "tab-echr-legal-en-v1", "ro-realskeleton-v1"):
-        assert classify_contamination("kp-deid-moe-res100", config) == "unknown"
+        assert classify_contamination(adapter, config) == "unknown"
     assert classify_contamination("kp-model", "de") == "clean_held_out"

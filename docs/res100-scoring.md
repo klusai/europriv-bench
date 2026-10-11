@@ -52,3 +52,7 @@ Not verified: gateway service/load acceptance, a new reviewed harder held-out ch
 training/evaluation subject and source disjointness, or empirical attacker re-identification.
 The eight-language training mixture means old RO/EN/PL-only contamination assumptions do
 not apply; RES-100 rows conservatively retain unknown contamination outside RO synthetic.
+
+The subsequent [dev-only calibration protocol](res100-calibration.md) and
+[three-seed calibrated results](res100-calibrated-results.md) are separate evidence.
+Their distinct leaderboard keys preserve these historical, uncalibrated seed-0 rows.
