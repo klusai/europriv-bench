@@ -55,7 +55,15 @@ def pct(value, interval):
     )
 
 
-def report(scratch: Path, *, splice=False):
+def report(scratch: Path, *, splice=False, decoded=False):
+    adapter = "kp-deid-moe-gateway-decoded" if decoded else "kp-deid-moe-gateway"
+    artifact = "gateway-decoding" if decoded else "gateway-moe"
+    diagnostic_path = scratch / "diagnostic-registration.json"
+    diagnostic = read(diagnostic_path) if decoded and diagnostic_path.exists() else None
+    execution_path = scratch.parent / "runtime-concurrency.json"
+    execution = read(execution_path) if diagnostic and execution_path.exists() else None
+    description = ("dev-rejected strict decoding (diagnostic)" if diagnostic else
+                   "dev-selected boundary decoding" if decoded else "default operating point")
     availability = read(scratch / "availability.json")
     configs = availability["configs"]
     files = sorted((scratch / "results").glob("seed*--*.json"))
@@ -70,6 +78,8 @@ def report(scratch: Path, *, splice=False):
                 raise ValueError(f"Refusing incomplete seed suite: {seed}/{config}")
             candidate = read(path)
             row = candidate["row"]
+            if diagnostic and (row.get("diagnostic") != diagnostic or row.get("dev_selection_feasible") is not False):
+                raise ValueError("Decoded diagnostic row lost its infeasible-selection provenance")
             if "national_id_leakage" in row["scores"]:
                 row["legacy_availability"] = {
                     "national_id_leakage": row["scores"]["national_id_leakage"]["decode_bearing_total"] > 0,
@@ -163,8 +173,16 @@ def report(scratch: Path, *, splice=False):
         )["config"]
         for seed in seeds
     }
+    relocated = len({
+        item["replay_evidence"]["original_path"]
+        for record in records for item in record["comparisons"].values()
+        if "original_path" in item["replay_evidence"]
+    })
     output = {
-        "candidate": "gateway-trained MoE; default operating point",
+        "candidate": f"gateway-trained MoE; {description}",
+        **({"diagnostic": diagnostic, "dev_selection_feasible": False} if diagnostic else {}),
+        **({"execution": execution} if execution else {}),
+        **({"byte_verified_relocated_receipts": relocated} if relocated else {}),
         "seeds": seeds,
         "seed_count": len(seeds),
         "contract_pin": read(scratch / "contract-pin.json"),
@@ -196,19 +214,28 @@ def report(scratch: Path, *, splice=False):
     board_path = ROOT / "baselines/leaderboard.json"
     board = read(board_path)
     for seed in seeds:
-        board["entries"][f"kp-deid-moe-gateway::klusai/kp-deid-moe-gateway-seed{seed}"] = [
+        board["entries"][f"{adapter}::klusai/{adapter}-seed{seed}"] = [
             r for r in rows if r["training_seed"] == seed
         ]
     write(board_path, board)
-    write(ROOT / "analysis/gateway-moe-comparison.json", output)
+    write(ROOT / f"analysis/{artifact}-comparison.json", output)
     lines = [
-        "# Gateway-trained MoE: default operating point",
+        f"# Gateway-trained MoE: {description}",
         "",
         f"Contract v3: **{contracts['3']['verdict']}**. Contract v2: **{contracts['2']['verdict']}**.",
         "",
+        *(["Dev selection was infeasible. This is the prospectively amended strict-rule diagnostic,",
+           "not a feasible selection or a contract win; see [the amendment](gateway-decoding-diagnostic.md)",
+           "and [all dev results](gateway-decoding-dev-results.md).", ""] if diagnostic else []),
+        *(["Remaining seed-1 inference used two local CPU workers on disjoint configs, four threads each;",
+           "earlier inference was sequential. Model, batches, windows and decoding stayed fixed.",
+           "This scheduling change supplies no latency or SLO evidence.", ""] if execution else []),
+        *([f"{relocated} comparator receipt paths had moved during scratch archiving. Exact original SHA-256",
+           "matches were verified in the archive or preserved copies; scores were unchanged. The comparison",
+           "JSON records both original and resolved evidence paths.", ""] if relocated else []),
         f"Training seeds: {seeds}; seed count {len(seeds)}. CPU fp32, saved 512-token window, no threshold tuning.",
         "Leak CIs are 95% Wilson; F1 and utility CIs are 2,000-cluster bootstrap, RNG seed 100.",
-        "Paired candidate-minus-comparator CIs and both verdicts: `analysis/gateway-moe-comparison.json`.",
+        f"Paired candidate-minus-comparator CIs and both verdicts: `analysis/{artifact}-comparison.json`.",
         "",
         "| Config | Seed | Clusters | Subjects | F1 % [95% CI] | V2 leak % [95% CI] | Non-PII removed % [95% CI] |",
         "|---|---:|---:|---:|---:|---:|---:|",
@@ -265,5 +292,5 @@ def report(scratch: Path, *, splice=False):
                 f"{pct(utility['candidate_minus_comparator'], utility['ci95'])} | "
                 f"{item['contracts']['2']['numerical_pass']} | {item['contracts']['3']['numerical_pass']} |"
             )
-    (ROOT / "docs/gateway-moe-results.md").write_text("\n".join(lines) + "\n")
+    (ROOT / f"docs/{artifact}-results.md").write_text("\n".join(lines) + "\n")
     return output
