@@ -27,6 +27,7 @@ from europriv_bench.gateway import (
     sha256,
     utility_counts,
 )
+from europriv_bench.gateway_contract import utility_gate
 from europriv_bench.gateway_operator import GatewayDeletionAdapter
 from europriv_bench.leaderboard import build_leaderboard
 from europriv_bench.runner import run_spec
@@ -94,7 +95,8 @@ def controls(spec, adapter, rows, coverage):
     }
 
 
-def compare(scratch):
+def compare(scratch, *, contract_version=1):
+    utility_gate(None, contract_version=contract_version)
     records = [json.loads(p.read_text()) for p in sorted(scratch.glob("*.row.json"))]
     comparisons = []
     for language in LANGUAGES:
@@ -104,6 +106,8 @@ def compare(scratch):
                 if name not in group or baseline not in group:
                     continue
                 a, b = group[name], group[baseline]
+                if contract_version == 3 and a.get("run_pin", {}).get("contract_version") != 3:
+                    raise ValueError("Contract v3 cannot relabel historical candidate evaluations")
                 if a["dataset"]["data_sha256"] != b["dataset"]["data_sha256"]:
                     raise ValueError("comparison gold hashes differ")
                 ac = json.loads((scratch / f"{name}-{language}.clusters.json").read_text())
@@ -113,11 +117,17 @@ def compare(scratch):
                 slices = {key: paired_cluster_bootstrap(ac[key], bc[key])
                           for key in ("all", "direct", "quasi", "unspecified", "utility")}
                 sa, sb = a["scores"]["residual_leakage_v2"], b["scores"]["residual_leakage_v2"]
+                utility = slices["utility"]
+                utility_result = utility_gate(
+                    [utility["ci_low"], utility["ci_high"]] if utility["available"] else None,
+                    contract_version=contract_version,
+                )
                 comparisons.append({
+                    "contract_version": contract_version, "utility_gate": utility_result,
                     "candidate": name, "comparator": baseline, "language": language, "slices": slices,
                     "wilson_disjoint": sa["all_leak_rate_ci_high"] < sb["all_leak_rate_ci_low"],
                     "paired_privacy_pass": slices["all"]["available"] and slices["all"]["ci_high"] < 0,
-                    "utility_pass": slices["utility"]["available"] and slices["utility"]["ci_high"] <= 0,
+                    "utility_pass": utility_result["pass"],
                     "verdict": "not established: one training seed; dev gold; current operator anchors unverified",
                 })
     write(scratch / "comparisons.json", comparisons)
@@ -133,10 +143,12 @@ def main():
     parser.add_argument("--adapter", choices=["kp", "presidio", "shield"], default="kp")
     parser.add_argument("--languages", nargs="+", choices=LANGUAGES, default=LANGUAGES)
     parser.add_argument("--compare", action="store_true")
+    parser.add_argument("--contract-version", type=int, choices=(1, 2, 3), default=1,
+                        help="Pin before scoring; v3 applies only to evaluations after its registration commit")
     args = parser.parse_args()
     args.scratch.mkdir(parents=True, exist_ok=True)
     if args.compare:
-        compare(args.scratch)
+        compare(args.scratch, contract_version=args.contract_version)
         return
     if not args.label or (args.adapter == "kp" and not args.checkpoint):
         parser.error("scoring needs --label and KP needs --checkpoint")
@@ -165,6 +177,8 @@ def main():
     pin = {"weights": weights, "code": code_pin(), "versions": versions,
            "device": os.environ.get("EUROPRIV_DEVICE", "cpu"), "model_id": adapter.model_id,
            "harness_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()}
+    if args.contract_version != 1:
+        pin["contract_version"] = args.contract_version
     for language in args.languages:
         spec = EvalSpec.from_yaml(f"evaluations/pii-detection-gateway-traffic-{language}.yaml")
         rows = load_gateway(spec)

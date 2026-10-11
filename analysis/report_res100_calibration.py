@@ -11,6 +11,7 @@ from analysis.calibrate_res100 import COMPARATORS, ESTATE, evaluate, read, recei
 from analysis.report_res100 import import_receipts, paired
 from analysis.score_res100 import GROUPS, ROOT, digest, row_digest, subject_counts, utility_counts, write
 from europriv_bench import metrics
+from europriv_bench.gateway_contract import utility_gate
 from europriv_bench.gateway_operator import delete_intervals
 
 
@@ -77,13 +78,20 @@ def import_comparators(scratch):
     print(f"Missing comparator runs: {missing}", flush=True)
 
 
-def gates(candidate, other, endpoint="all"):
+def gates(candidate, other, endpoint="all", *, contract_version=1):
+    # Historical reporters stay pinned to v1. New evaluations must register v3.
+    utility_gate(None, contract_version=contract_version)
+    if contract_version == 3 and candidate["row"].get("contract_version") != 3:
+        raise ValueError("Contract v3 requires a prospectively registered candidate evaluation")
     comparison = paired(candidate, other)
     if candidate["row"].get("dataset", {}).get("loader") == "gateway":
         comparison["unit"] = "conversation"
     a, b = (r["row"]["scores"]["residual_leakage_v2"] for r in (candidate, other))
     delta = comparison["deltas"][f"v2_{endpoint}"]["ci95"]
     utility = comparison["deltas"]["over_redaction"]["ci95"]
+    utility_result = utility_gate(utility, contract_version=contract_version)
+    comparison["contract_version"] = contract_version
+    comparison["utility_gate"] = utility_result
     comparison["numerical_gates"] = {
         "disjoint_wilson": bool(
             a[f"{endpoint}_available"]
@@ -91,10 +99,10 @@ def gates(candidate, other, endpoint="all"):
             and a[f"{endpoint}_leak_rate_ci_high"] < b[f"{endpoint}_leak_rate_ci_low"]
         ),
         "paired_privacy": bool(delta and delta[1] < 0),
-        "no_worse_utility": bool(utility and utility[1] <= 0),
+        ("utility_noninferiority" if contract_version == 3 else "no_worse_utility"): utility_result["pass"],
     }
     comparison["verdict"] = "not established"
-    if utility and utility[0] > 0:
+    if utility_result["regression"]:
         comparison["verdict"] = "loss: over-redaction regression"
     elif delta and delta[0] > 0 and a[f"{endpoint}_leak_rate_ci_low"] > b[f"{endpoint}_leak_rate_ci_high"]:
         comparison["verdict"] = "loss: residual-leak regression"
@@ -197,9 +205,9 @@ def report(scratch):
                 "comparisons": {},
             }
             for name, other in baselines.items():
-                result = gates(candidate, other)
+                result = gates(candidate, other, contract_version=1)
                 if config == "tab-echr-legal-en-v1":
-                    result["secondary_TAB_DIRECT"] = gates(candidate, other, "direct")
+                    result["secondary_TAB_DIRECT"] = gates(candidate, other, "direct", contract_version=1)
                 result["comparator_scores"] = other["row"]["scores"]
                 result["comparator_provenance"] = other["row"]["inference_provenance"]
                 result["legacy_zero_floor"] = "not applicable"

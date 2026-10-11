@@ -9,6 +9,7 @@ from pathlib import Path
 import numpy as np
 
 from analysis.score_res100 import RESAMPLES, RNG_SEED, ROOT, ci, digest, row_digest, samples, score, write
+from europriv_bench.gateway_contract import utility_gate
 
 HISTORICAL = {
     "base": "privacy-filter::openai/privacy-filter",
@@ -168,12 +169,13 @@ def report(scratch: Path, receipt_source: Path | None = None, *, splice: bool = 
             a, b = row["scores"]["residual_leakage_v2"], other["row"]["scores"]["residual_leakage_v2"]
             delta = comparison["deltas"]["v2_all"]["ci95"]
             utility = comparison["deltas"]["over_redaction"]["ci95"]
+            utility_result = utility_gate(utility, contract_version=1)  # Frozen RES-100 protocol.
             comparison["single_seed_gates"] = {
                 "disjoint_wilson": bool(
                     a["all_available"] and b["all_available"] and a["all_leak_rate_ci_high"] < b["all_leak_rate_ci_low"]
                 ),
                 "paired_leak": bool(delta and delta[1] < 0),
-                "no_worse_utility": bool(utility and utility[1] <= 0),
+                "no_worse_utility": utility_result["pass"],
             }
             comparison["status"] = "unverified"
             comparison["reason"] = "three candidate seeds and reviewed held-out/disjointness gates not established"
@@ -181,7 +183,7 @@ def report(scratch: Path, receipt_source: Path | None = None, *, splice: bool = 
                 comparison.update(
                     status="loss", reason="single-seed v2 regression: disjoint Wilson and positive paired CI"
                 )
-            if utility and utility[0] > 0:
+            if utility_result["regression"]:
                 comparison.update(status="loss", reason="over-redaction regression: positive paired CI")
             comparison["legacy_zero_floor"] = "not applicable"
             if config in {"ro-realskeleton-v1", "pl-realskeleton-v1"}:

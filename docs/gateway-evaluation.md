@@ -34,7 +34,10 @@ These operators are distinct from production KP gateway integration.
 
 `gateway_utility` is the fraction of gold non-PII non-whitespace characters removed
 and its complement (character retention), not semantic task utility. Empty support
-is unavailable. Paired utility delta upper bound must be <=0 for the contract gate.
+is unavailable. This historical registration retains the paired utility delta upper
+bound <=0. New post-registration evaluations may explicitly select [contract v3](gateway-contract.md)
+with `--contract-version 3` before scoring and comparison; its upper-bound margin is +0.01.
+Earlier evaluations and verdicts remain unchanged.
 No-mask and full-mask controls verify metric extremes. Shuffled-label coverage
 must be invariant (v2 is intentionally label-independent); shuffled gold positions
 provide a separate destructive alignment control. Masked-input inference replaces
