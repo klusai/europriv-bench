@@ -16,7 +16,7 @@ ANCHORS = ("ro-realskeleton-v1", "pl-realskeleton-v1")
 def comparison(candidate, other, endpoint="all"):
     result = paired(candidate, other)
     row = candidate["row"]
-    if row["dataset"]["loader"] == "gateway":
+    if row["dataset"].get("loader") == "gateway":
         result["unit"] = "conversation"
     a, b = (item["row"]["scores"]["residual_leakage_v2"] for item in (candidate, other))
     delta = result["deltas"][f"v2_{endpoint}"]["ci95"]
@@ -70,6 +70,15 @@ def report(scratch: Path, *, splice=False):
                 raise ValueError(f"Refusing incomplete seed suite: {seed}/{config}")
             candidate = read(path)
             row = candidate["row"]
+            if "national_id_leakage" in row["scores"]:
+                row["legacy_availability"] = {
+                    "national_id_leakage": row["scores"]["national_id_leakage"]["decode_bearing_total"] > 0,
+                    "name_in_context_leakage": row["scores"]["name_in_context_leakage"]["name_subjects_total"] > 0,
+                }
+                if "tab_reid_leakage" in row["scores"]:
+                    row["legacy_availability"]["tab_reid_leakage"] = (
+                        row["scores"]["tab_reid_leakage"]["all_subjects_total"] > 0
+                    )
             predictions = scratch / "predictions" / f"seed{seed}--{config}.json"
             if digest(predictions) != row["prediction_sha256"]:
                 raise ValueError("Candidate prediction receipt changed")
@@ -82,6 +91,8 @@ def report(scratch: Path, *, splice=False):
                 "n_clusters": row["n"],
                 "scores": row["scores"],
                 "comparisons": {},
+                "legacy_availability": row.get("legacy_availability"),
+                "metric_unavailability": row.get("metric_unavailability"),
             }
             for name in COMPARATORS:
                 other = read(scratch / "comparators" / f"{name}--{config}.json")
@@ -158,6 +169,7 @@ def report(scratch: Path, *, splice=False):
         "seed_count": len(seeds),
         "contract_pin": read(scratch / "contract-pin.json"),
         "availability": availability,
+        "report_source_sha256": digest(__file__),
         "contracts": contracts,
         "legacy_anchors": anchors,
         "comparisons": records,
@@ -227,5 +239,31 @@ def report(scratch: Path, *, splice=False):
         "",
         "No overall win is established. Unverified: " + "; ".join(output["not_verified"]) + ".",
     ]
+    lines += [
+        "",
+        "## Paired anchor and worst-language comparisons",
+        "",
+        "All deltas below are candidate minus comparator in percentage points (95% cluster bootstrap).",
+        "TAB uses its separately registered DIRECT endpoint; other rows use all identifier subjects.",
+        "The worst gateway language is descriptive, not a selected replacement for the eight-language matrix.",
+        "Numerical pass counts are not contract wins; the seed/review/disjointness requirements remain.",
+        "",
+        "| Config / endpoint | Seed | Comparator | Leak delta [95% CI] | Utility delta [95% CI] | V2 numerical pass | V3 numerical pass |",
+        "|---|---:|---|---:|---:|---|---|",
+    ]
+    for r in records:
+        if r["config"] not in {*ANCHORS, "tab-echr-legal-en-v1", worst[str(r["seed"])]}:
+            continue
+        direct = r["config"] == "tab-echr-legal-en-v1"
+        for name, item in r["comparisons"].items():
+            item = item["secondary_TAB_DIRECT"] if direct else item
+            delta = item["deltas"]["v2_direct" if direct else "v2_all"]
+            utility = item["deltas"]["over_redaction"]
+            lines.append(
+                f"| {r['config']}/{'DIRECT' if direct else 'all'} | {r['seed']} | {name} | "
+                f"{pct(delta['candidate_minus_comparator'], delta['ci95'])} | "
+                f"{pct(utility['candidate_minus_comparator'], utility['ci95'])} | "
+                f"{item['contracts']['2']['numerical_pass']} | {item['contracts']['3']['numerical_pass']} |"
+            )
     (ROOT / "docs/gateway-moe-results.md").write_text("\n".join(lines) + "\n")
     return output

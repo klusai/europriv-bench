@@ -74,3 +74,21 @@ def test_v3_boundary_pass_is_not_an_overall_win():
     assert output["contracts"]["3"]["verdict"] == "not established"
     assert output["contracts"]["2"]["verdict"] == "loss: over-redaction regression"
     assert not comparison(result(0, 2), result(1, 0))["contracts"]["3"]["numerical_pass"]
+    old = result(0, 0)
+    old["row"]["dataset"] = {"config": "legacy-without-loader"}
+    assert comparison(old, result(1, 0))["unit"] == "document"
+
+
+def test_incomplete_seed_cannot_overwrite_leaderboard(tmp_path, monkeypatch):
+    from analysis import report_gateway_moe
+    from analysis.score_res100 import write
+
+    write(tmp_path / "availability.json", {"configs": ["missing"], "unavailable": []})
+    write(tmp_path / "results/seed0--other.json", {})
+    monkeypatch.setattr(report_gateway_moe, "ROOT", tmp_path)
+    board = tmp_path / "baselines/leaderboard.json"
+    write(board, {"entries": {"historical": [{"keep": True}]}})
+    original = board.read_bytes()
+    with pytest.raises(ValueError, match="incomplete seed"):
+        report_gateway_moe.report(tmp_path, splice=True)
+    assert board.read_bytes() == original

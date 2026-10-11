@@ -34,6 +34,8 @@ The [gateway metric/SLO contract](docs/gateway-contract.md) freezes exact-charac
 v2 alongside reproducible legacy v1 scores, zero-floor comparison rules and CPU service/load targets.
 The [gateway full-PII evaluation](docs/gateway-evaluation.md) registers eight language specs, local
 unpublished-data loading, exact deletion operators, paired cluster intervals and over-redaction controls.
+[Gateway-trained MoE scoring](docs/gateway-moe-scoring.md) resumes local CPU evaluation
+at the checkpoint default operating point and reports contracts v2 and v3 side by side.
 
 ## Layout
 
