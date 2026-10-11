@@ -92,3 +92,30 @@ def test_incomplete_seed_cannot_overwrite_leaderboard(tmp_path, monkeypatch):
     with pytest.raises(ValueError, match="incomplete seed"):
         report_gateway_moe.report(tmp_path, splice=True)
     assert board.read_bytes() == original
+
+
+def test_three_seed_gate_requires_every_seed_on_the_same_endpoint():
+    from analysis.report_gateway_moe import COMPARATORS, seed_summary
+
+    def record(seed, passed):
+        return {
+            "config": "tab-echr-legal-en-v1",
+            "seed": seed,
+            "comparisons": {
+                name: {
+                    "contracts": {"3": {"numerical_pass": passed}},
+                    "secondary_TAB_DIRECT": {"contracts": {"3": {"numerical_pass": True}}},
+                }
+                for name in COMPARATORS
+            },
+        }
+
+    records = [record(0, True), record(1, True), record(2, False)]
+    result = seed_summary(records, [0, 1, 2], "3")
+    assert not any(result["tab-echr-legal-en-v1/all"].values())
+    assert all(result["tab-echr-legal-en-v1/DIRECT"].values())
+    assert not any(seed_summary(records[:2], [0, 1], "3")["tab-echr-legal-en-v1/DIRECT"].values())
+    with pytest.raises(ValueError, match="Incomplete or duplicate"):
+        seed_summary(records[:2], [0, 1, 2], "3")
+    with pytest.raises(ValueError, match="Incomplete or duplicate"):
+        seed_summary([records[0], records[0], records[2]], [0, 1, 2], "3")
