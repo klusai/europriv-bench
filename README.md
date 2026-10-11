@@ -30,6 +30,9 @@ their splits and metrics rather than competing with them.
 Metrics that aren't implemented yet raise `NotImplementedError` (the harness never reports
 a fake number).
 
+The [gateway metric/SLO contract](docs/gateway-contract.md) freezes exact-character residual-leak
+v2 alongside reproducible legacy v1 scores, zero-floor comparison rules and CPU service/load targets.
+
 ## Layout
 
 ```

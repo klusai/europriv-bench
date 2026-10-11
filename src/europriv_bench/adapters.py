@@ -127,6 +127,15 @@ class BaseAdapter:
         """DETECTION: return a BIOES tag sequence (KP label space) per input text."""
         raise NotImplementedError(f"{self.name}: detection not implemented")
 
+    def redaction_spans(self, texts: Sequence[str]) -> list[list[tuple[int, int]]]:
+        """Actual removed/replaced intervals in original-input code points, for residual metric v2.
+
+        Implementations must apply their frozen filters, thresholds and operators before returning
+        coverage. A partially masked token must retain its exact boundary. Token-projected detector
+        spans cannot stand in for operator coverage. See docs/gateway-contract.md.
+        """
+        raise NotImplementedError(f"{self.name}: residual v2 needs exact redaction_spans, not BIOES tags")
+
     def anonymize(self, texts: Sequence[str]) -> list[str]:
         """ANONYMIZATION (Track C): return redacted text per input by masking detected spans.
 

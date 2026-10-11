@@ -16,7 +16,16 @@ from . import __version__
 from .adapters import BaseAdapter
 from .leaderboard import classify_contamination, config_status_for
 from .logger import get_logger
-from .metrics import ALL_METRICS, ANON_MAP_REGISTRY, ANON_REGISTRY, REGISTRY, ROW_REGISTRY
+from .metrics import (
+    ALL_METRICS,
+    ANON_MAP_REGISTRY,
+    ANON_REGISTRY,
+    REGISTRY,
+    ROW_REGISTRY,
+    SPAN_REGISTRY,
+    RedactionSpans,
+    residual_subject_detection_v2,
+)
 from .spans import Span, char_spans_to_bioes, validate_bioes
 from .spec import EvalSpec, Task
 from .taxonomy import TAXONOMY_VERSION
@@ -161,6 +170,7 @@ def run_spec(
     timestamp: str | None = None,
     limit: int | None = None,
     dumps: list[dict] | None = None,
+    redaction_spans: RedactionSpans | None = None,
 ) -> dict:
     """Score one adapter on one spec. Gold may be injected as ``rows`` (preferred) or ``gold``
     (texts, tag-seqs, for tag-only tests); else loaded from HF. Row-metrics (e.g. national_id_leakage)
@@ -170,7 +180,12 @@ def run_spec(
     McNemar significance) is appended to it: ``{adapter, model_id, spec, dataset, n, subjects:[...]}``
     where each subject carries its ``detected``/``leaked`` flag under the exact same per-subject
     ``(doc, country, normalized value)`` semantics as the re-id leak-rate. Requires ``rows`` (the
-    span values), so it is emitted only for row-metric specs run against real gold."""
+    span values), so it is emitted only for row-metric specs run against real gold.
+
+    Residual v2 metrics require exact original-input operator coverage, supplied via
+    ``redaction_spans`` or ``adapter.redaction_spans``. Their versioned subject dumps are separate
+    from legacy dumps. Existing token-based scores and fairness filtering are unchanged.
+    """
     # Track gating: DETECTION (the original v0 path, unchanged) and ANONYMIZATION (Track C, KLU-104)
     # are wired. CLASSIFICATION/LEAKAGE still raise — the seam exists but is not implemented, so the
     # harness never silently reports a fake number. Lifting ANONYMIZATION does NOT touch DETECTION.
@@ -184,26 +199,43 @@ def run_spec(
     if unknown:
         raise KeyError(f"spec {spec.name!r} names unknown metrics {unknown}; known: {sorted(ALL_METRICS)}")
 
+    span_only = bool(spec.metrics) and all(key in SPAN_REGISTRY for key in spec.metrics)
     if rows is None and gold is None:
         rows = _load_gold_rows(spec)
     if rows is not None:
         if limit is not None:
             rows = rows[:limit]
-        texts, gold_tags = _rows_to_gold(rows)
+        if span_only:
+            texts, gold_tags = [row["text"] for row in rows], []
+        else:
+            texts, gold_tags = _rows_to_gold(rows)
     else:
         texts, gold_tags = gold
         if limit is not None:
             texts, gold_tags = texts[:limit], gold_tags[:limit]
 
     if spec.task is Task.ANONYMIZATION:
+        if any(key in SPAN_REGISTRY for key in spec.metrics):
+            raise ValueError("residual v2 currently uses the detection runner with exact operator coverage")
         return _run_anonymization(spec, adapter, rows, texts, gold_tags, timestamp, limit)
 
-    pred_tags = adapter.predict_tags(texts)
+    needs_spans = any(key in SPAN_REGISTRY for key in spec.metrics)
+    if needs_spans:
+        if rows is None:
+            raise ValueError("residual v2 needs gold rows; inject rows= or load from HF")
+        if redaction_spans is None:
+            redaction_spans = adapter.redaction_spans(texts)
+        elif limit is not None:
+            redaction_spans = redaction_spans[:limit]
+
+    pred_tags = [] if span_only else adapter.predict_tags(texts)
 
     # Fairness: score only the entity types the gold annotates. A model isn't penalized for
     # detecting categories this gold doesn't cover (it predicts them → masked to O, not FPs).
     # Applied identically to every adapter so the leaderboard is apples-to-apples.
     eval_labels = {t.split("-", 1)[1] for seq in gold_tags for t in seq if t != "O"}
+    if span_only:
+        eval_labels = {sp["label"] for row in rows for sp in row.get("spans", [])}
     pred_tags = [
         [t if (t == "O" or t.split("-", 1)[1] in eval_labels) else "O" for t in seq]
         for seq in pred_tags
@@ -211,7 +243,18 @@ def run_spec(
 
     scores: dict[str, dict] = {}
     for key in spec.metrics:
-        if key in ROW_REGISTRY:
+        if key in SPAN_REGISTRY:
+            scores[key] = SPAN_REGISTRY[key](rows, redaction_spans)
+            if dumps is not None:
+                dumps.append({
+                    "adapter": adapter.name, "model_id": adapter.model_id, "spec": spec.name,
+                    "metric": key, "metric_version": 2, "coverage_basis": "operator_character_spans",
+                    "dataset": spec.dataset.model_dump(), "n": len(texts), "limit": limit,
+                    "subjects": residual_subject_detection_v2(
+                        rows, redaction_spans, tab_only=key == "tab_reid_leakage_v2",
+                    ),
+                })
+        elif key in ROW_REGISTRY:
             if rows is None:
                 raise ValueError(f"metric {key!r} needs gold rows; inject rows= or load from HF")
             scores[key] = ROW_REGISTRY[key](rows, pred_tags)
