@@ -44,7 +44,9 @@ def comparison(candidate, other, endpoint="all"):
             "numerical_pass": all(gates.values()),
             "utility": utility,
             "verdict": verdict,
-            "scope": "Single-seed numerical evidence; review, disjointness and three-seed gates still required",
+            "scope": (
+                "Single-seed numerical evidence; aggregate seed gate assessed separately; review/disjointness unverified"
+            ),
         }
     return result
 
@@ -53,6 +55,27 @@ def pct(value, interval):
     return (
         "unavailable" if interval is None else f"{100 * value:.2f} [{100 * interval[0]:.2f}, {100 * interval[1]:.2f}]"
     )
+
+
+def seed_summary(records, seeds, version):
+    """Require every seed on a fixed config/endpoint; never pool observations."""
+    summary = {}
+    for config in sorted({r["config"] for r in records}):
+        selected = [r for r in records if r["config"] == config]
+        if sorted(r["seed"] for r in selected) != seeds:
+            raise ValueError(f"Incomplete or duplicate seed records: {config}")
+        endpoints = ("all", "DIRECT") if config == "tab-echr-legal-en-v1" else ("all",)
+        for endpoint in endpoints:
+            passes = {}
+            for name in COMPARATORS:
+                results = [r["comparisons"][name] for r in selected]
+                if endpoint == "DIRECT":
+                    results = [r["secondary_TAB_DIRECT"] for r in results]
+                passes[name] = len(seeds) >= 3 and all(
+                    r["contracts"][version]["numerical_pass"] for r in results
+                )
+            summary[f"{config}/{endpoint}"] = passes
+    return summary
 
 
 def report(scratch: Path, *, splice=False, decoded=False):
@@ -151,6 +174,7 @@ def report(scratch: Path, *, splice=False, decoded=False):
             "losses": losses,
             "utility_margin": 0.01 if version == "3" else 0,
             "three_seeds": len(seeds) >= 3,
+            "three_seed_numerical_passes": seed_summary(records, seeds, version),
             "legacy_zero_floors": anchor_pass,
             "numerical_passes": {
                 config: {
@@ -230,6 +254,10 @@ def report(scratch: Path, *, splice=False, decoded=False):
         *(["Remaining seed-1 inference used two local CPU workers on disjoint configs, four threads each;",
            "earlier inference was sequential. Model, batches, windows and decoding stayed fixed.",
            "This scheduling change supplies no latency or SLO evidence.", ""] if execution else []),
+        *(["Seed 2 extends the same frozen strict diagnostic by replaying verified default CPU receipts.",
+           "No decoder selection or new inference was performed for this extension; its registration is",
+           "recorded in the comparison JSON under `execution.seed2_extension`.", ""]
+          if execution and "seed2_extension" in execution else []),
         *([f"{relocated} comparator receipt paths had moved during scratch archiving. Exact original SHA-256",
            "matches were verified in the archive or preserved copies; scores were unchanged. The comparison",
            "JSON records both original and resolved evidence paths.", ""] if relocated else []),
@@ -268,12 +296,89 @@ def report(scratch: Path, *, splice=False, decoded=False):
     ]
     lines += [
         "",
+        "## Legacy national-ID zero floors",
+        "",
+        "Any observed leak fails the frozen anchor under both contracts. Document counts are listed above.",
+        "",
+        "| Config | Seed | ID subjects | Missed | Legacy leak % [95% Wilson CI] | Zero-floor gate |",
+        "|---|---:|---:|---:|---:|---|",
+    ]
+    for seed, configs_scores in anchors.items():
+        for config, item in configs_scores.items():
+            s = item["scores"]
+            interval = pct(s["leak_rate"], [s["leak_rate_ci_low"], s["leak_rate_ci_high"]])
+            lines.append(
+                f"| {config} | {seed} | {int(s['decode_bearing_total'])} | {int(s['decode_bearing_missed'])} | "
+                f"{interval} | {'PASS' if item['pass'] else 'FAIL'} |"
+            )
+    lines += [
+        "",
+        "## TAB DIRECT endpoint",
+        "",
+        "The separately registered DIRECT endpoint uses the same documents and its own subject denominator.",
+        "",
+        "| Seed | Documents | DIRECT subjects | V2 DIRECT leak % [95% Wilson CI] |",
+        "|---|---:|---:|---:|",
+    ]
+    for r in records:
+        if r["config"] == "tab-echr-legal-en-v1":
+            s = r["scores"]["residual_leakage_v2"]
+            interval = [s["direct_leak_rate_ci_low"], s["direct_leak_rate_ci_high"]] if s["direct_available"] else None
+            lines.append(
+                f"| {r['seed']} | {r['n_clusters']} | {int(s['direct_subjects_total'])} | "
+                f"{pct(s['direct_leak_rate'], interval)} |"
+            )
+    lines += [
+        "",
+        "## Training-seed spread",
+        "",
+        "Min–max of per-seed point estimates, in percent; these ranges are not confidence intervals.",
+        "The per-seed CIs and denominators are above. Repeated gold is never pooled across seeds.",
+        "",
+        "| Config | Seeds | F1 % range | V2 all leak % range | Non-PII removed % range |",
+        "|---|---:|---:|---:|---:|",
+    ]
+    for config in configs:
+        selected = [r["scores"] for r in records if r["config"] == config]
+        values = [
+            [s["entity_f1"]["f1"] for s in selected if "entity_f1" in s],
+            [s["residual_leakage_v2"]["all_leak_rate"] for s in selected if s["residual_leakage_v2"]["all_available"]],
+            [s["over_redaction"]["rate"] for s in selected],
+        ]
+        ranges = [
+            f"{100 * min(v):.2f}–{100 * max(v):.2f}"
+            if len(v) == len(seeds) and all(x is not None for x in v)
+            else "unavailable"
+            for v in values
+        ]
+        lines.append(f"| {config} | {len(seeds)} | " + " | ".join(ranges) + " |")
+    lines += [
+        "",
+        "## Three-seed numerical gate",
+        "",
+        f"Seed-count requirement: {'met' if len(seeds) >= 3 else 'not met'} ({len(seeds)} training seeds).",
+        "Each listed comparator passes disjoint Wilson privacy, paired privacy and utility gates on",
+        "the same endpoint for every seed. An empty cell is shown as none; this is not a contract win.",
+        "Legacy zero floors are reported above; native review and held-out disjointness remain unverified.",
+        "",
+        "| Config / endpoint | V2 passing comparators (all seeds) | V3 passing comparators (all seeds) |",
+        "|---|---|---|",
+    ]
+    for endpoint in contracts["3"]["three_seed_numerical_passes"]:
+        passing = [
+            ", ".join(name for name, passed in contracts[v]["three_seed_numerical_passes"][endpoint].items() if passed)
+            or "none"
+            for v in ("2", "3")
+        ]
+        lines.append(f"| {endpoint} | " + " | ".join(passing) + " |")
+    lines += [
+        "",
         "## Paired anchor and worst-language comparisons",
         "",
         "All deltas below are candidate minus comparator in percentage points (95% cluster bootstrap).",
         "TAB uses its separately registered DIRECT endpoint; other rows use all identifier subjects.",
         "The worst gateway language is descriptive, not a selected replacement for the eight-language matrix.",
-        "Numerical pass counts are not contract wins; the seed/review/disjointness requirements remain.",
+        "Numerical pass counts are not contract wins; review/disjointness requirements remain.",
         "",
         "| Config / endpoint | Seed | Comparator | Leak delta [95% CI] | Utility delta [95% CI] | V2 numerical pass | V3 numerical pass |",
         "|---|---:|---|---:|---:|---|---|",
