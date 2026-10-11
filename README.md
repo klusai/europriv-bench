@@ -93,3 +93,5 @@ substitute when human annotators are unavailable. `panel-validated` is a separat
 `citable-validated` remains reserved for human sign-off. Failed/incomplete audits stay `dev`.
 See `analysis/panel_validation.py` for cached, spend-capped execution and
 `analysis/panel_report.py` for offline statistics and disagreement export.
+The [v2 round-3 runbook](docs/validation/round3-runbook.md) records the preregistered
+availability-only replacement of the Mistral seat and reproduces the RO/PL audit.
