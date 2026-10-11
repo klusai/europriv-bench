@@ -1,0 +1,1208 @@
+{
+  "ledger_sha256": "12b2793212995d5ae8c3851a8d8e84599dedbd05353cf8141998270808e64938",
+  "training_seed_count": 1,
+  "training_seed": 0,
+  "bootstrap_seed": 126,
+  "bootstrap_resamples": 2000,
+  "review": "single Codex multilingual contextual adjudication; no independent native human review",
+  "provenance": {
+    "checkpoint": "/Users/mihai/codespace/research-artifacts/gateway/seed0/merged",
+    "files": {
+      "config.json": "498036d4a34566faaac6ae2f16f6d26511a9a8672e661ee05c830ade09026de4",
+      "model.safetensors": "0e844ccb9e6469b85631e44d20bea5743d1176beaf3667e924b2fe33f471d0ea",
+      "tokenizer.json": "e714c627d94fd333b14f9ff32436219a4d7ac969719efe340fdc3385e1c7cd3e",
+      "tokenizer_config.json": "2f167645b9b4b8417dd101197ffb2e9dabfe053e599ad88c6c4c0883c6a460ca"
+    },
+    "packages": {
+      "torch": "2.12.0",
+      "transformers": "5.10.2"
+    },
+    "device": "cpu",
+    "dtype": "float32",
+    "threads": 4,
+    "batch_size": 16,
+    "window": 512,
+    "stride": 64,
+    "training_seed": 0,
+    "inference_seed": 100,
+    "adapter_sha256": "6e9fcbba7a7304822689e038e879b80e2498af91be51c6a532f2aa6b0b29bbd0",
+    "operator": "union of all native intervals; no threshold; simple aggregation",
+    "data": {
+      "data_sha256": "eb59f81485860c100682253471bbba218a648ccb4f6926666bab3c29dfc4e751",
+      "manifest_sha256": "15012ebb23289000af8acaca03bb505ded43378db1420924a1c6c60801061663",
+      "data_revision": 4,
+      "coordinate_policy": "message-part-order-newline-v1",
+      "sources": {
+        "originals": {
+          "url": "https://github.com/klusai/klusai-datasets",
+          "revision": "736665aa1c8908c73f6d0dd19b75d4541cf97b46",
+          "revision_scope": "Repository baseline before RES-123; no authored conversations yet. Each RES-124 record must pin its actual artifact Git object (clean input blob for squashed revisions).",
+          "license": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.en",
+          "license_evidence": "conf/gateway_traffic_licenses/originals.txt",
+          "attribution": "KlusAI / Codex \u2014 gateway-traffic-v1 \u2014 https://github.com/klusai/klusai-datasets",
+          "stratum": "original-synthetic",
+          "allowed_gateway_splits": [
+            "train",
+            "dev",
+            "test"
+          ],
+          "artifact_path": "artifacts/gateway-traffic-v1/originals/",
+          "permitted_train": true,
+          "permitted_redistribute": true,
+          "license_verified_on": "2026-10-11",
+          "license_sha256": "1467a94107023406b967a067ad77254df750cd04b7025ee539348523d8e0652e"
+        },
+        "openpii": {
+          "url": "https://huggingface.co/datasets/ai4privacy/pii-masking-openpii-1m",
+          "revision": "ecfdc547f4a0955600cfe6ab98ba2a162207fcc0",
+          "revision_scope": "Upstream dataset Git revision",
+          "license": "CC-BY-4.0",
+          "license_url": "https://huggingface.co/datasets/ai4privacy/pii-masking-openpii-1m/blob/ecfdc547f4a0955600cfe6ab98ba2a162207fcc0/README.md",
+          "license_evidence": "conf/gateway_traffic_licenses/openpii-card.md",
+          "attribution": "Ai4Privacy / Ai Suisse SA \u2014 https://huggingface.co/datasets/ai4privacy/pii-masking-openpii-1m",
+          "stratum": "external-synthetic",
+          "allowed_gateway_splits": [
+            "train",
+            "dev",
+            "test"
+          ],
+          "artifact_path": "data/{train,validation}.jsonl",
+          "admission": "Blocked until family/subject/translation identities and train overlap are audited. Never counted toward original 8k/1.6k quotas.",
+          "permitted_train": true,
+          "permitted_redistribute": true,
+          "license_verified_on": "2026-10-11",
+          "license_sha256": "f6c425ec1b231ed9756b461682d82cec746183dea6031b860ce55d8e3854ad48"
+        },
+        "tab": {
+          "url": "https://github.com/NorskRegnesentral/text-anonymization-benchmark",
+          "revision": "558e09e26d6b36f5f78440074e6a233946d98bd9",
+          "revision_scope": "Upstream dataset Git revision",
+          "license": "MIT",
+          "license_url": "https://github.com/NorskRegnesentral/text-anonymization-benchmark/blob/558e09e26d6b36f5f78440074e6a233946d98bd9/LICENSE.txt",
+          "license_evidence": "conf/gateway_traffic_licenses/tab-MIT.txt",
+          "attribution": "Norsk Regnesentral; Pil\u00e1n et al. (2022), Text Anonymization Benchmark",
+          "stratum": "independent-real-anchor",
+          "allowed_gateway_splits": [],
+          "artifact_path": "echr_test.json",
+          "anchor_manifest": "conf/tab_echr_manifest.yaml",
+          "admission": "Independent frozen anchor only; never convert held-out TAB cases into gateway train/dev/test.",
+          "permitted_train": true,
+          "permitted_redistribute": true,
+          "license_verified_on": "2026-10-11",
+          "license_sha256": "9569b31acf50e1cb3f38f47220f2c3a42f533e07e72fe2d18c2871e89098a8c7"
+        }
+      },
+      "local_override": true
+    },
+    "split": "dev"
+  },
+  "languages": {
+    "ro": {
+      "conversations": 200,
+      "affected_conversations": 53,
+      "fragments": 885,
+      "classes": {
+        "a": {
+          "fragments": 0,
+          "share": 0.0,
+          "share_wilson95": [
+            4.336808689942018e-19,
+            0.004321854286815375
+          ],
+          "characters": 0,
+          "conversations": 0,
+          "utility_contribution": {
+            "available": true,
+            "n": 106151,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "valid_resamples": 2000
+          },
+          "reasons": {}
+        },
+        "b": {
+          "fragments": 732,
+          "share": 0.8271186440677966,
+          "share_wilson95": [
+            0.8008051796928557,
+            0.8506045902144141
+          ],
+          "characters": 3792,
+          "conversations": 30,
+          "utility_contribution": {
+            "available": true,
+            "n": 106151,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.03572269691288824,
+            "ci_low": 0.024679093366559025,
+            "ci_high": 0.046414143105403996,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "merchant_alias": 618,
+            "product_description": 99,
+            "product_and_row_separator": 1,
+            "tariff_or_product_code": 8,
+            "public_figure": 1,
+            "public_statute_or_date": 5
+          }
+        },
+        "c": {
+          "fragments": 0,
+          "share": 0.0,
+          "share_wilson95": [
+            4.336808689942018e-19,
+            0.004321854286815375
+          ],
+          "characters": 0,
+          "conversations": 0,
+          "utility_contribution": {
+            "available": true,
+            "n": 106151,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "valid_resamples": 2000
+          },
+          "reasons": {}
+        },
+        "d": {
+          "fragments": 153,
+          "share": 0.17288135593220338,
+          "share_wilson95": [
+            0.14939540978558585,
+            0.1991948203071442
+          ],
+          "characters": 1001,
+          "conversations": 41,
+          "utility_contribution": {
+            "available": true,
+            "n": 106151,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.009429962977268232,
+            "ci_low": 0.005823519821937092,
+            "ci_high": 0.01329216124099004,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "receipt_status": 124,
+            "ordinary_prose_or_status": 29
+          }
+        }
+      },
+      "harness_utility": {
+        "available": 1,
+        "non_pii_characters": 106151,
+        "removed_non_pii_characters": 4793,
+        "over_redaction_rate": 0.045152659890156474,
+        "character_retention": 0.9548473401098435
+      },
+      "utility_ci": {
+        "available": true,
+        "n": 106151,
+        "clusters": 200,
+        "resamples": 2000,
+        "seed": 126,
+        "method": "paired conversation cluster percentile 95%",
+        "delta": 0.045152659890156474,
+        "ci_low": 0.030996623074110705,
+        "ci_high": 0.05869365546250857,
+        "valid_resamples": 2000
+      },
+      "family_error_characters": {
+        "gateway-v1/family-004": 4561,
+        "gateway-v1/family-022": 30,
+        "gateway-v1/family-001": 24,
+        "gateway-v1/family-013": 75,
+        "gateway-v1/family-019": 12,
+        "gateway-v1/family-007": 58,
+        "gateway-v1/family-016": 33
+      },
+      "predictions_sha256": "7a86a1300b2e5820f5ca44f66426af14a9952091b93af1e561bcc2d9faf5d294",
+      "errors_sha256": "141a77562c1d11862e130f97dafb76d4d0e528a011fd06aad420282f25477cea"
+    },
+    "en": {
+      "conversations": 200,
+      "affected_conversations": 33,
+      "fragments": 362,
+      "classes": {
+        "a": {
+          "fragments": 0,
+          "share": 0.0,
+          "share_wilson95": [
+            0.0,
+            0.010500295341015096
+          ],
+          "characters": 0,
+          "conversations": 0,
+          "utility_contribution": {
+            "available": true,
+            "n": 115434,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "valid_resamples": 2000
+          },
+          "reasons": {}
+        },
+        "b": {
+          "fragments": 359,
+          "share": 0.9917127071823204,
+          "share_wilson95": [
+            0.975921513447372,
+            0.9971776436205799
+          ],
+          "characters": 1322,
+          "conversations": 30,
+          "utility_contribution": {
+            "available": true,
+            "n": 115434,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.011452431692568914,
+            "ci_low": 0.007320617025014124,
+            "ci_high": 0.015862360730339992,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "merchant_alias": 344,
+            "tariff_or_product_code": 3,
+            "public_figure": 4,
+            "public_statute_or_date": 8
+          }
+        },
+        "c": {
+          "fragments": 0,
+          "share": 0.0,
+          "share_wilson95": [
+            0.0,
+            0.010500295341015096
+          ],
+          "characters": 0,
+          "conversations": 0,
+          "utility_contribution": {
+            "available": true,
+            "n": 115434,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "valid_resamples": 2000
+          },
+          "reasons": {}
+        },
+        "d": {
+          "fragments": 3,
+          "share": 0.008287292817679558,
+          "share_wilson95": [
+            0.002822356379420049,
+            0.024078486552627947
+          ],
+          "characters": 41,
+          "conversations": 3,
+          "utility_contribution": {
+            "available": true,
+            "n": 115434,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.0003551813157302008,
+            "ci_low": 0.0,
+            "ci_high": 0.0009127913553376728,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "ordinary_prose_or_status": 3
+          }
+        }
+      },
+      "harness_utility": {
+        "available": 1,
+        "non_pii_characters": 115434,
+        "removed_non_pii_characters": 1363,
+        "over_redaction_rate": 0.011807613008299115,
+        "character_retention": 0.9881923869917009
+      },
+      "utility_ci": {
+        "available": true,
+        "n": 115434,
+        "clusters": 200,
+        "resamples": 2000,
+        "seed": 126,
+        "method": "paired conversation cluster percentile 95%",
+        "delta": 0.011807613008299115,
+        "ci_low": 0.00773321465719774,
+        "ci_high": 0.016235619965139714,
+        "valid_resamples": 2000
+      },
+      "family_error_characters": {
+        "gateway-v1/family-004": 1220,
+        "gateway-v1/family-016": 41,
+        "gateway-v1/family-022": 9,
+        "gateway-v1/family-007": 40,
+        "gateway-v1/family-013": 53
+      },
+      "predictions_sha256": "c351166880fa8a3cae7bbbbb29bad2127c7284049e06aaa1c02cc0292d340ba7",
+      "errors_sha256": "8bd10d53da0bc0e661cdf94cf42aa874be892e9d93592dcd8783165550863a24"
+    },
+    "de": {
+      "conversations": 200,
+      "affected_conversations": 53,
+      "fragments": 742,
+      "classes": {
+        "a": {
+          "fragments": 0,
+          "share": 0.0,
+          "share_wilson95": [
+            0.0,
+            0.0051504823667483735
+          ],
+          "characters": 0,
+          "conversations": 0,
+          "utility_contribution": {
+            "available": true,
+            "n": 113713,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "valid_resamples": 2000
+          },
+          "reasons": {}
+        },
+        "b": {
+          "fragments": 670,
+          "share": 0.9029649595687331,
+          "share_wilson95": [
+            0.8795449668876529,
+            0.9222340244124607
+          ],
+          "characters": 3461,
+          "conversations": 29,
+          "utility_contribution": {
+            "available": true,
+            "n": 113713,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.030436273776964815,
+            "ci_low": 0.020409434141391573,
+            "ci_high": 0.039808956357228475,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "product_description": 160,
+            "merchant_alias": 491,
+            "tariff_or_product_code": 12,
+            "public_statute_or_date": 7
+          }
+        },
+        "c": {
+          "fragments": 4,
+          "share": 0.005390835579514825,
+          "share_wilson95": [
+            0.0020983321027116635,
+            0.013778290615877698
+          ],
+          "characters": 40,
+          "conversations": 4,
+          "utility_contribution": {
+            "available": true,
+            "n": 113713,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.0003517627711871114,
+            "ci_low": 8.464179441275892e-06,
+            "ci_high": 0.0008160865358046896,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "native_span_extends_gold": 4
+          }
+        },
+        "d": {
+          "fragments": 68,
+          "share": 0.09164420485175202,
+          "share_wilson95": [
+            0.07293449870123916,
+            0.11456036964680599
+          ],
+          "characters": 383,
+          "conversations": 37,
+          "utility_contribution": {
+            "available": true,
+            "n": 113713,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.003368128534116592,
+            "ci_low": 0.0022634214496423614,
+            "ci_high": 0.0045831774880772305,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "ordinary_prose_or_status": 34,
+            "column_header": 7,
+            "receipt_status": 27
+          }
+        }
+      },
+      "harness_utility": {
+        "available": 1,
+        "non_pii_characters": 113713,
+        "removed_non_pii_characters": 3884,
+        "over_redaction_rate": 0.03415616508226852,
+        "character_retention": 0.9658438349177315
+      },
+      "utility_ci": {
+        "available": true,
+        "n": 113713,
+        "clusters": 200,
+        "resamples": 2000,
+        "seed": 126,
+        "method": "paired conversation cluster percentile 95%",
+        "delta": 0.03415616508226852,
+        "ci_low": 0.024015865125581987,
+        "ci_high": 0.04381286237830168,
+        "valid_resamples": 2000
+      },
+      "family_error_characters": {
+        "gateway-v1/family-004": 3498,
+        "gateway-v1/family-007": 114,
+        "gateway-v1/family-022": 60,
+        "gateway-v1/family-001": 39,
+        "gateway-v1/family-019": 49,
+        "gateway-v1/family-010": 52,
+        "gateway-v1/family-016": 21,
+        "gateway-v1/family-013": 51
+      },
+      "predictions_sha256": "4484fe6d0546981b1ba8bb719abebbb47a6c748001c61e8b0f1027db6804bac0",
+      "errors_sha256": "9f6622a306e7c7face972df00e842c781b63988c9b0a49c16b4b67a25683d773"
+    },
+    "fr": {
+      "conversations": 200,
+      "affected_conversations": 35,
+      "fragments": 369,
+      "classes": {
+        "a": {
+          "fragments": 0,
+          "share": 0.0,
+          "share_wilson95": [
+            0.0,
+            0.010303155058658229
+          ],
+          "characters": 0,
+          "conversations": 0,
+          "utility_contribution": {
+            "available": true,
+            "n": 109001,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "valid_resamples": 2000
+          },
+          "reasons": {}
+        },
+        "b": {
+          "fragments": 344,
+          "share": 0.9322493224932249,
+          "share_wilson95": [
+            0.9019001036147488,
+            0.9536914777844056
+          ],
+          "characters": 1192,
+          "conversations": 24,
+          "utility_contribution": {
+            "available": true,
+            "n": 109001,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.010935679489178998,
+            "ci_low": 0.007008891484752611,
+            "ci_high": 0.0150636666245484,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "merchant_alias": 330,
+            "product_description": 7,
+            "tariff_or_product_code": 1,
+            "public_statute_or_date": 6
+          }
+        },
+        "c": {
+          "fragments": 1,
+          "share": 0.0027100271002710027,
+          "share_wilson95": [
+            0.00047854797856980175,
+            0.01518881762177592
+          ],
+          "characters": 15,
+          "conversations": 1,
+          "utility_contribution": {
+            "available": true,
+            "n": 109001,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.0001376134163906753,
+            "ci_low": 0.0,
+            "ci_high": 0.0004762482051310285,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "native_span_extends_gold": 1
+          }
+        },
+        "d": {
+          "fragments": 24,
+          "share": 0.06504065040650407,
+          "share_wilson95": [
+            0.04409334003849509,
+            0.0949508680206629
+          ],
+          "characters": 161,
+          "conversations": 20,
+          "utility_contribution": {
+            "available": true,
+            "n": 109001,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.001477050669259915,
+            "ci_low": 0.0008268024219073982,
+            "ci_high": 0.0022381131430509772,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "receipt_status": 14,
+            "ordinary_prose_or_status": 10
+          }
+        }
+      },
+      "harness_utility": {
+        "available": 1,
+        "non_pii_characters": 109001,
+        "removed_non_pii_characters": 1368,
+        "over_redaction_rate": 0.012550343574829589,
+        "character_retention": 0.9874496564251705
+      },
+      "utility_ci": {
+        "available": true,
+        "n": 109001,
+        "clusters": 200,
+        "resamples": 2000,
+        "seed": 126,
+        "method": "paired conversation cluster percentile 95%",
+        "delta": 0.012550343574829589,
+        "ci_low": 0.008347218351625009,
+        "ci_high": 0.01694117163540581,
+        "valid_resamples": 2000
+      },
+      "family_error_characters": {
+        "gateway-v1/family-004": 1228,
+        "gateway-v1/family-010": 61,
+        "gateway-v1/family-019": 12,
+        "gateway-v1/family-022": 3,
+        "gateway-v1/family-007": 28,
+        "gateway-v1/family-013": 36
+      },
+      "predictions_sha256": "66f5c88dd3c083385a2c870e26d8ccd8d3688c1af9f1578ee59b379a40b1ca4f",
+      "errors_sha256": "8c57a7bf57ce06bacba2c37ee9cfd41d0aa634b6a680453c837ae00e547cfe55"
+    },
+    "es": {
+      "conversations": 200,
+      "affected_conversations": 35,
+      "fragments": 543,
+      "classes": {
+        "a": {
+          "fragments": 0,
+          "share": 0.0,
+          "share_wilson95": [
+            4.336808689942018e-19,
+            0.007024784330736621
+          ],
+          "characters": 0,
+          "conversations": 0,
+          "utility_contribution": {
+            "available": true,
+            "n": 108534,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "valid_resamples": 2000
+          },
+          "reasons": {}
+        },
+        "b": {
+          "fragments": 521,
+          "share": 0.9594843462246777,
+          "share_wilson95": [
+            0.9394190806819415,
+            0.9730940548962582
+          ],
+          "characters": 2321,
+          "conversations": 28,
+          "utility_contribution": {
+            "available": true,
+            "n": 108534,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.021385003777618074,
+            "ci_low": 0.01393660306540936,
+            "ci_high": 0.028571116617764916,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "merchant_alias": 495,
+            "tariff_or_product_code": 5,
+            "product_description": 14,
+            "product_and_row_separator": 1,
+            "public_statute_or_date": 6
+          }
+        },
+        "c": {
+          "fragments": 1,
+          "share": 0.001841620626151013,
+          "share_wilson95": [
+            0.0003251661919055366,
+            0.010356985415697614
+          ],
+          "characters": 23,
+          "conversations": 1,
+          "utility_contribution": {
+            "available": true,
+            "n": 108534,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.00021191516022628853,
+            "ci_low": 0.0,
+            "ci_high": 0.0007016299533488052,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "native_span_extends_gold": 1
+          }
+        },
+        "d": {
+          "fragments": 21,
+          "share": 0.03867403314917127,
+          "share_wilson95": [
+            0.025432268686275766,
+            0.058397228458658024
+          ],
+          "characters": 154,
+          "conversations": 17,
+          "utility_contribution": {
+            "available": true,
+            "n": 108534,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.0014189102032542797,
+            "ci_low": 0.0007206214896440598,
+            "ci_high": 0.002262145888614026,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "ordinary_prose_or_status": 8,
+            "receipt_status": 13
+          }
+        }
+      },
+      "harness_utility": {
+        "available": 1,
+        "non_pii_characters": 108534,
+        "removed_non_pii_characters": 2498,
+        "over_redaction_rate": 0.02301582914109864,
+        "character_retention": 0.9769841708589013
+      },
+      "utility_ci": {
+        "available": true,
+        "n": 108534,
+        "clusters": 200,
+        "resamples": 2000,
+        "seed": 126,
+        "method": "paired conversation cluster percentile 95%",
+        "delta": 0.02301582914109864,
+        "ci_low": 0.015328631605418235,
+        "ci_high": 0.030566874239069612,
+        "valid_resamples": 2000
+      },
+      "family_error_characters": {
+        "gateway-v1/family-004": 2360,
+        "gateway-v1/family-016": 53,
+        "gateway-v1/family-013": 55,
+        "gateway-v1/family-019": 4,
+        "gateway-v1/family-022": 12,
+        "gateway-v1/family-007": 14
+      },
+      "predictions_sha256": "cb26935e8eabdd5c2865743ade1a347ff1e75517252b3100b8fb8208e1cf42e9",
+      "errors_sha256": "ec4f38a992e1c5d3d392fb90b820beba94e49c174d3984dc25cb8cce7dc81104"
+    },
+    "it": {
+      "conversations": 200,
+      "affected_conversations": 52,
+      "fragments": 525,
+      "classes": {
+        "a": {
+          "fragments": 0,
+          "share": 0.0,
+          "share_wilson95": [
+            0.0,
+            0.00726388457444626
+          ],
+          "characters": 0,
+          "conversations": 0,
+          "utility_contribution": {
+            "available": true,
+            "n": 109011,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "valid_resamples": 2000
+          },
+          "reasons": {}
+        },
+        "b": {
+          "fragments": 497,
+          "share": 0.9466666666666667,
+          "share_wilson95": [
+            0.9239986285446635,
+            0.9628456345688312
+          ],
+          "characters": 2303,
+          "conversations": 29,
+          "utility_contribution": {
+            "available": true,
+            "n": 109011,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.02112630835420279,
+            "ci_low": 0.014064233654772796,
+            "ci_high": 0.027777166508607884,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "merchant_alias": 443,
+            "product_description": 39,
+            "tariff_or_product_code": 9,
+            "public_statute_or_date": 5,
+            "product_and_row_separator": 1
+          }
+        },
+        "c": {
+          "fragments": 2,
+          "share": 0.0038095238095238095,
+          "share_wilson95": [
+            0.0010453336630564533,
+            0.013782254647965453
+          ],
+          "characters": 36,
+          "conversations": 2,
+          "utility_contribution": {
+            "available": true,
+            "n": 109011,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.00033024190219335664,
+            "ci_low": 0.0,
+            "ci_high": 0.0008797420241127976,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "native_span_extends_gold": 2
+          }
+        },
+        "d": {
+          "fragments": 26,
+          "share": 0.049523809523809526,
+          "share_wilson95": [
+            0.034017648282074736,
+            0.07157438486785495
+          ],
+          "characters": 222,
+          "conversations": 23,
+          "utility_contribution": {
+            "available": true,
+            "n": 109011,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.002036491730192366,
+            "ci_low": 0.0011482782713441713,
+            "ci_high": 0.0030958320624520775,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "ordinary_prose_or_status": 23,
+            "receipt_status": 3
+          }
+        }
+      },
+      "harness_utility": {
+        "available": 1,
+        "non_pii_characters": 109011,
+        "removed_non_pii_characters": 2561,
+        "over_redaction_rate": 0.023493041986588508,
+        "character_retention": 0.9765069580134115
+      },
+      "utility_ci": {
+        "available": true,
+        "n": 109011,
+        "clusters": 200,
+        "resamples": 2000,
+        "seed": 126,
+        "method": "paired conversation cluster percentile 95%",
+        "delta": 0.023493041986588508,
+        "ci_low": 0.01663988283963103,
+        "ci_high": 0.030231699954717636,
+        "valid_resamples": 2000
+      },
+      "family_error_characters": {
+        "gateway-v1/family-001": 155,
+        "gateway-v1/family-004": 2239,
+        "gateway-v1/family-022": 56,
+        "gateway-v1/family-007": 21,
+        "gateway-v1/family-016": 44,
+        "gateway-v1/family-013": 46
+      },
+      "predictions_sha256": "835a25244423f67466e7a9b049efb2d202d1a518dfd67a675f9a6d3ee6738ff0",
+      "errors_sha256": "c8dfbae739c18c4e49940737d69dabb5b31f42059c2dbf4f9767c68e04d076b8"
+    },
+    "nl": {
+      "conversations": 200,
+      "affected_conversations": 53,
+      "fragments": 751,
+      "classes": {
+        "a": {
+          "fragments": 0,
+          "share": 0.0,
+          "share_wilson95": [
+            0.0,
+            0.005089072991682629
+          ],
+          "characters": 0,
+          "conversations": 0,
+          "utility_contribution": {
+            "available": true,
+            "n": 106448,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "valid_resamples": 2000
+          },
+          "reasons": {}
+        },
+        "b": {
+          "fragments": 715,
+          "share": 0.952063914780293,
+          "share_wilson95": [
+            0.9343507066019153,
+            0.9651759504402252
+          ],
+          "characters": 3653,
+          "conversations": 29,
+          "utility_contribution": {
+            "available": true,
+            "n": 106448,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.034317225311889375,
+            "ci_low": 0.02320733037439304,
+            "ci_high": 0.04496334066126535,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "product_description": 113,
+            "merchant_alias": 582,
+            "tariff_or_product_code": 14,
+            "public_statute_or_date": 6
+          }
+        },
+        "c": {
+          "fragments": 0,
+          "share": 0.0,
+          "share_wilson95": [
+            0.0,
+            0.005089072991682629
+          ],
+          "characters": 0,
+          "conversations": 0,
+          "utility_contribution": {
+            "available": true,
+            "n": 106448,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "valid_resamples": 2000
+          },
+          "reasons": {}
+        },
+        "d": {
+          "fragments": 36,
+          "share": 0.047936085219707054,
+          "share_wilson95": [
+            0.03482404955977483,
+            0.0656492933980847
+          ],
+          "characters": 257,
+          "conversations": 29,
+          "utility_contribution": {
+            "available": true,
+            "n": 106448,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.0024143243649481436,
+            "ci_low": 0.0014763838976902873,
+            "ci_high": 0.0035773857309750116,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "ordinary_prose_or_status": 29,
+            "receipt_status": 7
+          }
+        }
+      },
+      "harness_utility": {
+        "available": 1,
+        "non_pii_characters": 106448,
+        "removed_non_pii_characters": 3910,
+        "over_redaction_rate": 0.03673154967683752,
+        "character_retention": 0.9632684503231624
+      },
+      "utility_ci": {
+        "available": true,
+        "n": 106448,
+        "clusters": 200,
+        "resamples": 2000,
+        "seed": 126,
+        "method": "paired conversation cluster percentile 95%",
+        "delta": 0.03673154967683752,
+        "ci_low": 0.02610658705745344,
+        "ci_high": 0.047054869674246824,
+        "valid_resamples": 2000
+      },
+      "family_error_characters": {
+        "gateway-v1/family-004": 3573,
+        "gateway-v1/family-016": 36,
+        "gateway-v1/family-022": 183,
+        "gateway-v1/family-013": 79,
+        "gateway-v1/family-010": 25,
+        "gateway-v1/family-001": 9,
+        "gateway-v1/family-019": 5
+      },
+      "predictions_sha256": "08b17f158df4a4bb4e09ad3aa7c11d95c0448deef9306ec65efc267c307439d1",
+      "errors_sha256": "429c0589ea0c9ec5a76dce5d4452b4274fdf858231e65bd1c82b918aaa2bc3c3"
+    },
+    "pl": {
+      "conversations": 200,
+      "affected_conversations": 92,
+      "fragments": 1582,
+      "classes": {
+        "a": {
+          "fragments": 0,
+          "share": 0.0,
+          "share_wilson95": [
+            0.0,
+            0.0024223375029502597
+          ],
+          "characters": 0,
+          "conversations": 0,
+          "utility_contribution": {
+            "available": true,
+            "n": 103530,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "valid_resamples": 2000
+          },
+          "reasons": {}
+        },
+        "b": {
+          "fragments": 1061,
+          "share": 0.6706700379266751,
+          "share_wilson95": [
+            0.6471222964284166,
+            0.6933909385579341
+          ],
+          "characters": 6455,
+          "conversations": 29,
+          "utility_contribution": {
+            "available": true,
+            "n": 103530,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.062349077562059305,
+            "ci_low": 0.043270260175621106,
+            "ci_high": 0.07994370251087196,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "merchant_alias": 840,
+            "product_description": 210,
+            "tariff_or_product_code": 2,
+            "public_figure": 3,
+            "public_statute_or_date": 6
+          }
+        },
+        "c": {
+          "fragments": 0,
+          "share": 0.0,
+          "share_wilson95": [
+            0.0,
+            0.0024223375029502597
+          ],
+          "characters": 0,
+          "conversations": 0,
+          "utility_contribution": {
+            "available": true,
+            "n": 103530,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "valid_resamples": 2000
+          },
+          "reasons": {}
+        },
+        "d": {
+          "fragments": 521,
+          "share": 0.3293299620733249,
+          "share_wilson95": [
+            0.30660906144206584,
+            0.35287770357158327
+          ],
+          "characters": 5169,
+          "conversations": 85,
+          "utility_contribution": {
+            "available": true,
+            "n": 103530,
+            "clusters": 200,
+            "resamples": 2000,
+            "seed": 126,
+            "method": "paired conversation cluster percentile 95%",
+            "delta": 0.04992755722978847,
+            "ci_low": 0.038622580406861014,
+            "ci_high": 0.06033666056005852,
+            "valid_resamples": 2000
+          },
+          "reasons": {
+            "receipt_status": 400,
+            "ordinary_prose_or_status": 121
+          }
+        }
+      },
+      "harness_utility": {
+        "available": 1,
+        "non_pii_characters": 103530,
+        "removed_non_pii_characters": 11624,
+        "over_redaction_rate": 0.11227663479184777,
+        "character_retention": 0.8877233652081522
+      },
+      "utility_ci": {
+        "available": true,
+        "n": 103530,
+        "clusters": 200,
+        "resamples": 2000,
+        "seed": 126,
+        "method": "paired conversation cluster percentile 95%",
+        "delta": 0.11227663479184777,
+        "ci_low": 0.08231548607476094,
+        "ci_high": 0.13945307244823255,
+        "valid_resamples": 2000
+      },
+      "family_error_characters": {
+        "gateway-v1/family-004": 10576,
+        "gateway-v1/family-013": 173,
+        "gateway-v1/family-016": 138,
+        "gateway-v1/family-022": 73,
+        "gateway-v1/family-007": 156,
+        "gateway-v1/family-019": 275,
+        "gateway-v1/family-010": 157,
+        "gateway-v1/family-001": 76
+      },
+      "predictions_sha256": "9c22311ef9b01113f74586c099eeedde39ee019e9d3d4cc7df99701ee24e4e42",
+      "errors_sha256": "b4504720c9f775678ba43f54ada53a5c22af7db7294c92da3f97a3801dbe0fc5"
+    }
+  }
+}
