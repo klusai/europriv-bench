@@ -796,7 +796,8 @@ def tab_reid_leakage(rows: Sequence[dict], pred_tags: Tags) -> dict[str, float]:
     should remove, what fraction does it LEAVE in the residual? Each TAB gold span carries an
     ``identifier_type`` (DIRECT — directly re-identifying, e.g. names / case numbers; QUASI — needs
     combination) and an ``entity_id`` (coreference). A **subject** is one ``(doc, entity_id,
-    identifier_type)``; it is detected iff EVERY occurrence's whitespace tokens are marked (non-O), so
+    identifier_type)``; v1 calls an occurrence detected if ANY overlapping token is non-O, and a
+    subject detected iff EVERY occurrence is detected. This historical any-overlap rule is frozen, so
     it LEAKS iff any occurrence survives un-redacted. Reports the per-subject leak rate (↓ better)
     overall and split DIRECT/QUASI, each with a 95% Wilson CI (shared ``_leak_rate_stats``). Computed
     on the post-detection residual, never raw text — the re-id-risk axis competitors don't report.
@@ -857,6 +858,90 @@ def tab_reid_subject_detection(rows: Sequence[dict], pred_tags: Tags) -> list[di
     ]
 
 
+RedactionSpans = Sequence[Sequence[tuple[int, int]]]
+
+
+def residual_subject_detection_v2(
+    rows: Sequence[dict], redaction_spans: RedactionSpans, *, tab_only: bool = False,
+) -> list[dict]:
+    """Exact-character coverage outcomes; see docs/gateway-contract.md for the frozen v2 contract.
+
+    Offsets are Python Unicode code points in the ORIGINAL input, end-exclusive, and describe
+    characters actually removed/replaced. Never project partial predictions onto whole tokens.
+    Every non-whitespace gold character must be covered in EVERY occurrence. Subject identities
+    come from gold only, so dumps can be paired across systems and bootstrapped by document.
+    """
+    if len(rows) != len(redaction_spans):
+        raise ValueError("v2 requires one redaction-span list per gold row (including empty lists)")
+    subjects: dict[tuple[int, tuple[str, ...], str], dict] = {}
+    for doc_idx, (row, masks) in enumerate(zip(rows, redaction_spans, strict=True)):
+        text = row["text"]
+        covered = bytearray(len(text))
+
+        def checked_bounds(start, end):
+            if type(start) is not int or type(end) is not int or not 0 <= start < end <= len(text):
+                raise ValueError(f"v2 invalid character offsets in document {doc_idx}: {(start, end)!r}")
+            return start, end
+
+        for start, end in masks:
+            start, end = checked_bounds(start, end)
+            covered[start:end] = b"\x01" * (end - start)
+        for sp in row.get("spans", []):
+            start, end = checked_bounds(sp["start"], sp["end"])
+            required = [i for i in range(start, end) if not text[i].isspace()]
+            if not required:
+                raise ValueError(f"v2 gold span contains only whitespace in document {doc_idx}")
+            eid = sp.get("entity_id")
+            idt = str(sp.get("identifier_type") or "UNSPECIFIED").upper()
+            if idt not in {"DIRECT", "QUASI", "UNSPECIFIED"}:
+                raise ValueError(f"v2 unknown identifier_type: {idt!r}")
+            if tab_only and (eid is None or idt == "UNSPECIFIED"):
+                raise ValueError("tab_reid_leakage_v2 requires entity_id and DIRECT/QUASI on every gold span")
+            # Keep explicit coreference separate from fallback value identities. Without coreference,
+            # these are identifier subjects, NOT counts of unique people. Country prevents collisions.
+            identity = ("entity", str(eid)) if eid is not None else (
+                "value", str(sp.get("country") or row.get("country") or ""),
+                sp["label"], " ".join(text[start:end].split()),
+            )
+            key = (doc_idx, identity, idt)
+            subj = subjects.setdefault(key, {
+                "doc": doc_idx, "subject_key": list(identity), "identifier_type": idt,
+                "detected": True, "occurrences": 0,
+            })
+            subj["detected"] = subj["detected"] and all(covered[i] for i in required)
+            subj["occurrences"] += 1
+    return [dict(subjects[key], leaked=not subjects[key]["detected"]) for key in sorted(subjects)]
+
+
+def _residual_leakage_stats_v2(subjects: list[dict]) -> dict[str, float]:
+    out = {"metric_version": 2.0}
+    for group in ("all", "direct", "quasi", "unspecified"):
+        items = [s for s in subjects if group == "all" or s["identifier_type"].lower() == group]
+        total, leaked = len(items), sum(s["leaked"] for s in items)
+        stats = _leak_rate_stats(leaked, total)
+        out[f"{group}_available"] = float(total > 0)
+        out[f"{group}_subjects_total"] = float(total)
+        out[f"{group}_subjects_leaked"] = float(leaked)
+        for key in ("leak_rate", "leak_rate_ci_low", "leak_rate_ci_high"):
+            out[f"{group}_{key}"] = stats[key]
+    return out
+
+
+def residual_leakage_v2(rows: Sequence[dict], redaction_spans: RedactionSpans) -> dict[str, float]:
+    """All-PII residual leak v2: full non-whitespace character coverage, with 95% Wilson CIs.
+
+    Gold spans define the protection policy; no label filtering is applied to redaction intervals.
+    With no subjects, available=0 marks the numeric zero sentinels as NOT an observed zero leak.
+    This coverage measure is not an empirical attacker re-identification probability.
+    """
+    return _residual_leakage_stats_v2(residual_subject_detection_v2(rows, redaction_spans))
+
+
+def tab_reid_leakage_v2(rows: Sequence[dict], redaction_spans: RedactionSpans) -> dict[str, float]:
+    """TAB v2: same (document, entity_id, sensitivity) units as v1, strict character coverage."""
+    return _residual_leakage_stats_v2(residual_subject_detection_v2(rows, redaction_spans, tab_only=True))
+
+
 REGISTRY: dict[str, Callable] = {
     "entity_f1": entity_f1,
     "entity_f2": entity_f2,
@@ -875,6 +960,8 @@ ROW_REGISTRY: dict[str, Callable] = {
     # RES-72/104 pivot: re-id-risk leak rate on TAB real legal gold, split DIRECT/QUASI. The flagship
     # privacy axis (competitors report only detection-F1). Computed on the post-detection residual.
     "tab_reid_leakage": tab_reid_leakage,
+    "tab_reid_leakage_v1": tab_reid_leakage,
+    "name_in_context_leakage_v1": name_in_context_leakage,
 }
 
 # Track-C anonymization metrics: called as fn(gold_rows, redacted_texts) — score the adapter's
@@ -892,4 +979,10 @@ ANON_MAP_REGISTRY: dict[str, Callable] = {
     "pseudonymization_consistency": pseudonymization_consistency,
 }
 
-ALL_METRICS = set(REGISTRY) | set(ROW_REGISTRY) | set(ANON_REGISTRY) | set(ANON_MAP_REGISTRY)
+# Exact original-input redaction intervals, not lossy token tags or substring matches in output.
+SPAN_REGISTRY: dict[str, Callable] = {
+    "residual_leakage_v2": residual_leakage_v2,
+    "tab_reid_leakage_v2": tab_reid_leakage_v2,
+}
+
+ALL_METRICS = set(REGISTRY) | set(ROW_REGISTRY) | set(ANON_REGISTRY) | set(ANON_MAP_REGISTRY) | set(SPAN_REGISTRY)
