@@ -50,6 +50,11 @@ def _load_gold_rows(spec: EvalSpec) -> list[dict]:
     any other loader error (corrupt rows, network, schema drift) propagates unchanged so a real
     crash on an *available* config fails the run instead of being silently skipped.
     """
+    if spec.dataset.loader == "gateway":
+        from .gateway import load_gateway
+
+        return load_gateway(spec)
+
     if spec.dataset.loader == "ai4privacy-openpii":
         from .openpii import load_openpii
 
@@ -254,7 +259,7 @@ def run_spec(
     for key in spec.metrics:
         if key in SPAN_REGISTRY:
             scores[key] = SPAN_REGISTRY[key](rows, redaction_spans)
-            if dumps is not None:
+            if dumps is not None and key in {"residual_leakage_v2", "tab_reid_leakage_v2"}:
                 dumps.append({
                     "adapter": adapter.name, "model_id": adapter.model_id, "spec": spec.name,
                     "metric": key, "metric_version": 2, "coverage_basis": "operator_character_spans",

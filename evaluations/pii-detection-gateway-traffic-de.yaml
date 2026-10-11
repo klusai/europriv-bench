@@ -1,0 +1,22 @@
+name: Gateway full-PII residual v2 — de
+version: 1
+task: detection
+domain: gateway
+languages: [de]
+dataset:
+  hf_id: klusai/europriv-bench
+  config: gateway-traffic-v1
+  eval_config: gateway-traffic-v1/de
+  loader: gateway
+  split: test
+  license: CC-BY-4.0
+metrics:
+  - residual_leakage_v2
+  - gateway_utility
+description: >
+  Preregistered all-PII conversation endpoint, all_leak_rate, all eight languages.
+  Synthetic dev gold; no native-review or clean-held-out claim. DIRECT/QUASI/UNSPECIFIED
+  slices, Wilson 95% and paired conversation bootstrap (2000 resamples, seed 126).
+  Exact deletion operator coverage; utility is gold non-PII character retention.
+  Local EUROPRIV_GATEWAY_PATH and EUROPRIV_GATEWAY_MANIFEST overrides until publication.
+  TAB and RO/PL legacy anchors remain separate and unchanged.

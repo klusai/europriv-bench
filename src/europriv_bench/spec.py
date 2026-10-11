@@ -28,7 +28,9 @@ class DatasetRef(BaseModel):
     config: str | None = None           # HF dataset config (per lang/domain)
     split: str = "test"
     license: str | None = None          # recorded for the openly-redistributable guarantee
-    loader: Literal["datasets", "ai4privacy-openpii"] = "datasets"
+    loader: Literal["datasets", "ai4privacy-openpii", "gateway"] = "datasets"
+    local_path: str | None = None
+    manifest_path: str | None = None
     eval_config: str | None = None      # stable eval identity when distinct from the HF config
     revision: str | None = None
     files: list[str] = Field(default_factory=list)

@@ -980,7 +980,15 @@ ANON_MAP_REGISTRY: dict[str, Callable] = {
 }
 
 # Exact original-input redaction intervals, not lossy token tags or substring matches in output.
+def gateway_utility(rows, redaction_spans):
+    """Exact non-PII character retention proxy, not semantic task utility."""
+    from .gateway import gateway_utility as score
+
+    return score(rows, redaction_spans)
+
+
 SPAN_REGISTRY: dict[str, Callable] = {
+    "gateway_utility": gateway_utility,
     "residual_leakage_v2": residual_leakage_v2,
     "tab_reid_leakage_v2": tab_reid_leakage_v2,
 }
