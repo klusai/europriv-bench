@@ -1,0 +1,3632 @@
+{
+  "ro-realskeleton-v2": {
+    "source_commit": "79c7a91c47be20c8d214b05b09c2850fe8049037",
+    "license": "CC-BY-4.0",
+    "source_url": "https://github.com/klusai/klusai-datasets",
+    "heldout_sha256": "cf320aebb7fd53c68ebb16e18116cbe0fea1f4e9f6cd8f0cc7d16e49b4daa470",
+    "population_sha256": "3b03b17125a643d5c1118ff476e61df704dd1458f2a1f9dc53140c3b21ab7bb7",
+    "strata": {
+      "admin": 75,
+      "clinical": 75,
+      "contract": 75,
+      "declaration": 75
+    },
+    "samples": [
+      {
+        "id": "11",
+        "stratum": "admin",
+        "sha256": "2e66471736ed9357133be825af51727a7f7afa2e8b5e5184b22b300235bfa348",
+        "text_sha256": "f4671065f8d72d1b665893b01ed9a171b1ce87852314a6d80c858689c4b602d5"
+      },
+      {
+        "id": "18",
+        "stratum": "admin",
+        "sha256": "6a4f3a65ce72a5a752378b51bbdb3ec81af47f134dd156de2fc8d263962528ba",
+        "text_sha256": "2dbe7d68ee8af58664e5d807c8af1c2071ef7f53c68aae8ec360072133fecb91"
+      },
+      {
+        "id": "47",
+        "stratum": "admin",
+        "sha256": "d08f0796d27bba94dc7f495673da5b41f78af6b51f027a51855d21bd4fe6ed2b",
+        "text_sha256": "1315122b559e1b803de95ffe262956b6148fa48a7346c770c01d822f665d8552"
+      },
+      {
+        "id": "54",
+        "stratum": "admin",
+        "sha256": "1e8e6d98c1610121e562dbfd99eea1b9c1575a5ab4de91d560b42ed5f9122928",
+        "text_sha256": "83ca8dc16354d51f051e87adad7b35dc7d683b91e0a2db57b42647658fc32c65"
+      },
+      {
+        "id": "64",
+        "stratum": "admin",
+        "sha256": "bfd3cc5d921b987e105b7d92b519a0363da9aa59894cf92f310bb014cbd01698",
+        "text_sha256": "1c32c23641310431d92db1a45daa9cbcc38899b2fcc5a4b9ff6c6ae51a44c84a"
+      },
+      {
+        "id": "71",
+        "stratum": "admin",
+        "sha256": "5e4aa985f750511d3bd6e45c2f5cdf9ad24ed6a5abaee66f08af067b7fbd7432",
+        "text_sha256": "5fe7a14f65a05bc042be0d087612299e7da81befb5749b8b11c21b9df042563f"
+      },
+      {
+        "id": "82",
+        "stratum": "admin",
+        "sha256": "7774d2c7867cad542e1d8908d33f109f02c6816b4fe0a222974e620c861bcbbf",
+        "text_sha256": "5025b392f4cb3df607095c29f86448bcb91d4a281d1a9869f621bef3edb6f88b"
+      },
+      {
+        "id": "90",
+        "stratum": "admin",
+        "sha256": "1c99813c1e8f2baa6a6ca46a3fa48da4033eadfd2eb8a8a2959f3d489e476b81",
+        "text_sha256": "691044f8530c99b83a3b0c56c17740be323775d29cab8c26ff019bc5712133bb"
+      },
+      {
+        "id": "103",
+        "stratum": "admin",
+        "sha256": "38a0c16ed62dcfb365a1a878b248b5b7bbe180a4e01301efba79d6d53baabbf0",
+        "text_sha256": "162038a75200f545df8360bce43974343ba9eca84c003d91946a2719faa599ed"
+      },
+      {
+        "id": "163",
+        "stratum": "admin",
+        "sha256": "565acc909da85fd817a174c9e2b73f63e0b0fa703aaaebac7b2f4c1e74434b4d",
+        "text_sha256": "423bea0ae04de8930d265ba17db2b8d2f379620f98d3d289ab9fd0ab40d6d0bf"
+      },
+      {
+        "id": "164",
+        "stratum": "admin",
+        "sha256": "f37a895dc053f87d2e7464a56de04d7253cf9871cb7a3d5784d9708d54ac8605",
+        "text_sha256": "271b8417b94a482d3fe4debd6831afe76a11c2c6180b5f715e3f089d2c5c636f"
+      },
+      {
+        "id": "173",
+        "stratum": "admin",
+        "sha256": "be51a986f96cc4d9525df2b2e04d154895a06bb034ce491cd6b82f1e1b991149",
+        "text_sha256": "670ee407c9ad0450c7b6474ca87bec5a58bb4c99c44038704e9e5f17ffe45319"
+      },
+      {
+        "id": "201",
+        "stratum": "admin",
+        "sha256": "7a03db28019f6a5f65b390fe3b6ccd69599ba0b125aecdaabaf2222ad39e5a8a",
+        "text_sha256": "e798579c6b5579e332b07eff73650bf50a2bdaee2a564eb307d09d8d4cb68862"
+      },
+      {
+        "id": "215",
+        "stratum": "admin",
+        "sha256": "bb0e2cd8a6e233c59614245c73a073f5b4fdfc14dbfd7d45aa738accb505d9da",
+        "text_sha256": "3ffcee49c2b2cef03b4874996ae8a4d48294a40540160790b9b5c4c828cfbc9f"
+      },
+      {
+        "id": "237",
+        "stratum": "admin",
+        "sha256": "b1ab6317906cb3cee4999973a43cebed2249f72bc9155a86164a105c6a740a6c",
+        "text_sha256": "13de9096c510b5e7bb2dfdf65b8815193fc8be86c4b5737789a170fc2f600784"
+      },
+      {
+        "id": "240",
+        "stratum": "admin",
+        "sha256": "5bb35067f4436329dc68c6d149aab36da5c01a9e3f57c7f3825160fe34c724f1",
+        "text_sha256": "85c64c61dd262f17295e6b045c617d1322fdd31b95aa92f6569b5d9a4189ff5d"
+      },
+      {
+        "id": "265",
+        "stratum": "admin",
+        "sha256": "b9b4cdab185f88da4fe77d0cdea508ab999ac4cdb6765504285ac458a8848084",
+        "text_sha256": "8f43f6dfd36a676d11cc63f7abf1fc4407d4eb659473ec41002b9a687db05e36"
+      },
+      {
+        "id": "268",
+        "stratum": "admin",
+        "sha256": "c7c1190a146488bba4b837e346f54f487efc54bd5f9e5567f19332e67a71e054",
+        "text_sha256": "a646b914b890eb1b8bffdc2fe020ac3c93c0061a4252e4c0afe2d295970fd733"
+      },
+      {
+        "id": "288",
+        "stratum": "admin",
+        "sha256": "25307a084518907843769364e4772ed2719f977518937e25accaaae2f3ba1233",
+        "text_sha256": "8f507aacd79f6c2ac00bbc579582eecdd0ec6af9792e93d62f273a115164a08b"
+      },
+      {
+        "id": "305",
+        "stratum": "admin",
+        "sha256": "d07fbfc594ccb25a9071f044c6a6f9556153d2c197da875977400ce74be32f14",
+        "text_sha256": "2a40af8a65592d233e7a34a990e2f78adb8cba5b06bc2255fd79c3b7957743d1"
+      },
+      {
+        "id": "310",
+        "stratum": "admin",
+        "sha256": "f576fc52223aa13088ded5e8b1523458cc908d8d3b401ed6c98ca2d4a2fbf446",
+        "text_sha256": "6362550bfcdaf9444a1c15f1c08b9b2f1d90a8dd56e6661113190348c0826000"
+      },
+      {
+        "id": "392",
+        "stratum": "admin",
+        "sha256": "7ce5554298150a29049b6bddf00709cf5d72c0053b0c5f09ea51cbe5e868923f",
+        "text_sha256": "6a00caf08677989b4bdb2a186c554f6e0744dd1d92915862f235a35740a70c5b"
+      },
+      {
+        "id": "455",
+        "stratum": "admin",
+        "sha256": "4a085411b4c37caa642a07d12b76f9b13e4407c0abcd781429d18e0a416fd762",
+        "text_sha256": "cce558527ede730519c680ce7ebd530b5ff3f4f3c387778d47c239e277706cdd"
+      },
+      {
+        "id": "464",
+        "stratum": "admin",
+        "sha256": "0bf4977a339ec1ae058d5a8ed335026eed090fef33e8173b8f88a8fbf235d381",
+        "text_sha256": "237a501bffa5168130d2454010449766de3e02787566cdbdaac65e8ebffed230"
+      },
+      {
+        "id": "487",
+        "stratum": "admin",
+        "sha256": "f797caa6bef4afe358faae4d7365b546e5f889f21feb54ba68d3ebe417b2e7bf",
+        "text_sha256": "e770eb106d07d90c3d7ccd082fe2a0230bbbcd4def6e4fbe423df5be54a6802c"
+      },
+      {
+        "id": "524",
+        "stratum": "admin",
+        "sha256": "6335bb8d44071dadfa15bd0a26cbef6c412161cd92256515f996f7b5f57c1c41",
+        "text_sha256": "7feada2263894c6024681affb475aa7a069093840d9a5d0b5d5af6123ffd1893"
+      },
+      {
+        "id": "566",
+        "stratum": "admin",
+        "sha256": "6c6ad6db4c718a1a38d7de13dcd9fcfbccb15cd1e6b9b46045cf32adcff64500",
+        "text_sha256": "a4ba6b0bc3db5b317be83fb9833677bc12e474d0c0c0a8a45010f1511077a644"
+      },
+      {
+        "id": "567",
+        "stratum": "admin",
+        "sha256": "0e1275434bd390505c2ee7fed68bf6a194bc920c845883900c8e14452a4483af",
+        "text_sha256": "c3be5e7596226071cb93b83ca104501959fd93b7a86657d6449984974d6d5916"
+      },
+      {
+        "id": "572",
+        "stratum": "admin",
+        "sha256": "7de756a9f5f42292008180aa6119ac6a35b6aaa1e96c07c4a06788b048c316b2",
+        "text_sha256": "2fe3c8f62e7a22615f80e88a3403d17c6cd892fe461df097599d745d71d0bafe"
+      },
+      {
+        "id": "574",
+        "stratum": "admin",
+        "sha256": "42e22091699495caa96a5e6e41b39680006c6019dbd8e1b0017adf5d50f8c239",
+        "text_sha256": "b1372267986c39b15f3f50881435595d59d04b35062468443be3521f001d6ff8"
+      },
+      {
+        "id": "595",
+        "stratum": "admin",
+        "sha256": "6a779785c9f6f05e16b83f12890d0147521f88d3ad66835fafeb4f9a9e05e84f",
+        "text_sha256": "272d2956068bc5a5264f768c2ca209858c77d40eb99a2491b66c232ee711a5c7"
+      },
+      {
+        "id": "602",
+        "stratum": "admin",
+        "sha256": "f74600ca37add201d63092af0fe6f6a8a669fda59dcd7468777af690318d91c4",
+        "text_sha256": "03db92984b73592c8313f8023c32e346323807ad46b930236516a5bf7a42df36"
+      },
+      {
+        "id": "631",
+        "stratum": "admin",
+        "sha256": "81b647c0b3b497d9d3179f9ead0c3303a78f01e15e77406587f107421d6ab5c6",
+        "text_sha256": "e178c89a7553d8505dca51da0dab98dd837c263b058d346b4128abe1aeddd018"
+      },
+      {
+        "id": "663",
+        "stratum": "admin",
+        "sha256": "9c1b05a3cfbad23ea355612788dc15a26ae7be22ff196304997693f11211b613",
+        "text_sha256": "eeb0b5291ffd6294be845b811650ac06f71eae670031bc8b586f8b61b844bd18"
+      },
+      {
+        "id": "678",
+        "stratum": "admin",
+        "sha256": "03e30169c3f950e00193b9e24a367864d26102070848013fbb864fe4131203bf",
+        "text_sha256": "d6992a8d39db088aadd45199bd964883af7c0962abafe3d4258f92a31e6f6b58"
+      },
+      {
+        "id": "701",
+        "stratum": "admin",
+        "sha256": "7bde753d74cf639613e473ac580966b60f683a99f1dc96275292a07b28ad649f",
+        "text_sha256": "8afc38abcaec1e912bd08b69af94ddf8d275882c075eaefd32887f717ff014f4"
+      },
+      {
+        "id": "703",
+        "stratum": "admin",
+        "sha256": "134b311ae1e4b558ef71ea7893b2b4c41acffb7df984b9e2f10f665ee4f271a6",
+        "text_sha256": "b15274515394e12148df0d8bc2638fd14f3b2dea149961a1be45e7acf52ad527"
+      },
+      {
+        "id": "718",
+        "stratum": "admin",
+        "sha256": "5d8a231073ce5f55ba1f9ef799213a7b40e7a2b5495f1a058901fdb805861e82",
+        "text_sha256": "30571a413c7a1e38e8ab7c4bcb6d7d2f5aa587f877860b91ce1c63b67a6ae165"
+      },
+      {
+        "id": "732",
+        "stratum": "admin",
+        "sha256": "4faee8608177fc0455e8c5befe0921b22532ceca930c0a87777f5e5bc969d5c5",
+        "text_sha256": "324d61a9de9c182b86b103b62170be91e2455fd8f0e6a7ed989403933b363def"
+      },
+      {
+        "id": "735",
+        "stratum": "admin",
+        "sha256": "9fde1361b16211d26ca212026d2da1fc8756b88aacfe82c247345b10ff07f917",
+        "text_sha256": "16a4cea80edbdc8602cad5044da8f61da28462cc5f99b0381015acd8e8f5240e"
+      },
+      {
+        "id": "738",
+        "stratum": "admin",
+        "sha256": "d52c7fddc41dc0c57a72719b66c8c515967221e44562eab04a56a6eead785fad",
+        "text_sha256": "74e13305009ef198c3ed636add97be2826df7fed20dca2e09b7919ee24afaffb"
+      },
+      {
+        "id": "739",
+        "stratum": "admin",
+        "sha256": "91377d1f68b34528b77e8eb8db5cd4c4d30152ec6a95a3350ec764024671e0d4",
+        "text_sha256": "1877a6dc8d2515b2e755484f4816d97603a8f30649feb788c02c8568ef7686f9"
+      },
+      {
+        "id": "762",
+        "stratum": "admin",
+        "sha256": "bf8a7a260ba8766ce435db6902d063e7c70112dfb406a6c75bd8591af82f4fd4",
+        "text_sha256": "1d8a4301a27824fd0f3ea40421de2638b33e8cd6032baeff57f6bdd3baef0bc8"
+      },
+      {
+        "id": "778",
+        "stratum": "admin",
+        "sha256": "e5f6f9e5d707e1726f9d336fc4dae887679d1b2550e310b0bd28e3db00e2801a",
+        "text_sha256": "f3107ff58977000fd0e3b064e408db45a9908d300b24e586c6d41d4a2ebf534f"
+      },
+      {
+        "id": "787",
+        "stratum": "admin",
+        "sha256": "fe62805fa1451fc64a3a743e0c6ac23f36b700768e208512634c5070429e9370",
+        "text_sha256": "5caec8495549b92d416b0aba807a2941ff49f63ffdda32dd7fc0e98ddbb75c25"
+      },
+      {
+        "id": "913",
+        "stratum": "admin",
+        "sha256": "fe474a63e283d6fdad293583f88e2376838d9b735f05154147189d84eb49bd9c",
+        "text_sha256": "c713eb2f83c97c1c3e130402febf771eb1fbbdd42e36ee9ab0c3216bf51f6527"
+      },
+      {
+        "id": "918",
+        "stratum": "admin",
+        "sha256": "f107ffbede2bde3bd9d900e89d61c6b927efd99edf77aefd2ca51428339afc4b",
+        "text_sha256": "f8742b962ef560fff6f6b0b60e5b666d38c121cfdfd44bf78c83035e927aa041"
+      },
+      {
+        "id": "968",
+        "stratum": "admin",
+        "sha256": "dc3eec487013e397355e6ee52c7881a48c4241a4680552b63881f64b5d60a711",
+        "text_sha256": "54cd4ffe58d991666edc28c5cca6ed3365b49c198a590a027823a58deeea4063"
+      },
+      {
+        "id": "976",
+        "stratum": "admin",
+        "sha256": "9d289bfd250d2103cffc3e7e1f845edbd1c4812d62f20f9079b58f8dbcf6f9aa",
+        "text_sha256": "2be3b5510dabdcd10e71201c355554cca5ac6ccf274b0d7db528c4f8bda42e75"
+      },
+      {
+        "id": "1041",
+        "stratum": "admin",
+        "sha256": "e590756d392d9e6b7d87809a273e23e34cf3c573fc160ed92ae2dfee49971946",
+        "text_sha256": "f96089cd5eb44809be77d876a8a7336a611e0a3d81e59df86329dbfe12dc43f4"
+      },
+      {
+        "id": "1098",
+        "stratum": "admin",
+        "sha256": "d388673dd04299731ffe48499b8ec5379af18506334c5b19cde0e7a94eac993d",
+        "text_sha256": "5c52b09e71be9fbddffff6b126d1ad148d7a85a3d8721e2195c0e03b6d2a0929"
+      },
+      {
+        "id": "1125",
+        "stratum": "admin",
+        "sha256": "14c6374ab23b72d701e370410ede8baf0d053c19bbd602b1262b312e4c1aebef",
+        "text_sha256": "ceb861376a956fa20ea7a53620ecc9426d5a4eb44218e2a1933e2343759c67d5"
+      },
+      {
+        "id": "1137",
+        "stratum": "admin",
+        "sha256": "25d776ab2166adbb66499f05cbbfeaffcaaf7938de371a71bf030987f601b789",
+        "text_sha256": "5726ba98f6045562b42e30b52806f5fa86715ac344c6b1a0c8a14de7893f750e"
+      },
+      {
+        "id": "1139",
+        "stratum": "admin",
+        "sha256": "5db1c2e5f7ce67ab6784dba9da6f5d563557898d9674db375b3884e3ac27e555",
+        "text_sha256": "4dab265966522bc9cd0e45b67a3069734e6cb7fe205e7114b758a2683975084f"
+      },
+      {
+        "id": "1148",
+        "stratum": "admin",
+        "sha256": "cfc81eb253040f5d44fda955ba778b5ab13fb86d49eafeb99795d659f965e049",
+        "text_sha256": "105057683442718098ca177aef5673ee03e3e89f3e1a8383af3d0f88d630c8c3"
+      },
+      {
+        "id": "1156",
+        "stratum": "admin",
+        "sha256": "686de695fff4296769560d423a56ad791b1601481cd51d016dd037986ade9ebb",
+        "text_sha256": "bc0d789154e2fdb631e44f9a89137fce1fc67d541f4680b6e96eced70783ea90"
+      },
+      {
+        "id": "1169",
+        "stratum": "admin",
+        "sha256": "721bfd2e6aa614daf4437bc4793d44c02ab50a54f2e1449c823210547336edf3",
+        "text_sha256": "c5b57efe3ff2547c7bc2104561cfb652fcc9a8188357055f832642190c855806"
+      },
+      {
+        "id": "1170",
+        "stratum": "admin",
+        "sha256": "18708bdf00053c6962c9b275d387d527888c6b85b2a2ef7a83d4afa63b113bec",
+        "text_sha256": "424b837228f7feef829996a063597b620e2cfda9c750117c6a010611a6e27d69"
+      },
+      {
+        "id": "1178",
+        "stratum": "admin",
+        "sha256": "1a54805ec58f68ac70db0108379b47010f5648c9439ccbb658fe24af97313c34",
+        "text_sha256": "047cef7c1ba3e3c29d2d4147a50a1422b50a44a9035fa53b6d509aac471b7515"
+      },
+      {
+        "id": "1209",
+        "stratum": "admin",
+        "sha256": "baa1fd1b173d079b43159f09e8177be0ea892cabe0ff319887e5498a4fc71f27",
+        "text_sha256": "05f2557bb6007378f43b135b4cfb3c04abc5ce1bf438528c236417ce54a611c6"
+      },
+      {
+        "id": "1229",
+        "stratum": "admin",
+        "sha256": "db3a09a2dae881399c075fbd6cde1de844c536024c9e463c368df3a4e03f7d40",
+        "text_sha256": "476b896862caad300f5430d5633f0e0928ff8bd0cabd6a39b6e0785cee768afe"
+      },
+      {
+        "id": "1263",
+        "stratum": "admin",
+        "sha256": "b7f0319d5325a08702e87abc48e07186a75f3387093daf437cae4504e4461902",
+        "text_sha256": "870273d650adb47b6273e558c0950990a80a33b697a72d08228800917e5743c4"
+      },
+      {
+        "id": "1279",
+        "stratum": "admin",
+        "sha256": "3ddea690da8db1709005b530aad95d8340f944df84e8b12b53442a6d6e7709de",
+        "text_sha256": "5b290d2a9ab74d2dc11c477442219918cea910f1c3a0799469096095579e9144"
+      },
+      {
+        "id": "1298",
+        "stratum": "admin",
+        "sha256": "5be354129a18885cff765330f1f89e44b24a6abf8a1d7b0d4d82043152831e0d",
+        "text_sha256": "fd48cc6349e4624e1009c5d5c4e8b3d1ea9d16b5c0e1abfe407ef309752f1c39"
+      },
+      {
+        "id": "1299",
+        "stratum": "admin",
+        "sha256": "e49f0443ef62e49227b480ff03c323763d32bd57e704827b372580b63d86ff1f",
+        "text_sha256": "9227ca51a9bacd15347aa4ebbd80521f6750fe218bc1b9e5640bbd87a22c81f5"
+      },
+      {
+        "id": "1332",
+        "stratum": "admin",
+        "sha256": "8af582c8a0ca3f61e8880c893949e5feb64c9bda546977a5beec679fb0c37ee6",
+        "text_sha256": "35963edcce8844576d2c724333aa6fd4f89eac495e569051c63c5ba790d2eada"
+      },
+      {
+        "id": "1355",
+        "stratum": "admin",
+        "sha256": "09eebcb65eb97e81719986ff77820df069a98f9dd2c643c87cc94be083ea73d8",
+        "text_sha256": "cc2c1ea889aa0bb0d0c895f3cf2d246d7593f6e9015dc11234a0b98aee4d2595"
+      },
+      {
+        "id": "1361",
+        "stratum": "admin",
+        "sha256": "79f242223fff51c2d26e05460770cd7c0b467ec357446499f71665e0cecea490",
+        "text_sha256": "7a86de6901929cb9d3758085a834979b7566cf56b0c114cfb2e65fb83930412a"
+      },
+      {
+        "id": "1363",
+        "stratum": "admin",
+        "sha256": "a219d71d1cad3726be1bb06929dbc6821cc35a3332b969a8a6d468abdd97edb5",
+        "text_sha256": "bc861625580699a3a0ac4e8954f0e558d1b0b2d127b5b7bff729bfbf221c492b"
+      },
+      {
+        "id": "1389",
+        "stratum": "admin",
+        "sha256": "4f56466fb23f88593805003fae66e68e5d9927f969f68321efcb9cdf73d917d5",
+        "text_sha256": "0f9ca1aea7429642501da4f9025b7c3241808a9e7e1ef1246c69b6ee2b46eec4"
+      },
+      {
+        "id": "1399",
+        "stratum": "admin",
+        "sha256": "0eb229705bb9adc1881775f67f7e18b2fa5ddd3d599e1f8d8d89a3c0e1f58986",
+        "text_sha256": "8e528af9da98ee22659415e2f3c8b807b49c84872200b03f81cfa5754039a5b7"
+      },
+      {
+        "id": "1439",
+        "stratum": "admin",
+        "sha256": "d15d5d3b5bde13d3a8b264853cf9f3c7df0eb4e255fb9bf39cdff3db51e1692c",
+        "text_sha256": "7276e9384698c95418bef469e9ae43c9caf017fbc2fc5b0ba077aa5b4eeb27d8"
+      },
+      {
+        "id": "1488",
+        "stratum": "admin",
+        "sha256": "3bd4219b6735b7d537fc7f4610fdd8ccc3ee898f5922de3d1b922f54f6dda66f",
+        "text_sha256": "572e5e32e36a836d47ad88dbd7b2159ce36fff89ef9b01124e2f2d04195c166b"
+      },
+      {
+        "id": "1496",
+        "stratum": "admin",
+        "sha256": "8e308cf8c4225872c576f32dcbd545d89e527330c17e5328d2adfe3520d795de",
+        "text_sha256": "302717e2b610072b4f6b48c36c37d017de7ac5a907a4630457ed52af43266712"
+      },
+      {
+        "id": "1498",
+        "stratum": "admin",
+        "sha256": "2ed51e5513c59e6d6969e19d1953ad5a4087f4378441e4eb8ce9c8161848860b",
+        "text_sha256": "39b5255951a87699e1158dfa97adff37d33c932b2cdf008730d25fcfeba8dc7b"
+      },
+      {
+        "id": "5",
+        "stratum": "clinical",
+        "sha256": "ec20a554533820c66eada15dcfc610250d9591a540d718c01f8131dc2ab72d0c",
+        "text_sha256": "b8a47851a47eb962687158f7f5399adf978e866afe186912a6c0fde9d38aa11c"
+      },
+      {
+        "id": "21",
+        "stratum": "clinical",
+        "sha256": "b51add00e1288f3f9d5e9e734c54bc7a987335e064f264bb5a0cd205c22cdba5",
+        "text_sha256": "0357d8285a7181c352bf81a7cbdf58fefa69e7b7f8fbb4d421a62e8872b73a89"
+      },
+      {
+        "id": "73",
+        "stratum": "clinical",
+        "sha256": "7f48483763d1305ae03daadd67529600c92289446c5eb83316c7afe396601bfb",
+        "text_sha256": "782f9f6f127fe4edfa58ec9bf1705b2faa2aa412cbb7d8ef34cbd4f1c4fd1cab"
+      },
+      {
+        "id": "81",
+        "stratum": "clinical",
+        "sha256": "50be300979ba9a0b67edf1bd79fbaadb9350a6c2c603e9dd9a5aa0cfcc4a0c2b",
+        "text_sha256": "fa098772bfdaf1664005c2b1fb2ac2ac51dc6eda3530eebc40f63227488ca83e"
+      },
+      {
+        "id": "99",
+        "stratum": "clinical",
+        "sha256": "02ea009e483200587f60017133379696527facf94387c1cb9e6b7ec4212d87eb",
+        "text_sha256": "ce388ebbf46a098c4609a7c4e9a2da6205a38ff1949942e586d16e916fc10d88"
+      },
+      {
+        "id": "132",
+        "stratum": "clinical",
+        "sha256": "c5cb85d39778066b64f6a1c6509aaaf88d18eecc0c20bf4d6f3548f58957001a",
+        "text_sha256": "8e84b57781c7fafeefbbeed41fbb402d8d8b4081ad662532086ead2da6e8b9a8"
+      },
+      {
+        "id": "137",
+        "stratum": "clinical",
+        "sha256": "8ca16a3d1d5b7a8c1913ec19fd4f357e1e422fc0b8733d8b94718920f0193ceb",
+        "text_sha256": "c23db79bf69ef67331fab3cfb3b08e85b6959675e65468422b12fe350fc27e19"
+      },
+      {
+        "id": "205",
+        "stratum": "clinical",
+        "sha256": "a24e8191c4a4f438fa171f1b790312e279512d1b42a5cfcee75bd1587891078c",
+        "text_sha256": "143fc254f0a45f5428fb34d475c23e2fdd851d3ab3646440ca6f4a201deb1f6e"
+      },
+      {
+        "id": "225",
+        "stratum": "clinical",
+        "sha256": "7ee9c6a128f805e25d15c7c61de81cf9f6d7c0f101672dedac59f878f5974e29",
+        "text_sha256": "7c04f267eed76b2f4511ade58d20c3ab9725def9ccfb5332332076adbca531d0"
+      },
+      {
+        "id": "253",
+        "stratum": "clinical",
+        "sha256": "af79f06c48e756fc1b117d7190332f8a093f12528c2845312f96680a24481c04",
+        "text_sha256": "d6839e0b796322956ebe63802843f2773e755005cd0d88b4d63e9826f23da0c8"
+      },
+      {
+        "id": "272",
+        "stratum": "clinical",
+        "sha256": "e667d47f9c4f2ed16ec8e92baa2fec128872e63fe52dd92072c70b7b1c5dfe3e",
+        "text_sha256": "ad30f4d01b56e2aa929d2c9e6463c4c6b77d387708a6770fd39f95f3b65dcca2"
+      },
+      {
+        "id": "285",
+        "stratum": "clinical",
+        "sha256": "c708e4c955c438d733861136df04465efe2ccbf85107f406af2a1963a9e3013f",
+        "text_sha256": "acffec714c5c52583241030d368580b40db6056c7d68968ef9e836a6035366c5"
+      },
+      {
+        "id": "301",
+        "stratum": "clinical",
+        "sha256": "cddfaef9de527d8a27159d1333e33af99644c973a247182afcd430d78e1293f9",
+        "text_sha256": "d1fdb08c0c5b468b7bf0f73919b3bb1318f9493c674902c87e73b977932e6f65"
+      },
+      {
+        "id": "321",
+        "stratum": "clinical",
+        "sha256": "541a0be0afc9c11135ba7e17e41f26ae7d7aff130aaaaff0fad55372c989a75e",
+        "text_sha256": "754a4b44cb3e7eb8e872941f05f49bd4134e2cf30b2faf7b2c43a176adc284b0"
+      },
+      {
+        "id": "325",
+        "stratum": "clinical",
+        "sha256": "7b57baa91e1660436ca1f7f3aafd39183384488b10bda13b547cc0565d4ca85c",
+        "text_sha256": "5d172ec7e0e348c5532d9f7016d16e96f327ecd3219ed11dd23ec23e4c69aa55"
+      },
+      {
+        "id": "337",
+        "stratum": "clinical",
+        "sha256": "d4278934ed9b3f8c0d631ec785a2e43ebe75ba8f01de9569cc6ad0abd633248e",
+        "text_sha256": "5620473eec0fabbea088dee8c7e1c3d31b364db1a42e483a7e1d064032ab53a8"
+      },
+      {
+        "id": "338",
+        "stratum": "clinical",
+        "sha256": "e05d9b556ab6d288170eda529c79a3a4bb23df518b5f90451e8abd067ce81700",
+        "text_sha256": "67949dbf2dd453949b721d9f32a275f4057a40c396bfa659c50c319b891b48a8"
+      },
+      {
+        "id": "340",
+        "stratum": "clinical",
+        "sha256": "2854a3f395e849a19cb4df316d9e903c7833562ad5530a54020a3031999b73fe",
+        "text_sha256": "f9190298886171fee5044881ac86c2d8074fb0745069ff757fa787f8ccd5523c"
+      },
+      {
+        "id": "348",
+        "stratum": "clinical",
+        "sha256": "eb6071461ccf8e924d96deb754a98a0c323bf27baa1adf06fb28f7d9384cac92",
+        "text_sha256": "cfe3f2b249b2f84a35a0c59b32fab4d1d1a55a8e05f68305c88f2eea7e7d0c63"
+      },
+      {
+        "id": "362",
+        "stratum": "clinical",
+        "sha256": "487a58f958ef58d6c6e74e3589d0eca5faf7a54e53fc9fd006af627b3784f32c",
+        "text_sha256": "fba46145f442e5d6d838a42f51f25faf1cbfdf894d1982444036b95a4ce7da64"
+      },
+      {
+        "id": "396",
+        "stratum": "clinical",
+        "sha256": "30e057c58835df93129339e8aab79aa234518e2abdeec0cf71511b99a5e2adc0",
+        "text_sha256": "270c078de566f5c35acbb1a45a9e62f3e3b47882732564f21bdf20e197e54810"
+      },
+      {
+        "id": "400",
+        "stratum": "clinical",
+        "sha256": "7d2df54552d405b73a3bafbd73a237af738861002047f46bad67ff46f8ea14b8",
+        "text_sha256": "2acca9db8cc09d60e0eac384535614170253e1d853ad56ef4cd49398021c9f5b"
+      },
+      {
+        "id": "406",
+        "stratum": "clinical",
+        "sha256": "662e1302fa6c0900b770e1b4cbca9c1e405f748ec3828389e299daeff813a8ca",
+        "text_sha256": "39258eb48a071a9d5b610a6577d1fdbcb745cee93c0e589b0c71126a3dae0972"
+      },
+      {
+        "id": "453",
+        "stratum": "clinical",
+        "sha256": "09feb6540b409eb8c3d837c5a33b4f9b29482226ceac0e6bb94b7c1fee78772c",
+        "text_sha256": "c8a3eb978858f5c19ad55b67bb2b97eb62b738ff95d0a1feee32cc91a16730dc"
+      },
+      {
+        "id": "470",
+        "stratum": "clinical",
+        "sha256": "5c288e5b1303119d4cd14274b6628d66a4228633726fef5d333d419d6ab52a46",
+        "text_sha256": "cdc2db01369ca192c379c8f49bdeb201b662dbd766d969b6a177d3ede5d5c2fd"
+      },
+      {
+        "id": "472",
+        "stratum": "clinical",
+        "sha256": "7770c3af426a2c8a3357885e6fda130a121852ebd5c5b31c2a4098590fe5eefb",
+        "text_sha256": "581df35302109a1c62f0ac960d41295de59d8d19580590905c6f31a32d7c3aef"
+      },
+      {
+        "id": "475",
+        "stratum": "clinical",
+        "sha256": "aee72fcc73a126d78c862f833e9746f030aa284f6f449131e4b57e0d53d48f09",
+        "text_sha256": "48c05e61ef15dafc3512bb76d386fc16bd51c0fe8f41bc24f86369ebad7cb98f"
+      },
+      {
+        "id": "486",
+        "stratum": "clinical",
+        "sha256": "2420ed3d6f693328744acef78a1dbbc9efbeebb117d9e9ca6ebe52e5a90fb126",
+        "text_sha256": "a8afbab9dc52851287f43a1e6bae266ca402306a4581f8bee12cbe8119f91fd2"
+      },
+      {
+        "id": "496",
+        "stratum": "clinical",
+        "sha256": "5be8ee54c715ab8f8fae3f207b2b23f8ebdd26f9056d17c729774f47c5deb241",
+        "text_sha256": "a66684f67ae4d2a3b1ef1bab832381e55f3f630b185477cb06eb56bac064a5b3"
+      },
+      {
+        "id": "504",
+        "stratum": "clinical",
+        "sha256": "02958b85adb80a4834914ff8aaa8cf4c99983d1bd77cb20b5a82c8a0a0960bc1",
+        "text_sha256": "1dffbceb4172eae84b71ed614384fdaea9e5307f50b5059b60cd9ec3ebd6b0f5"
+      },
+      {
+        "id": "538",
+        "stratum": "clinical",
+        "sha256": "44a722d9431b561086543dfd37bb634518d4b629211e7ec98815fa8c75c268e9",
+        "text_sha256": "0045a4df3a10d70605c4288746785c02bbd2222a3fd3ef8e881bb250402951bc"
+      },
+      {
+        "id": "545",
+        "stratum": "clinical",
+        "sha256": "961b2307ada8483176b09c497690d258ee2ff8bad2d660d21d0585db54c5df46",
+        "text_sha256": "19de8676efa5077f9098e2f4aea984a3bb2aeb92302a7a4ada7b02a063c75834"
+      },
+      {
+        "id": "558",
+        "stratum": "clinical",
+        "sha256": "8ca1b9827b2595ba86f2c1dee73283e6bcdaa259427ac75d28381a9c4ff7a94b",
+        "text_sha256": "976c727e633a20336d043821e2e72106ecba202affa2aeef42ec5363b0076e83"
+      },
+      {
+        "id": "565",
+        "stratum": "clinical",
+        "sha256": "732eca8fb208ffaa3ff19f0659a7b7d65769b0d2f8dd2d98fab1758acf74d5ff",
+        "text_sha256": "077f13ddb7bdcba66ac6020dbec7e268890374a7b0f85866e416bf21eb10ede7"
+      },
+      {
+        "id": "568",
+        "stratum": "clinical",
+        "sha256": "a65ea47fe945bec4016723ee1111ffaefc9d07d3fee492de7aebaf1787359e11",
+        "text_sha256": "9ebe620cf9b8dc51c6feba9b2d1b7e8aaa347ece4584df426b47a55b080e86aa"
+      },
+      {
+        "id": "585",
+        "stratum": "clinical",
+        "sha256": "bfafe076f73dc83c7fb2848894afba55da499da3a47cd0644530f7fdd79f9b52",
+        "text_sha256": "6e519373c2a76c6d78b26880854cce78b822a84dedcce8868cd9e94c8500a4db"
+      },
+      {
+        "id": "592",
+        "stratum": "clinical",
+        "sha256": "e287a10a8efb03aa512582a8c4780b80bdb7ef7727c98b3d26e1a2a2dc880dd3",
+        "text_sha256": "b247ad7784319074a0165dc79a72bfc260f356ca1dcdfb11826fc9ce9847b371"
+      },
+      {
+        "id": "614",
+        "stratum": "clinical",
+        "sha256": "135e4ac7b1267214242b042c7778b65a91827a38debc6cad4bd4b32b6269f6cb",
+        "text_sha256": "b9edef81685779b86dac7f0339515484d794abe08f545cf88e2895ec69f96a17"
+      },
+      {
+        "id": "628",
+        "stratum": "clinical",
+        "sha256": "39b4ab2c8fd08d9a690ed9a8c1dfdd4c6a76dd7bf48dd81cef3d5d7e2008cb1c",
+        "text_sha256": "64aca313cd4f101597d837a3c3cc290cdf4d2c4b78c0c8358ebc7a2dab0dd242"
+      },
+      {
+        "id": "659",
+        "stratum": "clinical",
+        "sha256": "1e7619669840f8e569131ff4b37ed8b221c40085a0e721fa28d8f86218d736f4",
+        "text_sha256": "9a99aa483514343d06d57aa449b63c7103262ecf28d695730dedf96c4a627ade"
+      },
+      {
+        "id": "667",
+        "stratum": "clinical",
+        "sha256": "8569a6fbd956407bb5b49498f087ff4d08d0f3fcf0949fefa9e0173db35b0961",
+        "text_sha256": "27ae54a62f3684c2d6541f0f0a18311a3725995de72ea315fcb40b4fb4d12e5d"
+      },
+      {
+        "id": "709",
+        "stratum": "clinical",
+        "sha256": "d2fae0dc4a54ffc41ca2a76d9008f1ef62d7a6bbaf3fb107b92cc8ba00552a61",
+        "text_sha256": "fb4a2a32bf7c6dcc3435ebb6eb1c825956d09d23ad2eb2aeeeb7b22a3c12222d"
+      },
+      {
+        "id": "728",
+        "stratum": "clinical",
+        "sha256": "b574db723df76df8e32330f1af82843a49542e91588a2e8507cc9ed0871ad12e",
+        "text_sha256": "c00fdb7372641bd93d5ae22ce8af852ceb54e97e9afba649a8484aa4d7c35e1e"
+      },
+      {
+        "id": "741",
+        "stratum": "clinical",
+        "sha256": "826805f3539bd6562cd4a227e47eb48e1fc3d91d21587cc4df73de066b481c85",
+        "text_sha256": "4ba7e6a0a40bcc04941eb90842501d0bf94c7d527f31baedcfd7134065d4005f"
+      },
+      {
+        "id": "771",
+        "stratum": "clinical",
+        "sha256": "fa3a5c62dfbce44158d4e303beded6720e5abe0d55cfaed0e2711e12f74bbf7d",
+        "text_sha256": "f05707689157def75a7fde901a920cdafece4e35d8850caaf3cd2a167d901e94"
+      },
+      {
+        "id": "797",
+        "stratum": "clinical",
+        "sha256": "c092d867cd9df5059d0111861fdd27b814c1c817c0a3534a37ce9f86a4e3f859",
+        "text_sha256": "f59eeeef502a4c5c8a26998a230b781828472da7f84dfd65de637d67fe22307c"
+      },
+      {
+        "id": "821",
+        "stratum": "clinical",
+        "sha256": "0cb88add96662c3a03cae84ab68ee3241c87c88e1b75b0e9836dbd37fcfb9bbc",
+        "text_sha256": "146c90c1116814842eed383b58d08f0006a053f6cc3c4f13d717f24671d69d4e"
+      },
+      {
+        "id": "838",
+        "stratum": "clinical",
+        "sha256": "ed7c1159e8d1aa29f418dfee47013f5e02527be0d64662e8863a89db35feca7a",
+        "text_sha256": "9d3f88f4c508685c3bb069ede733c0e6a041975d2769d57afadce640fe5cad96"
+      },
+      {
+        "id": "842",
+        "stratum": "clinical",
+        "sha256": "d2e7c7966232db7b37b9c8f3995900fbe345f447958e3f380f2db928fd242552",
+        "text_sha256": "609cc7cddaf93aea174fb0345ab7d47d73e7b8ac4ea646aeee9b03bf441ac485"
+      },
+      {
+        "id": "862",
+        "stratum": "clinical",
+        "sha256": "94f8b81d702b5b790965c4723b15d8611c68ae30c69b5558a62f47ad6c79e5c9",
+        "text_sha256": "f66ef498ae713f2672d6ab9310348fdf45b318aff6de1ade511d672c779bcad3"
+      },
+      {
+        "id": "873",
+        "stratum": "clinical",
+        "sha256": "f42a842d6e5c3f2f0ad6bba9edc3abb4d388800e14c9b28035cd8d3581a4fa54",
+        "text_sha256": "02c989492fbc450ac06b78f153ad52cd4e9b17d07de5d2f0abeab33ac5bc2014"
+      },
+      {
+        "id": "874",
+        "stratum": "clinical",
+        "sha256": "3b223b4c4eeb2747cae5e04c52105b3241b2ffe8b86fb7224c7c258716c48d70",
+        "text_sha256": "69d116745cdf793afc95d92c6a815036e37b7d1071e8e887925cc0df20c0418e"
+      },
+      {
+        "id": "882",
+        "stratum": "clinical",
+        "sha256": "2d1a718a4dcf1e21b72649a51554c8db020dbe694b439ed81c885efd1b769a38",
+        "text_sha256": "91473e5c4c7c46a02d8bcbbedc155b665457b2387b10c7eb4fb6793fd89fc79a"
+      },
+      {
+        "id": "902",
+        "stratum": "clinical",
+        "sha256": "0ad19908f1842fd8280b542678b98c1e0169ff546e2d898f11dd3fcc0019a2ad",
+        "text_sha256": "6c5e4c07c4a72da9ba7524f43b3e9762620cc27607c643519011b5d115b58624"
+      },
+      {
+        "id": "920",
+        "stratum": "clinical",
+        "sha256": "c277aef70ddba1846da04e5f2159db864c8155b29092ae395d940a66131eb1d0",
+        "text_sha256": "89ee7805cfeef9ced37b3c98b99463ce5aa0a520cb342c1076d5bca44e1fe313"
+      },
+      {
+        "id": "943",
+        "stratum": "clinical",
+        "sha256": "3cc22bd66c331211e163046a985b40d989d45fedd7d88122049f2c8b1ef5f48a",
+        "text_sha256": "634c3e875f3c113be8dafb8db7db0632b717d989f9018cdf9d7b2af71b36bd3c"
+      },
+      {
+        "id": "948",
+        "stratum": "clinical",
+        "sha256": "2adc76113a62084310bb8df66507df4886f0b75b0e2a74e66061d14b01f36c08",
+        "text_sha256": "74dfc904c33a342efcd39f2962ff757de93ce3064fb1006f9fe5400e829fe32c"
+      },
+      {
+        "id": "996",
+        "stratum": "clinical",
+        "sha256": "d1fd29747da811e80fb0a69e34718d4025df61a79a069189ac42d1a45cf3f5d2",
+        "text_sha256": "0f924d880b8c1fb39b97190f2271f2e5dd9c20fcd45b05bc097f1d4658bccf08"
+      },
+      {
+        "id": "1020",
+        "stratum": "clinical",
+        "sha256": "20417ceccd0e899d1e4e21c986d8f68c357c2d1ea635c7650259f772620547a3",
+        "text_sha256": "73b45ac5f9f3956a1d56bac4482e7c7ecb48f98ec87dcb4f9edd9e26b0b48e9f"
+      },
+      {
+        "id": "1085",
+        "stratum": "clinical",
+        "sha256": "2c79250696a0a3cc754fcc4cb1006bc983cc18f93139b57171346dcb9fe98b00",
+        "text_sha256": "7deb1a98f1184ef7ecc0a613aba82a80ed682fd4515d6c6525f4cde8d5652aee"
+      },
+      {
+        "id": "1120",
+        "stratum": "clinical",
+        "sha256": "e052b1d78eb39b53ff311dc3316eb22d83fc23360340fd7679581ef0ea093f49",
+        "text_sha256": "519c6eb2d65ba8c6931773deb5b4bd574b1907cb7e3bc4c40c8a6c1bc0919246"
+      },
+      {
+        "id": "1138",
+        "stratum": "clinical",
+        "sha256": "8792785dc2dd47f28ed3ebe82485c4202137a8329c170a7b844d6ce2d1538ad2",
+        "text_sha256": "498091c58ac29049be9fab7fe042989d86dcb6c32acd64d426f4d606e0726b74"
+      },
+      {
+        "id": "1172",
+        "stratum": "clinical",
+        "sha256": "019d0808a2f8270081ed401d0ece3cbef1b8ef5692095eb08d32585ad28690be",
+        "text_sha256": "2ebc160cd04e4d612a5abdba17dcc3d03929364feaa34c55eeef28ed32b45e36"
+      },
+      {
+        "id": "1234",
+        "stratum": "clinical",
+        "sha256": "b7b8c71420286bd41f934e9ee8aef5677f862bd33b8855899664cef21af52101",
+        "text_sha256": "265c02096bd9094523e2069a15d4538fc26a64e6e76ba7aa4ae4aff8e0d7dfb5"
+      },
+      {
+        "id": "1262",
+        "stratum": "clinical",
+        "sha256": "7d2a370819fb318b4a9955613ee2670261aeaec3e08f628616a02fac3d59b2f5",
+        "text_sha256": "77710220b86da55c96327a60c86ab7bf64c39349f0666e8ecce408e38c7e4e68"
+      },
+      {
+        "id": "1275",
+        "stratum": "clinical",
+        "sha256": "9db2ca1fb5c0e3ba01da0d6f2ed82b1d2ed524798057f719ac735b14c29cddfa",
+        "text_sha256": "351c56767692123e03aaf0a72ae59085b985c1507ec4e83c5cb598ce83ce3378"
+      },
+      {
+        "id": "1290",
+        "stratum": "clinical",
+        "sha256": "fb13572a071af3827350151b940eab70371098b478aa4565094e2192c1e5bda4",
+        "text_sha256": "b0c4c22b6f9f0eb81f34b2c22ac756255c7b3d29a614039594c47bcb85526ecf"
+      },
+      {
+        "id": "1329",
+        "stratum": "clinical",
+        "sha256": "fd8a375ddd8270a4f42b105074610cf86781095ec9297e9ff250dab65e1b88e5",
+        "text_sha256": "84cb615d0d5b72c4e1d735339afb485520f9de8818a28d0b0e95705d39176639"
+      },
+      {
+        "id": "1362",
+        "stratum": "clinical",
+        "sha256": "2598544645f94e3eb5f02acf1c44461bed6130bd244f5d131fb7d0ffd4ed92e8",
+        "text_sha256": "26fffe5521ad37330ca669458c7788cb912e06549c175dd4fb0cb7cb33ea5c08"
+      },
+      {
+        "id": "1365",
+        "stratum": "clinical",
+        "sha256": "b0cfe6be4b4aaa8f6f0c2c6b7dbfba4eb2c9da23d58534103e064943f92d9cc0",
+        "text_sha256": "c0b4614c5fff39989ffe8b87d7a7e259f500b5f74410c6fcf8d13d0d6a18a089"
+      },
+      {
+        "id": "1376",
+        "stratum": "clinical",
+        "sha256": "8dcc850707a75f65f09cd29b3848ed0fa437c78e06dd7f83336e84f1aa30d188",
+        "text_sha256": "850c5e5c55037a8af3cc82cdf4d6ce64f4283398db2171976177594bf0d16537"
+      },
+      {
+        "id": "1383",
+        "stratum": "clinical",
+        "sha256": "d5c8b738c605aa560ad776c3eece35a46b1dbaf235a8b052a00b57ec4e14508a",
+        "text_sha256": "91cb4525530f10a34977dc37f16a440e6b3c4fac528ff7f649848afd5955401a"
+      },
+      {
+        "id": "1411",
+        "stratum": "clinical",
+        "sha256": "d22200411c9735bb11ffe085defcd62c3e03f87c60faa0f8ab854a57d2a7f570",
+        "text_sha256": "a692e81213076c3d57022939e43d5e732d24b7a5fc5dcae6eed817ad25485efe"
+      },
+      {
+        "id": "1478",
+        "stratum": "clinical",
+        "sha256": "d0cbcc353da206c47b99308f1d95ef848dac2e7cd56dd31054be686584b209f8",
+        "text_sha256": "2e2c0b5418ecee5946e7c39fc04096b143a701af6742e5f314ca3b9e85f1e243"
+      },
+      {
+        "id": "1485",
+        "stratum": "clinical",
+        "sha256": "1a58c552a94ffd5b3cb1462aa33df7f224ee395f32ecf3cadc1fbd714f0af490",
+        "text_sha256": "b022ac5dba627e88416e104a151e3a1471c723ffb6f8caf45985da829d4deb78"
+      },
+      {
+        "id": "3",
+        "stratum": "contract",
+        "sha256": "df466af15274cc836f8f425c3ea5b1b3eb576f39a44a553a3fde64c41b9638e2",
+        "text_sha256": "25405cfb47b721ecc39d4796f5dfc0739560de4954a31388f154409790792d47"
+      },
+      {
+        "id": "42",
+        "stratum": "contract",
+        "sha256": "8acf2e82044a90a077409e69f26da50b62497e816488ac0b92a189999e767082",
+        "text_sha256": "4fdb61cef9a202555852483ac085e015dafe55ca287f524735abdb4713423351"
+      },
+      {
+        "id": "52",
+        "stratum": "contract",
+        "sha256": "e40b6a0fd2bcb88da0cb37c4b937af602f431ddce491318c31725c2b3aae051c",
+        "text_sha256": "ee3d47bd9bd0f09547e1f32ca124270f54f208ec7b5dc184e30b9e7688916047"
+      },
+      {
+        "id": "67",
+        "stratum": "contract",
+        "sha256": "912c59b765d4d89bff888e913a8a538b74428054887134f9176098fe5b330f61",
+        "text_sha256": "0ab7d34510e892576ede76f77dcec7ffcf5f547a80469d7052a42afc9b754c21"
+      },
+      {
+        "id": "68",
+        "stratum": "contract",
+        "sha256": "85e7550a6572bb30d5c37ab6fd3ac6615e36e53126485c3fca42f279e89882d0",
+        "text_sha256": "27ea25b5268cb1290cc1ed96f76840307a101029a38bb0026ba7c9390bdd4927"
+      },
+      {
+        "id": "76",
+        "stratum": "contract",
+        "sha256": "72245c8e30befc6dd4c8ba797ccb0b90ed8d25c18260c96eb6bf96ba32ad733a",
+        "text_sha256": "5f2d124b9c778a13b66244338204a5a47e32182c7afb2230958d16677647e2b8"
+      },
+      {
+        "id": "92",
+        "stratum": "contract",
+        "sha256": "87eb095f4e7c96d707fa58f777315423ed980efa58fae96a772a1dd55b7b85e6",
+        "text_sha256": "42dd0fb4f5e605f5025c79dc27c77f71493debc79521f4cc3df55aa79da92715"
+      },
+      {
+        "id": "102",
+        "stratum": "contract",
+        "sha256": "63bc64ddbb6f53c6fe556891a60dce31306c81a8dff978712cd416af0115d36f",
+        "text_sha256": "5199cc96a9f8771f27105f6c7eac4f9c61c9b9cb0e2b947a1bf29d62272a5e89"
+      },
+      {
+        "id": "111",
+        "stratum": "contract",
+        "sha256": "90a981032776ba5d981f9b0a13a5cf66a6425f022c1fa3f17bfb52198f80b06c",
+        "text_sha256": "7c8c7cbbdaf1b58c611129e2afad2e70fef947fca528b2e06881cd70263c717d"
+      },
+      {
+        "id": "123",
+        "stratum": "contract",
+        "sha256": "a0ba8caf494dcfa2afe283f2320766bc614e4dfa9e9d946a99106472aabfccab",
+        "text_sha256": "4939627182a654994cf5bf8a6c0b8dee2e6e335384fb544885edaee1f4dba296"
+      },
+      {
+        "id": "178",
+        "stratum": "contract",
+        "sha256": "54d24e642740b2d443ce7dd7470793f7e5b802fb43860ecbf47a5ae9188f81fc",
+        "text_sha256": "89a9c86e9c57724bea34386c8b142129acc44c76ad882e1ed07a649dac339102"
+      },
+      {
+        "id": "212",
+        "stratum": "contract",
+        "sha256": "d1adc643bd6e476b4357bc7c0b07d26bc0b91020bd9c896776bb7cea1b1ff4c1",
+        "text_sha256": "3313290e6415f707232576884e07aec61e8d2ffb41b36aea9378c7320bb2e5a9"
+      },
+      {
+        "id": "238",
+        "stratum": "contract",
+        "sha256": "ae287fde0a5696fdf02122fd163e646e1aecd807728b15a91456d34f72ea1ed3",
+        "text_sha256": "43103734380120c57a4de305d118edec7be49e21a6b93b9e8c4f939b9b662980"
+      },
+      {
+        "id": "256",
+        "stratum": "contract",
+        "sha256": "c0a81dbc816b0dc19813ba3b4de9b10969c34510b7ed42e9cc65885ea902eb1a",
+        "text_sha256": "904378865e3915dfab9ed83eda15952867c9262ba517a12eaae7ce50ee2970cc"
+      },
+      {
+        "id": "259",
+        "stratum": "contract",
+        "sha256": "e67b22a0497ae97777bf5a37fe444ba289db4b0c8547d79ab7ceea7dfc1dd821",
+        "text_sha256": "36285793a944a26b2759edeb74008a760bf99e3cc172d68f897d01c9d88e267d"
+      },
+      {
+        "id": "287",
+        "stratum": "contract",
+        "sha256": "7fbd94e31e7325ab18684e31da4ba16fab4987c6dbace9febfaa4d7f2fd42701",
+        "text_sha256": "198eb343ae69e072b94d7647e7beeefff4a73c256bb8468b78767698d3bd7160"
+      },
+      {
+        "id": "360",
+        "stratum": "contract",
+        "sha256": "c444d40069f5c95c544835ba82a0281a14ecd5e1e890aba6b8766bad3d60ea78",
+        "text_sha256": "8884f9e9cf10e492569f2e2af8cb223c48163d987cb4f5cdff2d410494ae276d"
+      },
+      {
+        "id": "374",
+        "stratum": "contract",
+        "sha256": "f3c5ff6997667ec8e244691c87e26f2ce0815f5b33a303de150ac5407f5d14f8",
+        "text_sha256": "a65432ca6b0f6577d677c7ea2072fb94f7a5e5c6cf8b4ef6b60559012bc03f85"
+      },
+      {
+        "id": "407",
+        "stratum": "contract",
+        "sha256": "90879f61cc91adc485c5a2dc3e3f4c7b23246635ac8f7c83edd820b8cc86af26",
+        "text_sha256": "73c953b2a0624f5c5905251b8e4b1fff0dfcec0aea9821ee94c09f9aa6da5b3a"
+      },
+      {
+        "id": "418",
+        "stratum": "contract",
+        "sha256": "26f7623b17e1dee244ae07ad1091f0ce448138264151db87ebb584a199b4393b",
+        "text_sha256": "28017b8bd8420f51b642ce0992f17b2fac885ec5e31950a0a3d89903d38e6c09"
+      },
+      {
+        "id": "457",
+        "stratum": "contract",
+        "sha256": "1484cf7c026ebb6d121eaff97ae4a2dc551766e06b06a182719f14ef12982312",
+        "text_sha256": "b836e304ad983cf5e030bdceee9dc7a8f2b02a14b5731d16fa214efea21ddb09"
+      },
+      {
+        "id": "484",
+        "stratum": "contract",
+        "sha256": "a68cc0517edc2845eec13f757c96b99023bc87e49c18b4d8b9ebd9dd9009ecf2",
+        "text_sha256": "c2d1f93526a2b6e2f8003b11a5e66592377ee4e665ee35a2d4e3e1a35e6d863e"
+      },
+      {
+        "id": "510",
+        "stratum": "contract",
+        "sha256": "ec185627bdeffa02690d2b616067180c604713d317a06cf78e39d48271fe66fb",
+        "text_sha256": "a57039a63a6e5e0f91254d0f6069562006bf7ecdcd2475f105166a6bc8226dc0"
+      },
+      {
+        "id": "544",
+        "stratum": "contract",
+        "sha256": "c8e24c6326b4113ec6d80ac359ea0197b00151d983dbf72142de19364cd571be",
+        "text_sha256": "3dc2a64e62ab1ed46948ba4d3415c0e8ee07928da1b5e0ebe3c3acc53236bb9f"
+      },
+      {
+        "id": "555",
+        "stratum": "contract",
+        "sha256": "6bf0a8c5ed4d22a7b83259920849e85600a19f7adf6037b6438e0e76140a1ede",
+        "text_sha256": "9038f32d5d55d342086bc0cfe2ec39253f3f97ca35245d96ccc5c89f2052a6df"
+      },
+      {
+        "id": "596",
+        "stratum": "contract",
+        "sha256": "24a547b37cf738d9c2751190ccaa59a0435f38a86069f1a7b58e3b258660bd82",
+        "text_sha256": "6a1fa2a85ce3152a6f5f816947e62866d845b9fc19c6c6de26be276a95366862"
+      },
+      {
+        "id": "633",
+        "stratum": "contract",
+        "sha256": "b0b723c3ed113a31d149a7fd08304796c29c5836e87db9efbfef681ebd225967",
+        "text_sha256": "494460c50b8caabbb0546010d4c6ae55d25c7d84d0d0cde88bdafe45ebbc7e67"
+      },
+      {
+        "id": "634",
+        "stratum": "contract",
+        "sha256": "d5f381576bd8dac82d233848b6928df3d1f602d1be7d0238847f8559e19d4a5e",
+        "text_sha256": "c5ff5044ebbecfbb503cd769404d938fc4a3c5793049a6e721b0738edd4067b8"
+      },
+      {
+        "id": "655",
+        "stratum": "contract",
+        "sha256": "e75d6faeba0c7495f66d9d1c0a655feeafab0fe782abb909e22da63f83a57b91",
+        "text_sha256": "948301d0f3ce65190bdbf560a008f01b131d40c42d7a0b8bd8962dda505a3588"
+      },
+      {
+        "id": "660",
+        "stratum": "contract",
+        "sha256": "b1d344d117155ef8fb001df9eab4609768439d5f63ab08c0d8878322d62da010",
+        "text_sha256": "9282c6935abf20517d2b8e7c971e13874eb2c1b89f72d4526579fab61033f5e8"
+      },
+      {
+        "id": "715",
+        "stratum": "contract",
+        "sha256": "36c8209ee36fff621ef401096135afad14ce19605215970b8abfa8114e6373db",
+        "text_sha256": "baddad1a9f715cac9a806b09317d552093d0ff9eb0ac0298f04a92973bb1ff4b"
+      },
+      {
+        "id": "733",
+        "stratum": "contract",
+        "sha256": "50780595f418beda9ae93c5dae2bd812e71e1de61c29325bafd9a5efcaf524ba",
+        "text_sha256": "0576db638c53f0459ae07d58e340b56d6116093396ea82ec94304fca4b4c1dcc"
+      },
+      {
+        "id": "749",
+        "stratum": "contract",
+        "sha256": "afa44e6854c5cde2243a1b1cf1360b428331d2cd3d023385545509c5fd49a319",
+        "text_sha256": "6093536fc35bfc214f0d28e7803649f0cb427cf0b5fa910e10108ee67f61428e"
+      },
+      {
+        "id": "774",
+        "stratum": "contract",
+        "sha256": "0a651fc676ad1552d006f2a623aedd456e637e0eacc16f1fe68645a91fbcbc3c",
+        "text_sha256": "d5e9057e67e994a8d305d97bd5af87f3c61269d47b0948b10f276beff0e1f0de"
+      },
+      {
+        "id": "775",
+        "stratum": "contract",
+        "sha256": "ddd51a527e35655c5376287a853bcd28dac9ecb4d3a61e6b1c6a20a49a00b3ee",
+        "text_sha256": "6d81d583e5c2b0bfbd5c3dedbf9f21cd47349bfb06ecb6551983fbced499bb03"
+      },
+      {
+        "id": "786",
+        "stratum": "contract",
+        "sha256": "94afa94ca325131a6cf5ebf4ff370bd00913a6938ed8e7ce3c6b43c7d7aee662",
+        "text_sha256": "b39de182c33bcad58feae92514ffc20d00b2e5e0d180f38c686b9bfa56905df9"
+      },
+      {
+        "id": "812",
+        "stratum": "contract",
+        "sha256": "a6659c9dd18b7656c9415c6f9043d20ab262e30d5f42e3121d66c386d9dd53c0",
+        "text_sha256": "a3b5c131fde4b7168ef48b841229274369b7198608e0d3c5a0010d34f93f0f37"
+      },
+      {
+        "id": "817",
+        "stratum": "contract",
+        "sha256": "5801244b2d9ffbbde42454826fec9c98c9fe1250df2d3d1fb4267f2a50ac6467",
+        "text_sha256": "e570ffe823db5d55a8874d03142e58bbf348674bf64f280e1eeaf44e3e9d2813"
+      },
+      {
+        "id": "855",
+        "stratum": "contract",
+        "sha256": "d582802c34236556fe07e5663ef5d33e9649bec5604eecdc4d74ec19e1d21dc5",
+        "text_sha256": "d0fb6d72d6c069c86f6482b02734c8030432727d728c7f6e80a31c67f96e89af"
+      },
+      {
+        "id": "925",
+        "stratum": "contract",
+        "sha256": "e87509421d94ecb437e35bfb8bb679f15b6379b3acad8d70cb4e7fc95b86f15c",
+        "text_sha256": "24ec99bdf1d6e13bd7bacf3c3c3a1686552b7d715664f781f8ce45fbe427b989"
+      },
+      {
+        "id": "926",
+        "stratum": "contract",
+        "sha256": "b90046a4d3b0f5d06ee03ca13e58c698a57ada52b0b11e4403acd122fd657297",
+        "text_sha256": "bea9a02358c8059666c8454f2cbef7eda6b47f27c8a3262d83e68b0acd865ba9"
+      },
+      {
+        "id": "931",
+        "stratum": "contract",
+        "sha256": "fdfa49292881e35f457b823a3aafd47772e9f49d56f1f0dd5baa265008d3a149",
+        "text_sha256": "597a070ec875b3515df259845b4c73db16ce57ddf56a16a5d05cc3110a584971"
+      },
+      {
+        "id": "940",
+        "stratum": "contract",
+        "sha256": "9af0451fe322d9ba42759d57f8ba56bc6ce8afda6ac6d12e6fb81131926ed297",
+        "text_sha256": "f8835007fd70979bdacea9ad29ab5d4c767b5fd535083da403a817f5dde0de87"
+      },
+      {
+        "id": "952",
+        "stratum": "contract",
+        "sha256": "1ff2b8283cd4a7d6ae33881f37a449a255a19ee84e755c8b9e374cf514f180df",
+        "text_sha256": "e03d5f50a23ef01f495b163fe768e124a771d0d31def22e1e3e83d8da98ffc35"
+      },
+      {
+        "id": "962",
+        "stratum": "contract",
+        "sha256": "42ff158cb41ac6c69ab672dc79b322e6b8e74a9bcff680254a9a99d2a1295940",
+        "text_sha256": "2366879c457f30dfd657d24d1eaea4d6da72ecb1f528009f5361a702d20c57b0"
+      },
+      {
+        "id": "971",
+        "stratum": "contract",
+        "sha256": "e7d68a86049e7d408b62782779c3e56a12def175192a3f5641b08512206c3b2f",
+        "text_sha256": "7af793bd338e4ecc0c9bbd93bdbdab3ec7c82b0250a5b3f35f386d89b3e36a3e"
+      },
+      {
+        "id": "987",
+        "stratum": "contract",
+        "sha256": "338b57e968bfc752f24ea31e50325a2ec3c406a93e0c810994563ad4691fb19a",
+        "text_sha256": "f1d7b0bfa43e48c826ee271809cec8b8e84ce3452a30d1149ce921b946b54f6f"
+      },
+      {
+        "id": "992",
+        "stratum": "contract",
+        "sha256": "949033ba35f6c12f1e4b8454f5b7093fc7cdc678e3a60b77e09dcc3546d61e68",
+        "text_sha256": "bf97a5b9bd90040c4793e5ea871120e908317c0a5cc8d8122b18a60a81e8718a"
+      },
+      {
+        "id": "1008",
+        "stratum": "contract",
+        "sha256": "6a6317178c83ad6aa30b1b350c9eb2f1f0505b4faeb5451072b49ddcce4c6a14",
+        "text_sha256": "64c50b1e4e7d575ec218714ff7437a45ecdbd1e79b46a51968658dfb26520047"
+      },
+      {
+        "id": "1021",
+        "stratum": "contract",
+        "sha256": "4cd184f5067057753a2653d3d0726001264a70b987ba3d7acd6c85bce39023ed",
+        "text_sha256": "b88020a7e1257240de4008d31f77f80799c5abe630744c28ab0c167e02763046"
+      },
+      {
+        "id": "1025",
+        "stratum": "contract",
+        "sha256": "9d29ed5bf121649da7438756f051947a18f28cd26afb9d5de82f38aa46b0a6bf",
+        "text_sha256": "12cea1a64c67f41b7d674504abec37ca627eac7dc0c7c5937cd387b6f5e36e2f"
+      },
+      {
+        "id": "1051",
+        "stratum": "contract",
+        "sha256": "5ac39b143bac6231e8cba9cee240deb198cfb011cc2b0c4d434609655ff45575",
+        "text_sha256": "4c961e8d0c71db97f3a1a82b8ed7f69c32dea06f582522acdb22e3f62d81ff56"
+      },
+      {
+        "id": "1079",
+        "stratum": "contract",
+        "sha256": "c7ee39720cfd7a731778cc932920f01fd13d66be54503009ffe350652c31898a",
+        "text_sha256": "6baea5fb6f8e04a871efb4e370158f10b56c2f166e47aa52190b48e5733afc68"
+      },
+      {
+        "id": "1101",
+        "stratum": "contract",
+        "sha256": "ea99781d4a34c225fbd0b899aa1f6e3f22e7609819ee7480a8afecb9d6fe247d",
+        "text_sha256": "8c72cb8026a29f5c697b5aeddd1ffcd4c4775f0a6a59024a0d4849cd53da9054"
+      },
+      {
+        "id": "1103",
+        "stratum": "contract",
+        "sha256": "07126f5245fd96b337881fafc96b8e926cc0f0e2f17afae97a715437c449cee6",
+        "text_sha256": "f2dbf7e083745bbbf0f0c82f5d7b6ed622cfa642d6024a781aa98371fb8e23e0"
+      },
+      {
+        "id": "1150",
+        "stratum": "contract",
+        "sha256": "e67bfecb40c39fb05e3a73eb659fea715a081df2d420348eabb090a9f4253d2f",
+        "text_sha256": "33c8dfd473bf5281c867e4b7bb6b2d55ee9e3585b66443a0a761b3aecd1bfb77"
+      },
+      {
+        "id": "1181",
+        "stratum": "contract",
+        "sha256": "44dba3637eb920d34c0e3f344f13a05322942bd41d066d197cef5aa6e08c4d55",
+        "text_sha256": "d31669fb05e9d8660afe4c9e9f3c5a5315a56818b31a45d8f4107f92031b359e"
+      },
+      {
+        "id": "1199",
+        "stratum": "contract",
+        "sha256": "7451ee3589188a306a57ecd98c3f71106bda5bf3cbdf71ce6d4db0b5b4fd9027",
+        "text_sha256": "53bbdc75ffc53eeb8add9cbae7bb1e3f7128d8c9862696416484a22d473ba246"
+      },
+      {
+        "id": "1204",
+        "stratum": "contract",
+        "sha256": "27341b5a8f99cd47494ea32e56b357afd0a746843750b10c6c437768da79bf8a",
+        "text_sha256": "517c1df868eb028511206a14719608d14a36e88473984ee05b1eb36c9f804737"
+      },
+      {
+        "id": "1205",
+        "stratum": "contract",
+        "sha256": "b64346906282f19c3a72b161903fca0aae6451787c7b87f708dbbc593cd48f86",
+        "text_sha256": "30da012634ae9104c5a0bde4ddd3b6f7a86bd9a023862949fb5a5224832dcb94"
+      },
+      {
+        "id": "1216",
+        "stratum": "contract",
+        "sha256": "3689ae9dec43c967e62aa3644dc1ca9b8bd87314fbcdbd04dae071704e80cf5e",
+        "text_sha256": "0f97393557f8c02f9318722dcf6eeea0187bfce7a98423d8d7f216126aa00692"
+      },
+      {
+        "id": "1233",
+        "stratum": "contract",
+        "sha256": "61c04373fbad004b738da64f24b731dbc6985fb651603a06866e85a25e592689",
+        "text_sha256": "a3986a5d6e02144c2f45bb67e22140ebaa9a301172003c9b44ec546641884355"
+      },
+      {
+        "id": "1240",
+        "stratum": "contract",
+        "sha256": "6963d5f4da160e91c7b1380c58904b86f848de9be571967357b35c9dd047db38",
+        "text_sha256": "a9d1cbb3b4c365af0efb40338a7cf0815aba4f8fcd7104cf4287ce0eabb45a03"
+      },
+      {
+        "id": "1276",
+        "stratum": "contract",
+        "sha256": "0286d2d064b3abe8b4546bbe76acd39c08a277352ff0f5a5823bda31fe639449",
+        "text_sha256": "e72c26cdd03b2825fffe7334b9eca9ad795f05f1ad3e4371990f375d3e66ba88"
+      },
+      {
+        "id": "1285",
+        "stratum": "contract",
+        "sha256": "0aecef64c1ac2574a78eed8490f1b42f6882d464a0715feda27db66d0460d83c",
+        "text_sha256": "02dc7225f7de3b763d410859db1face8b0b2bf390f7dae365a3e97dc8eb6ddd4"
+      },
+      {
+        "id": "1309",
+        "stratum": "contract",
+        "sha256": "882b668c9694484edbc03756644f29febe58b5ca9f69efebad35d4761eaad4cd",
+        "text_sha256": "4fc59ff0aebcee99788095940f8759a541e157463098106033e95776c6695deb"
+      },
+      {
+        "id": "1359",
+        "stratum": "contract",
+        "sha256": "be89e00be38b0c9fb7f64ef97c3368600b324776990710791e21c98a25382ef7",
+        "text_sha256": "a1a6847e5bb5efaa542cbc32f1d28d98c6c99f1a2b4c8b67ff673a0dab5874e3"
+      },
+      {
+        "id": "1378",
+        "stratum": "contract",
+        "sha256": "227b9de16b868119c2f1b09a706b64c5ccf732b99fc2828deaf1860b7788d95d",
+        "text_sha256": "54ada9d2bec66ff08d38781bce1f7de3fe423fd404d1f426f01f1937fbf44431"
+      },
+      {
+        "id": "1380",
+        "stratum": "contract",
+        "sha256": "956b52b3214840eb9ddcbdf55b10609491cd7fe51263dddc263caca7415c769d",
+        "text_sha256": "a998a9fdfda92f20cba4d772db56c2613fc34e93fc681e57cf968aa24c98eb24"
+      },
+      {
+        "id": "1392",
+        "stratum": "contract",
+        "sha256": "6ce462796f616cc5cfb59d16b32b78b8cdf52e8c8b3af33da581dbb094a01abe",
+        "text_sha256": "79be04fc33e4df0da94b814455da5c64298269a31c0916d524a20d14fad13bbb"
+      },
+      {
+        "id": "1409",
+        "stratum": "contract",
+        "sha256": "d6536d6809d9c5e75365257ab3ed7fcb327dabdb2585af07e094584ceeb8ffab",
+        "text_sha256": "5246699d784a5a3d7f159357798cd61e88ce9da346f3ffc9a63274491a1a973b"
+      },
+      {
+        "id": "1410",
+        "stratum": "contract",
+        "sha256": "def1d11bc7036ce21c830efa7332a3de5fe78ef19055f8528fa7eb4b2474f657",
+        "text_sha256": "c4ee99ceb6c1cab65d7ce27618010edeb59605a37b14263e27c1ed6d5e1d52ee"
+      },
+      {
+        "id": "1461",
+        "stratum": "contract",
+        "sha256": "ced7e731c587f664e581ccd6031f87e27f65434741d327aec385892b8426c7df",
+        "text_sha256": "3051a46bbc8982ddef71190c8d576d147cb8ed88c7658e79d757310c60baf7fa"
+      },
+      {
+        "id": "1464",
+        "stratum": "contract",
+        "sha256": "649bd62d5389ab1fdf3b3104e9f7b8a1e7c5a39ffa4fb5d3ac36bfc01cdf9525",
+        "text_sha256": "1b9d693615262451a19f88e2f144c7ce8dd3e294b54f0414824ffb4421af4325"
+      },
+      {
+        "id": "1494",
+        "stratum": "contract",
+        "sha256": "c8f4dc1ea935c71d008303c38b844814d75799804827e9979a7d1ee9633e3547",
+        "text_sha256": "0473dca3b149cf002f2251db4d5118a6747782ce8debc88fde6d125ae8e40fd4"
+      },
+      {
+        "id": "49",
+        "stratum": "declaration",
+        "sha256": "7c0bb566cc93f70f2b2c32a140e68bb09c7fe445a4b2684532579c25bfedd76e",
+        "text_sha256": "0173fb0a6f98657220769011ca56cac1494b4ae69c095f4395774e5074742dd3"
+      },
+      {
+        "id": "72",
+        "stratum": "declaration",
+        "sha256": "8d868bb32f1c92bf93fa32ee7714afe5fb88e3ac3111bb9f8a65d6779094997f",
+        "text_sha256": "a2dfa9acb329ceba20f2f75056c8c51ae973927e165aac8b6a50b1b459aa184d"
+      },
+      {
+        "id": "112",
+        "stratum": "declaration",
+        "sha256": "125e41ba9880cefc02b31cc8ef8aa34cbc55d8f4f2c9cac90b84991fd668a7a0",
+        "text_sha256": "a8914e7367588c96379bf3f2d61dbf02d2721020676282b4bb8085f274babc0c"
+      },
+      {
+        "id": "114",
+        "stratum": "declaration",
+        "sha256": "fa330944ce57f1beade3f7fd4de34f220fa73dcc7d21940c641a1f035617bf7e",
+        "text_sha256": "640e91d95e2ec690add809f5ca30428db26043fe3867f58e34cb2aa36c3716a5"
+      },
+      {
+        "id": "134",
+        "stratum": "declaration",
+        "sha256": "1c2f3a92d7eccb23483869eff6c2d325ef4d229e6ed11552ce13ab65dea65f43",
+        "text_sha256": "5762d5228ed490989f32dda549c05527c338a66541803f7189245ff31be9914e"
+      },
+      {
+        "id": "139",
+        "stratum": "declaration",
+        "sha256": "7d8752617cb1ace6a3ef3e9d241165908b4ba6faa0525e085bcec4bbc842f40f",
+        "text_sha256": "c8339fe3d560b3fc096b373169e73b6bbe40d6ddf3001db22444cf0851657f8c"
+      },
+      {
+        "id": "147",
+        "stratum": "declaration",
+        "sha256": "86726d5bc0c022246bc131abcf54bf87ca4fae547d39750436baa829c9282bf5",
+        "text_sha256": "db3e7c27960916745fcbd498b0e296ccbb1f92a8e8ebab4e75e0d3c1b51f9ade"
+      },
+      {
+        "id": "186",
+        "stratum": "declaration",
+        "sha256": "fa6b62f4e53adb9b660889daa6384037c4ac95c4e20dc9bbd79a18414bd27ee3",
+        "text_sha256": "c9cedbf91666836e7374f340a2a6a99c9c5c9148ac7df70d31efc0c578a86631"
+      },
+      {
+        "id": "229",
+        "stratum": "declaration",
+        "sha256": "118176489bf8f578b8e9b55c3774db74015a17e7ec066d0da46e78f62b6a64fe",
+        "text_sha256": "5e9591e8c6d5c46c08e6145f54c4e57482ee15d2c0f0bc871191dc064fe1d9f0"
+      },
+      {
+        "id": "239",
+        "stratum": "declaration",
+        "sha256": "ae4edbd3bdabd44990bbc63c9c12799df75671a30a7f783763624f2274b919ad",
+        "text_sha256": "b2091c3e033b74824d9928f06950f22d76e34d6d79dbb8e3a99985287fce1866"
+      },
+      {
+        "id": "251",
+        "stratum": "declaration",
+        "sha256": "e66c011dcb53d0647314a390a1c82f00342bce67c181198728637683ff1fc202",
+        "text_sha256": "fa4c8dd1cbc7c676be64b110251544595c84f5b1b9d82cb583d25be0d6870f60"
+      },
+      {
+        "id": "262",
+        "stratum": "declaration",
+        "sha256": "7e0d1a489981bebf886c4652fcd4944db4a1851963c39117733e07ddb53cafba",
+        "text_sha256": "02e308513759c1cef8be9766135a89707982e9777909020925debd85675071b2"
+      },
+      {
+        "id": "264",
+        "stratum": "declaration",
+        "sha256": "173fd62290d59bd7fed4637dcd3fb04e7fe2e48c3dce55154defbc54bfe11eaa",
+        "text_sha256": "f4878a52c569ac9667683cbd716193adac0146a9301305c0278ab14c4a44a259"
+      },
+      {
+        "id": "266",
+        "stratum": "declaration",
+        "sha256": "ebe6188a801776bebd227a2614289a7e496bc9349da70f13f219b9c4d9d1f806",
+        "text_sha256": "b487551dc7196a75a9d24e001136c9cce51f66b4ea49ec910e252972f68fa99e"
+      },
+      {
+        "id": "280",
+        "stratum": "declaration",
+        "sha256": "eefd76fc472b1293bf3af8f233beb9659c9469325dac88daaf3f3c6c1152f177",
+        "text_sha256": "171b47afd16ebc229ed6bba0890f88f6f4c2924ed04786c860006c7874b18b59"
+      },
+      {
+        "id": "282",
+        "stratum": "declaration",
+        "sha256": "82c7d9c0c87eefac10bbc2d95a3919c22d18b393fd458573b8d84481eb06fe81",
+        "text_sha256": "e689c0c577b39377eb3f50a2e69bd2f16a7ea40643280dba7a6fa58778dd58d0"
+      },
+      {
+        "id": "295",
+        "stratum": "declaration",
+        "sha256": "42be4edd942fe7384b28eb727eebf36c612dc62a8bcf8bd534ef99967a916996",
+        "text_sha256": "3b6dc67a30a9539e52a2813b8b51146e7ee3588deb314975b5f7f7a7842edc27"
+      },
+      {
+        "id": "313",
+        "stratum": "declaration",
+        "sha256": "f52a803027d2eaea4e6b428e41a72e4f3f6d867bc381d71b240bfa845b4e9624",
+        "text_sha256": "814f562836b4b46837fd2264a3f4f6e57872e8eecd322754dca4eba2813ebeb8"
+      },
+      {
+        "id": "367",
+        "stratum": "declaration",
+        "sha256": "91bff64e8f4da8977e50114636f59675f21d65d9a8a9a21a23cfc10ab5b1822b",
+        "text_sha256": "62b4a046c27a3de616072cf63edfaafb0af4c87f4e8b99464e90f60f90e1ec20"
+      },
+      {
+        "id": "368",
+        "stratum": "declaration",
+        "sha256": "550e9bd0e18e04816e04edd343b2aa8176bc7a804c4110449d4e9123849c2748",
+        "text_sha256": "96764dc1030822f2c0cf7a7760f06f800d09c9781f628aa11d500ede1f52d5fc"
+      },
+      {
+        "id": "387",
+        "stratum": "declaration",
+        "sha256": "54e9e2347c74e47749b60e046c71d31578fad2393ac4e6507ee3d201678e9189",
+        "text_sha256": "d96f933432808e9b5a15d4b843ca842b5fbf699eb728fd508d8e67a6020c9cba"
+      },
+      {
+        "id": "388",
+        "stratum": "declaration",
+        "sha256": "dd693daaf8be3ebe317b45fd313e9b7c0b2cf30e391956b9866234d77d810287",
+        "text_sha256": "7cb590baec247b3c155883b416988bd62b00ab021ea720adb3073749de12da29"
+      },
+      {
+        "id": "404",
+        "stratum": "declaration",
+        "sha256": "f952b0ec9285afed4a0b8727bf8f73f82d04a9e4febeaa56306dbf5a302e42c5",
+        "text_sha256": "c07358cc1419aa7a2e9ad9ebab2cb99c5868236585fab23ed1e4a604d65c4d17"
+      },
+      {
+        "id": "416",
+        "stratum": "declaration",
+        "sha256": "30073a0288e3b24f33e08d085fce4582841ee0df665848ac18c86f61c6788f9a",
+        "text_sha256": "aed94a42bea25cc1b4959d720758b743ba837df9aaa81bf3b857c0af25228d7e"
+      },
+      {
+        "id": "425",
+        "stratum": "declaration",
+        "sha256": "b24d07f7cea55873c1e3797177b240fd1a9775027664daa70ce1dffd7321d0f5",
+        "text_sha256": "7fa99e084498379266440c4a079457551ae888681b3a044c7b867982a745daf6"
+      },
+      {
+        "id": "435",
+        "stratum": "declaration",
+        "sha256": "9d5956ebc3602717a721642c05c6ad05ed50370c619b0d2edab3d832283be2da",
+        "text_sha256": "30d3f3fbb16fd606a885785a26583e6e1067f73b3ef48e56d9b9e07445d3be4c"
+      },
+      {
+        "id": "446",
+        "stratum": "declaration",
+        "sha256": "e5098433c4ddf88052ef0d0186778a324b73556fdcfbc98ecc2ab3cb565a502d",
+        "text_sha256": "d644463e9513d1f1cab5b5c5c0a5e8de9d3ec8703a06451278fd726e46c99edb"
+      },
+      {
+        "id": "476",
+        "stratum": "declaration",
+        "sha256": "b0404bbd4ba98aade9ee82940e47a304ec8283bd1f7bbfed9c16ea05261145c8",
+        "text_sha256": "0ee390c9bf56dc6cf18d55e9e7f3095604a7d6b256a9ca01c9b394a11c4dd57c"
+      },
+      {
+        "id": "501",
+        "stratum": "declaration",
+        "sha256": "02ebb3104eef89cf91d0e84ca84f425ccb7af89dda3c1f3ccb75e13000fe9f10",
+        "text_sha256": "b0814939f5d207e67f143660fd868da678e9afc4d196e6168c23bd2a7d287761"
+      },
+      {
+        "id": "508",
+        "stratum": "declaration",
+        "sha256": "0bde4676fdc45f54afbab272d2e7ea691bb7b6aa83b624253d7a8557f5944eb1",
+        "text_sha256": "e5abcf0462f1c6ad30d0022e29540af5ab9a82b936e57b137f7dd3af03303fb6"
+      },
+      {
+        "id": "516",
+        "stratum": "declaration",
+        "sha256": "231bb73a324e5fed2c7eba4a612ce4ef26fcdd112c3b31df72fd2a48e7e26d27",
+        "text_sha256": "510d05a66663c1cc87728ee01fe945baac1b05205fae8f984130c144c4b5450f"
+      },
+      {
+        "id": "526",
+        "stratum": "declaration",
+        "sha256": "f82ea597ec96e82d66b72a1f196a7ae065394049abd9541005ddca4dab7bfcaa",
+        "text_sha256": "fef735da5a8cae83c3329992abff77f3c5f352f0e4162baf906bb0a52a72addb"
+      },
+      {
+        "id": "533",
+        "stratum": "declaration",
+        "sha256": "ada3aab7bc057264136b8844375ef4cecadb5752c00d2d9b55424c73f2d5b9dd",
+        "text_sha256": "6fc16155a1b6b0589122cddcd30ae34678190b339ccea58e75e20174f42c14da"
+      },
+      {
+        "id": "534",
+        "stratum": "declaration",
+        "sha256": "42590f65c5053fd3a494c2da422fb3b9b8dfb4926a400468d8c0564930533287",
+        "text_sha256": "815b133b301599a5b81ab6c37100ae8137160d771f9123d0244bd3f57398a273"
+      },
+      {
+        "id": "588",
+        "stratum": "declaration",
+        "sha256": "16dd2ba2f54282f7648780abac45f51bd74c6934368e4ec0b3e598352ef34956",
+        "text_sha256": "b2cc9db697fe5bae55710ece4233897eb784a38c16965049af2910b1ee6e3161"
+      },
+      {
+        "id": "593",
+        "stratum": "declaration",
+        "sha256": "b3fdc1c8524c2ad7b823347ac117a422a4c8a65734acb01bfb1dcc12cf7393c9",
+        "text_sha256": "bcd3da8f589235bb054ceecedb8af70304487a302f2d4cba59bdf48ac636249d"
+      },
+      {
+        "id": "615",
+        "stratum": "declaration",
+        "sha256": "ccc3867695f7924a7c934c00fd3a6d0aa6477d87a35a7d6f02f4cfc82bbe6367",
+        "text_sha256": "2891729078185b0c1f1232f1ce843337ff9be83284f9c8a2d130072754393989"
+      },
+      {
+        "id": "653",
+        "stratum": "declaration",
+        "sha256": "a2e2df9c71c3cb05f8bf17c9c1ca8ff5c725998c3b4ef5a8a92abd307d36eabd",
+        "text_sha256": "144fcd730530ee19f9f177502c7220e76dd1d1122117c62494ebb399e998b49b"
+      },
+      {
+        "id": "665",
+        "stratum": "declaration",
+        "sha256": "ed0773eee4a4806c939ad147c0d7a1af59943e264435534fb12b850d83923433",
+        "text_sha256": "4eb2862c8ece2056209af04af4692edfa69e5e0f046eb06a4ec1ccfbb518258f"
+      },
+      {
+        "id": "720",
+        "stratum": "declaration",
+        "sha256": "43dd6a0217216c3b5b01dc190411a7ec06d7252a9e5bac5dffa4c71ea8ebd9e4",
+        "text_sha256": "cb3ca8c75bdc18ef9eceef750c69f49a392a997a450ead329088b8cb81e75d92"
+      },
+      {
+        "id": "751",
+        "stratum": "declaration",
+        "sha256": "3225e86f4553f75812fc7b86e343c2d5de662635c79c3001f2ccbcd7301e895e",
+        "text_sha256": "f23b772b0f7a5cd18af1a8d86d988aa27445b3b52e46ec4608ac01d794eff75f"
+      },
+      {
+        "id": "758",
+        "stratum": "declaration",
+        "sha256": "2fd07530041fb2f0d9947d85071f9f10232cbf55de30b94f0ddff6a710a5ce94",
+        "text_sha256": "2a584a1ca029d86d401a8b4af61cc93203ac77ed6e801d5e62fd5298589a706b"
+      },
+      {
+        "id": "765",
+        "stratum": "declaration",
+        "sha256": "6f00a779a79620a1a0cf2fb880ad3e436a0ef1549366d229a01deb910f065469",
+        "text_sha256": "384dae529594d78b7193b7b65b5113a6ecc4ae7c7e241dd059aa9cbf16732703"
+      },
+      {
+        "id": "779",
+        "stratum": "declaration",
+        "sha256": "dab265f2f58d95a50abebbc214a18792046507524965e830429ecedc2da0039f",
+        "text_sha256": "045b0b37e1f7cdff941ab6b7c161fcc134d109176bed86837a81398e3990522c"
+      },
+      {
+        "id": "788",
+        "stratum": "declaration",
+        "sha256": "c25085c1f2d2b2e02dc96aead2912f0328ac230bfd4389dea5144d4849f080e5",
+        "text_sha256": "e26450cb7dbcceb8385a685743ae155483e7384ce2da3114caeae013539a506b"
+      },
+      {
+        "id": "818",
+        "stratum": "declaration",
+        "sha256": "a988d31d29f6bb2160cf60845bb5c8bf45985f96eff767b2ac5f740ae2b33283",
+        "text_sha256": "d2eca90f0dfe12385381873220c428b44b76dd0162c4f96487387f68d6ab798b"
+      },
+      {
+        "id": "826",
+        "stratum": "declaration",
+        "sha256": "850406f47687acadbbd01031f52ed929897a907cbe587f05235e1fe88fabf21b",
+        "text_sha256": "bd0df1aaf473aa8e9f7015bd2609a904f80b8a8dca809a3da89f53b8cc95f2cf"
+      },
+      {
+        "id": "921",
+        "stratum": "declaration",
+        "sha256": "ac8b1676ba286daa8d887929f7943dffc1786678ba6e910a50b52105f0b6e4f4",
+        "text_sha256": "7f01f7cfc166886595aa2b21dc5894c02500488613511a8147cbed94fc36712f"
+      },
+      {
+        "id": "922",
+        "stratum": "declaration",
+        "sha256": "22d2699524531ee503486b13ef87e428e9f8ce17b5ec1f6fb8765e346f66afc1",
+        "text_sha256": "2cfcf760c47c79eb6dfbd9967a6894f34456f6bc1a09af24edc087fed3607dd9"
+      },
+      {
+        "id": "939",
+        "stratum": "declaration",
+        "sha256": "29484703d5f638e242b1f639f4f4d9ec3d9a0ed649bcdc99cf373c542379a647",
+        "text_sha256": "1e0d6c99621daac095e1042e54e40940d6829132432be6a85846c8c729720170"
+      },
+      {
+        "id": "949",
+        "stratum": "declaration",
+        "sha256": "4f978c0b1f7ab14ff72a3ab96072fae123dd8077d2c5ec4d310ed5118593efdd",
+        "text_sha256": "6f6d30106dfb26abe2bb16e10bbe13bf0764ef5fa8550af6673cda2dd1e03bda"
+      },
+      {
+        "id": "977",
+        "stratum": "declaration",
+        "sha256": "4b2b3c6195bb90e372a04d642d8b9145e202e523f9ede1739fad832d5012f5c6",
+        "text_sha256": "2b55b0fe76641e63c7433ac40613ab787a45e070d5cb216575f45ddcb5d0a837"
+      },
+      {
+        "id": "1014",
+        "stratum": "declaration",
+        "sha256": "e71df9a4571843e512f05749e2e721db8187a96983adea818ca1c5b424af5025",
+        "text_sha256": "3d5d780526901524c617f314c28c0a326809e8ab3b5087fc0a2131eb3e6363a7"
+      },
+      {
+        "id": "1038",
+        "stratum": "declaration",
+        "sha256": "126977370b87f4f355df013b8f5b827320aeb60e1df1a347437fa11140677bb8",
+        "text_sha256": "ae9c72d5ee0e471cd04a35b5dc17eac69b9bb846f34688d76a519f9ed2905c33"
+      },
+      {
+        "id": "1060",
+        "stratum": "declaration",
+        "sha256": "04727d60703d3bf2a820de77d074927ae74d42e9072ba94a22a1a1fdec8d24f0",
+        "text_sha256": "b3c86f520112187481b5daddd1a471afe1faad8a56e99bb8de4fb5ba08b059a0"
+      },
+      {
+        "id": "1065",
+        "stratum": "declaration",
+        "sha256": "118a42b38fece3647df12620cb729bf5486555670101766ac9ba3fe289446c4b",
+        "text_sha256": "9edd66b93b10c024aeb71cdadbecfb96a146ac9d028db13c3aa3a3825b784e4e"
+      },
+      {
+        "id": "1134",
+        "stratum": "declaration",
+        "sha256": "f0c3401ef38d259d54799faef92f71767b941f9ef16ec3bea84ebc4939b77315",
+        "text_sha256": "69ddba9e9a7fe718f948f53fc76144f3177eb98643a886ddf0cd886274817a32"
+      },
+      {
+        "id": "1135",
+        "stratum": "declaration",
+        "sha256": "cb1e920a2f520fbba4c2ba43c8c64348797bbca5defeef173b620a652b9d54b8",
+        "text_sha256": "be8eaab4c1219fb09d7712847106d319a5b8a3dfb02939cdd89d8cd3d0020bc3"
+      },
+      {
+        "id": "1161",
+        "stratum": "declaration",
+        "sha256": "2bc570047c7ab6708023a54728b4e06287cb719c6d9456fd450239e3aa5f61e5",
+        "text_sha256": "dc1b0a5ca99fe63530169d8db8c8f6e96f351ce9e9d44a067dc5480c6d2ce7ef"
+      },
+      {
+        "id": "1184",
+        "stratum": "declaration",
+        "sha256": "c4ed394a771458561cdcc0a953aad21a6424f5e6a57babbd03e95e992e7b8344",
+        "text_sha256": "eeda1ed36370d61c962876a107c96b8a0b29936a58d08fa5f61fe35264c0a1dd"
+      },
+      {
+        "id": "1253",
+        "stratum": "declaration",
+        "sha256": "01d73eda3c5bf95272d32f2634bb35dab1c6531403f8582b7abe1d824f899e39",
+        "text_sha256": "61867bc3f289291718cb067c0ba7ff678a8b5ffdb27708c58308745a7e49525a"
+      },
+      {
+        "id": "1287",
+        "stratum": "declaration",
+        "sha256": "e4c98b16a98f32b29f3e71f535a94665d66b6f6b30076e03713e9dce0bb35bbc",
+        "text_sha256": "b9898080cd1c356888156183eaf5ee75f1e4221b640ecc77ee2aade8cdeb1cce"
+      },
+      {
+        "id": "1297",
+        "stratum": "declaration",
+        "sha256": "239d62ad8f55400b3dddf77ed0897dab267fa25d0e0dc349178aa2c49b27ec0b",
+        "text_sha256": "e7bad80eae570acbc3aab16d741f5d6b26b00abaa2389c1965969b4aad102411"
+      },
+      {
+        "id": "1301",
+        "stratum": "declaration",
+        "sha256": "7824dff688bd0b236eca06b6ab1dbb5166e328c458ac7d34efb9060e9f060908",
+        "text_sha256": "c92735c3d8a200ffc24e7bda68aed12c6ff53c44e9b942056817a4dd6bae019b"
+      },
+      {
+        "id": "1303",
+        "stratum": "declaration",
+        "sha256": "dd17a3d9410632497b5c8ed2ba51eb8966c48eca684d2ef81880b8efabf303cf",
+        "text_sha256": "bb52676dc0cb94202b4f5eba5fee7dc04e5b8d4a719ff584fce048b289137122"
+      },
+      {
+        "id": "1313",
+        "stratum": "declaration",
+        "sha256": "7ab0f6bbeb6f8d34825c49a97877e44ea4937c916925ff6fd1f2c6281b3cfd46",
+        "text_sha256": "f7a979005c0c5cc9d9187b81bef0bd97f7d52667b052ac77d31903c7805b2b60"
+      },
+      {
+        "id": "1315",
+        "stratum": "declaration",
+        "sha256": "54fe08f4ade8477e2a39256aed6171a86cbe256359bee74e499c520b8c6646a9",
+        "text_sha256": "120f8f2fa152436e4ce4911056946a0fd813aa59d7a80af4bb2d3701cfd586ba"
+      },
+      {
+        "id": "1340",
+        "stratum": "declaration",
+        "sha256": "e969922419d11c8d03f0597f4699f8687d22a0fc1da1ec029fa066eac40e2841",
+        "text_sha256": "4a3c698d7c336e9ff592e6f75518daa58998f89409919e9895a108888ab390a9"
+      },
+      {
+        "id": "1401",
+        "stratum": "declaration",
+        "sha256": "28ddf1117b2d5c5bf5aff83db0ec4cbd0074139e57edcfa04ff1e3ed351d60aa",
+        "text_sha256": "c17ae108c8ba7aeed56011e1ac5a864bf3e9bf79e2bc5c2e6dbeb42038a5f027"
+      },
+      {
+        "id": "1407",
+        "stratum": "declaration",
+        "sha256": "d4ebbc26e3fda6a52836af2e6319ee71553ee0bccdb68dce5df2881980d47ff3",
+        "text_sha256": "b6f8fa1d2b5e18a065f30be56d72ad1e9bdcfe9603392b688fb8db0f57044efc"
+      },
+      {
+        "id": "1421",
+        "stratum": "declaration",
+        "sha256": "3ecadc4426e44f1dfbac45c63a3804afe88ca2cdd2a4dfa5233023b4dd0e2526",
+        "text_sha256": "a846b81f1fd89fe942e7a47578de27d84beb52dd531c89ee3a129c15d0f9c061"
+      },
+      {
+        "id": "1430",
+        "stratum": "declaration",
+        "sha256": "84cb844dcd8315a35c690ff4697ddde9b90755e494d9e6960a51d1ef17ad5631",
+        "text_sha256": "eb45588eb0f33a74094715f1c8c63bece3cdea52fbac4ed069f6b30fe4251b9b"
+      },
+      {
+        "id": "1446",
+        "stratum": "declaration",
+        "sha256": "e13fad6de0d1f886efefc6688cec2746b5e132b74ce7d9be9f069dcee3ffecb1",
+        "text_sha256": "94422c492654910bb605bb3ab42ec0a3a4b41f779f810a6a3059c8751e41af11"
+      },
+      {
+        "id": "1451",
+        "stratum": "declaration",
+        "sha256": "cd1a097611358c19d14211bb7cd6187bc4a11c2e56c73034acf470d59d63bf9b",
+        "text_sha256": "9ed44466481bac3af13ba453b0811f1acc10ef94cc007cf8e7e8242d9a060098"
+      },
+      {
+        "id": "1457",
+        "stratum": "declaration",
+        "sha256": "67d926daef5c44758d72761fecf8b5bb0b41bdf372c1a1fd6397be0d14ebaec7",
+        "text_sha256": "f2a50b9d68a371055d0b89fcbc513fb6dd1b0c24a3179244716c1d70493fe32d"
+      }
+    ]
+  },
+  "pl-realskeleton-v2": {
+    "source_commit": "79c7a91c47be20c8d214b05b09c2850fe8049037",
+    "license": "CC-BY-4.0",
+    "source_url": "https://github.com/klusai/klusai-datasets",
+    "heldout_sha256": "bcb99ae771c20e11f2dd77f4cd27560bb97a67d82a7c8240bc834eedef835e29",
+    "population_sha256": "1fdcf3ee0ba4c3b7d87c16d4be353acc4ddb60bce1fec8fa4a6e84f5c2ea593a",
+    "strata": {
+      "admin": 75,
+      "clinical": 75,
+      "contract": 75,
+      "declaration": 75
+    },
+    "samples": [
+      {
+        "id": "18",
+        "stratum": "admin",
+        "sha256": "400d9f37527775ff0b8545f8b578ad9a9afd0803dd55fb913dbdee5d934cfd7d",
+        "text_sha256": "e70ecd4568c2978255f38e3eed557b02fc4a478e546136052543d2c7ea320c9b"
+      },
+      {
+        "id": "25",
+        "stratum": "admin",
+        "sha256": "b5e590f5490e0eeec077d50b8024791cf529364deb0155c0411bb6a269f54a9b",
+        "text_sha256": "ab84f6a06d74b7eaf09ba41afa8c9af728c080ec4ad473406d4d5cb3377af628"
+      },
+      {
+        "id": "56",
+        "stratum": "admin",
+        "sha256": "e32a2ce09e49e1402759ca1e73e734bd9e70c1bd426483b31e0b2b21afa27b6e",
+        "text_sha256": "0738bb5820a9238b222ae587892817d45f70fba30fe5658eca390dcc1d1aa768"
+      },
+      {
+        "id": "61",
+        "stratum": "admin",
+        "sha256": "85676c7784e61d3188a6785af1c2b41a250dd0c420d3e3d86a66ddb2c1f88eae",
+        "text_sha256": "a7b15b670bcf14cb4055efb54f45e6da92c6c12ff0371820e776190c97737506"
+      },
+      {
+        "id": "70",
+        "stratum": "admin",
+        "sha256": "e275f3a67719d040df71822a7f8ae868aabce8b665c9e3b8529edadd95a150f9",
+        "text_sha256": "e685147397208d83143752a0c7222b9d46e83ed3a27e74a9828bb788f7223c89"
+      },
+      {
+        "id": "76",
+        "stratum": "admin",
+        "sha256": "68230ab576a7c78dd154b17be5eee701542280fd571ae1775bae58d9b61c3680",
+        "text_sha256": "30ff5cf75b93d0564f13d097202cb8502ab3fa97b94e48955010448bbc4c21de"
+      },
+      {
+        "id": "106",
+        "stratum": "admin",
+        "sha256": "fb362d387d960ff5e2caf4138ba9b363c723059cf9cc99089ea649dd651d53fd",
+        "text_sha256": "160d6b10379f2d95837073a872866042920856ebbbc632cf495e1951057e94ac"
+      },
+      {
+        "id": "109",
+        "stratum": "admin",
+        "sha256": "28ae2c169df5d5589c3184918298357393381cc92c2831652460d1cc7848eca8",
+        "text_sha256": "54191815867442562ab9e05371612515c551078be097cdb57768890ff3bd9ea5"
+      },
+      {
+        "id": "117",
+        "stratum": "admin",
+        "sha256": "b0574a2318eb95925cef1d38100df7d948f9107881dbacbb2e900b1e1d0ea5d0",
+        "text_sha256": "137fad227720eff3f609396b980be05daaa050751f6bc4270748341d4f3d6c1f"
+      },
+      {
+        "id": "169",
+        "stratum": "admin",
+        "sha256": "99e618038fac0e44c858cf958679c2c56ea1fa5aa9e981b3e2f863eec6a94e8f",
+        "text_sha256": "7a0d6e378fe43037d5fca731c7e9995e389ee778f350d0d7f9160e16df8385c3"
+      },
+      {
+        "id": "170",
+        "stratum": "admin",
+        "sha256": "e256b722a01b15a0fd744fb4c361c6e5a18f0b087558c72215cbe5c501e2d09b",
+        "text_sha256": "ee644a2a972ce264573889cdaa4af1e3f6e4e83b0949fa304d45e61a9de51573"
+      },
+      {
+        "id": "176",
+        "stratum": "admin",
+        "sha256": "29d47951c1ccdab9d9f1e61fd921bafc116a6f7cd9a57fa7facfae9398cd5f19",
+        "text_sha256": "bad7c70a1151f41a50e6aa82b9d60346868e56e18297189147868802c4244f0d"
+      },
+      {
+        "id": "195",
+        "stratum": "admin",
+        "sha256": "4fcc40f7bcc30ec4362ab590699d784120c692df22e001623d72099f83cf9e7b",
+        "text_sha256": "4293198ec8f76b7ff18df17bad68ff13645cec8f052212f69a029fe49a305c8f"
+      },
+      {
+        "id": "208",
+        "stratum": "admin",
+        "sha256": "841cefb7a7144d9254a54398497a23a63711639d733fe35ed9d49d2283bbd136",
+        "text_sha256": "f2478f3cc96bd318bee862236226d818fe3a3fcf72c92b818c60d4048de6bfac"
+      },
+      {
+        "id": "228",
+        "stratum": "admin",
+        "sha256": "5a8b068d02d5f62e24ec294e7693131467f86eef06bf358237450edbd4ecc065",
+        "text_sha256": "08618e25b367f09571555928a0210f5d8ed0596482c05741e47ae68b208213a0"
+      },
+      {
+        "id": "229",
+        "stratum": "admin",
+        "sha256": "fd9f302062e52b8bd8373ed3b2e3e49455a0f74a4160ff29f84a53d259465cb6",
+        "text_sha256": "5cb5032edfecdea729034956321835c07138ec7cee89638918e162b94023aeec"
+      },
+      {
+        "id": "245",
+        "stratum": "admin",
+        "sha256": "35c0f8455a73cfbfac872b625130b259df8d4f8c40de47e078951aab70f5f624",
+        "text_sha256": "9ecb7c5a173ebe5b4babaa6e63d0c593004256b062dbcdc4490ac784ee8b829b"
+      },
+      {
+        "id": "250",
+        "stratum": "admin",
+        "sha256": "690c054dd125c3965e57a99dacb538729c7543c64f61f61b7e4dddaa3914b119",
+        "text_sha256": "148429e2b1d04561f831e708ff546d44e45cf1c34221969d92676e968201cfe1"
+      },
+      {
+        "id": "267",
+        "stratum": "admin",
+        "sha256": "eb4e3f4b198220d1d4319e1f38d32018a1b29bd5771ba7b452ab30cfc9664632",
+        "text_sha256": "42b1abf66d28009a324b4fa7d62f0c7dc18d7c775134d41808ca7225bebac11a"
+      },
+      {
+        "id": "285",
+        "stratum": "admin",
+        "sha256": "84c37e6e53867413457266337162836131040ace66cbb5d174c1ad33439a1434",
+        "text_sha256": "fb6842d653b71afbcbf93ac5bdbfb760555e69024e5839ffcc03f9e7f6e92820"
+      },
+      {
+        "id": "292",
+        "stratum": "admin",
+        "sha256": "2864b4acfe136b0a7ff0ef5dd8129879371de4e3fb1199912380e0689d9c1256",
+        "text_sha256": "ea25f9cc913d24c96616a74d4f1b16b459433095b96695888482584b1a46d421"
+      },
+      {
+        "id": "332",
+        "stratum": "admin",
+        "sha256": "f2c6a7b3cf933a8ee627edd7268789e6221b4253701fe6eece5c4edf6f824e1f",
+        "text_sha256": "5eae471118ccd89e1d821eaf3c96bdb1ecea310cce510b73f1a6906b319acd82"
+      },
+      {
+        "id": "363",
+        "stratum": "admin",
+        "sha256": "edc3d924f32999186269885e7951ca14f9fa5b37288f4570df31c84c3d158c84",
+        "text_sha256": "5bbd6b83a2c2380d048583dfc80bf16d1f57a610201eea265f3acd096d78b19c"
+      },
+      {
+        "id": "371",
+        "stratum": "admin",
+        "sha256": "4f08a8b3cbf2d72d46bbc8dbec114c4eecedbfb90a29ffcf3694e5a3bb1c5e21",
+        "text_sha256": "3333fe40710a3b0160f0305530db178b1a8a713fa642ec3c8f98d2105eb1af7e"
+      },
+      {
+        "id": "402",
+        "stratum": "admin",
+        "sha256": "eaef8e40915d02d532beb22330f21e3f6e86dad8f19b7ff49a817c1a2836c607",
+        "text_sha256": "f594a01e2214ad8dc09e15c7580296f23446a439c6b3ff4d800b8bf6d06620b3"
+      },
+      {
+        "id": "443",
+        "stratum": "admin",
+        "sha256": "53c676db38ded5d8c25bde869e1145297701c9d2aa68612994f9d60d758bd5ba",
+        "text_sha256": "b75fabcb9399ef8a120d1cba9cde95fdd6d2a06b99086d6c043bf24ab088ce80"
+      },
+      {
+        "id": "489",
+        "stratum": "admin",
+        "sha256": "611a9106d6c0af906083c707beb0874a7eb92a29cba446e10c70ea850f14ddb1",
+        "text_sha256": "d0c199e4ba00d845f6d19d557db033435a0e847801771817e1ab9051825d3d57"
+      },
+      {
+        "id": "496",
+        "stratum": "admin",
+        "sha256": "21d2d103e05e037ed933a6b538a5caf3fec7b84e991b52fb2d52b13e408282fb",
+        "text_sha256": "b3ec2cf700543208166a7581a98bb880bb39c5e8072048cc06c3f5dfb6f7a161"
+      },
+      {
+        "id": "501",
+        "stratum": "admin",
+        "sha256": "9dc811b55f825219f9f90440807d144a96d923162c5fe14931f2aca8501aea05",
+        "text_sha256": "9ae048e1772ed0f7f6a25446dfa33ff1608855a858d537f3a3598139ec8e6809"
+      },
+      {
+        "id": "505",
+        "stratum": "admin",
+        "sha256": "f117cea27d5d44d780e76438a0b595f7e48799ec44ca04c28b058462c670f9cd",
+        "text_sha256": "6c8d702d6c136c4a172f73064b7fc13c0c647cdf90f54b5ada1358d520bf6e4a"
+      },
+      {
+        "id": "533",
+        "stratum": "admin",
+        "sha256": "cbaa35760305a18a29e9134800886eb5c669eeeb9a96b990747fcf12df33aa2c",
+        "text_sha256": "c1e7ba90a9e24588f50aad48c2bce4026df125b2bb706b8406b811932819be81"
+      },
+      {
+        "id": "554",
+        "stratum": "admin",
+        "sha256": "561e089438671527e6a2f3446706ce48630fa8995ac6a57b295e4f0e6bee4b37",
+        "text_sha256": "bc521a0949f6493b70ab7987aab6b5543d2b9bfccc719e69a78ec0d2e6151179"
+      },
+      {
+        "id": "634",
+        "stratum": "admin",
+        "sha256": "7c4167410ad0659f2ecfefc01b4189818c7383bcc2eefaeb2e8a7e3d6aa52867",
+        "text_sha256": "e6025addf607b67f9e39730d5de023f6e451f8958ceca4455f1b83efb82fd85f"
+      },
+      {
+        "id": "658",
+        "stratum": "admin",
+        "sha256": "2fb409def5ea696d6de9f03524081f3583253a867f23a35aa4fbf6a933a94e6e",
+        "text_sha256": "e94e2ab5dee3e98a9312ee28cf944a0c5b7c7ebef88c657621dafbbd84fa9855"
+      },
+      {
+        "id": "670",
+        "stratum": "admin",
+        "sha256": "0c6d041f80b6da45af37f81f899d9e56323baf6ddf3a2dfb7ff9b68d72fef2b9",
+        "text_sha256": "5bdfc2c136ad451fe9e7d4a4726ea3a9a90900ede9bf4de73bcecfdade1904f9"
+      },
+      {
+        "id": "673",
+        "stratum": "admin",
+        "sha256": "9f992031e9102c187a067bf4cce5f14c213d1054eabd6c56055a86e233a40832",
+        "text_sha256": "a07e7d8f1c8bfb0d8c490166ca7820b42dc3cafb77bcb24b90617d659e3fa3df"
+      },
+      {
+        "id": "708",
+        "stratum": "admin",
+        "sha256": "6e23a0f5ee0254a9c096766fac65eef2aa0f2e58c024075d46dc912db016de83",
+        "text_sha256": "e533eb1c38676c54058f73c5d5d8338834be79c91afb11d7f93768b95b06ac78"
+      },
+      {
+        "id": "731",
+        "stratum": "admin",
+        "sha256": "246579627e04bc59e9363b280cbd9885ef337c85ba264cf26194d54e955d7702",
+        "text_sha256": "9c3202d16e40f9c6f1b9d9263e0fd1f738aba02dbcf3fed9e58b839e2580de44"
+      },
+      {
+        "id": "732",
+        "stratum": "admin",
+        "sha256": "7e825542a3ae140be69c22b75541dd8ad81986fac6b0a085ccdab069300ca033",
+        "text_sha256": "73261dd9eca3bd48562902ee0e88fd63880128f2493c70d72039e2e35dec48d8"
+      },
+      {
+        "id": "735",
+        "stratum": "admin",
+        "sha256": "41c07345a4a5fbd0d97ee9803a2af3bf14fd559d2c1154a00a016cd731006fc0",
+        "text_sha256": "4aca6b71bf160c630b24ec21e9ec4b4c8a1e242dfc70e4cbc11a6961c5c5113b"
+      },
+      {
+        "id": "736",
+        "stratum": "admin",
+        "sha256": "21adb90acae24e50ef3761cbd80a1148c7169f48cd09b41c1ef9f00c2fa1eea4",
+        "text_sha256": "ba4947f834b14e9764e823c6177332e0e66772090f214992520ce06adbbdacc3"
+      },
+      {
+        "id": "755",
+        "stratum": "admin",
+        "sha256": "446eceb9867df8cc235a50aef23493207c9045fab08bff09e5c000261fddb87a",
+        "text_sha256": "f11ef871ce39799f50b66a2f075227f669a96890f5c607ec546030dd2e732def"
+      },
+      {
+        "id": "762",
+        "stratum": "admin",
+        "sha256": "690170a0dd8a7c0cf0c60ad0ff1c6003342b9715eeff9d1726dfb9ebd7c56aaf",
+        "text_sha256": "9a1ce6aeaaf5a93af76fbf1b0c1b79224bf9f9d94eeb2e6bd02a89d875f44bbd"
+      },
+      {
+        "id": "781",
+        "stratum": "admin",
+        "sha256": "91ff5a632a13af4480ae721571bf59a1402c5dc265142829cf05b8aa8156dab8",
+        "text_sha256": "b7b66c18dd67af23eaa1843fb40fd3323ec7631fc8ff431fc10fb72983496347"
+      },
+      {
+        "id": "927",
+        "stratum": "admin",
+        "sha256": "01c34d61bdd125ba4b3fe9897b5391f6066634697b66b847e657603d02188d88",
+        "text_sha256": "27ac30fb38e3a100f7e8be7f498ec993663acc88e95f7dd4020d0e400dacf621"
+      },
+      {
+        "id": "939",
+        "stratum": "admin",
+        "sha256": "436699f379ca2461423d206a7b7f00c7af818e5c0de82a0be9595af4b054512d",
+        "text_sha256": "e0202c6b8f9547eca5dcd98a04de62c3d6ac82dec54adff82447b08e5bf2015d"
+      },
+      {
+        "id": "991",
+        "stratum": "admin",
+        "sha256": "d0cd20e07267da7998294fff256bcfe6196791b651250c2cc09e54fbfe4ccc5b",
+        "text_sha256": "c4494d369dee551d094d3b641ef9fb1a98ccfbd701a9878db93638bee51d804a"
+      },
+      {
+        "id": "1025",
+        "stratum": "admin",
+        "sha256": "6827efcecce6d49f119d703933e66a3b5a12779e40ef23f71f4033ad5fd4d41b",
+        "text_sha256": "c6bc6675a2d29952ea58def1dec35beeed590e46f85aa26b8cec51c92283c230"
+      },
+      {
+        "id": "1057",
+        "stratum": "admin",
+        "sha256": "9330c6e4c9bfab518c521928ba51706da371fa0943fb5f5515519da752c15867",
+        "text_sha256": "bdd26a6254874293c79753ae03b8ac997a10366d0ea9d023e93612aa30896955"
+      },
+      {
+        "id": "1120",
+        "stratum": "admin",
+        "sha256": "b2eba9c7083209484959302d1b918e3b8e6aedcdb89082c2a01e043616daf1e1",
+        "text_sha256": "746387e172a2e646ca52027ebe4688f74b5efe19acb882427905071a88d86666"
+      },
+      {
+        "id": "1123",
+        "stratum": "admin",
+        "sha256": "496e00c93b072e878683431985f9652de53abbcd5714c549eeab00aceed74486",
+        "text_sha256": "7b9e54e4ff80725e712b503b121e038f27f19f59d260003912c96c316cce3fb7"
+      },
+      {
+        "id": "1136",
+        "stratum": "admin",
+        "sha256": "008b13cd333e0213e0d9f2604c52f33e43d11756890df63efcb44841a2003a71",
+        "text_sha256": "16f489e525e557c5d5cae812614cd9aa5301fcb31ad967fbbc116d11e0c40678"
+      },
+      {
+        "id": "1148",
+        "stratum": "admin",
+        "sha256": "b135f79b4eed2e0e510ff91f934d7d275be40ee84b867208ac4d6fb649a9a3fc",
+        "text_sha256": "02eb3752051db7158f8a810b9aeb9ad7c1fbad75d140de34dd798567f74ecc67"
+      },
+      {
+        "id": "1151",
+        "stratum": "admin",
+        "sha256": "1befda86974c284752575957d2031e0f8b325a133271ffe7f52321b91aefb7dd",
+        "text_sha256": "cc2831bc894a349ce117c9a7be9362fd7f32f4bb98b796cae557bf78094626fb"
+      },
+      {
+        "id": "1153",
+        "stratum": "admin",
+        "sha256": "c08adc128d6ccf7ed608bf667639161f6650ee72bd4dd122577fbbeae87ec46a",
+        "text_sha256": "cee4bc3b8dbe168072b6d0863e41cf2154195c505b7f428fe3d25b1859b921b5"
+      },
+      {
+        "id": "1161",
+        "stratum": "admin",
+        "sha256": "f389c3356b2076e24464213f203ce2984549b5d7d048dabe5b4a3d034ba43970",
+        "text_sha256": "d91f9163612f1430e24b688943c739e87ba3a14b08cf2b32a986b7a41de0dfab"
+      },
+      {
+        "id": "1173",
+        "stratum": "admin",
+        "sha256": "5fd48abd467730e13d7dafc24cb478321011b1fa15a9127a0541ef2beae6fd0a",
+        "text_sha256": "ff2e1901462199e737a0486c9ccf6bbc8dac3a58840b4e0dd3509475c86fb965"
+      },
+      {
+        "id": "1187",
+        "stratum": "admin",
+        "sha256": "cbff045554e40099fd99b8c7bd197f296bd0819dd3fe2cd77a5d2108ef3fd5b3",
+        "text_sha256": "86be023b07a31e020468a99a11b3dc2c030a0b5cb64ea7a632c551c81eb14bfe"
+      },
+      {
+        "id": "1212",
+        "stratum": "admin",
+        "sha256": "2869bdddf7f838a24473c72654d3a3092dc158dd6e81bfd1f878f20d71e85cc4",
+        "text_sha256": "3fecbf452a9c4304c2ff7fecaec0ed85164cd91b0ba9c96593269aac581beb95"
+      },
+      {
+        "id": "1225",
+        "stratum": "admin",
+        "sha256": "3136bb1502935710e4e316d39405baf57e53c53402fd4f6f97135efafd5c9519",
+        "text_sha256": "779cd1e50c6aabc52ad1040ea90647a80073cde6d57d63f2caddd342800dae2d"
+      },
+      {
+        "id": "1248",
+        "stratum": "admin",
+        "sha256": "835214cb1bd395421721cdab503a8da20371768d7c5dba23dc17831b3456ffa6",
+        "text_sha256": "de0536f6b12ca3f0ad0af83b3a1c881c2b53c6406ad994cc4bc9aea87fef4141"
+      },
+      {
+        "id": "1256",
+        "stratum": "admin",
+        "sha256": "c9e89083503296517512947134e8dd6ae0088128e75cbb65cff7db8814bb53f6",
+        "text_sha256": "69c11e017fec5ff863a209e69690d266144b04c7fc6034242e981d142cf4fb62"
+      },
+      {
+        "id": "1290",
+        "stratum": "admin",
+        "sha256": "a265ee30977d7310ab62a2141329f1e69981a10ad32263522358edf977c2217c",
+        "text_sha256": "6f4964c31737ec71e7cdf9aa63bb492e7605140824d20d49bb214570357e9fd3"
+      },
+      {
+        "id": "1306",
+        "stratum": "admin",
+        "sha256": "babf1cb4b310c3fb730c21e999cfcd09b378260c6a4d78a530281c62e6a0ef16",
+        "text_sha256": "b10d45cf1a992fb6a9d95bb28e1a6052e6fda12aea0684f98902989ff31882b0"
+      },
+      {
+        "id": "1311",
+        "stratum": "admin",
+        "sha256": "ca0a37c673f07a11177f861985eb2511d930fe5596c04967f38ae9d34b0599cd",
+        "text_sha256": "be4df56d9a945492c90e6785cfe9052e33e42c9653eb4ebb5a96639a6cc425c7"
+      },
+      {
+        "id": "1342",
+        "stratum": "admin",
+        "sha256": "feb0333df14cafa3019087fa95c9dbf2723b751dffa9b36662dad7cd2fc2a0d8",
+        "text_sha256": "9b9212f88df51f7767186a1873585568228388ab76b012fcfbe3d59b005983ab"
+      },
+      {
+        "id": "1350",
+        "stratum": "admin",
+        "sha256": "5e85b07bc82b89e2b3b0a49d0204a645eff403f5725ebd8ecbfc4060631d966c",
+        "text_sha256": "7e0e140c21fb4b52de75539d9a0653e16ce10b4e8542e44a653dd2bf6e2af12a"
+      },
+      {
+        "id": "1373",
+        "stratum": "admin",
+        "sha256": "fcbd3b88a62099d338799218dab83d4f2d220e3865bf5b1ad6079d430f87341a",
+        "text_sha256": "6e629bb3eae6ae0dfca877cd1a5902f43a98948e4aff87925dc0f26fae5fc125"
+      },
+      {
+        "id": "1420",
+        "stratum": "admin",
+        "sha256": "263ae49391ba9285e66c632feae613627f5529395e8d8c0bfc77ef28f272dd76",
+        "text_sha256": "b3a2eaa5af942adc1283631e6c4b5419f62aa41173b96ab7eea2477352cca91c"
+      },
+      {
+        "id": "1422",
+        "stratum": "admin",
+        "sha256": "b2be6a9d8130d2b234b3899498e2d68dbf84777b85dba9c618693085fd7bbbbb",
+        "text_sha256": "bd7e85dc63feeae8c4e678d773a2c9ec65a4b5c9aa291cd0feeb03330e33b98f"
+      },
+      {
+        "id": "1439",
+        "stratum": "admin",
+        "sha256": "7ffc32d9f825f523aa29c4b8291e9762e0cee4e0e78b924af36f53ec67e92ec5",
+        "text_sha256": "11c7a0f5226aca3572c95a23a8a0e532857ce383479408fbaf82069e4398b5dc"
+      },
+      {
+        "id": "1449",
+        "stratum": "admin",
+        "sha256": "8f5183c1e211b9e7af534c52510b174a372d526a4e6f580cbc307f006a5ccb1e",
+        "text_sha256": "35f611b50dbb0dd4542b902ae5751ecf91df529a27dde0fd59de4a4c7e82c863"
+      },
+      {
+        "id": "1452",
+        "stratum": "admin",
+        "sha256": "1ea859781576aeb2cf90da66a0a4644485ec9a06a1a3422b8d056f3358eb5df1",
+        "text_sha256": "5f68005f7dc3ad420931cb1e244791d39436d6d2b17bb88f9a1519e570f6bc27"
+      },
+      {
+        "id": "1462",
+        "stratum": "admin",
+        "sha256": "e049de34b94a3e27699cd9f64bf612892cdcc56b3f10b6683c1cdf0cf10750ce",
+        "text_sha256": "0ad357c884fd8e77480b9be8f3c658b142f0c4b3de1a6ac07ee3f64417fdf66f"
+      },
+      {
+        "id": "1494",
+        "stratum": "admin",
+        "sha256": "aa63d5ad6736985ba89f79222799fa2f381fa6c9b7a6c92688cbaa6d90ff2589",
+        "text_sha256": "d137c3ddaa22cc485d7eca8699e9536e988cb5d7e34267af267d45f73ef0780a"
+      },
+      {
+        "id": "1",
+        "stratum": "clinical",
+        "sha256": "54d46619438c2902197f23bf8e7b41c8ba918e078a4e462b69e5d941f52f9106",
+        "text_sha256": "7358403fe9fe382ed605a35e7b41cc2b4b70e8f1df83b13cc112b1b0dc7db88a"
+      },
+      {
+        "id": "21",
+        "stratum": "clinical",
+        "sha256": "0fe6872975f75eb2574bf96b2a1b9bb9b81bab9309bccb342dfb55692f7a9c9d",
+        "text_sha256": "4f26020e3f46ab146b75ac25c426b8d48b3aeaa38b38feff80de1e2dc0c69197"
+      },
+      {
+        "id": "65",
+        "stratum": "clinical",
+        "sha256": "16f1c51be8f2731a384138fdb57c66de68effbb3f02f0001630c009741db4421",
+        "text_sha256": "431bd34ba2b76a7fb2eb67452c6fa45b6763d78c9d031ed68a633672ccd23dbd"
+      },
+      {
+        "id": "80",
+        "stratum": "clinical",
+        "sha256": "86447bb0866bf0c99ddb670e3d7fdec988047575fa7994829eb61fa79129cbcd",
+        "text_sha256": "4c2699d4e515cc897506feb7a3f834f7d63c28bcb69c8e6f932846897ab48eda"
+      },
+      {
+        "id": "87",
+        "stratum": "clinical",
+        "sha256": "cb88db7f3d01a2f99402f389b37bcccc2c865470c4a9e9a83ab27313c86031ba",
+        "text_sha256": "532b59d9460002b923c5d5c7de0db721f2c99d51ba6982b5fd744a73081da1c6"
+      },
+      {
+        "id": "130",
+        "stratum": "clinical",
+        "sha256": "e0130632cac8a037e8d6b9b819ae2a792afb9f3f12f25263689ed9caa3a963e6",
+        "text_sha256": "a074eb0f5205316306707af68169a1a55c720653b0bae357c3659ccec24b63a2"
+      },
+      {
+        "id": "137",
+        "stratum": "clinical",
+        "sha256": "0134d3a456acdac8876f4fcdb476a974d6136a24ae6e218bcd04260c5e76bce5",
+        "text_sha256": "86ea05b39b822fa66ec52c44cc5c513dca9e9069bbb906bee691af373628746c"
+      },
+      {
+        "id": "186",
+        "stratum": "clinical",
+        "sha256": "8e4737ae8484bd5033580a24b7e6db8ca7dc430de0c26404a9a3d2b1879a004f",
+        "text_sha256": "739abd9b938bf05bc53f3836eadb175deca7644da8eb356dad2a105f3bf70875"
+      },
+      {
+        "id": "240",
+        "stratum": "clinical",
+        "sha256": "68b7c95b9ed96742704d88cc57d929c41f47f9cc9c6866e2930539590589d902",
+        "text_sha256": "4c84acf30fc515c3f557f7fe51ce6632bffafb77887c70e8df89328cc0aab02a"
+      },
+      {
+        "id": "273",
+        "stratum": "clinical",
+        "sha256": "682eb22d750b33ce03bc3d5d6dc1180f70569ac86b5292fb2b2e82b9f1cc8145",
+        "text_sha256": "e94b6450ee51af65c515b872c4c91ac513e9f86f5791390e6a8d3b86ee564391"
+      },
+      {
+        "id": "279",
+        "stratum": "clinical",
+        "sha256": "19dba160fce32f4206deb5fcfd2ca52cd9fbd6cb53fb460801a9be6f30f5a30c",
+        "text_sha256": "f8d61747936e8c6ae0374bb1c6e32008f7d20448d1814c708436e1b18583bb81"
+      },
+      {
+        "id": "293",
+        "stratum": "clinical",
+        "sha256": "c27846c84fe19e79963874ffe3ae9ab8e5165d1a7e735766a43413a859af79c2",
+        "text_sha256": "e73f2e92cf4854bc07b7732e39cf68150806b3935968f790c8a58a2db86ee34c"
+      },
+      {
+        "id": "303",
+        "stratum": "clinical",
+        "sha256": "662fccf4440a627125b85d40ca9aac1f38fb637a6f1c762ff42bedef8a8f04a7",
+        "text_sha256": "2416296d162adfd29fc0249a808aac71e5a802ba74008b486bb3885fb8ba08da"
+      },
+      {
+        "id": "330",
+        "stratum": "clinical",
+        "sha256": "9d5efee1f3756a8608d951b03dbd146858efc33d11e2bd00fc0b73102938e96a",
+        "text_sha256": "e21ceaee48b1b559e54462d630c6095f208a1ed9b88f0bcf44ce4dd5ed5ca153"
+      },
+      {
+        "id": "342",
+        "stratum": "clinical",
+        "sha256": "642f2a5ebcf58f7a66afbf736de996d74633c5fb16aae3c66d9fa6133d7c746e",
+        "text_sha256": "67f5ceaf56137582a4e5ceb5cd1994a1dd52ad16c23b8d89c81a4da8fda53643"
+      },
+      {
+        "id": "357",
+        "stratum": "clinical",
+        "sha256": "8205fa8dd4e6f24f2e1d3e58a947579704079f1103cacf4d428707f8ee68bb2c",
+        "text_sha256": "beacad2ce70051f6e7d6a7e368e5852118ae488674a6f62b257844f7b23f1a10"
+      },
+      {
+        "id": "358",
+        "stratum": "clinical",
+        "sha256": "45bd970046756d3e823d305da42a77f2e70a9811bbbf281974207f152a3b2207",
+        "text_sha256": "e7c45cd98d83bb62ee19150eff4c8d8ecf84f1d1a944a76df980250750b771da"
+      },
+      {
+        "id": "364",
+        "stratum": "clinical",
+        "sha256": "b61a177f8713c18406a3d5e71bea4fa14cb1826956f2b1d05d2821c54b91b2ca",
+        "text_sha256": "55aab6c52798408f73ff07fd9972a51105ff71d5a4745040a806297e165d7859"
+      },
+      {
+        "id": "377",
+        "stratum": "clinical",
+        "sha256": "f8dacc687cdcabc704564de1389fee723da0bf8926f455a7f85c650c8ef41f85",
+        "text_sha256": "c30614ae6d04f66db1a30dc6c54f2ccbf815a9ddb5baa0ce079970e08d037b11"
+      },
+      {
+        "id": "388",
+        "stratum": "clinical",
+        "sha256": "cab4e8b7c549d70ddf256449be329de0ece6c6156bc726c8f60998ffa4af8ce5",
+        "text_sha256": "dcfb5dbed58fffcaf348361fb80c5244eff130e4ca1d042d680d4437a4cfef02"
+      },
+      {
+        "id": "417",
+        "stratum": "clinical",
+        "sha256": "073e0b07dedda8646d57680a36c955aee1b2ce340063f6c00f2726ace568b9a1",
+        "text_sha256": "dbc19333539d9e760c21d5df5254353474e1b18497928f3b23a3845f1da3a70a"
+      },
+      {
+        "id": "430",
+        "stratum": "clinical",
+        "sha256": "6efc9e329ca07df066df17a493675f8d8f93e0c1eddbe3def08167a8cb32d61d",
+        "text_sha256": "ddcaebc9a5a85c50a97ea90584ed7acd4b982c759ce091908e9d3d9ed53f5787"
+      },
+      {
+        "id": "435",
+        "stratum": "clinical",
+        "sha256": "244bdc6fed28b9a427fb632f586716eaa7dbcb3e818c094f7705fccb4f425ac9",
+        "text_sha256": "542cf88be52c3eaa68542779a29371f14ac10693a3bf72e5f829b19d1f0a2266"
+      },
+      {
+        "id": "495",
+        "stratum": "clinical",
+        "sha256": "e8d6bacafd39df2a48bce48e4659abedd6b7c11713efb41b1558202ebe5adda1",
+        "text_sha256": "5958a64d4951e7c0c74fc2b7c132107b55a85e3d5d5b0d7a2c9555c7f7c86a55"
+      },
+      {
+        "id": "497",
+        "stratum": "clinical",
+        "sha256": "77bbc6c46c018125318cfb34a900826d2d1232a756d28360954924b982bd95b8",
+        "text_sha256": "209773af14ae27939876f0142c7cf5d58f4d006114f95e7b782d20d53e0ffca4"
+      },
+      {
+        "id": "498",
+        "stratum": "clinical",
+        "sha256": "f4f938232e5e35db78bdec1d5d608b6238cd3b968b011a7809bf7f5ac7dc6a6a",
+        "text_sha256": "4127a2d64d3bc49926badfd6fadbdeddc3988abdc8f146cf4b58001dd012c216"
+      },
+      {
+        "id": "499",
+        "stratum": "clinical",
+        "sha256": "c88bceef2fd396a4f5965788fc198ebe99623b94b0bff9fffcd88ee2a4a43885",
+        "text_sha256": "e6f843ff17e7854feeedcb3a597d1b522e4fd3dacad56dd65a0897be448a6f9d"
+      },
+      {
+        "id": "507",
+        "stratum": "clinical",
+        "sha256": "b4f940f4fe85198d1aa0dbc2d2d32144e006ee76faa1b308d1361432e44572cd",
+        "text_sha256": "fc26f3481f0a1fa0c5669dd42eaa9a2f587ab52f13ab65fff8811268dca1e3e5"
+      },
+      {
+        "id": "522",
+        "stratum": "clinical",
+        "sha256": "4400e596c22b27aa5f74ac67a1216dbf88b9202c5c50a6667aa1bcd3f5318297",
+        "text_sha256": "66c3c4994f0d6d9c8ea6a37600782a9874d86ac195e91df80df4d628433782d6"
+      },
+      {
+        "id": "536",
+        "stratum": "clinical",
+        "sha256": "929c1ff503b5ed27225fd97d5d226f266a30b79c5bb7e4ef331ddb296780f317",
+        "text_sha256": "13575e3d7ea22d926eb5877c1660bfded4306e99eb8bb3f821febc2a50e80093"
+      },
+      {
+        "id": "539",
+        "stratum": "clinical",
+        "sha256": "ddc164ebccdc35e8d0d609d689facd3e3ed838df2c7de3222eb3a326ad6f31ea",
+        "text_sha256": "fc2e0dd94996e44f0e383214d0cc423e3d480230f05d4fc214d0f7260786036c"
+      },
+      {
+        "id": "547",
+        "stratum": "clinical",
+        "sha256": "d0a5984bf01b910cb375e38b769b0ce6e6904ba6de03251e5c41997c069e52e9",
+        "text_sha256": "dcd41d67ff3a1619cf644c7ede47e4b908fbf6ead6679e73614f8c811df82ef2"
+      },
+      {
+        "id": "572",
+        "stratum": "clinical",
+        "sha256": "b5f9cd85008cd3b42e29d7a85e86c11e717ce706e9cb9fd28f87fbe91f6597aa",
+        "text_sha256": "015e3cfe8552c74f989c7ffbff9bd1f04f37d92555d151990255d48825ca2f3e"
+      },
+      {
+        "id": "579",
+        "stratum": "clinical",
+        "sha256": "36d024d5bfbe30320d7d6fb45850f7202ce6898e38b9893697da323b86490d3b",
+        "text_sha256": "eb44d8fe77a69800c7102e30033e3a36d0251ffd66879540d80841714dff3a06"
+      },
+      {
+        "id": "602",
+        "stratum": "clinical",
+        "sha256": "181d9444fd1db7cc777f1349c9df64a9ceb9f17ba7f97e172a295de2a8801b7a",
+        "text_sha256": "f0d2f170df6b9c0b5931a13e8e7987fbf45e102380b6760ff938063bf502d8f0"
+      },
+      {
+        "id": "609",
+        "stratum": "clinical",
+        "sha256": "c576426310ba76fa141625dcd14e9d2602fb0d9f5cab1852e440986c099c674e",
+        "text_sha256": "7804ba4f0e74d9fe2d21ba24ce72428ea0c64399cb28e21657da302dbd677053"
+      },
+      {
+        "id": "620",
+        "stratum": "clinical",
+        "sha256": "4b82fcbd8a84b0f51d71538ddcff2a489d8e905df35092ebdd3fd9d97bdd1e56",
+        "text_sha256": "bbe1e6499bfaf3868108c877422f3042ce70ae5ba5494cc52e9bf7626b088dad"
+      },
+      {
+        "id": "635",
+        "stratum": "clinical",
+        "sha256": "cd63c8a0a23c09904a08200d1c9558ee865bd7a7a3cc371e0800a3b41c0625f8",
+        "text_sha256": "328bd3f4b180539a6aaa501d9bab4543ef14b84e305afad60c493849532a75b8"
+      },
+      {
+        "id": "640",
+        "stratum": "clinical",
+        "sha256": "2a57b0f36d08e5d4ea81f8b9dd2ff15e9a40b0ce54fb716a4183c4983c9d69c7",
+        "text_sha256": "904a90d9d2a6b446090d5d880d5df8fff2d05aaaf2f03e37ec1f0c92a799eabc"
+      },
+      {
+        "id": "644",
+        "stratum": "clinical",
+        "sha256": "b87171c9a779096c99164c2a9bb4bf6c9fad3a46f0722dbd542947fe727599d8",
+        "text_sha256": "0eb53ba266484113926adfc24c33071e3efd081527bf232f530c5e023d0c6d8e"
+      },
+      {
+        "id": "663",
+        "stratum": "clinical",
+        "sha256": "96dcccf80eca67019af560e1bcb2327a68649713215fd334fecba9be2b9820c1",
+        "text_sha256": "cd7003ce1b8df698877955328f23e7e7ed61439ecd999c8650167e5f5fa02a72"
+      },
+      {
+        "id": "728",
+        "stratum": "clinical",
+        "sha256": "e4df966044875172fbf4c16247784d639b43a36ee30e81b3c5ffa0aae7457bd7",
+        "text_sha256": "0b13a3d9cb855b7927a079581a0d36de4c91d7230d43d902658f8c958fe4c3d8"
+      },
+      {
+        "id": "744",
+        "stratum": "clinical",
+        "sha256": "8b7b68040c6994548e7a740f736e7cb28d41022c7c67254082054870e414fd35",
+        "text_sha256": "c1504e8177a129709ea12ca6cf3e62d6deff19086c601488301301792ea7a44d"
+      },
+      {
+        "id": "765",
+        "stratum": "clinical",
+        "sha256": "e10bf3433c2a61f467cc4228dc295249262bcac674b8d781840449a59ab44990",
+        "text_sha256": "5d0f4c0a08b72c63481b38025c0b7f7349acf8555601d0489c629e19820167d8"
+      },
+      {
+        "id": "809",
+        "stratum": "clinical",
+        "sha256": "41d99525816f63f3e5bb598c2fb15feca99aa78486ea01d7d406baa0f8afef02",
+        "text_sha256": "e30d6a2ca0b7feffdbe50917015ae7ddee7d386ce6bc10de2a181b395b0ed5f6"
+      },
+      {
+        "id": "829",
+        "stratum": "clinical",
+        "sha256": "77d8f8d2e3c23d91c845434036765a5a262273f3b079f967eecf39d32e40956f",
+        "text_sha256": "21d9f0e8d4bfa4ae76ebd3c663079c5f4c8b20ddc6c3292b9ddb409cbe91ba6a"
+      },
+      {
+        "id": "859",
+        "stratum": "clinical",
+        "sha256": "0d7be6b9c88073d065a4d4385011ff0835638686f2a1a3ecb0d91d168f392fad",
+        "text_sha256": "e7a1985173a9469a1ac8c36fcd34a3a072e2e46c1b4efb8b3fe524116099bd46"
+      },
+      {
+        "id": "871",
+        "stratum": "clinical",
+        "sha256": "ce948574766b242aa2a95cd2ee9424a151a85765b68bd6235c107a3b966179cf",
+        "text_sha256": "53416c9b08aa52d1c46354332b0f9e203f10afeee4c1b5c2141dcaab5157cbfd"
+      },
+      {
+        "id": "888",
+        "stratum": "clinical",
+        "sha256": "4285329201b12f8d5ac1e5762be1f57ca8f9b7c07fead7a2b2b1d034f3a617fe",
+        "text_sha256": "e75d56f721c096e1a2d241fdab54ac4737300bbf226772afbef352f3d3c8362d"
+      },
+      {
+        "id": "906",
+        "stratum": "clinical",
+        "sha256": "ee24b3bf4c2899f09e95ddf763d5a500db8673efe57cbd9ae3b485fbdc806cf8",
+        "text_sha256": "93d32d1bb51170aea5b76481fec8ac8bd63d830eb4bb78f8d29b8426c9d3e242"
+      },
+      {
+        "id": "923",
+        "stratum": "clinical",
+        "sha256": "931facaea9023b546dba33a5301cf170688c1df646bcfedff1d06cbe41a4174d",
+        "text_sha256": "8bf5ca480c0dc53ef50249e515fa18dc8ab243b57e3b4615a617458fffc9bef0"
+      },
+      {
+        "id": "928",
+        "stratum": "clinical",
+        "sha256": "d44e604e9247fc52ca9a235c8a050de8d69617b35bf946a543e63d93411f023a",
+        "text_sha256": "1f9a0dd0766a3ee498681856122c4628725d77ed905ccd9511b0b465d029450d"
+      },
+      {
+        "id": "966",
+        "stratum": "clinical",
+        "sha256": "87faa766648cf73a6c447168d3fce6a868ab3bfd413fa3f8b52ba087922d2b5a",
+        "text_sha256": "fd0b61ac53e9bbb4cf5996df442138e3a0680beb24c437ce20282d5a1e28f160"
+      },
+      {
+        "id": "976",
+        "stratum": "clinical",
+        "sha256": "aca0e1bf06f4af89b6697a46e824adcb6fdc964d84f7e5cb251eaa44880b4b53",
+        "text_sha256": "d008100e333f29bd6d1cfd71cf1ac2c52e166ae3e0c228bca2f58b78c93ce0b0"
+      },
+      {
+        "id": "992",
+        "stratum": "clinical",
+        "sha256": "053b71bbcf7908518164fc2eb3e536d5c02a88920fc4076b6758995abd70ec14",
+        "text_sha256": "32619544ee5a08fcfcdbf729d5c23ed408278b0fb336f895fe45828910d40017"
+      },
+      {
+        "id": "1022",
+        "stratum": "clinical",
+        "sha256": "dd2d40f0f323c9da1db50ad51529ad12a3e6d2c0d15021a9b3464a6aa33fa297",
+        "text_sha256": "00b0c8ddb371d096d1bc7dc13dfdabf646a5bedc1b6ef5997857479356ad2f2a"
+      },
+      {
+        "id": "1029",
+        "stratum": "clinical",
+        "sha256": "443778215e156b3bb48b353958089dddb019b979bfe9c6065443a8bf04e21390",
+        "text_sha256": "d7c8195db222b06460966b52a9eb5b8bbc8a66af19561ed3feaa881dff3e8cb7"
+      },
+      {
+        "id": "1035",
+        "stratum": "clinical",
+        "sha256": "aa221bfacbcc2f69fd2cd884940cb9b9ab759cad5629915d985d73a10dda50a4",
+        "text_sha256": "5a3ac30218470bace556f9050a8466cfc282944311761de7f0406c18e2f7a47a"
+      },
+      {
+        "id": "1076",
+        "stratum": "clinical",
+        "sha256": "977ad8bfe9d91f9e3aa2d068fa1eb2caff2e365e5fcd9d874c61fa785388283c",
+        "text_sha256": "c9819babe9bae32a03ae6a95447c478c71660488e2b1950913b27b37a1eb71ef"
+      },
+      {
+        "id": "1127",
+        "stratum": "clinical",
+        "sha256": "c0814c0d0d25d54e80669f097a2b612f68a26b894f84597dd53d6ec94060bf37",
+        "text_sha256": "91abff1f8797824c6d5107ff52c8617ca39bbe577ec7840addaa61997c044752"
+      },
+      {
+        "id": "1155",
+        "stratum": "clinical",
+        "sha256": "4ff4748bd7d0202b3f3fddc1facb797fa29a1ff9feaa97c276c2db07892d3492",
+        "text_sha256": "fa6cca4a144d2db7aedc96dfbec45d333d044dba9dcee5588d36cec7a240c241"
+      },
+      {
+        "id": "1162",
+        "stratum": "clinical",
+        "sha256": "95608ad307d68a775af6295517136edef8369b47ab7a734c271a38f05fa9267c",
+        "text_sha256": "9b30fe22f88f38c4bcd6eb0ef169252babb5144fb0f3808ff8a707e1a2454c4b"
+      },
+      {
+        "id": "1203",
+        "stratum": "clinical",
+        "sha256": "bd9147d05b048b0636135d92f3db03493633411d9dcfc503b8d70981a666a148",
+        "text_sha256": "140e5e1a190990373ce2c1a402d08c0222bbd72843cc707020d42d429e097b92"
+      },
+      {
+        "id": "1227",
+        "stratum": "clinical",
+        "sha256": "7b87a5b0f3c0985262a1a753b11a7ee2697840501e2f09f3c03fdef1d014e98d",
+        "text_sha256": "b8597ff3da9c9db75539a7f94bedb71e6d392faa3a3002872abc2a36fc8a1168"
+      },
+      {
+        "id": "1309",
+        "stratum": "clinical",
+        "sha256": "b9e4dce9ea8930218fbe88ad50c749fb41003d23aef5bc1465cf6aeba2565e77",
+        "text_sha256": "e24f3837424a72f792c68fcd10d01a7c9b209bb7123d57f25eee1586896e45c4"
+      },
+      {
+        "id": "1368",
+        "stratum": "clinical",
+        "sha256": "f2e57ea8032027879a8609aa3f84a53bc87e773d1edeb6f0d3df576f8f8371ae",
+        "text_sha256": "30258e2e4a7e23743ad45b62ff05c37b4efa1c53ab903794b798e6ef35b85e3c"
+      },
+      {
+        "id": "1397",
+        "stratum": "clinical",
+        "sha256": "82e1e19bff7def112832c05e810265562b3112f11129266590f89a76ca418917",
+        "text_sha256": "ae9332cf75db618436adea5ea9a716f5cb18f05b1b9004038201ec1caff5e675"
+      },
+      {
+        "id": "1401",
+        "stratum": "clinical",
+        "sha256": "414be3796fcb7ac3c0d143a1cfd0db13d32316001014e25ea7022d48ef197096",
+        "text_sha256": "e1f27edd148db865fd96a96b3e38a44478da77cef06a08740d5170c085b9d88c"
+      },
+      {
+        "id": "1421",
+        "stratum": "clinical",
+        "sha256": "9d9ac171ad134c6c4a4cf18ae9844f47503c03998bcf496f1fb98bddca26c01b",
+        "text_sha256": "bc7b9385b6a0ee91aef3ea7fd08a95d4889b5f25c43d79a7575e38ee033aea89"
+      },
+      {
+        "id": "1444",
+        "stratum": "clinical",
+        "sha256": "a2b984c03537879cf0cd730f8c25ba3e5ee30f50641a85a59884d0bcfb6681ef",
+        "text_sha256": "f94d401a5a8719df5760c840267b7721883db91d23031c6f59dbf5a104f901b4"
+      },
+      {
+        "id": "1450",
+        "stratum": "clinical",
+        "sha256": "215ab500cfc631f23d05246140dace0cd34628838031c41eedb4901a6da5ca34",
+        "text_sha256": "02d4eb7ef961700d1d6944ee9441b7102ab11051efb079f3e1bab9061cdb71e0"
+      },
+      {
+        "id": "1474",
+        "stratum": "clinical",
+        "sha256": "5ddd2a12c93393083eee9fe6bfddb61517e4b472550618590b04e1a6bedcd53a",
+        "text_sha256": "b234d872b157d15c7ba7e4207fa1192b2bc60cda04a1043f8431864e676d30a7"
+      },
+      {
+        "id": "1475",
+        "stratum": "clinical",
+        "sha256": "f4e462264dfe1cc2a5247a5b25eca47c6197647fa223361d7755d6c44dd4bcc2",
+        "text_sha256": "bada47d41987776657368a125c4bf505dda3d6d8377935cb2ad476a400ec72bd"
+      },
+      {
+        "id": "1481",
+        "stratum": "clinical",
+        "sha256": "61ea2dd534d3e3c2da52701cf16baee0e025f48e38947cd294f77fade64bde1b",
+        "text_sha256": "fda41b2226690a3f49c319f0cf2ff99c4f77c955ed30d4b3d454f1cce653d9ee"
+      },
+      {
+        "id": "1495",
+        "stratum": "clinical",
+        "sha256": "4a4363fa2c35f695056d5d1f50e78c040e0f6b7575f441e08cff19821b2fb389",
+        "text_sha256": "9576ebba740bf3fa32cb9e04ceb6e1b2fad4da4a07e4fd2ac526c5ad59a4de08"
+      },
+      {
+        "id": "10",
+        "stratum": "contract",
+        "sha256": "e7680db91708713ab78294d941690473f30de5f55509466599f8f082a9428a43",
+        "text_sha256": "99a01b59561cdec7407823e92b6326a93d23808cf26f4c2974f7af099828aa9a"
+      },
+      {
+        "id": "59",
+        "stratum": "contract",
+        "sha256": "2bf20124eb37c6e53659c8a3f3c9c5ff9d5674b8263bf5fb389990887b38336a",
+        "text_sha256": "3bab03ac97df19b766d5e33f377b5757a5df761198aeb1ad4e798656745fb5fd"
+      },
+      {
+        "id": "78",
+        "stratum": "contract",
+        "sha256": "21807659de7964b589d23e4d8b86fc11a5d188a90803248214f884381ce9eeb1",
+        "text_sha256": "213eedb815eaa21b2da7cf7c56dbdc118746c27f779ac81fb34687c9a8a36547"
+      },
+      {
+        "id": "98",
+        "stratum": "contract",
+        "sha256": "312de77281774f0b72290c71ffef75f9daac7544bfafac223efae2be65e30b5c",
+        "text_sha256": "6d52debf7c6da7097caf8ce7ac83856444ed29ebc04e95864cd2636c978e9225"
+      },
+      {
+        "id": "102",
+        "stratum": "contract",
+        "sha256": "789a4d08084b6d1ff6802ddaee126390dee93a0650df8b119741378a74ca270c",
+        "text_sha256": "f5090063b7f23d215ec842e415fcd3cb9ef1973cfc436fdf7b2686c27ced431b"
+      },
+      {
+        "id": "119",
+        "stratum": "contract",
+        "sha256": "dabdf67c0ebf3be9b819b4c47e7d34ae27ccb7dc10300fe22f2bb3aa98688da2",
+        "text_sha256": "f18a52d44660986a1354ee62d68fb2e0399651505b7fc9b291ea52a653755dec"
+      },
+      {
+        "id": "133",
+        "stratum": "contract",
+        "sha256": "4c161547ae91aed8211fac277aa9eae853ddc8cad447c06f42d1f681e421583e",
+        "text_sha256": "e8af0425db9d2d01b0eede1b762134639eb6840520e7c70d149df4a71990fbdf"
+      },
+      {
+        "id": "156",
+        "stratum": "contract",
+        "sha256": "48ab73ac0c3ca664456eef40f16df356f0af7946754a08294fa55c60fa1fa24e",
+        "text_sha256": "eab372d4612bf9620e79f2439268abee256bab390f4bd1a3df8de4999f04ae5a"
+      },
+      {
+        "id": "163",
+        "stratum": "contract",
+        "sha256": "169ff4154972dd25e573549eb5fcdc27b7d8e0728e37218a26128d69d3f71fa3",
+        "text_sha256": "3e4bfde8e59561b259e7740ec7bf085e38b66a6f68334b6808977e3ddbc0ede8"
+      },
+      {
+        "id": "177",
+        "stratum": "contract",
+        "sha256": "32cd76d2284febb122b335c7ef53df1df317a9258fbe68630f022d722a91e70f",
+        "text_sha256": "7e2b10ab768f39ac54c6b11437611845df35cdf277f66fc4dda606fbeceb8983"
+      },
+      {
+        "id": "218",
+        "stratum": "contract",
+        "sha256": "a3c1b5dac803113f3bb04a125e9a808e71164e9f920b5e2e53792a0d357e782b",
+        "text_sha256": "9bc0e9b263561ec09f2b84093db83e6dbc18960b1a0453a598e4c0bf960e1207"
+      },
+      {
+        "id": "243",
+        "stratum": "contract",
+        "sha256": "8d7033d2fda849d0101b949716e5eea15241560c54c09a7a68dbcba1e07bbbed",
+        "text_sha256": "d94f2cbf3ac77393495c6ab3097c02c12e44010663eae4a2b5a3b10d529665da"
+      },
+      {
+        "id": "266",
+        "stratum": "contract",
+        "sha256": "efbcc672ae6d1beb3b434580bb27962a27c38e54b9badebbbed7ff26e9cab99f",
+        "text_sha256": "fbb1bf0eb13568a5e2ef3dd54669824856f01b24d72461a96c20e5434ee022a7"
+      },
+      {
+        "id": "301",
+        "stratum": "contract",
+        "sha256": "ce0920da4460de2ad3e5e700a7c57d1d7fca635d2fd275ab1bf6365a65eb99b9",
+        "text_sha256": "be1f127c39de20e21a03d413c6fd6537bbd221fa1ce0ac743289b353613d60a1"
+      },
+      {
+        "id": "321",
+        "stratum": "contract",
+        "sha256": "083a43a84c2b05cadc4b31beec2bdb17872f433c35f005759f430aea3840223c",
+        "text_sha256": "daf183cd1d12b01c87088d21098bec70a3a2eae89bcf5df137c657e7d18ee0ff"
+      },
+      {
+        "id": "329",
+        "stratum": "contract",
+        "sha256": "6e243ab7534cc816f148a4e262540bf26967bc077b909fd2b5de4d83ad9bcf08",
+        "text_sha256": "97ac374017b4b7c1e57033e353c51150575af574426bfb012736d82eaddb2abf"
+      },
+      {
+        "id": "337",
+        "stratum": "contract",
+        "sha256": "b8b7056f2811ec877fbec6e6774f5ba57ea3861e828a210e0b577ff01674e82d",
+        "text_sha256": "6b44ffec19b13bd1a0f00905c32ddb7a5cd4b947df1b73140641054899fc41eb"
+      },
+      {
+        "id": "375",
+        "stratum": "contract",
+        "sha256": "958cc409d3950a252c187d6fab15e308a00bee88c4a253477e358b998a6ab300",
+        "text_sha256": "871c39dccace6cdeeaea637cf7fab4b529321160210b13bc23ce9bdfc72fb69a"
+      },
+      {
+        "id": "420",
+        "stratum": "contract",
+        "sha256": "e6fa93ba7f24df90368f7b2e416119e12c91638ff8b771ab96c1d1a386bafca3",
+        "text_sha256": "94bc86e9ebf738716bd558e0b0d5c424a64d00e393b823a3d27990a19262fd69"
+      },
+      {
+        "id": "429",
+        "stratum": "contract",
+        "sha256": "f95e82c17b5fc301ce5dbf94fa0a01bd1e65ebf993dfba2203ab5227945086d2",
+        "text_sha256": "cb10c4e88e6310489cb67ef33a363b1641039e0babb995af0f094a8ed529ee34"
+      },
+      {
+        "id": "434",
+        "stratum": "contract",
+        "sha256": "9a871b114fae011df19edab93ca3b21fc73c6a8c4160061d07d49693aa560b3b",
+        "text_sha256": "a07bc3b53c08e36f95b56284b001d2df9adb78749cff3138e8191dd1e3f4b155"
+      },
+      {
+        "id": "458",
+        "stratum": "contract",
+        "sha256": "f4a76281912677889017cc4fccc27370a9f391af040ecac8796f0145cbd70c26",
+        "text_sha256": "538cbc1ac7b28510f72cbecb25d2f1940a7604ea7894a46c8774e357209563b8"
+      },
+      {
+        "id": "470",
+        "stratum": "contract",
+        "sha256": "04e1c1aabed14a9748071954ad6458e4722ef4f8a42c6a122df9569c0c66f898",
+        "text_sha256": "d8a3402c4c581a9d81415f7f3647a36c24a32d4df2eabf9601068df9f7b9b78a"
+      },
+      {
+        "id": "531",
+        "stratum": "contract",
+        "sha256": "619e884d12f36728b81372acbde6f7a717bfd508dd17f7060ec536cd5cb85033",
+        "text_sha256": "50fefb1d63b0590873202b2050f7d78a694d8319d8332c173b1419ba17084eac"
+      },
+      {
+        "id": "544",
+        "stratum": "contract",
+        "sha256": "ae4e636892b75a5b387ab5ac2d8a81a228dc93dbae422194fbeecc7af9a4e619",
+        "text_sha256": "bab8893187ce18892040203708540a57f2bb2336d7c708d94ded68642dd227de"
+      },
+      {
+        "id": "557",
+        "stratum": "contract",
+        "sha256": "53dccfe0096a3d73271272ec28cfb46350c188e526b4aeaf4cea80891d7fbadb",
+        "text_sha256": "61f083eee11e7510ba31077a60c5d3e61c6248d6aecc8b51ec3f74198b32f65c"
+      },
+      {
+        "id": "607",
+        "stratum": "contract",
+        "sha256": "54a96393f0ca0251f9c7801ed41722ab7406ff4ce0bc217765fa6e89d5102d57",
+        "text_sha256": "df82e0fe89d9bac39b5f8f18cafb3e6b2e2739bf12fe90cb4af67da7cd3c7a6c"
+      },
+      {
+        "id": "610",
+        "stratum": "contract",
+        "sha256": "b85458df45640c21e4f1572508d691e211e8a9e3303c1e65ceea2a9ec09468c4",
+        "text_sha256": "b7051edc8ba586420e5ef342e97ac3ce5fac38a38a7c6e7aa47e0a73a0df5485"
+      },
+      {
+        "id": "652",
+        "stratum": "contract",
+        "sha256": "e4f1137fd0c08e9698df01c672ca7fae7fd3d20efdea48df64b84cf82b50e081",
+        "text_sha256": "97ae65f25803b0ff4d205bd6e3e57a5b6fda12ba897f5b56b81881d5dbf4d718"
+      },
+      {
+        "id": "668",
+        "stratum": "contract",
+        "sha256": "a5fa18b2a4ba853567d4df6ce5cca2649a89d7f29665ddebf2679eb782b1f086",
+        "text_sha256": "f982a14ad4a18da3bb5031c8466668444f93c580bbd2ddcd8e268ce11eee11b9"
+      },
+      {
+        "id": "681",
+        "stratum": "contract",
+        "sha256": "93bab47941b277ceb9fccfa7e3987ce63bddd8efa3a996f53f5a93dd1ec70b64",
+        "text_sha256": "46d81f9c464b24711df72be8bcb42191089b59707cbc9d41e11dfc0d706ebbcc"
+      },
+      {
+        "id": "737",
+        "stratum": "contract",
+        "sha256": "e8e015023b1961015691b4697d6dfac42f6486ca8f1a4a824fbc1b673fd22fea",
+        "text_sha256": "9b95216ebe707a5f263552c6a61b6e3d73ffaa0b31cfe0c75691f5e9e717ea30"
+      },
+      {
+        "id": "738",
+        "stratum": "contract",
+        "sha256": "b4d2c69ca2bc9b300f2f2f65cb9748c517dd045c17f713d6832786c1685e5aeb",
+        "text_sha256": "8591da111afb6e64c52c8de633a6fcb657fbace990c7150d6fedc27fb207aa95"
+      },
+      {
+        "id": "753",
+        "stratum": "contract",
+        "sha256": "c8142388865a17245e337518e00f662038548f3d30e7be03876545c945a5b49e",
+        "text_sha256": "c0b4a04bc3b7499332551c4775904c8b5b95b7763845198c1e9bc820a58e6afa"
+      },
+      {
+        "id": "757",
+        "stratum": "contract",
+        "sha256": "5eb174fbd2890f3ffc6b021bc787a25970c3008cd19de6091231cb1018d9d499",
+        "text_sha256": "6541ce1b4cf3d5f64e78c0bb5eb8957742e2a856515b510fa0cfa197877cda29"
+      },
+      {
+        "id": "784",
+        "stratum": "contract",
+        "sha256": "ed53a219b71c6e9d2ff4e124be116a49ea86aa9973af56b2c1c7269f73b070ff",
+        "text_sha256": "6b2a9632c258f6c85a44e1f46050773b3b90fb2e67328c154551a4f6c1a4dc74"
+      },
+      {
+        "id": "793",
+        "stratum": "contract",
+        "sha256": "881cde6a56b15514db95cdca8faf035a60f84aefaec6526e18478165d5c3de5d",
+        "text_sha256": "300e846511e84a9432d1816f54985122976294db1a9faa305d935b61db89251f"
+      },
+      {
+        "id": "801",
+        "stratum": "contract",
+        "sha256": "1c389d912dec60e3d4a9f147793f736545baf1486f4b4146c9eb459db907a8c0",
+        "text_sha256": "59210de46e0c5bd452598771ed713f688653cae67243b75bdbfb38770fe40314"
+      },
+      {
+        "id": "803",
+        "stratum": "contract",
+        "sha256": "e6a1deec007342af6ef1158f6a852c3fba8bc814bb01ab7c8adb9c4fca61546e",
+        "text_sha256": "b23c286274e6dd900e0af0720d87b2ecf277647f82eb984371d1c941f4201deb"
+      },
+      {
+        "id": "825",
+        "stratum": "contract",
+        "sha256": "c5dc339619bd52be13332127050e9e22b22159d24816869bbf736203a4395c85",
+        "text_sha256": "897aaa07a4fd67bf1605af2bd35b2d39edef9a3cb77ab2172c18c027ded44871"
+      },
+      {
+        "id": "828",
+        "stratum": "contract",
+        "sha256": "c8706cd0cf8f3f9a7f2d3d904fda305badce53faa44df949c81c9b2c425d6497",
+        "text_sha256": "5e0eeaa75f79eda35c856e1ac3b8dc48a8e2e6a9afd204eb66e6b240e4b7be19"
+      },
+      {
+        "id": "841",
+        "stratum": "contract",
+        "sha256": "fa996e37d848b1bbb3cfc7b183a094321c058d859e31a7f85a9fcf7ff2065ba2",
+        "text_sha256": "655acbf9ed002fc1caf08dd24ed0b915925f8101c4e38c5736240eef07cda90b"
+      },
+      {
+        "id": "875",
+        "stratum": "contract",
+        "sha256": "330988ce7f8f6a67768f3616f0e890742e62bb04622a3d98df4d140fb8ba4969",
+        "text_sha256": "b5e7ecca885e6f482a0609fa48f840888fe37c4c5598d3042d0e69beb3a3a9d9"
+      },
+      {
+        "id": "883",
+        "stratum": "contract",
+        "sha256": "90fa962d92386fc93d0291eeb23116e6b77fd6680d2a31025683ebdaf0089e8c",
+        "text_sha256": "67f04477fca28d6efd58b7d1fc6993fb0ba2105a45cb43414153727b2734a553"
+      },
+      {
+        "id": "913",
+        "stratum": "contract",
+        "sha256": "fd133864d97c29734b55216865edbe4010e17d584dcf1dddcfa9992c87309ee1",
+        "text_sha256": "4c849a3884cde46959a0160079106d4e2ee75f1fbd80a0286a6843333cbd9123"
+      },
+      {
+        "id": "914",
+        "stratum": "contract",
+        "sha256": "767572e262caba4c784487d63a92fc4d1cffdf997659e657c86018594b2030b7",
+        "text_sha256": "e666b2634125cfe2a7f303fc720aa0042c0e0958b9fcbab6ae661971743fc649"
+      },
+      {
+        "id": "1034",
+        "stratum": "contract",
+        "sha256": "c1678ec09896d3ba70d9ab51fffae17ccc3b9a095ee233baa0fdb351fc96e499",
+        "text_sha256": "3b6f39126e5e7509ad09f74d0aea762492c95687b2f59e0a17ad15502fbd28bf"
+      },
+      {
+        "id": "1037",
+        "stratum": "contract",
+        "sha256": "d618645158a8c817bce9f2586ace6bbd085a72351d1270eb01bfff4762a54720",
+        "text_sha256": "5c48aa55bdc3f1738e4d26060e4926bf43006140a39b006dccca02ba60e9f59b"
+      },
+      {
+        "id": "1059",
+        "stratum": "contract",
+        "sha256": "b4f1b7b6f31a4acbd9fe13683858f77c3704cba9feb89c6a07efac485cf0f242",
+        "text_sha256": "8a2f2357bb0727474e4174ebf988fd448ed205ae6285efcf1fbb4ae571d5a32c"
+      },
+      {
+        "id": "1060",
+        "stratum": "contract",
+        "sha256": "4cd69666b1e02cca699c8a6c49a86fba31c3cd68c26e6887e5f63320c2efa46e",
+        "text_sha256": "585bc22317cb51facbdfed3a63c232a2b854938786fb9afd80e0a4d8e6f34ec8"
+      },
+      {
+        "id": "1066",
+        "stratum": "contract",
+        "sha256": "7d2574773dc9027ae94993e0f49b4402360446afbb94c35cedbd6e4ec86e7c1f",
+        "text_sha256": "41c00c2aa2a2d924d070d8a34f4284c216dcfa6abfc131624ec87a8d3addc0df"
+      },
+      {
+        "id": "1084",
+        "stratum": "contract",
+        "sha256": "b91b1b080b3a9e7a6baf1cfbf5d7e148b9ddd7f1076e4e59605bc31bf3ee705c",
+        "text_sha256": "c6ed86769872eba8cd4cab2367013e9c857017c0c92b36415e60a5d10b2819c0"
+      },
+      {
+        "id": "1099",
+        "stratum": "contract",
+        "sha256": "3197fd7cadfb3588b6efb86ed4f509218e1618f18c4255ac192a5185c75b9ae4",
+        "text_sha256": "74f0bdcaa826f159ebc1646468b6df029bea1d67641cb67a91c1d38f9726abac"
+      },
+      {
+        "id": "1104",
+        "stratum": "contract",
+        "sha256": "ef93e007367de95f386ffd4edcd9045ad0886c00e4c48e9823250c7ec602777e",
+        "text_sha256": "2f17ef6992842431a3ec1826252ab42f64e27b7de00430c7158fd78af59caa09"
+      },
+      {
+        "id": "1109",
+        "stratum": "contract",
+        "sha256": "499c664b3e49294759401fc0a084d92908ef6f654527740bd8d4b735f7185ba4",
+        "text_sha256": "2f4a1a25b21ed613a9a00f7f7897ae1f1b3a90d06b41b450a69253f7be5255f9"
+      },
+      {
+        "id": "1119",
+        "stratum": "contract",
+        "sha256": "5299f7ed4442292b2e09ac9b55a9cf3d785a51d0693e47e6cc3bc321f45b0005",
+        "text_sha256": "2e8d51f9a5863ec9497ad3ae19b2e4a62230b41beb327fe9890e710754836b1d"
+      },
+      {
+        "id": "1137",
+        "stratum": "contract",
+        "sha256": "bf53fbeb851d69b3960749237529c9a6ebcf5aa0f67fa3cb5e8482c9d740ee56",
+        "text_sha256": "7f47248811a81c19b288d88149875efae020508e1d98fe08375772f8d94327e8"
+      },
+      {
+        "id": "1141",
+        "stratum": "contract",
+        "sha256": "f2d0bec8faaef240024978a3644472e9aa021f1578a8f946ab6cecd08a90b932",
+        "text_sha256": "d1067b7ae20c01fca68b37da36b4822bd7791a54107197cc718d463e45b57eca"
+      },
+      {
+        "id": "1183",
+        "stratum": "contract",
+        "sha256": "692c6176c8c68cd17dd16744ee28d287bbb05bf2e71654c1706ba0076243b8f1",
+        "text_sha256": "10aaf42fabae9775ad157916775cebc8073228fe208e0b8d2b0e40d9d6367a78"
+      },
+      {
+        "id": "1222",
+        "stratum": "contract",
+        "sha256": "c88e9f849f3dadc86ee5544af6de343c4930a42cd4b33d175b9dd313a8cd0e42",
+        "text_sha256": "da802b3043665aa064ae4b7b4bdea15aba664364fba44cc7f0a15cd2ce388a12"
+      },
+      {
+        "id": "1230",
+        "stratum": "contract",
+        "sha256": "37d59e1bd4a67c2c5bf3a244b196611ad0938868a1e9a91d68f92fb3ba37626a",
+        "text_sha256": "059acb5a001ec8a739645ff546ee2766350fec7d3acc5a8b6155a6e15b804086"
+      },
+      {
+        "id": "1243",
+        "stratum": "contract",
+        "sha256": "29e930eadb094ead924dfcd93e4cff19037bc189a848c7a9d33b3ff5c945dce6",
+        "text_sha256": "795cc692e8b4eb1ee6ad09890f75baaf2e7e14e468d3b83d541067ce44cb8c02"
+      },
+      {
+        "id": "1246",
+        "stratum": "contract",
+        "sha256": "d57ca7ab33f3e8fd2d4590d96f1c2f9231b5f5ce3ba6e99c3e23156d1a6fccde",
+        "text_sha256": "b1291de4be11246593eb8de24097287dfae9ec59f664e7d797f8bd2eea8a3600"
+      },
+      {
+        "id": "1270",
+        "stratum": "contract",
+        "sha256": "e64faabe8c275bb83542ba240c40c6b7f0aa9154e4ebeb64160e48b251fe2d7b",
+        "text_sha256": "48babe77b67bf2146840af84082d6c40613c9279d9d9ce152ecea1389308cbbc"
+      },
+      {
+        "id": "1289",
+        "stratum": "contract",
+        "sha256": "317ffc924ba16b697b990f99cf6af785d7ebe793cc1b5b1047dd400b5432a192",
+        "text_sha256": "702a31914517e4b99afc0d21d4425d33478e0544289d7ab0a24c069f0dd49b76"
+      },
+      {
+        "id": "1304",
+        "stratum": "contract",
+        "sha256": "b750b72e48ecc4d29b083899d7338beace9fe39828ce99a4514c86f6666d0265",
+        "text_sha256": "e8635575eb5c535421c1b3d644b75fa4d70cfea5a9561509a98aa4f4af3540d0"
+      },
+      {
+        "id": "1322",
+        "stratum": "contract",
+        "sha256": "8157c91c4f0e06200cd3239e6147527c92eba9d66fcb8043cdc5de53248823a7",
+        "text_sha256": "df2290ca1b0d97bb038ad34f4b055d76953d396ae0c462429b9672d59d5d5230"
+      },
+      {
+        "id": "1325",
+        "stratum": "contract",
+        "sha256": "87dce4276f45f456fcb08ffdbdf7e033015301d0bf9cdaa80bfadfe0cf85f42a",
+        "text_sha256": "c713901908df98abdf643e7f6a6b624c4134d55f431f20df21d01ac8e56a032d"
+      },
+      {
+        "id": "1333",
+        "stratum": "contract",
+        "sha256": "79b0757621a08c470c6175de5037dcbf9651dd813a3f5b183a8d585c0cb2c153",
+        "text_sha256": "b4ffa8a1481dc369aadbe6176cdce5418cf043de9d799ca5de4d3a22b15fcda5"
+      },
+      {
+        "id": "1346",
+        "stratum": "contract",
+        "sha256": "74854dd9f7dffccdc1e602864253e5d9f4edc11fd29451f83e780eecfca320f1",
+        "text_sha256": "2a3049ad9b190d86018b0a43c5ca9d5cc9a270a0395dc3a9b9ef62892255ce7c"
+      },
+      {
+        "id": "1357",
+        "stratum": "contract",
+        "sha256": "884d32e16f6e8f6d37e35ec8910caed3cf5fbb7d174c96a2e1757436eb56d294",
+        "text_sha256": "ffae99027d87eb1e9e5af4eaca55e94441d6bf827103235a800f91387fb42b9e"
+      },
+      {
+        "id": "1383",
+        "stratum": "contract",
+        "sha256": "4a14fe2fb64ddd2e08a254bb4be21e6651ec07c5534b43c4f0cdbef36eb8273c",
+        "text_sha256": "0e89a79df7cef4f601b69e492dc4b74d2b602d70e22f9abdc493d0f7909d871d"
+      },
+      {
+        "id": "1394",
+        "stratum": "contract",
+        "sha256": "7b17ef2f3de220170a19dbd24e5411c34794c7f297cdd85cf2db6fc72f7ce611",
+        "text_sha256": "588a3e29968b948aef464a7688f2efd9ef2fbfdaababc9f0005b5783f8e023c2"
+      },
+      {
+        "id": "1408",
+        "stratum": "contract",
+        "sha256": "7eafea6ce3a873f872293b1bf0dcb6dced8d511c4f00f29fbf8f4fe872463bb7",
+        "text_sha256": "9359e7f6ebc3277ab4d4c5d5a6d3c7c178b85e9d7e47d2c5b5a066dfa7a15b6d"
+      },
+      {
+        "id": "1487",
+        "stratum": "contract",
+        "sha256": "c4798e89b3c339da26d2cd29eded6d652b4e9662f1d94218f866392991d786ab",
+        "text_sha256": "06d4211dd77efe0cc3fb269780d90f47e2fb4185d79f440f71ea252b53df1947"
+      },
+      {
+        "id": "28",
+        "stratum": "declaration",
+        "sha256": "4aa832d0ba2badef79428cb5c02a08ea6597da539f53dd8de7288e70b6db1583",
+        "text_sha256": "5c718ad30c866af4318f8b37269d2ba46f9ae5fd4ed32774751ce71575ddf50f"
+      },
+      {
+        "id": "39",
+        "stratum": "declaration",
+        "sha256": "c3e21ff01791c51974510c3e5f928867795654bce8e859a50385b9c954e57a68",
+        "text_sha256": "eb7de20617c65e4bf9170c7a8384d747a65b7281bd26948cf5ae897594bc824c"
+      },
+      {
+        "id": "54",
+        "stratum": "declaration",
+        "sha256": "e8f90b9345ebdcf9aa42476886cf5e19b4d46a0576c8f8d0563a5c3942cf8c40",
+        "text_sha256": "7668ae3444cb87b9bd229ff7c8efa4b0d257cb44e8faf2f692c8f5848cbbc7c6"
+      },
+      {
+        "id": "67",
+        "stratum": "declaration",
+        "sha256": "e62dfc6aab0b075fe8e30a04580fc7640a679f78c521f351e2e26e4f85814e7b",
+        "text_sha256": "1fad9980d9b8a6f8ac92c8413c7f6f08d572b6b2ba1f88ba061961c6a38f5418"
+      },
+      {
+        "id": "97",
+        "stratum": "declaration",
+        "sha256": "46c586ee287d761a64d7b2ef208620dee8e21124b49a5713ec8eb63174539c4e",
+        "text_sha256": "06dea5c7cebc6fbca194b5bcdd6c85771f8f8b12fde3e0abf03b329fad9dda4c"
+      },
+      {
+        "id": "103",
+        "stratum": "declaration",
+        "sha256": "aea4a307f3529d59b8911716db24c1fd1c4071065180adfc0bba465ddc83ad07",
+        "text_sha256": "caa4908abdda1dedea583b6cf2fe094ef4d62f37b6c1bcc96c7d5c2256a7822f"
+      },
+      {
+        "id": "129",
+        "stratum": "declaration",
+        "sha256": "31b8d29db1da239d47eed268111acf8784e2b62fa34e02b3d55220f7785c48ba",
+        "text_sha256": "e167269cb14a89ec131044a1e5faff9f2729e1d7b166ba0f0071f2850c55fad8"
+      },
+      {
+        "id": "166",
+        "stratum": "declaration",
+        "sha256": "66db84f979aa05b4034e21341506435845f83ee8247117089c6ff42dd7ab22fb",
+        "text_sha256": "7789e25773d0e11108efeb46157e0ead82417198af5078c5ea2b5b272b8135de"
+      },
+      {
+        "id": "182",
+        "stratum": "declaration",
+        "sha256": "8aacb3d5983d3b88fb33287c5e5ac1e1f9b4cd4212352b078ec82e1dadf2b3a4",
+        "text_sha256": "62f234c6adc704db83039d09724858873d79726b33d9c24ffa1e007a1faf8fb3"
+      },
+      {
+        "id": "196",
+        "stratum": "declaration",
+        "sha256": "7c3e9da5dcbfa160b91ed381d3607c0d6cd42a88c1067781c17aed2450887562",
+        "text_sha256": "af65cc276d145de8919d8bb447be013bbad6b47b2294081f30c65d918cd8440f"
+      },
+      {
+        "id": "207",
+        "stratum": "declaration",
+        "sha256": "a046b60175bb0cce5c34e8a99f5f47a2cfb805953a45be1c2bcef4abce7c532a",
+        "text_sha256": "ea792f8ba80f3c059ece597265bcf84aee4a52730fd2c5ef60834c45e830d6e1"
+      },
+      {
+        "id": "212",
+        "stratum": "declaration",
+        "sha256": "568e4da0a3b057004a01c81b305672ac26300aa69a88be3a74bef91205c3d418",
+        "text_sha256": "8a3fd137aa6a0d28428249745df8e781d44af505b27e880d330d9cf2d883e9ea"
+      },
+      {
+        "id": "219",
+        "stratum": "declaration",
+        "sha256": "83b7230edbd179c56e9b38f49f2dc9aad67debc0cc7cf68c5c04b157cf367c46",
+        "text_sha256": "6ed19cd5a0f8a043f500f264d798b7af6976efd9e839142bc0224a3d3d6c2c6b"
+      },
+      {
+        "id": "230",
+        "stratum": "declaration",
+        "sha256": "29059b77005a86af7909a0bc58440b8071d156574e61a859e1e88a2a73d5a21f",
+        "text_sha256": "709d944ae28b92edc26574b77418c28eb9a1ad8e98d8db104359800442654188"
+      },
+      {
+        "id": "231",
+        "stratum": "declaration",
+        "sha256": "249b7a4f7df805520226e5e3efe5c6c634f7f56a202ab46c75ed5ad9f43bd710",
+        "text_sha256": "b842a9f200016933483cd2205ea60be878c21c12db5c05d912c17e2bff741dc5"
+      },
+      {
+        "id": "244",
+        "stratum": "declaration",
+        "sha256": "b1cb4424e2b09e8fb19eed0de2025f0c9513e387390fa82b5c4aef08b0be1aa4",
+        "text_sha256": "688f9cb3268f7f6e95fd81502d02cc4239ae277326e0b41db3446683f62d7a9b"
+      },
+      {
+        "id": "256",
+        "stratum": "declaration",
+        "sha256": "3f04bff11bdaf5f67d1b21b9bc4a06ca6a9515cfdd71172d72260770143f2ff7",
+        "text_sha256": "54e99e463a9ecb51d909d70a80ea85e8397771f32cc9ee4b87d09243bf261a0f"
+      },
+      {
+        "id": "311",
+        "stratum": "declaration",
+        "sha256": "3fdb5febb4dfd1de8497ef83a6ec335c1aee00b27701a693da237859d10be0c9",
+        "text_sha256": "e99c3ee8d5583938ee2e59d53ce3ac098588be4933957b92d990fd758eca5601"
+      },
+      {
+        "id": "312",
+        "stratum": "declaration",
+        "sha256": "8cfd87508b960050c2f12c3ceef76474bc116cd58ea41f09a7c6948719f2099a",
+        "text_sha256": "96967c8cb7e9fce097bb5c19b6bfc3e46f13a22ab57d3a1e0318e1fb4e1ad875"
+      },
+      {
+        "id": "340",
+        "stratum": "declaration",
+        "sha256": "8cab7914a817cae3eaf1e36ca94281548d85e88f4b79ab01514feab62c84c64d",
+        "text_sha256": "307d78d4a6421144719da39b0316966b0c5102e77113c468c5ab77d28e924521"
+      },
+      {
+        "id": "350",
+        "stratum": "declaration",
+        "sha256": "1fd50b4cee01ab53677cb280ae0078195a8c912a1c0c8d55b2116268495720b4",
+        "text_sha256": "b7946a90603968df548e9b9b28aa0d4ca799f65394de42bc36158809e0606ab3"
+      },
+      {
+        "id": "368",
+        "stratum": "declaration",
+        "sha256": "005c1424b1750442662574832b0c5aed9f7cc0fb2b887307be9a1ad4b336ec81",
+        "text_sha256": "ee2bc6c811e6f9847c74c204bbbfaf78bcde93b90b496f1e9ca3aabb45f058b4"
+      },
+      {
+        "id": "393",
+        "stratum": "declaration",
+        "sha256": "a1319ea0f10ba8df2237b07a63f6e433e23c279a02ff0bbf48ec33eed5c69f31",
+        "text_sha256": "cd5f6d388211f971e6eb99291fd4dffc1782798a1053aaeae13c38691cc441f0"
+      },
+      {
+        "id": "452",
+        "stratum": "declaration",
+        "sha256": "b6922d3371056932ac875c5cafd121e671739a30b9238ee813940620ada5dbfb",
+        "text_sha256": "2cd086f44291f24ad149c6b2c5bcdc1d26fdcc1aeb4d012f146afad356795862"
+      },
+      {
+        "id": "472",
+        "stratum": "declaration",
+        "sha256": "11470725c5df0686e8442b62bdd539eb885ae883b41e8431168d5c18285821d2",
+        "text_sha256": "89ae7ae7d844abc873a31fc2ea78e28b56ef4fa70b2639359d0964122fd1a057"
+      },
+      {
+        "id": "476",
+        "stratum": "declaration",
+        "sha256": "3c5a01030ac54f6a11630b54b733eda4dea5705933c0834e3fac8966f2fb6bca",
+        "text_sha256": "0edc743831f072ba002512fa1cc823fd38a3d9a95a1c394c384c374e6e0e7eb8"
+      },
+      {
+        "id": "482",
+        "stratum": "declaration",
+        "sha256": "3db1a244598abb9edf07231c3711de501ac81574de06a5ee31b4b4eecad2b8c7",
+        "text_sha256": "fda0393f12b3d218b9c2bcc10104c166c5679de50e93d761e45729c46ea14e17"
+      },
+      {
+        "id": "512",
+        "stratum": "declaration",
+        "sha256": "b70842dbd1ff7c0215500b447b8dd7ed4bf0828d9a6ed9a47d8d6b634ab71ec0",
+        "text_sha256": "1958380385f611dbcf993f0828de1ee13f4253e20beca85142fa07ed83106cb6"
+      },
+      {
+        "id": "529",
+        "stratum": "declaration",
+        "sha256": "b28e54a4fdb222f9f02cc4396107a704a62e1c321f9d4767c7832b5d01bd97de",
+        "text_sha256": "f0e3708091be61aa1683f96b610b996749f6bb42ecca66fe880081da8d719b8f"
+      },
+      {
+        "id": "530",
+        "stratum": "declaration",
+        "sha256": "8040e082133f8e74653f87fbb53476d7e9d49c92bef1a240a9f1c02003f88b08",
+        "text_sha256": "56cd2413da3f7332ae31a2488744d96e7c269f22d82a0fc6a0163bd643a1347e"
+      },
+      {
+        "id": "550",
+        "stratum": "declaration",
+        "sha256": "4688b873919d1c85872f90dee4e34bfcd5eb9e4c45558494a9d24beabb53ebaf",
+        "text_sha256": "6312ea9d80a436915727191f6059625cff626f9c98c4c3f971303d16e3264716"
+      },
+      {
+        "id": "560",
+        "stratum": "declaration",
+        "sha256": "d278d761dbc43a9f2028fd07ac56278fe434dddaf4fe2a61444360144c737cca",
+        "text_sha256": "8360e5126c07f59c2d9bb8ab51b64c5b63aff3aa8ce45fd07dfa3a1c381db666"
+      },
+      {
+        "id": "563",
+        "stratum": "declaration",
+        "sha256": "46c5e248a017859f493b110879f53a9b795c4da57610d02fd6185608cf180f18",
+        "text_sha256": "abf4ff3249a52d7d62840dd0d5f453ae0268f1d7eed9b4962ef37b517ca99161"
+      },
+      {
+        "id": "603",
+        "stratum": "declaration",
+        "sha256": "d77f40c77a310e9ff5b68ddf30eebf5fbe2fcb5cb4d1c55ece94e7a13bd369ea",
+        "text_sha256": "b27a7621e59c40c00c3b4d8726b20ad49b2ce827a93d1702b92a48ddc496c741"
+      },
+      {
+        "id": "649",
+        "stratum": "declaration",
+        "sha256": "d8235d1244f900dc9ff182cde4710a743bc500d6d962ba2047dab92c999b5294",
+        "text_sha256": "b9090a59322f4293f25103adc8f2b50dd374fbb9be9e22847117d6a35109443c"
+      },
+      {
+        "id": "655",
+        "stratum": "declaration",
+        "sha256": "a3700d5da9082b88f2424df6b1aa6fc2dced19099633fa970477750e8d5a7841",
+        "text_sha256": "4d7567b34678b9646135dc0c8e9935a8bea31cabc8567ea8905309418dcc7b88"
+      },
+      {
+        "id": "667",
+        "stratum": "declaration",
+        "sha256": "da03b2d589f4eb7fda2cf05a9499bbe5d8c6961fbacf0c622aee4cd9d5a61724",
+        "text_sha256": "52f755e494de21030faf4c6228c742d13fc90ce35d12dd4fa5a4f49d97c4bfd2"
+      },
+      {
+        "id": "684",
+        "stratum": "declaration",
+        "sha256": "7832b9b552ce2c7076891c129c3b02a62bee88976d750e02082d5571909d3418",
+        "text_sha256": "08cf48c17dcc1781ece9fc0111d8c974b72c26962371b643db1286e3539a1a70"
+      },
+      {
+        "id": "691",
+        "stratum": "declaration",
+        "sha256": "097c3fa5b22876a361e01b1f1264a84b5edc8d6babff0c5f2c35574c0500373a",
+        "text_sha256": "20534ba5269eb4286d2215aa630b834be99fbe186f90a3abd9ac6a45e1367b15"
+      },
+      {
+        "id": "706",
+        "stratum": "declaration",
+        "sha256": "e5cddcd4000850b2800b40e5377d3ac2f265add529e618fd9e7fc5069cad1b60",
+        "text_sha256": "7f6092daeadc20bc5b2806e134a9c249c6e750c0d50bffe9067938e3343c3b20"
+      },
+      {
+        "id": "725",
+        "stratum": "declaration",
+        "sha256": "e6ccdc79ab4a7f91711c139fd34d11f99bed9d751ebbcf2bbae6038302e5e730",
+        "text_sha256": "308d3cc2dfaf197f606ac661841c9abee337861b0352555d4e37fbd3379c3084"
+      },
+      {
+        "id": "729",
+        "stratum": "declaration",
+        "sha256": "cd2baf31ac5039c09fce5f4b0ff838677a34af7b1486dfcc0e46a79d52591ff9",
+        "text_sha256": "868b9cd564ca692a4e786f70fc3a69d1f1dc3047eb1d9c7ec3ddd700e1f5857a"
+      },
+      {
+        "id": "796",
+        "stratum": "declaration",
+        "sha256": "6a10cb6f694a4d04f4bdd812b8722285c0f840d3539799ccf5893896e3ab4d00",
+        "text_sha256": "9171d56d2f2e0b342a6040f0a54d5241ab263ad50190955cdfffa7bbe2581c88"
+      },
+      {
+        "id": "817",
+        "stratum": "declaration",
+        "sha256": "5fdcad972a49657cd04b8e2c0f8bb5144fd8e4737ca2090d2d9803b946a09711",
+        "text_sha256": "92e5497d2624f4c2c42475eb8a8020d7fde6d795b2b49dedb14613ddd73526e2"
+      },
+      {
+        "id": "833",
+        "stratum": "declaration",
+        "sha256": "431b21a8962aaff267c5f907c1a035fd2efa4d12eb47bdd83dbafbcc3b3550ca",
+        "text_sha256": "a0d87064517596ec1fac2916e72d263e751e5996363d627084c09e643c729218"
+      },
+      {
+        "id": "845",
+        "stratum": "declaration",
+        "sha256": "f22ea365f0511a3f34a1a8f20543d04df9138c168b98cf4dcbea17d31cf87a27",
+        "text_sha256": "0cce2fbf87a488ecfd9499a89716bd094b8638fcef9e0d3af692613005ead224"
+      },
+      {
+        "id": "858",
+        "stratum": "declaration",
+        "sha256": "80c96acfb02f8d620b5e07be7fda62f14949b566d75debf61d48c17dee04faa4",
+        "text_sha256": "d613e0cfb00b71eab0066365e2e7e94ad4500f634b3fca4b916d9f2c9d8a646d"
+      },
+      {
+        "id": "889",
+        "stratum": "declaration",
+        "sha256": "4b289ef298a52de592b6570bbfdd5066e1aef49d8e650d843312551f9125b0cc",
+        "text_sha256": "759a23b6b362699c4f37d847d393386da9ad80de7587df0f19c22bf7e20cae61"
+      },
+      {
+        "id": "915",
+        "stratum": "declaration",
+        "sha256": "fe56475f90512fbf07920ba7a217999d9006b6ec59b40747714061d1c121673c",
+        "text_sha256": "0bbc323f4a3d63ea7f0fca67f29f4d8be452a1396f98788ee3f4b5c1b214c07f"
+      },
+      {
+        "id": "967",
+        "stratum": "declaration",
+        "sha256": "28128b2dbf96cb9274c2bb2aec5b125af31ebff04ead60e0f28731a1475738b9",
+        "text_sha256": "3f285c65dcb7966815a0dc68a24762434a6e0a7ab5dd39193e111497651ad968"
+      },
+      {
+        "id": "969",
+        "stratum": "declaration",
+        "sha256": "5d8cc4eb113d049f4985518e05da498ed545a06065db84eacf3a20e4054e48f8",
+        "text_sha256": "dba19fe4c730cae9ed1b4e9d6244eed0a15b6d0a25fe8d537ba6b67dfc9462c5"
+      },
+      {
+        "id": "982",
+        "stratum": "declaration",
+        "sha256": "5f0bfd2cdbe2c93cc61b5b3da7cb622828df91d2e6cdaf1848cfbd2d859081d7",
+        "text_sha256": "e451bfd32db091844370c64d93cfbcf1b328f8284b6e907bc4031b86501d4c74"
+      },
+      {
+        "id": "1063",
+        "stratum": "declaration",
+        "sha256": "b715bfac99a11549a2c248921b14ee18bff7108e6ae28e88fd6b23ff6f77f39b",
+        "text_sha256": "fe6319e8145771c13ef3b51bcd2accbb763a224b7fefee9a90307a16f8270fd1"
+      },
+      {
+        "id": "1113",
+        "stratum": "declaration",
+        "sha256": "18b995f2bd4686141fa884ad1f01ae9de7cea7d4ea7339889cd81dbd92c4bedb",
+        "text_sha256": "ae6dc38ae6638826e2e05557447896afd8352cbf7f7ff392c739f3c521fdb976"
+      },
+      {
+        "id": "1122",
+        "stratum": "declaration",
+        "sha256": "9b49354e52efd871d7e80514eeed24fd9859650f1f390f4e11065b07d15fa812",
+        "text_sha256": "194e0e74493bbf277274481502e7bc7a144b6cedb14f4b60d23431a113d2c796"
+      },
+      {
+        "id": "1133",
+        "stratum": "declaration",
+        "sha256": "505b4f9abdee7e6026c5160ed6cd3e2052ad0443c4bd002dfdcad9d4bb27ca1f",
+        "text_sha256": "95b2d3d1a7063b6b9363c440ffeb79c5a1de3a4bacb1ee830430838bae57fdb1"
+      },
+      {
+        "id": "1138",
+        "stratum": "declaration",
+        "sha256": "ec1fce85ca36ae83b5975eff37086a12f2785aeff863d4ad8ba8f97196a42989",
+        "text_sha256": "acc937341b695a6999f9440f64edfa05be2c33aa7f34709412f51b91ce06a5df"
+      },
+      {
+        "id": "1160",
+        "stratum": "declaration",
+        "sha256": "c481d90b137ee20a482bcce659c701997355df2e808271c872a7457140a67c13",
+        "text_sha256": "ff605f803a4808911714ed79fb501974998a03a57f45edbc650d4bc494c4659a"
+      },
+      {
+        "id": "1168",
+        "stratum": "declaration",
+        "sha256": "1a819bf4269db01eea63b589b739ae3578d81a4a86145e6ff5bca753da7c54c5",
+        "text_sha256": "cd75a469473c37d942fb2f2480d1ca65ada97b0b6aecd8abb0edac8c26f86862"
+      },
+      {
+        "id": "1241",
+        "stratum": "declaration",
+        "sha256": "a018533173b08936892b66bb23735a10f062900359aa6b17f60adb86a39e1860",
+        "text_sha256": "40e2cf94c9ddcb4a3c98930d27b8adbe6a831b00f11e3d2e9b5e3d93cef4d18e"
+      },
+      {
+        "id": "1245",
+        "stratum": "declaration",
+        "sha256": "ba9212becaa67e654121128f77b3d0833f6ec6f0c67fc035350d775a0b9e710d",
+        "text_sha256": "0ed33ef7e8ec1bd7519776930c61d4833d9b021024f2c304709394964180657c"
+      },
+      {
+        "id": "1252",
+        "stratum": "declaration",
+        "sha256": "9c912046b7e8e8a91f5bbec7b188d53b7cd2eaad6e019633ab6a22390c84121c",
+        "text_sha256": "1ec82942d191dbf57aa5008cfb97109850019823177e9528ee4eb9046b598b2b"
+      },
+      {
+        "id": "1257",
+        "stratum": "declaration",
+        "sha256": "7f07396d41b7abece76e088f1eb37f1c07725ea2a4f03e21d8489cfc6ff24e01",
+        "text_sha256": "ff0a4c2d31d0c3ca65ff8861f485f17b2f2465cdc04eb08ae6073330d05f1e7b"
+      },
+      {
+        "id": "1262",
+        "stratum": "declaration",
+        "sha256": "99902ffc99535cbdd37f1cf0022670868a9269c5a547ea747b53a41f8b2c427a",
+        "text_sha256": "e31483f3e4d72a6e4f46c672d38f945fad4ec0dc4616ae33c77f660aca8b71aa"
+      },
+      {
+        "id": "1272",
+        "stratum": "declaration",
+        "sha256": "247c1b5c241154189eef1571c33b64517dc3c31d42444b05116f0419226a750a",
+        "text_sha256": "1e632a3b42414900bf1b6d0198206d4d382819c744526caf307381280c7f76b9"
+      },
+      {
+        "id": "1281",
+        "stratum": "declaration",
+        "sha256": "aef42a2df37aa041d7e013a91a3cf1e7326e9c59d57d8fae1f75b50decbe66d0",
+        "text_sha256": "330dfea737f6f7c426397a7a01d216895932698b0531764d80c66912bb2bdf29"
+      },
+      {
+        "id": "1339",
+        "stratum": "declaration",
+        "sha256": "f9c047026cfe856bdb0c81de8cc827b40a6d4ffe317a52e15f10c41f5900f927",
+        "text_sha256": "7883656b809ad2b0288851989bbef7107f9fee25353b46e271dc7282ab8c0e12"
+      },
+      {
+        "id": "1352",
+        "stratum": "declaration",
+        "sha256": "f6d928c602539062734ab8ba69ecac24c2d73149c7acd5dccfdeb9fa20eefe8f",
+        "text_sha256": "92427ccd70836b6aaceabdfca0f03516077d7676862217fb9f9caab6163faef3"
+      },
+      {
+        "id": "1365",
+        "stratum": "declaration",
+        "sha256": "4839fa105da5718bbeb0647b734ed6b07dc24ece9e7586f377e8cf0c88fd11b1",
+        "text_sha256": "d4654b6f601c351172bf1502f7816571dff851295873bdef9c29e7c8371deed0"
+      },
+      {
+        "id": "1384",
+        "stratum": "declaration",
+        "sha256": "0742d4cbb812ca370ad95b1da6a6b7986b522749c57ba502c2c996479de60c20",
+        "text_sha256": "74ec71c8cfd7e1b3fc8a525dfb67f7fff2f3410ea90f79b1502c14edeaa5771d"
+      },
+      {
+        "id": "1416",
+        "stratum": "declaration",
+        "sha256": "fe0a02b321cdfc68156103bfa01c820b6dc62af5dc94534d5076ded29e083cd4",
+        "text_sha256": "8ee3e6c062701f378aeefad006c471ce814bcb503503159a973f8b0bc3ddab21"
+      },
+      {
+        "id": "1417",
+        "stratum": "declaration",
+        "sha256": "b81706229f7c5b49fb222949abb5985fa7149104039bd54e605fc3311104672d",
+        "text_sha256": "65765cbecc90713374904a58a9681bf6cb5706b47c6ad10a25829b1ff8dce832"
+      },
+      {
+        "id": "1426",
+        "stratum": "declaration",
+        "sha256": "e42a217328098d5d68c0dfec6285855a6eaf64139d2eca93a2ce693dc2c739a9",
+        "text_sha256": "006f8f23282819bd4af816f365341adc900e5d4abd6dbc64c12c8a4046648049"
+      },
+      {
+        "id": "1429",
+        "stratum": "declaration",
+        "sha256": "bdf61ac605c7e353560c7a64426787ad93eb5a99c0de716eef35fb85086a12d7",
+        "text_sha256": "82a48a67831e08390c95d7dacc28b9733b75e1b7675e47aa9fa00739d2ec6c52"
+      },
+      {
+        "id": "1464",
+        "stratum": "declaration",
+        "sha256": "f48b29a237ee80103eaca53c1e27b3fc5756c2752dda862f181e7c9784febc1f",
+        "text_sha256": "3e0fd97ccd2dc14bbe134ee34f6ef03d6af06a4b0acab50c3ed19d53327ca9ec"
+      }
+    ]
+  }
+}
