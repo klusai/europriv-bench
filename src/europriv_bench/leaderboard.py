@@ -140,6 +140,10 @@ def classify_contamination(adapter: str | None, config: str | None) -> str:
     established — e.g. a same-language but different-generator config, or a baseline whose training
     data we don't know).
     """
+    # Gateway dev gold has pending family/subject/translation overlap review. Do not
+    # inherit a generic clean-held-out claim, including for stock orchestration baselines.
+    if config == "gateway-traffic-v1" or (config and config.startswith("gateway-traffic-v1/")):
+        return UNKNOWN
     # RES-100 uses eight-language KP + TAB train, unlike the older three-language KP family.
     # Do not inherit source/subject-disjointness assertions that this run has not audited.
     if adapter == "kp-deid-moe-res100":
