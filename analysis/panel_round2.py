@@ -103,35 +103,37 @@ def prepare(source, scratch):
     print("Prepared 300/language, author-review exclusion verified; blind files omit gold", flush=True)
 
 
-def run(scratch, stage, offline=False):
+def run(scratch, stage, offline=False, *, models=MODELS, freeze=frozen, request_builder=request, initial=None):
     samples = json.loads((scratch / "samples.json").read_text())
-    expected = {**frozen(), "sample_sha256": digest(samples)}
+    expected = {**freeze(), "sample_sha256": digest(samples)}
     if json.loads((scratch / "frozen.json").read_text()) != expected:
         raise ValueError("Frozen protocol/prompts/sample changed")
     client = RetryBudgetClient(scratch / "cache", expected["protocol_sha256"], offline)
     output_path = scratch / f"stage-{stage}.json"
-    output = {c: {m: {} for m in MODELS} for c in samples}
+    output = json.loads(json.dumps(initial)) if initial is not None else {c: {m: {} for m in models} for c in samples}
     errors, proposals = [], {}
     a = json.loads((scratch / "stage-a.json").read_text())["annotations"] if stage == "b" else None
     if a is not None:
-        if any(set(a[c][m]) != {r["id"] for r in rows} for c, rows in samples.items() for m in MODELS):
+        if any(set(a[c][m]) != {r["id"] for r in rows} for c, rows in samples.items() for m in models):
             raise ValueError("Stage B requires all 300 valid A outputs per family/language")
         proposals = {
-            c: {r["id"]: candidates(r, [a[c][m][r["id"]] for m in MODELS]) for r in rows} for c, rows in samples.items()
+            c: {r["id"]: candidates(r, [a[c][m][r["id"]] for m in models]) for r in rows} for c, rows in samples.items()
         }
         atomic_json(scratch / "candidates.json", proposals)
     try:
         for c, rows in samples.items():
             for start in range(0, len(rows), 5):
                 batch = rows[start : start + 5]
-                for model in MODELS:
+                for model in models:
+                    if initial is not None and all(r["id"] in initial[c][model] for r in batch):
+                        continue
                     payload = [{"id": r["id"], "language": r["language"], "text": r["text"]} for r in batch]
                     if stage == "b":
                         payload = [
                             {"id": r["id"], "text": r["text"], "gold": r["spans"], "candidates": proposals[c][r["id"]]}
                             for r in batch
                         ]
-                    raw = client.complete(request(model, payload, stage))
+                    raw = client.complete(request_builder(model, payload, stage))
                     try:
                         parsed = parse_response(raw)
                         if set(parsed) != {r["id"] for r in batch}:

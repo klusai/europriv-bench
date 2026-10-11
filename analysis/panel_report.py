@@ -71,17 +71,17 @@ def bootstrap(rows, annotations, models=MODELS) -> dict:
     return stats
 
 
-def adjudicate(row, proposals, reviews):
+def adjudicate(row, proposals, reviews, models=MODELS):
     """Only unanimous availability + >=2 approvals; preserve conflicting originals."""
-    votes = {m: {v["id"]: v for v in reviews.get(m, {}).get(row["id"], {}).get("votes", [])} for m in MODELS}
+    votes = {m: {v["id"]: v for v in reviews.get(m, {}).get(row["id"], {}).get("votes", [])} for m in models}
     approved, records = [], []
-    complete = all(set(votes[m]) == {p["id"] for p in proposals} for m in MODELS)
+    complete = all(set(votes[m]) == {p["id"] for p in proposals} for m in models)
     for proposal in proposals:
-        choices = [votes[m].get(proposal["id"]) for m in MODELS]
+        choices = [votes[m].get(proposal["id"]) for m in models]
         majority = all(v is not None for v in choices) and sum(v["approve"] for v in choices) >= 2
         if majority:
             approved.append(proposal)
-        records.append({**proposal, "majority": majority, "votes": dict(zip(MODELS, choices))})
+        records.append({**proposal, "majority": majority, "votes": dict(zip(models, choices))})
     spans = span_set(row["spans"])
     for p in approved:
         item = (p["start"], p["end"], p["label"])
@@ -109,15 +109,15 @@ def adjudicate(row, proposals, reviews):
     }
 
 
-def evaluate(config, population, rows, annotations, reviews, errors):
-    full = [r for r in rows if all(r["id"] in annotations.get(m, {}) for m in MODELS)]
-    stats = bootstrap(full, annotations)
+def evaluate(config, population, rows, annotations, reviews, errors, models=MODELS):
+    full = [r for r in rows if all(r["id"] in annotations.get(m, {}) for m in models)]
+    stats = bootstrap(full, annotations, models=models)
     discrepancies, overlays, approved, conflicts = [], [], 0, 0
     b_complete = len(full) == 300
     for row in rows:
         row_id = row["id"]
-        present = [m for m in MODELS if row_id in annotations.get(m, {})]
-        for model in MODELS:
+        present = [m for m in models if row_id in annotations.get(m, {})]
+        for model in models:
             if model not in present:
                 reason = next(
                     (e["error"] for e in errors if e["config"] == config and e["model"] == model and e["id"] == row_id),
@@ -150,8 +150,8 @@ def evaluate(config, population, rows, annotations, reviews, errors):
             for artifact in annotations[model][row_id]["artifacts"]:
                 discrepancies.append({"id": row_id, "kind": "artifact", "model": model, "details": artifact})
         if len(present) == 3:
-            ps = candidates(row, [annotations[m][row_id] for m in MODELS])
-            adj = adjudicate(row, ps, reviews)
+            ps = candidates(row, [annotations[m][row_id] for m in models])
+            adj = adjudicate(row, ps, reviews, models=models)
             b_complete &= adj["complete"]
             approved += adj["approved"]
             conflicts += adj["conflict"]
@@ -172,7 +172,7 @@ def evaluate(config, population, rows, annotations, reviews, errors):
     for failure in decode["failures"]:
         discrepancies.append({"id": failure["id"], "kind": "decode", "details": failure})
     decode["ci95"] = list(wilson_interval(decode["consistent"], decode["subjects"]))
-    artifacts = sum(sum(bool(annotations[m][r["id"]]["artifacts"]) for m in MODELS) >= 2 for r in full)
+    artifacts = sum(sum(bool(annotations[m][r["id"]]["artifacts"]) for m in models) >= 2 for r in full)
     stats.update(
         execution_errors=dict(Counter(e["error"] for e in errors if e["config"] == config)),
         config=config,
@@ -185,7 +185,7 @@ def evaluate(config, population, rows, annotations, reviews, errors):
         decode=decode,
         majority_gold_errors=approved,
         edit_conflicts=conflicts,
-        valid_per_model={m: len(annotations.get(m, {})) for m in MODELS},
+        valid_per_model={m: len(annotations.get(m, {})) for m in models},
         artifacts={
             "n": len(full),
             "flagged": artifacts,
