@@ -11,6 +11,7 @@ dependencies = [
     "pydantic>=2.0,<3",
     "seqeval>=1.2,<2",
     "huggingface-hub>=0.25,<2",
+    "regex>=2024.11",
 ]
 
 [project.optional-dependencies]

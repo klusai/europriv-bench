@@ -212,11 +212,14 @@ class PrivacyFilterAdapter(BaseAdapter):
 
     name = "privacy-filter"
 
-    def __init__(self, model_id: str = "openai/privacy-filter", scheme: str = "openai") -> None:
+    def __init__(self, model_id: str = "openai/privacy-filter", scheme: str = "openai", *,
+                 decoding_rule: str | None = None, country: str | None = None) -> None:
         import os
 
         self.model_id = model_id
         self.scheme = scheme
+        self.decoding_rule = decoding_rule
+        self.country = country
         self._pipe = None
         # Batching is the dominant speedup (~4x at 32 on CPU) — far more than device choice.
         self._batch_size = int(os.environ.get("EUROPRIV_BATCH_SIZE", "32"))
@@ -252,7 +255,16 @@ class PrivacyFilterAdapter(BaseAdapter):
                 {"label": e["entity_group"], "start": int(e["start"]), "end": int(e["end"])}
                 for e in ents
             ]
-            out.append(entities_to_kp_bioes(text, mapped, self.scheme))
+            if self.decoding_rule is not None:
+                from .crosswalk import to_kp
+                from .decoding import postprocess_spans
+
+                mapped = [{**e, "label": to_kp(self.scheme, e["label"])} for e in mapped]
+                mapped = [e for e in mapped if e["label"] is not None]
+                mapped = postprocess_spans(text, mapped, rule=self.decoding_rule, country=self.country)
+                out.append(kp_entities_to_bioes(text, mapped))
+            else:
+                out.append(entities_to_kp_bioes(text, mapped, self.scheme))
         return out
 
 
@@ -266,8 +278,9 @@ class Res100MoEAdapter(PrivacyFilterAdapter):
 
     name = "kp-deid-moe-res100"
 
-    def __init__(self, model_id: str, *, scheme: str = "kp", batch_size: int = 16) -> None:
-        super().__init__(model_id, scheme)
+    def __init__(self, model_id: str, *, scheme: str = "kp", batch_size: int = 16,
+                 decoding_rule: str | None = None, country: str | None = None) -> None:
+        super().__init__(model_id, scheme, decoding_rule=decoding_rule, country=country)
         self._batch_size = batch_size
 
     def _pipeline(self):  # pragma: no cover - real checkpoint integration
@@ -302,10 +315,21 @@ class Res100MoEAdapter(PrivacyFilterAdapter):
                     if kp not in labels:
                         raise ValueError(f"Unknown KP label: {kp}")
                     mapped.append({**span, "label": kp})
+            raw_native = native
+            if self.decoding_rule is not None:
+                from .decoding import postprocess_spans
+
+                # Native labels are retained for auditing; validation uses the KP crosswalk.
+                decoded = [{**s, "label": s["label"] if self.scheme == "kp"
+                            else to_kp(self.scheme, s["label"]) or s["label"]} for s in native]
+                native = postprocess_spans(text, decoded, rule=self.decoding_rule, country=self.country)
+                mapped = [s for s in native if s["label"] in labels]
             intervals = [[s["start"], s["end"]] for s in native]
             receipts.append({
                 "tags": kp_entities_to_bioes(text, mapped), "intervals": intervals, "native": native,
                 "output": _mask_spans(text, intervals),
+                **({"raw_native": raw_native, "decoding_rule": self.decoding_rule}
+                   if self.decoding_rule is not None else {}),
             })
         return receipts
 

@@ -55,7 +55,9 @@ def pct(value, interval):
     )
 
 
-def report(scratch: Path, *, splice=False):
+def report(scratch: Path, *, splice=False, decoded=False):
+    adapter = "kp-deid-moe-gateway-decoded" if decoded else "kp-deid-moe-gateway"
+    artifact = "gateway-decoding" if decoded else "gateway-moe"
     availability = read(scratch / "availability.json")
     configs = availability["configs"]
     files = sorted((scratch / "results").glob("seed*--*.json"))
@@ -164,7 +166,8 @@ def report(scratch: Path, *, splice=False):
         for seed in seeds
     }
     output = {
-        "candidate": "gateway-trained MoE; default operating point",
+        "candidate": "gateway-trained MoE; dev-selected boundary decoding" if decoded
+        else "gateway-trained MoE; default operating point",
         "seeds": seeds,
         "seed_count": len(seeds),
         "contract_pin": read(scratch / "contract-pin.json"),
@@ -196,19 +199,20 @@ def report(scratch: Path, *, splice=False):
     board_path = ROOT / "baselines/leaderboard.json"
     board = read(board_path)
     for seed in seeds:
-        board["entries"][f"kp-deid-moe-gateway::klusai/kp-deid-moe-gateway-seed{seed}"] = [
+        board["entries"][f"{adapter}::klusai/{adapter}-seed{seed}"] = [
             r for r in rows if r["training_seed"] == seed
         ]
     write(board_path, board)
-    write(ROOT / "analysis/gateway-moe-comparison.json", output)
+    write(ROOT / f"analysis/{artifact}-comparison.json", output)
     lines = [
-        "# Gateway-trained MoE: default operating point",
+        "# Gateway-trained MoE: dev-selected boundary decoding" if decoded
+        else "# Gateway-trained MoE: default operating point",
         "",
         f"Contract v3: **{contracts['3']['verdict']}**. Contract v2: **{contracts['2']['verdict']}**.",
         "",
         f"Training seeds: {seeds}; seed count {len(seeds)}. CPU fp32, saved 512-token window, no threshold tuning.",
         "Leak CIs are 95% Wilson; F1 and utility CIs are 2,000-cluster bootstrap, RNG seed 100.",
-        "Paired candidate-minus-comparator CIs and both verdicts: `analysis/gateway-moe-comparison.json`.",
+        f"Paired candidate-minus-comparator CIs and both verdicts: `analysis/{artifact}-comparison.json`.",
         "",
         "| Config | Seed | Clusters | Subjects | F1 % [95% CI] | V2 leak % [95% CI] | Non-PII removed % [95% CI] |",
         "|---|---:|---:|---:|---:|---:|---:|",
@@ -265,5 +269,5 @@ def report(scratch: Path, *, splice=False):
                 f"{pct(utility['candidate_minus_comparator'], utility['ci95'])} | "
                 f"{item['contracts']['2']['numerical_pass']} | {item['contracts']['3']['numerical_pass']} |"
             )
-    (ROOT / "docs/gateway-moe-results.md").write_text("\n".join(lines) + "\n")
+    (ROOT / f"docs/{artifact}-results.md").write_text("\n".join(lines) + "\n")
     return output
