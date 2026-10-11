@@ -159,8 +159,8 @@ def predict(scratch, split, name, configs=None):
                      packages={**ident["packages"], **{k: importlib.metadata.version(k)
                                                       for k in ("spacy", "presidio-analyzer", "en_core_web_lg")}})
     elif name == "shield":
-        pin = read(ESTATE / "res127-train/shield-pin.json")
-        adapter = ShieldAdapter(base_url="http://127.0.0.1:11447", pin=pin)
+        pin = read(scratch / "shield-pin.json")
+        adapter = ShieldAdapter(base_url="http://127.0.0.1:11449", pin=pin)
         ident.update(service_pin_sha256=adapter.client.pin_sha256)
     else:
         path = model_path(name)
