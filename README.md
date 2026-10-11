@@ -63,6 +63,10 @@ via the crosswalk in `taxonomy.py`, register it in `adapters.BUILDERS`. Planned 
 GLiNER-PII, MAPA, Presidio, mDeBERTa/XLM-R. (Piiranha-v1 is **CC-BY-NC-ND** → baseline-only,
 never a base model or redistributed artifact.)
 
+The `shield` adapter calls the exact kOS Shield HTTP service, with a reviewed
+configuration pin and row provenance. It stays distinct from stock `presidio`.
+See [local setup, language fallback and resumable scoring](docs/shield-baseline.md).
+
 ## Submit your model to the leaderboard
 
 EuroPriv-Bench is an open, neutral scorekeeper: anyone can land a system on the public board

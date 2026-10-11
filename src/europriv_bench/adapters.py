@@ -123,6 +123,13 @@ class BaseAdapter:
     name: str = "base"
     model_id: str = "base"
 
+    def prepare(self, languages: Sequence[str]) -> None:
+        """Select evaluation context; fixed-language adapters keep their existing behavior."""
+
+    def provenance(self) -> dict:
+        """Additional configuration bound to this result row."""
+        return {}
+
     def predict_tags(self, texts: Sequence[str]) -> list[list[str]]:
         """DETECTION: return a BIOES tag sequence (KP label space) per input text."""
         raise NotImplementedError(f"{self.name}: detection not implemented")
@@ -604,6 +611,51 @@ class PresidioAdapter(BaseAdapter):
         return out
 
 
+class ShieldAdapter(BaseAdapter):
+    """The kOS Shield HTTP service, distinct from stock local Presidio."""
+
+    name = "shield"
+    SHIELD_TO_KP = {
+        **PresidioAdapter.PRESIDIO_TO_KP,
+        "ORGANIZATION": "ORG_PARTY",
+        "NL_POSTAL_CODE": "ADDRESS",
+        "NL_BSN": "NATIONAL_ID",
+        "ID_DOCUMENT": "NATIONAL_ID",
+        # Cadastral parcels locate property; abbreviations have no reliable KP type.
+        "NL_CADASTRAL_PARCEL": "ADDRESS",
+    }
+
+    def __init__(self, base_url: str | None = None, pin: dict | None = None, batch_size: int = 32) -> None:
+        from .shield import ShieldClient
+
+        self.client = ShieldClient(base_url, pin, batch_size)
+        self.model_id = self.client.model_id
+
+    def prepare(self, languages: Sequence[str]) -> None:
+        if len(languages) != 1:
+            raise ValueError("Shield needs exactly one evaluation language")
+        self.client.language = languages[0]
+
+    def predict_tags(self, texts: Sequence[str]) -> list[list[str]]:
+        results = self.client.analyze(list(texts))
+        return [
+            kp_entities_to_bioes(text, [
+                {"start": item["start"], "end": item["end"], "label": self.SHIELD_TO_KP[item["entity_type"]]}
+                for item in result["items"] if item["entity_type"] in self.SHIELD_TO_KP
+            ])
+            for text, result in zip(texts, results, strict=True)
+        ]
+
+    def anonymize(self, texts: Sequence[str]) -> list[str]:
+        return [result["text"] for result in self.client.analyze(list(texts))]
+
+    def pseudonymize(self, texts: Sequence[str]) -> list[dict[str, str]]:
+        raise NotImplementedError("Shield baseline pins replace operators, not pseudonymization")
+
+    def provenance(self) -> dict:
+        return {"service_provenance": {**self.client.provenance(), "entity_mapping": self.SHIELD_TO_KP.copy()}}
+
+
 # Builder registry: adapter key (CLI --adapter) -> zero-arg factory.
 BUILDERS: dict[str, type[BaseAdapter]] = {
     "dummy": DummyAdapter,
@@ -615,6 +667,7 @@ BUILDERS: dict[str, type[BaseAdapter]] = {
     "spacy": SpacyAdapter,
     "kp-model": KpModelAdapter,
     "presidio": PresidioAdapter,
+    "shield": ShieldAdapter,
 }
 
 

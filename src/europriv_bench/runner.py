@@ -150,6 +150,7 @@ def _run_anonymization(
         "taxonomy_version": TAXONOMY_VERSION,
         "dataset": {"hf_id": spec.dataset.hf_id, "config": spec.dataset.config, "split": spec.dataset.split},
         "timestamp": timestamp,
+        **adapter.provenance(),
     }
 
 
@@ -195,6 +196,7 @@ def run_spec(
         if limit is not None:
             texts, gold_tags = texts[:limit], gold_tags[:limit]
 
+    adapter.prepare(spec.languages)
     if spec.task is Task.ANONYMIZATION:
         return _run_anonymization(spec, adapter, rows, texts, gold_tags, timestamp, limit)
 
@@ -259,4 +261,5 @@ def run_spec(
         "taxonomy_version": TAXONOMY_VERSION,
         "dataset": {"hf_id": spec.dataset.hf_id, "config": spec.dataset.config, "split": spec.dataset.split},
         "timestamp": timestamp,
+        **adapter.provenance(),
     }
