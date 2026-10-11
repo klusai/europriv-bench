@@ -189,12 +189,13 @@ def config_status_for(config: str | None) -> str:
 def annotate_row(row: dict) -> dict:
     """Return ``row`` with schema-3 markers filled in (idempotent; preserves existing values).
 
-    ``contamination`` is derived from ``(adapter, dataset.config)`` when absent; ``config_status``
+    ``contamination`` uses the adapter and dataset.eval_config (or config) when absent; ``config_status``
     is derived from the config (``real-external-gold`` for TAB ECHR, else ``dev``). Never overwrites
     a value already present, so a future curated promotion to ``citable-validated`` (KLU-27) — or an
     explicit real-gold tag set at run time — survives re-aggregation.
     """
-    config = (row.get("dataset") or {}).get("config")
+    dataset = row.get("dataset") or {}
+    config = dataset.get("eval_config") or dataset.get("config")
     if "contamination" not in row:
         row["contamination"] = classify_contamination(row.get("adapter"), config)
     if "config_status" not in row:

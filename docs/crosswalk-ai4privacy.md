@@ -15,6 +15,17 @@ off-by-one).
 
 ## Source
 
+- **RES-101 repair (2026-10-11):** the `ai4privacy-openpii-*-v1` configs were never available
+  from the published `klusai/europriv-bench` dataset. The YAMLs now load Ai4Privacy's actual
+  `default` / `validation` source at a pinned parquet revision using `hf_hub_download` and
+  local pyarrow reads. `dataset.eval_config` retains the language-specific evaluation identity
+  for contamination classification; `dataset.config` records the actual HF config.
+  See [the source manifest](ai4privacy-openpii-manifest.yaml) for licence, URLs and file checksums.
+- The repaired slice selects the **first 400 source candidates per language**, excludes and
+  counts whitespace-token collisions without replacements, and fails on other malformed gold.
+  It yields **3,985 documents across ten languages** (15 exclusions). Kept-row unmapped-label
+  counts and excluded UIDs travel in the score provenance. This differs from the historical
+  locally curated 400-row slices and 80-row scores below; those are not paired comparisons.
 - **Repo:** `ai4privacy/pii-masking-openpii-1m` — the verified-clean CC-BY-4.0 **open core**
   (1.43M rows, 23 EU languages, 19 PII classes). License verified live 2026-06-07; see the
   `klusai-datasets` manifest `conf/ai4privacy_openpii_manifest.yaml`.

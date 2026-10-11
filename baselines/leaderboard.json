@@ -1438,6 +1438,190 @@
         "timestamp": "2026-06-02T03:58:51.839492+00:00"
       },
       {
+        "spec": "PII Detection — Czech (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "cs"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-mdeberta-280m",
+        "n": 399,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.4442553191489362,
+            "recall": 0.41330166270783847,
+            "f1": 0.42821985233798193,
+            "ci_low": 0.4105946175788737,
+            "ci_high": 0.44642024226628474
+          },
+          "entity_f2": {
+            "precision": 0.4442553191489362,
+            "recall": 0.41330166270783847,
+            "f2": 0.41914244419463625,
+            "ci_low": 0.4011315617552436,
+            "ci_high": 0.43771245968768885
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-cs-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 399,
+            "excluded_token_collision_uids": [
+              20590853
+            ],
+            "unmapped_labels_kept_rows": {
+              "AGE": 151,
+              "SEX": 85,
+              "GENDER": 86,
+              "TITLE": 174
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "dd82be9653049e7aa6cebebcb4f34c49891e6eaa035f1058a876d835b7d54e78"
+        },
+        "timestamp": "2026-10-11T05:45:06.800306+00:00",
+        "model_revision": "bc977796e2002e8ab045664618ed8372781896bd",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
+        "spec": "PII Detection — Dutch (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "nl"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-mdeberta-280m",
+        "n": 399,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.3574346405228758,
+            "recall": 0.33358749523446435,
+            "f1": 0.34509958588049694,
+            "ci_low": 0.32826230260468503,
+            "ci_high": 0.3625993426007859
+          },
+          "entity_f2": {
+            "precision": 0.3574346405228758,
+            "recall": 0.33358749523446435,
+            "f2": 0.3380989180834621,
+            "ci_low": 0.3207489280367297,
+            "ci_high": 0.35560943719047344
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-nl-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 399,
+            "excluded_token_collision_uids": [
+              21783321
+            ],
+            "unmapped_labels_kept_rows": {
+              "TITLE": 213,
+              "AGE": 156,
+              "GENDER": 80,
+              "SEX": 80
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "447f7257bb081026e0629ae277ab48d2387843c2f396da36bd8031b43f71bd6c"
+        },
+        "timestamp": "2026-10-11T05:45:36.944678+00:00",
+        "model_revision": "bc977796e2002e8ab045664618ed8372781896bd",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
         "spec": "PII Detection — Dutch (general)",
         "task": "detection",
         "languages": [
@@ -1524,6 +1708,191 @@
         "timestamp": "2026-06-02T04:21:24.829288+00:00"
       },
       {
+        "spec": "PII Detection — Finnish (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "fi"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-mdeberta-280m",
+        "n": 399,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.38544698544698547,
+            "recall": 0.3510034078000757,
+            "f1": 0.36741973840665876,
+            "ci_low": 0.35186432868601986,
+            "ci_high": 0.38321458883957715
+          },
+          "entity_f2": {
+            "precision": 0.38544698544698547,
+            "recall": 0.3510034078000757,
+            "f2": 0.3573907009021513,
+            "ci_low": 0.3417016329455195,
+            "ci_high": 0.37398451482938033
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-fi-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 399,
+            "excluded_token_collision_uids": [
+              21267311
+            ],
+            "unmapped_labels_kept_rows": {
+              "GENDER": 90,
+              "SEX": 90,
+              "TITLE": 217,
+              "AGE": 144
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "32bb8210b86e4a2ab6f323ca8ca29c974453c31e42a55eef7e106cc9fc6e1bdb"
+        },
+        "timestamp": "2026-10-11T05:45:21.418317+00:00",
+        "model_revision": "bc977796e2002e8ab045664618ed8372781896bd",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
+        "spec": "PII Detection — French (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "fr"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-mdeberta-280m",
+        "n": 398,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.35556417215975183,
+            "recall": 0.3422918999626726,
+            "f1": 0.34880182578927343,
+            "ci_low": 0.33172147141724,
+            "ci_high": 0.36743497278134696
+          },
+          "entity_f2": {
+            "precision": 0.35556417215975183,
+            "recall": 0.3422918999626726,
+            "f2": 0.344866491162091,
+            "ci_low": 0.3281268957448213,
+            "ci_high": 0.3629143036050876
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-fr-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 398,
+            "excluded_token_collision_uids": [
+              21317022,
+              21317288
+            ],
+            "unmapped_labels_kept_rows": {
+              "TITLE": 214,
+              "AGE": 145,
+              "GENDER": 79,
+              "SEX": 82
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "92fb6cec630f777457435e9f5d796c4676771ba0e449cda188d454c6aed1acf7"
+        },
+        "timestamp": "2026-10-11T05:45:26.846335+00:00",
+        "model_revision": "bc977796e2002e8ab045664618ed8372781896bd",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
         "spec": "PII Detection — French (general)",
         "task": "detection",
         "languages": [
@@ -1565,6 +1934,98 @@
           "split": "test"
         },
         "timestamp": "2026-06-02T04:21:24.829288+00:00"
+      },
+      {
+        "spec": "PII Detection — German (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "de"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-mdeberta-280m",
+        "n": 399,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.3101871101871102,
+            "recall": 0.2918622848200313,
+            "f1": 0.30074581737552913,
+            "ci_low": 0.28418194196953905,
+            "ci_high": 0.3185068362305033
+          },
+          "entity_f2": {
+            "precision": 0.3101871101871102,
+            "recall": 0.2918622848200313,
+            "f2": 0.29535196769340405,
+            "ci_low": 0.27874185272587293,
+            "ci_high": 0.3129431617972132
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-de-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 399,
+            "excluded_token_collision_uids": [
+              20696092
+            ],
+            "unmapped_labels_kept_rows": {
+              "AGE": 155,
+              "GENDER": 108,
+              "TITLE": 166,
+              "SEX": 77
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "47f2dede3ca98dc70c8f1d6a6fc95b11cd61134510aae7b5aa7278bfae663d80"
+        },
+        "timestamp": "2026-10-11T05:45:11.226379+00:00",
+        "model_revision": "bc977796e2002e8ab045664618ed8372781896bd",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
       },
       {
         "spec": "PII Detection — German (general)",
@@ -1610,6 +2071,190 @@
         "timestamp": "2026-06-02T04:21:24.829288+00:00"
       },
       {
+        "spec": "PII Detection — Greek (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "el"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-mdeberta-280m",
+        "n": 397,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.3546562228024369,
+            "recall": 0.3347022587268994,
+            "f1": 0.3443904500316924,
+            "ci_low": 0.3266988630103317,
+            "ci_high": 0.36201926810235413
+          },
+          "entity_f2": {
+            "precision": 0.3546562228024369,
+            "recall": 0.3347022587268994,
+            "f2": 0.3385113806280113,
+            "ci_low": 0.3210693816456621,
+            "ci_high": 0.3564879776970605
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-el-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 397,
+            "excluded_token_collision_uids": [
+              20850928,
+              20851537,
+              20852476
+            ],
+            "unmapped_labels_kept_rows": {
+              "AGE": 154,
+              "SEX": 76,
+              "GENDER": 87,
+              "TITLE": 178
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "8d8019285bb2f874f831a7b85100681c3fdda6efd576bb731e7b8aa18260ea6b"
+        },
+        "timestamp": "2026-10-11T05:45:16.635625+00:00",
+        "model_revision": "bc977796e2002e8ab045664618ed8372781896bd",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
+        "spec": "PII Detection — Hungarian (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "hu"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-mdeberta-280m",
+        "n": 400,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.30195048762190546,
+            "recall": 0.2925145348837209,
+            "f1": 0.2971576227390181,
+            "ci_low": 0.28214254875736877,
+            "ci_high": 0.3128666879903535
+          },
+          "entity_f2": {
+            "precision": 0.30195048762190546,
+            "recall": 0.2925145348837209,
+            "f2": 0.2943542489395934,
+            "ci_low": 0.2790944134169803,
+            "ci_high": 0.30995568391479633
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-hu-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 400,
+            "excluded_token_collision_uids": [],
+            "unmapped_labels_kept_rows": {
+              "AGE": 162,
+              "SEX": 85,
+              "GENDER": 105,
+              "TITLE": 217
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "8ce29fdfe7b4e8ea691a49307984b82d51ed79fe399e21709ff5284ae54f51a4"
+        },
+        "timestamp": "2026-10-11T05:45:32.287921+00:00",
+        "model_revision": "bc977796e2002e8ab045664618ed8372781896bd",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
         "spec": "PII Detection — Italian (general)",
         "task": "detection",
         "languages": [
@@ -1653,6 +2298,190 @@
         "timestamp": "2026-06-02T04:21:24.829288+00:00"
       },
       {
+        "spec": "PII Detection — Polish (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "pl"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-mdeberta-280m",
+        "n": 397,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.35242121445042274,
+            "recall": 0.32890961262553803,
+            "f1": 0.34025974025974026,
+            "ci_low": 0.32247741780079486,
+            "ci_high": 0.35919322354115424
+          },
+          "entity_f2": {
+            "precision": 0.35242121445042274,
+            "recall": 0.32890961262553803,
+            "f2": 0.33335756870728517,
+            "ci_low": 0.3162036551315914,
+            "ci_high": 0.3513182120958781
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-pl-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 397,
+            "excluded_token_collision_uids": [
+              21834091,
+              21835048,
+              21836294
+            ],
+            "unmapped_labels_kept_rows": {
+              "TITLE": 203,
+              "AGE": 148,
+              "SEX": 95,
+              "GENDER": 80
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "fbecc697909ab7d4e03d65757d890d095a707e36952750e814d6723d790ea615"
+        },
+        "timestamp": "2026-10-11T05:45:41.989280+00:00",
+        "model_revision": "bc977796e2002e8ab045664618ed8372781896bd",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
+        "spec": "PII Detection — Romanian (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-mdeberta-280m",
+        "n": 400,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.3553495558130552,
+            "recall": 0.3367496339677892,
+            "f1": 0.34579966171772225,
+            "ci_low": 0.32953643262922916,
+            "ci_high": 0.3623932559636685
+          },
+          "entity_f2": {
+            "precision": 0.3553495558130552,
+            "recall": 0.3367496339677892,
+            "f2": 0.34031219945254126,
+            "ci_low": 0.3247094011664865,
+            "ci_high": 0.35627832520201974
+          }
+        },
+        "contamination": "unknown",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-ro-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 400,
+            "excluded_token_collision_uids": [],
+            "unmapped_labels_kept_rows": {
+              "TITLE": 198,
+              "SEX": 100,
+              "AGE": 169,
+              "GENDER": 98
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "4fd204d4d98db7958ee53b62dc9ac7ebd52ebf7d81c4aee5969402b380766a4f"
+        },
+        "timestamp": "2026-10-11T05:45:47.037491+00:00",
+        "model_revision": "bc977796e2002e8ab045664618ed8372781896bd",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
         "spec": "PII Detection — Spanish (general)",
         "task": "detection",
         "languages": [
@@ -1694,6 +2523,100 @@
           "split": "test"
         },
         "timestamp": "2026-06-02T04:21:24.829288+00:00"
+      },
+      {
+        "spec": "PII Detection — Swedish (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "sv"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-mdeberta-280m",
+        "n": 397,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.38199233716475095,
+            "recall": 0.3626773372135322,
+            "f1": 0.3720843440940474,
+            "ci_low": 0.35480496311454185,
+            "ci_high": 0.39006482301773804
+          },
+          "entity_f2": {
+            "precision": 0.38199233716475095,
+            "recall": 0.3626773372135322,
+            "f2": 0.36638247831838894,
+            "ci_low": 0.3488099408571126,
+            "ci_high": 0.38403257122860984
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-sv-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 397,
+            "excluded_token_collision_uids": [
+              22146597,
+              22147112,
+              22147205
+            ],
+            "unmapped_labels_kept_rows": {
+              "TITLE": 213,
+              "AGE": 176,
+              "GENDER": 99,
+              "SEX": 80
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "dcdae5adcd8fda846983f683ffa662ea5209445e4b81ee28e6daaf222a75f1b0"
+        },
+        "timestamp": "2026-10-11T05:45:51.722069+00:00",
+        "model_revision": "bc977796e2002e8ab045664618ed8372781896bd",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
       }
     ],
     "kp-model::klusai/kp-deid-xlmr-560m": [
@@ -2384,6 +3307,190 @@
         "timestamp": "2026-10-11T04:23:10.159933+00:00"
       },
       {
+        "spec": "PII Detection — Czech (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "cs"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 399,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.47592463363572923,
+            "recall": 0.26999208234362626,
+            "f1": 0.3445314473351856,
+            "ci_low": 0.32497960302242457,
+            "ci_high": 0.36546647053102504
+          },
+          "entity_f2": {
+            "precision": 0.47592463363572923,
+            "recall": 0.26999208234362626,
+            "f2": 0.29557077229782436,
+            "ci_low": 0.2772822645297107,
+            "ci_high": 0.3149222001940364
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-cs-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 399,
+            "excluded_token_collision_uids": [
+              20590853
+            ],
+            "unmapped_labels_kept_rows": {
+              "AGE": 151,
+              "SEX": 85,
+              "GENDER": 86,
+              "TITLE": 174
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "dd82be9653049e7aa6cebebcb4f34c49891e6eaa035f1058a876d835b7d54e78"
+        },
+        "timestamp": "2026-10-11T05:46:04.815484+00:00",
+        "model_revision": "af6635cb3db84c88da91aae71289227240d81912",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
+        "spec": "PII Detection — Dutch (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "nl"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 399,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.4346648612051456,
+            "recall": 0.2447579107891727,
+            "f1": 0.3131707317073171,
+            "ci_low": 0.29473559932890075,
+            "ci_high": 0.33202362381497924
+          },
+          "entity_f2": {
+            "precision": 0.4346648612051456,
+            "recall": 0.2447579107891727,
+            "f2": 0.2681928314813268,
+            "ci_low": 0.2519785566271387,
+            "ci_high": 0.28548734759905997
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-nl-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 399,
+            "excluded_token_collision_uids": [
+              21783321
+            ],
+            "unmapped_labels_kept_rows": {
+              "TITLE": 213,
+              "AGE": 156,
+              "GENDER": 80,
+              "SEX": 80
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "447f7257bb081026e0629ae277ab48d2387843c2f396da36bd8031b43f71bd6c"
+        },
+        "timestamp": "2026-10-11T05:46:47.114923+00:00",
+        "model_revision": "af6635cb3db84c88da91aae71289227240d81912",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
         "spec": "PII Detection — Dutch (general)",
         "task": "detection",
         "languages": [
@@ -2470,6 +3577,191 @@
         "timestamp": "2026-10-11T04:22:24.596751+00:00"
       },
       {
+        "spec": "PII Detection — Finnish (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "fi"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 399,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.4268385140257771,
+            "recall": 0.21317682695948503,
+            "f1": 0.28434343434343434,
+            "ci_low": 0.2676523030971772,
+            "ci_high": 0.3028301591347729
+          },
+          "entity_f2": {
+            "precision": 0.4268385140257771,
+            "recall": 0.21317682695948503,
+            "f2": 0.23689304047799373,
+            "ci_low": 0.22191562658757266,
+            "ci_high": 0.2529988966551532
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-fi-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 399,
+            "excluded_token_collision_uids": [
+              21267311
+            ],
+            "unmapped_labels_kept_rows": {
+              "GENDER": 90,
+              "SEX": 90,
+              "TITLE": 217,
+              "AGE": 144
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "32bb8210b86e4a2ab6f323ca8ca29c974453c31e42a55eef7e106cc9fc6e1bdb"
+        },
+        "timestamp": "2026-10-11T05:46:25.856136+00:00",
+        "model_revision": "af6635cb3db84c88da91aae71289227240d81912",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
+        "spec": "PII Detection — French (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "fr"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 398,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.4544287548138639,
+            "recall": 0.2642777155655095,
+            "f1": 0.33419872551333485,
+            "ci_low": 0.3145667682179583,
+            "ci_high": 0.35513569521501603
+          },
+          "entity_f2": {
+            "precision": 0.4544287548138639,
+            "recall": 0.2642777155655095,
+            "f2": 0.2884145347889849,
+            "ci_low": 0.27075266468369336,
+            "ci_high": 0.3071731132370764
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-fr-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 398,
+            "excluded_token_collision_uids": [
+              21317022,
+              21317288
+            ],
+            "unmapped_labels_kept_rows": {
+              "TITLE": 214,
+              "AGE": 145,
+              "GENDER": 79,
+              "SEX": 82
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "92fb6cec630f777457435e9f5d796c4676771ba0e449cda188d454c6aed1acf7"
+        },
+        "timestamp": "2026-10-11T05:46:33.039143+00:00",
+        "model_revision": "af6635cb3db84c88da91aae71289227240d81912",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
         "spec": "PII Detection — French (general)",
         "task": "detection",
         "languages": [
@@ -2511,6 +3803,98 @@
           "split": "test"
         },
         "timestamp": "2026-10-11T04:22:44.994970+00:00"
+      },
+      {
+        "spec": "PII Detection — German (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "de"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 399,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.4334038054968288,
+            "recall": 0.24061032863849766,
+            "f1": 0.30943396226415093,
+            "ci_low": 0.29252235831408013,
+            "ci_high": 0.32611547352318304
+          },
+          "entity_f2": {
+            "precision": 0.4334038054968288,
+            "recall": 0.24061032863849766,
+            "f2": 0.2641071888688482,
+            "ci_low": 0.24812345754735457,
+            "ci_high": 0.27944505029791195
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-de-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 399,
+            "excluded_token_collision_uids": [
+              20696092
+            ],
+            "unmapped_labels_kept_rows": {
+              "AGE": 155,
+              "GENDER": 108,
+              "TITLE": 166,
+              "SEX": 77
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "47f2dede3ca98dc70c8f1d6a6fc95b11cd61134510aae7b5aa7278bfae663d80"
+        },
+        "timestamp": "2026-10-11T05:46:11.519614+00:00",
+        "model_revision": "af6635cb3db84c88da91aae71289227240d81912",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
       },
       {
         "spec": "PII Detection — German (general)",
@@ -2556,6 +3940,190 @@
         "timestamp": "2026-10-11T04:22:09.002825+00:00"
       },
       {
+        "spec": "PII Detection — Greek (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "el"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 397,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.40618101545253865,
+            "recall": 0.22669404517453798,
+            "f1": 0.29098576700052714,
+            "ci_low": 0.2721105277324561,
+            "ci_high": 0.31051237726808434
+          },
+          "entity_f2": {
+            "precision": 0.40618101545253865,
+            "recall": 0.22669404517453798,
+            "f2": 0.2486710514460762,
+            "ci_low": 0.23154388812033846,
+            "ci_high": 0.2663025138057527
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-el-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 397,
+            "excluded_token_collision_uids": [
+              20850928,
+              20851537,
+              20852476
+            ],
+            "unmapped_labels_kept_rows": {
+              "AGE": 154,
+              "SEX": 76,
+              "GENDER": 87,
+              "TITLE": 178
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "8d8019285bb2f874f831a7b85100681c3fdda6efd576bb731e7b8aa18260ea6b"
+        },
+        "timestamp": "2026-10-11T05:46:18.902813+00:00",
+        "model_revision": "af6635cb3db84c88da91aae71289227240d81912",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
+        "spec": "PII Detection — Hungarian (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "hu"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 400,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.42522756827048114,
+            "recall": 0.2376453488372093,
+            "f1": 0.30489510489510485,
+            "ci_low": 0.28949758459483527,
+            "ci_high": 0.3214826810008981
+          },
+          "entity_f2": {
+            "precision": 0.42522756827048114,
+            "recall": 0.2376453488372093,
+            "f2": 0.26064084170253465,
+            "ci_low": 0.24660819373304624,
+            "ci_high": 0.2758992810878596
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-hu-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 400,
+            "excluded_token_collision_uids": [],
+            "unmapped_labels_kept_rows": {
+              "AGE": 162,
+              "SEX": 85,
+              "GENDER": 105,
+              "TITLE": 217
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "8ce29fdfe7b4e8ea691a49307984b82d51ed79fe399e21709ff5284ae54f51a4"
+        },
+        "timestamp": "2026-10-11T05:46:40.231482+00:00",
+        "model_revision": "af6635cb3db84c88da91aae71289227240d81912",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
         "spec": "PII Detection — Italian (general)",
         "task": "detection",
         "languages": [
@@ -2599,6 +4167,190 @@
         "timestamp": "2026-10-11T04:22:53.779267+00:00"
       },
       {
+        "spec": "PII Detection — Polish (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "pl"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 397,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.4347549331635901,
+            "recall": 0.24497847919655666,
+            "f1": 0.31337462720807524,
+            "ci_low": 0.29511928123650744,
+            "ci_high": 0.3314553740807324
+          },
+          "entity_f2": {
+            "precision": 0.4347549331635901,
+            "recall": 0.24497847919655666,
+            "f2": 0.2684115381592391,
+            "ci_low": 0.25120686506531,
+            "ci_high": 0.2853383831744188
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-pl-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 397,
+            "excluded_token_collision_uids": [
+              21834091,
+              21835048,
+              21836294
+            ],
+            "unmapped_labels_kept_rows": {
+              "TITLE": 203,
+              "AGE": 148,
+              "SEX": 95,
+              "GENDER": 80
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "fbecc697909ab7d4e03d65757d890d095a707e36952750e814d6723d790ea615"
+        },
+        "timestamp": "2026-10-11T05:46:54.068093+00:00",
+        "model_revision": "af6635cb3db84c88da91aae71289227240d81912",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
+        "spec": "PII Detection — Romanian (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 400,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.4487678339818418,
+            "recall": 0.25329428989751096,
+            "f1": 0.32381843706130087,
+            "ci_low": 0.30727085625183764,
+            "ci_high": 0.3412550041050397
+          },
+          "entity_f2": {
+            "precision": 0.4487678339818418,
+            "recall": 0.25329428989751096,
+            "f2": 0.2774659182036888,
+            "ci_low": 0.2624854773669907,
+            "ci_high": 0.29312282838638315
+          }
+        },
+        "contamination": "unknown",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-ro-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 400,
+            "excluded_token_collision_uids": [],
+            "unmapped_labels_kept_rows": {
+              "TITLE": 198,
+              "SEX": 100,
+              "AGE": 169,
+              "GENDER": 98
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "4fd204d4d98db7958ee53b62dc9ac7ebd52ebf7d81c4aee5969402b380766a4f"
+        },
+        "timestamp": "2026-10-11T05:47:01.219484+00:00",
+        "model_revision": "af6635cb3db84c88da91aae71289227240d81912",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
         "spec": "PII Detection — Spanish (general)",
         "task": "detection",
         "languages": [
@@ -2640,6 +4392,100 @@
           "split": "test"
         },
         "timestamp": "2026-10-11T04:22:36.357869+00:00"
+      },
+      {
+        "spec": "PII Detection — Swedish (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "sv"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 397,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.42185430463576157,
+            "recall": 0.2317206256820662,
+            "f1": 0.2991312514674806,
+            "ci_low": 0.28120430613470054,
+            "ci_high": 0.3170764807128836
+          },
+          "entity_f2": {
+            "precision": 0.42185430463576157,
+            "recall": 0.2317206256820662,
+            "f2": 0.25467775467775466,
+            "ci_low": 0.23831237444587733,
+            "ci_high": 0.27126868287100686
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-sv-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 397,
+            "excluded_token_collision_uids": [
+              22146597,
+              22147112,
+              22147205
+            ],
+            "unmapped_labels_kept_rows": {
+              "TITLE": 213,
+              "AGE": 176,
+              "GENDER": 99,
+              "SEX": 80
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "dcdae5adcd8fda846983f683ffa662ea5209445e4b81ee28e6daaf222a75f1b0"
+        },
+        "timestamp": "2026-10-11T05:47:07.960149+00:00",
+        "model_revision": "af6635cb3db84c88da91aae71289227240d81912",
+        "runtime": {
+          "device": "mps",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
       },
       {
         "spec": "PII Detection — TAB ECHR legal English (REAL gold)",
@@ -3572,6 +5418,190 @@
         "timestamp": "2026-06-02T11:04:28.490593+00:00"
       },
       {
+        "spec": "PII Detection — Czech (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "cs"
+        ],
+        "domain": "general",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 399,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.27355971003433804,
+            "recall": 0.2838479809976247,
+            "f1": 0.27860889838741015,
+            "ci_low": 0.26449216711320483,
+            "ci_high": 0.2933953354409666
+          },
+          "entity_f2": {
+            "precision": 0.27355971003433804,
+            "recall": 0.2838479809976247,
+            "f2": 0.28172888015717096,
+            "ci_low": 0.2670296113048148,
+            "ci_high": 0.29719019447069
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-cs-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 399,
+            "excluded_token_collision_uids": [
+              20590853
+            ],
+            "unmapped_labels_kept_rows": {
+              "AGE": 151,
+              "SEX": 85,
+              "GENDER": 86,
+              "TITLE": 174
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "dd82be9653049e7aa6cebebcb4f34c49891e6eaa035f1058a876d835b7d54e78"
+        },
+        "timestamp": "2026-10-11T05:47:16.386540+00:00",
+        "model_revision": null,
+        "runtime": {
+          "device": "cpu",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
+        "spec": "PII Detection — Dutch (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "nl"
+        ],
+        "domain": "general",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 399,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.29251439539347407,
+            "recall": 0.29050705299275636,
+            "f1": 0.2915072685539403,
+            "ci_low": 0.2779659385654394,
+            "ci_high": 0.30604419734854516
+          },
+          "entity_f2": {
+            "precision": 0.29251439539347407,
+            "recall": 0.29050705299275636,
+            "f2": 0.2909063144231503,
+            "ci_low": 0.2776684752480478,
+            "ci_high": 0.3053469161671592
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-nl-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 399,
+            "excluded_token_collision_uids": [
+              21783321
+            ],
+            "unmapped_labels_kept_rows": {
+              "TITLE": 213,
+              "AGE": 156,
+              "GENDER": 80,
+              "SEX": 80
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "447f7257bb081026e0629ae277ab48d2387843c2f396da36bd8031b43f71bd6c"
+        },
+        "timestamp": "2026-10-11T05:47:51.270519+00:00",
+        "model_revision": null,
+        "runtime": {
+          "device": "cpu",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
         "spec": "PII Detection — Dutch (general)",
         "task": "detection",
         "languages": [
@@ -3658,6 +5688,191 @@
         "timestamp": "2026-06-02T04:53:42.999082+00:00"
       },
       {
+        "spec": "PII Detection — Finnish (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "fi"
+        ],
+        "domain": "general",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 399,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.2628882484790266,
+            "recall": 0.3108670957970466,
+            "f1": 0.28487161693268565,
+            "ci_low": 0.2707056681993315,
+            "ci_high": 0.29967984028881395
+          },
+          "entity_f2": {
+            "precision": 0.2628882484790266,
+            "recall": 0.3108670957970466,
+            "f2": 0.29991963176737046,
+            "ci_low": 0.285691429450494,
+            "ci_high": 0.3146265972905917
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-fi-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 399,
+            "excluded_token_collision_uids": [
+              21267311
+            ],
+            "unmapped_labels_kept_rows": {
+              "GENDER": 90,
+              "SEX": 90,
+              "TITLE": 217,
+              "AGE": 144
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "32bb8210b86e4a2ab6f323ca8ca29c974453c31e42a55eef7e106cc9fc6e1bdb"
+        },
+        "timestamp": "2026-10-11T05:47:32.783770+00:00",
+        "model_revision": null,
+        "runtime": {
+          "device": "cpu",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
+        "spec": "PII Detection — French (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "fr"
+        ],
+        "domain": "general",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 398,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.4283324037925265,
+            "recall": 0.2866741321388578,
+            "f1": 0.34347048300536676,
+            "ci_low": 0.32598391267820104,
+            "ci_high": 0.3611496024579866
+          },
+          "entity_f2": {
+            "precision": 0.4283324037925265,
+            "recall": 0.2866741321388578,
+            "f2": 0.3069789751379007,
+            "ci_low": 0.29051290253666096,
+            "ci_high": 0.3236438847321446
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-fr-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 398,
+            "excluded_token_collision_uids": [
+              21317022,
+              21317288
+            ],
+            "unmapped_labels_kept_rows": {
+              "TITLE": 214,
+              "AGE": 145,
+              "GENDER": 79,
+              "SEX": 82
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "92fb6cec630f777457435e9f5d796c4676771ba0e449cda188d454c6aed1acf7"
+        },
+        "timestamp": "2026-10-11T05:47:39.355309+00:00",
+        "model_revision": null,
+        "runtime": {
+          "device": "cpu",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
         "spec": "PII Detection — French (general)",
         "task": "detection",
         "languages": [
@@ -3699,6 +5914,98 @@
           "split": "test"
         },
         "timestamp": "2026-06-02T04:53:42.999082+00:00"
+      },
+      {
+        "spec": "PII Detection — German (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "de"
+        ],
+        "domain": "general",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 399,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.21049562682215744,
+            "recall": 0.282472613458529,
+            "f1": 0.2412295355830271,
+            "ci_low": 0.22790687591272524,
+            "ci_high": 0.2549488849590947
+          },
+          "entity_f2": {
+            "precision": 0.21049562682215744,
+            "recall": 0.282472613458529,
+            "f2": 0.2643913871392999,
+            "ci_low": 0.2500653080577531,
+            "ci_high": 0.2797386002424155
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-de-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 399,
+            "excluded_token_collision_uids": [
+              20696092
+            ],
+            "unmapped_labels_kept_rows": {
+              "AGE": 155,
+              "GENDER": 108,
+              "TITLE": 166,
+              "SEX": 77
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "47f2dede3ca98dc70c8f1d6a6fc95b11cd61134510aae7b5aa7278bfae663d80"
+        },
+        "timestamp": "2026-10-11T05:47:22.156676+00:00",
+        "model_revision": null,
+        "runtime": {
+          "device": "cpu",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
       },
       {
         "spec": "PII Detection — German (general)",
@@ -3744,6 +6051,190 @@
         "timestamp": "2026-06-02T04:53:42.999082+00:00"
       },
       {
+        "spec": "PII Detection — Greek (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "el"
+        ],
+        "domain": "general",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 397,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.34424139396515085,
+            "recall": 0.3326488706365503,
+            "f1": 0.33834586466165406,
+            "ci_low": 0.32271790412108126,
+            "ci_high": 0.3534833220172461
+          },
+          "entity_f2": {
+            "precision": 0.34424139396515085,
+            "recall": 0.3326488706365503,
+            "f2": 0.33490449020094276,
+            "ci_low": 0.3189830616281054,
+            "ci_high": 0.3510168860314807
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-el-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 397,
+            "excluded_token_collision_uids": [
+              20850928,
+              20851537,
+              20852476
+            ],
+            "unmapped_labels_kept_rows": {
+              "AGE": 154,
+              "SEX": 76,
+              "GENDER": 87,
+              "TITLE": 178
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "8d8019285bb2f874f831a7b85100681c3fdda6efd576bb731e7b8aa18260ea6b"
+        },
+        "timestamp": "2026-10-11T05:47:27.583447+00:00",
+        "model_revision": null,
+        "runtime": {
+          "device": "cpu",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
+        "spec": "PII Detection — Hungarian (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "hu"
+        ],
+        "domain": "general",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 400,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.28523377060208543,
+            "recall": 0.3081395348837209,
+            "f1": 0.29624454148471613,
+            "ci_low": 0.28224250874832024,
+            "ci_high": 0.30937685580265767
+          },
+          "entity_f2": {
+            "precision": 0.28523377060208543,
+            "recall": 0.3081395348837209,
+            "f2": 0.30326872183677844,
+            "ci_low": 0.288493707564448,
+            "ci_high": 0.31705018842558524
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-hu-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 400,
+            "excluded_token_collision_uids": [],
+            "unmapped_labels_kept_rows": {
+              "AGE": 162,
+              "SEX": 85,
+              "GENDER": 105,
+              "TITLE": 217
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "8ce29fdfe7b4e8ea691a49307984b82d51ed79fe399e21709ff5284ae54f51a4"
+        },
+        "timestamp": "2026-10-11T05:47:45.365628+00:00",
+        "model_revision": null,
+        "runtime": {
+          "device": "cpu",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
         "spec": "PII Detection — Italian (general)",
         "task": "detection",
         "languages": [
@@ -3787,6 +6278,190 @@
         "timestamp": "2026-06-02T04:53:42.999082+00:00"
       },
       {
+        "spec": "PII Detection — Polish (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "pl"
+        ],
+        "domain": "general",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 397,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.251069430733794,
+            "recall": 0.2736728837876614,
+            "f1": 0.2618843315599794,
+            "ci_low": 0.24823553599481918,
+            "ci_high": 0.2765415349642767
+          },
+          "entity_f2": {
+            "precision": 0.251069430733794,
+            "recall": 0.2736728837876614,
+            "f2": 0.26883235853710097,
+            "ci_low": 0.2552486416737181,
+            "ci_high": 0.284258353810795
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-pl-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 397,
+            "excluded_token_collision_uids": [
+              21834091,
+              21835048,
+              21836294
+            ],
+            "unmapped_labels_kept_rows": {
+              "TITLE": 203,
+              "AGE": 148,
+              "SEX": 95,
+              "GENDER": 80
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "fbecc697909ab7d4e03d65757d890d095a707e36952750e814d6723d790ea615"
+        },
+        "timestamp": "2026-10-11T05:47:57.435466+00:00",
+        "model_revision": null,
+        "runtime": {
+          "device": "cpu",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
+        "spec": "PII Detection — Romanian (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "general",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 400,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.31865912762520193,
+            "recall": 0.2887994143484627,
+            "f1": 0.3029953917050691,
+            "ci_low": 0.2886181728687016,
+            "ci_high": 0.3171231814679741
+          },
+          "entity_f2": {
+            "precision": 0.31865912762520193,
+            "recall": 0.2887994143484627,
+            "f2": 0.2943151298119964,
+            "ci_low": 0.27948581486703145,
+            "ci_high": 0.30855004034984884
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-ro-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 400,
+            "excluded_token_collision_uids": [],
+            "unmapped_labels_kept_rows": {
+              "TITLE": 198,
+              "SEX": 100,
+              "AGE": 169,
+              "GENDER": 98
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "4fd204d4d98db7958ee53b62dc9ac7ebd52ebf7d81c4aee5969402b380766a4f"
+        },
+        "timestamp": "2026-10-11T05:48:03.956437+00:00",
+        "model_revision": null,
+        "runtime": {
+          "device": "cpu",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
+      },
+      {
         "spec": "PII Detection — Spanish (general)",
         "task": "detection",
         "languages": [
@@ -3828,6 +6503,100 @@
           "split": "test"
         },
         "timestamp": "2026-06-02T04:53:42.999082+00:00"
+      },
+      {
+        "spec": "PII Detection — Swedish (Ai4Privacy open core, external synthetic)",
+        "task": "detection",
+        "languages": [
+          "sv"
+        ],
+        "domain": "general",
+        "adapter": "presidio",
+        "model_id": "presidio-analyzer+en_core_web_lg",
+        "n": 397,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.2522255192878338,
+            "recall": 0.2782830120043652,
+            "f1": 0.2646143203043929,
+            "ci_low": 0.25079807412375255,
+            "ci_high": 0.27843511960589074
+          },
+          "entity_f2": {
+            "precision": 0.2522255192878338,
+            "recall": 0.2782830120043652,
+            "f2": 0.272649511725711,
+            "ci_low": 0.25866185542884795,
+            "ci_high": 0.2869493961671006
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "ai4privacy/pii-masking-openpii-1m",
+          "config": "default",
+          "split": "validation",
+          "license": "CC-BY-4.0",
+          "loader": "ai4privacy-openpii",
+          "eval_config": "ai4privacy-openpii-sv-v1",
+          "revision": "c064392b9d3ddccc3a2997d41630631f9be465f0",
+          "files": [
+            "default/validation/0000.parquet",
+            "default/validation/0001.parquet"
+          ],
+          "max_rows": 400,
+          "curation": {
+            "candidate_rows": 400,
+            "kept_rows": 397,
+            "excluded_token_collision_uids": [
+              22146597,
+              22147112,
+              22147205
+            ],
+            "unmapped_labels_kept_rows": {
+              "TITLE": 213,
+              "AGE": 176,
+              "GENDER": 99,
+              "SEX": 80
+            },
+            "selection": "first max_rows per language in pinned file/row order; no replacement"
+          },
+          "gold_sha256": "dcdae5adcd8fda846983f683ffa662ea5209445e4b81ee28e6daaf222a75f1b0"
+        },
+        "timestamp": "2026-10-11T05:48:10.264100+00:00",
+        "model_revision": null,
+        "runtime": {
+          "device": "cpu",
+          "packages": {
+            "torch": "2.12.0",
+            "transformers": "5.9.0",
+            "presidio-analyzer": "2.2.362",
+            "spacy": "3.8.14",
+            "en_core_web_lg": "3.8.0"
+          },
+          "batch_size": 16,
+          "inference_seed": 101
+        },
+        "uncertainty": {
+          "method": "document bootstrap, percentile 95%",
+          "resamples": 2000,
+          "bootstrap_seed": 122,
+          "inference_seed_count": 1,
+          "training_seed_count": null,
+          "note": "One fixed checkpoint per model; no multi-seed training comparison."
+        }
       }
     ],
     "privacy-filter::openai/privacy-filter": [

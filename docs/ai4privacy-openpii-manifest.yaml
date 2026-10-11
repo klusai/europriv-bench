@@ -1,0 +1,38 @@
+# RES-101: source and licence evidence for the repaired external-synthetic eval.
+source:
+  hf_id: ai4privacy/pii-masking-openpii-1m
+  url: https://huggingface.co/datasets/ai4privacy/pii-masking-openpii-1m
+  source_revision: ecfdc547f4a0955600cfe6ab98ba2a162207fcc0
+  config: default
+  split: validation
+  parquet_revision: c064392b9d3ddccc3a2997d41630631f9be465f0
+  files:
+    default/validation/0000.parquet: 568d70b4c7431a6d2a043705a419c711b60c131dc38c0de57e5e8f15030e0221
+    default/validation/0001.parquet: 3fe1635368f26d26724866fb43b931f7422a2eae913498826f1a6ca51d171d4c
+license:
+  effective: CC-BY-4.0
+  verified_on: "2026-10-11"
+  evidence_url: https://huggingface.co/datasets/ai4privacy/pii-masking-openpii-1m/blob/ecfdc547f4a0955600cfe6ab98ba2a162207fcc0/README.md
+  method: Hub API download of the pinned README; checked metadata and Licensing and Terms of Use
+  redistributable: true
+  trainable: true
+  attribution: Ai4Privacy / Ai Suisse SA
+selection:
+  candidate_rows_per_language: 400
+  order: Published parquet file order, then row order, filtered by ISO language
+  replacements: false
+  excluded: Whitespace-token collisions only; all other annotation errors fail loudly
+  unmapped_labels: [TITLE, AGE, GENDER, SEX]
+  label_mapping: src/europriv_bench/conf/taxonomy.yaml (ai4privacy)
+  row_checks: Exact source substring equality, character bounds, no overlap, strict BIOES
+  kept_rows: {cs: 399, de: 399, el: 397, fi: 399, fr: 398, hu: 400, nl: 399, pl: 397, ro: 400, sv: 397}
+  total_candidates: 4000
+  total_kept: 3985
+  total_excluded_token_collisions: 15
+  exclusions_and_gold_checksums: Each result row's dataset.curation and dataset.gold_sha256
+contamination:
+  openmed: in_distribution
+  tabularisai: in_distribution
+  kp-model: Existing harness policy; unknown on ro, clean_held_out on other selected languages
+  presidio: clean_held_out
+  note: Source-family labels are not a row-level train/eval deduplication claim.
