@@ -21,8 +21,8 @@ def digest(value) -> str:
 
 
 def stratum(row: dict) -> str:
-    if row["domain"] == "admin":
-        return "admin"
+    if row["domain"] in {"admin", "clinical"}:
+        return row["domain"]
     heading = row["text"].splitlines()[0]
     if heading.startswith(("SCRISOARE", "KARTA")):
         return "clinical"
