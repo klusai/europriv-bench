@@ -2199,6 +2199,507 @@
         "timestamp": null
       }
     ],
+    "kp-model::klusai/kp-deid-xlmr-560m-legal": [
+      {
+        "spec": "PII Detection + CNP Leakage — Romanian (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "legal",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.44816736586442923,
+            "recall": 0.5187859424920128,
+            "f1": 0.4808979446780785
+          },
+          "entity_f2": {
+            "precision": 0.44816736586442923,
+            "recall": 0.5187859424920128,
+            "f2": 0.5029362208236287
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1123.0,
+            "decode_bearing_detected": 1123.0,
+            "decode_bearing_missed": 0.0,
+            "leak_rate": 0.0,
+            "leak_rate_ci_low": 0.0,
+            "leak_rate_ci_high": 0.003409036137937588,
+            "detection_rate": 1.0,
+            "leaked_quasi_identifiers": 0.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1123.0,
+            "ro_detected": 1123.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "ro-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-10-11T04:23:34.128538+00:00"
+      },
+      {
+        "spec": "PII Detection + CNP Leakage — Romanian (synthetic v1)",
+        "task": "detection",
+        "languages": [
+          "ro"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.5462633451957295,
+            "recall": 0.4258631319358816,
+            "f1": 0.47860730989087125
+          },
+          "entity_f2": {
+            "precision": 0.5462633451957295,
+            "recall": 0.4258631319358816,
+            "f2": 0.445501451144792
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1017.0,
+            "decode_bearing_detected": 0.0,
+            "decode_bearing_missed": 1017.0,
+            "leak_rate": 1.0,
+            "leak_rate_ci_low": 0.9962369834931933,
+            "leak_rate_ci_high": 1.0,
+            "detection_rate": 0.0,
+            "leaked_quasi_identifiers": 3051.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "ro_total": 1017.0,
+            "ro_detected": 0.0
+          }
+        },
+        "contamination": "in_distribution",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "ro-synthetic-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-10-11T04:23:56.345411+00:00"
+      },
+      {
+        "spec": "PII Detection + PESEL Leakage — Polish (real-skeleton v1)",
+        "task": "detection",
+        "languages": [
+          "pl"
+        ],
+        "domain": "legal",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "CASE_NUMBER",
+          "COMPANY_ID",
+          "DATE",
+          "EMAIL",
+          "HEALTH_CONDITION",
+          "NATIONAL_ID",
+          "ORG_PARTY",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.4486877431373623,
+            "recall": 0.517406962785114,
+            "f1": 0.4806033217911849
+          },
+          "entity_f2": {
+            "precision": 0.4486877431373623,
+            "recall": 0.517406962785114,
+            "f2": 0.502029205850979
+          },
+          "national_id_leakage": {
+            "decode_bearing_total": 1096.0,
+            "decode_bearing_detected": 1096.0,
+            "decode_bearing_missed": 0.0,
+            "leak_rate": 0.0,
+            "leak_rate_ci_low": 0.0,
+            "leak_rate_ci_high": 0.003492724542564693,
+            "detection_rate": 1.0,
+            "leaked_quasi_identifiers": 0.0,
+            "coverage_only_total": 0.0,
+            "coverage_only_detected": 0.0,
+            "coverage_only_detection_rate": 0.0,
+            "pl_total": 1096.0,
+            "pl_detected": 1096.0
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "pl-realskeleton-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-10-11T04:23:10.159933+00:00"
+      },
+      {
+        "spec": "PII Detection — Dutch (general)",
+        "task": "detection",
+        "languages": [
+          "nl"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.6012658227848101,
+            "recall": 0.3648,
+            "f1": 0.4540928101971719
+          },
+          "entity_f2": {
+            "precision": 0.6012658227848101,
+            "recall": 0.3648,
+            "f2": 0.39594331758821893
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "nl",
+          "split": "test"
+        },
+        "timestamp": "2026-10-11T04:23:02.189561+00:00"
+      },
+      {
+        "spec": "PII Detection — English (general)",
+        "task": "detection",
+        "languages": [
+          "en"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.5584795321637427,
+            "recall": 0.3166620613429124,
+            "f1": 0.40416152354082174
+          },
+          "entity_f2": {
+            "precision": 0.5584795321637427,
+            "recall": 0.3166620613429124,
+            "f2": 0.3466844143272023
+          }
+        },
+        "contamination": "unknown",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "en",
+          "split": "test"
+        },
+        "timestamp": "2026-10-11T04:22:24.596751+00:00"
+      },
+      {
+        "spec": "PII Detection — French (general)",
+        "task": "detection",
+        "languages": [
+          "fr"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.5693684733963202,
+            "recall": 0.3485540334855403,
+            "f1": 0.4324018126888217
+          },
+          "entity_f2": {
+            "precision": 0.5693684733963202,
+            "recall": 0.3485540334855403,
+            "f2": 0.37786284733680947
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "fr",
+          "split": "test"
+        },
+        "timestamp": "2026-10-11T04:22:44.994970+00:00"
+      },
+      {
+        "spec": "PII Detection — German (general)",
+        "task": "detection",
+        "languages": [
+          "de"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.6104525862068966,
+            "recall": 0.3584308763049668,
+            "f1": 0.4516643412397847
+          },
+          "entity_f2": {
+            "precision": 0.6104525862068966,
+            "recall": 0.3584308763049668,
+            "f2": 0.39068965517241383
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "de",
+          "split": "test"
+        },
+        "timestamp": "2026-10-11T04:22:09.002825+00:00"
+      },
+      {
+        "spec": "PII Detection — Italian (general)",
+        "task": "detection",
+        "languages": [
+          "it"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.5583377730420884,
+            "recall": 0.32305795314426633,
+            "f1": 0.40929505955867995
+          },
+          "entity_f2": {
+            "precision": 0.5583377730420884,
+            "recall": 0.32305795314426633,
+            "f2": 0.35279068201710095
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "it",
+          "split": "test"
+        },
+        "timestamp": "2026-10-11T04:22:53.779267+00:00"
+      },
+      {
+        "spec": "PII Detection — Spanish (general)",
+        "task": "detection",
+        "languages": [
+          "es"
+        ],
+        "domain": "general",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 1500,
+        "limit": null,
+        "eval_labels": [
+          "ACCOUNT_ID",
+          "ADDRESS",
+          "DATE",
+          "EMAIL",
+          "NATIONAL_ID",
+          "PERSON",
+          "PHONE"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.5062429057888763,
+            "recall": 0.27901157335001564,
+            "f1": 0.35974994958661016
+          },
+          "entity_f2": {
+            "precision": 0.5062429057888763,
+            "recall": 0.27901157335001564,
+            "f2": 0.3065292096219931
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "dev",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "es",
+          "split": "test"
+        },
+        "timestamp": "2026-10-11T04:22:36.357869+00:00"
+      },
+      {
+        "spec": "PII Detection — TAB ECHR legal English (REAL gold)",
+        "task": "detection",
+        "languages": [
+          "en"
+        ],
+        "domain": "legal",
+        "adapter": "kp-model",
+        "model_id": "klusai/kp-deid-xlmr-560m-legal",
+        "n": 127,
+        "limit": null,
+        "eval_labels": [
+          "ADDRESS",
+          "CASE_NUMBER",
+          "DATE",
+          "ORG_PARTY",
+          "PERSON"
+        ],
+        "scores": {
+          "entity_f1": {
+            "precision": 0.3924497555676263,
+            "recall": 0.2997303464011616,
+            "f1": 0.33988004233799834
+          },
+          "entity_f2": {
+            "precision": 0.3924497555676263,
+            "recall": 0.2997303464011616,
+            "f2": 0.3145954889837151
+          },
+          "tab_reid_leakage": {
+            "all_subjects_total": 3965.0,
+            "all_subjects_leaked": 1925.0,
+            "all_leak_rate": 0.4854981084489281,
+            "all_leak_rate_ci_low": 0.4699631338804676,
+            "all_leak_rate_ci_high": 0.5010611557905171,
+            "direct_subjects_total": 264.0,
+            "direct_subjects_leaked": 25.0,
+            "direct_leak_rate": 0.0946969696969697,
+            "direct_leak_rate_ci_low": 0.06496639870257452,
+            "direct_leak_rate_ci_high": 0.13605343810092718,
+            "quasi_subjects_total": 3701.0,
+            "quasi_subjects_leaked": 1900.0,
+            "quasi_leak_rate": 0.5133747635774115,
+            "quasi_leak_rate_ci_low": 0.49726640905497776,
+            "quasi_leak_rate_ci_high": 0.5294553822869069
+          }
+        },
+        "contamination": "clean_held_out",
+        "config_status": "real-external-gold",
+        "europriv_bench_version": "0.2.0",
+        "taxonomy_version": "0.2.0",
+        "dataset": {
+          "hf_id": "klusai/europriv-bench",
+          "config": "tab-echr-legal-en-v1",
+          "split": "test"
+        },
+        "timestamp": "2026-10-11T04:24:05.255036+00:00"
+      }
+    ],
     "openmed::OpenMed/privacy-filter-multilingual": [
       {
         "spec": "PII Detection + CNP Leakage — Legal domain (real-skeleton v1)",
