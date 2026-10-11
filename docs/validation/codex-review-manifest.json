@@ -1,0 +1,41 @@
+{
+  "reviewer": "openai/codex-session",
+  "model": "GPT-6 (session; exact backend snapshot unavailable)",
+  "provider": "OpenAI Codex session",
+  "review_completed_utc": "2026-10-11T04:48:45.686100+00:00",
+  "additional_paid_api_calls": 0,
+  "additional_api_spend_usd": 0,
+  "temperature": null,
+  "inference_seed": null,
+  "review_runs": 1,
+  "sampling_seed": 77,
+  "sampling_seed_count": 1,
+  "bootstrap_seed": 7701,
+  "bootstrap_replicates": 2000,
+  "source_revision": "58faa4fa572cd8064818a6e1f8ca6e361b959c00",
+  "source_url": "https://huggingface.co/datasets/klusai/europriv-bench",
+  "license": "CC-BY-4.0",
+  "taxonomy_version": "0.2.0",
+  "protocol_sha256": "c1dcb67199e23e1ff6606996987a80f0ba9967b61682ec6855383c8f2080127c",
+  "sample_manifest_sha256": "e6a0dfef75734aced33b151d7cc61a0581f2b8c5ede99c4624326edd810374a4",
+  "status": "Supplemental session judge, not a replacement for any frozen judge; no promotion authority",
+  "procedure": "Codex read all 600 raw sampled texts before gold comparison. Code transcribed reviewed slots and checked exact Unicode offsets. A was frozen per language before B; no other valid judge outputs exist. Session batches and decoding parameters differ from the frozen paid procedure.",
+  "independence_limit": "One session saw repeated templates and prior audit diagnostics, but no sampled gold before A freeze; not independent per-document contexts and not human/native-speaker certification.",
+  "text_hash_definition": "text_sha256 is protocol digest(JSON-encoded string); raw_utf8_sha256 hashes UTF-8 bytes directly.",
+  "configs": {
+    "ro-realskeleton-v1": {
+      "n": 300,
+      "stage_a_file_sha256": "848162f023a1bec2bbad69f5de034ae9440316ca552f2da0119db256e79c4ca6",
+      "annotations_file": "codex-annotations-ro.jsonl",
+      "annotations_file_sha256": "c8a57e43af359a3142dc00fa114d7357294e474f2e9180d3c50e1d521eadb053",
+      "stage_a_payload_sha256": "e6302750b588904ee50f08b2f1d14b5edf1e72646a5fbf2f628e67fcfe2fb71c"
+    },
+    "pl-realskeleton-v1": {
+      "n": 300,
+      "stage_a_file_sha256": "789fed626d9c3a880b90856e7ba401263eab7174f1407973483d0ce964c4462c",
+      "annotations_file": "codex-annotations-pl.jsonl",
+      "annotations_file_sha256": "82b2232cb56d60fbc162d481f16d2d4ad264b6d0ba6b4df74a56f21c19d9de25",
+      "stage_a_payload_sha256": "3104741355dba8abb6decf833bc973c019b7a63ea7dd8661788daa905dce6f4c"
+    }
+  }
+}

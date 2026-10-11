@@ -65,14 +65,20 @@ per-`(model, config)` `config_status`:
 
 - **`dev`** — default. Usable for development and iteration. Numbers from `dev` configs MUST
   NOT be cited as validated benchmark results.
+- **`panel-validated`** (RES-77) — autonomous LLM-panel validation only. Requires all gates
+  in the committed [pre-registration](docs/validation/panel-protocol.md) to pass, with a
+  config-specific report, source revision, sample hashes, cost ledger and disagreements.
+  It is never native-speaker review, human validation, or permission to make claims about
+  real-world representativeness/privacy. An incomplete or failed panel remains `dev`.
+  Corrections require separate held-out revalidation; no promotion from an amended audit sample.
 - **`citable-validated`** — promotable ONLY after native-speaker review and inter-annotator
   agreement (IAA) sign-off on the underlying gold data. A config cannot be marked
   `citable-validated` without recorded native-speaker/IAA validation.
 - **`real-external-gold`** (RES-89) — REAL, peer-reviewed, externally-annotated human gold: a
   third value, a clear step ABOVE synthetic `dev`, on a separate basis from `citable-validated`.
   Assigned to configs built from real-data corpora whose annotations are already external
-  peer-reviewed human gold — so they do NOT depend on the program's own KLU-27/RES-77
-  native-speaker/IAA gate (that gate validates *our* synthetic skeletons; it is not needed for an
+  peer-reviewed human gold — so they do NOT depend on the program's own KLU-27
+  human native-speaker/IAA gate (that gate validates *our* synthetic skeletons; it is not needed for an
   externally peer-reviewed corpus). The first is **`tab-echr-legal-en-v1`** (the Text Anonymization
   Benchmark, Pilán et al. 2022, *Computational Linguistics* 48(4)). Claim discipline still applies:
   the KP gold uses one canonical annotator per document, keeps DIRECT+QUASI mentions remapped to

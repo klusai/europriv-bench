@@ -30,6 +30,9 @@ their splits and metrics rather than competing with them.
 Metrics that aren't implemented yet raise `NotImplementedError` (the harness never reports
 a fake number).
 
+The [gateway metric/SLO contract](docs/gateway-contract.md) freezes exact-character residual-leak
+v2 alongside reproducible legacy v1 scores, zero-floor comparison rules and CPU service/load targets.
+
 ## Layout
 
 ```
@@ -80,3 +83,11 @@ AWS Comprehend) need credentials → a separate human-gated path, not the self-s
 
 Code: Apache-2.0. Benchmark data: built only from cleanly-licensed sources so the whole
 suite stays openly redistributable — a deliberate edge over license-encumbered competitors.
+
+## Autonomous validation
+
+[RES-77 panel protocol](docs/validation/panel-protocol.md) defines a reproducible LLM-panel
+substitute when human annotators are unavailable. `panel-validated` is a separate status;
+`citable-validated` remains reserved for human sign-off. Failed/incomplete audits stay `dev`.
+See `analysis/panel_validation.py` for cached, spend-capped execution and
+`analysis/panel_report.py` for offline statistics and disagreement export.

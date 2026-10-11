@@ -1,0 +1,49 @@
+{
+  "protocol_commit": "3225e2e",
+  "http_status": 429,
+  "attempted_requests": 6,
+  "successful_responses": 0,
+  "unknown_cost_reservations_usd": 0.1796892,
+  "attempts": {
+    "b9f13faaa811fd7638b2136e21ea2124ca454571a03daf19baa63ffa99072bb7": {
+      "state": "pending",
+      "reserved": 0.0299472,
+      "model": "mistralai/mistral-large-2512",
+      "timestamp": "2026-10-11T04:31:23.977264+00:00"
+    },
+    "728323992099ee35565fcedc4e8dc4ba738b8a12a3ffaee0ca9dfc3e30655f6c": {
+      "state": "pending",
+      "reserved": 0.0299448,
+      "model": "mistralai/mistral-large-2512",
+      "timestamp": "2026-10-11T04:31:23.979741+00:00"
+    },
+    "71ea09c4360b00a5950c1f725f043d6f603deda5ad54155ab5a5fa0d77fca0c9": {
+      "state": "pending",
+      "reserved": 0.029946599999999997,
+      "model": "mistralai/mistral-large-2512",
+      "timestamp": "2026-10-11T04:31:23.980219+00:00"
+    },
+    "fb28a8d28bbd87c11aa600c2da36d803543ddf875266e731b64f2c0d2e3c7e2c": {
+      "state": "pending",
+      "reserved": 0.0299484,
+      "model": "mistralai/mistral-large-2512",
+      "timestamp": "2026-10-11T04:31:23.980686+00:00"
+    },
+    "7677043d4c826ed8f5fd451d037728da01a9ba243cc008c4c55c0fe3455d1eb3": {
+      "state": "pending",
+      "reserved": 0.0299538,
+      "model": "mistralai/mistral-large-2512",
+      "timestamp": "2026-10-11T04:31:23.981074+00:00"
+    },
+    "b3a6ac782006032075054680ba0da24158503155748559bcff40216b0cf4a700": {
+      "state": "pending",
+      "reserved": 0.0299484,
+      "model": "mistralai/mistral-large-2512",
+      "timestamp": "2026-10-11T04:31:23.981418+00:00"
+    }
+  },
+  "stage_b_run": false,
+  "failure": "All six initial concurrent Mistral requests returned HTTP 429; no usage.cost or generation ID was returned to the runner. Original transport did not retain error bodies/headers; diagnostic retention has since been fixed.",
+  "continuation": "No further paid requests under frozen protocol until outstanding costs are reconciled. No claim that rejections were free.",
+  "outcome": "incomplete; both configs remain dev"
+}

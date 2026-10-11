@@ -18,7 +18,8 @@ metrics:
   - national_id_leakage
 
 description: >
-  The CITABLE Romanian track: faithful real-structure documents (CNAS discharge letter,
+  Romanian candidate track (config_status=dev; RES-77 autonomous panel audit incomplete,
+  see docs/validation/ro-realskeleton-v1-panel-report.md): faithful real-structure documents (CNAS discharge letter,
   services contract, declarație, administrative letter) with synthetic PII (CNP-consistent
   DOB). Compare against ro-synthetic-v1 for the synthetic-context vs real-context gap (Paper 2);
   headline is national_id_leakage (CNP channel: missed CNP = deterministic DOB+sex+county disclosure).

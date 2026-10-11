@@ -1,0 +1,103 @@
+name: Auto-merge
+
+# Ported from klusai/rb-cli (.github/workflows/auto-merge.yml).
+# Admin prerequisites: allow squash + auto-merge; protect main with required `test`.
+# Keep "Require branches to be up to date" off (auto-merge doesn't update branches).
+# Configure Codex review separately; this workflow does not substitute for review.
+# Unlike the original, fail closed unless active protection requiring `test` is visible.
+# No checkout: pull_request_target must never execute code from the PR.
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, reopened, synchronize, labeled, unlabeled, ready_for_review, converted_to_draft, edited]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: auto-merge-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+    steps:
+      - name: Require active branch protection
+        id: protection
+        run: |
+          # The branch summary needs Contents: read, unlike /protection (Administration: read).
+          # Unknown, unavailable, disabled, or unrelated requirements must never arm auto-merge.
+          if gh api "repos/$GH_REPO/branches/main" > "$RUNNER_TEMP/branch.json" &&
+             jq -e '
+               .protected == true and
+               (.protection.required_status_checks.enforcement_level | IN("non_admins", "everyone")) and
+               ((.protection.required_status_checks.contexts // []) | index("test") != null)
+             ' "$RUNNER_TEMP/branch.json" > /dev/null; then
+            echo "active=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::Auto-merge inactive: cannot verify branch protection requiring test on main."
+            echo "active=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Resolve Dependabot metadata
+        id: dependabot
+        if: steps.protection.outputs.active == 'true' && github.event.pull_request.user.login == 'dependabot[bot]'
+        uses: dependabot/fetch-metadata@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Decide eligibility
+        id: gate
+        if: steps.protection.outputs.active == 'true'
+        env:
+          UPDATE_TYPE: ${{ steps.dependabot.outputs.update-type }}
+        run: |
+          # Read current metadata so queued label/draft events don't re-arm a stale decision.
+          gh api "repos/$GH_REPO/pulls/$PR_NUMBER" > "$RUNNER_TEMP/pr.json"
+          pr="$RUNNER_TEMP/pr.json"
+          eligible=true
+
+          if [ "$(jq -r '.head.repo.full_name' "$pr")" != "$GH_REPO" ]; then
+            eligible=false
+          fi
+          if [ "$(jq -r '.user.login' "$pr")" = 'dependabot[bot]' ]; then
+            case "$UPDATE_TYPE" in
+              version-update:semver-patch|version-update:semver-minor) ;;
+              *) eligible=false ;;
+            esac
+          fi
+          case "$(jq -r '.head.ref' "$pr")" in
+            review/*|hold/*) eligible=false ;;
+          esac
+
+          # Maintainer opt-in overrides fork, branch-prefix and Dependabot-major holds.
+          if jq -e '.labels | any(.name == "automerge")' "$pr" > /dev/null; then
+            eligible=true
+          fi
+          # Hard holds beat the override, including conversion of an armed PR to draft.
+          if jq -e '.labels | any(.name == "needs-review" or .name == "hold")' "$pr" > /dev/null; then
+            eligible=false
+          fi
+          if ! jq -e '.draft == false and .state == "open" and .base.ref == "main"' "$pr" > /dev/null; then
+            eligible=false
+          fi
+
+          echo "eligible=$eligible" >> "$GITHUB_OUTPUT"
+          echo "head_sha=$(jq -r '.head.sha' "$pr")" >> "$GITHUB_OUTPUT"
+
+      - name: Enable auto-merge
+        if: steps.protection.outputs.active == 'true' && steps.gate.outputs.eligible == 'true'
+        env:
+          HEAD_SHA: ${{ steps.gate.outputs.head_sha }}
+        run: |
+          gh pr merge "$PR_NUMBER" --repo "$GH_REPO" --auto --squash --match-head-commit "$HEAD_SHA"
+
+      - name: Disable auto-merge for held PRs
+        if: steps.protection.outputs.active == 'true' && steps.gate.outputs.eligible == 'false'
+        run: gh pr merge "$PR_NUMBER" --repo "$GH_REPO" --disable-auto
