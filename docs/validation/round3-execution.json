@@ -1,0 +1,75 @@
+{
+  "actual_usd": 0.86720452,
+  "reserved_usd": 0.3177,
+  "responses": 282,
+  "attempts": 292,
+  "unknown_cost_requests": 10,
+  "protocol_sha256": "6bd87ff66604dc9a4d53f121581ead58c9143c319093466ff1d86b6fce578845",
+  "known_plus_reserved_usd": 1.18490452,
+  "rate_limited_attempts": 9,
+  "ledger_sha256": "097ce38cb153668d6eba1f26e11676d7499ab3ab84227b585e63d251dd435ed3",
+  "inherited_round2": {
+    "actual_usd": 0.0094176,
+    "reserved_usd": 0.284733,
+    "responses": 3,
+    "attempts": 12,
+    "unknown_cost_requests": 9,
+    "protocol_sha256": "9a59bbbf24bb1cda8bf2c5c7ffeacd0a5dd623bcda48179e89e78d125e293a99",
+    "known_plus_reserved_usd": 0.29415060000000004,
+    "rate_limited_attempts": 9,
+    "ledger_sha256": "b5f05f019274cd68953486346b11e9faa947dd906961a620479395d5ef10e8b9"
+  },
+  "new_round3_actual_usd": 0.85778692,
+  "new_round3_attempts": 280,
+  "new_round3_rate_limited_attempts": 0,
+  "successful_response_providers": {
+    "qwen/qwen3-235b-a22b-2507": [
+      "DeepInfra",
+      "Nebius",
+      "Parasail"
+    ],
+    "deepseek/deepseek-v4.1-flash": [
+      "Alibaba"
+    ],
+    "google/gemini-2.5-flash": [
+      "Google AI Studio"
+    ]
+  },
+  "transport_errors": [
+    {
+      "file": "8c6e7107ffd11a7db34fd66303be134f1541339c1c6dd0320484a93f06917d87.error.json",
+      "sha256": "012f8a54193138a8f971b5525eb4b375584b49be54cf4f0df7e0e8d12dfa51ff",
+      "model": "qwen/qwen3-235b-a22b-2507",
+      "http_status": 400,
+      "retry_after": null,
+      "message": "Provider returned error",
+      "provider": "GMICloud",
+      "previous_errors": [
+        {
+          "code": 504,
+          "provider_name": "Nebius"
+        },
+        {
+          "code": 429,
+          "provider_name": "DeepInfra"
+        },
+        {
+          "code": 429,
+          "provider_name": "Parasail"
+        },
+        {
+          "code": 429,
+          "provider_name": "Venice"
+        },
+        {
+          "code": 429,
+          "provider_name": "Google"
+        },
+        {
+          "code": 429,
+          "provider_name": "Google"
+        }
+      ]
+    }
+  ]
+}
