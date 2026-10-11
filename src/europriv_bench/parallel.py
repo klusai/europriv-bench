@@ -58,8 +58,12 @@ def run_jobs(
             continue
         seen.add(key)
         try:
-            from datasets import load_dataset
-            load_dataset(d.hf_id, d.config, split=d.split)
+            if d.loader == "ai4privacy-openpii":
+                from .runner import _load_gold_rows
+                _load_gold_rows(spec)
+            else:
+                from datasets import load_dataset
+                load_dataset(d.hf_id, d.config, split=d.split)
         except Exception as e:  # pragma: no cover - network/dep dependent
             logger.warning("cache pre-warm failed for %s/%s: %s", d.hf_id, d.config, e)
 

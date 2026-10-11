@@ -5,9 +5,14 @@ domain: general
 languages: [fr]
 
 dataset:
-  hf_id: klusai/europriv-bench
-  config: ai4privacy-openpii-fr-v1
-  split: test
+  hf_id: ai4privacy/pii-masking-openpii-1m
+  eval_config: ai4privacy-openpii-fr-v1
+  config: default
+  split: validation
+  loader: ai4privacy-openpii
+  revision: c064392b9d3ddccc3a2997d41630631f9be465f0  # pinned HF parquet conversion
+  files: [default/validation/0000.parquet, default/validation/0001.parquet]
+  max_rows: 400
   license: CC-BY-4.0   # ai4privacy/pii-masking-openpii-1m open core (RES-93, verified 2026-06-07)
 
 # De-identification is recall-sensitive → report F2 alongside strict F1.
