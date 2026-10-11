@@ -58,6 +58,10 @@ def pct(value, interval):
 def report(scratch: Path, *, splice=False, decoded=False):
     adapter = "kp-deid-moe-gateway-decoded" if decoded else "kp-deid-moe-gateway"
     artifact = "gateway-decoding" if decoded else "gateway-moe"
+    diagnostic_path = scratch / "diagnostic-registration.json"
+    diagnostic = read(diagnostic_path) if decoded and diagnostic_path.exists() else None
+    description = ("dev-rejected strict decoding (diagnostic)" if diagnostic else
+                   "dev-selected boundary decoding" if decoded else "default operating point")
     availability = read(scratch / "availability.json")
     configs = availability["configs"]
     files = sorted((scratch / "results").glob("seed*--*.json"))
@@ -72,6 +76,8 @@ def report(scratch: Path, *, splice=False, decoded=False):
                 raise ValueError(f"Refusing incomplete seed suite: {seed}/{config}")
             candidate = read(path)
             row = candidate["row"]
+            if diagnostic and (row.get("diagnostic") != diagnostic or row.get("dev_selection_feasible") is not False):
+                raise ValueError("Decoded diagnostic row lost its infeasible-selection provenance")
             if "national_id_leakage" in row["scores"]:
                 row["legacy_availability"] = {
                     "national_id_leakage": row["scores"]["national_id_leakage"]["decode_bearing_total"] > 0,
@@ -166,8 +172,8 @@ def report(scratch: Path, *, splice=False, decoded=False):
         for seed in seeds
     }
     output = {
-        "candidate": "gateway-trained MoE; dev-selected boundary decoding" if decoded
-        else "gateway-trained MoE; default operating point",
+        "candidate": f"gateway-trained MoE; {description}",
+        **({"diagnostic": diagnostic, "dev_selection_feasible": False} if diagnostic else {}),
         "seeds": seeds,
         "seed_count": len(seeds),
         "contract_pin": read(scratch / "contract-pin.json"),
@@ -205,11 +211,13 @@ def report(scratch: Path, *, splice=False, decoded=False):
     write(board_path, board)
     write(ROOT / f"analysis/{artifact}-comparison.json", output)
     lines = [
-        "# Gateway-trained MoE: dev-selected boundary decoding" if decoded
-        else "# Gateway-trained MoE: default operating point",
+        f"# Gateway-trained MoE: {description}",
         "",
         f"Contract v3: **{contracts['3']['verdict']}**. Contract v2: **{contracts['2']['verdict']}**.",
         "",
+        *(["Dev selection was infeasible. This is the prospectively amended strict-rule diagnostic,",
+           "not a feasible selection or a contract win; see [the amendment](gateway-decoding-diagnostic.md)",
+           "and [all dev results](gateway-decoding-dev-results.md).", ""] if diagnostic else []),
         f"Training seeds: {seeds}; seed count {len(seeds)}. CPU fp32, saved 512-token window, no threshold tuning.",
         "Leak CIs are 95% Wilson; F1 and utility CIs are 2,000-cluster bootstrap, RNG seed 100.",
         f"Paired candidate-minus-comparator CIs and both verdicts: `analysis/{artifact}-comparison.json`.",

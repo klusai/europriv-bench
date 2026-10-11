@@ -36,6 +36,9 @@ The [gateway full-PII evaluation](docs/gateway-evaluation.md) registers eight la
 unpublished-data loading, exact deletion operators, paired cluster intervals and over-redaction controls.
 [Gateway-trained MoE scoring](docs/gateway-moe-scoring.md) resumes local CPU evaluation
 at the checkpoint default operating point and reports contracts v2 and v3 side by side.
+[Gateway boundary decoding](docs/gateway-decoding.md) registers Unicode fragment controls and
+dev-only rule selection; [the dev results](docs/gateway-decoding-dev-results.md) retain the
+infeasible utility constraint and link the separate prospective diagnostic test amendment.
 
 ## Layout
 

@@ -85,3 +85,43 @@ def test_dev_selection_requires_feasibility_and_uses_registered_ties():
     ]
     assert select_rule(grid) == "strict"
     assert select_rule(grid[:1]) is None
+
+
+def test_harness_control_preserves_name_and_removes_false_positive():
+    from analysis.calibrate_res100 import receipt
+    from analysis.score_gateway_moe import evaluate
+    from analysis.score_res100 import row_digest
+
+    rows = [{"text": "Ana etichette", "spans": [span(0, 3)]}]
+    frozen = {"rows": rows, "dataset": {"loader": "gateway"}, "spec": {
+        "name": "decoding-control", "task": "detection",
+        "dataset": {"hf_id": "control", "loader": "gateway"},
+        "metrics": ["residual_leakage_v2", "gateway_utility"],
+    }}
+    native = [{**span(0, 3), "score": .9}, {**span(8, 13), "score": .9}]
+    decoded = postprocess_spans(rows[0]["text"], native, rule="strict")
+    result = evaluate(frozen, [receipt(rows[0]["text"], decoded)], "control", None,
+                      {"gold_sha256": row_digest(rows)})
+    scores = result["row"]["scores"]
+    assert scores["residual_leakage_v2"]["all_subjects_total"] == 1
+    assert scores["residual_leakage_v2"]["all_subjects_leaked"] == 0
+    assert scores["over_redaction"]["removed_nonpii_characters"] == 0
+    # n=1 is only a functional control: Wilson upper bound cannot establish a win.
+    assert scores["residual_leakage_v2"]["all_leak_rate_ci_high"] > .5
+
+
+def test_infeasible_selection_cannot_open_test_gold(tmp_path, monkeypatch):
+    from analysis import score_gateway_decoding as scoring
+    from analysis.score_res100 import digest, write
+
+    write(tmp_path / "dev-grid.json", [])
+    write(tmp_path / "selection.json", {"registration": {}, "pins": {}, "selected_rule": None,
+                                        "grid_sha256": digest(tmp_path / "dev-grid.json")})
+    monkeypatch.setattr(scoring, "registration", lambda _: {})
+
+    def forbidden(_):
+        pytest.fail("Test gold must not be opened without a feasible frozen rule")
+
+    monkeypatch.setattr(scoring, "freeze", forbidden)
+    with pytest.raises(ValueError, match="No feasible dev decoder"):
+        scoring.test(tmp_path, [0], True)
