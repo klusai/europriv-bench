@@ -16,8 +16,8 @@ metrics:
   - national_id_leakage
 
 description: >
-  A citable-track candidate (currently config_status=dev; not yet validated — pending
-  native-speaker review + IAA, KLU-27) and the SECOND decode-bearing measurement (after
+  A citable-track candidate (currently config_status=dev; RES-77 autonomous LLM-panel audit incomplete;
+  see docs/validation/pl-realskeleton-v1-panel-report.md) and the SECOND decode-bearing measurement (after
   ro-realskeleton-v1): faithful real-structure documents (hospital discharge card
   KARTA INFORMACYJNA, services contract UMOWA, declaration OŚWIADCZENIE, administrative
   letter) with synthetic PII (PESEL-consistent DOB). Headline is national_id_leakage —

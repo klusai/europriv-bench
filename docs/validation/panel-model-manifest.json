@@ -1,0 +1,1233 @@
+{
+  "catalogue_url": "https://openrouter.ai/api/v1/models",
+  "retrieved_date": "2026-10-11",
+  "selected": [
+    {
+      "id": "mistralai/mistral-large-2512",
+      "canonical_slug": "mistralai/mistral-large-2512",
+      "hugging_face_id": "",
+      "name": "Mistral: Mistral Large 3 2512",
+      "created": 1764624472,
+      "description": "Mistral Large 3 2512 is Mistral’s most capable model to date, featuring a sparse mixture-of-experts architecture with 41B active parameters (675B total), and released under the Apache 2.0 license.",
+      "context_length": 262144,
+      "architecture": {
+        "modality": "text+image+file->text",
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Mistral",
+        "instruct_type": null
+      },
+      "pricing": {
+        "prompt": "0.0000005",
+        "completion": "0.0000015",
+        "input_cache_read": "0.00000005"
+      },
+      "top_provider": {
+        "context_length": 262144,
+        "max_completion_tokens": 209715,
+        "is_moderated": false
+      },
+      "per_request_limits": null,
+      "supported_parameters": [
+        "frequency_penalty",
+        "max_tokens",
+        "presence_penalty",
+        "response_format",
+        "seed",
+        "stop",
+        "structured_outputs",
+        "temperature",
+        "tool_choice",
+        "tools",
+        "top_p"
+      ],
+      "default_parameters": {
+        "temperature": 0.0645,
+        "top_p": null,
+        "frequency_penalty": null
+      },
+      "supported_voices": null,
+      "knowledge_cutoff": null,
+      "expiration_date": null,
+      "links": {
+        "details": "/api/v1/models/mistralai/mistral-large-2512/endpoints"
+      },
+      "benchmarks": {
+        "design_arena": [
+          {
+            "arena": "models",
+            "category": "3d",
+            "elo": 1103,
+            "win_rate": 46.9,
+            "rank": 82
+          },
+          {
+            "arena": "models",
+            "category": "asciiart",
+            "elo": 1076,
+            "win_rate": 40.3,
+            "rank": 65
+          },
+          {
+            "arena": "models",
+            "category": "codecategories",
+            "elo": 1145,
+            "win_rate": 47.6,
+            "rank": 85
+          },
+          {
+            "arena": "models",
+            "category": "dataviz",
+            "elo": 1140,
+            "win_rate": 45.7,
+            "rank": 81
+          },
+          {
+            "arena": "models",
+            "category": "gamedev",
+            "elo": 1087,
+            "win_rate": 41.5,
+            "rank": 95
+          },
+          {
+            "arena": "models",
+            "category": "svg",
+            "elo": 992,
+            "win_rate": 38,
+            "rank": 85
+          },
+          {
+            "arena": "models",
+            "category": "uicomponent",
+            "elo": 1105,
+            "win_rate": 43,
+            "rank": 87
+          },
+          {
+            "arena": "models",
+            "category": "website",
+            "elo": 1167,
+            "win_rate": 49.5,
+            "rank": 80
+          }
+        ],
+        "artificial_analysis": {
+          "intelligence_index": 9.3,
+          "coding_index": 20.1,
+          "agentic_index": 1
+        }
+      }
+    },
+    {
+      "id": "qwen/qwen3-235b-a22b-2507",
+      "canonical_slug": "qwen/qwen3-235b-a22b-07-25",
+      "hugging_face_id": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "name": "Qwen: Qwen3 235B A22B Instruct 2507",
+      "created": 1753119555,
+      "description": "Qwen3-235B-A22B-Instruct-2507 is a multilingual, instruction-tuned mixture-of-experts language model based on the Qwen3-235B architecture, with 22B active parameters per forward pass. It is optimized for general-purpose text generation, including instruction following,...",
+      "context_length": 262144,
+      "architecture": {
+        "modality": "text->text",
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Qwen3",
+        "instruct_type": null
+      },
+      "pricing": {
+        "prompt": "0.00000009",
+        "completion": "0.00000055"
+      },
+      "top_provider": {
+        "context_length": 262144,
+        "max_completion_tokens": 16384,
+        "is_moderated": false
+      },
+      "per_request_limits": null,
+      "supported_parameters": [
+        "frequency_penalty",
+        "logit_bias",
+        "logprobs",
+        "max_tokens",
+        "min_p",
+        "presence_penalty",
+        "repetition_penalty",
+        "response_format",
+        "seed",
+        "stop",
+        "structured_outputs",
+        "temperature",
+        "tool_choice",
+        "tools",
+        "top_k",
+        "top_logprobs",
+        "top_p"
+      ],
+      "default_parameters": {},
+      "supported_voices": null,
+      "knowledge_cutoff": "2025-06-30",
+      "expiration_date": null,
+      "links": {
+        "details": "/api/v1/models/qwen/qwen3-235b-a22b-07-25/endpoints"
+      },
+      "benchmarks": {
+        "design_arena": [
+          {
+            "arena": "models",
+            "category": "3d",
+            "elo": 999,
+            "win_rate": 41.1,
+            "rank": 105
+          },
+          {
+            "arena": "models",
+            "category": "codecategories",
+            "elo": 1042,
+            "win_rate": 42.6,
+            "rank": 110
+          },
+          {
+            "arena": "models",
+            "category": "dataviz",
+            "elo": 1073,
+            "win_rate": 49,
+            "rank": 102
+          },
+          {
+            "arena": "models",
+            "category": "gamedev",
+            "elo": 957,
+            "win_rate": 35,
+            "rank": 121
+          },
+          {
+            "arena": "models",
+            "category": "uicomponent",
+            "elo": 968,
+            "win_rate": 38.4,
+            "rank": 111
+          },
+          {
+            "arena": "models",
+            "category": "website",
+            "elo": 1062,
+            "win_rate": 43.6,
+            "rank": 111
+          }
+        ],
+        "artificial_analysis": {
+          "intelligence_index": 12,
+          "coding_index": null,
+          "agentic_index": null
+        }
+      }
+    },
+    {
+      "id": "google/gemini-2.5-flash",
+      "canonical_slug": "google/gemini-2.5-flash",
+      "hugging_face_id": "",
+      "name": "Google: Gemini 2.5 Flash",
+      "created": 1750172488,
+      "description": "Gemini 2.5 Flash is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater...",
+      "context_length": 1048576,
+      "architecture": {
+        "modality": "text+image+file+audio+video->text",
+        "input_modalities": [
+          "file",
+          "image",
+          "text",
+          "audio",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Gemini",
+        "instruct_type": null
+      },
+      "pricing": {
+        "prompt": "0.0000003",
+        "completion": "0.0000025",
+        "image": "0.0000003",
+        "audio": "0.000001",
+        "input_audio_cache": "0.0000001",
+        "web_search": "0.014",
+        "internal_reasoning": "0.0000025",
+        "input_cache_read": "0.00000003",
+        "input_cache_write": "0.0000000833333333333333"
+      },
+      "top_provider": {
+        "context_length": 1048576,
+        "max_completion_tokens": 65535,
+        "is_moderated": false
+      },
+      "per_request_limits": null,
+      "supported_parameters": [
+        "include_reasoning",
+        "max_tokens",
+        "reasoning",
+        "response_format",
+        "seed",
+        "stop",
+        "structured_outputs",
+        "temperature",
+        "tool_choice",
+        "tools",
+        "top_p"
+      ],
+      "default_parameters": {
+        "temperature": null,
+        "top_p": null,
+        "top_k": null,
+        "frequency_penalty": null,
+        "presence_penalty": null,
+        "repetition_penalty": null
+      },
+      "supported_voices": null,
+      "knowledge_cutoff": "2025-01-31",
+      "expiration_date": "2026-10-20",
+      "links": {
+        "details": "/api/v1/models/google/gemini-2.5-flash/endpoints"
+      },
+      "benchmarks": {
+        "design_arena": [
+          {
+            "arena": "models",
+            "category": "3d",
+            "elo": 1074,
+            "win_rate": 47.4,
+            "rank": 94
+          },
+          {
+            "arena": "models",
+            "category": "codecategories",
+            "elo": 1108,
+            "win_rate": 46.9,
+            "rank": 97
+          },
+          {
+            "arena": "models",
+            "category": "dataviz",
+            "elo": 1137,
+            "win_rate": 49.1,
+            "rank": 83
+          },
+          {
+            "arena": "models",
+            "category": "gamedev",
+            "elo": 1073,
+            "win_rate": 44.3,
+            "rank": 100
+          },
+          {
+            "arena": "models",
+            "category": "uicomponent",
+            "elo": 1096,
+            "win_rate": 48.9,
+            "rank": 91
+          },
+          {
+            "arena": "models",
+            "category": "website",
+            "elo": 1118,
+            "win_rate": 47.1,
+            "rank": 98
+          },
+          {
+            "arena": "models",
+            "category": "svg",
+            "elo": 1019,
+            "win_rate": 43.1,
+            "rank": 81
+          }
+        ],
+        "artificial_analysis": {
+          "intelligence_index": 15.5,
+          "coding_index": null,
+          "agentic_index": null
+        }
+      },
+      "reasoning": {
+        "mandatory": false
+      }
+    }
+  ],
+  "providers": {
+    "mistralai/mistral-large-2512": {
+      "data": {
+        "id": "mistralai/mistral-large-2512",
+        "name": "Mistral: Mistral Large 3 2512",
+        "created": 1764624472,
+        "description": "Mistral Large 3 2512 is Mistral’s most capable model to date, featuring a sparse mixture-of-experts architecture with 41B active parameters (675B total), and released under the Apache 2.0 license.",
+        "architecture": {
+          "tokenizer": "Mistral",
+          "instruct_type": null,
+          "modality": "text+image+file->text",
+          "input_modalities": [
+            "text",
+            "image",
+            "file"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "endpoints": [
+          {
+            "name": "Mistral | mistralai/mistral-large-2512",
+            "model_id": "mistralai/mistral-large-2512",
+            "model_name": "Mistral: Mistral Large 3 2512",
+            "context_length": 262144,
+            "pricing": {
+              "prompt": "0.0000005",
+              "completion": "0.0000015",
+              "input_cache_read": "0.00000005",
+              "discount": 0
+            },
+            "provider_name": "Mistral",
+            "tag": "mistral/zdr",
+            "quantization": "unknown",
+            "max_completion_tokens": 209715,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "stop",
+              "frequency_penalty",
+              "presence_penalty",
+              "seed",
+              "response_format",
+              "structured_outputs",
+              "tools",
+              "tool_choice"
+            ],
+            "supports_tool_choice": {
+              "none": false,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 100,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "Mistral | mistralai/mistral-large-2512",
+            "model_id": "mistralai/mistral-large-2512",
+            "model_name": "Mistral: Mistral Large 3 2512",
+            "context_length": 262144,
+            "pricing": {
+              "prompt": "0.00000055",
+              "completion": "0.00000165",
+              "input_cache_read": "0.000000055",
+              "discount": 0
+            },
+            "provider_name": "Mistral",
+            "tag": "mistral/eu",
+            "quantization": "unknown",
+            "max_completion_tokens": 209715,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "stop",
+              "frequency_penalty",
+              "presence_penalty",
+              "seed",
+              "response_format",
+              "structured_outputs",
+              "tools",
+              "tool_choice"
+            ],
+            "supports_tool_choice": {
+              "none": false,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": null,
+            "uptime_last_5m": null,
+            "uptime_last_1d": 100,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          }
+        ]
+      }
+    },
+    "google/gemini-2.5-flash": {
+      "data": {
+        "id": "google/gemini-2.5-flash",
+        "name": "Google: Gemini 2.5 Flash",
+        "created": 1750172488,
+        "description": "Gemini 2.5 Flash is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater...",
+        "architecture": {
+          "tokenizer": "Gemini",
+          "instruct_type": null,
+          "modality": "text+image+file+audio+video->text",
+          "input_modalities": [
+            "file",
+            "image",
+            "text",
+            "audio",
+            "video"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "endpoints": [
+          {
+            "name": "Google | google/gemini-2.5-flash",
+            "model_id": "google/gemini-2.5-flash",
+            "model_name": "Google: Gemini 2.5 Flash",
+            "context_length": 1048576,
+            "pricing": {
+              "prompt": "0.0000003",
+              "completion": "0.0000025",
+              "image": "0.0000003",
+              "audio": "0.000001",
+              "input_audio_cache": "0.0000001",
+              "web_search": "0.014",
+              "internal_reasoning": "0.0000025",
+              "input_cache_read": "0.00000003",
+              "input_cache_write": "0.0000000833333333333333",
+              "discount": 0
+            },
+            "provider_name": "Google",
+            "tag": "google-vertex/eu",
+            "quantization": "unknown",
+            "max_completion_tokens": 65535,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "reasoning",
+              "include_reasoning",
+              "structured_outputs",
+              "response_format",
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "seed",
+              "tools",
+              "tool_choice",
+              "stop"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 100,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "Google | google/gemini-2.5-flash",
+            "model_id": "google/gemini-2.5-flash",
+            "model_name": "Google: Gemini 2.5 Flash",
+            "context_length": 1048576,
+            "pricing": {
+              "prompt": "0.0000003",
+              "completion": "0.0000025",
+              "image": "0.0000003",
+              "audio": "0.000001",
+              "input_audio_cache": "0.0000001",
+              "web_search": "0.014",
+              "internal_reasoning": "0.0000025",
+              "input_cache_read": "0.00000003",
+              "input_cache_write": "0.0000000833333333333333",
+              "discount": 0
+            },
+            "provider_name": "Google",
+            "tag": "google-vertex/global",
+            "quantization": "unknown",
+            "max_completion_tokens": 65535,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "reasoning",
+              "include_reasoning",
+              "structured_outputs",
+              "response_format",
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "seed",
+              "tools",
+              "tool_choice",
+              "stop"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 100,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "Google | google/gemini-2.5-flash",
+            "model_id": "google/gemini-2.5-flash",
+            "model_name": "Google: Gemini 2.5 Flash",
+            "context_length": 1048576,
+            "pricing": {
+              "prompt": "0.00000054",
+              "completion": "0.0000045",
+              "image": "0.00000054",
+              "audio": "0.0000018",
+              "input_audio_cache": "0.00000018",
+              "web_search": "0.014",
+              "internal_reasoning": "0.0000045",
+              "input_cache_read": "0.000000054",
+              "input_cache_write": "0.00000015",
+              "discount": 0
+            },
+            "provider_name": "Google",
+            "tag": "google-vertex/global/priority",
+            "quantization": "unknown",
+            "max_completion_tokens": 65535,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "reasoning",
+              "include_reasoning",
+              "structured_outputs",
+              "response_format",
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "seed",
+              "tools",
+              "tool_choice",
+              "stop"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 100,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "Google AI Studio | google/gemini-2.5-flash",
+            "model_id": "google/gemini-2.5-flash",
+            "model_name": "Google: Gemini 2.5 Flash",
+            "context_length": 1048576,
+            "pricing": {
+              "prompt": "0.00000015",
+              "completion": "0.00000125",
+              "image": "0.00000015",
+              "audio": "0.0000005",
+              "input_audio_cache": "0.00000005",
+              "web_search": "0.014",
+              "internal_reasoning": "0.00000125",
+              "input_cache_read": "0.000000015",
+              "input_cache_write": "0.0000000416666666666667",
+              "discount": 0
+            },
+            "provider_name": "Google AI Studio",
+            "tag": "google-ai-studio/flex",
+            "quantization": "unknown",
+            "max_completion_tokens": 65535,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "reasoning",
+              "include_reasoning",
+              "structured_outputs",
+              "response_format",
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "seed",
+              "tools",
+              "tool_choice",
+              "stop"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": null,
+            "uptime_last_1d": 100,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "Google AI Studio | google/gemini-2.5-flash",
+            "model_id": "google/gemini-2.5-flash",
+            "model_name": "Google: Gemini 2.5 Flash",
+            "context_length": 1048576,
+            "pricing": {
+              "prompt": "0.0000003",
+              "completion": "0.0000025",
+              "image": "0.0000003",
+              "audio": "0.000001",
+              "input_audio_cache": "0.0000001",
+              "web_search": "0.014",
+              "internal_reasoning": "0.0000025",
+              "input_cache_read": "0.00000003",
+              "input_cache_write": "0.0000000833333333333333",
+              "discount": 0
+            },
+            "provider_name": "Google AI Studio",
+            "tag": "google-ai-studio",
+            "quantization": "unknown",
+            "max_completion_tokens": 65535,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "reasoning",
+              "include_reasoning",
+              "structured_outputs",
+              "response_format",
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "seed",
+              "tools",
+              "tool_choice",
+              "stop"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 100,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "Google | google/gemini-2.5-flash",
+            "model_id": "google/gemini-2.5-flash",
+            "model_name": "Google: Gemini 2.5 Flash",
+            "context_length": 1048576,
+            "pricing": {
+              "prompt": "0.0000003",
+              "completion": "0.0000025",
+              "image": "0.0000003",
+              "audio": "0.000001",
+              "input_audio_cache": "0.0000001",
+              "web_search": "0.014",
+              "internal_reasoning": "0.0000025",
+              "input_cache_read": "0.00000003",
+              "input_cache_write": "0.0000000833333333333333",
+              "discount": 0
+            },
+            "provider_name": "Google",
+            "tag": "google-vertex",
+            "quantization": "unknown",
+            "max_completion_tokens": 65535,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "reasoning",
+              "include_reasoning",
+              "structured_outputs",
+              "response_format",
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "seed",
+              "tools",
+              "tool_choice",
+              "stop"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": -5,
+            "uptime_last_30m": 46.666666666666664,
+            "uptime_last_5m": 80,
+            "uptime_last_1d": 37.039610840861705,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "Google AI Studio | google/gemini-2.5-flash",
+            "model_id": "google/gemini-2.5-flash",
+            "model_name": "Google: Gemini 2.5 Flash",
+            "context_length": 1048576,
+            "pricing": {
+              "prompt": "0.00000054",
+              "completion": "0.0000045",
+              "image": "0.00000054",
+              "audio": "0.0000018",
+              "input_audio_cache": "0.00000018",
+              "web_search": "0.014",
+              "internal_reasoning": "0.0000045",
+              "input_cache_read": "0.000000054",
+              "input_cache_write": "0.00000015",
+              "discount": 0
+            },
+            "provider_name": "Google AI Studio",
+            "tag": "google-ai-studio/priority",
+            "quantization": "unknown",
+            "max_completion_tokens": 65535,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "reasoning",
+              "include_reasoning",
+              "structured_outputs",
+              "response_format",
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "seed",
+              "tools",
+              "tool_choice",
+              "stop"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": null,
+            "uptime_last_5m": null,
+            "uptime_last_1d": null,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          }
+        ]
+      }
+    },
+    "qwen/qwen3-235b-a22b-2507": {
+      "data": {
+        "id": "qwen/qwen3-235b-a22b-2507",
+        "name": "Qwen: Qwen3 235B A22B Instruct 2507",
+        "created": 1753119555,
+        "description": "Qwen3-235B-A22B-Instruct-2507 is a multilingual, instruction-tuned mixture-of-experts language model based on the Qwen3-235B architecture, with 22B active parameters per forward pass. It is optimized for general-purpose text generation, including instruction following,...",
+        "architecture": {
+          "tokenizer": "Qwen3",
+          "instruct_type": null,
+          "modality": "text->text",
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "endpoints": [
+          {
+            "name": "GMICloud | qwen/qwen3-235b-a22b-07-25",
+            "model_id": "qwen/qwen3-235b-a22b-2507",
+            "model_name": "Qwen: Qwen3 235B A22B Instruct 2507",
+            "context_length": 262144,
+            "pricing": {
+              "prompt": "0.0000000875",
+              "completion": "0.00000035",
+              "input_cache_read": "0.0000000175",
+              "discount": 0.75
+            },
+            "provider_name": "GMICloud",
+            "tag": "gmicloud/fp8",
+            "quantization": "fp8",
+            "max_completion_tokens": 235929,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "seed",
+              "response_format",
+              "structured_outputs",
+              "tools",
+              "tool_choice",
+              "logprobs",
+              "top_logprobs"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": -5,
+            "uptime_last_30m": 0,
+            "uptime_last_5m": null,
+            "uptime_last_1d": 0,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "DeepInfra | qwen/qwen3-235b-a22b-07-25",
+            "model_id": "qwen/qwen3-235b-a22b-2507",
+            "model_name": "Qwen: Qwen3 235B A22B Instruct 2507",
+            "context_length": 262144,
+            "pricing": {
+              "prompt": "0.00000009",
+              "completion": "0.00000055",
+              "discount": 0
+            },
+            "provider_name": "DeepInfra",
+            "tag": "deepinfra/fp8",
+            "quantization": "fp8",
+            "max_completion_tokens": 16384,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "stop",
+              "frequency_penalty",
+              "presence_penalty",
+              "repetition_penalty",
+              "top_k",
+              "seed",
+              "min_p",
+              "tools",
+              "tool_choice",
+              "logit_bias",
+              "structured_outputs",
+              "response_format"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": false,
+              "function": false
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 89.16666666666667,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "Parasail | qwen/qwen3-235b-a22b-07-25",
+            "model_id": "qwen/qwen3-235b-a22b-2507",
+            "model_name": "Qwen: Qwen3 235B A22B Instruct 2507",
+            "context_length": 131072,
+            "pricing": {
+              "prompt": "0.00000014",
+              "completion": "0.0000008",
+              "input_cache_read": "0.00000005",
+              "discount": 0
+            },
+            "provider_name": "Parasail",
+            "tag": "parasail/fp8",
+            "quantization": "fp8",
+            "max_completion_tokens": 117964,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "frequency_penalty",
+              "presence_penalty",
+              "repetition_penalty",
+              "seed",
+              "stop",
+              "top_k",
+              "logit_bias",
+              "tools",
+              "tool_choice",
+              "response_format",
+              "structured_outputs",
+              "logprobs",
+              "top_logprobs"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 99.93055555555556,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "Venice | qwen/qwen3-235b-a22b-07-25",
+            "model_id": "qwen/qwen3-235b-a22b-2507",
+            "model_name": "Qwen: Qwen3 235B A22B Instruct 2507",
+            "context_length": 128000,
+            "pricing": {
+              "prompt": "0.00000015",
+              "completion": "0.00000075",
+              "discount": 0
+            },
+            "provider_name": "Venice",
+            "tag": "venice/fp8",
+            "quantization": "fp8",
+            "max_completion_tokens": 16384,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "stop",
+              "frequency_penalty",
+              "presence_penalty",
+              "top_k",
+              "response_format",
+              "structured_outputs",
+              "tools",
+              "tool_choice"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": false,
+              "function": false
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 91.13652609006434,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "Nebius | qwen/qwen3-235b-a22b-07-25",
+            "model_id": "qwen/qwen3-235b-a22b-2507",
+            "model_name": "Qwen: Qwen3 235B A22B Instruct 2507",
+            "context_length": 262144,
+            "pricing": {
+              "prompt": "0.0000002",
+              "completion": "0.0000006",
+              "discount": 0
+            },
+            "provider_name": "Nebius",
+            "tag": "nebius/fp8",
+            "quantization": "fp8",
+            "max_completion_tokens": 235929,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "stop",
+              "frequency_penalty",
+              "presence_penalty",
+              "seed",
+              "top_k",
+              "logit_bias",
+              "repetition_penalty",
+              "response_format",
+              "structured_outputs",
+              "tools",
+              "tool_choice"
+            ],
+            "supports_tool_choice": {
+              "none": false,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": -5,
+            "uptime_last_30m": 40,
+            "uptime_last_5m": null,
+            "uptime_last_1d": 96.50837988826815,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "Google | qwen/qwen3-235b-a22b-07-25",
+            "model_id": "qwen/qwen3-235b-a22b-2507",
+            "model_name": "Qwen: Qwen3 235B A22B Instruct 2507",
+            "context_length": 262144,
+            "pricing": {
+              "prompt": "0.00000022",
+              "completion": "0.00000088",
+              "discount": 0
+            },
+            "provider_name": "Google",
+            "tag": "google-vertex/us-south1",
+            "quantization": "unknown",
+            "max_completion_tokens": 16384,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "structured_outputs",
+              "response_format",
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "seed",
+              "top_k",
+              "repetition_penalty",
+              "frequency_penalty",
+              "presence_penalty",
+              "stop",
+              "tools",
+              "tool_choice",
+              "logprobs",
+              "top_logprobs"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 99.93055555555556,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "Google | qwen/qwen3-235b-a22b-07-25",
+            "model_id": "qwen/qwen3-235b-a22b-2507",
+            "model_name": "Qwen: Qwen3 235B A22B Instruct 2507",
+            "context_length": 262144,
+            "pricing": {
+              "prompt": "0.00000025",
+              "completion": "0.000001",
+              "discount": 0
+            },
+            "provider_name": "Google",
+            "tag": "google-vertex/us-south1",
+            "quantization": "unknown",
+            "max_completion_tokens": 16384,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "seed",
+              "response_format"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 99.79166666666667,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          }
+        ]
+      }
+    }
+  }
+}

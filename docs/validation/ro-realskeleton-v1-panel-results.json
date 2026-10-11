@@ -1,0 +1,74 @@
+{
+  "n": 0,
+  "alpha": {},
+  "ratings": {},
+  "bootstrap_replicates": 2000,
+  "execution_errors": {
+    "HTTP Error 429: Too Many Requests": 30,
+    "Unresolved request liability: no further paid calls": 870
+  },
+  "config": "ro-realskeleton-v1",
+  "sampled_n": 300,
+  "population_n": 1500,
+  "strata": {
+    "admin": 75,
+    "clinical": 75,
+    "contract": 75,
+    "declaration": 75
+  },
+  "population_strata": {
+    "clinical": 397,
+    "admin": 377,
+    "contract": 339,
+    "declaration": 387
+  },
+  "seed": 77,
+  "seed_count": 1,
+  "decode": {
+    "subjects": 1123,
+    "consistent": 1123,
+    "explicit_dob_subjects": 397,
+    "failures": [],
+    "pass": true,
+    "ci95": [
+      0.9965909638620625,
+      1.0
+    ]
+  },
+  "majority_gold_errors": 0,
+  "edit_conflicts": 0,
+  "valid_per_model": {
+    "mistralai/mistral-large-2512": 0,
+    "google/gemini-2.5-flash": 0,
+    "qwen/qwen3-235b-a22b-2507": 0
+  },
+  "artifacts": {
+    "n": 0,
+    "flagged": 0,
+    "ci95": null
+  },
+  "gates": {
+    "sample": true,
+    "complete": false,
+    "agreement": false,
+    "ratings": false,
+    "artifacts": false,
+    "decode": true,
+    "gold_errors": false
+  },
+  "passed": false,
+  "config_status": "dev",
+  "provenance": {
+    "revision": "58faa4fa572cd8064818a6e1f8ca6e361b959c00",
+    "protocol_sha256": "c1dcb67199e23e1ff6606996987a80f0ba9967b61682ec6855383c8f2080127c",
+    "sample_manifest_sha256": "e6a0dfef75734aced33b151d7cc61a0581f2b8c5ede99c4624326edd810374a4"
+  },
+  "shared_spend": {
+    "actual_usd": 0,
+    "reserved_usd": 0.1796892,
+    "responses": 0,
+    "attempts": 6,
+    "unknown_cost_requests": 6
+  },
+  "stage_b_run": false
+}

@@ -250,7 +250,7 @@ def run_spec(
         "scores": scores,
         # schema-3 governance markers (per model, config). See leaderboard.py / GOVERNANCE.md.
         # contamination: in_distribution | clean_held_out | unknown (derived from adapter+config).
-        # config_status: dev | citable-validated | real-external-gold (REAL peer-reviewed external
+        # config_status: dev | panel-validated | citable-validated | real-external-gold (REAL peer-reviewed external
         # gold, e.g. TAB ECHR — RES-89); derived from the config, defaults to dev for synthetic.
         "contamination": classify_contamination(adapter.name, spec.dataset.config),
         "config_status": config_status_for(spec.dataset.config),

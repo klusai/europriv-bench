@@ -20,7 +20,8 @@ governance markers:
     but the board's en config is a *different* AI4Privacy generator — and see the KLU-54 low
     eval-loss concern) is ``unknown`` — never ``clean_held_out``.
   * **config_status** — ``dev`` (default; usable for iteration, MUST NOT be cited as a validated
-    result) or ``citable-validated`` (promotable ONLY after native-speaker review + IAA sign-off
+    result), ``panel-validated`` (autonomous LLM-panel gates, never human validation),
+    or ``citable-validated`` (promotable ONLY after native-speaker review + IAA sign-off
     on the gold data — that gate lands in KLU-27). Everything defaults to ``dev`` here: no config
     is citable-validated until that sign-off lands. See GOVERNANCE.md (`config_status` policy).
 """
@@ -42,15 +43,20 @@ CONTAMINATION_VALUES = frozenset({IN_DISTRIBUTION, CLEAN_HELD_OUT, UNKNOWN})
 # native-speaker / IAA sign-off promotes them to ``citable-validated``. RES-89 adds a THIRD,
 # distinct value, ``real-external-gold``: REAL, peer-reviewed, externally-annotated human gold
 # (the TAB ECHR config) — a clear step ABOVE synthetic ``dev``, but on a separate basis from
-# ``citable-validated``. It does NOT depend on the RES-77 native-speaker IAA gate (TAB's
+# ``citable-validated``. It does NOT depend on the KLU-27 human IAA gate (TAB's
 # annotations are already external peer-reviewed human gold); the program's own claim discipline
 # still applies (single-annotator gold, KP-remapped). Distinguishing it from synthetic ``dev`` is
 # the point: real data should never be conflated with the synthetic skeletons on the board.
 DEV = "dev"
 CITABLE_VALIDATED = "citable-validated"
+PANEL_VALIDATED = "panel-validated"
 REAL_EXTERNAL_GOLD = "real-external-gold"
-CONFIG_STATUS_VALUES = frozenset({DEV, CITABLE_VALIDATED, REAL_EXTERNAL_GOLD})
+CONFIG_STATUS_VALUES = frozenset({DEV, CITABLE_VALIDATED, PANEL_VALIDATED, REAL_EXTERNAL_GOLD})
 DEFAULT_CONFIG_STATUS = DEV
+
+# RES-77: populate ONLY after a committed pre-registered panel report passes every gate.
+# Autonomous model judgments never constitute human/native-speaker validation.
+_PANEL_VALIDATED_CONFIGS: frozenset[str] = frozenset()
 
 # Configs that are REAL, peer-reviewed, externally-annotated human gold (config_status =
 # real-external-gold). RES-89: TAB ECHR is the first. These are clean_held_out for every board
@@ -172,9 +178,11 @@ def classify_contamination(adapter: str | None, config: str | None) -> str:
 def config_status_for(config: str | None) -> str:
     """Default config_status for a config: ``real-external-gold`` for REAL peer-reviewed external
     gold (RES-89 TAB ECHR), else ``dev`` (synthetic configs; promoted to ``citable-validated`` only
-    after the KLU-27 native-speaker / IAA sign-off)."""
+    after the KLU-27 human sign-off). RES-77 panel promotion is a separate curated status."""
     if config in _REAL_EXTERNAL_GOLD_CONFIGS:
         return REAL_EXTERNAL_GOLD
+    if config in _PANEL_VALIDATED_CONFIGS:
+        return PANEL_VALIDATED
     return DEFAULT_CONFIG_STATUS
 
 
@@ -191,6 +199,8 @@ def annotate_row(row: dict) -> dict:
         row["contamination"] = classify_contamination(row.get("adapter"), config)
     if "config_status" not in row:
         row["config_status"] = config_status_for(config)
+    if row["config_status"] not in CONFIG_STATUS_VALUES:
+        raise ValueError(f"Unknown config_status: {row['config_status']!r}")
     return row
 
 
