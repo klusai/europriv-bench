@@ -51,8 +51,11 @@ sourcing + legal basis for the **real-skeleton + synthetic-PII** Romanian gold. 
 4. **Break decision-chain links** (don't carry first-instance↔appeal↔ÎCCJ references that re-link).
 5. **Neutralize rare-fact phrasing** (unusual circumstances enabling inference).
 6. Inject synthetic RO PII (CNP/IBAN/CUI/plate/phone/address via `ro_generators`).
-7. **Validate**: native-speaker review + inter-annotator agreement on a sample; confirm no
-   singling-out/linkability remains.
+7. **Validate**: the [RES-77 autonomous LLM-panel protocol](validation/panel-protocol.md)
+   supplies a distinct `panel-validated` route when human annotators are unavailable. It is
+   never native-speaker/human validation and cannot confirm absence of singling-out/linkability.
+   `citable-validated` still requires recorded human review. The current panel run is incomplete;
+   see [RO report](validation/ro-realskeleton-v1-panel-report.md).
 
 ## DO NOT USE
 - Real CNPs or any real litigant/patient PII in a redistributed artifact (Law 190/2018 Art. 4).

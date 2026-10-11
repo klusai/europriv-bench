@@ -33,6 +33,8 @@ presidio = ["presidio-analyzer>=2.2"]
 # writes JSON without it; only `analysis/pareto_dissociation.py` needs matplotlib to render the
 # figure. scipy is used for the exact-binomial McNemar p-value when present (pure-Python fallback).
 analysis = ["matplotlib>=3.8", "scipy>=1.11"]
+# Autonomous LLM-panel audit: local parquet sampling + document bootstrap (RES-77).
+panel = ["pyarrow>=18", "numpy>=2"]
 # Loader tests mock datasets.load_dataset; they need the package, but no model backends.
 dev = ["pytest>=8.0", "ruff>=0.11", "coverage>=7.0", "datasets>=4.0"]
 
