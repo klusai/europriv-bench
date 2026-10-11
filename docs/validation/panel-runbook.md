@@ -60,3 +60,12 @@ Promotion to `panel-validated` is a curated change to `_PANEL_VALIDATED_CONFIGS`
 passing, source-pinned report; the set is currently empty. `citable-validated` remains
 reserved for human sign-off. The sample/CI results never certify native fluency, human IAA,
 real-world privacy, or generalization beyond these authored synthetic templates.
+
+## No-cost Codex follow-up
+
+[Codex session review](codex-review.md) adds 300 raw-text annotations/config plus single-judge
+hypotheses, retaining the frozen judges, thresholds, source and verdict. Reproduce the supplement
+with `panel_report.py --codex-dir docs/validation` and `--overlay-out` pointing to the follow-up
+scratch. The original A/B ledger and reservations remain unchanged. Both configs still stay `dev`;
+Codex cannot substitute for the missing three-family panel. Romanian generator changes are delivered
+as a [tested patch and fix list](codex-ro-quality-fixes.md), not applied outside the assigned worktree.

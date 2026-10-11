@@ -59,4 +59,28 @@ No gold correction is established without the required votes. If no overlay exis
 
 ## Limitations
 
-LLMs can share systematic errors and favor synthetic prose; different model families do not imply independent errors. Agreement is neither human IAA nor evidence of native competence, privacy, real-world representativeness or absence of linkability. One sampling seed and one authored template family limit generalization; document bootstrap CIs omit model and template-family uncertainty. Missing judgments prevent all linguistic/agreement conclusions. No model-performance win, human review, clinical correctness, or real-world privacy guarantee was verified.
+LLMs can share systematic errors and favor synthetic prose; different model families do not imply independent errors. Agreement is neither human IAA nor evidence of native competence, privacy, real-world representativeness or absence of linkability. One sampling seed and one authored template family limit generalization; document bootstrap CIs omit model and template-family uncertainty. Missing frozen-judge outputs prevent a complete panel conclusion. No model-performance win, human review, clinical correctness, or real-world privacy guarantee was verified.
+
+## Codex session follow-up (supplemental)
+
+Codex read all 300 raw sampled documents, froze A, then compared gold. This adds one session judge, with no additional paid API calls; it does not replace a frozen judge.
+[Annotations](codex-annotations-ro.jsonl), [provenance](codex-review-manifest.json), [method and limitations](codex-review.md), [Romanian generator fixes](codex-ro-quality-fixes.md).
+
+| Comparison | n | Alpha [95% CI] | Fluency [95% CI] | Naturalness [95% CI] |
+|---|---:|---|---|---|
+| Codex vs gold | 300 | 0.9456 [0.9456, 0.9456] | 4.0000 [4.0000, 4.0000] | 3.0000 [3.0000, 3.0000] |
+| Expanded four-judge panel | 0 | unavailable | — | — |
+
+| Codex stratum | n | Alpha [95% CI] | Fluency [95% CI] | Naturalness [95% CI] |
+|---|---:|---|---|---|
+| admin | 75 | 1.0000 [1.0000, 1.0000] | 4.0000 [4.0000, 4.0000] | 3.0000 [3.0000, 3.0000] |
+| clinical | 75 | 0.8001 [0.8001, 0.8001] | 4.0000 [4.0000, 4.0000] | 3.0000 [3.0000, 3.0000] |
+| contract | 75 | 1.0000 [1.0000, 1.0000] | 4.0000 [4.0000, 4.0000] | 3.0000 [3.0000, 3.0000] |
+| declaration | 75 | 1.0000 [1.0000, 1.0000] | 4.0000 [4.0000, 4.0000] | 4.0000 [3.0000, 4.0000] |
+
+Codex-vs-gold uses their exact-span union; missing judges are not ABSENT votes. Expanded-panel statistics require all four judges and the union of gold plus those four. A single available judge cannot define panel-vs-panel alpha.
+Sampling seed 77 (one seed); 2,000 stratified document-cluster bootstrap draws, seed 7701. Degenerate CIs reflect identical span/label counts within template strata, not certainty across judges or genres.
+Codex artifact flags: 300/300; Wilson 95% CI 1.0000 [0.9874, 1.0000]. This is not a majority artifact rate.
+Gold-error hypotheses: 75/300 documents (Wilson 95% CI 0.2500 [0.2044, 0.3020]), 300 add/remove operations. These are single-judge votes, not approved repairs.
+Hospitals: ORG_PARTY → FACILITY; treating physicians: PERSON → PROVIDER. Boundaries agree. The contextual clinical refinements follow KP 0.2.0; adjudication is outstanding.
+**Verdict remains NOT VALIDATED (`dev`).** The original three-family completeness and review requirements remain unmet; supplemental descriptive checks cannot change the frozen gates. No dataset regeneration, accepted gold overlay, or model rescoring occurred.

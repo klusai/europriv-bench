@@ -99,6 +99,8 @@ def alpha_counts(raters: list[dict[tuple, str]], units: list[tuple]) -> tuple[fl
     counts = Counter()
     disagreement = 0.0
     m = len(raters)
+    if m < 2:
+        return disagreement, counts  # A single judge cannot supply panel agreement.
     for unit in units:
         c = Counter(r.get(unit, "ABSENT") for r in raters)
         counts.update(c)
@@ -114,19 +116,19 @@ def alpha_from_counts(disagreement: float, counts: Counter) -> float | None:
     return 1 - disagreement / expected if expected else None
 
 
-def alpha_documents(rows: list[dict], annotations: dict) -> list[dict]:
+def alpha_documents(rows: list[dict], annotations: dict, models: tuple[str, ...] = MODELS) -> list[dict]:
     result = []
     for row in rows:
         raters = [
             {(s["start"], s["end"]): s["label"] for s in spans}
-            for spans in [row["spans"], *(annotations[m][row["id"]]["spans"] for m in MODELS)]
+            for spans in [row["spans"], *(annotations[m][row["id"]]["spans"] for m in models)]
         ]
         units = sorted(set().union(*(r.keys() for r in raters)))
         result.append(
             {
                 "stratum": row["stratum"],
                 "panel": alpha_counts(raters[1:], units),
-                **{m: alpha_counts([raters[0], raters[i + 1]], units) for i, m in enumerate(MODELS)},
+                **{m: alpha_counts([raters[0], raters[i + 1]], units) for i, m in enumerate(models)},
             }
         )
     return result

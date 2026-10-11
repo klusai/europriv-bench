@@ -16,10 +16,11 @@ from pathlib import Path
 import numpy as np
 
 from europriv_bench.metrics import wilson_interval
-from europriv_bench.panel import MODELS, alpha_documents, candidates, decode_audit, digest, span_set, stratum
+from europriv_bench.panel import LABELS, MODELS, alpha_documents, candidates, decode_audit, digest, span_set, stratum
 from europriv_bench.panel_api import BudgetClient, atomic_json
 
 ROOT = Path(__file__).resolve().parents[1]
+CODEX = "openai/codex-session"
 
 
 def interval(values) -> list[float] | None:
@@ -28,11 +29,11 @@ def interval(values) -> list[float] | None:
     return np.quantile(values, [0.025, 0.975]).tolist() if len(values) else None
 
 
-def bootstrap(rows, annotations) -> dict:
+def bootstrap(rows, annotations, models=MODELS) -> dict:
     """Stratified document-cluster bootstrap, shared resamples for all alpha/ratings."""
     if not rows:
         return {"n": 0, "alpha": {}, "ratings": {}, "bootstrap_replicates": 2000}
-    documents = alpha_documents(rows, annotations)
+    documents = alpha_documents(rows, annotations, models=models)
     groups = defaultdict(list)
     for i, row in enumerate(rows):
         groups[row["stratum"]].append(i)
@@ -41,7 +42,7 @@ def bootstrap(rows, annotations) -> dict:
         [rng.choice(indices, (2000, len(indices))) for _, indices in sorted(groups.items())], axis=1
     )
     stats = {"n": len(rows), "alpha": {}, "ratings": {}, "bootstrap_replicates": 2000}
-    for metric in ("panel", *MODELS):
+    for metric in ("panel", *models):
         labels = sorted(set().union(*(d[metric][1].keys() for d in documents)))
         counts = np.array([[d[metric][1][label] for label in labels] for d in documents], dtype=float)
         disagreements = np.array([d[metric][0] for d in documents])
@@ -59,7 +60,7 @@ def bootstrap(rows, annotations) -> dict:
             "ci95": interval(draws),
             "defined_bootstraps": int(np.isfinite(draws).sum()),
         }
-    for model in MODELS:
+    for model in models:
         stats["ratings"][model] = {}
         for metric in ("fluency", "naturalness"):
             values = np.array([annotations[model][r["id"]][metric] for r in rows])
@@ -219,6 +220,205 @@ def fmt(value, ci=None):
     return f"{value:.4f}" + (f" [{ci[0]:.4f}, {ci[1]:.4f}]" if ci else "")
 
 
+def load_codex(path, rows, config, manifest):
+    """Fail closed on changed source, judgments, offsets, or incomplete review operations."""
+    metadata = manifest["configs"][config]
+    if hashlib.sha256(path.read_bytes()).hexdigest() != metadata["annotations_file_sha256"]:
+        raise ValueError("Codex annotation file hash mismatch")
+    records = [json.loads(line) for line in path.read_text().splitlines()]
+    indexed = {r["id"]: r for r in rows}
+    if len(records) != len(indexed) or {a["id"] for a in records} != set(indexed):
+        raise ValueError("Codex sample coverage mismatch")
+    frozen = []
+    for a in records:
+        row = indexed[a["id"]]
+        text = row["text"]
+        if (
+            a["config"] != config
+            or a["reviewer"] != CODEX
+            or a["source_revision"] != manifest["source_revision"]
+            or a["stratum"] != row["stratum"]
+            or a["text_sha256"] != row["sha256"]
+            or row["sha256"] != digest(text)
+            or a["raw_utf8_sha256"] != hashlib.sha256(text.encode()).hexdigest()
+        ):
+            raise ValueError("Codex source mismatch")
+        for metric in ("fluency", "naturalness"):
+            if type(a[metric]) is not int or not 1 <= a[metric] <= 5:
+                raise ValueError("Invalid Codex rating")
+        if not isinstance(a["reason"], str) or not a["reason"].strip():
+            raise ValueError("Missing Codex rating reason")
+        if not isinstance(a["artifacts"], list) or any(not isinstance(x, str) for x in a["artifacts"]):
+            raise ValueError("Invalid Codex artifacts")
+        end = 0
+        for span in a["spans"]:
+            start, stop = span["start"], span["end"]
+            if (
+                type(start) is not int
+                or type(stop) is not int
+                or not end <= start < stop <= len(text)
+                or span["label"] not in LABELS
+                or text[start:stop] != span["text"]
+            ):
+                raise ValueError("Invalid Codex span/offset")
+            end = stop
+        stage_a = {k: v for k, v in a.items() if k not in {"stage_a_sha256", "gold_errors"}}
+        stage_a["gold_review_status"] = "pending_after_A_freeze"
+        if digest(stage_a) != a["stage_a_sha256"]:
+            raise ValueError("Codex stage A changed after freeze")
+        frozen.append(stage_a)
+        proposals = candidates(row, [a])
+        if len(proposals) != len(a["gold_errors"]):
+            raise ValueError("Incomplete Codex gold review")
+        for proposal, vote in zip(proposals, a["gold_errors"]):
+            if any(vote[k] != v for k, v in proposal.items()) or type(vote["approve"]) is not bool:
+                raise ValueError("Codex review does not match candidate")
+            if not isinstance(vote["reason"], str) or not vote["reason"].strip():
+                raise ValueError("Codex review reason missing")
+    frozen_bytes = "".join(json.dumps(a, ensure_ascii=False) + "\n" for a in frozen).encode()
+    if (
+        digest(frozen) != metadata["stage_a_payload_sha256"]
+        or hashlib.sha256(frozen_bytes).hexdigest() != metadata["stage_a_file_sha256"]
+    ):
+        raise ValueError("Codex frozen file/payload mismatch")
+    return {a["id"]: a for a in records}
+
+
+def supplemental(rows, annotations, codex):
+    """Descriptive added-judge audit; never substitutes for frozen judges or B votes."""
+    combined = {**annotations, CODEX: codex}
+    models = (*MODELS, CODEX)
+    full = [r for r in rows if all(r["id"] in combined.get(m, {}) for m in models)]
+    single = bootstrap(rows, {CODEX: codex}, models=(CODEX,))
+    flagged = sum(bool(a["artifacts"]) for a in codex.values())
+    affected = sum(any(v["approve"] for v in a["gold_errors"]) for a in codex.values())
+    operations = sum(v["approve"] for a in codex.values() for v in a["gold_errors"])
+    discrepancies = []
+    for row in rows:
+        a = codex[row["id"]]
+        raters = {"gold": row["spans"], CODEX: a["spans"]}
+        raters.update({m: annotations[m][row["id"]]["spans"] for m in MODELS if row["id"] in annotations.get(m, {})})
+        labels = {m: {(s["start"], s["end"]): s["label"] for s in spans} for m, spans in raters.items()}
+        for start, end in sorted(set().union(*(r.keys() for r in labels.values()))):
+            choices = {m: r.get((start, end), "ABSENT") for m, r in labels.items()}
+            if len(set(choices.values())) > 1:
+                discrepancies.append(
+                    dict(
+                        id=row["id"],
+                        kind="supplemental_span",
+                        model=CODEX,
+                        start=start,
+                        end=end,
+                        text=row["text"][start:end],
+                        details=choices,
+                    )
+                )
+        for artifact in a["artifacts"]:
+            discrepancies.append(dict(id=row["id"], kind="supplemental_artifact", model=CODEX, details=artifact))
+        for vote in a["gold_errors"]:
+            discrepancies.append(
+                dict(
+                    id=row["id"],
+                    kind="supplemental_gold_review",
+                    model=CODEX,
+                    start=vote["start"],
+                    end=vote["end"],
+                    text=vote["text"],
+                    details=vote,
+                )
+            )
+        for metric in ("fluency", "naturalness"):
+            values = {m: combined[m][row["id"]][metric] for m in models if row["id"] in combined.get(m, {})}
+            if len(set(values.values())) > 1:
+                discrepancies.append(dict(id=row["id"], kind="supplemental_" + metric, details=values))
+    ratings = single["ratings"][CODEX]
+    alpha = single["alpha"][CODEX]
+    return {
+        "judge": CODEX,
+        "n": len(rows),
+        "models": models,
+        "valid_per_model": {m: sum(r["id"] in combined.get(m, {}) for r in rows) for m in models},
+        "codex_vs_gold": single,
+        "expanded_panel": bootstrap(full, combined, models=models),
+        "by_stratum": {
+            group: bootstrap([r for r in rows if r["stratum"] == group], {CODEX: codex}, models=(CODEX,))
+            for group in sorted({r["stratum"] for r in rows})
+        },
+        "artifacts": {"n": len(rows), "flagged": flagged, "ci95": list(wilson_interval(flagged, len(rows)))},
+        "gold_hypotheses": {
+            "documents": affected,
+            "operations": operations,
+            "ci95_documents": list(wilson_interval(affected, len(rows))),
+            "majority_adjudicated": False,
+        },
+        "descriptive_checks": {
+            "codex_alpha_ge_080": alpha["estimate"] is not None and alpha["estimate"] >= 0.8,
+            "codex_medians_ge_4": all(v["median"] >= 4 for v in ratings.values()),
+            "codex_artifacts_le_005": flagged / len(rows) <= 0.05,
+            "no_codex_gold_hypotheses": operations == 0,
+        },
+        "changes_frozen_verdict": False,
+    }, discrepancies
+
+
+def supplemental_markdown(s, config):
+    single = s["codex_vs_gold"]
+    alpha, ratings = single["alpha"][CODEX], single["ratings"][CODEX]
+    art, gold = s["artifacts"], s["gold_hypotheses"]
+    lang = config[:2]
+    lines = [
+        "",
+        "## Codex session follow-up (supplemental)",
+        "",
+        f"Codex read all {s['n']} raw sampled documents, froze A, then compared gold. "
+        "This adds one session judge, with no additional paid API calls; it does not replace a frozen judge.",
+        f"[Annotations](codex-annotations-{lang}.jsonl), [provenance](codex-review-manifest.json), "
+        "[method and limitations](codex-review.md), [Romanian generator fixes](codex-ro-quality-fixes.md).",
+        "",
+        "| Comparison | n | Alpha [95% CI] | Fluency [95% CI] | Naturalness [95% CI] |",
+        "|---|---:|---|---|---|",
+        f"| Codex vs gold | {s['n']} | {fmt(alpha['estimate'], alpha['ci95'])} | "
+        f"{fmt(ratings['fluency']['median'], ratings['fluency']['ci95'])} | "
+        f"{fmt(ratings['naturalness']['median'], ratings['naturalness']['ci95'])} |",
+        f"| Expanded four-judge panel | {s['expanded_panel']['n']} | "
+        + fmt(
+            s["expanded_panel"]["alpha"].get("panel", {}).get("estimate"),
+            s["expanded_panel"]["alpha"].get("panel", {}).get("ci95"),
+        )
+        + " | — | — |",
+        "",
+        "| Codex stratum | n | Alpha [95% CI] | Fluency [95% CI] | Naturalness [95% CI] |",
+        "|---|---:|---|---|---|",
+    ]
+    for group, stats in s["by_stratum"].items():
+        a, r = stats["alpha"][CODEX], stats["ratings"][CODEX]
+        lines.append(
+            f"| {group} | {stats['n']} | {fmt(a['estimate'], a['ci95'])} | "
+            f"{fmt(r['fluency']['median'], r['fluency']['ci95'])} | "
+            f"{fmt(r['naturalness']['median'], r['naturalness']['ci95'])} |"
+        )
+    lines += [
+        "",
+        "Codex-vs-gold uses their exact-span union; missing judges are not ABSENT votes. "
+        "Expanded-panel statistics require all four judges and the union of gold plus those four. "
+        "A single available judge cannot define panel-vs-panel alpha.",
+        "Sampling seed 77 (one seed); 2,000 stratified document-cluster bootstrap draws, seed 7701. "
+        "Degenerate CIs reflect identical span/label counts within template strata, not certainty across judges or genres.",
+        f"Codex artifact flags: {art['flagged']}/{art['n']}; Wilson 95% CI "
+        f"{fmt(art['flagged'] / art['n'], art['ci95'])}. This is not a majority artifact rate.",
+        f"Gold-error hypotheses: {gold['documents']}/{s['n']} documents "
+        f"(Wilson 95% CI {fmt(gold['documents'] / s['n'], gold['ci95_documents'])}), "
+        f"{gold['operations']} add/remove operations. These are single-judge votes, not approved repairs.",
+        "Hospitals: ORG_PARTY → FACILITY; treating physicians: PERSON → PROVIDER. "
+        "Boundaries agree. The contextual clinical refinements follow KP 0.2.0; adjudication is outstanding.",
+        "**Verdict remains NOT VALIDATED (`dev`).** The original three-family completeness and review "
+        "requirements remain unmet; supplemental descriptive checks cannot change the frozen gates. "
+        "No dataset regeneration, accepted gold overlay, or model rescoring occurred.",
+        "",
+    ]
+    return "\n".join(lines)
+
+
 def markdown(stats, provenance, spend):
     config = stats["config"]
     lines = [
@@ -310,17 +510,26 @@ def markdown(stats, provenance, spend):
         "independent errors. Agreement is neither human IAA nor evidence of native competence, privacy, "
         "real-world representativeness or absence of linkability. One sampling seed and one authored template "
         "family limit generalization; document bootstrap CIs omit model and template-family uncertainty. "
-        "Missing judgments prevent all linguistic/agreement conclusions. No model-performance win, human "
+        "Missing frozen-judge outputs prevent a complete panel conclusion. No model-performance win, human "
         "review, clinical correctness, or real-world privacy guarantee was verified.",
         "",
     ]
-    return "\n".join(lines)
+    result = "\n".join(lines)
+    if "codex_supplement" in stats:
+        result += supplemental_markdown(stats["codex_supplement"], config)
+    return result
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--scratch", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument(
+        "--codex-dir", type=Path, help="Optional frozen session annotations; never changes original gates"
+    )
+    parser.add_argument(
+        "--overlay-out", type=Path, help="Write overlays here instead of the original execution scratch"
+    )
     args = parser.parse_args()
     scratch, out = args.scratch, args.out
     out.mkdir(parents=True, exist_ok=True)
@@ -338,6 +547,12 @@ def main():
         "protocol_sha256": stage_a["protocol_sha256"],
         "sample_manifest_sha256": hashlib.sha256((scratch / "sample-manifest.json").read_bytes()).hexdigest(),
     }
+    codex_manifest = None
+    if args.codex_dir:
+        codex_manifest = json.loads((args.codex_dir / "codex-review-manifest.json").read_text())
+        for key, value in provenance.items():
+            if codex_manifest["source_revision" if key == "revision" else key] != value:
+                raise ValueError("Codex protocol/sample/revision differs from frozen run")
     spend = BudgetClient(scratch / "cache", stage_a["protocol_sha256"], offline=True).totals()
     atomic_json(out / "panel-sample-manifest.json", manifest)
     results = {}
@@ -357,8 +572,15 @@ def main():
                     {"id": error["id"], "kind": "missing_review", "model": error["model"], "details": error["error"]}
                 )
         stats.update(provenance=provenance, shared_spend=spend, stage_b_run=bool(stage_b))
+        if codex_manifest:
+            path = args.codex_dir / codex_manifest["configs"][config]["annotations_file"]
+            codex = load_codex(path, rows, config, codex_manifest)
+            supplement, extra = supplemental(rows, stage_a["annotations"][config], codex)
+            supplement["provenance"] = codex_manifest["configs"][config]
+            stats["codex_supplement"] = supplement
+            discrepancies.extend(extra)
         atomic_json(out / f"{config}-panel-results.json", stats)
-        atomic_json(scratch / f"{config}-gold-overlay.json", overlays)
+        atomic_json((args.overlay_out or scratch) / f"{config}-gold-overlay.json", overlays)
         with (out / f"{config}-disagreements.csv").open("w", newline="") as f:
             writer = csv.DictWriter(
                 f, lineterminator="\n", fieldnames=["id", "kind", "model", "start", "end", "text", "details"]
