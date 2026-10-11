@@ -6,7 +6,7 @@ from urllib.error import HTTPError
 import pytest
 
 from analysis.panel_round2 import request
-from europriv_bench.panel import MODELS
+from europriv_bench.panel import MODELS, decode_audit, stratum
 from europriv_bench.panel_api import CAP, atomic_json, reservation
 from europriv_bench.panel_round2_api import RetryBudgetClient
 
@@ -76,3 +76,27 @@ def test_provider_fallback_preserves_exact_models():
         req = request(model, [], "a")
         assert req["model"] == model and "models" not in req
         assert "only" not in req["provider"] and req["provider"]["allow_fallbacks"]
+
+
+@pytest.mark.parametrize(
+    "country,value,dob,field,correct,wrong",
+    [
+        ("RO", "2680219165213", "Data nașterii: 19.02.1968", "sex", "feminin", "masculin"),
+        ("PL", "52040803927", "Data urodzenia: 08.04.1952", "płeć", "żeńska", "męska"),
+    ],
+)
+def test_v2_decode_checks_textual_sex(country, value, dob, field, correct, wrong):
+    row = {
+        "text": f"{value} {dob}; {field}: {correct}",
+        "domain": "clinical",
+        "spans": [{"start": 0, "end": len(value), "label": "NATIONAL_ID"}],
+    }
+    result = decode_audit([row], country)
+    assert result["pass"] and result["explicit_sex_subjects"] == 1
+    assert result["explicit_dob_subjects"] == 1
+    assert not decode_audit([{**row, "text": row["text"].replace(correct, wrong)}], country)["pass"]
+    assert not decode_audit([{**row, "text": row["text"].replace(correct, "unknown")}], country)["pass"]
+
+
+def test_v2_clinical_heading_uses_domain():
+    assert stratum({"domain": "clinical", "text": "INFORMACJA Z KONSULTACJI LEKARSKIEJ"}) == "clinical"

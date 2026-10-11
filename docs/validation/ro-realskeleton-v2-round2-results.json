@@ -1,0 +1,3438 @@
+{
+  "protocol_sha256": "9a59bbbf24bb1cda8bf2c5c7ffeacd0a5dd623bcda48179e89e78d125e293a99",
+  "sample_sha256": "4c4e1e8742ed2861cba363f27a0bb86ffcd7bca9d653eee090abc8b9cd1e75b4",
+  "source_commit": "79c7a91c47be20c8d214b05b09c2850fe8049037",
+  "panel": {
+    "n": 5,
+    "alpha": {
+      "panel": {
+        "estimate": 0.8298412698412698,
+        "ci95": [
+          0.8298412698412698,
+          0.8298412698412698
+        ],
+        "defined_bootstraps": 2000
+      },
+      "mistralai/mistral-large-2512": {
+        "estimate": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "defined_bootstraps": 2000
+      },
+      "google/gemini-2.5-flash": {
+        "estimate": 0.8719424460431655,
+        "ci95": [
+          0.8719424460431655,
+          0.8719424460431655
+        ],
+        "defined_bootstraps": 2000
+      },
+      "qwen/qwen3-235b-a22b-2507": {
+        "estimate": 0.747517730496454,
+        "ci95": [
+          0.747517730496454,
+          0.747517730496454
+        ],
+        "defined_bootstraps": 2000
+      }
+    },
+    "ratings": {
+      "mistralai/mistral-large-2512": {
+        "fluency": {
+          "median": 5.0,
+          "ci95": [
+            5.0,
+            5.0
+          ]
+        },
+        "naturalness": {
+          "median": 5.0,
+          "ci95": [
+            5.0,
+            5.0
+          ]
+        }
+      },
+      "google/gemini-2.5-flash": {
+        "fluency": {
+          "median": 5.0,
+          "ci95": [
+            5.0,
+            5.0
+          ]
+        },
+        "naturalness": {
+          "median": 5.0,
+          "ci95": [
+            5.0,
+            5.0
+          ]
+        }
+      },
+      "qwen/qwen3-235b-a22b-2507": {
+        "fluency": {
+          "median": 5.0,
+          "ci95": [
+            5.0,
+            5.0
+          ]
+        },
+        "naturalness": {
+          "median": 5.0,
+          "ci95": [
+            5.0,
+            5.0
+          ]
+        }
+      }
+    },
+    "bootstrap_replicates": 2000,
+    "execution_errors": {},
+    "config": "ro-realskeleton-v2",
+    "sampled_n": 300,
+    "population_n": 1500,
+    "strata": {
+      "admin": 75,
+      "clinical": 75,
+      "contract": 75,
+      "declaration": 75
+    },
+    "population_strata": {
+      "contract": 417,
+      "declaration": 342,
+      "admin": 370,
+      "clinical": 371
+    },
+    "seed": 7712,
+    "seed_count": 1,
+    "decode": {
+      "subjects": 1130,
+      "consistent": 1130,
+      "explicit_dob_subjects": 371,
+      "explicit_sex_subjects": 371,
+      "explicit_dob_consistent": 371,
+      "explicit_sex_consistent": 371,
+      "failures": [],
+      "pass": true,
+      "ci95": [
+        0.996612010237734,
+        1.0
+      ],
+      "explicit_dob_ci95": [
+        0.9897518183454066,
+        1.0
+      ],
+      "explicit_sex_ci95": [
+        0.9897518183454066,
+        1.0
+      ]
+    },
+    "majority_gold_errors": 0,
+    "edit_conflicts": 0,
+    "valid_per_model": {
+      "mistralai/mistral-large-2512": 5,
+      "google/gemini-2.5-flash": 5,
+      "qwen/qwen3-235b-a22b-2507": 5
+    },
+    "artifacts": {
+      "flagged": 0,
+      "n": 5,
+      "ci95": [
+        2.7755575615628914e-17,
+        0.43448146575265334
+      ]
+    },
+    "gates": {
+      "sample": true,
+      "complete": false,
+      "agreement": false,
+      "ratings": true,
+      "artifacts": true,
+      "decode": true,
+      "gold_errors": false
+    },
+    "passed": false,
+    "config_status": "dev",
+    "inference_seed": 77,
+    "scope": "Only complete external cases; incomplete coverage cannot establish any config-wide pass",
+    "by_type": {
+      "contract": {
+        "n": 0,
+        "alpha": {},
+        "ratings": {},
+        "bootstrap_replicates": 2000,
+        "artifacts_per_judge": {
+          "mistralai/mistral-large-2512": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          },
+          "google/gemini-2.5-flash": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          },
+          "qwen/qwen3-235b-a22b-2507": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          }
+        }
+      },
+      "clinical": {
+        "n": 0,
+        "alpha": {},
+        "ratings": {},
+        "bootstrap_replicates": 2000,
+        "artifacts_per_judge": {
+          "mistralai/mistral-large-2512": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          },
+          "google/gemini-2.5-flash": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          },
+          "qwen/qwen3-235b-a22b-2507": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          }
+        }
+      },
+      "admin": {
+        "n": 5,
+        "alpha": {
+          "panel": {
+            "estimate": 0.8298412698412698,
+            "ci95": [
+              0.8298412698412698,
+              0.8298412698412698
+            ],
+            "defined_bootstraps": 2000
+          },
+          "mistralai/mistral-large-2512": {
+            "estimate": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ],
+            "defined_bootstraps": 2000
+          },
+          "google/gemini-2.5-flash": {
+            "estimate": 0.8719424460431655,
+            "ci95": [
+              0.8719424460431655,
+              0.8719424460431655
+            ],
+            "defined_bootstraps": 2000
+          },
+          "qwen/qwen3-235b-a22b-2507": {
+            "estimate": 0.747517730496454,
+            "ci95": [
+              0.747517730496454,
+              0.747517730496454
+            ],
+            "defined_bootstraps": 2000
+          }
+        },
+        "ratings": {
+          "mistralai/mistral-large-2512": {
+            "fluency": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            },
+            "naturalness": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            }
+          },
+          "google/gemini-2.5-flash": {
+            "fluency": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            },
+            "naturalness": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            }
+          },
+          "qwen/qwen3-235b-a22b-2507": {
+            "fluency": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            },
+            "naturalness": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            }
+          }
+        },
+        "bootstrap_replicates": 2000,
+        "artifacts_per_judge": {
+          "mistralai/mistral-large-2512": {
+            "flagged": 0,
+            "n": 5,
+            "ci95": [
+              2.7755575615628914e-17,
+              0.43448146575265334
+            ]
+          },
+          "google/gemini-2.5-flash": {
+            "flagged": 0,
+            "n": 5,
+            "ci95": [
+              2.7755575615628914e-17,
+              0.43448146575265334
+            ]
+          },
+          "qwen/qwen3-235b-a22b-2507": {
+            "flagged": 0,
+            "n": 5,
+            "ci95": [
+              2.7755575615628914e-17,
+              0.43448146575265334
+            ]
+          }
+        }
+      },
+      "declaration": {
+        "n": 0,
+        "alpha": {},
+        "ratings": {},
+        "bootstrap_replicates": 2000,
+        "artifacts_per_judge": {
+          "mistralai/mistral-large-2512": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          },
+          "google/gemini-2.5-flash": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          },
+          "qwen/qwen3-235b-a22b-2507": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          }
+        }
+      }
+    }
+  },
+  "codex": {
+    "overall": {
+      "n": 300,
+      "alpha": {
+        "panel": {
+          "estimate": null,
+          "ci95": null,
+          "defined_bootstraps": 0
+        },
+        "openai/codex-session": {
+          "estimate": 0.911711851278079,
+          "ci95": [
+            0.911711851278079,
+            0.911711851278079
+          ],
+          "defined_bootstraps": 2000
+        }
+      },
+      "ratings": {
+        "openai/codex-session": {
+          "fluency": {
+            "median": 5.0,
+            "ci95": [
+              5.0,
+              5.0
+            ]
+          },
+          "naturalness": {
+            "median": 5.0,
+            "ci95": [
+              5.0,
+              5.0
+            ]
+          }
+        }
+      },
+      "bootstrap_replicates": 2000,
+      "artifacts_per_judge": {
+        "openai/codex-session": {
+          "flagged": 75,
+          "n": 300,
+          "ci95": [
+            0.2043699748164734,
+            0.3019514854180529
+          ]
+        }
+      }
+    },
+    "by_type": {
+      "contract": {
+        "n": 75,
+        "alpha": {
+          "panel": {
+            "estimate": null,
+            "ci95": null,
+            "defined_bootstraps": 0
+          },
+          "openai/codex-session": {
+            "estimate": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ],
+            "defined_bootstraps": 2000
+          }
+        },
+        "ratings": {
+          "openai/codex-session": {
+            "fluency": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            },
+            "naturalness": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            }
+          }
+        },
+        "bootstrap_replicates": 2000,
+        "artifacts_per_judge": {
+          "openai/codex-session": {
+            "flagged": 0,
+            "n": 75,
+            "ci95": [
+              0.0,
+              0.04872365402770864
+            ]
+          }
+        }
+      },
+      "clinical": {
+        "n": 75,
+        "alpha": {
+          "panel": {
+            "estimate": null,
+            "ci95": null,
+            "defined_bootstraps": 0
+          },
+          "openai/codex-session": {
+            "estimate": 0.6593181818181818,
+            "ci95": [
+              0.6593181818181818,
+              0.6593181818181818
+            ],
+            "defined_bootstraps": 2000
+          }
+        },
+        "ratings": {
+          "openai/codex-session": {
+            "fluency": {
+              "median": 5.0,
+              "ci95": [
+                4.0,
+                5.0
+              ]
+            },
+            "naturalness": {
+              "median": 4.0,
+              "ci95": [
+                4.0,
+                4.0
+              ]
+            }
+          }
+        },
+        "bootstrap_replicates": 2000,
+        "artifacts_per_judge": {
+          "openai/codex-session": {
+            "flagged": 75,
+            "n": 75,
+            "ci95": [
+              0.9512763459722913,
+              1.0
+            ]
+          }
+        }
+      },
+      "admin": {
+        "n": 75,
+        "alpha": {
+          "panel": {
+            "estimate": null,
+            "ci95": null,
+            "defined_bootstraps": 0
+          },
+          "openai/codex-session": {
+            "estimate": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ],
+            "defined_bootstraps": 2000
+          }
+        },
+        "ratings": {
+          "openai/codex-session": {
+            "fluency": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            },
+            "naturalness": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            }
+          }
+        },
+        "bootstrap_replicates": 2000,
+        "artifacts_per_judge": {
+          "openai/codex-session": {
+            "flagged": 0,
+            "n": 75,
+            "ci95": [
+              0.0,
+              0.04872365402770864
+            ]
+          }
+        }
+      },
+      "declaration": {
+        "n": 75,
+        "alpha": {
+          "panel": {
+            "estimate": null,
+            "ci95": null,
+            "defined_bootstraps": 0
+          },
+          "openai/codex-session": {
+            "estimate": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ],
+            "defined_bootstraps": 2000
+          }
+        },
+        "ratings": {
+          "openai/codex-session": {
+            "fluency": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            },
+            "naturalness": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            }
+          }
+        },
+        "bootstrap_replicates": 2000,
+        "artifacts_per_judge": {
+          "openai/codex-session": {
+            "flagged": 0,
+            "n": 75,
+            "ci95": [
+              0.0,
+              0.04872365402770864
+            ]
+          }
+        }
+      }
+    }
+  },
+  "codex_disagreements": [
+    {
+      "id": "5",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 71,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Sibiu"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 71,
+          "label": "FACILITY",
+          "text": "Centrul Medical Sibiu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 801,
+          "end": 814,
+          "label": "PERSON",
+          "text": "Maria Dumitru"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 801,
+          "end": 814,
+          "label": "PROVIDER",
+          "text": "Maria Dumitru"
+        }
+      ]
+    },
+    {
+      "id": "21",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 77,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 77,
+          "label": "FACILITY",
+          "text": "Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 756,
+          "end": 771,
+          "label": "PERSON",
+          "text": "Bogdan Munteanu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 756,
+          "end": 771,
+          "label": "PROVIDER",
+          "text": "Bogdan Munteanu"
+        }
+      ]
+    },
+    {
+      "id": "73",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Constanța"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical Constanța"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 816,
+          "end": 832,
+          "label": "PERSON",
+          "text": "Mihai Constantin"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 816,
+          "end": 832,
+          "label": "PROVIDER",
+          "text": "Mihai Constantin"
+        }
+      ]
+    },
+    {
+      "id": "81",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 77,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 77,
+          "label": "FACILITY",
+          "text": "Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 821,
+          "end": 837,
+          "label": "PERSON",
+          "text": "Maria Constantin"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 821,
+          "end": 837,
+          "label": "PROVIDER",
+          "text": "Maria Constantin"
+        }
+      ]
+    },
+    {
+      "id": "99",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 73,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Craiova"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 73,
+          "label": "FACILITY",
+          "text": "Centrul Medical Craiova"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 756,
+          "end": 767,
+          "label": "PERSON",
+          "text": "Ștefan Radu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 756,
+          "end": 767,
+          "label": "PROVIDER",
+          "text": "Ștefan Radu"
+        }
+      ]
+    },
+    {
+      "id": "132",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 77,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 77,
+          "label": "FACILITY",
+          "text": "Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 794,
+          "end": 808,
+          "label": "PERSON",
+          "text": "Raluca Popescu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 794,
+          "end": 808,
+          "label": "PROVIDER",
+          "text": "Raluca Popescu"
+        }
+      ]
+    },
+    {
+      "id": "137",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 70,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Iași"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 70,
+          "label": "FACILITY",
+          "text": "Centrul Medical Iași"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 739,
+          "end": 752,
+          "label": "PERSON",
+          "text": "Maria Dumitru"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 739,
+          "end": 752,
+          "label": "PROVIDER",
+          "text": "Maria Dumitru"
+        }
+      ]
+    },
+    {
+      "id": "205",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 73,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Craiova"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 73,
+          "label": "FACILITY",
+          "text": "Centrul Medical Craiova"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 796,
+          "end": 808,
+          "label": "PERSON",
+          "text": "Gabriela Pop"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 796,
+          "end": 808,
+          "label": "PROVIDER",
+          "text": "Gabriela Pop"
+        }
+      ]
+    },
+    {
+      "id": "225",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical București"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical București"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 802,
+          "end": 814,
+          "label": "PERSON",
+          "text": "Alina Stoica"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 802,
+          "end": 814,
+          "label": "PROVIDER",
+          "text": "Alina Stoica"
+        }
+      ]
+    },
+    {
+      "id": "253",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 71,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Sibiu"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 71,
+          "label": "FACILITY",
+          "text": "Centrul Medical Sibiu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 806,
+          "end": 822,
+          "label": "PERSON",
+          "text": "Cătălin Munteanu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 806,
+          "end": 822,
+          "label": "PROVIDER",
+          "text": "Cătălin Munteanu"
+        }
+      ]
+    },
+    {
+      "id": "272",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Constanța"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical Constanța"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 748,
+          "end": 758,
+          "label": "PERSON",
+          "text": "Raluca Pop"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 748,
+          "end": 758,
+          "label": "PROVIDER",
+          "text": "Raluca Pop"
+        }
+      ]
+    },
+    {
+      "id": "285",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 77,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 77,
+          "label": "FACILITY",
+          "text": "Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 787,
+          "end": 801,
+          "label": "PERSON",
+          "text": "Bogdan Dumitru"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 787,
+          "end": 801,
+          "label": "PROVIDER",
+          "text": "Bogdan Dumitru"
+        }
+      ]
+    },
+    {
+      "id": "301",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 70,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Iași"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 70,
+          "label": "FACILITY",
+          "text": "Centrul Medical Iași"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 742,
+          "end": 754,
+          "label": "PERSON",
+          "text": "Maria Stoica"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 742,
+          "end": 754,
+          "label": "PROVIDER",
+          "text": "Maria Stoica"
+        }
+      ]
+    },
+    {
+      "id": "321",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical București"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical București"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 799,
+          "end": 815,
+          "label": "PERSON",
+          "text": "Cristian Popescu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 799,
+          "end": 815,
+          "label": "PROVIDER",
+          "text": "Cristian Popescu"
+        }
+      ]
+    },
+    {
+      "id": "325",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 70,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Iași"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 70,
+          "label": "FACILITY",
+          "text": "Centrul Medical Iași"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 793,
+          "end": 806,
+          "label": "PERSON",
+          "text": "Ștefan Stoica"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 793,
+          "end": 806,
+          "label": "PROVIDER",
+          "text": "Ștefan Stoica"
+        }
+      ]
+    },
+    {
+      "id": "337",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 77,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 77,
+          "label": "FACILITY",
+          "text": "Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 767,
+          "end": 783,
+          "label": "PERSON",
+          "text": "Alina Constantin"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 767,
+          "end": 783,
+          "label": "PROVIDER",
+          "text": "Alina Constantin"
+        }
+      ]
+    },
+    {
+      "id": "338",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical București"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical București"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 802,
+          "end": 819,
+          "label": "PERSON",
+          "text": "Andrei Constantin"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 802,
+          "end": 819,
+          "label": "PROVIDER",
+          "text": "Andrei Constantin"
+        }
+      ]
+    },
+    {
+      "id": "340",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 73,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Craiova"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 73,
+          "label": "FACILITY",
+          "text": "Centrul Medical Craiova"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 804,
+          "end": 820,
+          "label": "PERSON",
+          "text": "Cristian Dumitru"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 804,
+          "end": 820,
+          "label": "PROVIDER",
+          "text": "Cristian Dumitru"
+        }
+      ]
+    },
+    {
+      "id": "348",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 72,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Oradea"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 72,
+          "label": "FACILITY",
+          "text": "Centrul Medical Oradea"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 801,
+          "end": 816,
+          "label": "PERSON",
+          "text": "Raluca Munteanu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 801,
+          "end": 816,
+          "label": "PROVIDER",
+          "text": "Raluca Munteanu"
+        }
+      ]
+    },
+    {
+      "id": "362",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 73,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Craiova"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 73,
+          "label": "FACILITY",
+          "text": "Centrul Medical Craiova"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 756,
+          "end": 771,
+          "label": "PERSON",
+          "text": "Andreea Ionescu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 756,
+          "end": 771,
+          "label": "PROVIDER",
+          "text": "Andreea Ionescu"
+        }
+      ]
+    },
+    {
+      "id": "396",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 72,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Brașov"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 72,
+          "label": "FACILITY",
+          "text": "Centrul Medical Brașov"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 808,
+          "end": 820,
+          "label": "PERSON",
+          "text": "Vlad Dumitru"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 808,
+          "end": 820,
+          "label": "PROVIDER",
+          "text": "Vlad Dumitru"
+        }
+      ]
+    },
+    {
+      "id": "400",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Timișoara"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical Timișoara"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 748,
+          "end": 760,
+          "label": "PERSON",
+          "text": "Andreea Radu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 748,
+          "end": 760,
+          "label": "PROVIDER",
+          "text": "Andreea Radu"
+        }
+      ]
+    },
+    {
+      "id": "406",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 77,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 77,
+          "label": "FACILITY",
+          "text": "Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 740,
+          "end": 756,
+          "label": "PERSON",
+          "text": "Maria Constantin"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 740,
+          "end": 756,
+          "label": "PROVIDER",
+          "text": "Maria Constantin"
+        }
+      ]
+    },
+    {
+      "id": "453",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical București"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical București"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 805,
+          "end": 818,
+          "label": "PERSON",
+          "text": "Raluca Stoica"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 805,
+          "end": 818,
+          "label": "PROVIDER",
+          "text": "Raluca Stoica"
+        }
+      ]
+    },
+    {
+      "id": "470",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 72,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Brașov"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 72,
+          "label": "FACILITY",
+          "text": "Centrul Medical Brașov"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 804,
+          "end": 820,
+          "label": "PERSON",
+          "text": "Cristian Ionescu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 804,
+          "end": 820,
+          "label": "PROVIDER",
+          "text": "Cristian Ionescu"
+        }
+      ]
+    },
+    {
+      "id": "472",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 72,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Oradea"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 72,
+          "label": "FACILITY",
+          "text": "Centrul Medical Oradea"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 809,
+          "end": 825,
+          "label": "PERSON",
+          "text": "Gabriela Dumitru"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 809,
+          "end": 825,
+          "label": "PROVIDER",
+          "text": "Gabriela Dumitru"
+        }
+      ]
+    },
+    {
+      "id": "475",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 72,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Brașov"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 72,
+          "label": "FACILITY",
+          "text": "Centrul Medical Brașov"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 746,
+          "end": 757,
+          "label": "PERSON",
+          "text": "Raluca Radu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 746,
+          "end": 757,
+          "label": "PROVIDER",
+          "text": "Raluca Radu"
+        }
+      ]
+    },
+    {
+      "id": "486",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 77,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 77,
+          "label": "FACILITY",
+          "text": "Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 760,
+          "end": 774,
+          "label": "PERSON",
+          "text": "Ionuț Munteanu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 760,
+          "end": 774,
+          "label": "PROVIDER",
+          "text": "Ionuț Munteanu"
+        }
+      ]
+    },
+    {
+      "id": "496",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Timișoara"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical Timișoara"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 804,
+          "end": 818,
+          "label": "PERSON",
+          "text": "Cătălin Stoica"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 804,
+          "end": 818,
+          "label": "PROVIDER",
+          "text": "Cătălin Stoica"
+        }
+      ]
+    },
+    {
+      "id": "504",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 77,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 77,
+          "label": "FACILITY",
+          "text": "Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 750,
+          "end": 763,
+          "label": "PERSON",
+          "text": "Mihai Ionescu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 750,
+          "end": 763,
+          "label": "PROVIDER",
+          "text": "Mihai Ionescu"
+        }
+      ]
+    },
+    {
+      "id": "538",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 72,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Brașov"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 72,
+          "label": "FACILITY",
+          "text": "Centrul Medical Brașov"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 744,
+          "end": 761,
+          "label": "PERSON",
+          "text": "Ștefan Constantin"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 744,
+          "end": 761,
+          "label": "PROVIDER",
+          "text": "Ștefan Constantin"
+        }
+      ]
+    },
+    {
+      "id": "545",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical București"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical București"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 807,
+          "end": 820,
+          "label": "PERSON",
+          "text": "Mihai Popescu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 807,
+          "end": 820,
+          "label": "PROVIDER",
+          "text": "Mihai Popescu"
+        }
+      ]
+    },
+    {
+      "id": "558",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 71,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Sibiu"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 71,
+          "label": "FACILITY",
+          "text": "Centrul Medical Sibiu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 756,
+          "end": 768,
+          "label": "PERSON",
+          "text": "Mihai Stoica"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 756,
+          "end": 768,
+          "label": "PROVIDER",
+          "text": "Mihai Stoica"
+        }
+      ]
+    },
+    {
+      "id": "565",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Timișoara"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical Timișoara"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 806,
+          "end": 818,
+          "label": "PERSON",
+          "text": "Maria Stoica"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 806,
+          "end": 818,
+          "label": "PROVIDER",
+          "text": "Maria Stoica"
+        }
+      ]
+    },
+    {
+      "id": "568",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 74,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Ploiești"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 74,
+          "label": "FACILITY",
+          "text": "Centrul Medical Ploiești"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 744,
+          "end": 757,
+          "label": "PERSON",
+          "text": "Bogdan Stoica"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 744,
+          "end": 757,
+          "label": "PROVIDER",
+          "text": "Bogdan Stoica"
+        }
+      ]
+    },
+    {
+      "id": "585",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical București"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical București"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 803,
+          "end": 819,
+          "label": "PERSON",
+          "text": "Gabriela Dumitru"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 803,
+          "end": 819,
+          "label": "PROVIDER",
+          "text": "Gabriela Dumitru"
+        }
+      ]
+    },
+    {
+      "id": "592",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 70,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Iași"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 70,
+          "label": "FACILITY",
+          "text": "Centrul Medical Iași"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 804,
+          "end": 813,
+          "label": "PERSON",
+          "text": "Mihai Pop"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 804,
+          "end": 813,
+          "label": "PROVIDER",
+          "text": "Mihai Pop"
+        }
+      ]
+    },
+    {
+      "id": "614",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 71,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Sibiu"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 71,
+          "label": "FACILITY",
+          "text": "Centrul Medical Sibiu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 815,
+          "end": 829,
+          "label": "PERSON",
+          "text": "Raluca Popescu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 815,
+          "end": 829,
+          "label": "PROVIDER",
+          "text": "Raluca Popescu"
+        }
+      ]
+    },
+    {
+      "id": "628",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 77,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 77,
+          "label": "FACILITY",
+          "text": "Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 812,
+          "end": 829,
+          "label": "PERSON",
+          "text": "Cristian Munteanu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 812,
+          "end": 829,
+          "label": "PROVIDER",
+          "text": "Cristian Munteanu"
+        }
+      ]
+    },
+    {
+      "id": "659",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 72,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Oradea"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 72,
+          "label": "FACILITY",
+          "text": "Centrul Medical Oradea"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 808,
+          "end": 822,
+          "label": "PERSON",
+          "text": "Mihai Munteanu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 808,
+          "end": 822,
+          "label": "PROVIDER",
+          "text": "Mihai Munteanu"
+        }
+      ]
+    },
+    {
+      "id": "667",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 74,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Ploiești"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 74,
+          "label": "FACILITY",
+          "text": "Centrul Medical Ploiești"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 799,
+          "end": 811,
+          "label": "PERSON",
+          "text": "Ionuț Stoica"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 799,
+          "end": 811,
+          "label": "PROVIDER",
+          "text": "Ionuț Stoica"
+        }
+      ]
+    },
+    {
+      "id": "709",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical București"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical București"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 757,
+          "end": 772,
+          "label": "PERSON",
+          "text": "Ștefania Stoica"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 757,
+          "end": 772,
+          "label": "PROVIDER",
+          "text": "Ștefania Stoica"
+        }
+      ]
+    },
+    {
+      "id": "728",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical București"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical București"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 751,
+          "end": 765,
+          "label": "PERSON",
+          "text": "Ștefan Dumitru"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 751,
+          "end": 765,
+          "label": "PROVIDER",
+          "text": "Ștefan Dumitru"
+        }
+      ]
+    },
+    {
+      "id": "741",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 74,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Ploiești"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 74,
+          "label": "FACILITY",
+          "text": "Centrul Medical Ploiești"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 794,
+          "end": 804,
+          "label": "PERSON",
+          "text": "Ștefan Pop"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 794,
+          "end": 804,
+          "label": "PROVIDER",
+          "text": "Ștefan Pop"
+        }
+      ]
+    },
+    {
+      "id": "771",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 73,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Craiova"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 73,
+          "label": "FACILITY",
+          "text": "Centrul Medical Craiova"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 798,
+          "end": 811,
+          "label": "PERSON",
+          "text": "Elena Dumitru"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 798,
+          "end": 811,
+          "label": "PROVIDER",
+          "text": "Elena Dumitru"
+        }
+      ]
+    },
+    {
+      "id": "797",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 73,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Craiova"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 73,
+          "label": "FACILITY",
+          "text": "Centrul Medical Craiova"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 757,
+          "end": 770,
+          "label": "PERSON",
+          "text": "Cristian Radu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 757,
+          "end": 770,
+          "label": "PROVIDER",
+          "text": "Cristian Radu"
+        }
+      ]
+    },
+    {
+      "id": "821",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Timișoara"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical Timișoara"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 736,
+          "end": 750,
+          "label": "PERSON",
+          "text": "Ștefan Ionescu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 736,
+          "end": 750,
+          "label": "PROVIDER",
+          "text": "Ștefan Ionescu"
+        }
+      ]
+    },
+    {
+      "id": "838",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 70,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Iași"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 70,
+          "label": "FACILITY",
+          "text": "Centrul Medical Iași"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 803,
+          "end": 815,
+          "label": "PERSON",
+          "text": "Vlad Dumitru"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 803,
+          "end": 815,
+          "label": "PROVIDER",
+          "text": "Vlad Dumitru"
+        }
+      ]
+    },
+    {
+      "id": "842",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 70,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Iași"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 70,
+          "label": "FACILITY",
+          "text": "Centrul Medical Iași"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 749,
+          "end": 767,
+          "label": "PERSON",
+          "text": "Andreea Constantin"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 749,
+          "end": 767,
+          "label": "PROVIDER",
+          "text": "Andreea Constantin"
+        }
+      ]
+    },
+    {
+      "id": "862",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 73,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Craiova"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 73,
+          "label": "FACILITY",
+          "text": "Centrul Medical Craiova"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 751,
+          "end": 763,
+          "label": "PERSON",
+          "text": "Maria Stoica"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 751,
+          "end": 763,
+          "label": "PROVIDER",
+          "text": "Maria Stoica"
+        }
+      ]
+    },
+    {
+      "id": "873",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Timișoara"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical Timișoara"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 797,
+          "end": 813,
+          "label": "PERSON",
+          "text": "Ștefania Popescu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 797,
+          "end": 813,
+          "label": "PROVIDER",
+          "text": "Ștefania Popescu"
+        }
+      ]
+    },
+    {
+      "id": "874",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 72,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Oradea"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 72,
+          "label": "FACILITY",
+          "text": "Centrul Medical Oradea"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 804,
+          "end": 819,
+          "label": "PERSON",
+          "text": "Cătălin Ionescu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 804,
+          "end": 819,
+          "label": "PROVIDER",
+          "text": "Cătălin Ionescu"
+        }
+      ]
+    },
+    {
+      "id": "882",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical București"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical București"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 752,
+          "end": 764,
+          "label": "PERSON",
+          "text": "Elena Stoica"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 752,
+          "end": 764,
+          "label": "PROVIDER",
+          "text": "Elena Stoica"
+        }
+      ]
+    },
+    {
+      "id": "902",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Constanța"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical Constanța"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 805,
+          "end": 818,
+          "label": "PERSON",
+          "text": "Maria Ionescu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 805,
+          "end": 818,
+          "label": "PROVIDER",
+          "text": "Maria Ionescu"
+        }
+      ]
+    },
+    {
+      "id": "920",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 77,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 77,
+          "label": "FACILITY",
+          "text": "Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 812,
+          "end": 829,
+          "label": "PERSON",
+          "text": "Raluca Constantin"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 812,
+          "end": 829,
+          "label": "PROVIDER",
+          "text": "Raluca Constantin"
+        }
+      ]
+    },
+    {
+      "id": "943",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 72,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Oradea"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 72,
+          "label": "FACILITY",
+          "text": "Centrul Medical Oradea"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 808,
+          "end": 821,
+          "label": "PERSON",
+          "text": "Ioana Ionescu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 808,
+          "end": 821,
+          "label": "PROVIDER",
+          "text": "Ioana Ionescu"
+        }
+      ]
+    },
+    {
+      "id": "948",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 73,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Craiova"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 73,
+          "label": "FACILITY",
+          "text": "Centrul Medical Craiova"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 754,
+          "end": 769,
+          "label": "PERSON",
+          "text": "Ștefan Munteanu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 754,
+          "end": 769,
+          "label": "PROVIDER",
+          "text": "Ștefan Munteanu"
+        }
+      ]
+    },
+    {
+      "id": "996",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 72,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Brașov"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 72,
+          "label": "FACILITY",
+          "text": "Centrul Medical Brașov"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 793,
+          "end": 805,
+          "label": "PERSON",
+          "text": "Ioana Stoica"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 793,
+          "end": 805,
+          "label": "PROVIDER",
+          "text": "Ioana Stoica"
+        }
+      ]
+    },
+    {
+      "id": "1020",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Constanța"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical Constanța"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 808,
+          "end": 825,
+          "label": "PERSON",
+          "text": "Bogdan Constantin"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 808,
+          "end": 825,
+          "label": "PROVIDER",
+          "text": "Bogdan Constantin"
+        }
+      ]
+    },
+    {
+      "id": "1085",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 72,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Oradea"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 72,
+          "label": "FACILITY",
+          "text": "Centrul Medical Oradea"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 796,
+          "end": 811,
+          "label": "PERSON",
+          "text": "Cristian Stoica"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 796,
+          "end": 811,
+          "label": "PROVIDER",
+          "text": "Cristian Stoica"
+        }
+      ]
+    },
+    {
+      "id": "1120",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 77,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 77,
+          "label": "FACILITY",
+          "text": "Centrul Medical Cluj-Napoca"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 755,
+          "end": 767,
+          "label": "PERSON",
+          "text": "Vlad Ionescu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 755,
+          "end": 767,
+          "label": "PROVIDER",
+          "text": "Vlad Ionescu"
+        }
+      ]
+    },
+    {
+      "id": "1138",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 72,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Brașov"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 72,
+          "label": "FACILITY",
+          "text": "Centrul Medical Brașov"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 800,
+          "end": 813,
+          "label": "PERSON",
+          "text": "Vlad Munteanu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 800,
+          "end": 813,
+          "label": "PROVIDER",
+          "text": "Vlad Munteanu"
+        }
+      ]
+    },
+    {
+      "id": "1172",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 74,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Ploiești"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 74,
+          "label": "FACILITY",
+          "text": "Centrul Medical Ploiești"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 799,
+          "end": 812,
+          "label": "PERSON",
+          "text": "Alina Ionescu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 799,
+          "end": 812,
+          "label": "PROVIDER",
+          "text": "Alina Ionescu"
+        }
+      ]
+    },
+    {
+      "id": "1234",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Constanța"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical Constanța"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 808,
+          "end": 824,
+          "label": "PERSON",
+          "text": "Cătălin Munteanu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 808,
+          "end": 824,
+          "label": "PROVIDER",
+          "text": "Cătălin Munteanu"
+        }
+      ]
+    },
+    {
+      "id": "1262",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 74,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Ploiești"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 74,
+          "label": "FACILITY",
+          "text": "Centrul Medical Ploiești"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 755,
+          "end": 768,
+          "label": "PERSON",
+          "text": "Ioana Dumitru"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 755,
+          "end": 768,
+          "label": "PROVIDER",
+          "text": "Ioana Dumitru"
+        }
+      ]
+    },
+    {
+      "id": "1275",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Constanța"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical Constanța"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 739,
+          "end": 755,
+          "label": "PERSON",
+          "text": "Ionuț Constantin"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 739,
+          "end": 755,
+          "label": "PROVIDER",
+          "text": "Ionuț Constantin"
+        }
+      ]
+    },
+    {
+      "id": "1290",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical București"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical București"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 804,
+          "end": 818,
+          "label": "PERSON",
+          "text": "Mihai Munteanu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 804,
+          "end": 818,
+          "label": "PROVIDER",
+          "text": "Mihai Munteanu"
+        }
+      ]
+    },
+    {
+      "id": "1329",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 70,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Iași"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 70,
+          "label": "FACILITY",
+          "text": "Centrul Medical Iași"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 743,
+          "end": 759,
+          "label": "PERSON",
+          "text": "Ionuț Constantin"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 743,
+          "end": 759,
+          "label": "PROVIDER",
+          "text": "Ionuț Constantin"
+        }
+      ]
+    },
+    {
+      "id": "1362",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 70,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Iași"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 70,
+          "label": "FACILITY",
+          "text": "Centrul Medical Iași"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 744,
+          "end": 757,
+          "label": "PERSON",
+          "text": "Raluca Stoica"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 744,
+          "end": 757,
+          "label": "PROVIDER",
+          "text": "Raluca Stoica"
+        }
+      ]
+    },
+    {
+      "id": "1365",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 72,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Oradea"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 72,
+          "label": "FACILITY",
+          "text": "Centrul Medical Oradea"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 804,
+          "end": 817,
+          "label": "PERSON",
+          "text": "Maria Popescu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 804,
+          "end": 817,
+          "label": "PROVIDER",
+          "text": "Maria Popescu"
+        }
+      ]
+    },
+    {
+      "id": "1376",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 72,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Brașov"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 72,
+          "label": "FACILITY",
+          "text": "Centrul Medical Brașov"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 805,
+          "end": 816,
+          "label": "PERSON",
+          "text": "Cătălin Pop"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 805,
+          "end": 816,
+          "label": "PROVIDER",
+          "text": "Cătălin Pop"
+        }
+      ]
+    },
+    {
+      "id": "1383",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 70,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Iași"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 70,
+          "label": "FACILITY",
+          "text": "Centrul Medical Iași"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 814,
+          "end": 823,
+          "label": "PERSON",
+          "text": "Vlad Radu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 814,
+          "end": 823,
+          "label": "PROVIDER",
+          "text": "Vlad Radu"
+        }
+      ]
+    },
+    {
+      "id": "1411",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 71,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Sibiu"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 71,
+          "label": "FACILITY",
+          "text": "Centrul Medical Sibiu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 799,
+          "end": 811,
+          "label": "PERSON",
+          "text": "Elena Stoica"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 799,
+          "end": 811,
+          "label": "PROVIDER",
+          "text": "Elena Stoica"
+        }
+      ]
+    },
+    {
+      "id": "1478",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 72,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Brașov"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 72,
+          "label": "FACILITY",
+          "text": "Centrul Medical Brașov"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 790,
+          "end": 804,
+          "label": "PERSON",
+          "text": "Mihai Munteanu"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 790,
+          "end": 804,
+          "label": "PROVIDER",
+          "text": "Mihai Munteanu"
+        }
+      ]
+    },
+    {
+      "id": "1485",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "remove",
+          "start": 19,
+          "end": 75,
+          "label": "ORG_PARTY",
+          "text": "Ambulatoriul de specialitate — Centrul Medical Timișoara"
+        },
+        {
+          "id": "1",
+          "operation": "add",
+          "start": 50,
+          "end": 75,
+          "label": "FACILITY",
+          "text": "Centrul Medical Timișoara"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 755,
+          "end": 765,
+          "label": "PERSON",
+          "text": "Ștefan Pop"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 755,
+          "end": 765,
+          "label": "PROVIDER",
+          "text": "Ștefan Pop"
+        }
+      ]
+    }
+  ],
+  "codex_role": "Supplemental single judge; no replacement of panel or majority adjudication"
+}

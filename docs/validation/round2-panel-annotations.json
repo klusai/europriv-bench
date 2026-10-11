@@ -1,0 +1,716 @@
+{
+  "protocol_sha256": "9a59bbbf24bb1cda8bf2c5c7ffeacd0a5dd623bcda48179e89e78d125e293a99",
+  "sample_sha256": "4c4e1e8742ed2861cba363f27a0bb86ffcd7bca9d653eee090abc8b9cd1e75b4",
+  "stage_a": {
+    "ro-realskeleton-v2": {
+      "mistralai/mistral-large-2512": {
+        "11": {
+          "id": "11",
+          "spans": [
+            {
+              "start": 0,
+              "end": 19,
+              "label": "ORG_PARTY"
+            },
+            {
+              "start": 76,
+              "end": 79,
+              "label": "CASE_NUMBER"
+            },
+            {
+              "start": 86,
+              "end": 96,
+              "label": "DATE"
+            },
+            {
+              "start": 105,
+              "end": 119,
+              "label": "PERSON"
+            },
+            {
+              "start": 145,
+              "end": 181,
+              "label": "ADDRESS"
+            },
+            {
+              "start": 736,
+              "end": 747,
+              "label": "PERSON"
+            },
+            {
+              "start": 757,
+              "end": 772,
+              "label": "PHONE"
+            },
+            {
+              "start": 782,
+              "end": 804,
+              "label": "EMAIL"
+            }
+          ],
+          "fluency": 5,
+          "naturalness": 5,
+          "artifacts": []
+        },
+        "18": {
+          "id": "18",
+          "spans": [
+            {
+              "start": 0,
+              "end": 19,
+              "label": "ORG_PARTY"
+            },
+            {
+              "start": 76,
+              "end": 80,
+              "label": "CASE_NUMBER"
+            },
+            {
+              "start": 87,
+              "end": 97,
+              "label": "DATE"
+            },
+            {
+              "start": 106,
+              "end": 122,
+              "label": "PERSON"
+            },
+            {
+              "start": 148,
+              "end": 187,
+              "label": "ADDRESS"
+            },
+            {
+              "start": 742,
+              "end": 757,
+              "label": "PERSON"
+            },
+            {
+              "start": 767,
+              "end": 782,
+              "label": "PHONE"
+            },
+            {
+              "start": 792,
+              "end": 818,
+              "label": "EMAIL"
+            }
+          ],
+          "fluency": 5,
+          "naturalness": 5,
+          "artifacts": []
+        },
+        "47": {
+          "id": "47",
+          "spans": [
+            {
+              "start": 0,
+              "end": 19,
+              "label": "ORG_PARTY"
+            },
+            {
+              "start": 76,
+              "end": 80,
+              "label": "CASE_NUMBER"
+            },
+            {
+              "start": 87,
+              "end": 97,
+              "label": "DATE"
+            },
+            {
+              "start": 106,
+              "end": 122,
+              "label": "PERSON"
+            },
+            {
+              "start": 148,
+              "end": 198,
+              "label": "ADDRESS"
+            },
+            {
+              "start": 753,
+              "end": 765,
+              "label": "PERSON"
+            },
+            {
+              "start": 775,
+              "end": 790,
+              "label": "PHONE"
+            },
+            {
+              "start": 800,
+              "end": 823,
+              "label": "EMAIL"
+            }
+          ],
+          "fluency": 5,
+          "naturalness": 5,
+          "artifacts": []
+        },
+        "54": {
+          "id": "54",
+          "spans": [
+            {
+              "start": 0,
+              "end": 19,
+              "label": "ORG_PARTY"
+            },
+            {
+              "start": 76,
+              "end": 80,
+              "label": "CASE_NUMBER"
+            },
+            {
+              "start": 87,
+              "end": 97,
+              "label": "DATE"
+            },
+            {
+              "start": 106,
+              "end": 119,
+              "label": "PERSON"
+            },
+            {
+              "start": 145,
+              "end": 196,
+              "label": "ADDRESS"
+            },
+            {
+              "start": 752,
+              "end": 764,
+              "label": "PERSON"
+            },
+            {
+              "start": 774,
+              "end": 789,
+              "label": "PHONE"
+            },
+            {
+              "start": 799,
+              "end": 822,
+              "label": "EMAIL"
+            }
+          ],
+          "fluency": 5,
+          "naturalness": 5,
+          "artifacts": []
+        },
+        "64": {
+          "id": "64",
+          "spans": [
+            {
+              "start": 0,
+              "end": 19,
+              "label": "ORG_PARTY"
+            },
+            {
+              "start": 76,
+              "end": 80,
+              "label": "CASE_NUMBER"
+            },
+            {
+              "start": 87,
+              "end": 97,
+              "label": "DATE"
+            },
+            {
+              "start": 106,
+              "end": 119,
+              "label": "PERSON"
+            },
+            {
+              "start": 145,
+              "end": 192,
+              "label": "ADDRESS"
+            },
+            {
+              "start": 747,
+              "end": 763,
+              "label": "PERSON"
+            },
+            {
+              "start": 773,
+              "end": 788,
+              "label": "PHONE"
+            },
+            {
+              "start": 798,
+              "end": 825,
+              "label": "EMAIL"
+            }
+          ],
+          "fluency": 5,
+          "naturalness": 5,
+          "artifacts": []
+        }
+      },
+      "google/gemini-2.5-flash": {
+        "11": {
+          "id": "11",
+          "spans": [
+            {
+              "start": 0,
+              "end": 19,
+              "label": "ORG_PARTY"
+            },
+            {
+              "start": 86,
+              "end": 96,
+              "label": "DATE"
+            },
+            {
+              "start": 105,
+              "end": 119,
+              "label": "PERSON"
+            },
+            {
+              "start": 145,
+              "end": 181,
+              "label": "ADDRESS"
+            },
+            {
+              "start": 736,
+              "end": 747,
+              "label": "PERSON"
+            },
+            {
+              "start": 757,
+              "end": 772,
+              "label": "PHONE"
+            },
+            {
+              "start": 782,
+              "end": 804,
+              "label": "EMAIL"
+            }
+          ],
+          "fluency": 5,
+          "naturalness": 5,
+          "artifacts": []
+        },
+        "18": {
+          "id": "18",
+          "spans": [
+            {
+              "start": 0,
+              "end": 19,
+              "label": "ORG_PARTY"
+            },
+            {
+              "start": 87,
+              "end": 97,
+              "label": "DATE"
+            },
+            {
+              "start": 106,
+              "end": 122,
+              "label": "PERSON"
+            },
+            {
+              "start": 148,
+              "end": 187,
+              "label": "ADDRESS"
+            },
+            {
+              "start": 742,
+              "end": 757,
+              "label": "PERSON"
+            },
+            {
+              "start": 767,
+              "end": 782,
+              "label": "PHONE"
+            },
+            {
+              "start": 792,
+              "end": 818,
+              "label": "EMAIL"
+            }
+          ],
+          "fluency": 5,
+          "naturalness": 5,
+          "artifacts": []
+        },
+        "47": {
+          "id": "47",
+          "spans": [
+            {
+              "start": 0,
+              "end": 19,
+              "label": "ORG_PARTY"
+            },
+            {
+              "start": 87,
+              "end": 97,
+              "label": "DATE"
+            },
+            {
+              "start": 106,
+              "end": 122,
+              "label": "PERSON"
+            },
+            {
+              "start": 148,
+              "end": 198,
+              "label": "ADDRESS"
+            },
+            {
+              "start": 753,
+              "end": 765,
+              "label": "PERSON"
+            },
+            {
+              "start": 775,
+              "end": 790,
+              "label": "PHONE"
+            },
+            {
+              "start": 800,
+              "end": 823,
+              "label": "EMAIL"
+            }
+          ],
+          "fluency": 5,
+          "naturalness": 5,
+          "artifacts": []
+        },
+        "54": {
+          "id": "54",
+          "spans": [
+            {
+              "start": 0,
+              "end": 19,
+              "label": "ORG_PARTY"
+            },
+            {
+              "start": 87,
+              "end": 97,
+              "label": "DATE"
+            },
+            {
+              "start": 106,
+              "end": 119,
+              "label": "PERSON"
+            },
+            {
+              "start": 145,
+              "end": 196,
+              "label": "ADDRESS"
+            },
+            {
+              "start": 752,
+              "end": 764,
+              "label": "PERSON"
+            },
+            {
+              "start": 774,
+              "end": 789,
+              "label": "PHONE"
+            },
+            {
+              "start": 799,
+              "end": 822,
+              "label": "EMAIL"
+            }
+          ],
+          "fluency": 5,
+          "naturalness": 5,
+          "artifacts": []
+        },
+        "64": {
+          "id": "64",
+          "spans": [
+            {
+              "start": 0,
+              "end": 19,
+              "label": "ORG_PARTY"
+            },
+            {
+              "start": 87,
+              "end": 97,
+              "label": "DATE"
+            },
+            {
+              "start": 106,
+              "end": 119,
+              "label": "PERSON"
+            },
+            {
+              "start": 145,
+              "end": 192,
+              "label": "ADDRESS"
+            },
+            {
+              "start": 747,
+              "end": 763,
+              "label": "PERSON"
+            },
+            {
+              "start": 773,
+              "end": 788,
+              "label": "PHONE"
+            },
+            {
+              "start": 798,
+              "end": 825,
+              "label": "EMAIL"
+            }
+          ],
+          "fluency": 5,
+          "naturalness": 5,
+          "artifacts": []
+        }
+      },
+      "qwen/qwen3-235b-a22b-2507": {
+        "11": {
+          "id": "11",
+          "spans": [
+            {
+              "start": 0,
+              "end": 19,
+              "label": "ORG_PARTY"
+            },
+            {
+              "start": 20,
+              "end": 54,
+              "label": "FACILITY"
+            },
+            {
+              "start": 86,
+              "end": 96,
+              "label": "DATE"
+            },
+            {
+              "start": 105,
+              "end": 119,
+              "label": "PERSON"
+            },
+            {
+              "start": 145,
+              "end": 181,
+              "label": "ADDRESS"
+            },
+            {
+              "start": 736,
+              "end": 747,
+              "label": "PERSON"
+            },
+            {
+              "start": 757,
+              "end": 772,
+              "label": "PHONE"
+            },
+            {
+              "start": 782,
+              "end": 804,
+              "label": "EMAIL"
+            }
+          ],
+          "fluency": 5,
+          "naturalness": 5,
+          "artifacts": []
+        },
+        "18": {
+          "id": "18",
+          "spans": [
+            {
+              "start": 0,
+              "end": 19,
+              "label": "ORG_PARTY"
+            },
+            {
+              "start": 20,
+              "end": 54,
+              "label": "FACILITY"
+            },
+            {
+              "start": 87,
+              "end": 97,
+              "label": "DATE"
+            },
+            {
+              "start": 106,
+              "end": 122,
+              "label": "PERSON"
+            },
+            {
+              "start": 148,
+              "end": 187,
+              "label": "ADDRESS"
+            },
+            {
+              "start": 742,
+              "end": 757,
+              "label": "PERSON"
+            },
+            {
+              "start": 767,
+              "end": 782,
+              "label": "PHONE"
+            },
+            {
+              "start": 792,
+              "end": 818,
+              "label": "EMAIL"
+            }
+          ],
+          "fluency": 5,
+          "naturalness": 5,
+          "artifacts": []
+        },
+        "47": {
+          "id": "47",
+          "spans": [
+            {
+              "start": 0,
+              "end": 19,
+              "label": "ORG_PARTY"
+            },
+            {
+              "start": 20,
+              "end": 54,
+              "label": "FACILITY"
+            },
+            {
+              "start": 87,
+              "end": 97,
+              "label": "DATE"
+            },
+            {
+              "start": 106,
+              "end": 122,
+              "label": "PERSON"
+            },
+            {
+              "start": 148,
+              "end": 198,
+              "label": "ADDRESS"
+            },
+            {
+              "start": 753,
+              "end": 765,
+              "label": "PERSON"
+            },
+            {
+              "start": 775,
+              "end": 790,
+              "label": "PHONE"
+            },
+            {
+              "start": 800,
+              "end": 823,
+              "label": "EMAIL"
+            }
+          ],
+          "fluency": 5,
+          "naturalness": 5,
+          "artifacts": []
+        },
+        "54": {
+          "id": "54",
+          "spans": [
+            {
+              "start": 0,
+              "end": 19,
+              "label": "ORG_PARTY"
+            },
+            {
+              "start": 20,
+              "end": 54,
+              "label": "FACILITY"
+            },
+            {
+              "start": 87,
+              "end": 97,
+              "label": "DATE"
+            },
+            {
+              "start": 106,
+              "end": 119,
+              "label": "PERSON"
+            },
+            {
+              "start": 145,
+              "end": 196,
+              "label": "ADDRESS"
+            },
+            {
+              "start": 752,
+              "end": 764,
+              "label": "PERSON"
+            },
+            {
+              "start": 774,
+              "end": 789,
+              "label": "PHONE"
+            },
+            {
+              "start": 799,
+              "end": 822,
+              "label": "EMAIL"
+            }
+          ],
+          "fluency": 5,
+          "naturalness": 5,
+          "artifacts": []
+        },
+        "64": {
+          "id": "64",
+          "spans": [
+            {
+              "start": 0,
+              "end": 19,
+              "label": "ORG_PARTY"
+            },
+            {
+              "start": 20,
+              "end": 54,
+              "label": "FACILITY"
+            },
+            {
+              "start": 87,
+              "end": 97,
+              "label": "DATE"
+            },
+            {
+              "start": 106,
+              "end": 119,
+              "label": "PERSON"
+            },
+            {
+              "start": 145,
+              "end": 192,
+              "label": "ADDRESS"
+            },
+            {
+              "start": 747,
+              "end": 763,
+              "label": "PERSON"
+            },
+            {
+              "start": 773,
+              "end": 788,
+              "label": "PHONE"
+            },
+            {
+              "start": 798,
+              "end": 825,
+              "label": "EMAIL"
+            }
+          ],
+          "fluency": 5,
+          "naturalness": 5,
+          "artifacts": []
+        }
+      }
+    },
+    "pl-realskeleton-v2": {
+      "mistralai/mistral-large-2512": {},
+      "google/gemini-2.5-flash": {},
+      "qwen/qwen3-235b-a22b-2507": {}
+    }
+  },
+  "stage_b": {},
+  "errors": []
+}

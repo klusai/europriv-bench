@@ -1,0 +1,11 @@
+{
+  "actual_usd": 0.0094176,
+  "reserved_usd": 0.284733,
+  "responses": 3,
+  "attempts": 12,
+  "unknown_cost_requests": 9,
+  "protocol_sha256": "9a59bbbf24bb1cda8bf2c5c7ffeacd0a5dd623bcda48179e89e78d125e293a99",
+  "known_plus_reserved_usd": 0.29415060000000004,
+  "rate_limited_attempts": 9,
+  "ledger_sha256": "b5f05f019274cd68953486346b11e9faa947dd906961a620479395d5ef10e8b9"
+}

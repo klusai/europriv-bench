@@ -135,7 +135,7 @@ def alpha_documents(rows: list[dict], annotations: dict, models: tuple[str, ...]
 
 
 def decode_audit(rows: list[dict], country: str) -> dict:
-    subjects, explicit_dob, failures = 0, 0, []
+    subjects, explicit_dob, explicit_sex, failures = 0, 0, 0, []
     pattern = r"(?<!\d)\d{" + ("13" if country == "RO" else "11") + r"}(?!\d)"
     for i, row in enumerate(rows):
         text = row["text"]
@@ -162,19 +162,38 @@ def decode_audit(rows: list[dict], country: str) -> dict:
                         reasons.append("explicit DOB mismatch")
                 else:
                     reasons.append("clinical DOB field missing")
-            sex = re.search(r"(?:Sex|Płeć):\s*(M|F|K)\b", text, re.I)
-            if sex and info.extra.get("sex") != ("F" if sex[1].upper() in {"F", "K"} else "M"):
-                reasons.append("explicit sex mismatch")
+            sex = re.search(r"(?:Sex|Płeć):\s*(\w+)\b", text, re.I)
+            if sex:
+                if value not in seen:
+                    explicit_sex += 1
+                stated_sex = {
+                    "m": "M",
+                    "f": "F",
+                    "k": "F",
+                    "masculin": "M",
+                    "feminin": "F",
+                    "męska": "M",
+                    "żeńska": "F",
+                }.get(sex[1].lower())
+                if stated_sex is None or info.extra.get("sex") != stated_sex:
+                    reasons.append("explicit sex mismatch or unrecognized field")
             if value not in seen:
                 subjects += 1
             seen.add(value)
             if reasons:
                 failures.append({"id": str(i), "value": value, "start": match.start(), "reasons": reasons})
     failed_subjects = len({(f["id"], f["value"]) for f in failures})
+    dob_mismatches = len({(f["id"], f["value"]) for f in failures if "explicit DOB mismatch" in f["reasons"]})
+    sex_mismatches = len(
+        {(f["id"], f["value"]) for f in failures if "explicit sex mismatch or unrecognized field" in f["reasons"]}
+    )
     return {
         "subjects": subjects,
         "consistent": subjects - failed_subjects,
         "explicit_dob_subjects": explicit_dob,
+        "explicit_sex_subjects": explicit_sex,
+        "explicit_dob_consistent": explicit_dob - dob_mismatches,
+        "explicit_sex_consistent": explicit_sex - sex_mismatches,
         "failures": failures,
         "pass": subjects > 0 and not failures,
     }
