@@ -1,0 +1,1281 @@
+id,kind,model,start,end,text,details
+11,span,,20,54,Compartimentul relații cu clienții,"{""gold"": ""ABSENT"", ""mistralai/mistral-large-2512"": ""ABSENT"", ""google/gemini-2.5-flash"": ""ABSENT"", ""qwen/qwen3-235b-a22b-2507"": ""FACILITY""}"
+11,span,,76,79,475,"{""gold"": ""CASE_NUMBER"", ""mistralai/mistral-large-2512"": ""CASE_NUMBER"", ""google/gemini-2.5-flash"": ""ABSENT"", ""qwen/qwen3-235b-a22b-2507"": ""ABSENT""}"
+11,gold_review,,20,54,Compartimentul relații cu clienții,"{""id"": ""0"", ""operation"": ""add"", ""start"": 20, ""end"": 54, ""label"": ""FACILITY"", ""text"": ""Compartimentul relații cu clienții"", ""majority"": false, ""votes"": {""mistralai/mistral-large-2512"": null, ""google/gemini-2.5-flash"": null, ""qwen/qwen3-235b-a22b-2507"": null}}"
+11,gold_review,,76,79,475,"{""id"": ""1"", ""operation"": ""remove"", ""start"": 76, ""end"": 79, ""label"": ""CASE_NUMBER"", ""text"": ""475"", ""majority"": false, ""votes"": {""mistralai/mistral-large-2512"": null, ""google/gemini-2.5-flash"": null, ""qwen/qwen3-235b-a22b-2507"": null}}"
+18,span,,20,54,Compartimentul relații cu clienții,"{""gold"": ""ABSENT"", ""mistralai/mistral-large-2512"": ""ABSENT"", ""google/gemini-2.5-flash"": ""ABSENT"", ""qwen/qwen3-235b-a22b-2507"": ""FACILITY""}"
+18,span,,76,80,4596,"{""gold"": ""CASE_NUMBER"", ""mistralai/mistral-large-2512"": ""CASE_NUMBER"", ""google/gemini-2.5-flash"": ""ABSENT"", ""qwen/qwen3-235b-a22b-2507"": ""ABSENT""}"
+18,gold_review,,20,54,Compartimentul relații cu clienții,"{""id"": ""0"", ""operation"": ""add"", ""start"": 20, ""end"": 54, ""label"": ""FACILITY"", ""text"": ""Compartimentul relații cu clienții"", ""majority"": false, ""votes"": {""mistralai/mistral-large-2512"": null, ""google/gemini-2.5-flash"": null, ""qwen/qwen3-235b-a22b-2507"": null}}"
+18,gold_review,,76,80,4596,"{""id"": ""1"", ""operation"": ""remove"", ""start"": 76, ""end"": 80, ""label"": ""CASE_NUMBER"", ""text"": ""4596"", ""majority"": false, ""votes"": {""mistralai/mistral-large-2512"": null, ""google/gemini-2.5-flash"": null, ""qwen/qwen3-235b-a22b-2507"": null}}"
+47,span,,20,54,Compartimentul relații cu clienții,"{""gold"": ""ABSENT"", ""mistralai/mistral-large-2512"": ""ABSENT"", ""google/gemini-2.5-flash"": ""ABSENT"", ""qwen/qwen3-235b-a22b-2507"": ""FACILITY""}"
+47,span,,76,80,4644,"{""gold"": ""CASE_NUMBER"", ""mistralai/mistral-large-2512"": ""CASE_NUMBER"", ""google/gemini-2.5-flash"": ""ABSENT"", ""qwen/qwen3-235b-a22b-2507"": ""ABSENT""}"
+47,gold_review,,20,54,Compartimentul relații cu clienții,"{""id"": ""0"", ""operation"": ""add"", ""start"": 20, ""end"": 54, ""label"": ""FACILITY"", ""text"": ""Compartimentul relații cu clienții"", ""majority"": false, ""votes"": {""mistralai/mistral-large-2512"": null, ""google/gemini-2.5-flash"": null, ""qwen/qwen3-235b-a22b-2507"": null}}"
+47,gold_review,,76,80,4644,"{""id"": ""1"", ""operation"": ""remove"", ""start"": 76, ""end"": 80, ""label"": ""CASE_NUMBER"", ""text"": ""4644"", ""majority"": false, ""votes"": {""mistralai/mistral-large-2512"": null, ""google/gemini-2.5-flash"": null, ""qwen/qwen3-235b-a22b-2507"": null}}"
+54,span,,20,54,Compartimentul relații cu clienții,"{""gold"": ""ABSENT"", ""mistralai/mistral-large-2512"": ""ABSENT"", ""google/gemini-2.5-flash"": ""ABSENT"", ""qwen/qwen3-235b-a22b-2507"": ""FACILITY""}"
+54,span,,76,80,5969,"{""gold"": ""CASE_NUMBER"", ""mistralai/mistral-large-2512"": ""CASE_NUMBER"", ""google/gemini-2.5-flash"": ""ABSENT"", ""qwen/qwen3-235b-a22b-2507"": ""ABSENT""}"
+54,gold_review,,20,54,Compartimentul relații cu clienții,"{""id"": ""0"", ""operation"": ""add"", ""start"": 20, ""end"": 54, ""label"": ""FACILITY"", ""text"": ""Compartimentul relații cu clienții"", ""majority"": false, ""votes"": {""mistralai/mistral-large-2512"": null, ""google/gemini-2.5-flash"": null, ""qwen/qwen3-235b-a22b-2507"": null}}"
+54,gold_review,,76,80,5969,"{""id"": ""1"", ""operation"": ""remove"", ""start"": 76, ""end"": 80, ""label"": ""CASE_NUMBER"", ""text"": ""5969"", ""majority"": false, ""votes"": {""mistralai/mistral-large-2512"": null, ""google/gemini-2.5-flash"": null, ""qwen/qwen3-235b-a22b-2507"": null}}"
+64,span,,20,54,Compartimentul relații cu clienții,"{""gold"": ""ABSENT"", ""mistralai/mistral-large-2512"": ""ABSENT"", ""google/gemini-2.5-flash"": ""ABSENT"", ""qwen/qwen3-235b-a22b-2507"": ""FACILITY""}"
+64,span,,76,80,3152,"{""gold"": ""CASE_NUMBER"", ""mistralai/mistral-large-2512"": ""CASE_NUMBER"", ""google/gemini-2.5-flash"": ""ABSENT"", ""qwen/qwen3-235b-a22b-2507"": ""ABSENT""}"
+64,gold_review,,20,54,Compartimentul relații cu clienții,"{""id"": ""0"", ""operation"": ""add"", ""start"": 20, ""end"": 54, ""label"": ""FACILITY"", ""text"": ""Compartimentul relații cu clienții"", ""majority"": false, ""votes"": {""mistralai/mistral-large-2512"": null, ""google/gemini-2.5-flash"": null, ""qwen/qwen3-235b-a22b-2507"": null}}"
+64,gold_review,,76,80,3152,"{""id"": ""1"", ""operation"": ""remove"", ""start"": 76, ""end"": 80, ""label"": ""CASE_NUMBER"", ""text"": ""3152"", ""majority"": false, ""votes"": {""mistralai/mistral-large-2512"": null, ""google/gemini-2.5-flash"": null, ""qwen/qwen3-235b-a22b-2507"": null}}"
+71,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+71,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+71,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+82,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+82,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+82,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+90,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+90,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+90,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+103,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+103,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+103,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+163,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+163,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+163,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+164,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+164,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+164,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+173,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+173,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+173,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+201,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+201,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+201,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+215,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+215,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+215,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+237,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+237,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+237,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+240,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+240,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+240,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+265,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+265,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+265,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+268,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+268,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+268,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+288,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+288,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+288,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+305,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+305,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+305,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+310,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+310,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+310,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+392,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+392,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+392,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+455,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+455,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+455,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+464,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+464,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+464,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+487,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+487,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+487,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+524,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+524,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+524,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+566,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+566,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+566,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+567,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+567,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+567,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+572,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+572,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+572,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+574,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+574,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+574,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+595,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+595,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+595,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+602,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+602,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+602,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+631,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+631,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+631,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+663,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+663,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+663,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+678,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+678,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+678,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+701,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+701,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+701,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+703,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+703,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+703,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+718,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+718,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+718,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+732,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+732,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+732,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+735,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+735,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+735,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+738,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+738,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+738,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+739,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+739,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+739,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+762,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+762,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+762,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+778,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+778,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+778,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+787,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+787,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+787,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+913,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+913,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+913,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+918,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+918,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+918,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+968,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+968,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+968,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+976,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+976,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+976,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1041,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1041,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1041,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1098,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1098,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1098,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1125,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1125,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1125,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1137,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1137,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1137,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1139,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1139,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1139,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1148,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1148,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1148,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1156,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1156,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1156,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1169,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1169,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1169,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1170,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1170,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1170,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1178,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1178,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1178,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1209,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1209,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1209,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1229,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1229,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1229,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1263,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1263,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1263,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1279,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1279,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1279,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1298,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1298,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1298,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1299,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1299,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1299,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1332,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1332,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1332,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1355,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1355,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1355,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1361,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1361,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1361,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1363,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1363,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1363,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1389,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1389,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1389,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1399,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1399,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1399,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1439,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1439,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1439,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1488,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1488,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1488,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1496,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1496,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1496,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1498,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1498,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1498,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+5,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+5,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+5,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+21,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+21,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+21,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+73,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+73,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+73,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+81,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+81,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+81,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+99,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+99,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+99,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+132,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+132,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+132,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+137,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+137,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+137,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+205,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+205,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+205,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+225,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+225,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+225,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+253,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+253,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+253,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+272,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+272,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+272,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+285,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+285,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+285,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+301,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+301,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+301,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+321,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+321,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+321,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+325,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+325,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+325,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+337,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+337,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+337,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+338,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+338,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+338,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+340,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+340,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+340,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+348,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+348,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+348,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+362,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+362,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+362,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+396,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+396,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+396,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+400,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+400,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+400,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+406,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+406,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+406,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+453,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+453,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+453,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+470,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+470,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+470,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+472,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+472,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+472,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+475,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+475,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+475,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+486,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+486,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+486,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+496,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+496,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+496,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+504,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+504,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+504,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+538,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+538,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+538,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+545,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+545,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+545,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+558,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+558,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+558,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+565,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+565,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+565,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+568,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+568,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+568,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+585,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+585,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+585,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+592,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+592,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+592,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+614,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+614,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+614,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+628,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+628,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+628,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+659,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+659,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+659,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+667,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+667,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+667,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+709,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+709,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+709,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+728,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+728,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+728,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+741,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+741,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+741,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+771,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+771,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+771,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+797,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+797,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+797,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+821,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+821,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+821,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+838,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+838,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+838,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+842,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+842,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+842,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+862,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+862,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+862,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+873,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+873,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+873,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+874,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+874,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+874,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+882,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+882,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+882,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+902,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+902,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+902,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+920,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+920,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+920,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+943,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+943,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+943,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+948,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+948,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+948,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+996,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+996,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+996,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1020,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1020,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1020,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1085,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1085,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1085,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1120,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1120,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1120,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1138,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1138,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1138,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1172,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1172,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1172,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1234,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1234,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1234,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1262,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1262,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1262,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1275,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1275,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1275,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1290,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1290,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1290,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1329,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1329,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1329,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1362,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1362,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1362,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1365,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1365,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1365,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1376,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1376,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1376,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1383,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1383,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1383,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1411,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1411,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1411,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1478,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1478,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1478,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1485,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1485,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1485,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+3,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+3,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+3,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+42,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+42,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+42,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+52,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+52,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+52,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+67,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+67,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+67,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+68,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+68,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+68,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+76,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+76,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+76,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+92,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+92,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+92,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+102,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+102,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+102,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+111,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+111,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+111,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+123,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+123,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+123,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+178,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+178,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+178,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+212,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+212,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+212,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+238,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+238,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+238,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+256,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+256,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+256,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+259,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+259,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+259,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+287,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+287,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+287,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+360,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+360,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+360,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+374,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+374,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+374,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+407,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+407,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+407,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+418,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+418,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+418,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+457,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+457,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+457,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+484,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+484,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+484,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+510,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+510,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+510,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+544,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+544,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+544,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+555,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+555,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+555,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+596,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+596,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+596,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+633,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+633,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+633,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+634,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+634,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+634,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+655,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+655,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+655,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+660,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+660,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+660,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+715,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+715,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+715,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+733,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+733,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+733,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+749,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+749,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+749,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+774,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+774,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+774,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+775,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+775,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+775,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+786,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+786,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+786,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+812,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+812,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+812,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+817,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+817,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+817,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+855,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+855,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+855,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+925,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+925,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+925,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+926,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+926,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+926,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+931,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+931,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+931,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+940,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+940,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+940,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+952,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+952,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+952,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+962,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+962,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+962,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+971,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+971,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+971,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+987,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+987,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+987,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+992,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+992,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+992,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1008,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1008,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1008,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1021,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1021,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1021,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1025,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1025,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1025,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1051,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1051,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1051,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1079,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1079,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1079,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1101,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1101,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1101,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1103,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1103,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1103,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1150,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1150,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1150,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1181,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1181,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1181,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1199,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1199,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1199,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1204,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1204,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1204,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1205,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1205,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1205,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1216,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1216,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1216,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1233,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1233,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1233,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1240,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1240,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1240,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1276,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1276,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1276,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1285,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1285,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1285,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1309,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1309,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1309,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1359,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1359,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1359,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1378,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1378,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1378,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1380,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1380,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1380,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1392,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1392,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1392,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1409,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1409,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1409,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1410,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1410,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1410,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1461,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1461,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1461,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1464,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1464,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1464,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1494,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1494,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1494,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+49,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+49,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+49,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+72,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+72,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+72,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+112,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+112,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+112,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+114,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+114,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+114,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+134,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+134,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+134,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+139,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+139,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+139,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+147,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+147,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+147,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+186,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+186,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+186,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+229,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+229,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+229,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+239,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+239,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+239,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+251,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+251,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+251,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+262,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+262,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+262,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+264,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+264,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+264,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+266,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+266,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+266,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+280,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+280,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+280,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+282,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+282,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+282,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+295,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+295,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+295,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+313,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+313,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+313,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+367,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+367,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+367,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+368,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+368,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+368,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+387,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+387,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+387,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+388,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+388,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+388,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+404,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+404,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+404,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+416,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+416,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+416,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+425,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+425,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+425,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+435,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+435,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+435,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+446,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+446,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+446,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+476,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+476,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+476,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+501,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+501,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+501,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+508,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+508,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+508,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+516,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+516,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+516,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+526,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+526,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+526,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+533,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+533,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+533,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+534,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+534,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+534,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+588,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+588,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+588,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+593,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+593,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+593,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+615,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+615,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+615,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+653,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+653,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+653,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+665,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+665,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+665,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+720,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+720,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+720,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+751,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+751,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+751,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+758,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+758,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+758,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+765,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+765,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+765,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+779,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+779,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+779,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+788,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+788,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+788,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+818,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+818,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+818,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+826,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+826,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+826,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+921,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+921,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+921,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+922,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+922,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+922,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+939,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+939,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+939,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+949,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+949,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+949,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+977,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+977,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+977,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1014,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1014,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1014,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1038,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1038,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1038,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1060,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1060,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1060,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1065,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1065,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1065,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1134,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1134,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1134,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1135,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1135,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1135,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1161,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1161,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1161,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1184,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1184,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1184,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1253,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1253,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1253,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1287,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1287,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1287,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1297,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1297,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1297,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1301,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1301,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1301,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1303,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1303,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1303,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1313,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1313,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1313,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1315,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1315,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1315,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1340,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1340,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1340,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1401,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1401,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1401,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1407,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1407,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1407,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1421,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1421,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1421,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1430,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1430,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1430,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1446,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1446,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1446,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1451,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1451,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1451,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+1457,missing_annotation,mistralai/mistral-large-2512,,,,No valid stage-A output
+1457,missing_annotation,google/gemini-2.5-flash,,,,No valid stage-A output
+1457,missing_annotation,qwen/qwen3-235b-a22b-2507,,,,No valid stage-A output
+5,codex_single_judge_hypothesis,openai/codex-session,19,71,Ambulatoriul de specialitate — Centrul Medical Sibiu,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 71, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Sibiu""}"
+5,codex_single_judge_hypothesis,openai/codex-session,50,71,Centrul Medical Sibiu,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 71, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Sibiu""}"
+5,codex_single_judge_hypothesis,openai/codex-session,801,814,Maria Dumitru,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 801, ""end"": 814, ""label"": ""PERSON"", ""text"": ""Maria Dumitru""}"
+5,codex_single_judge_hypothesis,openai/codex-session,801,814,Maria Dumitru,"{""id"": ""3"", ""operation"": ""add"", ""start"": 801, ""end"": 814, ""label"": ""PROVIDER"", ""text"": ""Maria Dumitru""}"
+21,codex_single_judge_hypothesis,openai/codex-session,19,77,Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 77, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca""}"
+21,codex_single_judge_hypothesis,openai/codex-session,50,77,Centrul Medical Cluj-Napoca,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 77, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Cluj-Napoca""}"
+21,codex_single_judge_hypothesis,openai/codex-session,756,771,Bogdan Munteanu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 756, ""end"": 771, ""label"": ""PERSON"", ""text"": ""Bogdan Munteanu""}"
+21,codex_single_judge_hypothesis,openai/codex-session,756,771,Bogdan Munteanu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 756, ""end"": 771, ""label"": ""PROVIDER"", ""text"": ""Bogdan Munteanu""}"
+73,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical Constanța,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Constanța""}"
+73,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical Constanța,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Constanța""}"
+73,codex_single_judge_hypothesis,openai/codex-session,816,832,Mihai Constantin,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 816, ""end"": 832, ""label"": ""PERSON"", ""text"": ""Mihai Constantin""}"
+73,codex_single_judge_hypothesis,openai/codex-session,816,832,Mihai Constantin,"{""id"": ""3"", ""operation"": ""add"", ""start"": 816, ""end"": 832, ""label"": ""PROVIDER"", ""text"": ""Mihai Constantin""}"
+81,codex_single_judge_hypothesis,openai/codex-session,19,77,Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 77, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca""}"
+81,codex_single_judge_hypothesis,openai/codex-session,50,77,Centrul Medical Cluj-Napoca,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 77, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Cluj-Napoca""}"
+81,codex_single_judge_hypothesis,openai/codex-session,821,837,Maria Constantin,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 821, ""end"": 837, ""label"": ""PERSON"", ""text"": ""Maria Constantin""}"
+81,codex_single_judge_hypothesis,openai/codex-session,821,837,Maria Constantin,"{""id"": ""3"", ""operation"": ""add"", ""start"": 821, ""end"": 837, ""label"": ""PROVIDER"", ""text"": ""Maria Constantin""}"
+99,codex_single_judge_hypothesis,openai/codex-session,19,73,Ambulatoriul de specialitate — Centrul Medical Craiova,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 73, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Craiova""}"
+99,codex_single_judge_hypothesis,openai/codex-session,50,73,Centrul Medical Craiova,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 73, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Craiova""}"
+99,codex_single_judge_hypothesis,openai/codex-session,756,767,Ștefan Radu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 756, ""end"": 767, ""label"": ""PERSON"", ""text"": ""Ștefan Radu""}"
+99,codex_single_judge_hypothesis,openai/codex-session,756,767,Ștefan Radu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 756, ""end"": 767, ""label"": ""PROVIDER"", ""text"": ""Ștefan Radu""}"
+132,codex_single_judge_hypothesis,openai/codex-session,19,77,Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 77, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca""}"
+132,codex_single_judge_hypothesis,openai/codex-session,50,77,Centrul Medical Cluj-Napoca,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 77, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Cluj-Napoca""}"
+132,codex_single_judge_hypothesis,openai/codex-session,794,808,Raluca Popescu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 794, ""end"": 808, ""label"": ""PERSON"", ""text"": ""Raluca Popescu""}"
+132,codex_single_judge_hypothesis,openai/codex-session,794,808,Raluca Popescu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 794, ""end"": 808, ""label"": ""PROVIDER"", ""text"": ""Raluca Popescu""}"
+137,codex_single_judge_hypothesis,openai/codex-session,19,70,Ambulatoriul de specialitate — Centrul Medical Iași,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 70, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Iași""}"
+137,codex_single_judge_hypothesis,openai/codex-session,50,70,Centrul Medical Iași,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 70, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Iași""}"
+137,codex_single_judge_hypothesis,openai/codex-session,739,752,Maria Dumitru,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 739, ""end"": 752, ""label"": ""PERSON"", ""text"": ""Maria Dumitru""}"
+137,codex_single_judge_hypothesis,openai/codex-session,739,752,Maria Dumitru,"{""id"": ""3"", ""operation"": ""add"", ""start"": 739, ""end"": 752, ""label"": ""PROVIDER"", ""text"": ""Maria Dumitru""}"
+205,codex_single_judge_hypothesis,openai/codex-session,19,73,Ambulatoriul de specialitate — Centrul Medical Craiova,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 73, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Craiova""}"
+205,codex_single_judge_hypothesis,openai/codex-session,50,73,Centrul Medical Craiova,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 73, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Craiova""}"
+205,codex_single_judge_hypothesis,openai/codex-session,796,808,Gabriela Pop,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 796, ""end"": 808, ""label"": ""PERSON"", ""text"": ""Gabriela Pop""}"
+205,codex_single_judge_hypothesis,openai/codex-session,796,808,Gabriela Pop,"{""id"": ""3"", ""operation"": ""add"", ""start"": 796, ""end"": 808, ""label"": ""PROVIDER"", ""text"": ""Gabriela Pop""}"
+225,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical București,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical București""}"
+225,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical București,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical București""}"
+225,codex_single_judge_hypothesis,openai/codex-session,802,814,Alina Stoica,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 802, ""end"": 814, ""label"": ""PERSON"", ""text"": ""Alina Stoica""}"
+225,codex_single_judge_hypothesis,openai/codex-session,802,814,Alina Stoica,"{""id"": ""3"", ""operation"": ""add"", ""start"": 802, ""end"": 814, ""label"": ""PROVIDER"", ""text"": ""Alina Stoica""}"
+253,codex_single_judge_hypothesis,openai/codex-session,19,71,Ambulatoriul de specialitate — Centrul Medical Sibiu,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 71, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Sibiu""}"
+253,codex_single_judge_hypothesis,openai/codex-session,50,71,Centrul Medical Sibiu,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 71, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Sibiu""}"
+253,codex_single_judge_hypothesis,openai/codex-session,806,822,Cătălin Munteanu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 806, ""end"": 822, ""label"": ""PERSON"", ""text"": ""Cătălin Munteanu""}"
+253,codex_single_judge_hypothesis,openai/codex-session,806,822,Cătălin Munteanu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 806, ""end"": 822, ""label"": ""PROVIDER"", ""text"": ""Cătălin Munteanu""}"
+272,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical Constanța,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Constanța""}"
+272,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical Constanța,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Constanța""}"
+272,codex_single_judge_hypothesis,openai/codex-session,748,758,Raluca Pop,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 748, ""end"": 758, ""label"": ""PERSON"", ""text"": ""Raluca Pop""}"
+272,codex_single_judge_hypothesis,openai/codex-session,748,758,Raluca Pop,"{""id"": ""3"", ""operation"": ""add"", ""start"": 748, ""end"": 758, ""label"": ""PROVIDER"", ""text"": ""Raluca Pop""}"
+285,codex_single_judge_hypothesis,openai/codex-session,19,77,Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 77, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca""}"
+285,codex_single_judge_hypothesis,openai/codex-session,50,77,Centrul Medical Cluj-Napoca,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 77, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Cluj-Napoca""}"
+285,codex_single_judge_hypothesis,openai/codex-session,787,801,Bogdan Dumitru,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 787, ""end"": 801, ""label"": ""PERSON"", ""text"": ""Bogdan Dumitru""}"
+285,codex_single_judge_hypothesis,openai/codex-session,787,801,Bogdan Dumitru,"{""id"": ""3"", ""operation"": ""add"", ""start"": 787, ""end"": 801, ""label"": ""PROVIDER"", ""text"": ""Bogdan Dumitru""}"
+301,codex_single_judge_hypothesis,openai/codex-session,19,70,Ambulatoriul de specialitate — Centrul Medical Iași,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 70, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Iași""}"
+301,codex_single_judge_hypothesis,openai/codex-session,50,70,Centrul Medical Iași,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 70, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Iași""}"
+301,codex_single_judge_hypothesis,openai/codex-session,742,754,Maria Stoica,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 742, ""end"": 754, ""label"": ""PERSON"", ""text"": ""Maria Stoica""}"
+301,codex_single_judge_hypothesis,openai/codex-session,742,754,Maria Stoica,"{""id"": ""3"", ""operation"": ""add"", ""start"": 742, ""end"": 754, ""label"": ""PROVIDER"", ""text"": ""Maria Stoica""}"
+321,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical București,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical București""}"
+321,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical București,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical București""}"
+321,codex_single_judge_hypothesis,openai/codex-session,799,815,Cristian Popescu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 799, ""end"": 815, ""label"": ""PERSON"", ""text"": ""Cristian Popescu""}"
+321,codex_single_judge_hypothesis,openai/codex-session,799,815,Cristian Popescu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 799, ""end"": 815, ""label"": ""PROVIDER"", ""text"": ""Cristian Popescu""}"
+325,codex_single_judge_hypothesis,openai/codex-session,19,70,Ambulatoriul de specialitate — Centrul Medical Iași,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 70, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Iași""}"
+325,codex_single_judge_hypothesis,openai/codex-session,50,70,Centrul Medical Iași,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 70, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Iași""}"
+325,codex_single_judge_hypothesis,openai/codex-session,793,806,Ștefan Stoica,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 793, ""end"": 806, ""label"": ""PERSON"", ""text"": ""Ștefan Stoica""}"
+325,codex_single_judge_hypothesis,openai/codex-session,793,806,Ștefan Stoica,"{""id"": ""3"", ""operation"": ""add"", ""start"": 793, ""end"": 806, ""label"": ""PROVIDER"", ""text"": ""Ștefan Stoica""}"
+337,codex_single_judge_hypothesis,openai/codex-session,19,77,Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 77, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca""}"
+337,codex_single_judge_hypothesis,openai/codex-session,50,77,Centrul Medical Cluj-Napoca,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 77, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Cluj-Napoca""}"
+337,codex_single_judge_hypothesis,openai/codex-session,767,783,Alina Constantin,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 767, ""end"": 783, ""label"": ""PERSON"", ""text"": ""Alina Constantin""}"
+337,codex_single_judge_hypothesis,openai/codex-session,767,783,Alina Constantin,"{""id"": ""3"", ""operation"": ""add"", ""start"": 767, ""end"": 783, ""label"": ""PROVIDER"", ""text"": ""Alina Constantin""}"
+338,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical București,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical București""}"
+338,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical București,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical București""}"
+338,codex_single_judge_hypothesis,openai/codex-session,802,819,Andrei Constantin,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 802, ""end"": 819, ""label"": ""PERSON"", ""text"": ""Andrei Constantin""}"
+338,codex_single_judge_hypothesis,openai/codex-session,802,819,Andrei Constantin,"{""id"": ""3"", ""operation"": ""add"", ""start"": 802, ""end"": 819, ""label"": ""PROVIDER"", ""text"": ""Andrei Constantin""}"
+340,codex_single_judge_hypothesis,openai/codex-session,19,73,Ambulatoriul de specialitate — Centrul Medical Craiova,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 73, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Craiova""}"
+340,codex_single_judge_hypothesis,openai/codex-session,50,73,Centrul Medical Craiova,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 73, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Craiova""}"
+340,codex_single_judge_hypothesis,openai/codex-session,804,820,Cristian Dumitru,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 804, ""end"": 820, ""label"": ""PERSON"", ""text"": ""Cristian Dumitru""}"
+340,codex_single_judge_hypothesis,openai/codex-session,804,820,Cristian Dumitru,"{""id"": ""3"", ""operation"": ""add"", ""start"": 804, ""end"": 820, ""label"": ""PROVIDER"", ""text"": ""Cristian Dumitru""}"
+348,codex_single_judge_hypothesis,openai/codex-session,19,72,Ambulatoriul de specialitate — Centrul Medical Oradea,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 72, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Oradea""}"
+348,codex_single_judge_hypothesis,openai/codex-session,50,72,Centrul Medical Oradea,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 72, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Oradea""}"
+348,codex_single_judge_hypothesis,openai/codex-session,801,816,Raluca Munteanu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 801, ""end"": 816, ""label"": ""PERSON"", ""text"": ""Raluca Munteanu""}"
+348,codex_single_judge_hypothesis,openai/codex-session,801,816,Raluca Munteanu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 801, ""end"": 816, ""label"": ""PROVIDER"", ""text"": ""Raluca Munteanu""}"
+362,codex_single_judge_hypothesis,openai/codex-session,19,73,Ambulatoriul de specialitate — Centrul Medical Craiova,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 73, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Craiova""}"
+362,codex_single_judge_hypothesis,openai/codex-session,50,73,Centrul Medical Craiova,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 73, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Craiova""}"
+362,codex_single_judge_hypothesis,openai/codex-session,756,771,Andreea Ionescu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 756, ""end"": 771, ""label"": ""PERSON"", ""text"": ""Andreea Ionescu""}"
+362,codex_single_judge_hypothesis,openai/codex-session,756,771,Andreea Ionescu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 756, ""end"": 771, ""label"": ""PROVIDER"", ""text"": ""Andreea Ionescu""}"
+396,codex_single_judge_hypothesis,openai/codex-session,19,72,Ambulatoriul de specialitate — Centrul Medical Brașov,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 72, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Brașov""}"
+396,codex_single_judge_hypothesis,openai/codex-session,50,72,Centrul Medical Brașov,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 72, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Brașov""}"
+396,codex_single_judge_hypothesis,openai/codex-session,808,820,Vlad Dumitru,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 808, ""end"": 820, ""label"": ""PERSON"", ""text"": ""Vlad Dumitru""}"
+396,codex_single_judge_hypothesis,openai/codex-session,808,820,Vlad Dumitru,"{""id"": ""3"", ""operation"": ""add"", ""start"": 808, ""end"": 820, ""label"": ""PROVIDER"", ""text"": ""Vlad Dumitru""}"
+400,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical Timișoara,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Timișoara""}"
+400,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical Timișoara,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Timișoara""}"
+400,codex_single_judge_hypothesis,openai/codex-session,748,760,Andreea Radu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 748, ""end"": 760, ""label"": ""PERSON"", ""text"": ""Andreea Radu""}"
+400,codex_single_judge_hypothesis,openai/codex-session,748,760,Andreea Radu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 748, ""end"": 760, ""label"": ""PROVIDER"", ""text"": ""Andreea Radu""}"
+406,codex_single_judge_hypothesis,openai/codex-session,19,77,Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 77, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca""}"
+406,codex_single_judge_hypothesis,openai/codex-session,50,77,Centrul Medical Cluj-Napoca,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 77, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Cluj-Napoca""}"
+406,codex_single_judge_hypothesis,openai/codex-session,740,756,Maria Constantin,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 740, ""end"": 756, ""label"": ""PERSON"", ""text"": ""Maria Constantin""}"
+406,codex_single_judge_hypothesis,openai/codex-session,740,756,Maria Constantin,"{""id"": ""3"", ""operation"": ""add"", ""start"": 740, ""end"": 756, ""label"": ""PROVIDER"", ""text"": ""Maria Constantin""}"
+453,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical București,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical București""}"
+453,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical București,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical București""}"
+453,codex_single_judge_hypothesis,openai/codex-session,805,818,Raluca Stoica,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 805, ""end"": 818, ""label"": ""PERSON"", ""text"": ""Raluca Stoica""}"
+453,codex_single_judge_hypothesis,openai/codex-session,805,818,Raluca Stoica,"{""id"": ""3"", ""operation"": ""add"", ""start"": 805, ""end"": 818, ""label"": ""PROVIDER"", ""text"": ""Raluca Stoica""}"
+470,codex_single_judge_hypothesis,openai/codex-session,19,72,Ambulatoriul de specialitate — Centrul Medical Brașov,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 72, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Brașov""}"
+470,codex_single_judge_hypothesis,openai/codex-session,50,72,Centrul Medical Brașov,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 72, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Brașov""}"
+470,codex_single_judge_hypothesis,openai/codex-session,804,820,Cristian Ionescu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 804, ""end"": 820, ""label"": ""PERSON"", ""text"": ""Cristian Ionescu""}"
+470,codex_single_judge_hypothesis,openai/codex-session,804,820,Cristian Ionescu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 804, ""end"": 820, ""label"": ""PROVIDER"", ""text"": ""Cristian Ionescu""}"
+472,codex_single_judge_hypothesis,openai/codex-session,19,72,Ambulatoriul de specialitate — Centrul Medical Oradea,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 72, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Oradea""}"
+472,codex_single_judge_hypothesis,openai/codex-session,50,72,Centrul Medical Oradea,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 72, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Oradea""}"
+472,codex_single_judge_hypothesis,openai/codex-session,809,825,Gabriela Dumitru,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 809, ""end"": 825, ""label"": ""PERSON"", ""text"": ""Gabriela Dumitru""}"
+472,codex_single_judge_hypothesis,openai/codex-session,809,825,Gabriela Dumitru,"{""id"": ""3"", ""operation"": ""add"", ""start"": 809, ""end"": 825, ""label"": ""PROVIDER"", ""text"": ""Gabriela Dumitru""}"
+475,codex_single_judge_hypothesis,openai/codex-session,19,72,Ambulatoriul de specialitate — Centrul Medical Brașov,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 72, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Brașov""}"
+475,codex_single_judge_hypothesis,openai/codex-session,50,72,Centrul Medical Brașov,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 72, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Brașov""}"
+475,codex_single_judge_hypothesis,openai/codex-session,746,757,Raluca Radu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 746, ""end"": 757, ""label"": ""PERSON"", ""text"": ""Raluca Radu""}"
+475,codex_single_judge_hypothesis,openai/codex-session,746,757,Raluca Radu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 746, ""end"": 757, ""label"": ""PROVIDER"", ""text"": ""Raluca Radu""}"
+486,codex_single_judge_hypothesis,openai/codex-session,19,77,Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 77, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca""}"
+486,codex_single_judge_hypothesis,openai/codex-session,50,77,Centrul Medical Cluj-Napoca,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 77, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Cluj-Napoca""}"
+486,codex_single_judge_hypothesis,openai/codex-session,760,774,Ionuț Munteanu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 760, ""end"": 774, ""label"": ""PERSON"", ""text"": ""Ionuț Munteanu""}"
+486,codex_single_judge_hypothesis,openai/codex-session,760,774,Ionuț Munteanu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 760, ""end"": 774, ""label"": ""PROVIDER"", ""text"": ""Ionuț Munteanu""}"
+496,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical Timișoara,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Timișoara""}"
+496,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical Timișoara,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Timișoara""}"
+496,codex_single_judge_hypothesis,openai/codex-session,804,818,Cătălin Stoica,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 804, ""end"": 818, ""label"": ""PERSON"", ""text"": ""Cătălin Stoica""}"
+496,codex_single_judge_hypothesis,openai/codex-session,804,818,Cătălin Stoica,"{""id"": ""3"", ""operation"": ""add"", ""start"": 804, ""end"": 818, ""label"": ""PROVIDER"", ""text"": ""Cătălin Stoica""}"
+504,codex_single_judge_hypothesis,openai/codex-session,19,77,Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 77, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca""}"
+504,codex_single_judge_hypothesis,openai/codex-session,50,77,Centrul Medical Cluj-Napoca,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 77, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Cluj-Napoca""}"
+504,codex_single_judge_hypothesis,openai/codex-session,750,763,Mihai Ionescu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 750, ""end"": 763, ""label"": ""PERSON"", ""text"": ""Mihai Ionescu""}"
+504,codex_single_judge_hypothesis,openai/codex-session,750,763,Mihai Ionescu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 750, ""end"": 763, ""label"": ""PROVIDER"", ""text"": ""Mihai Ionescu""}"
+538,codex_single_judge_hypothesis,openai/codex-session,19,72,Ambulatoriul de specialitate — Centrul Medical Brașov,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 72, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Brașov""}"
+538,codex_single_judge_hypothesis,openai/codex-session,50,72,Centrul Medical Brașov,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 72, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Brașov""}"
+538,codex_single_judge_hypothesis,openai/codex-session,744,761,Ștefan Constantin,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 744, ""end"": 761, ""label"": ""PERSON"", ""text"": ""Ștefan Constantin""}"
+538,codex_single_judge_hypothesis,openai/codex-session,744,761,Ștefan Constantin,"{""id"": ""3"", ""operation"": ""add"", ""start"": 744, ""end"": 761, ""label"": ""PROVIDER"", ""text"": ""Ștefan Constantin""}"
+545,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical București,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical București""}"
+545,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical București,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical București""}"
+545,codex_single_judge_hypothesis,openai/codex-session,807,820,Mihai Popescu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 807, ""end"": 820, ""label"": ""PERSON"", ""text"": ""Mihai Popescu""}"
+545,codex_single_judge_hypothesis,openai/codex-session,807,820,Mihai Popescu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 807, ""end"": 820, ""label"": ""PROVIDER"", ""text"": ""Mihai Popescu""}"
+558,codex_single_judge_hypothesis,openai/codex-session,19,71,Ambulatoriul de specialitate — Centrul Medical Sibiu,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 71, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Sibiu""}"
+558,codex_single_judge_hypothesis,openai/codex-session,50,71,Centrul Medical Sibiu,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 71, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Sibiu""}"
+558,codex_single_judge_hypothesis,openai/codex-session,756,768,Mihai Stoica,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 756, ""end"": 768, ""label"": ""PERSON"", ""text"": ""Mihai Stoica""}"
+558,codex_single_judge_hypothesis,openai/codex-session,756,768,Mihai Stoica,"{""id"": ""3"", ""operation"": ""add"", ""start"": 756, ""end"": 768, ""label"": ""PROVIDER"", ""text"": ""Mihai Stoica""}"
+565,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical Timișoara,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Timișoara""}"
+565,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical Timișoara,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Timișoara""}"
+565,codex_single_judge_hypothesis,openai/codex-session,806,818,Maria Stoica,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 806, ""end"": 818, ""label"": ""PERSON"", ""text"": ""Maria Stoica""}"
+565,codex_single_judge_hypothesis,openai/codex-session,806,818,Maria Stoica,"{""id"": ""3"", ""operation"": ""add"", ""start"": 806, ""end"": 818, ""label"": ""PROVIDER"", ""text"": ""Maria Stoica""}"
+568,codex_single_judge_hypothesis,openai/codex-session,19,74,Ambulatoriul de specialitate — Centrul Medical Ploiești,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 74, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Ploiești""}"
+568,codex_single_judge_hypothesis,openai/codex-session,50,74,Centrul Medical Ploiești,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 74, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Ploiești""}"
+568,codex_single_judge_hypothesis,openai/codex-session,744,757,Bogdan Stoica,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 744, ""end"": 757, ""label"": ""PERSON"", ""text"": ""Bogdan Stoica""}"
+568,codex_single_judge_hypothesis,openai/codex-session,744,757,Bogdan Stoica,"{""id"": ""3"", ""operation"": ""add"", ""start"": 744, ""end"": 757, ""label"": ""PROVIDER"", ""text"": ""Bogdan Stoica""}"
+585,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical București,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical București""}"
+585,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical București,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical București""}"
+585,codex_single_judge_hypothesis,openai/codex-session,803,819,Gabriela Dumitru,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 803, ""end"": 819, ""label"": ""PERSON"", ""text"": ""Gabriela Dumitru""}"
+585,codex_single_judge_hypothesis,openai/codex-session,803,819,Gabriela Dumitru,"{""id"": ""3"", ""operation"": ""add"", ""start"": 803, ""end"": 819, ""label"": ""PROVIDER"", ""text"": ""Gabriela Dumitru""}"
+592,codex_single_judge_hypothesis,openai/codex-session,19,70,Ambulatoriul de specialitate — Centrul Medical Iași,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 70, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Iași""}"
+592,codex_single_judge_hypothesis,openai/codex-session,50,70,Centrul Medical Iași,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 70, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Iași""}"
+592,codex_single_judge_hypothesis,openai/codex-session,804,813,Mihai Pop,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 804, ""end"": 813, ""label"": ""PERSON"", ""text"": ""Mihai Pop""}"
+592,codex_single_judge_hypothesis,openai/codex-session,804,813,Mihai Pop,"{""id"": ""3"", ""operation"": ""add"", ""start"": 804, ""end"": 813, ""label"": ""PROVIDER"", ""text"": ""Mihai Pop""}"
+614,codex_single_judge_hypothesis,openai/codex-session,19,71,Ambulatoriul de specialitate — Centrul Medical Sibiu,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 71, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Sibiu""}"
+614,codex_single_judge_hypothesis,openai/codex-session,50,71,Centrul Medical Sibiu,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 71, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Sibiu""}"
+614,codex_single_judge_hypothesis,openai/codex-session,815,829,Raluca Popescu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 815, ""end"": 829, ""label"": ""PERSON"", ""text"": ""Raluca Popescu""}"
+614,codex_single_judge_hypothesis,openai/codex-session,815,829,Raluca Popescu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 815, ""end"": 829, ""label"": ""PROVIDER"", ""text"": ""Raluca Popescu""}"
+628,codex_single_judge_hypothesis,openai/codex-session,19,77,Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 77, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca""}"
+628,codex_single_judge_hypothesis,openai/codex-session,50,77,Centrul Medical Cluj-Napoca,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 77, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Cluj-Napoca""}"
+628,codex_single_judge_hypothesis,openai/codex-session,812,829,Cristian Munteanu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 812, ""end"": 829, ""label"": ""PERSON"", ""text"": ""Cristian Munteanu""}"
+628,codex_single_judge_hypothesis,openai/codex-session,812,829,Cristian Munteanu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 812, ""end"": 829, ""label"": ""PROVIDER"", ""text"": ""Cristian Munteanu""}"
+659,codex_single_judge_hypothesis,openai/codex-session,19,72,Ambulatoriul de specialitate — Centrul Medical Oradea,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 72, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Oradea""}"
+659,codex_single_judge_hypothesis,openai/codex-session,50,72,Centrul Medical Oradea,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 72, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Oradea""}"
+659,codex_single_judge_hypothesis,openai/codex-session,808,822,Mihai Munteanu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 808, ""end"": 822, ""label"": ""PERSON"", ""text"": ""Mihai Munteanu""}"
+659,codex_single_judge_hypothesis,openai/codex-session,808,822,Mihai Munteanu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 808, ""end"": 822, ""label"": ""PROVIDER"", ""text"": ""Mihai Munteanu""}"
+667,codex_single_judge_hypothesis,openai/codex-session,19,74,Ambulatoriul de specialitate — Centrul Medical Ploiești,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 74, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Ploiești""}"
+667,codex_single_judge_hypothesis,openai/codex-session,50,74,Centrul Medical Ploiești,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 74, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Ploiești""}"
+667,codex_single_judge_hypothesis,openai/codex-session,799,811,Ionuț Stoica,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 799, ""end"": 811, ""label"": ""PERSON"", ""text"": ""Ionuț Stoica""}"
+667,codex_single_judge_hypothesis,openai/codex-session,799,811,Ionuț Stoica,"{""id"": ""3"", ""operation"": ""add"", ""start"": 799, ""end"": 811, ""label"": ""PROVIDER"", ""text"": ""Ionuț Stoica""}"
+709,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical București,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical București""}"
+709,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical București,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical București""}"
+709,codex_single_judge_hypothesis,openai/codex-session,757,772,Ștefania Stoica,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 757, ""end"": 772, ""label"": ""PERSON"", ""text"": ""Ștefania Stoica""}"
+709,codex_single_judge_hypothesis,openai/codex-session,757,772,Ștefania Stoica,"{""id"": ""3"", ""operation"": ""add"", ""start"": 757, ""end"": 772, ""label"": ""PROVIDER"", ""text"": ""Ștefania Stoica""}"
+728,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical București,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical București""}"
+728,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical București,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical București""}"
+728,codex_single_judge_hypothesis,openai/codex-session,751,765,Ștefan Dumitru,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 751, ""end"": 765, ""label"": ""PERSON"", ""text"": ""Ștefan Dumitru""}"
+728,codex_single_judge_hypothesis,openai/codex-session,751,765,Ștefan Dumitru,"{""id"": ""3"", ""operation"": ""add"", ""start"": 751, ""end"": 765, ""label"": ""PROVIDER"", ""text"": ""Ștefan Dumitru""}"
+741,codex_single_judge_hypothesis,openai/codex-session,19,74,Ambulatoriul de specialitate — Centrul Medical Ploiești,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 74, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Ploiești""}"
+741,codex_single_judge_hypothesis,openai/codex-session,50,74,Centrul Medical Ploiești,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 74, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Ploiești""}"
+741,codex_single_judge_hypothesis,openai/codex-session,794,804,Ștefan Pop,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 794, ""end"": 804, ""label"": ""PERSON"", ""text"": ""Ștefan Pop""}"
+741,codex_single_judge_hypothesis,openai/codex-session,794,804,Ștefan Pop,"{""id"": ""3"", ""operation"": ""add"", ""start"": 794, ""end"": 804, ""label"": ""PROVIDER"", ""text"": ""Ștefan Pop""}"
+771,codex_single_judge_hypothesis,openai/codex-session,19,73,Ambulatoriul de specialitate — Centrul Medical Craiova,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 73, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Craiova""}"
+771,codex_single_judge_hypothesis,openai/codex-session,50,73,Centrul Medical Craiova,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 73, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Craiova""}"
+771,codex_single_judge_hypothesis,openai/codex-session,798,811,Elena Dumitru,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 798, ""end"": 811, ""label"": ""PERSON"", ""text"": ""Elena Dumitru""}"
+771,codex_single_judge_hypothesis,openai/codex-session,798,811,Elena Dumitru,"{""id"": ""3"", ""operation"": ""add"", ""start"": 798, ""end"": 811, ""label"": ""PROVIDER"", ""text"": ""Elena Dumitru""}"
+797,codex_single_judge_hypothesis,openai/codex-session,19,73,Ambulatoriul de specialitate — Centrul Medical Craiova,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 73, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Craiova""}"
+797,codex_single_judge_hypothesis,openai/codex-session,50,73,Centrul Medical Craiova,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 73, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Craiova""}"
+797,codex_single_judge_hypothesis,openai/codex-session,757,770,Cristian Radu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 757, ""end"": 770, ""label"": ""PERSON"", ""text"": ""Cristian Radu""}"
+797,codex_single_judge_hypothesis,openai/codex-session,757,770,Cristian Radu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 757, ""end"": 770, ""label"": ""PROVIDER"", ""text"": ""Cristian Radu""}"
+821,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical Timișoara,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Timișoara""}"
+821,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical Timișoara,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Timișoara""}"
+821,codex_single_judge_hypothesis,openai/codex-session,736,750,Ștefan Ionescu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 736, ""end"": 750, ""label"": ""PERSON"", ""text"": ""Ștefan Ionescu""}"
+821,codex_single_judge_hypothesis,openai/codex-session,736,750,Ștefan Ionescu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 736, ""end"": 750, ""label"": ""PROVIDER"", ""text"": ""Ștefan Ionescu""}"
+838,codex_single_judge_hypothesis,openai/codex-session,19,70,Ambulatoriul de specialitate — Centrul Medical Iași,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 70, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Iași""}"
+838,codex_single_judge_hypothesis,openai/codex-session,50,70,Centrul Medical Iași,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 70, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Iași""}"
+838,codex_single_judge_hypothesis,openai/codex-session,803,815,Vlad Dumitru,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 803, ""end"": 815, ""label"": ""PERSON"", ""text"": ""Vlad Dumitru""}"
+838,codex_single_judge_hypothesis,openai/codex-session,803,815,Vlad Dumitru,"{""id"": ""3"", ""operation"": ""add"", ""start"": 803, ""end"": 815, ""label"": ""PROVIDER"", ""text"": ""Vlad Dumitru""}"
+842,codex_single_judge_hypothesis,openai/codex-session,19,70,Ambulatoriul de specialitate — Centrul Medical Iași,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 70, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Iași""}"
+842,codex_single_judge_hypothesis,openai/codex-session,50,70,Centrul Medical Iași,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 70, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Iași""}"
+842,codex_single_judge_hypothesis,openai/codex-session,749,767,Andreea Constantin,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 749, ""end"": 767, ""label"": ""PERSON"", ""text"": ""Andreea Constantin""}"
+842,codex_single_judge_hypothesis,openai/codex-session,749,767,Andreea Constantin,"{""id"": ""3"", ""operation"": ""add"", ""start"": 749, ""end"": 767, ""label"": ""PROVIDER"", ""text"": ""Andreea Constantin""}"
+862,codex_single_judge_hypothesis,openai/codex-session,19,73,Ambulatoriul de specialitate — Centrul Medical Craiova,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 73, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Craiova""}"
+862,codex_single_judge_hypothesis,openai/codex-session,50,73,Centrul Medical Craiova,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 73, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Craiova""}"
+862,codex_single_judge_hypothesis,openai/codex-session,751,763,Maria Stoica,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 751, ""end"": 763, ""label"": ""PERSON"", ""text"": ""Maria Stoica""}"
+862,codex_single_judge_hypothesis,openai/codex-session,751,763,Maria Stoica,"{""id"": ""3"", ""operation"": ""add"", ""start"": 751, ""end"": 763, ""label"": ""PROVIDER"", ""text"": ""Maria Stoica""}"
+873,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical Timișoara,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Timișoara""}"
+873,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical Timișoara,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Timișoara""}"
+873,codex_single_judge_hypothesis,openai/codex-session,797,813,Ștefania Popescu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 797, ""end"": 813, ""label"": ""PERSON"", ""text"": ""Ștefania Popescu""}"
+873,codex_single_judge_hypothesis,openai/codex-session,797,813,Ștefania Popescu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 797, ""end"": 813, ""label"": ""PROVIDER"", ""text"": ""Ștefania Popescu""}"
+874,codex_single_judge_hypothesis,openai/codex-session,19,72,Ambulatoriul de specialitate — Centrul Medical Oradea,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 72, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Oradea""}"
+874,codex_single_judge_hypothesis,openai/codex-session,50,72,Centrul Medical Oradea,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 72, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Oradea""}"
+874,codex_single_judge_hypothesis,openai/codex-session,804,819,Cătălin Ionescu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 804, ""end"": 819, ""label"": ""PERSON"", ""text"": ""Cătălin Ionescu""}"
+874,codex_single_judge_hypothesis,openai/codex-session,804,819,Cătălin Ionescu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 804, ""end"": 819, ""label"": ""PROVIDER"", ""text"": ""Cătălin Ionescu""}"
+882,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical București,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical București""}"
+882,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical București,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical București""}"
+882,codex_single_judge_hypothesis,openai/codex-session,752,764,Elena Stoica,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 752, ""end"": 764, ""label"": ""PERSON"", ""text"": ""Elena Stoica""}"
+882,codex_single_judge_hypothesis,openai/codex-session,752,764,Elena Stoica,"{""id"": ""3"", ""operation"": ""add"", ""start"": 752, ""end"": 764, ""label"": ""PROVIDER"", ""text"": ""Elena Stoica""}"
+902,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical Constanța,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Constanța""}"
+902,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical Constanța,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Constanța""}"
+902,codex_single_judge_hypothesis,openai/codex-session,805,818,Maria Ionescu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 805, ""end"": 818, ""label"": ""PERSON"", ""text"": ""Maria Ionescu""}"
+902,codex_single_judge_hypothesis,openai/codex-session,805,818,Maria Ionescu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 805, ""end"": 818, ""label"": ""PROVIDER"", ""text"": ""Maria Ionescu""}"
+920,codex_single_judge_hypothesis,openai/codex-session,19,77,Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 77, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca""}"
+920,codex_single_judge_hypothesis,openai/codex-session,50,77,Centrul Medical Cluj-Napoca,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 77, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Cluj-Napoca""}"
+920,codex_single_judge_hypothesis,openai/codex-session,812,829,Raluca Constantin,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 812, ""end"": 829, ""label"": ""PERSON"", ""text"": ""Raluca Constantin""}"
+920,codex_single_judge_hypothesis,openai/codex-session,812,829,Raluca Constantin,"{""id"": ""3"", ""operation"": ""add"", ""start"": 812, ""end"": 829, ""label"": ""PROVIDER"", ""text"": ""Raluca Constantin""}"
+943,codex_single_judge_hypothesis,openai/codex-session,19,72,Ambulatoriul de specialitate — Centrul Medical Oradea,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 72, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Oradea""}"
+943,codex_single_judge_hypothesis,openai/codex-session,50,72,Centrul Medical Oradea,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 72, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Oradea""}"
+943,codex_single_judge_hypothesis,openai/codex-session,808,821,Ioana Ionescu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 808, ""end"": 821, ""label"": ""PERSON"", ""text"": ""Ioana Ionescu""}"
+943,codex_single_judge_hypothesis,openai/codex-session,808,821,Ioana Ionescu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 808, ""end"": 821, ""label"": ""PROVIDER"", ""text"": ""Ioana Ionescu""}"
+948,codex_single_judge_hypothesis,openai/codex-session,19,73,Ambulatoriul de specialitate — Centrul Medical Craiova,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 73, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Craiova""}"
+948,codex_single_judge_hypothesis,openai/codex-session,50,73,Centrul Medical Craiova,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 73, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Craiova""}"
+948,codex_single_judge_hypothesis,openai/codex-session,754,769,Ștefan Munteanu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 754, ""end"": 769, ""label"": ""PERSON"", ""text"": ""Ștefan Munteanu""}"
+948,codex_single_judge_hypothesis,openai/codex-session,754,769,Ștefan Munteanu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 754, ""end"": 769, ""label"": ""PROVIDER"", ""text"": ""Ștefan Munteanu""}"
+996,codex_single_judge_hypothesis,openai/codex-session,19,72,Ambulatoriul de specialitate — Centrul Medical Brașov,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 72, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Brașov""}"
+996,codex_single_judge_hypothesis,openai/codex-session,50,72,Centrul Medical Brașov,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 72, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Brașov""}"
+996,codex_single_judge_hypothesis,openai/codex-session,793,805,Ioana Stoica,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 793, ""end"": 805, ""label"": ""PERSON"", ""text"": ""Ioana Stoica""}"
+996,codex_single_judge_hypothesis,openai/codex-session,793,805,Ioana Stoica,"{""id"": ""3"", ""operation"": ""add"", ""start"": 793, ""end"": 805, ""label"": ""PROVIDER"", ""text"": ""Ioana Stoica""}"
+1020,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical Constanța,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Constanța""}"
+1020,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical Constanța,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Constanța""}"
+1020,codex_single_judge_hypothesis,openai/codex-session,808,825,Bogdan Constantin,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 808, ""end"": 825, ""label"": ""PERSON"", ""text"": ""Bogdan Constantin""}"
+1020,codex_single_judge_hypothesis,openai/codex-session,808,825,Bogdan Constantin,"{""id"": ""3"", ""operation"": ""add"", ""start"": 808, ""end"": 825, ""label"": ""PROVIDER"", ""text"": ""Bogdan Constantin""}"
+1085,codex_single_judge_hypothesis,openai/codex-session,19,72,Ambulatoriul de specialitate — Centrul Medical Oradea,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 72, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Oradea""}"
+1085,codex_single_judge_hypothesis,openai/codex-session,50,72,Centrul Medical Oradea,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 72, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Oradea""}"
+1085,codex_single_judge_hypothesis,openai/codex-session,796,811,Cristian Stoica,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 796, ""end"": 811, ""label"": ""PERSON"", ""text"": ""Cristian Stoica""}"
+1085,codex_single_judge_hypothesis,openai/codex-session,796,811,Cristian Stoica,"{""id"": ""3"", ""operation"": ""add"", ""start"": 796, ""end"": 811, ""label"": ""PROVIDER"", ""text"": ""Cristian Stoica""}"
+1120,codex_single_judge_hypothesis,openai/codex-session,19,77,Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 77, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Cluj-Napoca""}"
+1120,codex_single_judge_hypothesis,openai/codex-session,50,77,Centrul Medical Cluj-Napoca,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 77, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Cluj-Napoca""}"
+1120,codex_single_judge_hypothesis,openai/codex-session,755,767,Vlad Ionescu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 755, ""end"": 767, ""label"": ""PERSON"", ""text"": ""Vlad Ionescu""}"
+1120,codex_single_judge_hypothesis,openai/codex-session,755,767,Vlad Ionescu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 755, ""end"": 767, ""label"": ""PROVIDER"", ""text"": ""Vlad Ionescu""}"
+1138,codex_single_judge_hypothesis,openai/codex-session,19,72,Ambulatoriul de specialitate — Centrul Medical Brașov,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 72, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Brașov""}"
+1138,codex_single_judge_hypothesis,openai/codex-session,50,72,Centrul Medical Brașov,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 72, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Brașov""}"
+1138,codex_single_judge_hypothesis,openai/codex-session,800,813,Vlad Munteanu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 800, ""end"": 813, ""label"": ""PERSON"", ""text"": ""Vlad Munteanu""}"
+1138,codex_single_judge_hypothesis,openai/codex-session,800,813,Vlad Munteanu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 800, ""end"": 813, ""label"": ""PROVIDER"", ""text"": ""Vlad Munteanu""}"
+1172,codex_single_judge_hypothesis,openai/codex-session,19,74,Ambulatoriul de specialitate — Centrul Medical Ploiești,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 74, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Ploiești""}"
+1172,codex_single_judge_hypothesis,openai/codex-session,50,74,Centrul Medical Ploiești,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 74, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Ploiești""}"
+1172,codex_single_judge_hypothesis,openai/codex-session,799,812,Alina Ionescu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 799, ""end"": 812, ""label"": ""PERSON"", ""text"": ""Alina Ionescu""}"
+1172,codex_single_judge_hypothesis,openai/codex-session,799,812,Alina Ionescu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 799, ""end"": 812, ""label"": ""PROVIDER"", ""text"": ""Alina Ionescu""}"
+1234,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical Constanța,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Constanța""}"
+1234,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical Constanța,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Constanța""}"
+1234,codex_single_judge_hypothesis,openai/codex-session,808,824,Cătălin Munteanu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 808, ""end"": 824, ""label"": ""PERSON"", ""text"": ""Cătălin Munteanu""}"
+1234,codex_single_judge_hypothesis,openai/codex-session,808,824,Cătălin Munteanu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 808, ""end"": 824, ""label"": ""PROVIDER"", ""text"": ""Cătălin Munteanu""}"
+1262,codex_single_judge_hypothesis,openai/codex-session,19,74,Ambulatoriul de specialitate — Centrul Medical Ploiești,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 74, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Ploiești""}"
+1262,codex_single_judge_hypothesis,openai/codex-session,50,74,Centrul Medical Ploiești,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 74, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Ploiești""}"
+1262,codex_single_judge_hypothesis,openai/codex-session,755,768,Ioana Dumitru,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 755, ""end"": 768, ""label"": ""PERSON"", ""text"": ""Ioana Dumitru""}"
+1262,codex_single_judge_hypothesis,openai/codex-session,755,768,Ioana Dumitru,"{""id"": ""3"", ""operation"": ""add"", ""start"": 755, ""end"": 768, ""label"": ""PROVIDER"", ""text"": ""Ioana Dumitru""}"
+1275,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical Constanța,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Constanța""}"
+1275,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical Constanța,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Constanța""}"
+1275,codex_single_judge_hypothesis,openai/codex-session,739,755,Ionuț Constantin,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 739, ""end"": 755, ""label"": ""PERSON"", ""text"": ""Ionuț Constantin""}"
+1275,codex_single_judge_hypothesis,openai/codex-session,739,755,Ionuț Constantin,"{""id"": ""3"", ""operation"": ""add"", ""start"": 739, ""end"": 755, ""label"": ""PROVIDER"", ""text"": ""Ionuț Constantin""}"
+1290,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical București,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical București""}"
+1290,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical București,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical București""}"
+1290,codex_single_judge_hypothesis,openai/codex-session,804,818,Mihai Munteanu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 804, ""end"": 818, ""label"": ""PERSON"", ""text"": ""Mihai Munteanu""}"
+1290,codex_single_judge_hypothesis,openai/codex-session,804,818,Mihai Munteanu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 804, ""end"": 818, ""label"": ""PROVIDER"", ""text"": ""Mihai Munteanu""}"
+1329,codex_single_judge_hypothesis,openai/codex-session,19,70,Ambulatoriul de specialitate — Centrul Medical Iași,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 70, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Iași""}"
+1329,codex_single_judge_hypothesis,openai/codex-session,50,70,Centrul Medical Iași,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 70, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Iași""}"
+1329,codex_single_judge_hypothesis,openai/codex-session,743,759,Ionuț Constantin,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 743, ""end"": 759, ""label"": ""PERSON"", ""text"": ""Ionuț Constantin""}"
+1329,codex_single_judge_hypothesis,openai/codex-session,743,759,Ionuț Constantin,"{""id"": ""3"", ""operation"": ""add"", ""start"": 743, ""end"": 759, ""label"": ""PROVIDER"", ""text"": ""Ionuț Constantin""}"
+1362,codex_single_judge_hypothesis,openai/codex-session,19,70,Ambulatoriul de specialitate — Centrul Medical Iași,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 70, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Iași""}"
+1362,codex_single_judge_hypothesis,openai/codex-session,50,70,Centrul Medical Iași,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 70, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Iași""}"
+1362,codex_single_judge_hypothesis,openai/codex-session,744,757,Raluca Stoica,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 744, ""end"": 757, ""label"": ""PERSON"", ""text"": ""Raluca Stoica""}"
+1362,codex_single_judge_hypothesis,openai/codex-session,744,757,Raluca Stoica,"{""id"": ""3"", ""operation"": ""add"", ""start"": 744, ""end"": 757, ""label"": ""PROVIDER"", ""text"": ""Raluca Stoica""}"
+1365,codex_single_judge_hypothesis,openai/codex-session,19,72,Ambulatoriul de specialitate — Centrul Medical Oradea,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 72, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Oradea""}"
+1365,codex_single_judge_hypothesis,openai/codex-session,50,72,Centrul Medical Oradea,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 72, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Oradea""}"
+1365,codex_single_judge_hypothesis,openai/codex-session,804,817,Maria Popescu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 804, ""end"": 817, ""label"": ""PERSON"", ""text"": ""Maria Popescu""}"
+1365,codex_single_judge_hypothesis,openai/codex-session,804,817,Maria Popescu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 804, ""end"": 817, ""label"": ""PROVIDER"", ""text"": ""Maria Popescu""}"
+1376,codex_single_judge_hypothesis,openai/codex-session,19,72,Ambulatoriul de specialitate — Centrul Medical Brașov,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 72, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Brașov""}"
+1376,codex_single_judge_hypothesis,openai/codex-session,50,72,Centrul Medical Brașov,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 72, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Brașov""}"
+1376,codex_single_judge_hypothesis,openai/codex-session,805,816,Cătălin Pop,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 805, ""end"": 816, ""label"": ""PERSON"", ""text"": ""Cătălin Pop""}"
+1376,codex_single_judge_hypothesis,openai/codex-session,805,816,Cătălin Pop,"{""id"": ""3"", ""operation"": ""add"", ""start"": 805, ""end"": 816, ""label"": ""PROVIDER"", ""text"": ""Cătălin Pop""}"
+1383,codex_single_judge_hypothesis,openai/codex-session,19,70,Ambulatoriul de specialitate — Centrul Medical Iași,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 70, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Iași""}"
+1383,codex_single_judge_hypothesis,openai/codex-session,50,70,Centrul Medical Iași,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 70, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Iași""}"
+1383,codex_single_judge_hypothesis,openai/codex-session,814,823,Vlad Radu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 814, ""end"": 823, ""label"": ""PERSON"", ""text"": ""Vlad Radu""}"
+1383,codex_single_judge_hypothesis,openai/codex-session,814,823,Vlad Radu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 814, ""end"": 823, ""label"": ""PROVIDER"", ""text"": ""Vlad Radu""}"
+1411,codex_single_judge_hypothesis,openai/codex-session,19,71,Ambulatoriul de specialitate — Centrul Medical Sibiu,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 71, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Sibiu""}"
+1411,codex_single_judge_hypothesis,openai/codex-session,50,71,Centrul Medical Sibiu,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 71, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Sibiu""}"
+1411,codex_single_judge_hypothesis,openai/codex-session,799,811,Elena Stoica,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 799, ""end"": 811, ""label"": ""PERSON"", ""text"": ""Elena Stoica""}"
+1411,codex_single_judge_hypothesis,openai/codex-session,799,811,Elena Stoica,"{""id"": ""3"", ""operation"": ""add"", ""start"": 799, ""end"": 811, ""label"": ""PROVIDER"", ""text"": ""Elena Stoica""}"
+1478,codex_single_judge_hypothesis,openai/codex-session,19,72,Ambulatoriul de specialitate — Centrul Medical Brașov,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 72, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Brașov""}"
+1478,codex_single_judge_hypothesis,openai/codex-session,50,72,Centrul Medical Brașov,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 72, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Brașov""}"
+1478,codex_single_judge_hypothesis,openai/codex-session,790,804,Mihai Munteanu,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 790, ""end"": 804, ""label"": ""PERSON"", ""text"": ""Mihai Munteanu""}"
+1478,codex_single_judge_hypothesis,openai/codex-session,790,804,Mihai Munteanu,"{""id"": ""3"", ""operation"": ""add"", ""start"": 790, ""end"": 804, ""label"": ""PROVIDER"", ""text"": ""Mihai Munteanu""}"
+1485,codex_single_judge_hypothesis,openai/codex-session,19,75,Ambulatoriul de specialitate — Centrul Medical Timișoara,"{""id"": ""0"", ""operation"": ""remove"", ""start"": 19, ""end"": 75, ""label"": ""ORG_PARTY"", ""text"": ""Ambulatoriul de specialitate — Centrul Medical Timișoara""}"
+1485,codex_single_judge_hypothesis,openai/codex-session,50,75,Centrul Medical Timișoara,"{""id"": ""1"", ""operation"": ""add"", ""start"": 50, ""end"": 75, ""label"": ""FACILITY"", ""text"": ""Centrul Medical Timișoara""}"
+1485,codex_single_judge_hypothesis,openai/codex-session,755,765,Ștefan Pop,"{""id"": ""2"", ""operation"": ""remove"", ""start"": 755, ""end"": 765, ""label"": ""PERSON"", ""text"": ""Ștefan Pop""}"
+1485,codex_single_judge_hypothesis,openai/codex-session,755,765,Ștefan Pop,"{""id"": ""3"", ""operation"": ""add"", ""start"": 755, ""end"": 765, ""label"": ""PROVIDER"", ""text"": ""Ștefan Pop""}"
+5,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+21,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+73,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+81,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+99,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+132,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+137,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+205,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+225,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+253,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+272,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+285,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+301,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+321,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+325,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+337,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+338,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+340,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+348,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+362,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+396,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+400,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+406,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+453,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+470,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+472,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+475,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+486,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+496,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+504,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+538,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+545,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+558,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+565,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+568,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+585,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+592,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+614,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+628,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+659,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+667,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+709,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+728,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+741,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+771,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+797,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+821,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+838,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+842,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+862,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+873,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+874,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+882,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+902,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+920,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+943,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+948,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+996,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+1020,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+1085,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+1120,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+1138,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+1172,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+1234,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+1262,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+1275,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+1290,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+1329,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+1362,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+1365,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+1376,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+1383,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+1411,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+1478,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.
+1485,codex_artifact,openai/codex-session,,,,Generic clinical assessment and unchanged treatment omit individual measurements/treatment details.

@@ -1,0 +1,3262 @@
+{
+  "protocol_sha256": "9a59bbbf24bb1cda8bf2c5c7ffeacd0a5dd623bcda48179e89e78d125e293a99",
+  "sample_sha256": "4c4e1e8742ed2861cba363f27a0bb86ffcd7bca9d653eee090abc8b9cd1e75b4",
+  "source_commit": "79c7a91c47be20c8d214b05b09c2850fe8049037",
+  "panel": {
+    "n": 0,
+    "alpha": {},
+    "ratings": {},
+    "bootstrap_replicates": 2000,
+    "execution_errors": {},
+    "config": "pl-realskeleton-v2",
+    "sampled_n": 300,
+    "population_n": 1500,
+    "strata": {
+      "admin": 75,
+      "clinical": 75,
+      "contract": 75,
+      "declaration": 75
+    },
+    "population_strata": {
+      "declaration": 380,
+      "clinical": 352,
+      "admin": 390,
+      "contract": 378
+    },
+    "seed": 7712,
+    "seed_count": 1,
+    "decode": {
+      "subjects": 1110,
+      "consistent": 1110,
+      "explicit_dob_subjects": 352,
+      "explicit_sex_subjects": 352,
+      "explicit_dob_consistent": 352,
+      "explicit_sex_consistent": 352,
+      "failures": [],
+      "pass": true,
+      "ci95": [
+        0.9965511759101382,
+        1.0
+      ],
+      "explicit_dob_ci95": [
+        0.9892046211170977,
+        1.0
+      ],
+      "explicit_sex_ci95": [
+        0.9892046211170977,
+        1.0
+      ]
+    },
+    "majority_gold_errors": 0,
+    "edit_conflicts": 0,
+    "valid_per_model": {
+      "mistralai/mistral-large-2512": 0,
+      "google/gemini-2.5-flash": 0,
+      "qwen/qwen3-235b-a22b-2507": 0
+    },
+    "artifacts": {
+      "flagged": 0,
+      "n": 0,
+      "ci95": null
+    },
+    "gates": {
+      "sample": true,
+      "complete": false,
+      "agreement": false,
+      "ratings": false,
+      "artifacts": false,
+      "decode": true,
+      "gold_errors": false
+    },
+    "passed": false,
+    "config_status": "dev",
+    "inference_seed": 77,
+    "scope": "Only complete external cases; incomplete coverage cannot establish any config-wide pass",
+    "by_type": {
+      "contract": {
+        "n": 0,
+        "alpha": {},
+        "ratings": {},
+        "bootstrap_replicates": 2000,
+        "artifacts_per_judge": {
+          "mistralai/mistral-large-2512": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          },
+          "google/gemini-2.5-flash": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          },
+          "qwen/qwen3-235b-a22b-2507": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          }
+        }
+      },
+      "clinical": {
+        "n": 0,
+        "alpha": {},
+        "ratings": {},
+        "bootstrap_replicates": 2000,
+        "artifacts_per_judge": {
+          "mistralai/mistral-large-2512": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          },
+          "google/gemini-2.5-flash": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          },
+          "qwen/qwen3-235b-a22b-2507": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          }
+        }
+      },
+      "admin": {
+        "n": 0,
+        "alpha": {},
+        "ratings": {},
+        "bootstrap_replicates": 2000,
+        "artifacts_per_judge": {
+          "mistralai/mistral-large-2512": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          },
+          "google/gemini-2.5-flash": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          },
+          "qwen/qwen3-235b-a22b-2507": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          }
+        }
+      },
+      "declaration": {
+        "n": 0,
+        "alpha": {},
+        "ratings": {},
+        "bootstrap_replicates": 2000,
+        "artifacts_per_judge": {
+          "mistralai/mistral-large-2512": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          },
+          "google/gemini-2.5-flash": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          },
+          "qwen/qwen3-235b-a22b-2507": {
+            "flagged": 0,
+            "n": 0,
+            "ci95": null
+          }
+        }
+      }
+    }
+  },
+  "codex": {
+    "overall": {
+      "n": 300,
+      "alpha": {
+        "panel": {
+          "estimate": null,
+          "ci95": null,
+          "defined_bootstraps": 0
+        },
+        "openai/codex-session": {
+          "estimate": 0.9394048594048594,
+          "ci95": [
+            0.9394048594048594,
+            0.9394048594048594
+          ],
+          "defined_bootstraps": 2000
+        }
+      },
+      "ratings": {
+        "openai/codex-session": {
+          "fluency": {
+            "median": 5.0,
+            "ci95": [
+              5.0,
+              5.0
+            ]
+          },
+          "naturalness": {
+            "median": 5.0,
+            "ci95": [
+              5.0,
+              5.0
+            ]
+          }
+        }
+      },
+      "bootstrap_replicates": 2000,
+      "artifacts_per_judge": {
+        "openai/codex-session": {
+          "flagged": 75,
+          "n": 300,
+          "ci95": [
+            0.2043699748164734,
+            0.3019514854180529
+          ]
+        }
+      }
+    },
+    "by_type": {
+      "contract": {
+        "n": 75,
+        "alpha": {
+          "panel": {
+            "estimate": null,
+            "ci95": null,
+            "defined_bootstraps": 0
+          },
+          "openai/codex-session": {
+            "estimate": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ],
+            "defined_bootstraps": 2000
+          }
+        },
+        "ratings": {
+          "openai/codex-session": {
+            "fluency": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            },
+            "naturalness": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            }
+          }
+        },
+        "bootstrap_replicates": 2000,
+        "artifacts_per_judge": {
+          "openai/codex-session": {
+            "flagged": 0,
+            "n": 75,
+            "ci95": [
+              0.0,
+              0.04872365402770864
+            ]
+          }
+        }
+      },
+      "clinical": {
+        "n": 75,
+        "alpha": {
+          "panel": {
+            "estimate": null,
+            "ci95": null,
+            "defined_bootstraps": 0
+          },
+          "openai/codex-session": {
+            "estimate": 0.7430476190476191,
+            "ci95": [
+              0.7430476190476191,
+              0.7430476190476191
+            ],
+            "defined_bootstraps": 2000
+          }
+        },
+        "ratings": {
+          "openai/codex-session": {
+            "fluency": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            },
+            "naturalness": {
+              "median": 4.0,
+              "ci95": [
+                4.0,
+                4.0
+              ]
+            }
+          }
+        },
+        "bootstrap_replicates": 2000,
+        "artifacts_per_judge": {
+          "openai/codex-session": {
+            "flagged": 75,
+            "n": 75,
+            "ci95": [
+              0.9512763459722913,
+              1.0
+            ]
+          }
+        }
+      },
+      "admin": {
+        "n": 75,
+        "alpha": {
+          "panel": {
+            "estimate": null,
+            "ci95": null,
+            "defined_bootstraps": 0
+          },
+          "openai/codex-session": {
+            "estimate": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ],
+            "defined_bootstraps": 2000
+          }
+        },
+        "ratings": {
+          "openai/codex-session": {
+            "fluency": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            },
+            "naturalness": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            }
+          }
+        },
+        "bootstrap_replicates": 2000,
+        "artifacts_per_judge": {
+          "openai/codex-session": {
+            "flagged": 0,
+            "n": 75,
+            "ci95": [
+              0.0,
+              0.04872365402770864
+            ]
+          }
+        }
+      },
+      "declaration": {
+        "n": 75,
+        "alpha": {
+          "panel": {
+            "estimate": null,
+            "ci95": null,
+            "defined_bootstraps": 0
+          },
+          "openai/codex-session": {
+            "estimate": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ],
+            "defined_bootstraps": 2000
+          }
+        },
+        "ratings": {
+          "openai/codex-session": {
+            "fluency": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            },
+            "naturalness": {
+              "median": 5.0,
+              "ci95": [
+                5.0,
+                5.0
+              ]
+            }
+          }
+        },
+        "bootstrap_replicates": 2000,
+        "artifacts_per_judge": {
+          "openai/codex-session": {
+            "flagged": 0,
+            "n": 75,
+            "ci95": [
+              0.0,
+              0.04872365402770864
+            ]
+          }
+        }
+      }
+    }
+  },
+  "codex_disagreements": [
+    {
+      "id": "1",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 699,
+          "end": 715,
+          "label": "PERSON",
+          "text": "Joanna Szymańska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 699,
+          "end": 715,
+          "label": "PROVIDER",
+          "text": "Joanna Szymańska"
+        }
+      ]
+    },
+    {
+      "id": "21",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne we Wrocławiu"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne we Wrocławiu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 746,
+          "end": 758,
+          "label": "PERSON",
+          "text": "Ewa Kowalska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 746,
+          "end": 758,
+          "label": "PROVIDER",
+          "text": "Ewa Kowalska"
+        }
+      ]
+    },
+    {
+      "id": "65",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 60,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 60,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 700,
+          "end": 719,
+          "label": "PERSON",
+          "text": "Agnieszka Kowalczyk"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 700,
+          "end": 719,
+          "label": "PROVIDER",
+          "text": "Agnieszka Kowalczyk"
+        }
+      ]
+    },
+    {
+      "id": "80",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 692,
+          "end": 707,
+          "label": "PERSON",
+          "text": "Piotr Zieliński"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 692,
+          "end": 707,
+          "label": "PROVIDER",
+          "text": "Piotr Zieliński"
+        }
+      ]
+    },
+    {
+      "id": "87",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 60,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 60,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 737,
+          "end": 753,
+          "label": "PERSON",
+          "text": "Katarzyna Wójcik"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 737,
+          "end": 753,
+          "label": "PROVIDER",
+          "text": "Katarzyna Wójcik"
+        }
+      ]
+    },
+    {
+      "id": "130",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Lublinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Lublinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 708,
+          "end": 723,
+          "label": "PERSON",
+          "text": "Anna Wiśniewska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 708,
+          "end": 723,
+          "label": "PROVIDER",
+          "text": "Anna Wiśniewska"
+        }
+      ]
+    },
+    {
+      "id": "137",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 60,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 60,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 699,
+          "end": 714,
+          "label": "PERSON",
+          "text": "Magdalena Nowak"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 699,
+          "end": 714,
+          "label": "PROVIDER",
+          "text": "Magdalena Nowak"
+        }
+      ]
+    },
+    {
+      "id": "186",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Poznaniu"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Poznaniu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 701,
+          "end": 716,
+          "label": "PERSON",
+          "text": "Piotr Szymański"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 701,
+          "end": 716,
+          "label": "PROVIDER",
+          "text": "Piotr Szymański"
+        }
+      ]
+    },
+    {
+      "id": "240",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne we Wrocławiu"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne we Wrocławiu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 695,
+          "end": 708,
+          "label": "PERSON",
+          "text": "Jan Kowalczyk"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 695,
+          "end": 708,
+          "label": "PROVIDER",
+          "text": "Jan Kowalczyk"
+        }
+      ]
+    },
+    {
+      "id": "273",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Poznaniu"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Poznaniu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 738,
+          "end": 753,
+          "label": "PERSON",
+          "text": "Anna Wiśniewska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 738,
+          "end": 753,
+          "label": "PROVIDER",
+          "text": "Anna Wiśniewska"
+        }
+      ]
+    },
+    {
+      "id": "279",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Lublinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Lublinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 716,
+          "end": 731,
+          "label": "PERSON",
+          "text": "Piotr Szymański"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 716,
+          "end": 731,
+          "label": "PROVIDER",
+          "text": "Piotr Szymański"
+        }
+      ]
+    },
+    {
+      "id": "293",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Poznaniu"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Poznaniu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 743,
+          "end": 759,
+          "label": "PERSON",
+          "text": "Maria Wiśniewska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 743,
+          "end": 759,
+          "label": "PROVIDER",
+          "text": "Maria Wiśniewska"
+        }
+      ]
+    },
+    {
+      "id": "303",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne we Wrocławiu"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne we Wrocławiu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 709,
+          "end": 725,
+          "label": "PERSON",
+          "text": "Maria Wiśniewska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 709,
+          "end": 725,
+          "label": "PROVIDER",
+          "text": "Maria Wiśniewska"
+        }
+      ]
+    },
+    {
+      "id": "330",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 744,
+          "end": 757,
+          "label": "PERSON",
+          "text": "Jan Zieliński"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 744,
+          "end": 757,
+          "label": "PROVIDER",
+          "text": "Jan Zieliński"
+        }
+      ]
+    },
+    {
+      "id": "342",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 62,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Gdańsku"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 62,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Gdańsku"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 692,
+          "end": 702,
+          "label": "PERSON",
+          "text": "Jan Wójcik"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 692,
+          "end": 702,
+          "label": "PROVIDER",
+          "text": "Jan Wójcik"
+        }
+      ]
+    },
+    {
+      "id": "357",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne we Wrocławiu"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne we Wrocławiu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 699,
+          "end": 716,
+          "label": "PERSON",
+          "text": "Barbara Szymańska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 699,
+          "end": 716,
+          "label": "PROVIDER",
+          "text": "Barbara Szymańska"
+        }
+      ]
+    },
+    {
+      "id": "358",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 715,
+          "end": 734,
+          "label": "PERSON",
+          "text": "Agnieszka Szymańska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 715,
+          "end": 734,
+          "label": "PROVIDER",
+          "text": "Agnieszka Szymańska"
+        }
+      ]
+    },
+    {
+      "id": "364",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 699,
+          "end": 718,
+          "label": "PERSON",
+          "text": "Magdalena Szymańska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 699,
+          "end": 718,
+          "label": "PROVIDER",
+          "text": "Magdalena Szymańska"
+        }
+      ]
+    },
+    {
+      "id": "377",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 60,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 60,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 701,
+          "end": 719,
+          "label": "PERSON",
+          "text": "Joanna Lewandowska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 701,
+          "end": 719,
+          "label": "PROVIDER",
+          "text": "Joanna Lewandowska"
+        }
+      ]
+    },
+    {
+      "id": "388",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 62,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Gdańsku"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 62,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Gdańsku"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 746,
+          "end": 767,
+          "label": "PERSON",
+          "text": "Krzysztof Lewandowski"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 746,
+          "end": 767,
+          "label": "PROVIDER",
+          "text": "Krzysztof Lewandowski"
+        }
+      ]
+    },
+    {
+      "id": "417",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 703,
+          "end": 721,
+          "label": "PERSON",
+          "text": "Magdalena Kowalska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 703,
+          "end": 721,
+          "label": "PROVIDER",
+          "text": "Magdalena Kowalska"
+        }
+      ]
+    },
+    {
+      "id": "430",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Poznaniu"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Poznaniu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 709,
+          "end": 724,
+          "label": "PERSON",
+          "text": "Magdalena Nowak"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 709,
+          "end": 724,
+          "label": "PROVIDER",
+          "text": "Magdalena Nowak"
+        }
+      ]
+    },
+    {
+      "id": "435",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 741,
+          "end": 756,
+          "label": "PERSON",
+          "text": "Paweł Szymański"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 741,
+          "end": 756,
+          "label": "PROVIDER",
+          "text": "Paweł Szymański"
+        }
+      ]
+    },
+    {
+      "id": "495",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 60,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 60,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 703,
+          "end": 719,
+          "label": "PERSON",
+          "text": "Piotr Wiśniewski"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 703,
+          "end": 719,
+          "label": "PROVIDER",
+          "text": "Piotr Wiśniewski"
+        }
+      ]
+    },
+    {
+      "id": "497",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 703,
+          "end": 723,
+          "label": "PERSON",
+          "text": "Magdalena Wiśniewska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 703,
+          "end": 723,
+          "label": "PROVIDER",
+          "text": "Magdalena Wiśniewska"
+        }
+      ]
+    },
+    {
+      "id": "498",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 702,
+          "end": 718,
+          "label": "PERSON",
+          "text": "Michał Kowalczyk"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 702,
+          "end": 718,
+          "label": "PROVIDER",
+          "text": "Michał Kowalczyk"
+        }
+      ]
+    },
+    {
+      "id": "499",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 62,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Gdańsku"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 62,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Gdańsku"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 700,
+          "end": 716,
+          "label": "PERSON",
+          "text": "Krzysztof Wójcik"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 700,
+          "end": 716,
+          "label": "PROVIDER",
+          "text": "Krzysztof Wójcik"
+        }
+      ]
+    },
+    {
+      "id": "507",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 735,
+          "end": 752,
+          "label": "PERSON",
+          "text": "Marcin Wiśniewski"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 735,
+          "end": 752,
+          "label": "PROVIDER",
+          "text": "Marcin Wiśniewski"
+        }
+      ]
+    },
+    {
+      "id": "522",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 62,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Gdańsku"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 62,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Gdańsku"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 738,
+          "end": 755,
+          "label": "PERSON",
+          "text": "Piotr Lewandowski"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 738,
+          "end": 755,
+          "label": "PROVIDER",
+          "text": "Piotr Lewandowski"
+        }
+      ]
+    },
+    {
+      "id": "536",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 62,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Gdańsku"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 62,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Gdańsku"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 734,
+          "end": 750,
+          "label": "PERSON",
+          "text": "Anna Lewandowska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 734,
+          "end": 750,
+          "label": "PROVIDER",
+          "text": "Anna Lewandowska"
+        }
+      ]
+    },
+    {
+      "id": "539",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 747,
+          "end": 757,
+          "label": "PERSON",
+          "text": "Jan Wójcik"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 747,
+          "end": 757,
+          "label": "PROVIDER",
+          "text": "Jan Wójcik"
+        }
+      ]
+    },
+    {
+      "id": "547",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Poznaniu"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Poznaniu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 711,
+          "end": 726,
+          "label": "PERSON",
+          "text": "Katarzyna Nowak"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 711,
+          "end": 726,
+          "label": "PROVIDER",
+          "text": "Katarzyna Nowak"
+        }
+      ]
+    },
+    {
+      "id": "572",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne we Wrocławiu"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne we Wrocławiu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 699,
+          "end": 712,
+          "label": "PERSON",
+          "text": "Barbara Nowak"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 699,
+          "end": 712,
+          "label": "PROVIDER",
+          "text": "Barbara Nowak"
+        }
+      ]
+    },
+    {
+      "id": "579",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Poznaniu"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Poznaniu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 708,
+          "end": 719,
+          "label": "PERSON",
+          "text": "Anna Wójcik"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 708,
+          "end": 719,
+          "label": "PROVIDER",
+          "text": "Anna Wójcik"
+        }
+      ]
+    },
+    {
+      "id": "602",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Lublinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Lublinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 709,
+          "end": 727,
+          "label": "PERSON",
+          "text": "Barbara Wiśniewska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 709,
+          "end": 727,
+          "label": "PROVIDER",
+          "text": "Barbara Wiśniewska"
+        }
+      ]
+    },
+    {
+      "id": "609",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 697,
+          "end": 712,
+          "label": "PERSON",
+          "text": "Magdalena Nowak"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 697,
+          "end": 712,
+          "label": "PROVIDER",
+          "text": "Magdalena Nowak"
+        }
+      ]
+    },
+    {
+      "id": "620",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Lublinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Lublinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 708,
+          "end": 726,
+          "label": "PERSON",
+          "text": "Joanna Lewandowska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 708,
+          "end": 726,
+          "label": "PROVIDER",
+          "text": "Joanna Lewandowska"
+        }
+      ]
+    },
+    {
+      "id": "635",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 717,
+          "end": 732,
+          "label": "PERSON",
+          "text": "Marcin Kowalski"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 717,
+          "end": 732,
+          "label": "PROVIDER",
+          "text": "Marcin Kowalski"
+        }
+      ]
+    },
+    {
+      "id": "640",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Lublinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Lublinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 705,
+          "end": 720,
+          "label": "PERSON",
+          "text": "Maria Szymańska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 705,
+          "end": 720,
+          "label": "PROVIDER",
+          "text": "Maria Szymańska"
+        }
+      ]
+    },
+    {
+      "id": "644",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 60,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 60,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 738,
+          "end": 751,
+          "label": "PERSON",
+          "text": "Marcin Wójcik"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 738,
+          "end": 751,
+          "label": "PROVIDER",
+          "text": "Marcin Wójcik"
+        }
+      ]
+    },
+    {
+      "id": "663",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 708,
+          "end": 720,
+          "label": "PERSON",
+          "text": "Jan Kowalski"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 708,
+          "end": 720,
+          "label": "PROVIDER",
+          "text": "Jan Kowalski"
+        }
+      ]
+    },
+    {
+      "id": "728",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 60,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 60,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 695,
+          "end": 714,
+          "label": "PERSON",
+          "text": "Krzysztof Szymański"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 695,
+          "end": 714,
+          "label": "PROVIDER",
+          "text": "Krzysztof Szymański"
+        }
+      ]
+    },
+    {
+      "id": "744",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 694,
+          "end": 715,
+          "label": "PERSON",
+          "text": "Agnieszka Lewandowska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 694,
+          "end": 715,
+          "label": "PROVIDER",
+          "text": "Agnieszka Lewandowska"
+        }
+      ]
+    },
+    {
+      "id": "765",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 62,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Gdańsku"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 62,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Gdańsku"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 742,
+          "end": 760,
+          "label": "PERSON",
+          "text": "Joanna Lewandowska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 742,
+          "end": 760,
+          "label": "PROVIDER",
+          "text": "Joanna Lewandowska"
+        }
+      ]
+    },
+    {
+      "id": "809",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 60,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 60,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 704,
+          "end": 720,
+          "label": "PERSON",
+          "text": "Marcin Szymański"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 704,
+          "end": 720,
+          "label": "PROVIDER",
+          "text": "Marcin Szymański"
+        }
+      ]
+    },
+    {
+      "id": "829",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 712,
+          "end": 728,
+          "label": "PERSON",
+          "text": "Michał Szymański"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 712,
+          "end": 728,
+          "label": "PROVIDER",
+          "text": "Michał Szymański"
+        }
+      ]
+    },
+    {
+      "id": "859",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 60,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 60,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 731,
+          "end": 745,
+          "label": "PERSON",
+          "text": "Ewa Wiśniewska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 731,
+          "end": 745,
+          "label": "PROVIDER",
+          "text": "Ewa Wiśniewska"
+        }
+      ]
+    },
+    {
+      "id": "871",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne we Wrocławiu"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne we Wrocławiu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 706,
+          "end": 721,
+          "label": "PERSON",
+          "text": "Katarzyna Nowak"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 706,
+          "end": 721,
+          "label": "PROVIDER",
+          "text": "Katarzyna Nowak"
+        }
+      ]
+    },
+    {
+      "id": "888",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne we Wrocławiu"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne we Wrocławiu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 698,
+          "end": 713,
+          "label": "PERSON",
+          "text": "Tomasz Kowalski"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 698,
+          "end": 713,
+          "label": "PROVIDER",
+          "text": "Tomasz Kowalski"
+        }
+      ]
+    },
+    {
+      "id": "906",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 703,
+          "end": 722,
+          "label": "PERSON",
+          "text": "Magdalena Zielińska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 703,
+          "end": 722,
+          "label": "PROVIDER",
+          "text": "Magdalena Zielińska"
+        }
+      ]
+    },
+    {
+      "id": "923",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Lublinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Lublinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 697,
+          "end": 718,
+          "label": "PERSON",
+          "text": "Agnieszka Lewandowska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 697,
+          "end": 718,
+          "label": "PROVIDER",
+          "text": "Agnieszka Lewandowska"
+        }
+      ]
+    },
+    {
+      "id": "928",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 60,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 60,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 732,
+          "end": 751,
+          "label": "PERSON",
+          "text": "Magdalena Szymańska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 732,
+          "end": 751,
+          "label": "PROVIDER",
+          "text": "Magdalena Szymańska"
+        }
+      ]
+    },
+    {
+      "id": "966",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 739,
+          "end": 757,
+          "label": "PERSON",
+          "text": "Krzysztof Kowalski"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 739,
+          "end": 757,
+          "label": "PROVIDER",
+          "text": "Krzysztof Kowalski"
+        }
+      ]
+    },
+    {
+      "id": "976",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 732,
+          "end": 748,
+          "label": "PERSON",
+          "text": "Joanna Szymańska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 732,
+          "end": 748,
+          "label": "PROVIDER",
+          "text": "Joanna Szymańska"
+        }
+      ]
+    },
+    {
+      "id": "992",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Lublinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Lublinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 709,
+          "end": 727,
+          "label": "PERSON",
+          "text": "Andrzej Wiśniewski"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 709,
+          "end": 727,
+          "label": "PROVIDER",
+          "text": "Andrzej Wiśniewski"
+        }
+      ]
+    },
+    {
+      "id": "1022",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 60,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 60,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 728,
+          "end": 743,
+          "label": "PERSON",
+          "text": "Marcin Kowalski"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 728,
+          "end": 743,
+          "label": "PROVIDER",
+          "text": "Marcin Kowalski"
+        }
+      ]
+    },
+    {
+      "id": "1029",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 60,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 60,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Łodzi"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 694,
+          "end": 706,
+          "label": "PERSON",
+          "text": "Jan Kowalski"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 694,
+          "end": 706,
+          "label": "PROVIDER",
+          "text": "Jan Kowalski"
+        }
+      ]
+    },
+    {
+      "id": "1035",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 707,
+          "end": 726,
+          "label": "PERSON",
+          "text": "Krzysztof Kowalczyk"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 707,
+          "end": 726,
+          "label": "PROVIDER",
+          "text": "Krzysztof Kowalczyk"
+        }
+      ]
+    },
+    {
+      "id": "1076",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Lublinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Lublinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 701,
+          "end": 715,
+          "label": "PERSON",
+          "text": "Maria Kowalska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 701,
+          "end": 715,
+          "label": "PROVIDER",
+          "text": "Maria Kowalska"
+        }
+      ]
+    },
+    {
+      "id": "1127",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 740,
+          "end": 753,
+          "label": "PERSON",
+          "text": "Joanna Wójcik"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 740,
+          "end": 753,
+          "label": "PROVIDER",
+          "text": "Joanna Wójcik"
+        }
+      ]
+    },
+    {
+      "id": "1155",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 704,
+          "end": 721,
+          "label": "PERSON",
+          "text": "Barbara Zielińska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 704,
+          "end": 721,
+          "label": "PROVIDER",
+          "text": "Barbara Zielińska"
+        }
+      ]
+    },
+    {
+      "id": "1162",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 62,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Gdańsku"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 62,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Gdańsku"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 698,
+          "end": 713,
+          "label": "PERSON",
+          "text": "Piotr Szymański"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 698,
+          "end": 713,
+          "label": "PROVIDER",
+          "text": "Piotr Szymański"
+        }
+      ]
+    },
+    {
+      "id": "1203",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 732,
+          "end": 748,
+          "label": "PERSON",
+          "text": "Tomasz Kowalczyk"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 732,
+          "end": 748,
+          "label": "PROVIDER",
+          "text": "Tomasz Kowalczyk"
+        }
+      ]
+    },
+    {
+      "id": "1227",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne we Wrocławiu"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne we Wrocławiu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 713,
+          "end": 728,
+          "label": "PERSON",
+          "text": "Paweł Szymański"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 713,
+          "end": 728,
+          "label": "PROVIDER",
+          "text": "Paweł Szymański"
+        }
+      ]
+    },
+    {
+      "id": "1309",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 739,
+          "end": 752,
+          "label": "PERSON",
+          "text": "Ewa Zielińska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 739,
+          "end": 752,
+          "label": "PROVIDER",
+          "text": "Ewa Zielińska"
+        }
+      ]
+    },
+    {
+      "id": "1368",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Krakowie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 703,
+          "end": 718,
+          "label": "PERSON",
+          "text": "Joanna Kowalska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 703,
+          "end": 718,
+          "label": "PROVIDER",
+          "text": "Joanna Kowalska"
+        }
+      ]
+    },
+    {
+      "id": "1397",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 65,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 65,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Szczecinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 739,
+          "end": 759,
+          "label": "PERSON",
+          "text": "Agnieszka Wiśniewska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 739,
+          "end": 759,
+          "label": "PROVIDER",
+          "text": "Agnieszka Wiśniewska"
+        }
+      ]
+    },
+    {
+      "id": "1401",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 64,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Warszawie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 64,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Warszawie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 731,
+          "end": 747,
+          "label": "PERSON",
+          "text": "Marcin Kowalczyk"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 731,
+          "end": 747,
+          "label": "PROVIDER",
+          "text": "Marcin Kowalczyk"
+        }
+      ]
+    },
+    {
+      "id": "1421",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 64,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Warszawie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 64,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Warszawie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 703,
+          "end": 716,
+          "label": "PERSON",
+          "text": "Michał Wójcik"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 703,
+          "end": 716,
+          "label": "PROVIDER",
+          "text": "Michał Wójcik"
+        }
+      ]
+    },
+    {
+      "id": "1444",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Poznaniu"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Poznaniu"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 730,
+          "end": 742,
+          "label": "PERSON",
+          "text": "Maria Wójcik"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 730,
+          "end": 742,
+          "label": "PROVIDER",
+          "text": "Maria Wójcik"
+        }
+      ]
+    },
+    {
+      "id": "1450",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 64,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Warszawie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 64,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Warszawie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 700,
+          "end": 718,
+          "label": "PERSON",
+          "text": "Agnieszka Kowalska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 700,
+          "end": 718,
+          "label": "PROVIDER",
+          "text": "Agnieszka Kowalska"
+        }
+      ]
+    },
+    {
+      "id": "1474",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 62,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Gdańsku"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 62,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Gdańsku"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 706,
+          "end": 721,
+          "label": "PERSON",
+          "text": "Piotr Szymański"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 706,
+          "end": 721,
+          "label": "PROVIDER",
+          "text": "Piotr Szymański"
+        }
+      ]
+    },
+    {
+      "id": "1475",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 64,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Warszawie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 64,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Warszawie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 697,
+          "end": 711,
+          "label": "PERSON",
+          "text": "Maria Kowalska"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 697,
+          "end": 711,
+          "label": "PROVIDER",
+          "text": "Maria Kowalska"
+        }
+      ]
+    },
+    {
+      "id": "1481",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 63,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Lublinie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 63,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Lublinie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 737,
+          "end": 749,
+          "label": "PERSON",
+          "text": "Maria Wójcik"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 737,
+          "end": 749,
+          "label": "PROVIDER",
+          "text": "Maria Wójcik"
+        }
+      ]
+    },
+    {
+      "id": "1495",
+      "stratum": "clinical",
+      "proposals": [
+        {
+          "id": "0",
+          "operation": "add",
+          "start": 36,
+          "end": 64,
+          "label": "FACILITY",
+          "text": "Centrum Medyczne w Warszawie"
+        },
+        {
+          "id": "1",
+          "operation": "remove",
+          "start": 36,
+          "end": 64,
+          "label": "ORG_PARTY",
+          "text": "Centrum Medyczne w Warszawie"
+        },
+        {
+          "id": "2",
+          "operation": "remove",
+          "start": 703,
+          "end": 718,
+          "label": "PERSON",
+          "text": "Paweł Szymański"
+        },
+        {
+          "id": "3",
+          "operation": "add",
+          "start": 703,
+          "end": 718,
+          "label": "PROVIDER",
+          "text": "Paweł Szymański"
+        }
+      ]
+    }
+  ],
+  "codex_role": "Supplemental single judge; no replacement of panel or majority adjudication"
+}

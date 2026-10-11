@@ -1,0 +1,31 @@
+{
+  "reviewer": "openai/codex-session",
+  "model": "GPT-6 (session; backend snapshot unavailable)",
+  "review_runs": 1,
+  "sampling_seed": 7712,
+  "sampling_seed_count": 1,
+  "bootstrap_seed": 7701,
+  "bootstrap_replicates": 2000,
+  "temperature": null,
+  "inference_seed": null,
+  "source_commit": "79c7a91c47be20c8d214b05b09c2850fe8049037",
+  "frozen_at": "2026-10-11T05:45:25.901072+00:00",
+  "author_self_review_read": false,
+  "gold_or_panel_outputs_read_before_freeze": false,
+  "procedure": "Read eight full example documents, every remaining unique raw-text prose variant (11/language including gender/clinical variants), and all 600 document slot rows. Code transcribed independently chosen entity spans from raw-text layouts. All text is represented by prose+slots; this is shared-context template-assisted session review, not 600 isolated inference contexts. Ratings assigned after reviewing prose and all slot values; no gold or external judgments used.",
+  "limitations": "One session, repeated templates, template-assisted transcription and correlated ratings; not native-speaker/human validation. Source build metadata and author protocol, but no author review judgments, were read. Registry/address/bank reality not verified.",
+  "configs": {
+    "ro-realskeleton-v2": {
+      "n": 300,
+      "annotations_file": "round2-codex-annotations-ro.jsonl",
+      "sha256": "fcfe5489445e7b178b1667c75c0843c145e36d047ed98fd3682f28311d7aa1d2"
+    },
+    "pl-realskeleton-v2": {
+      "n": 300,
+      "annotations_file": "round2-codex-annotations-pl.jsonl",
+      "sha256": "5522d546b986a0a0af52297e81dbcdb43099e02def0fcfbc7bf908d728333a49"
+    }
+  },
+  "transcription_script_sha256": "d24f9fee018a16d918ea3c48c4f06681d9dc369dce9e3653fd3ccaa01c344043",
+  "protocol_sha256": "9a59bbbf24bb1cda8bf2c5c7ffeacd0a5dd623bcda48179e89e78d125e293a99"
+}
